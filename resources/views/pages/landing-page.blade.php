@@ -16,6 +16,7 @@
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
+                <img src="https://2.bp.blogspot.com/-aEgbm1FL1mw/WVcXNvQWIwI/AAAAAAAALIw/IXb0Fh3SR807o3iRvs9Ed16PL7xom57sQCLcBGAs/s1600/Logo-Kabupaten-Cilacap.png" alt="" width="32" height="32">
                 <!-- Navigation -->
                 <nav class="hidden md:block">
                     <ul class="flex space-x-8">

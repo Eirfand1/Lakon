@@ -38,8 +38,7 @@
 
            <!-- e-Catalog -->
            <x-dashboard.dashboard-card-04 />
-
-
         </div>
+        <x-dashboard.dashboard-card-06 />
     </div>
 </x-app-layout>
