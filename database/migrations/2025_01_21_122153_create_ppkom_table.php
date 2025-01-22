@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('ppkom', function (Blueprint $table) {
             $table->id();
+            $table->string('nip')->unique();
+            $table->string('nama');
+            $table->string('pangkat')->nullable();
+            $table->string('jabatan')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }

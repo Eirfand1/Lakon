@@ -33,7 +33,15 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard/fintech', [DashboardController::class, 'fintech'])->name('fintech');
 
 
-    Route::get('/adm/ppkom', [PpkomController::class, 'index'])->name('adm/ppkom');
+
+
+    Route::prefix('adm/ppkom')->group(function () {
+        Route::get('/', [PpkomController::class, 'index'])->name('adm.ppkom.index'); // Display all data
+        Route::post('/', [PpkomController::class, 'store'])->name('adm.ppkom.store'); // Create new data
+        Route::get('/{ppkom}/edit', [PpkomController::class, 'edit'])->name('adm.ppkom.edit'); // Show edit form
+        Route::put('/{ppkom}', [PpkomController::class, 'update'])->name('adm.ppkom.update'); // Update data
+        Route::delete('/{ppkom}', [PpkomController::class, 'destroy'])->name('adm.ppkom.destroy'); // Delete data
+    });
 
     Route::get('/penyedia', [PenyediaController::class, 'index'])->name('penyedia');
 

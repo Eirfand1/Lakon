@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', 'LAKON') }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -28,6 +28,11 @@
             }
         </script>
         <script src="https://kit.fontawesome.com/ac8548371f.js" crossorigin="anonymous"></script>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+        <script src="https://cdn.datatables.net/2.2.1/js/dataTables.tailwindcss.js"></script>
+        <link rel="stylesheet" type="" href="https://cdn.datatables.net/2.2.1/css/dataTables.tailwindcss.css">
     </head>
     <body
         class="font-inter antialiased bg-gray-100 dark:bg-gray-900 text-gray-600 dark:text-gray-400"

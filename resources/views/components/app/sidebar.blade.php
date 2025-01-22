@@ -10,7 +10,7 @@
         @keydown.escape.window="sidebarOpen = false">
 
         <!-- Sidebar header -->
-        <div class="flex justify-between mb-10 pr-3 sm:px-2">
+        <div class="flex justify-between mb-10 pr-3 md:px-2">
             <!-- Close button -->
             <button class="lg:hidden text-gray-500 hover:text-gray-400" @click.stop="sidebarOpen = !sidebarOpen"
                 aria-controls="sidebar" :aria-expanded="sidebarOpen">
@@ -20,13 +20,13 @@
                 </svg>
             </button>
             <!-- Logo -->
-            <a class="flex gap-10 items-center" href="{{ route('dashboard') }}">
+            <a class="flex gap-4 items-center" href="{{ route('dashboard') }}">
 
-                <p class="text-2xl font-bold block md:hidden">LAKON</p>
+                <p class="text-2xl font-bold block md:hidden">LAKONP&K</p>
                 <img width="32" height="32"
                     src="https://2.bp.blogspot.com/-aEgbm1FL1mw/WVcXNvQWIwI/AAAAAAAALIw/IXb0Fh3SR807o3iRvs9Ed16PL7xom57sQCLcBGAs/s1600/Logo-Kabupaten-Cilacap.png"
                     alt="LAKON">
-                <p class="text-2xl font-bold hidden md:block">LAKON</p>
+                <p class="text-2xl font-bold hidden md:block lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">LAKONP&K</p>
             </a>
         </div>
 
@@ -97,7 +97,7 @@
                                 </li>
                                 <li class="mb-1 last:mb-0">
                                     <a class="block text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition truncate @if(Route::is('adm/ppkom')){{ '!text-violet-500' }}@endif"
-                                        href="{{ route('adm/ppkom') }}">
+                                        href="{{ route('adm.ppkom.index') }}">
                                         <span
                                             class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Ppkom</span>
                                     </a>
