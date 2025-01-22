@@ -29,14 +29,23 @@
         </script>
         <script src="https://kit.fontawesome.com/ac8548371f.js" crossorigin="anonymous"></script>
 
+        <!-- data tables -->
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-        <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
+        <script src="https://cdn.datatables.net/v/dt/dt-2.2.1/datatables.min.js"></script>
         <script src="https://cdn.datatables.net/2.2.1/js/dataTables.tailwindcss.js"></script>
+        <link href="https://cdn.datatables.net/v/dt/dt-2.2.1/datatables.min.css" rel="stylesheet">
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
-        <link rel="stylesheet" type="" href="https://cdn.datatables.net/2.2.1/css/dataTables.tailwindcss.css">
+        <style>
+            table.dataTable thead th {
+                border-bottom: 0 !important;
+            }
+            table.dataTable tfoot th {
+                border-top: 0 !important;
+            }
+        </style>
     </head>
     <body
         class="font-inter antialiased bg-gray-100 dark:bg-gray-900 text-gray-600 dark:text-gray-400"

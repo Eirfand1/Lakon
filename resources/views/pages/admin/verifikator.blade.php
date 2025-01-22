@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class=" bg-white dark:bg-gray-800 m-4 p-5 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 ">
-        <div class="sm:flex sm:justify-between sm:items-center p-2">
+    <div class="p-5">
+        <div class="sm:flex sm:justify-between sm:items-center p-2 pb-5">
             <div class="">
                 <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">VERIFIKATOR</h1>
             </div>
@@ -44,11 +44,11 @@
         @endif
 
         <!-- Table -->
-        <div class="">
+        <div class="bg-white dark:bg-gray-800 rounded-lg ">
             <div class="p-3 overflow-x-auto">
-                <table id="verifikatorTable" class="display w-full rounded dark:bg-gray-800" >
-                    <thead>
-                        <tr class="border-b-0 bg-gray-500/20">
+                <table id="verifikatorTable" class="compact w-full rounded dark:bg-gray-800" >
+                    <thead class="bg-gray-300/10">
+                        <tr class="border-b-0 ">
                             <th class="dark:text-white">No</th>
                             <th class="dark:text-white">NIP</th>
                             <th class="dark:text-white">Nama</th>

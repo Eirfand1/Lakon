@@ -1,11 +1,11 @@
 <x-app-layout>
-    <div class=" bg-white dark:bg-gray-800 m-4 p-5 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 ">
-        <div class="sm:flex sm:justify-between sm:items-center p-2">
+    <div class="p-5">
+        <div class="sm:flex sm:justify-between sm:items-center p-2 pb-5">
             <div class="">
                 <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">PPKOM</h1>
             </div>
             <!-- Add Button -->
-            <label for="add-modal" class="btn btn-sm px-5 text-white bg-blue-800/80 hover:bg-blue-600/80">
+            <label for="add-modal" class="btn btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
                 <i class="fa-solid fa-square-plus"></i>
                 <span>Tambah Data</span>
             </label>
@@ -45,11 +45,11 @@
         @endif
 
         <!-- Table -->
-        <div class="">
+        <div class="bg-white dark:bg-gray-800 rounded-lg">
             <div class="p-3 overflow-x-auto">
-                <table id="ppkomTable" class="display w-full rounded dark:bg-gray-800" >
-                    <thead>
-                        <tr class="border-b-0 bg-gray-500/20">
+                <table id="ppkomTable" class="table w-full rounded-lg">
+                    <thead class="bg-gray-300/10 rounded-full">
+                        <tr class="">
                             <th class="dark:text-white">No</th>
                             <th class="dark:text-white">NIP</th>
                             <th class="dark:text-white">Nama</th>
@@ -63,7 +63,7 @@
                     </thead>
                     <tbody>
                         @foreach($ppkom as $i => $p)
-                        <tr>
+                        <tr class="border-gray-500/20">
 
                             <td>{{$i + 1}}</td>
                             <td>{{$p->nip}}</td>
