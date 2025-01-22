@@ -32,6 +32,10 @@
         <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <script src="https://cdn.datatables.net/2.2.1/js/dataTables.js"></script>
         <script src="https://cdn.datatables.net/2.2.1/js/dataTables.tailwindcss.js"></script>
+
+        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
         <link rel="stylesheet" type="" href="https://cdn.datatables.net/2.2.1/css/dataTables.tailwindcss.css">
     </head>
     <body

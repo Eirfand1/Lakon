@@ -3,10 +3,13 @@
 use App\Http\Controllers\PaketPekerjaanController;
 use App\Http\Controllers\PenyediaController;
 use App\Http\Controllers\PpkomController;
+use App\Http\Controllers\VerifikatorController;
 use App\Models\Penyedia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
+use App\Models\Verifikator;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -33,14 +36,20 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
     Route::get('/dashboard/fintech', [DashboardController::class, 'fintech'])->name('fintech');
 
 
-
-
+    // PPKOM route
     Route::prefix('adm/ppkom')->group(function () {
         Route::get('/', [PpkomController::class, 'index'])->name('adm.ppkom.index'); // Display all data
         Route::post('/', [PpkomController::class, 'store'])->name('adm.ppkom.store'); // Create new data
-        Route::get('/{ppkom}/edit', [PpkomController::class, 'edit'])->name('adm.ppkom.edit'); // Show edit form
         Route::put('/{ppkom}', [PpkomController::class, 'update'])->name('adm.ppkom.update'); // Update data
         Route::delete('/{ppkom}', [PpkomController::class, 'destroy'])->name('adm.ppkom.destroy'); // Delete data
+    });
+
+    // Verifikator Route
+    Route::prefix('adm/verifikator')->group(function () {
+        Route::get('/', [VerifikatorController::class, 'index'])->name('adm.verifikator.index');
+        Route::post('/', [VerifikatorController::class, 'store'])->name('adm.verifikator.store');
+        Route::put('/{verifikator}', [VerifikatorController::class, 'update'])->name('adm.ppkom.edit');
+        Route::delete('/{verifikator}', [VerifikatorController::class, 'destroy'])->name('adm.verifikator.destroy');
     });
 
     Route::get('/penyedia', [PenyediaController::class, 'index'])->name('penyedia');
