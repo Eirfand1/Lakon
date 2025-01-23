@@ -63,11 +63,11 @@
                             <td>{{$p->nama_verifikator}}</td>
                             <td>
                                 <label for="edit-modal" class="btn text-gray-200  btn-sm btn-warning"
-                                    onclick="editVerifikator({{ $p->id }}, '{{ $p->nip }}', '{{ $p->nama_verifikator }}')">
+                                    onclick="editVerifikator({{ $p->verifikator_id }}, '{{ $p->nip }}', '{{ $p->nama_verifikator }}')">
                                     <i class="fa-solid fa-pen-to-square"></i>
                                 </label>
                                 <label for="delete-modal" class="btn text-white btn-sm btn-error"
-                                    onclick="setDeleteId({{ $p->id }})">
+                                    onclick="setDeleteId({{ $p->verifikator_id }})">
                                     <i class="fa-solid fa-trash"></i>
                                 </label>
                             </td>
@@ -93,7 +93,7 @@
                     @csrf
                     <div class="form-control">
                         <label class="label">NIP</label>
-                        <input type="number" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="nip" class="bg-gray-200 dark:bg-gray-700 rounded" required />
+                        <input type="number" name="nip" class="bg-gray-200 dark:bg-gray-700 rounded" required />
                     </div>
                     <div class="form-control">
                         <label class="label">Nama</label>
@@ -182,14 +182,14 @@
                 $('.dt-search input').addClass('p-1 rounded w-52');
             });
 
-            function editVerifikator(id, nip, nama) {
-                document.getElementById('editForm').action = `verifikator/${id}`;
+            function editVerifikator(verifikator_id, nip, nama) {
+                document.getElementById('editForm').action = `verifikator/${verifikator_id}`;
                 document.getElementById('edit_nip').value = nip;
                 document.getElementById('edit_nama').value = nama;
             }
 
-            function setDeleteId(id) {
-                document.getElementById('deleteForm').action = `verifikator/${id}`;
+            function setDeleteId(verifikator_id) {
+                document.getElementById('deleteForm').action = `verifikator/${verifikator_id}`;
             }
         </script>
 </x-app-layout>

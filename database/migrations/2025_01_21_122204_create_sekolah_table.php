@@ -12,9 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('sekolah', function (Blueprint $table) {
-            $table->id();
-            $table->string('npsn')->unique();
-            $table->string('nama');
+            $table->id('sekolah_id');
+            $table->char('npsn', 8)->unique();
+            $table->string('nama_sekolah', 150);
+            $table->enum('jenjang', ['SD', 'SMP', 'SMA', 'SMK'])->nullable(); 
+            $table->string('status'); 
+            $table->string('alamat', 255); 
+            $table->string('desa', 100); 
+            $table->string('kecamatan', 100); 
+            $table->point('koordinat')->nullable(); 
             $table->timestamps();
         });
     }

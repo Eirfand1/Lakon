@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('verifikator', function (Blueprint $table) {
-            $table->id();
+            $table->id('verifikator_id');
             $table->string('nip')->unique();
             $table->string('nama_verifikator');
             $table->timestamps();
