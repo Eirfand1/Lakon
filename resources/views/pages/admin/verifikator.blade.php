@@ -44,7 +44,8 @@
         @endif
 
         <!-- Table -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg ">
+        <livewire:verifikator-table/>
+        {{-- <div class="bg-white dark:bg-gray-800 rounded-lg ">
             <div class="p-3 overflow-x-auto">
                 <table id="verifikatorTable" class="compact w-full rounded dark:bg-gray-800" >
                     <thead class="bg-gray-300/10">
@@ -76,7 +77,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
 
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
@@ -157,30 +158,30 @@
 
     <!-- Script for Verifikator Table -->
         <script>
-            $(document).ready(function() {
-                $('#verifikatorTable').DataTable({
-                      responsive: true,
-                      language: {
-                            lengthMenu: '_MENU_',
-                            search: "",
-                            searchPlaceholder: "search...",
-                      },
-                      layout: {
-                            topEnd: 'pageLength',
-                            topStart: 'search'
-                       },
-                       dom: '<"flex justify-between items-center mb-4"<"text-gray-600 dark:text-gray-400"f><"flex space-x-4"l>>' +
-                            '<"overflow-auto"t>' +
-                            '<"flex justify-between items-center mt-4"<"text-gray-600 dark:text-gray-400"i><"pagination-container"p>>',
+            // $(document).ready(function() {
+            //     $('#verifikatorTable').DataTable({
+            //           responsive: true,
+            //           language: {
+            //                 lengthMenu: '_MENU_',
+            //                 search: "",
+            //                 searchPlaceholder: "search...",
+            //           },
+            //           layout: {
+            //                 topEnd: 'pageLength',
+            //                 topStart: 'search'
+            //            },
+            //            dom: '<"flex justify-between items-center mb-4"<"text-gray-600 dark:text-gray-400"f><"flex space-x-4"l>>' +
+            //                 '<"overflow-auto"t>' +
+            //                 '<"flex justify-between items-center mt-4"<"text-gray-600 dark:text-gray-400"i><"pagination-container"p>>',
 
-                });
-                $('#dt-length-0').removeClass('px-3 py-2');
-                $('#dt-length-0').addClass('select select-sm p-0 px-5 bg-white dark:bg-gray-800');
-                $('<p> item</p>').appendTo('#dt-length-0 option');
-                $('.dt-search').addClass('text-xs');
-                $('.dt-search input').removeClass('px-3 py-2');
-                $('.dt-search input').addClass('p-1 rounded w-52');
-            });
+            //     });
+            //     $('#dt-length-0').removeClass('px-3 py-2');
+            //     $('#dt-length-0').addClass('select select-sm p-0 px-5 bg-white dark:bg-gray-800');
+            //     $('<p> item</p>').appendTo('#dt-length-0 option');
+            //     $('.dt-search').addClass('text-xs');
+            //     $('.dt-search input').removeClass('px-3 py-2');
+            //     $('.dt-search input').addClass('p-1 rounded w-52');
+            // });
 
             function editVerifikator(verifikator_id, nip, nama) {
                 document.getElementById('editForm').action = `verifikator/${verifikator_id}`;

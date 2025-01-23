@@ -45,51 +45,8 @@
         @endif
 
         <!-- Table -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg">
-            <div class="p-3 overflow-x-auto">
-                <table id="ppkomTable" class="table w-full rounded-lg">
-                    <thead class="bg-gray-300/10 rounded-full">
-                        <tr class="border-none">
-                            <th class="dark:text-white">No</th>
-                            <th class="dark:text-white">NIP</th>
-                            <th class="dark:text-white">Nama</th>
-                            <th class="dark:text-white">Pangkat</th>
-                            <th class="dark:text-white">Jabatan</th>
-                            <th class="dark:text-white">Alamat</th>
-                            <th class="dark:text-white">No. Telp</th>
-                            <th class="dark:text-white">Email</th>
-                            <th class="dark:text-white">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($ppkom as $i => $p)
-                            <tr class="border-gray-500/20">
 
-                                <td>{{$i + 1}}</td>
-                                <td>{{$p->nip}}</td>
-                                <td>{{$p->nama}}</td>
-                                <td>{{$p->pangkat}}</td>
-                                <td>{{$p->jabatan}}</td>
-                                <td>{{$p->alamat}}</td>
-                                <td>{{$p->no_telp}}</td>
-                                <td>{{$p->email}}</td>
-                                <td>
-                                    <label for="edit-modal" class="btn text-gray-200  btn-sm btn-warning" onclick="editPpkom({{ $p->ppkom_id }}, '{{ $p->nip }}', '{{ $p->nama }}',
-                                            '{{ $p->pangkat }}', '{{ $p->jabatan }}', '{{ $p->alamat }}',
-                                            '{{ $p->no_telp }}', '{{ $p->email }}')">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </label>
-                                    <label for="delete-modal" class="btn text-white btn-sm btn-error"
-                                        onclick="setDeleteId({{ $p->ppkom_id }})">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </label>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <livewire:ppkom-table/> 
 
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
