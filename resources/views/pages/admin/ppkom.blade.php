@@ -128,7 +128,7 @@
                     </div>
                     <div class="form-control">
                         <label class="label">No. Telp</label>
-                        <input type="text" name="no_telp" class="bg-gray-200 dark:bg-gray-700 rounded " />
+                        <input type="number" name="no_telp" class="bg-gray-200 dark:bg-gray-700 rounded " />
                     </div>
                     <div class="form-control">
                         <label class="label">Email</label>

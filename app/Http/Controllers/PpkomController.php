@@ -57,7 +57,7 @@ class PpkomController extends Controller
     {
         try {
             $validated = $request->validate([
-                'nip' => 'required|unique:ppkom,nip,' . $ppkom->ppkom_id . '|max:255',
+                'nip' => 'required|unique:ppkom,nip,' . $ppkom->ppkom_id . ',ppkom_id|max:255',
                 'nama' => 'required|max:255',
                 'pangkat' => 'nullable|max:255',
                 'jabatan' => 'nullable|max:255',
@@ -71,7 +71,7 @@ class PpkomController extends Controller
         } catch (QueryException $e) {
             return redirect()->back()
                 ->withInput()
-                ->with('error', 'Terjadi kesalahan saat memperbarui data.');
+                ->with('error', $e->getMessage());
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()

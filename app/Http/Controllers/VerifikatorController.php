@@ -52,7 +52,7 @@ class VerifikatorController extends Controller
     {
         try {
             $validate = $request->validate([
-                'nip' => 'required|numeric|unique:verifikator,nip,' . $verifikator->verifikator_id,
+                'nip' => 'required|numeric|unique:verifikator,nip,' . $verifikator->verifikator_id . ',verifikator_id',
                 'nama_verifikator' => 'required'
             ]);
 

@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Ppkom extends Model
 {
     protected $table = 'ppkom';
+    protected $primaryKey = 'ppkom_id';
     protected $fillable = [
         'nip',
         'nama',
