@@ -103,7 +103,7 @@
                     <i class="fa-solid fa-square-plus text-xl"></i>
                     <h3 class="font-bold text-xl">FORM TAMBAH DATA PPKOM</h3>
                 </div>
-                <form action="{{ route('adm.ppkom.store') }}" method="POST" class="border-t border-violet-800/40 mt-4">
+                <form action="{{ route('admin.ppkom.store') }}" method="POST" class="border-t border-violet-800/40 mt-4">
                     @csrf
                     <div class="form-control">
                         <label class="label">NIP</label>

@@ -45,11 +45,11 @@ class PpkomController extends Controller
         } catch (QueryException $e) {
             return redirect()->back()
                 ->withInput()
-                ->with('error', 'Terjadi kesalahan saat menyimpan data.');
+                ->with('error', $e->getMessage());
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
-                ->with('error', 'Terjadi kesalahan yang tidak terduga.');
+                ->with('error', $e->getMessage());
         }
     }
 
@@ -75,7 +75,7 @@ class PpkomController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
-                ->with('error', 'Terjadi kesalahan yang tidak terduga.');
+                ->with('error', $e->getMessage());
         }
     }
 
@@ -86,10 +86,10 @@ class PpkomController extends Controller
             return redirect()->back()->with('success', 'Data berhasil dihapus.');
         } catch (QueryException $e) {
             return redirect()->back()
-                ->with('error', 'Terjadi kesalahan saat menghapus data.');
+                ->with('error', $e->getMessage());
         } catch (\Exception $e) {
             return redirect()->back()
-                ->with('error', 'Terjadi kesalahan yang tidak terduga.');
+                ->with('error', $e->getMessage());
         }
     }
 }

@@ -24,49 +24,50 @@ use App\Models\Verifikator;
 
 
 Route::view('/', 'pages.landing-page');
+Route::get('/registrasi',[PenyediaController::class, 'create'])->name('registrasi'); 
+Route::post('/registrasi',[PenyediaController::class, 'store'])->name('registrasi.store'); 
 
 // TODO make all route to /admin or /penyedia or /verifikator
-Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin')->group(function () {
 
     // Route for the getting the data feed
     Route::get('/json-data-feed', [DataFeedController::class, 'getDataFeed'])->name('json_data_feed');
 
     // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     // PPKOM route
-    Route::prefix('adm/ppkom')->group(function () {
-        Route::get('/', [PpkomController::class, 'index'])->name('adm.ppkom.index'); // Display all data
-        Route::post('/', [PpkomController::class, 'store'])->name('adm.ppkom.store'); // Create new data
-        Route::put('/{ppkom}', [PpkomController::class, 'update'])->name('adm.ppkom.update'); // Update data
-        Route::delete('/{ppkom}', [PpkomController::class, 'destroy'])->name('adm.ppkom.destroy'); // Delete data
+    Route::prefix('/ppkom')->group(function () {
+        Route::get('/', [PpkomController::class, 'index'])->name('admin.ppkom.index'); // Display all data
+        Route::post('/', [PpkomController::class, 'store'])->name('admin.ppkom.store'); // Create new data
+        Route::put('/{ppkom}', [PpkomController::class, 'update'])->name('admin.ppkom.update'); // Update data
+        Route::delete('/{ppkom}', [PpkomController::class, 'destroy'])->name('admin.ppkom.destroy'); // Delete data
     });
 
     // Verifikator Route
-    Route::prefix('adm/verifikator')->group(function () {
-        Route::get('/', [VerifikatorController::class, 'index'])->name('adm.verifikator.index');
-        Route::post('/', [VerifikatorController::class, 'store'])->name('adm.verifikator.store');
-        Route::put('/{verifikator}', [VerifikatorController::class, 'update'])->name('adm.ppkom.edit');
-        Route::delete('/{verifikator}', [VerifikatorController::class, 'destroy'])->name('adm.verifikator.destroy');
+    Route::prefix('/verifikator')->group(function () {
+        Route::get('/', [VerifikatorController::class, 'index'])->name('admin.verifikator.index');
+        Route::post('/', [VerifikatorController::class, 'store'])->name('admin.verifikator.store');
+        Route::put('/{verifikator}', [VerifikatorController::class, 'update'])->name('admin.ppkom.edit');
+        Route::delete('/{verifikator}', [VerifikatorController::class, 'destroy'])->name('admin.verifikator.destroy');
     });
 
     // TODO : make post route
-    Route::get('/penyedia', [PenyediaController::class, 'index'])->name('penyedia');
-    Route::put('/penyedia/{penyedia}', [PenyediaController::class, 'update'])->name('penyedia.edit');
-    Route::delete('/penyedia/{penyedia}', [PenyediaController::class, 'destroy'])->name('penyedia.destroy');
-
-    Route::get('/paket-pekerjaan', [PaketPekerjaanController::class, 'index'])->name('paket-pekerjaan');
-
-
+    Route::prefix('/penyedia')->group(function () {
+        Route::get('/', [PenyediaController::class, 'index'])->name('admin.penyedia.index');
+        Route::put('/{penyedia}', [PenyediaController::class, 'update'])->name('admin.penyedia.edit');
+        Route::delete('/{penyedia}', [PenyediaController::class, 'destroy'])->name('admin.penyedia.destroy');
+    });
 
 
-
+    Route::get('/paket-pekerjaan', [PaketPekerjaanController::class, 'index'])->name('admin.paket-pekerjaan.index');
 
 
 
-    Route::get('/calendar', function () {
-        return view('pages/calendar');
-    })->name('calendar');
+
+
+
+    
     Route::get('/settings/account', function () {
         return view('pages/settings/account');
     })->name('account');

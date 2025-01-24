@@ -89,7 +89,7 @@
                     <i class="fa-solid fa-square-plus text-xl"></i>
                     <h3 class="font-bold text-xl">FORM TAMBAH DATA VERIFIKATOR</h3>
                 </div>
-                <form action="{{ route('adm.verifikator.store') }}" method="POST" class="border-t border-violet-800/40 mt-4">
+                <form action="{{ route('admin.verifikator.store') }}" method="POST" class="border-t border-violet-800/40 mt-4">
                     @csrf
                     <div class="form-control">
                         <label class="label">NIP</label>

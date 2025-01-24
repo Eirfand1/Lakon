@@ -35,7 +35,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="pt-24 pb-12 bg-gradient-to-r from-blue-500 to-blue-600 text-white">
+    <section class="pt-24 bg-cover bg-center bg-no-repeat bg-[url({{asset('images/laut.jpg')}})] pb-12 text-white">
         <div class="container mx-auto px-4">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div class="space-y-6">
