@@ -25,6 +25,7 @@ use App\Models\Verifikator;
 
 Route::view('/', 'pages.landing-page');
 
+// TODO make all route to /admin or /penyedia or /verifikator
 Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Route for the getting the data feed
@@ -32,9 +33,6 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
 
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/dashboard/analytics', [DashboardController::class, 'analytics'])->name('analytics');
-    Route::get('/dashboard/fintech', [DashboardController::class, 'fintech'])->name('fintech');
-
 
     // PPKOM route
     Route::prefix('adm/ppkom')->group(function () {
@@ -52,9 +50,19 @@ Route::middleware(['auth:sanctum', 'verified'])->group(function () {
         Route::delete('/{verifikator}', [VerifikatorController::class, 'destroy'])->name('adm.verifikator.destroy');
     });
 
+    // TODO : make post route
     Route::get('/penyedia', [PenyediaController::class, 'index'])->name('penyedia');
+    Route::put('/penyedia/{penyedia}', [PenyediaController::class, 'update'])->name('penyedia.edit');
+    Route::delete('/penyedia/{penyedia}', [PenyediaController::class, 'destroy'])->name('penyedia.destroy');
 
     Route::get('/paket-pekerjaan', [PaketPekerjaanController::class, 'index'])->name('paket-pekerjaan');
+
+
+
+
+
+
+
 
     Route::get('/calendar', function () {
         return view('pages/calendar');

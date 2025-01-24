@@ -15,12 +15,12 @@ class VerifikatorController extends Controller
     {
         try {
             $verifikator = Verifikator::all();
-            return view('pages.admin.verifikator', [
+            return view('pages.admin.verifikator.verifikator', [
                 "title" => "verifikator",
                 "verifikator" => $verifikator,
             ]);
         } catch (\Exception $e) {
-            return view('pages.admin.verifikator', [
+            return view('pages.admin.verifikator.verifikator', [
                 "title" => "verifikator",
                 "verifikator" => [],
             ])->with('error', 'Terjadi kesalahan saat mengambil data');

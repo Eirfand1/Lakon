@@ -67,9 +67,6 @@ final class VerifikatorTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Created at', 'created_at_formatted', 'created_at')
-                ->sortable(),
-
             Column::make('Created at', 'created_at')
                 ->sortable()
                 ->searchable(),
@@ -98,7 +95,8 @@ final class VerifikatorTable extends PowerGridComponent
                 ->slot('Edit: '.$row->id)
                 ->id()
                 ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('edit', ['rowId' => $row->id])
+                ->dispatch('edit', ['rowId' => $row->id]),
+            Button::add('delete')
         ];
     }
 

@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Penyedia extends Model
 {
     protected $table = 'penyedia';
+    protected $primaryKey = 'penyedia_id';
+
+    protected $guarded = ['penyedia_id'];
+
     use HasFactory;
 }

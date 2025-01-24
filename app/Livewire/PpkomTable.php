@@ -11,6 +11,9 @@ use PowerComponents\LivewirePowerGrid\Facades\Filter;
 use PowerComponents\LivewirePowerGrid\Facades\PowerGrid;
 use PowerComponents\LivewirePowerGrid\PowerGridFields;
 use PowerComponents\LivewirePowerGrid\PowerGridComponent;
+use PowerComponents\LivewirePowerGrid\Themes\Theme;
+
+
 
 final class PpkomTable extends PowerGridComponent
 {
@@ -99,7 +102,7 @@ final class PpkomTable extends PowerGridComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::action('Action')
+            Column::action('Aksi')
         ];
     }
 
@@ -107,8 +110,8 @@ final class PpkomTable extends PowerGridComponent
     {
         return [
 
-             Filter::inputText('jabatan')->placeholder('Jabatan'),
-             Filter::inputText('pangkat')->placeholder('pangkat'),
+            Filter::inputText('jabatan')->placeholder('Jabatan'),
+            Filter::inputText('pangkat')->placeholder('pangkat'),
 
         ];
     }
@@ -116,19 +119,23 @@ final class PpkomTable extends PowerGridComponent
     #[\Livewire\Attributes\On('edit')]
     public function edit($rowId): void
     {
-        $this->js('alert('.$rowId.')');
+        $this->js('alert(' . $rowId . ')');
     }
-
     public function actions(Ppkom $row): array
     {
         return [
             Button::add('edit')
-                ->slot('Edit: '.$row->ppkom_id)
-                ->id()
-                ->class('pg-btn-white dark:ring-pg-primary-600 dark:border-pg-primary-600 dark:hover:bg-pg-primary-700 dark:ring-offset-pg-primary-800 dark:text-pg-primary-300 dark:bg-pg-primary-700')
-                ->dispatch('edit', ['rowId' => $row->ppkom_id])
+                ->slot('Edit')
+                ->class('bg-blue-500 text-white font-bold py-2 px-2 rounded')
+                ->dispatch('edit', ['rowId' => $row->ppkom_id]),
+            
+            Button::add('delete')
+                ->slot('Delete')
+                ->class('bg-red-500 text-white font-bold py-2 px-2 rounded')
+                ->dispatch('delete', ['rowId' => $row->ppkom_id]),
         ];
-    }
+    } 
+
 
     /*
     public function actionRules($row): array

@@ -15,12 +15,12 @@ class PpkomController extends Controller
     {
         try {
             $ppkom = Ppkom::all();
-            return view('pages.admin.ppkom', [
+            return view('pages.admin.ppkom.ppkom', [
                 "title" => "ppkom",
                 'ppkom' => $ppkom,
             ]);
         } catch (\Exception $e) {
-            return view('pages.admin.ppkom', [
+            return view('pages.admin.ppkom.ppkom', [
                 "title" => "ppkom",
                 'ppkom' => [],
             ])->with('error', 'Terjadi kesalahan saat mengambil data.');
