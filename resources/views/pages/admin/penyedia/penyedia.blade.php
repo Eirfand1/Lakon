@@ -315,7 +315,7 @@
                 initComplete: function () {
                     this.api().columns([1, 2, 3]).every(function () {
                         var column = this;
-                        var select = $('<br class="mb-2"/><select class="select select-sm text-xs bg-white dark:bg-gray-100/20 w-full"><option value=""></option></select>')
+                        var select = $('<br class="mb-2"/><select class="select select-sm text-xs bg-white dark:bg-gray-600 w-full"><option value=""></option></select>')
                             .appendTo($(column.header()))
                             .on('change', function () {
                                 var val = $.fn.dataTable.util.escapeRegex(
