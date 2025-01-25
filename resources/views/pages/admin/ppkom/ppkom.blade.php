@@ -51,7 +51,7 @@
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
         <div id="modal_ppkom" class="modal">
-            <div class="modal-box w-11/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-900 bg-white">
+            <div class="modal-box w-11/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
@@ -69,13 +69,13 @@
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">NIP</label>
                             <input type="number" name="nip" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"
                                 required />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Nama</label>
                             <input type="text" name="nama"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"
                                 required />
                         </div>
                     </div>
@@ -84,31 +84,31 @@
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Pangkat</label>
                             <input type="text" name="pangkat"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Jabatan</label>
                             <input type="text" name="jabatan"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
                         </div>
                     </div>
 
                     <div class="form-control">
                         <label class="label font-semibold dark:text-gray-300">Alamat</label>
                         <textarea name="alamat"
-                            class="textarea textarea-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700"></textarea>
+                            class="textarea textarea-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"></textarea>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">No. Telp</label>
                             <input type="number" name="no_telp"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Email</label>
                             <input type="email" name="email"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
                         </div>
                     </div>
 
@@ -123,7 +123,7 @@
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
         <div class="modal">
-            <div class="modal-box w-11/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-900 bg-white">
+            <div class="modal-box w-11/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-pen-to-square text-2xl text-primary"></i>
@@ -142,13 +142,13 @@
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">NIP</label>
                             <input type="number" id="edit_nip" name="nip"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"
                                 required />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Nama</label>
                             <input type="text" id="edit_nama" name="nama"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"
                                 required />
                         </div>
                     </div>
@@ -157,31 +157,31 @@
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Pangkat</label>
                             <input type="text" id="edit_pangkat" name="pangkat"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Jabatan</label>
                             <input type="text" id="edit_jabatan" name="jabatan"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
                         </div>
                     </div>
 
                     <div class="form-control">
                         <label class="label font-semibold dark:text-gray-300">Alamat</label>
                         <textarea id="edit_alamat" name="alamat"
-                            class="textarea textarea-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700"></textarea>
+                            class="textarea textarea-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"></textarea>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">No. Telp</label>
                             <input type="number" id="edit_no_telp" name="no_telp"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Email</label>
                             <input type="email" id="edit_email" name="email"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
                         </div>
                     </div>
 

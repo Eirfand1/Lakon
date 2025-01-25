@@ -44,7 +44,7 @@
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
         <div class="modal">
-            <div class="modal-box w-10/12 max-w-3xl rounded dark:bg-gray-800 bg-gray-100">
+            <div class="modal-box w-10/12 max-w-3xl rounded dark:bg-gray-800 bg-gray-50">
                 <h3 class="font-bold text-lg">EDIT DATA PENYEDIA</h3>
                 <div>
                     <label for="edit-modal"
@@ -55,7 +55,7 @@
                     @method('PUT')
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="md:col-span-1">
-                            <label class="block text-sm font-medium text-gray-700">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                                 NIK <span class="text-red-500">*</span>
                                 <small class="block text-xs text-gray-500">Nomor Induk Kependudukan
                                     Pemilik/Direktur</small>
@@ -65,7 +65,7 @@
                                 placeholder="Nomor Induk Kependudukan" required>
                         </div>
                         <div class="md:col-span-1">
-                            <label class="block text-sm font-medium text-gray-700">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                                 Nama <span class="text-red-500">*</span>
                                 <small class="block text-xs text-gray-500">Nama Pemilik/Direktur Perusahaan</small>
                             </label>
@@ -76,7 +76,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                             Alamat <span class="text-red-500">*</span>
                             <small class="block text-xs text-gray-500">Alamat Pemilik/Direktur Perusahaan</small>
                         </label>
@@ -88,7 +88,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                                 Nama Perusahaan (lengkap) <span class="text-red-500">*</span>
                             </label>
                             <input type="text" name="nama_perusahaan_lengkap" id="edit_nama_perusahaan_lengkap"
@@ -96,7 +96,7 @@
                                 placeholder="Nama Lengkap Perusahaan" required>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                                 Nama Perusahaan (singkat) <span class="text-red-500">*</span>
                             </label>
                             <input type="text" name="nama_perusahaan_singkat" id="edit_nama_perusahaan_singkat"
@@ -106,7 +106,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                             Akta Notaris <span class="text-red-500">*</span>
                         </label>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -123,7 +123,7 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                             Alamat Perusahaan <span class="text-red-500">*</span>
                         </label>
                         <textarea name="alamat_perusahaan" id="edit_alamat_perusahaan"
@@ -133,7 +133,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                                 No. Telepon Perusahaan <span class="text-red-500">*</span>
                             </label>
                             <input type="number" name="kontak_hp" id="edit_kontak_hp"
@@ -141,7 +141,7 @@
                                 placeholder="No. Telp Perusahaan" required>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                                 Email Perusahaan <span class="text-red-500">*</span>
                             </label>
                             <input type="email" name="kontak_email" id="edit_kontak_email"
@@ -152,7 +152,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                                 NPWP Perusahaan <span class="text-red-500">*</span>
                                 <small class="block text-xs text-gray-500">Nomor Pokok Wajib Pajak</small>
                             </label>
@@ -161,7 +161,7 @@
                                 placeholder="Nomor Pokok Wajib Pajak" required>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                                 Logo Perusahaan
                                 <small class="block text-xs text-gray-500">Unggah logo perusahaan (maks. 2MB)</small>
                             </label>
@@ -175,7 +175,7 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                                 Nomor Rekening <span class="text-red-500">*</span>
                             </label>
                             <input type="text" name="rekening_norek" id="edit_rekening_norek"
@@ -183,7 +183,7 @@
                                 placeholder="Nomor Rekening" required>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                                 Nama Rekening <span class="text-red-500">*</span>
                             </label>
                             <input type="text" name="rekening_nama" id="edit_rekening_nama"
@@ -191,7 +191,7 @@
                                 placeholder="Nama Pemilik Rekening" required>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                                 Bank <span class="text-red-500">*</span>
                             </label>
                             <input type="text" name="rekening_bank" id="edit_rekening_bank"

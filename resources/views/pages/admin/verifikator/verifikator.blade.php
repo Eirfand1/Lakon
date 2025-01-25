@@ -61,11 +61,11 @@
                     @csrf
                     <div class="form-control">
                         <label class="label">NIP</label>
-                        <input type="number" name="nip" class="bg-gray-200 dark:bg-gray-700 rounded" required />
+                        <input type="number" name="nip" class="input bg-gray-200 dark:bg-gray-700 " required />
                     </div>
                     <div class="form-control">
                         <label class="label">Nama</label>
-                        <input type="text" name="nama_verifikator" class="bg-gray-200 dark:bg-gray-700 rounded" required />
+                        <input type="text" name="nama_verifikator" class="input bg-gray-200 dark:bg-gray-700" required />
                     </div>
                     <div class="modal-action">
                         <button type="submit" class="btn btn-primary">Simpan</button>
@@ -88,11 +88,11 @@
                     @method('PUT')
                     <div class="form-control">
                         <label class="label">NIP</label>
-                        <input type="number" id="edit_nip" name="nip" class="bg-gray-200 dark:bg-gray-700 rounded" required />
+                        <input type="number" id="edit_nip" name="nip" class="bg-gray-200 dark:bg-gray-700 input" required />
                     </div>
                     <div class="form-control">
                         <label class="label">Nama</label>
-                        <input type="text" id="edit_nama" name="nama_verifikator" class="bg-gray-200 dark:bg-gray-700 rounded" required />
+                        <input type="text" id="edit_nama" name="nama_verifikator" class="bg-gray-200 dark:bg-gray-700 input" required />
                     </div>
                     <div class="modal-action">
                         <button type="submit" class="btn btn-primary">Update</button>
