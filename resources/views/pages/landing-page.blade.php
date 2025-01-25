@@ -42,7 +42,7 @@
                     <h1 class="text-4xl md:text-5xl font-bold leading-tight bg-black/50 inline-block p-4">
                         PELAKSANAAN KEGIATAN YANG AMAN DAN TRANSPARAN.
                     </h1>
-                    <a href="/register" class="inline-block bg-white text-blue-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors">
+                    <a href="/registrasi" class="inline-block bg-white text-blue-600 px-8 py-3 rounded-full font-medium hover:bg-gray-100 transition-colors">
                         Belum memiliki akun? Ayo Daftarkan Perusahaan Anda!
                     </a>
                 </div>

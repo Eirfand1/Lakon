@@ -106,103 +106,166 @@
                     <label for="edit-modal"
                         class="btn btn-sm btn-circle font-bold mt-2 btn-ghost absolute right-2 top-2">X</label>
                 </div>
-                <form id="editForm" method="POST">
+                <form id="editForm" method="POST" class="space-y-4">
                     @csrf
                     @method('PUT')
-                    <!-- NIK -->
-                    <div class="form-control">
-                        <label class="label">NIK</label>
-                        <input type="text" id="edit_nik" name="NIK" class="bg-gray-200 dark:bg-gray-700 rounded"
-                            required />
-                    </div>
-                    <!-- Nama Pemilik -->
-                    <div class="form-control">
-                        <label class="label">Nama Pemilik</label>
-                        <input type="text" id="edit_nama_pemilik" name="nama_pemilik"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" required />
-                    </div>
-                    <!-- Alamat Pemilik -->
-                    <div class="form-control">
-                        <label class="label">Alamat Pemilik</label>
-                        <textarea id="edit_alamat_pemilik" name="alamat_pemilik"
-                            class="bg-gray-200 dark:bg-gray-700 rounded"></textarea>
-                    </div>
-                    <!-- Nama Perusahaan Lengkap -->
-                    <div class="form-control">
-                        <label class="label">Nama Perusahaan Lengkap</label>
-                        <input type="text" id="edit_nama_perusahaan_lengkap" name="nama_perusahaan_lengkap"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" required />
-                    </div>
-                    <!-- Nama Perusahaan Singkat -->
-                    <div class="form-control">
-                        <label class="label">Nama Perusahaan Singkat</label>
-                        <input type="text" id="edit_nama_perusahaan_singkat" name="nama_perusahaan_singkat"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
-                    </div>
-                    <!-- Akta Notaris -->
-                    <div class="form-control">
-                        <label class="label">Akta Notaris No</label>
-                        <input type="text" id="edit_akta_notaris_no" name="akta_notaris_no"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
-                    </div>
-                    <div class="form-control">
-                        <label class="label">Akta Notaris Nama</label>
-                        <input type="text" id="edit_akta_notaris_nama" name="akta_notaris_nama"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
-                    </div>
-                    <div class="form-control">
-                        <label class="label">Akta Notaris Tanggal</label>
-                        <input type="date" id="edit_akta_notaris_tanggal" name="akta_notaris_tanggal"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
-                    </div>
-                    <!-- Alamat Perusahaan -->
-                    <div class="form-control">
-                        <label class="label">Alamat Perusahaan</label>
-                        <textarea id="edit_alamat_perusahaan" name="alamat_perusahaan"
-                            class="bg-gray-200 dark:bg-gray-700 rounded"></textarea>
-                    </div>
-                    <!-- Kontak -->
-                    <div class="form-control">
-                        <label class="label">Kontak HP</label>
-                        <input type="text" id="edit_kontak_hp" name="kontak_hp"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
-                    </div>
-                    <div class="form-control">
-                        <label class="label">Kontak Email</label>
-                        <input type="email" id="edit_kontak_email" name="kontak_email"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
-                    </div>
-                    <!-- Rekening -->
-                    <div class="form-control">
-                        <label class="label">No Rekening</label>
-                        <input type="text" id="edit_rekening_norek" name="rekening_norek"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
-                    </div>
-                    <div class="form-control">
-                        <label class="label">Nama Rekening</label>
-                        <input type="text" id="edit_rekening_nama" name="rekening_nama"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
-                    </div>
-                    <div class="form-control">
-                        <label class="label">Bank</label>
-                        <input type="text" id="edit_rekening_bank" name="rekening_bank"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
-                    </div>
-                    <!-- NPWP -->
-                    <div class="form-control">
-                        <label class="label">NPWP Perusahaan</label>
-                        <input type="text" id="edit_npwp_perusahaan" name="npwp_perusahaan"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="md:col-span-1">
+                            <label class="block text-sm font-medium text-gray-700">
+                                NIK <span class="text-red-500">*</span>
+                                <small class="block text-xs text-gray-500">Nomor Induk Kependudukan
+                                    Pemilik/Direktur</small>
+                            </label>
+                            <input type="number" name="NIK" id="edit_nik"
+                                class="mt-1 block bg-white dark:bg-gray-50/10 dark:border-gray-600 w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                placeholder="Nomor Induk Kependudukan" required>
+                        </div>
+                        <div class="md:col-span-1">
+                            <label class="block text-sm font-medium text-gray-700">
+                                Nama <span class="text-red-500">*</span>
+                                <small class="block text-xs text-gray-500">Nama Pemilik/Direktur Perusahaan</small>
+                            </label>
+                            <input type="text" name="nama_pemilik" id="edit_nama_pemilik"
+                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                placeholder="Nama Pemilik/Direktur sesuai KTP" required>
+                        </div>
                     </div>
 
-                    <div class="form-control">
-                        <label class="label">Logo Perusahaan</label>
-                        <input type="file" id="logo_perusahaan" name="logo_perusahaan"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">
+                            Alamat <span class="text-red-500">*</span>
+                            <small class="block text-xs text-gray-500">Alamat Pemilik/Direktur Perusahaan</small>
+                        </label>
+                        <textarea name="alamat_pemilik" id="edit_alamat_pemilik"
+                            class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            rows="3" placeholder="Alamat lengkap Pemilik/Direktur sesuai dengan KTP"
+                            required></textarea>
                     </div>
-                    <!-- Modal Action -->
-                    <div class="modal-action">
-                        <button type="submit" class="btn btn-primary">Update</button>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                Nama Perusahaan (lengkap) <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" name="nama_perusahaan_lengkap" id="edit_nama_perusahaan_lengkap"
+                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                placeholder="Nama Lengkap Perusahaan" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                Nama Perusahaan (singkat) <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" name="nama_perusahaan_singkat" id="edit_nama_perusahaan_singkat"
+                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                placeholder="Nama Singkat Perusahaan" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">
+                            Akta Notaris <span class="text-red-500">*</span>
+                        </label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <input type="text" name="akta_notaris_no" id="edit_akta_notaris_no"
+                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                placeholder="Nomor Akta Notaris" required>
+                            <input type="text" name="akta_notaris_nama" id="edit_akta_notaris_nama"
+                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                placeholder="Nama Notaris" required>
+                            <input type="date" name="akta_notaris_tanggal" id="edit_akta_notaris_tanggal"
+                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                placeholder="Tanggal Notaris" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700">
+                            Alamat Perusahaan <span class="text-red-500">*</span>
+                        </label>
+                        <textarea name="alamat_perusahaan" id="edit_alamat_perusahaan"
+                            class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            rows="3" placeholder="Alamat lengkap perusahaan" required></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                No. Telepon Perusahaan <span class="text-red-500">*</span>
+                            </label>
+                            <input type="number" name="kontak_hp" id="edit_kontak_hp"
+                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                placeholder="No. Telp Perusahaan" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                Email Perusahaan <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" name="kontak_email" id="edit_kontak_email"
+                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                placeholder="Email Perusahaan" required>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                NPWP Perusahaan <span class="text-red-500">*</span>
+                                <small class="block text-xs text-gray-500">Nomor Pokok Wajib Pajak</small>
+                            </label>
+                            <input type="text" name="npwp_perusahaan" id="edit_npwp_perusahaan"
+                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                placeholder="Nomor Pokok Wajib Pajak" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                Logo Perusahaan
+                                <small class="block text-xs text-gray-500">Unggah logo perusahaan (maks. 2MB)</small>
+                            </label>
+                            <input type="file" name="logo_perusahaan" accept="image/png, image/jpg, image/jpeg" class="mt-1 block w-full text-sm text-gray-500
+                                file:mr-4 border p-1 bg-white dark:bg-gray-50/10 dark:border-gray-600  file:rounded-md rounded-md file:border-0
+                                file:text-sm file:font-medium
+                                file:bg-blue-50 file:text-blue-700
+                                hover:file:bg-blue-100">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                Nomor Rekening <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" name="rekening_norek" id="edit_rekening_norek"
+                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                placeholder="Nomor Rekening" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                Nama Rekening <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" name="rekening_nama" id="edit_rekening_nama"
+                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                placeholder="Nama Pemilik Rekening" required>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700">
+                                Bank <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" name="rekening_bank" id="edit_rekening_bank"
+                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                placeholder="Nama Bank" required>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end space-x-4 modal-action">
+                        <button type="submit"
+                            class="btn bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
+                                fill="currentColor">
+                                <path
+                                    d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293zM9 4a1 1 0 012 0v2H9V4z" />
+                            </svg>
+                            Simpan
+                        </button>
                         <label for="edit-modal" class="btn">Tutup</label>
                     </div>
                 </form>

@@ -5,7 +5,7 @@
                 <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">VERIFIKATOR</h1>
             </div>
             <!-- Add Button -->
-            <label for="add-modal" class="btn btn-sm px-5 text-white bg-blue-800/80 hover:bg-blue-600/80">
+            <label for="add-modal" class="btn btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
                 <i class="fa-solid fa-square-plus"></i>
                 <span>Tambah Data</span>
             </label>
