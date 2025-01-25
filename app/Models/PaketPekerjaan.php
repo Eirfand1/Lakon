@@ -15,12 +15,12 @@ class PaketPekerjaan extends Model
 
     public function ppkom()
     {
-        return $this->hasOne(Ppkom::class, 'paket_id', 'paket_id');
+        return $this->hasOne(Ppkom::class, 'ppkom_id', 'ppkom_id');
     }
 
     public function dasarHukum()
     {
-        return $this->hasOne(DasarHukum::class, 'paket_id', 'paket_id');
+        return $this->hasOne(DasarHukum::class, 'daskum_id', 'daskum_id');
     }
 
     public function satuanKerja()
@@ -30,7 +30,7 @@ class PaketPekerjaan extends Model
 
     public function subKegiatan()
     {
-        return $this->belongsTo(SubKegiatan::class, 'sub_kegiatan_id', 'id');
+        return $this->belongsTo(SubKegiatan::class, 'sub_kegiatan_id', 'sub_kegiatan_id');
     }
 
 }
