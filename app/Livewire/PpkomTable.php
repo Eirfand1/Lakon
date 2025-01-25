@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
 use App\Models\Ppkom;
@@ -23,6 +24,7 @@ class PpkomTable extends DataTableComponent
     public function columns(): array
     {
         return [
+            IncrementColumn::make('#'),
             Column::make("ID", "ppkom_id")
                 ->sortable(),
             Column::make("NIP", "nip")

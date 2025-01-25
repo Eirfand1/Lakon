@@ -44,39 +44,7 @@
         @endif
 
         <!-- Table -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg ">
-            <div class="p-3 overflow-x-auto">
-                <table id="verifikatorTable" class="compact w-full rounded dark:bg-gray-800" >
-                    <thead class="bg-gray-300/10">
-                        <tr class="border-b-0 ">
-                            <th class="dark:text-white">No</th>
-                            <th class="dark:text-white">NIP</th>
-                            <th class="dark:text-white">Nama</th>
-                            <th class="dark:text-white">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($verifikator as $i => $p)
-                        <tr>
-                            <td>{{$i + 1}}</td>
-                            <td>{{$p->nip}}</td>
-                            <td>{{$p->nama_verifikator}}</td>
-                            <td>
-                                <label for="edit-modal" class="btn text-gray-200  btn-sm btn-warning"
-                                    onclick="editVerifikator({{ $p->verifikator_id }}, '{{ $p->nip }}', '{{ $p->nama_verifikator }}')">
-                                    <i class="fa-solid fa-pen-to-square"></i>
-                                </label>
-                                <label for="delete-modal" class="btn text-white btn-sm btn-error"
-                                    onclick="setDeleteId({{ $p->verifikator_id }})">
-                                    <i class="fa-solid fa-trash"></i>
-                                </label>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
+        <livewire:verifikator-table/>
 
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
@@ -157,31 +125,6 @@
 
     <!-- Script for Verifikator Table -->
         <script>
-            $(document).ready(function() {
-                $('#verifikatorTable').DataTable({
-                      responsive: true,
-                      language: {
-                            lengthMenu: '_MENU_',
-                            search: "",
-                            searchPlaceholder: "search...",
-                      },
-                      layout: {
-                            topEnd: 'pageLength',
-                            topStart: 'search'
-                       },
-                       dom: '<"flex justify-between items-center mb-4"<"text-gray-600 dark:text-gray-400"f><"flex space-x-4"l>>' +
-                            '<"overflow-auto"t>' +
-                            '<"flex justify-between items-center mt-4"<"text-gray-600 dark:text-gray-400"i><"pagination-container"p>>',
-
-                });
-                $('#dt-length-0').removeClass('px-3 py-2');
-                $('#dt-length-0').addClass('select select-sm p-0 px-5 bg-white dark:bg-gray-800');
-                $('<p> item</p>').appendTo('#dt-length-0 option');
-                $('.dt-search').addClass('text-xs');
-                $('.dt-search input').removeClass('px-3 py-2');
-                $('.dt-search input').addClass('p-1 rounded w-52');
-            });
-
             function editVerifikator(verifikator_id, nip, nama) {
                 document.getElementById('editForm').action = `verifikator/${verifikator_id}`;
                 document.getElementById('edit_nip').value = nip;
