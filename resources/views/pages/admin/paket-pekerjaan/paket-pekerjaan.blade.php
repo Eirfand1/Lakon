@@ -3,5 +3,7 @@
         <div class="mb-4 sm:mb-0">
             <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">Paket Pekerjaan</h1>
         </div>
+
+        <livewire:paket-pekerjaan-table/>
     <div>
 </x-app-layout>

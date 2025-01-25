@@ -39,64 +39,6 @@
             </script>
         @endif
 
-        <!-- Table -->
-        {{-- <div class="bg-white dark:bg-gray-800 rounded-lg">
-            <div class="p-3 overflow-x-auto">
-                <div id="filter-container" class="mb-4"></div>
-                <table id="penyediaTable" class="table w-full rounded-lg">
-                    <thead class="bg-gray-300/10 rounded-full">
-                        <tr class="border-none">
-                            <th class="dark:text-white">No</th>
-                            <th class="dark:text-white">Nama Perusahaan</th>
-                            <th class="dark:text-white">Kontak</th>
-                            <th class="dark:text-white">Alamat</th>
-                            <th class="dark:text-white">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($penyedia as $i => $p)
-                            <tr class="border-gray-500/20">
-
-                                <td>{{$i + 1}}</td>
-                                <td>{{$p->nama_perusahaan_lengkap}}</td>
-                                <td>{{$p->kontak_hp}} / {{$p->kontak_email}}</td>
-                                <td>{{$p->alamat_perusahaan}}</td>
-                                <td>
-                                    <label for="edit-modal" class="btn text-gray-200 btn-sm btn-warning" onclick="editPenyedia(
-                                       {{ $p->penyedia_id }},
-                                        `{{ $p->NIK }}`,
-                                        `{{ $p->nama_pemilik }}`,
-                                        `{{ $p->alamat_pemilik ?? '' }}`,
-                                        `{{ $p->nama_perusahaan_lengkap ?? '' }}`,
-                                        `{{ $p->nama_perusahaan_singkat ?? '' }}`,
-                                        `{{ $p->akta_notaris_no ?? '' }}`,
-                                        `{{ $p->akta_notaris_nama ?? '' }}`,
-                                        `{{ $p->akta_notaris_tanggal ?? '' }}`,
-                                        `{{ $p->alamat_perusahaan ?? '' }}`,
-                                        '{{ $p->kontak_hp ?? '' }}',
-                                        '{{ $p->kontak_email ?? '' }}',
-                                        '{{ $p->rekening_norek ?? '' }}',
-                                        '{{ $p->rekening_nama ?? '' }}',
-                                        '{{ $p->rekening_bank ?? '' }}',
-                                        '{{ $p->npwp_perusahaan ?? '' }}'
-
-                                    )">
-                                        <i class="fa-solid fa-pen-to-square"></i>
-                                    </label> 
-
-                                    <label for="delete-modal" class="btn text-white btn-sm btn-error"
-                                        onclick="setDeleteId({{ $p->penyedia_id }})">
-                                        <i class="fa-solid fa-trash"></i>
-                                    </label>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div> --}}
-
-
         {{-- table --}}
         <livewire:penyedia-table/>
         <!-- Edit Modal -->
@@ -299,51 +241,6 @@
 
     <!-- Script for penyedia Table -->
     <script>
-        // $(document).ready(function () {
-        //     var table = $('#penyediaTable').DataTable({
-        //     responsive: true,
-        //     language: {
-        //         lengthMenu: '_MENU_',
-        //         search: "",
-        //         searchPlaceholder: "search.."
-        //     },
-        //     layout: {
-        //         topEnd: 'pageLength',
-        //         topStart: 'search'
-        //     },
-        //     dom: '<"flex justify-between items-center mb-4"<"text-gray-600 dark:text-gray-400"f><"flex space-x-4"l>>' +
-        //         '<"overflow-auto"t>' +
-        //         '<"flex justify-between items-center mt-4"<"text-gray-600 dark:text-gray-400"i><"pagination-container"p>>',
-        //         initComplete: function () {
-        //             this.api().columns([1, 2, 3]).every(function () {
-        //                 var column = this;
-        //                 var select = $('<br class="mb-2"/><select class="select select-sm text-xs bg-white dark:bg-gray-600 w-full"><option value=""></option></select>')
-        //                     .appendTo($(column.header()))
-        //                     .on('change', function () {
-        //                         var val = $.fn.dataTable.util.escapeRegex(
-        //                             $(this).val()
-        //                         );
-
-        //                         column
-        //                             .search(val ? '^' + val + '$' : '', true, false)
-        //                             .draw();
-        //                     });
-
-        //                 column.data().unique().sort().each(function (d, j) {
-        //                     select.append('<option value="' + d + '">' + d + '</option>')
-        //                 });
-        //             });
-        //         }
-        //     });
-
-        //     $('#dt-length-0').removeClass('px-3 py-2');
-        //     $('#dt-length-0').addClass('select select-sm p-0 px-5 bg-white dark:bg-gray-800');
-        //     $('<p> item</p>').appendTo('#dt-length-0 option');
-        //     $('.dt-search').addClass('text-xs');
-        //     $('.dt-search input').removeClass('px-3 py-2');
-        //     $('.dt-search input').addClass('p-1 rounded w-52');
-        // });
-
 
         function editPenyedia(penyedia_id, nik, nama_pemilik, 
                             alamat_pemilik, nama_perusahaan_lengkap, 

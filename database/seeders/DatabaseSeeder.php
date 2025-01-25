@@ -19,6 +19,11 @@ class DatabaseSeeder extends Seeder
             DashboardTableSeeder::class,
             UsersTableSeeder::class,
             PenyediaSeeder::class,
+            DasarHukumTable::class,
+            PpkomTable::class,
+            SatuanKerjaTable::class,
+            SubKegiatanTable::class,
+            PaketPekerjaanTable::class,
         ]);
     }
 }
