@@ -1,11 +1,27 @@
-<div class="flex space-x-2">
-    <button wire:click="$emit('openEditModal', {{ $penyedia->penyedia_id }})" 
-            class="btn btn-sm btn-warning text-gray-200">
+<div>
+    <label for="edit-modal" class="btn text-gray-200 btn-sm btn-warning" onclick="editPenyedia(
+                                       {{ $p->penyedia_id }},
+                                        `{{ $p->NIK }}`,
+                                        `{{ $p->nama_pemilik }}`,
+                                        `{{ $p->alamat_pemilik ?? '' }}`,
+                                        `{{ $p->nama_perusahaan_lengkap ?? '' }}`,
+                                        `{{ $p->nama_perusahaan_singkat ?? '' }}`,
+                                        `{{ $p->akta_notaris_no ?? '' }}`,
+                                        `{{ $p->akta_notaris_nama ?? '' }}`,
+                                        `{{ $p->akta_notaris_tanggal ?? '' }}`,
+                                        `{{ $p->alamat_perusahaan ?? '' }}`,
+                                        '{{ $p->kontak_hp ?? '' }}',
+                                        '{{ $p->kontak_email ?? '' }}',
+                                        '{{ $p->rekening_norek ?? '' }}',
+                                        '{{ $p->rekening_nama ?? '' }}',
+                                        '{{ $p->rekening_bank ?? '' }}',
+                                        '{{ $p->npwp_perusahaan ?? '' }}'
+
+                                    )">
         <i class="fa-solid fa-pen-to-square"></i>
-    </button>
-    
-    <button wire:click="$emit('confirmDelete', {{ $penyedia->penyedia_id }})" 
-            class="btn btn-sm btn-error text-white">
+    </label>
+
+    <label for="delete-modal" class="btn text-white btn-sm btn-error" onclick="setDeleteId({{ $p->penyedia_id }})">
         <i class="fa-solid fa-trash"></i>
-    </button>
+    </label>
 </div>

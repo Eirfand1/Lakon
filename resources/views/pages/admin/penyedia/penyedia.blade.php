@@ -40,7 +40,7 @@
         @endif
 
         <!-- Table -->
-        <div class="bg-white dark:bg-gray-800 rounded-lg">
+        {{-- <div class="bg-white dark:bg-gray-800 rounded-lg">
             <div class="p-3 overflow-x-auto">
                 <div id="filter-container" class="mb-4"></div>
                 <table id="penyediaTable" class="table w-full rounded-lg">
@@ -94,9 +94,11 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> --}}
 
 
+        {{-- table --}}
+        <livewire:penyedia-table/>
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
         <div class="modal">
@@ -297,50 +299,50 @@
 
     <!-- Script for penyedia Table -->
     <script>
-        $(document).ready(function () {
-            var table = $('#penyediaTable').DataTable({
-            responsive: true,
-            language: {
-                lengthMenu: '_MENU_',
-                search: "",
-                searchPlaceholder: "search.."
-            },
-            layout: {
-                topEnd: 'pageLength',
-                topStart: 'search'
-            },
-            dom: '<"flex justify-between items-center mb-4"<"text-gray-600 dark:text-gray-400"f><"flex space-x-4"l>>' +
-                '<"overflow-auto"t>' +
-                '<"flex justify-between items-center mt-4"<"text-gray-600 dark:text-gray-400"i><"pagination-container"p>>',
-                initComplete: function () {
-                    this.api().columns([1, 2, 3]).every(function () {
-                        var column = this;
-                        var select = $('<br class="mb-2"/><select class="select select-sm text-xs bg-white dark:bg-gray-600 w-full"><option value=""></option></select>')
-                            .appendTo($(column.header()))
-                            .on('change', function () {
-                                var val = $.fn.dataTable.util.escapeRegex(
-                                    $(this).val()
-                                );
+        // $(document).ready(function () {
+        //     var table = $('#penyediaTable').DataTable({
+        //     responsive: true,
+        //     language: {
+        //         lengthMenu: '_MENU_',
+        //         search: "",
+        //         searchPlaceholder: "search.."
+        //     },
+        //     layout: {
+        //         topEnd: 'pageLength',
+        //         topStart: 'search'
+        //     },
+        //     dom: '<"flex justify-between items-center mb-4"<"text-gray-600 dark:text-gray-400"f><"flex space-x-4"l>>' +
+        //         '<"overflow-auto"t>' +
+        //         '<"flex justify-between items-center mt-4"<"text-gray-600 dark:text-gray-400"i><"pagination-container"p>>',
+        //         initComplete: function () {
+        //             this.api().columns([1, 2, 3]).every(function () {
+        //                 var column = this;
+        //                 var select = $('<br class="mb-2"/><select class="select select-sm text-xs bg-white dark:bg-gray-600 w-full"><option value=""></option></select>')
+        //                     .appendTo($(column.header()))
+        //                     .on('change', function () {
+        //                         var val = $.fn.dataTable.util.escapeRegex(
+        //                             $(this).val()
+        //                         );
 
-                                column
-                                    .search(val ? '^' + val + '$' : '', true, false)
-                                    .draw();
-                            });
+        //                         column
+        //                             .search(val ? '^' + val + '$' : '', true, false)
+        //                             .draw();
+        //                     });
 
-                        column.data().unique().sort().each(function (d, j) {
-                            select.append('<option value="' + d + '">' + d + '</option>')
-                        });
-                    });
-                }
-            });
+        //                 column.data().unique().sort().each(function (d, j) {
+        //                     select.append('<option value="' + d + '">' + d + '</option>')
+        //                 });
+        //             });
+        //         }
+        //     });
 
-            $('#dt-length-0').removeClass('px-3 py-2');
-            $('#dt-length-0').addClass('select select-sm p-0 px-5 bg-white dark:bg-gray-800');
-            $('<p> item</p>').appendTo('#dt-length-0 option');
-            $('.dt-search').addClass('text-xs');
-            $('.dt-search input').removeClass('px-3 py-2');
-            $('.dt-search input').addClass('p-1 rounded w-52');
-        });
+        //     $('#dt-length-0').removeClass('px-3 py-2');
+        //     $('#dt-length-0').addClass('select select-sm p-0 px-5 bg-white dark:bg-gray-800');
+        //     $('<p> item</p>').appendTo('#dt-length-0 option');
+        //     $('.dt-search').addClass('text-xs');
+        //     $('.dt-search input').removeClass('px-3 py-2');
+        //     $('.dt-search input').addClass('p-1 rounded w-52');
+        // });
 
 
         function editPenyedia(penyedia_id, nik, nama_pemilik, 
