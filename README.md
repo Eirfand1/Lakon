@@ -1,67 +1,99 @@
 # LAKON
+## Berkas Desain
+Jika Anda membutuhkan berkas desain, Anda dapat mengunduhnya dari Figma Community 👉 https://bit.ly/3sigqHe
 
-## Design files
+## Penggunaan
+Proyek ini dibangun dengan [Laravel Jetstream](https://jetstream.laravel.com/) dan [Livewire + Blade](https://jetstream.laravel.com/2.x/introduction.html#livewire-blade) sebagai Stack.
 
-If you need the design files, you can download them from Figma's Community 👉 https://bit.ly/3sigqHe
+### Menyiapkan Berkas Konfigurasi .env
+Pastikan untuk menambahkan konfigurasi basis data di berkas .env Anda seperti nama basis data, nama pengguna, kata sandi, dan port.
 
-## Table of contents
 
-* [Usage](#usage)
-  * [Setup your .env config file](#setup-your-env-config-file)
-  * [Install Laravel dependencies](#install-laravel-dependencies)
-  * [Migrate the tables](#migrate-the-tables)
-  * [Generate some test data](#generate-some-test-data)
-  * [Compile the front-end](#compile-the-front-end)
-  * [Launch the Laravel backend](#launch-the-Laravel-backend)        
-* [Credits](#credits)
-* [Terms and License](#terms-and-license)
-* [About Us](#about-us)
-* [Stay in the loop](#stay-in-the-loop)
+## Tutorial Lengkap Konfigurasi .env di Laravel
 
-## Usage
+### 1. Temukan Berkas .env
+- Berkas `.env` biasanya terletak di direktori root proyek Laravel
+- Jika tidak ada, salin `.env.example` menjadi `.env`
 
-This project was built with [Laravel Jetstream](https://jetstream.laravel.com/) and [Livewire + Blade](https://jetstream.laravel.com/2.x/introduction.html#livewire-blade) as Stack.
+### 2. Konfigurasi Basis Data
 
-### Setup your .env config file
-Make sure to add the database configuration in your .env file such as database name, username, password and port.
+```env
+# Jenis basis data yang digunakan
+DB_CONNECTION=mysql
 
-### Install Laravel dependencies
-In the root of your Laravel application, run the ``php composer.phar install`` (or ``composer install``) command to install all of the framework's dependencies.
+# Nama host basis data (biasanya localhost)
+DB_HOST=127.0.0.1
 
-### Migrate the tables
+# Port basis data (default MySQL adalah 3306)
+DB_PORT=3306
 
-In order to migrate the tables and setup the bare minimum structure for this app
-to display some data you shoud open your terminal, locate and enter this project
-directory and run the following command
+# Nama basis data yang akan digunakan
+DB_DATABASE=nama_basis_data_anda
 
+# Nama pengguna basis data
+DB_USERNAME=nama_pengguna_anda
+
+# Kata sandi basis data
+DB_PASSWORD=kata_sandi_anda
+```
+
+### 3. Konfigurasi Tambahan yang Umum
+```env
+# Kunci aplikasi (digunakan untuk enkripsi)
+APP_KEY=
+
+# Mode aplikasi (local/production)
+APP_ENV=local
+
+# Aktifkan/nonaktifkan debug
+APP_DEBUG=true
+
+# URL aplikasi
+APP_URL=http://localhost
+
+# Konfigurasi email (opsional)
+MAIL_MAILER=smtp
+MAIL_HOST=mailhog
+MAIL_PORT=1025
+MAIL_USERNAME=null
+MAIL_PASSWORD=null
+MAIL_ENCRYPTION=null
+```
+
+### Tips Penting
+- Jangan commit berkas `.env` ke repositori versi kontrol
+- Gunakan `.gitignore` untuk mengabaikan berkas `.env`
+- Selalu buat `.env.example` dengan contoh konfigurasi tanpa nilai sensitif
+- Gunakan `php artisan key:generate` untuk membuat kunci aplikasi
+
+### Troubleshooting
+- Pastikan basis data sudah dibuat sebelum mengonfigurasi
+- Periksa kembali kredensial basis data
+- Gunakan `php artisan config:clear` jika mengalami masalah konfigurasi
+
+
+### Instal Dependensi Laravel
+Di root aplikasi Laravel, jalankan perintah ``php composer.phar install`` (atau ``composer install``) untuk menginstal semua dependensi kerangka kerja.
+
+### Migrasi Tabel
+Untuk melakukan migrasi tabel dan menyiapkan struktur dasar aplikasi, buka terminal, masuk ke direktori proyek, lalu jalankan perintah:
 ``php artisan migrate``
 
-### Generate some test data
-
-Once you have all your database tables setup you can then generate some test data
-which will come from our pre-made database table seeders.
-In order to do so, in your terminal run the following command
-
+### Hasilkan Data Uji
+Setelah menyiapkan tabel basis data, Anda dapat menghasilkan data uji dari pembuat data (seeders) yang sudah dibuat. Jalankan perintah:
 ``php artisan db:seed``
 
-N.B. If you run this command twice, all the test data will be duplicated and added to the existing table data, if you want to avoid having duplicate test data please
-make sure to ``truncate`` the following ``datafeeds`` table in your database.
+Catatan: Jika Anda menjalankan perintah ini dua kali, data uji akan diduplikasi. Untuk menghindari duplikasi, pastikan untuk melakukan ``truncate`` pada tabel ``datafeeds`` di basis data Anda.
 
-### Compile the front-end
+### Kompilasi Front-end
+Untuk mengompilasi aset CSS dan JS, instal dependensi NPM dengan mengetik ``npm install``.
 
-In order to compile all the CSS and JS assets for the front-end of this site you need to install NPM dependencies. To do that, open the terminal, type npm install and press the ``Enter`` key.
+Kemudian jalankan:
+- ``npm run dev`` untuk server pengembangan
+- ``npm run build`` untuk kompilasi produksi
 
-Then run ``npm run dev`` in the terminal to run a development server to re-compile static assets when making changes to the template.
-
-When you have done with changes, run ``npm run build`` for compiling and minify for production.
-
-### Launch the Laravel backend
-
-In order to make this Laravel installation work properly on your local machine you
-can run the following command in your terminal window.
-
+### Jalankan Backend Laravel
+Jalankan perintah:
 ``php artisan serve``
 
-You should receive a message similar to this
-``Starting Laravel development server: http://127.0.0.1:8000`` simply copy the URL
-in your browser and you'll be ready to test out your new mosaic laravel app.
+Anda akan menerima pesan seperti ``Starting Laravel development server: http://127.0.0.1:8000``. Salin URL ini di browser Anda untuk memulai.

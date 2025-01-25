@@ -31,10 +31,6 @@
         <script src="https://kit.fontawesome.com/ac8548371f.js" crossorigin="anonymous"></script>
 
         <!-- data tables -->
-        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-        <script src="https://cdn.datatables.net/v/dt/dt-2.2.1/datatables.min.js"></script>
-        <script src="https://cdn.datatables.net/2.2.1/js/dataTables.tailwindcss.js"></script>
-        <link href="https://cdn.datatables.net/v/dt/dt-2.2.1/datatables.min.css" rel="stylesheet">
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <script src="https://apis.google.com/js/platform.js" async defer></script>

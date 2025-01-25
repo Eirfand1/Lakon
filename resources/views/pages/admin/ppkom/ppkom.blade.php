@@ -46,54 +46,75 @@
 
         <!-- Table -->
 
-        <livewire:ppkom-table/>
+        <livewire:ppkom-table />
 
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
         <div id="modal_ppkom" class="modal">
-            <div class="modal-box w-10/12 max-w-2xl rounded  dark:bg-gray-800 bg-gray-100">
-                <div>
+            <div class="modal-box w-11/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-900 bg-white">
+                <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
+                        <h3 class="font-bold text-xl dark:text-gray-200">Tambah Data PPKOM</h3>
+                    </div>
                     <label for="add-modal"
-                        class="btn btn-sm btn-circle font-bold mt-2 btn-ghost absolute right-2 top-2">X</label>
+                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
+                        ✕
+                    </label>
                 </div>
-                <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-square-plus text-xl"></i>
-                    <h3 class="font-bold text-xl">FORM TAMBAH DATA PPKOM</h3>
-                </div>
-                <form action="{{ route('admin.ppkom.store') }}" method="POST" class="border-t border-violet-800/40 mt-4">
+
+                <form action="{{ route('admin.ppkom.store') }}" method="POST" class="space-y-4 pt-4">
                     @csrf
-                    <div class="form-control">
-                        <label class="label">NIP</label>
-                        <input type="number" oninput="this.value = this.value.replace(/[^0-9]/g, '')" name="nip"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" required />
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label font-semibold dark:text-gray-300">NIP</label>
+                            <input type="number" name="nip" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700"
+                                required />
+                        </div>
+                        <div class="form-control">
+                            <label class="label font-semibold dark:text-gray-300">Nama</label>
+                            <input type="text" name="nama"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700"
+                                required />
+                        </div>
                     </div>
-                    <div class="form-control">
-                        <label class="label">Nama</label>
-                        <input type="text" name="nama" class="bg-gray-200 dark:bg-gray-700 rounded" required />
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label font-semibold dark:text-gray-300">Pangkat</label>
+                            <input type="text" name="pangkat"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label font-semibold dark:text-gray-300">Jabatan</label>
+                            <input type="text" name="jabatan"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                        </div>
                     </div>
+
                     <div class="form-control">
-                        <label class="label">Pangkat</label>
-                        <input type="text" name="pangkat" class="bg-gray-200 dark:bg-gray-700 rounded" />
+                        <label class="label font-semibold dark:text-gray-300">Alamat</label>
+                        <textarea name="alamat"
+                            class="textarea textarea-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700"></textarea>
                     </div>
-                    <div class="form-control">
-                        <label class="label">Jabatan</label>
-                        <input type="text" name="jabatan" class="bg-gray-200 dark:bg-gray-700 rounded" />
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label font-semibold dark:text-gray-300">No. Telp</label>
+                            <input type="number" name="no_telp"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label font-semibold dark:text-gray-300">Email</label>
+                            <input type="email" name="email"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                        </div>
                     </div>
-                    <div class="form-control">
-                        <label class="label">Alamat</label>
-                        <textarea name="alamat" class="bg-gray-200 dark:bg-gray-700 rounded"></textarea>
-                    </div>
-                    <div class="form-control">
-                        <label class="label">No. Telp</label>
-                        <input type="number" name="no_telp" class="bg-gray-200 dark:bg-gray-700 rounded " />
-                    </div>
-                    <div class="form-control">
-                        <label class="label">Email</label>
-                        <input type="email" name="email" class="bg-gray-200 dark:bg-gray-700 rounded" />
-                    </div>
+
                     <div class="modal-action">
                         <button type="submit" class="btn btn-primary">Simpan</button>
-                        <label for="add-modal" class="btn">Tutup</label>
+                        <label for="add-modal" class="btn btn-ghost">Tutup</label>
                     </div>
                 </form>
             </div>
@@ -102,52 +123,71 @@
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
         <div class="modal">
-            <div class="modal-box w-10/12 max-w-2xl rounded  dark:bg-gray-800 bg-gray-100">
-                <h3 class="font-bold text-lg">EDIT DATA PPKOM</h3>
-                <div>
+            <div class="modal-box w-11/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-900 bg-white">
+                <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-pen-to-square text-2xl text-primary"></i>
+                        <h3 class="font-bold text-xl dark:text-gray-200">Edit Data PPKOM</h3>
+                    </div>
                     <label for="edit-modal"
-                        class="btn btn-sm btn-circle font-bold mt-2 btn-ghost absolute right-2 top-2">X</label>
+                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
+                        ✕
+                    </label>
                 </div>
-                <form id="editForm" method="POST">
+
+                <form id="editForm" method="POST" class="space-y-4 pt-4">
                     @csrf
                     @method('PUT')
-                    <div class="form-control">
-                        <label class="label">NIP</label>
-                        <input type="number" id="edit_nip" name="nip" class="bg-gray-200 dark:bg-gray-700 rounded"
-                            required />
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label font-semibold dark:text-gray-300">NIP</label>
+                            <input type="number" id="edit_nip" name="nip"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700"
+                                required />
+                        </div>
+                        <div class="form-control">
+                            <label class="label font-semibold dark:text-gray-300">Nama</label>
+                            <input type="text" id="edit_nama" name="nama"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700"
+                                required />
+                        </div>
                     </div>
-                    <div class="form-control">
-                        <label class="label">Nama</label>
-                        <input type="text" id="edit_nama" name="nama" class="bg-gray-200 dark:bg-gray-700 rounded"
-                            required />
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label font-semibold dark:text-gray-300">Pangkat</label>
+                            <input type="text" id="edit_pangkat" name="pangkat"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label font-semibold dark:text-gray-300">Jabatan</label>
+                            <input type="text" id="edit_jabatan" name="jabatan"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                        </div>
                     </div>
+
                     <div class="form-control">
-                        <label class="label">Pangkat</label>
-                        <input type="text" id="edit_pangkat" name="pangkat"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
-                    </div>
-                    <div class="form-control">
-                        <label class="label">Jabatan</label>
-                        <input type="text" id="edit_jabatan" name="jabatan"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
-                    </div>
-                    <div class="form-control">
-                        <label class="label">Alamat</label>
+                        <label class="label font-semibold dark:text-gray-300">Alamat</label>
                         <textarea id="edit_alamat" name="alamat"
-                            class="bg-gray-200 dark:bg-gray-700 rounded"></textarea>
+                            class="textarea textarea-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700"></textarea>
                     </div>
-                    <div class="form-control">
-                        <label class="label">No. Telp</label>
-                        <input type="text" id="edit_no_telp" name="no_telp"
-                            class="bg-gray-200 dark:bg-gray-700 rounded" />
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label font-semibold dark:text-gray-300">No. Telp</label>
+                            <input type="number" id="edit_no_telp" name="no_telp"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                        </div>
+                        <div class="form-control">
+                            <label class="label font-semibold dark:text-gray-300">Email</label>
+                            <input type="email" id="edit_email" name="email"
+                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-800 dark:border-gray-700" />
+                        </div>
                     </div>
-                    <div class="form-control">
-                        <label class="label">Email</label>
-                        <input type="email" id="edit_email" name="email" class="bg-gray-200 dark:bg-gray-700 rounded" />
-                    </div>
+
                     <div class="modal-action">
                         <button type="submit" class="btn btn-primary">Update</button>
-                        <label for="edit-modal" class="btn">Tutup</label>
+                        <label for="edit-modal" class="btn btn-ghost">Tutup</label>
                     </div>
                 </form>
             </div>

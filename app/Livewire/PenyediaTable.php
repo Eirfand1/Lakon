@@ -6,6 +6,8 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Penyedia;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
+use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectDropdownFilter;
+use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
 class PenyediaTable extends DataTableComponent
@@ -98,7 +100,19 @@ class PenyediaTable extends DataTableComponent
                 ->options(['' => 'Semua Perusahaan'] + $perusahaanOption) // Menambahkan opsi perusahaan dari database
                 ->filter(function($builder, $value) {
                     return $value ? $builder->where('nama_perusahaan_lengkap', $value) : $builder;
-                }),
+                }), ];
+    }
+
+    public function bulkActions(): array
+    {
+        return [
+            'deleteSelected' => 'Hapus Terpilih',
         ];
+    }
+
+    public function deleteSelected()
+    {
+        Penyedia::whereIn('penyedia_id', $this->getSelected())->delete();
+        $this->clearSelected();
     }
 }

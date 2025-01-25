@@ -14,15 +14,15 @@ class VerifikatorTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('verifikator_id')
-             ->setColumnSelectStatus(true)
-             ->setFilterLayout('slide-down');
+            ->setColumnSelectStatus(true)
+            ->setFilterLayout('slide-down');
     }
 
     public function columns(): array
     {
         return [
 
-            IncrementColumn::make('#'), 
+            IncrementColumn::make('#'),
             Column::make("Verifikator id", "verifikator_id")
                 ->sortable()
                 ->searchable(),
@@ -42,4 +42,19 @@ class VerifikatorTable extends DataTableComponent
                 ->format(fn($value, $row) => view('pages.admin.verifikator.actions', ['verifikator' => $row])),
         ];
     }
+
+    public function bulkActions(): array
+    {
+        return [
+            'deleteSelected' => 'Hapus Terpilih',
+        ];
+    }
+
+    public function deleteSelected()
+    {
+        Verifikator::whereIn('verifikator_id', $this->getSelected())->delete();
+        $this->clearSelected();
+    }
 }
+
+

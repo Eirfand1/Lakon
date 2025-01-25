@@ -78,7 +78,7 @@ class PpkomTable extends DataTableComponent
             SelectFilter::make('Jabatan')
                 ->options(['' => 'Semua Jabatan'] + $jabatanOptions) // Menambahkan opsi pangkat dari database
                 ->filter(function($builder, $value) {
-                    return $value ? $builder->where('pangkat', $value) : $builder;
+                    return $value ? $builder->where('jabatan', $value) : $builder;
                 }),
             
         ];
