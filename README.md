@@ -31,7 +31,7 @@ php artisan migrate
 php artisn db:seed
 ```
 ### seed awal
-email = admin@gmail.com
+email = admin@gmail.com <br/>
 password = 12345678
 *gunakan ini untuk login pada tombol masuk pojok kanan atas*
 
