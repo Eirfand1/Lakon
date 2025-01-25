@@ -15,29 +15,38 @@
 
         @if (session('success'))
 
-        <script>
-        Toastify({
-            text: "{{ session('success') }}",
-            duration: 2000,
-            gravity: "top", // `top` or `bottom`
-            position: "right", // `left`, `center` or `right`
-            style: {
-                background: "linear-gradient(to right, #00b09b, #96c93d)", // Hijau untuk sukses
-            },
-        }).showToast();
-        </script>
+            <script>
+               Toastify({
+                    escapeMarkup: false,
+                    text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
+                    duration: 3000,
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    style: {
+                        background: "linear-gradient(135deg, #2ecc71, #27ae60)",
+                        fontWeight: "600",
+                        textTransform: "uppercase",
+                        padding: "12px 20px",
+                    },
+                }).showToast();
+            </script>
 
         @endif
-        <!-- Error message -->
+        <!-- error message -->
+
         @if (session('error'))
             <script>
                 Toastify({
-                    text: "{{ session('error') }}",
-                    duration: 2000,
+                    escapeMarkup: false,
+                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
+                    duration: 3000,
                     gravity: "top",
-                    position: "right",
+                    position: "center",
                     style: {
                         background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                        fontWeight: "600",
+                        textTransform: "uppercase",
+                        padding: "12px 20px",
                     },
                 }).showToast();
             </script>

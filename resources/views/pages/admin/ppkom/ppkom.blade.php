@@ -16,13 +16,17 @@
         @if (session('success'))
 
             <script>
-                Toastify({
-                    text: "{{ session('success') }}",
-                    duration: 2000,
+               Toastify({
+                    escapeMarkup: false,
+                    text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
+                    duration: 3000,
                     gravity: "top", // `top` or `bottom`
-                    position: "right", // `left`, `center` or `right`
+                    position: "center", // `left`, `center` or `right`
                     style: {
-                        background: "linear-gradient(to right, #00b09b, #96c93d)", // Hijau untuk sukses
+                        background: "linear-gradient(135deg, #2ecc71, #27ae60)",
+                        fontWeight: "600",
+                        textTransform: "uppercase",
+                        padding: "12px 20px",
                     },
                 }).showToast();
             </script>
@@ -33,12 +37,16 @@
         @if (session('error'))
             <script>
                 Toastify({
-                    text: "{{ session('error') }}",
-                    duration: 2000,
+                    escapeMarkup: false,
+                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
+                    duration: 3000,
                     gravity: "top",
-                    position: "right",
+                    position: "center",
                     style: {
                         background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                        fontWeight: "600",
+                        textTransform: "uppercase",
+                        padding: "12px 20px",
                     },
                 }).showToast();
             </script>
@@ -175,7 +183,7 @@
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">No. Telp</label>
-                            <input type="number" id="edit_no_telp" name="no_telp"
+                            <input type="text" id="edit_no_telp" name="no_telp"
                                 class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
                         </div>
                         <div class="form-control">
@@ -223,7 +231,7 @@
             document.getElementById('edit_nama').value = nama;
             document.getElementById('edit_pangkat').value = pangkat;
             document.getElementById('edit_jabatan').value = jabatan;
-            document.getElementById('edit_alamat').value = alamat;
+            document.getElementById('edit_alamat').textContent = alamat;
             document.getElementById('edit_no_telp').value = no_telp;
             document.getElementById('edit_email').value = email;
         }
