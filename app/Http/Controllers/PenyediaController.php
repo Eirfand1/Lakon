@@ -36,29 +36,36 @@ class PenyediaController extends Controller
         ]);
     }
 
-    private function uploadToGoogleDrive($file, $filename)
+    private function uploadLocal($file)
     {
-        $client = new Client();
-        $client->setAuthConfig(storage_path('credentials/credentials.json'));
-        $client->addScope(Drive::DRIVE_FILE);
-
-        $service = new Drive($client);
-
-        $fileMetadata = new Drive\DriveFile([
-            'name' => $filename,
-            'parents' => ['1zfl-nW4rxIHf0K4LRma8SrBvsgaAQArc']
-        ]);
-
-        $content = file_get_contents($file->getRealPath());
-
-        $file = $service->files->create($fileMetadata, [
-            'data' => $content,
-            'mimeType' => $file->getMimeType(),
-            'uploadType' => 'multipart',
-        ]);
-
-        return $file->getWebViewLink();
+        $logoName = time() . '.' . $file->getClientOriginalExtension();
+        $file->move(public_path('uploads/logo'), $logoName);
+        return 'uploads/logo/' . $logoName;
     }
+
+    // private function uploadToGoogleDrive($file, $filename)
+    // {
+    //     $client = new Client();
+    //     $client->setAuthConfig(storage_path('credentials/credentials.json'));
+    //     $client->addScope(Drive::DRIVE_FILE);
+
+    //     $service = new Drive($client);
+
+    //     $fileMetadata = new Drive\DriveFile([
+    //         'name' => $filename,
+    //         'parents' => ['1zfl-nW4rxIHf0K4LRma8SrBvsgaAQArc']
+    //     ]);
+
+    //     $content = file_get_contents($file->getRealPath());
+
+    //     $file = $service->files->create($fileMetadata, [
+    //         'data' => $content,
+    //         'mimeType' => $file->getMimeType(),
+    //         'uploadType' => 'multipart',
+    //     ]);
+
+    //     return $file->getWebViewLink();
+    // }
 
     public function store(Request $request)
     {
@@ -85,13 +92,9 @@ class PenyediaController extends Controller
 
             if ($request->hasFile('logo_perusahaan')) {
                 $logo = $request->file('logo_perusahaan');
-                $logoName = time() . '.' . $logo->getClientOriginalExtension();
+                $validated['logo_perusahaan'] = $this->uploadLocal($logo);
+            } 
 
-                // Upload ke Google Drive
-                $googleDriveLink = $this->uploadToGoogleDrive($logo, $logoName);
-
-                $validated['logo_perusahaan'] = $googleDriveLink;
-            }
             $penyedia->create($validated);
             return redirect()->back()->with('success', 'Data berhasil ditambahkan!');
         } catch (\Throwable $th) {
@@ -120,8 +123,13 @@ class PenyediaController extends Controller
                 'rekening_nama' => 'required|max:255',
                 'rekening_bank' => 'required|max:255',
                 'npwp_perusahaan' => 'required|max:255',
-                'logo_perusahaan' => 'nullable|max:255',
+                'logo_perusahaan' => 'nullable|max:2048',
             ]);
+
+            if ($request->hasFile('logo_perusahaan')) {
+                $logo = $request->file('logo_perusahaan');
+                $validated['logo_perusahaan'] = $this->uploadLocal($logo);
+            }
 
             $penyedia->update($validated);
             return redirect()->back()->with('success', 'Data berhasil diperbarui.');

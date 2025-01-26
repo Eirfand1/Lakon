@@ -5,13 +5,14 @@
                 <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">PENYEDIA</h1>
             </div>
         </div>
+        {{var_dump($penyedia[0]->logo_perusahaan)}}
 
         <!-- Success Message -->
 
         @if (session('success'))
 
             <script>
-               Toastify({
+                Toastify({
                     escapeMarkup: false,
                     text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
                     duration: 3000,
@@ -48,7 +49,7 @@
         @endif
 
         {{-- table --}}
-        <livewire:penyedia-table/>
+        <livewire:penyedia-table />
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
         <div class="modal">
@@ -58,7 +59,7 @@
                     <label for="edit-modal"
                         class="btn btn-sm btn-circle font-bold mt-2 btn-ghost absolute right-2 top-2">X</label>
                 </div>
-                <form id="editForm" method="POST" class="space-y-4">
+                <form id="editForm" method="POST" class="space-y-4" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -174,11 +175,36 @@
                                 <small class="block text-xs text-gray-500">Unggah logo perusahaan (maks. 2MB)</small>
                             </label>
                             <input type="file" name="logo_perusahaan" accept="image/png, image/jpg, image/jpeg" class="mt-1 block w-full text-sm text-gray-500
-                                file:mr-4 border p-1 bg-white dark:bg-gray-50/10 dark:border-gray-600  file:rounded-md rounded-md file:border-0
-                                file:text-sm file:font-medium
-                                file:bg-blue-50 file:text-blue-700
-                                hover:file:bg-blue-100">
+                                                                  file:mr-4 border p-1 bg-white dark:bg-gray-50/10 
+                                                                  dark:border-gray-600 file:rounded-md rounded-md 
+                                                                  file:border-0 file:text-sm file:font-medium
+                                                                  file:bg-blue-50 file:text-blue-700
+                                                                  hover:file:bg-blue-100"
+                                onchange="previewLogo(event)">
+
+                            <img id="logoPreview" src="" class="mt-2  object-cover rounded-lg"
+                                alt="Logo Preview" width="100">
+                            <script>
+                                function previewLogo(event) {
+                                    const logoPreview = document.getElementById('logoPreview');
+                                    const file = event.target.files[0];
+
+                                    if (file) {
+                                        const reader = new FileReader();
+                                        reader.onload = function (e) {
+                                            logoPreview.src = e.target.result;
+                                            logoPreview.classList.remove('hidden');
+                                        }
+                                        reader.readAsDataURL(file);
+                                    } else {
+                                        logoPreview.src = '';
+                                        logoPreview.classList.add('hidden');
+                                    }
+                                }
+                            </script>
                         </div>
+
+
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -250,12 +276,12 @@
     <!-- Script for penyedia Table -->
     <script>
 
-        function editPenyedia(penyedia_id, nik, nama_pemilik, 
-                            alamat_pemilik, nama_perusahaan_lengkap, 
-                            nama_perusahaan_singkat, akta_notaris_no, akta_notaris_nama, 
-                            akta_notaris_tanggal, alamat_perusahaan, kontak_hp,
-                            kontak_email, rekening_norek, rekening_nama, rekening_bank, npwp_perusahaan
-        ){
+        function editPenyedia(penyedia_id, nik, nama_pemilik,
+            alamat_pemilik, nama_perusahaan_lengkap,
+            nama_perusahaan_singkat, akta_notaris_no, akta_notaris_nama,
+            akta_notaris_tanggal, alamat_perusahaan, kontak_hp,
+            kontak_email, rekening_norek, rekening_nama, rekening_bank, npwp_perusahaan, logo_perusahaan
+        ) {
             document.getElementById('editForm').action = `penyedia/${penyedia_id}`;
             document.getElementById('edit_nik').value = nik;
             document.getElementById('edit_nama_pemilik').value = nama_pemilik;
@@ -272,7 +298,9 @@
             document.getElementById('edit_rekening_nama').value = rekening_nama;
             document.getElementById('edit_rekening_bank').value = rekening_bank;
             document.getElementById('edit_npwp_perusahaan').value = npwp_perusahaan;
-            // document.getElementById('logo_perusahaan').value = logo_perusahaan;
+
+            const logoBefore = document.getElementById('logoPreview');
+            logoBefore.src = `${logo_perusahaan ? `{{ asset('') }}${logo_perusahaan}` : '{{ asset('images/default-logo.png') }}'}`;
         }
 
         function setDeleteId(penyedia_id) {

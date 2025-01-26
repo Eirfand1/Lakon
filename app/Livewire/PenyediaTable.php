@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Penyedia;
+use Rappasoft\LaravelLivewireTables\Views\Columns\ImageColumn;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
 use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectDropdownFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectFilter;
@@ -18,7 +19,8 @@ class PenyediaTable extends DataTableComponent
     {
         $this->setPrimaryKey('penyedia_id')
             ->setColumnSelectStatus(true)
-            ->setFilterLayout('slide-down');
+            ->setFilterLayout('slide-down')
+            ->setDefaultSort('penyedia_id', 'desc');
     }
 
     public function columns(): array
@@ -72,9 +74,17 @@ class PenyediaTable extends DataTableComponent
             Column::make("NPWP Perusahaan", "npwp_perusahaan")
                 ->sortable()
                 ->searchable(),
-            Column::make("Logo perusahaan", "logo_perusahaan")
+            Column::make("Path Logo perusahaan", "logo_perusahaan")
                 ->sortable()
                 ->searchable(),
+            ImageColumn::make('Logo Perusahaan')
+                ->location(
+                    fn($row) => asset($row->logo_perusahaan),
+                )
+                ->attributes(fn($row) => [
+                    'class' => 'w-8',
+                    'alt' => ''
+                ]),
             Column::make("Created at", "created_at")
                 ->sortable(),
             Column::make("Updated at", "updated_at")
@@ -84,23 +94,25 @@ class PenyediaTable extends DataTableComponent
         ];
     }
 
-    public function filters(): array{
+    public function filters(): array
+    {
         $perusahaanOption = Penyedia::distinct()->pluck('nama_perusahaan_lengkap', 'nama_perusahaan_lengkap')->toArray();
         return [
             TextFilter::make('Nama')
                 ->config([
                     'placeholder' => 'Cari Nama',
                 ])
-                ->filter(function($builder, $value) {
+                ->filter(function ($builder, $value) {
                     return $builder->where('nama', 'like', '%' . $value . '%');
                 }),
-            
+
 
             SelectFilter::make('Perusahaan')
                 ->options(['' => 'Semua Perusahaan'] + $perusahaanOption) // Menambahkan opsi perusahaan dari database
-                ->filter(function($builder, $value) {
+                ->filter(function ($builder, $value) {
                     return $value ? $builder->where('nama_perusahaan_lengkap', $value) : $builder;
-                }), ];
+                }),
+        ];
     }
 
     public function bulkActions(): array

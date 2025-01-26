@@ -16,7 +16,7 @@ class PpkomTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('ppkom_id')
-             ->setDefaultSort('ppkom_id', 'asc')
+             ->setDefaultSort('ppkom_id', 'desc')
              ->setColumnSelectStatus(true)
              ->setFilterLayout('slide-down');
     }
