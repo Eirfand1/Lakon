@@ -21,12 +21,14 @@ class PpkomTable extends DataTableComponent
              ->setFilterLayout('slide-down');
     }
 
+    public function builder(): \Illuminate\Database\Eloquent\Builder {
+        return Ppkom::query()->orderByDesc('updated_at');
+    }
+
     public function columns(): array
     {
         return [
             IncrementColumn::make('#'),
-            Column::make("ID", "ppkom_id")
-                ->sortable(),
             Column::make("NIP", "nip")
                 ->sortable()
                 ->searchable(),
@@ -46,7 +48,10 @@ class PpkomTable extends DataTableComponent
             Column::make("No Telp", "no_telp")
                 ->sortable()
                 ->searchable(),
-
+            Column::make("Created at", "created_at")
+                ->sortable(),
+            Column::make("Updated at", "updated_at")
+                ->sortable(),
             Column::make("Email", "email")
                 ->sortable()
                 ->searchable(),

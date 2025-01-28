@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\KontrakController;
 use App\Http\Controllers\PaketPekerjaanController;
 use App\Http\Controllers\PenyediaController;
 use App\Http\Controllers\PpkomController;
@@ -48,7 +49,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin')->group(functio
     Route::prefix('/verifikator')->group(function () {
         Route::get('/', [VerifikatorController::class, 'index'])->name('admin.verifikator.index');
         Route::post('/', [VerifikatorController::class, 'store'])->name('admin.verifikator.store');
-        Route::put('/{verifikator}', [VerifikatorController::class, 'update'])->name('admin.ppkom.edit');
+        Route::put('/{verifikator}', [VerifikatorController::class, 'update'])->name('admin.verifikator.edit');
         Route::delete('/{verifikator}', [VerifikatorController::class, 'destroy'])->name('admin.verifikator.destroy');
     });
 
@@ -61,7 +62,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin')->group(functio
 
 
     Route::get('/paket-pekerjaan', [PaketPekerjaanController::class, 'index'])->name('admin.paket-pekerjaan.index');
-
+    Route::get('/riwayat-kontrak', [KontrakController::class,'index'])->name('admin.riwayat-kontrak.index');
 
 
 

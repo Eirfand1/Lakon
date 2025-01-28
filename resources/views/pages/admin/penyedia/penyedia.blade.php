@@ -5,7 +5,6 @@
                 <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">PENYEDIA</h1>
             </div>
         </div>
-        {{var_dump($penyedia[0]->logo_perusahaan)}}
 
         <!-- Success Message -->
 

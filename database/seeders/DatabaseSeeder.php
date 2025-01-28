@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
             SatuanKerjaTable::class,
             SubKegiatanTable::class,
             PaketPekerjaanTable::class,
+            PaketSubKegiatanTable::class,
+            KontrakSeeder::class,
         ]);
     }
 }

@@ -30,7 +30,13 @@ class PaketPekerjaan extends Model
 
     public function subKegiatan()
     {
-        return $this->belongsTo(SubKegiatan::class, 'sub_kegiatan_id', 'sub_kegiatan_id');
+
+        return $this->belongsToMany(
+            SubKegiatan::class,
+            'paket_sub_kegiatan', 
+            'paket_id', 
+            'sub_kegiatan_id'
+        );
     }
 
 }

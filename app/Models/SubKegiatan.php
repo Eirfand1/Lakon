@@ -12,8 +12,18 @@ class SubKegiatan extends Model
     protected $guarded = ['sub_kegiatan_id'];
     use HasFactory;
 
+    public function kontrak()
+    {
+        return $this->hasMany(Kontrak::class, 'sub_kegiatan_id');
+    }
+
     public function paketPekerjaan()
     {
-        return $this->hasMany(PaketPekerjaan::class, 'sub_kegiatan_id', 'sub_kegiatan_id');
-    }
+        return $this->belongsToMany(
+            PaketPekerjaan::class,
+            'paket_sub_kegiatan', 
+            'sub_kegiatan_id', 
+            'paket_id',
+        );
+    } 
 }

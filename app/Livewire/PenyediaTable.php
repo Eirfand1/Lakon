@@ -22,13 +22,14 @@ class PenyediaTable extends DataTableComponent
             ->setFilterLayout('slide-down')
             ->setDefaultSort('penyedia_id', 'desc');
     }
+    public function builder(): \Illuminate\Database\Eloquent\Builder {
+        return Penyedia::query()->orderByDesc('updated_at');
+    }
 
     public function columns(): array
     {
         return [
             IncrementColumn::make('#'),
-            Column::make('ID', 'penyedia_id')
-                ->sortable(),
             Column::make("NIK", "NIK")
                 ->sortable()
                 ->searchable(),
@@ -76,15 +77,12 @@ class PenyediaTable extends DataTableComponent
                 ->searchable(),
             Column::make("Path Logo perusahaan", "logo_perusahaan")
                 ->sortable()
-                ->searchable(),
-            ImageColumn::make('Logo Perusahaan')
-                ->location(
-                    fn($row) => asset($row->logo_perusahaan),
-                )
-                ->attributes(fn($row) => [
-                    'class' => 'w-8',
-                    'alt' => ''
-                ]),
+                ->searchable()
+                ->format(function ($value, $row) {
+                   return "<img src='" . asset($value) ."' alt='' style='width: auto; height: 30px;' />"; 
+                })
+                ->html(),
+
             Column::make("Created at", "created_at")
                 ->sortable(),
             Column::make("Updated at", "updated_at")

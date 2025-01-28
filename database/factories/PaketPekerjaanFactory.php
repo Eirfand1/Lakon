@@ -20,18 +20,18 @@ class PaketPekerjaanFactory extends Factory
     public function definition(): array
     {
         return [
-            'sub_kegiatan_id' => \App\Models\SubKegiatan::factory()->create()->sub_kegiatan_id,
             'sumber_dana' => $this->faker->word(),
             'tahun_anggaran' => $this->faker->year(),
             'satker_id' => SatuanKerja::factory(),
             'nama_pekerjaan' => $this->faker->sentence(),
             'waktu_paket' => $this->faker->numberBetween(30, 180),
             'metode_pemilihan' => $this->faker->word(),
-            'jenis_pengadaan' => $this->faker->word(),
+            'jenis_pengadaan' => $this->faker->randomElement(['tender', 'non_tender', 'e_catalog']),
             'nilai_pagu' => $this->faker->randomFloat(2, 100000, 1000000),
             'nilai_hps' => $this->faker->randomFloat(2, 90000, 950000),
             'ppkom_id' => Ppkom::factory(),
             'daskum_id' => DasarHukum::factory(),
+            'kode_paket' => $this->faker->numberBetween(1000,5000)
         ];
     }
 }

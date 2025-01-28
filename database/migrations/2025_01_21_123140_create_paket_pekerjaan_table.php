@@ -12,9 +12,6 @@ return new class extends Migration {
     {
         Schema::create('paket_pekerjaan', function (Blueprint $table) {
             $table->id('paket_id');
-            $table->foreignId('sub_kegiatan_id')
-                ->constrained('sub_kegiatan', 'sub_kegiatan_id')
-                ->cascadeOnDelete();
             $table->string('sumber_dana');
             $table->smallInteger('tahun_anggaran');
             $table->foreignId('satker_id')
@@ -23,18 +20,18 @@ return new class extends Migration {
             $table->string('nama_pekerjaan');
             $table->smallInteger('waktu_paket');
             $table->string('metode_pemilihan');
-            $table->string('jenis_pengadaan');
+            $table->enum('jenis_pengadaan', ['tender', 'non_tender', 'e_catalog']);
             $table->integer('nilai_pagu');
             $table->integer('nilai_hps');
             $table->foreignId('ppkom_id')
                 ->constrained('ppkom', 'ppkom_id')
                 ->cascadeOnDelete();
-
             $table->unsignedBigInteger('daskum_id');
             $table->foreign('daskum_id')
                 ->references('daskum_id')
                 ->on('dasar_hukum')
                 ->onDelete('cascade');
+            $table->integer('kode_paket');
             $table->timestamps();
         });
 

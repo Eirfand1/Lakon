@@ -15,7 +15,12 @@ class VerifikatorTable extends DataTableComponent
     {
         $this->setPrimaryKey('verifikator_id')
             ->setColumnSelectStatus(true)
-            ->setFilterLayout('slide-down');
+            ->setFilterLayout('slide-down')
+            ->setDefaultSort('verifikator_id', 'desc');
+    }
+
+    public function builder(): \Illuminate\Database\Eloquent\Builder {
+        return Verifikator::query()->orderByDesc('updated_at');
     }
 
     public function columns(): array
@@ -23,9 +28,6 @@ class VerifikatorTable extends DataTableComponent
         return [
 
             IncrementColumn::make('#'),
-            Column::make("Verifikator id", "verifikator_id")
-                ->sortable()
-                ->searchable(),
             Column::make("Nip", "nip")
                 ->sortable()
                 ->searchable(),
