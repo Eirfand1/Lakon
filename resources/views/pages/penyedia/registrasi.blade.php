@@ -49,7 +49,7 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span>{{session('success')}} Silahkan login</span>
+                        <span>{{session('success')}} Silahkan klik <a href="/login" class="text-blue-500 font-bold">Login/Masuk</a></span>
                     </div>
                     <script>
                         Toastify({
@@ -236,6 +236,34 @@
                             <input type="text" name="rekening_bank"
                                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                                 placeholder="Nama Bank" required>
+                        </div>
+                    </div>
+
+                    <div class="border-t pt-5 flex flex-col gap-2">
+                        <h2 class="font-bold">Registrasi akun</h2>
+                        <div>
+                            <label for="name">
+                                username <span class="text-red-500">*</span>
+                            </label>
+                            <input type="text" name="name" required placeholder="Nama" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                        </div>
+                        <div>
+                            <label for="email">
+                                email <span class="text-red-500">*</span>
+                            </label>
+                            <input type="email" name="email" required placeholder="Email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                        </div>
+                        <div>
+                            <label for="password">
+                                password <span class="text-red-500">*</span>
+                            </label>
+                            <input type="password" name="password" required placeholder="Password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                        </div>
+                        <div>
+                            <label for="password_confirmation">
+                                Konfirmasi password <span class="text-red-500">*</span>
+                            </label>
+                            <input type="password" name="password_confirmation" required placeholder="Konfirmasi Password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
                         </div>
                     </div>
 

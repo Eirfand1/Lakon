@@ -2,6 +2,7 @@
 namespace App\Livewire;
 
 use App\Models\SubKegiatan;
+use DB;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
@@ -9,7 +10,6 @@ use App\Models\PaketPekerjaan;
 use Rappasoft\LaravelLivewireTables\Views\Filters\NumberFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
-
 class PaketPekerjaanTable extends DataTableComponent
 {
     protected $model = PaketPekerjaan::class;
@@ -23,10 +23,25 @@ class PaketPekerjaanTable extends DataTableComponent
     }
     public function builder(): \Illuminate\Database\Eloquent\Builder
     {
-        return PaketPekerjaan::query()
-            ->with(['subKegiatan', 'satuanKerja', 'dasarHukum', 'ppkom'])
-            ->orderByDesc('paket_id');
+        // return PaketPekerjaan::query()
+        //     ->with(['subKegiatan', 'satuanKerja', 'dasarHukum', 'ppkom'])
+        //     ->orderByDesc('paket_id');
+
+        $query = PaketPekerjaan::query()
+            ->with([
+                'satuanKerja',
+                'dasarHukum',
+                'ppkom',
+                'subKegiatan',
+            ])->orderBy('paket_pekerjaan.updated_at', 'desc');
+        // \DB::enableQueryLog();
+        // $result = $query->get();
+
+        // dd($query->toSql(), $query->get());
+
+        return $query;
     }
+
 
     public function columns(): array
     {
@@ -48,14 +63,14 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
 
-            // Column::make('Sub Kegiatan')
-            //     ->format(function ($row) {
+            // TODO Masih error ahgggggggggggggggggggggggg
+            // Column::make('Sub Kegiatan', 'subKegiatan.nama_sub_kegiatan')
+            //     ->label(function ($row,$value) {
+            //         // Debug untuk melihat isi $row
             //         return $row->subKegiatan->pluck('nama_sub_kegiatan')->implode(', ');
             //     }),
 
-            // TODO Masih error ahgggggggggggggggggggggggg
-            Column::make('Sub Kegiatan')
-                ->label(fn($row) => $row->subKegiatan->pluck('nama_sub_kegiatan')->implode(', ')),
+            // Column::make('asiu', 'subKegiatan.nama_sub_kegiatan'),
 
             Column::make('Waktu Paket', 'waktu_paket')
                 ->sortable()
@@ -110,35 +125,46 @@ class PaketPekerjaanTable extends DataTableComponent
                     });
                 }),
 
-            // Sub Kegiatan Filter
-            SelectFilter::make('Sub Kegiatan')
+            // Jenis Pengadaan Filter
+            SelectFilter::make('Jenis Pengadaan')
                 ->options([
-                    '' => 'Semua Sub Kegiatan',
-                ] + SubKegiatan::pluck('nama_sub_kegiatan', 'nama_sub_kegiatan')->toArray())
+                    '' => 'Semua Jenis',
+                ] + PaketPekerjaan::distinct()->pluck('jenis_pengadaan', 'jenis_pengadaan')->toArray())
                 ->filter(function ($builder, $value) {
-                    return $value
-                        ? $builder->whereHas('subKegiatan', fn($q) => $q->where('nama_sub_kegiatan', $value))
-                        : $builder;
+                    return $value ? $builder->where('jenis_pengadaan', $value) : $builder;
                 }),
+
+            // Sub Kegiatan Filter
+            // SelectFilter::make('Sub Kegiatan')
+            //     ->options([
+            //         '' => 'Semua Sub Kegiatan',
+            //     ] + SubKegiatan::pluck('nama_sub_kegiatan', 'nama_sub_kegiatan')->toArray())
+            //     ->filter(function ($builder, $value) {
+            //         return $value
+            //             ? $builder->whereHas('subKegiatan', fn($q) => $q->where('nama_sub_kegiatan', $value))
+            //             : $builder;
+            //     }),
 
             // Tahun Anggaran Filter
             SelectFilter::make('Tahun Anggaran')
                 ->options([
                     '' => 'Semua Tahun',
-                ] + PaketPekerjaan::distinct()->pluck('tahun_anggaran', 'tahun_anggaran')->toArray()),
+                ] + PaketPekerjaan::distinct()->pluck('tahun_anggaran', 'tahun_anggaran')->toArray())
+                ->filter(function ($builder, $value) {
+                    return $value ? $builder->where('tahun_anggaran', $value) : $builder;
+                }),
 
 
             // Metode Pemilihan Filter
             SelectFilter::make('Metode Pemilihan')
                 ->options([
                     '' => 'Semua Metode',
-                ] + PaketPekerjaan::distinct()->pluck('metode_pemilihan', 'metode_pemilihan')->toArray()),
+                ] + PaketPekerjaan::distinct()->pluck('metode_pemilihan', 'metode_pemilihan')->toArray())
+                ->filter(function ($builder, $value) {
+                    return $value ? $builder->where('metode_pemilihan', $value) : $builder;
+                }),
 
-            // Jenis Pengadaan Filter
-            SelectFilter::make('Jenis Pengadaan')
-                ->options([
-                    '' => 'Semua Jenis',
-                ] + PaketPekerjaan::distinct()->pluck('jenis_pengadaan', 'jenis_pengadaan')->toArray()),
+
 
             // Nilai Pagu Filter
             NumberFilter::make('Minimal Nilai Pagu')

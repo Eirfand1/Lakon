@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('verifikator', function (Blueprint $table) {
             $table->id('verifikator_id');
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->string('nip')->unique();
             $table->string('nama_verifikator');
             $table->timestamps();

@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -19,6 +20,7 @@ class VerifikatorFactory extends Factory
         return [
             //
             'nip' => $this->faker->numberBetween(1000000,5000000),
+            'user_id' => User::factory(),
             'nama_verifikator' => $this->faker->name(),
         ];
     }

@@ -58,4 +58,24 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
+
+    public function penyedia() {
+        return $this->hasOne(Penyedia::class);
+    }
+
+    public function verifikator() {
+        return $this->hasOne(Verifikator::class);
+    }
+
+    public function isPenyedia() {
+        return $this->role = 'penyedia';
+    }
+
+    public function isAdmin() {
+        return $this->role == 'admin';
+    }
+
+    public function isVerifikator() {
+        return $this->role ='verifikator';
+    }
 }

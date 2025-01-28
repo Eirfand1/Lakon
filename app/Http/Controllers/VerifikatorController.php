@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kontrak;
 use App\Models\Verifikator;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
@@ -78,5 +79,24 @@ class VerifikatorController extends Controller
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Terjadi kesalahan tak terduga saat menghapus data');
         }
+    }
+
+
+    public function kontrakSaya()
+    {
+        
+        $verifikator = auth()->user();
+
+        if (!$verifikator->role == 'verifikator') {
+            abort(403, 'Anda bukan verifikator');
+        }
+
+        $kontrak = Kontrak::where('verifikator_id', $verifikator->id)->get();
+
+        return view('pages.verifikator.riwayat.riwayat', compact('kontrak'));
+    }
+
+    public function dashboard() {
+        return view('pages.verifikator.dashboard.dashboard');
     }
 }

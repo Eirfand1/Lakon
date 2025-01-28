@@ -74,7 +74,20 @@ return [
     |
     */
 
-    'home' => RouteServiceProvider::HOME,
+    'home' => function () {
+        $user = auth()->user();
+
+        if ($user->role == 'admin') {
+            return route('admin.dashboard');
+        } else if($user->role == 'verifikator') {
+            return route('verifikator.dashboard');
+        } else if($user->role == 'penyedia') {
+            return route('penyedia.dashboard');
+        } else {
+            return route('/');
+        }
+    },
+
 
     /*
     |--------------------------------------------------------------------------

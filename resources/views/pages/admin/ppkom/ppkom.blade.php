@@ -5,7 +5,7 @@
                 <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">PPKOM</h1>
             </div>
             <!-- Add Button -->
-            <label for="add-modal" class="btn btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
+            <label for="add-modal" class="btn rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
                 <i class="fa-solid fa-square-plus"></i>
                 <span>Tambah Data</span>
             </label>
@@ -59,7 +59,7 @@
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
         <div id="modal_ppkom" class="modal">
-            <div class="modal-box w-11/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
+            <div class="modal-box w-10/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-square-plus text-2xl text-primary"></i>

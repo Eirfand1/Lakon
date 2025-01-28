@@ -11,4 +11,14 @@ class Verifikator extends Model
     protected $primaryKey = 'verifikator_id';
     protected $fillable = ['nip', 'nama_verifikator'];
     use HasFactory;
+
+
+    public function user() {
+        return $this->belongsTo(User::class);
+    }
+    public function kontrak()
+    {
+        return $this->hasMany(Kontrak::class, 'verifikator_id');
+    }
+
 }

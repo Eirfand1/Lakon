@@ -29,4 +29,11 @@ class Kontrak extends Model
     {
         return $this->belongsTo(Penyedia::class, 'penyedia_id');
     }
+
+    public function riwayatKontrak() {
+        $verifikator = auth()->user()->verifikator;
+        $kontrak = Kontrak::where('verifikator_id', $verifikator)->get();
+
+        return view('pages.verifikator.riwayat.riwayat', compact('kontrak'));
+    }
 }

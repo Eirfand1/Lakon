@@ -24,7 +24,7 @@ class KontrakTable extends DataTableComponent
     {
         return Kontrak::query()
             ->with(['satuanKerja', 'penyedia', 'verifikator'])
-            ->orderByDesc('kontrak_id');
+            ->orderByDesc('kontrak.updated_at');
     }
 
     public function bulkActions(): array

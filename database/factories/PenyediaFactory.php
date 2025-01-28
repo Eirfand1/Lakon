@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class PenyediaFactory extends Factory
     {
 
         return [
+            'user_id' => User::factory(),
             'NIK' => $this->faker->numerify('################'), // 16 digit angka acak
             'nama_pemilik' => $this->faker->name(),
             'alamat_pemilik' => $this->faker->address(),

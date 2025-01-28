@@ -28,8 +28,18 @@ Route::view('/', 'pages.landing-page');
 Route::get('/registrasi',[PenyediaController::class, 'create'])->name('registrasi'); 
 Route::post('/registrasi',[PenyediaController::class, 'store'])->name('registrasi.store'); 
 
+Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(function () {
+    Route::get('/riwayat-kontrak', [PenyediaController::class, 'kontrakSaya'])->name('penyedia.riwayat');
+    Route::get('/dashboard', [PenyediaController::class, 'dashboard'])->name('penyedia.dashboard');
+});
+
+Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(function () {
+    Route::get('/riwayat-kontrak', [VerifikatorController::class, 'kontrakSaya'])->name('verifikator.riwayat');
+    Route::get('/dashboard', [VerifikatorController::class, 'dashboard'])->name('verifikator.dashboard');
+});
+
 // TODO make all route to /admin or /penyedia or /verifikator
-Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin')->group(function () {
+Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
     // Route for the getting the data feed
     Route::get('/json-data-feed', [DataFeedController::class, 'getDataFeed'])->name('json_data_feed');
@@ -63,6 +73,7 @@ Route::middleware(['auth:sanctum', 'verified'])->prefix('/admin')->group(functio
 
     Route::get('/paket-pekerjaan', [PaketPekerjaanController::class, 'index'])->name('admin.paket-pekerjaan.index');
     Route::get('/riwayat-kontrak', [KontrakController::class,'index'])->name('admin.riwayat-kontrak.index');
+    Route::get('/riwayat-kontrak/export', [KontrakController::class,'export'])->name('admin.riwayat-kontrak.export');
 
 
 

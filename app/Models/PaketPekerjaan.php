@@ -8,19 +8,19 @@ use Illuminate\Database\Eloquent\Model;
 class PaketPekerjaan extends Model
 {
     protected $table = 'paket_pekerjaan';
-
     protected $primaryKey = 'paket_id';
     protected $guarded = ['paket_id'];
     use HasFactory;
 
+    // Ubah dari hasOne menjadi belongsTo
     public function ppkom()
     {
-        return $this->hasOne(Ppkom::class, 'ppkom_id', 'ppkom_id');
+        return $this->belongsTo(Ppkom::class, 'ppkom_id', 'ppkom_id');
     }
 
     public function dasarHukum()
     {
-        return $this->hasOne(DasarHukum::class, 'daskum_id', 'daskum_id');
+        return $this->belongsTo(DasarHukum::class, 'daskum_id', 'daskum_id');
     }
 
     public function satuanKerja()
@@ -30,7 +30,6 @@ class PaketPekerjaan extends Model
 
     public function subKegiatan()
     {
-
         return $this->belongsToMany(
             SubKegiatan::class,
             'paket_sub_kegiatan', 
@@ -38,5 +37,4 @@ class PaketPekerjaan extends Model
             'sub_kegiatan_id'
         );
     }
-
 }

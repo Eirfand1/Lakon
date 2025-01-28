@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kontrak;
 use App\Models\Penyedia;
+use App\Models\User;
+use Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -90,12 +93,43 @@ class PenyediaController extends Controller
                 'logo_perusahaan' => 'nullable|image|mimes:png,jpg,jpeg|max:2048'
             ]);
 
-            if ($request->hasFile('logo_perusahaan')) {
-                $logo = $request->file('logo_perusahaan');
-                $validated['logo_perusahaan'] = $this->uploadLocal($logo);
-            } 
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:users,email',
+                'password' => 'required|string|min:8|confirmed',
+            ]);
 
-            $penyedia->create($validated);
+
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+            ]);
+
+            $logoPath = null;
+            if ($request->hasFile('logo_perusahaan')) {
+                $logoPath = $request->file('logo_perusahaan')->store('logos', 'public');
+            }
+
+            Penyedia::create([
+                'user_id' => $user->id,
+                'NIK' => $request->NIK,
+                'nama_pemilik' => $request->nama_pemilik,
+                'alamat_pemilik' => $request->alamat_pemilik,
+                'nama_perusahaan_lengkap' => $request->nama_perusahaan_lengkap,
+                'nama_perusahaan_singkat' => $request->nama_perusahaan_singkat,
+                'akta_notaris_no' => $request->akta_notaris_no,
+                'akta_notaris_nama' => $request->akta_notaris_nama,
+                'akta_notaris_tanggal' => $request->akta_notaris_tanggal,
+                'alamat_perusahaan' => $request->alamat_perusahaan,
+                'kontak_hp' => $request->kontak_hp,
+                'kontak_email' => $request->kontak_email,
+                'rekening_norek' => $request->rekening_norek,
+                'rekening_nama' => $request->rekening_nama,
+                'rekening_bank' => $request->rekening_bank,
+                'npwp_perusahaan' => $request->npwp_perusahaan,
+                'logo_perusahaan' => $logoPath,
+            ]);
             return redirect()->back()->with('success', 'Data berhasil ditambahkan!');
         } catch (\Throwable $th) {
             return redirect()->back()->with('error', $th->getMessage());
@@ -157,5 +191,23 @@ class PenyediaController extends Controller
             return redirect()->back()
                 ->with('error', $e->getMessage());
         }
+    }
+
+    public function kontrakSaya()
+    {
+        $penyedia = auth()->user()->penyedia;
+
+        if (!$penyedia) {
+            abort(403, 'Anda bukan penyedia');
+        }
+
+        $kontrak = Kontrak::where('penyedia_id', $penyedia->id)->get();
+
+        return view('pages.penyedia.riwayat.riwayat', compact('kontrak'));
+    }
+
+    public function dashboard()
+    {
+        return view('pages.penyedia.dashboard.dashboard');
     }
 }
