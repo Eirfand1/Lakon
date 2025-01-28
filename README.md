@@ -31,9 +31,9 @@ php artisan migrate
 php artisn db:seed
 ```
 ### seed awal
-email = admin@gmail.com <br/>
-password = 12345678<br/>
-*gunakan ini untuk login pada tombol masuk pojok kanan atas*
+- email = admin@gmail.com <br/>
+- password = JunAedi99Gacor<br/>
+- *gunakan ini untuk login pada tombol masuk pojok kanan atas*
 
 6. Instal Dependensi NPM
 ```bash
