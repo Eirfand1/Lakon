@@ -16,7 +16,7 @@
         @if (session('success'))
 
             <script>
-               Toastify({
+                Toastify({
                     escapeMarkup: false,
                     text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
                     duration: 3000,
@@ -45,7 +45,6 @@
                     style: {
                         background: "linear-gradient(to right, #ff5f6d, #ffc371)",
                         fontWeight: "600",
-                        textTransform: "uppercase",
                         padding: "12px 20px",
                     },
                 }).showToast();
@@ -53,32 +52,58 @@
         @endif
 
         <!-- Table -->
-        <livewire:verifikator-table/>
+        <livewire:verifikator-table />
 
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
-        <div id="modal_verifikator" class="modal">
-            <div class="modal-box w-10/12 max-w-2xl rounded  dark:bg-gray-800 bg-gray-100">
+        <div id="modal_verifikator" class="modal modal-top">
+            <div class="modal-box w-10/12 mx-auto mt-4 max-w-2xl rounded  dark:bg-gray-800 bg-gray-100">
                 <div>
-                    <label for="add-modal" class="btn btn-sm btn-circle font-bold mt-2 btn-ghost absolute right-2 top-2">X</label>
+                    <label for="add-modal" class="btn btn-sm btn-circle mt-2 btn-ghost absolute right-2 top-2">X</label>
                 </div>
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-square-plus text-xl"></i>
                     <h3 class="font-bold text-xl">FORM TAMBAH DATA VERIFIKATOR</h3>
                 </div>
-                <form action="{{ route('admin.verifikator.store') }}" method="POST" class="border-t border-violet-800/40 mt-4">
+                <form action="{{ route('admin.verifikator.store') }}" method="POST" class="mt-4">
                     @csrf
                     <div class="form-control">
                         <label class="label">NIP</label>
-                        <input type="number" name="nip" class="input bg-gray-200 dark:bg-gray-700 " required />
+                        <input type="number" name="nip" class="input bg-white shadow dark:bg-gray-700" required
+                            placeholder="nip" />
                     </div>
                     <div class="form-control">
                         <label class="label">Nama</label>
-                        <input type="text" name="nama_verifikator" class="input bg-gray-200 dark:bg-gray-700" required />
+                        <input type="text" name="nama_verifikator" class="input bg-white shadow dark:bg-gray-700"
+                            required placeholder="nama verifikator" />
                     </div>
+
+                    <div class="form-control">
+                        <label class="label">Username</label>
+                        <input type="text" name="name" class="input bg-white shadow dark:bg-gray-700 " required
+                            placeholder="username" />
+                    </div>
+                    <div class="form-control">
+                        <label class="label">Email</label>
+                        <input type="text" name="email" class="input bg-white shadow dark:bg-gray-700" required
+                            placeholder="email" />
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">Password</label>
+                        <div class="relative">
+                            <input type="password" name="password" id="password"
+                                class="input bg-white shadow dark:bg-gray-700 w-full" required placeholder="password" />
+                            <button type="button" class="absolute right-2 top-1/2 transform -translate-y-1/2"
+                                onclick="togglePassword('password')">
+                                <i class="fa-solid fa-eye" id="password-icon"></i>
+                            </button>
+                        </div>
+                    </div>
+
                     <div class="modal-action">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                        <label for="add-modal" class="btn">Tutup</label>
+                        <button type="submit" class="btn text-white btn-primary rounded">Simpan</button>
+                        <label for="add-modal" class="btn rounded">Tutup</label>
                     </div>
                 </form>
             </div>
@@ -86,26 +111,54 @@
 
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
-        <div class="modal">
-            <div class="modal-box w-10/12 max-w-2xl rounded  dark:bg-gray-800 bg-gray-100">
+        <div class="modal modal-top">
+            <div class="modal-box mx-auto mt-4 w-10/12 max-w-2xl rounded  dark:bg-gray-800 bg-gray-100">
                 <h3 class="font-bold text-lg">EDIT DATA VERIVIKATOR</h3>
                 <div>
-                    <label for="edit-modal" class="btn btn-sm btn-circle font-bold mt-2 btn-ghost absolute right-2 top-2">X</label>
+                    <label for="edit-modal"
+                        class="btn btn-sm btn-circle font-bold mt-2 btn-ghost absolute right-2 top-2">X</label>
                 </div>
                 <form id="editForm" method="POST">
                     @csrf
                     @method('PUT')
+                    <input type="hidden" id="edit_user_id" name="user_id">
                     <div class="form-control">
                         <label class="label">NIP</label>
-                        <input type="number" id="edit_nip" name="nip" class="bg-gray-200 dark:bg-gray-700 input" required />
+                        <input type="number" id="edit_nip" name="nip" class="bg-white shadow dark:bg-gray-700 input"
+                            required placeholder="nip" />
                     </div>
                     <div class="form-control">
                         <label class="label">Nama</label>
-                        <input type="text" id="edit_nama" name="nama_verifikator" class="bg-gray-200 dark:bg-gray-700 input" required />
+                        <input type="text" id="edit_nama" name="nama_verifikator"
+                            class="bg-white shadow dark:bg-gray-700 input" required placeholder="nama verifikator" />
+                    </div>
+
+                    <div class="form-control">
+                        <label class="label">Username</label>
+                        <input type="text" id="edit_name" name="edit_name" class="input  bg-white shadow dark:bg-gray-700 " required
+                            placeholder="username" />
+                    </div>
+                    <div class="form-control">
+                        <label class="label">Email</label>
+                        <input type="text" id="edit_email" name="edit_email" class="input bg-white shadow dark:bg-gray-700" required
+                            placeholder="email" />
+                    </div>
+
+
+                    <div class="form-control">
+                        <label class="label">Password</label>
+                        <div class="relative">
+                            <input type="password" id="edit_password" name="edit_password" id="edit_password"
+                                class="input bg-white shadow dark:bg-gray-700 w-full" placeholder="password" />
+                            <button type="button" class="absolute right-2 top-1/2 transform -translate-y-1/2"
+                                onclick="togglePassword('edit_password')">
+                                <i class="fa-solid fa-eye mr-4" id="edit_password-icon"></i>
+                            </button>
+                        </div>
                     </div>
                     <div class="modal-action">
-                        <button type="submit" class="btn btn-primary">Update</button>
-                        <label for="edit-modal" class="btn">Tutup</label>
+                        <button type="submit" class="btn text-white btn-primary">Update</button>
+                        <label for="edit-modal" class="btn text-white">Tutup</label>
                     </div>
                 </form>
             </div>
@@ -114,7 +167,8 @@
         <!-- Delete Modal -->
         <input type="checkbox" id="delete-modal" class="modal-toggle" />
         <div class="modal modal-top">
-            <div class="modal-box w-auto mt-5 mx-auto rounded-lg dark:text-white text-gray-800 bg-gray-100 dark:bg-gray-800">
+            <div
+                class="modal-box w-auto mt-5 mx-auto rounded-lg dark:text-white text-gray-800 bg-gray-100 dark:bg-gray-800">
                 <h3 class="font-bold text-lg">Konfirmasi Hapus</h3>
                 <p>Apakah Anda yakin ingin menghapus data ini?</p>
                 <form id="deleteForm" method="POST">
@@ -132,16 +186,34 @@
         </div>
     </div>
 
-    <!-- Script for Verifikator Table -->
-        <script>
-            function editVerifikator(verifikator_id, nip, nama) {
-                document.getElementById('editForm').action = `verifikator/${verifikator_id}`;
-                document.getElementById('edit_nip').value = nip;
-                document.getElementById('edit_nama').value = nama;
-            }
+    <script>
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const icon = document.getElementById(inputId + '-icon');
 
-            function setDeleteId(verifikator_id) {
-                document.getElementById('deleteForm').action = `verifikator/${verifikator_id}`;
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
             }
-        </script>
+        }
+
+        function editVerifikator(verifikator_id, nip, nama, name, email, user_id) {
+            document.getElementById('editForm').action = `verifikator/${verifikator_id}`;
+            document.getElementById('edit_nip').value = nip;
+            document.getElementById('edit_nama').value = nama;
+            document.getElementById('edit_name').value = name;
+            document.getElementById('edit_email').value = email;
+            document.getElementById('edit_user_id').value = user_id;
+            document.getElementById('edit_password').value = '';
+        }
+
+        function setDeleteId(verifikator_id) {
+            document.getElementById('deleteForm').action = `verifikator/${verifikator_id}`;
+        }
+    </script>
 </x-app-layout>

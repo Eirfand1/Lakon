@@ -195,13 +195,13 @@ class PenyediaController extends Controller
 
     public function kontrakSaya()
     {
-        $penyedia = auth()->user()->penyedia;
+        $user = auth()->user();
 
-        if (!$penyedia) {
+        if ($user->role != 'penyedia') {
             abort(403, 'Anda bukan penyedia');
         }
 
-        $kontrak = Kontrak::where('penyedia_id', $penyedia->id)->get();
+        $kontrak = Kontrak::where('penyedia_id', $user->id)->get();
 
         return view('pages.penyedia.riwayat.riwayat', compact('kontrak'));
     }

@@ -9,16 +9,18 @@ class Verifikator extends Model
 {
     protected $table = 'verifikator';
     protected $primaryKey = 'verifikator_id';
-    protected $fillable = ['nip', 'nama_verifikator'];
+    protected $fillable = ['user_id','nip', 'nama_verifikator'];
     use HasFactory;
 
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class);
     }
     public function kontrak()
     {
         return $this->hasMany(Kontrak::class, 'verifikator_id');
     }
+
 
 }

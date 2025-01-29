@@ -19,8 +19,11 @@ class VerifikatorTable extends DataTableComponent
             ->setDefaultSort('verifikator_id', 'desc');
     }
 
-    public function builder(): \Illuminate\Database\Eloquent\Builder {
-        return Verifikator::query()->orderByDesc('updated_at');
+    public function builder(): \Illuminate\Database\Eloquent\Builder
+    {
+        return Verifikator::query()
+            ->with('user')
+            ->orderByDesc('verifikator.updated_at');
     }
 
     public function columns(): array
@@ -34,6 +37,12 @@ class VerifikatorTable extends DataTableComponent
             Column::make("Nama verifikator", "nama_verifikator")
                 ->sortable()
                 ->searchable(),
+            Column::make("Username", "user.name")
+                ->sortable()
+                ->searchable(),
+            Column::make("Email", "user.email")
+                ->sortable()
+                ->searchable(),
             Column::make("Created at", "created_at")
                 ->sortable()
                 ->searchable(),
@@ -41,7 +50,12 @@ class VerifikatorTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
             Column::make("Aksi", "verifikator_id")
-                ->format(fn($value, $row) => view('pages.admin.verifikator.actions', ['verifikator' => $row])),
+                ->format(
+                    fn($value, $row, Column $column) =>
+                    view('pages.admin.verifikator.actions', [
+                        'verifikator' => Verifikator::find($value)
+                    ])
+                ),
         ];
     }
 
