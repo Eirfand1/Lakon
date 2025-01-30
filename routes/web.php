@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\DasarHukumController;
 use App\Http\Controllers\KontrakController;
 use App\Http\Controllers\PaketPekerjaanController;
 use App\Http\Controllers\PenyediaController;
 use App\Http\Controllers\PpkomController;
+use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\VerifikatorController;
 use App\Models\Penyedia;
 use Illuminate\Support\Facades\Route;
@@ -72,10 +74,21 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
 
     Route::get('/paket-pekerjaan', [PaketPekerjaanController::class, 'index'])->name('admin.paket-pekerjaan.index');
-    Route::get('/riwayat-kontrak', [KontrakController::class,'index'])->name('admin.riwayat-kontrak.index');
-    Route::get('/riwayat-kontrak/export', [KontrakController::class,'export'])->name('admin.riwayat-kontrak.export');
 
+    Route::prefix('/riwayat-kontrak')->group(function () {
+        Route::get('/', [KontrakController::class,'index'])->name('admin.riwayat-kontrak.index');
+        Route::get('/export', [KontrakController::class,'export'])->name('admin.riwayat-kontrak.export');
+    });
 
+    Route::prefix('/sekolah')->group(function () {
+        Route::get('/', [SekolahController::class,'index'])->name('admin.sekolah.index');
+        Route::get('/import-sekolah', [SekolahController::class, 'showImport']);
+        Route::post('/import-sekolah', [SekolahController::class, 'import']);
+    });
+
+    Route::prefix('/dasar-hukum')->group(function () {
+        Route::get('/', [DasarHukumController::class,'index'])->name('admin.dasar-hukum.index');
+    });
 
 
 

@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             DashboardTableSeeder::class,
+            SekolahSeeder::class,
             UsersTableSeeder::class,
             PenyediaSeeder::class,
             DasarHukumTable::class,
