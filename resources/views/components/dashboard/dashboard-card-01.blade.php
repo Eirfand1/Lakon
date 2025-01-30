@@ -9,7 +9,7 @@
         </header>
         <div class="text-xs font-semibold text-gray-400 dark:text-gray-500 uppercase mb-1">Total</div>
         <div class="flex items-start">
-            <div class="text-3xl font-bold text-gray-800 dark:text-gray-100 mr-2">162</div>
+            <div class="text-3xl font-bold text-gray-800 dark:text-gray-100 mr-2">{{$paketPekerjaan}}</div>
         </div>
         </div>
 

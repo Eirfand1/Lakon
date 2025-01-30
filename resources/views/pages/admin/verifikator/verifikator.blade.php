@@ -94,7 +94,7 @@
                         <div class="relative">
                             <input type="password" name="password" id="password"
                                 class="input bg-white shadow dark:bg-gray-700 w-full" required placeholder="password" />
-                            <button type="button" class="absolute right-2 top-1/2 transform -translate-y-1/2"
+                            <button type="button" class="absolute right-4 top-1/2 transform -translate-y-1/2"
                                 onclick="togglePassword('password')">
                                 <i class="fa-solid fa-eye" id="password-icon"></i>
                             </button>
@@ -150,9 +150,9 @@
                         <div class="relative">
                             <input type="password" id="edit_password" name="edit_password" id="edit_password"
                                 class="input bg-white shadow dark:bg-gray-700 w-full" placeholder="password" />
-                            <button type="button" class="absolute right-2 top-1/2 transform -translate-y-1/2"
+                            <button type="button" class="absolute right-4 top-1/2 transform -translate-y-1/2"
                                 onclick="togglePassword('edit_password')">
-                                <i class="fa-solid fa-eye mr-4" id="edit_password-icon"></i>
+                                <i class="fa-solid fa-eye" id="edit_password-icon"></i>
                             </button>
                         </div>
                     </div>

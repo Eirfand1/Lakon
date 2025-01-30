@@ -6,6 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="google-signin-client_id" content="{{env('GOOGLE_DRIVE_CLIENT_ID')}}">
 
+
         <title>{{ config('app.name', 'LAKON') }}</title>
 
         <!-- Fonts -->
@@ -33,17 +34,8 @@
         <!-- data tables -->
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-        <script src="https://apis.google.com/js/platform.js" async defer></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 
-        <style>
-            table.dataTable thead th {
-                border-bottom: 0 !important;
-            }
-            table.dataTable tfoot th {
-                border-top: 0 !important;
-            }
-        </style>
     </head>
     <body
         class="font-inter antialiased bg-gray-100 dark:bg-gray-900 text-gray-600 dark:text-gray-400"

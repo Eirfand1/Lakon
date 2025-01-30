@@ -31,10 +31,12 @@ class VerifikatorTable extends DataTableComponent
         return [
 
             IncrementColumn::make('#'),
-            Column::make("Nip", "nip")
+            
+            Column::make("Nama verifikator", "nama_verifikator")
                 ->sortable()
                 ->searchable(),
-            Column::make("Nama verifikator", "nama_verifikator")
+
+            Column::make("Nip", "nip")
                 ->sortable()
                 ->searchable(),
             Column::make("Username", "user.name")

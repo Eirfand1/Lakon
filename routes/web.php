@@ -7,11 +7,9 @@ use App\Http\Controllers\PenyediaController;
 use App\Http\Controllers\PpkomController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\VerifikatorController;
-use App\Models\Penyedia;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
-use App\Models\Verifikator;
 
 /*
 |--------------------------------------------------------------------------

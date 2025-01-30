@@ -51,7 +51,7 @@
                     <li
                         class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['dashboard'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
                         <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(2), ['dashboard'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            href="{{ route('penyedia.dashboard') }}">
+                            href="{{ route('penyedia.dashboard') }}" wire:navigate>
                             <div class=" flex items-center">
                                 <svg fill="currentColor" width="16" height="16"
                                     class="shrink-0 @if(in_array(Request::segment(2), ['dashboard'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif"
@@ -70,7 +70,7 @@
                     <li
                         class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['riwayat-kontrak'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
                         <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['calendar'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            href="{{ route('penyedia.riwayat') }}">
+                            href="{{ route('penyedia.riwayat') }}" wire:navigate>
                             <div class="flex items-center">
                                 <svg fill="currentColor" width="16" height="16"
                                     class="shrink-0 @if(in_array(Request::segment(2), ['riwayat-kontrak'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif "
@@ -96,7 +96,7 @@
                     <li
                         class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['dashboard'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
                         <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(2), ['dashboard'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            href="{{ route('verifikator.dashboard') }}">
+                            href="{{ route('verifikator.dashboard') }}" wire:navigate>
                             <div class=" flex items-center">
                                 <svg fill="currentColor" width="16" height="16"
                                     class="shrink-0 @if(in_array(Request::segment(2), ['dashboard'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif"
@@ -115,7 +115,7 @@
                     <li
                         class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['riwayat-kontrak'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
                         <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['calendar'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            href="{{ route('verifikator.riwayat') }}">
+                            href="{{ route('verifikator.riwayat') }}" wire:navigate>
                             <div class="flex items-center">
                                 <svg fill="currentColor" width="16" height="16"
                                     class="shrink-0 @if(in_array(Request::segment(2), ['riwayat-kontrak'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif "
@@ -138,7 +138,7 @@
                     <li
                         class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['dashboard'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
                         <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(2), ['dashboard'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            href="{{ route('admin.dashboard') }}">
+                            href="{{ route('admin.dashboard') }}" wire:navigate>
                             <div class=" flex items-center">
                                 <svg fill="currentColor" width="16" height="16"
                                     class="shrink-0 @if(in_array(Request::segment(2), ['dashboard'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif"
@@ -186,14 +186,14 @@
                                 :class="open ? '!block' : 'hidden'">
                                 <li class="mb-1 last:mb-0">
                                     <a class="block text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition truncate @if(Route::is('admin.verifikator.index')){{ '!text-violet-500' }}@endif"
-                                        href="{{ route('admin.verifikator.index') }}">
+                                        href="{{ route('admin.verifikator.index') }}" wire:navigate>
                                         <span
                                             class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Verifikator</span>
                                     </a>
                                 </li>
                                 <li class="mb-1 last:mb-0">
                                     <a class="block text-gray-500/90 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 transition truncate @if(Route::is('admin.ppkom.index')){{ '!text-violet-500' }}@endif"
-                                        href="{{ route('admin.ppkom.index') }}">
+                                        href="{{ route('admin.ppkom.index') }}" wire:navigate>
                                         <span
                                             class="text-sm font-medium lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Ppkom</span>
                                     </a>
@@ -205,7 +205,7 @@
                     <li
                         class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['penyedia'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
                         <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(2), ['penyedia'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            href="{{ route('admin.penyedia.index') }}">
+                            href="{{ route('admin.penyedia.index') }}" wire:navigate>
                             <div class="flex items-center">
                                 <svg fill="currentColor" width="16" height="16"
                                     class="shrink-0 @if(in_array(Request::segment(2), ['penyedia'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif"
@@ -224,7 +224,7 @@
                     <li
                         class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['paket-pekerjaan'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
                         <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(2), ['paket-pekerjaan'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            href="{{ route('admin.paket-pekerjaan.index') }}">
+                            href="{{ route('admin.paket-pekerjaan.index') }}" wire:navigate>
                             <div class="flex items-center">
                                 <svg fill="currentColor" width="16" height="16"
                                     class="shrink-0 @if(in_array(Request::segment(2), ["paket-pekerjaan"])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif "
@@ -234,28 +234,9 @@
                                         d="M184 48l144 0c4.4 0 8 3.6 8 8l0 40L176 96l0-40c0-4.4 3.6-8 8-8zm-56 8l0 40L64 96C28.7 96 0 124.7 0 160l0 96 192 0 128 0 192 0 0-96c0-35.3-28.7-64-64-64l-64 0 0-40c0-30.9-25.1-56-56-56L184 0c-30.9 0-56 25.1-56 56zM512 288l-192 0 0 32c0 17.7-14.3 32-32 32l-64 0c-17.7 0-32-14.3-32-32l0-32L0 288 0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-128z" />
                                 </svg>
                                 <span
-                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Paket
-                                    Pekerjaan</span>
-                            </div>
-                        </a>
-                    </li>
-
-                    <!-- riwayat_kontrak -->
-                    <li
-                        class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['riwayat-kontrak'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
-                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['calendar'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            href="{{ route('admin.riwayat-kontrak.index') }}">
-                            <div class="flex items-center">
-                                <svg fill="currentColor" width="16" height="16"
-                                    class="shrink-0 @if(in_array(Request::segment(2), ['riwayat-kontrak'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif "
-                                    xmlns="http://www.w3.org/2000/svg"
-                                    viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                    <path
-                                        d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9L0 168c0 13.3 10.7 24 24 24l110.1 0c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24l0 104c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65 0-94.1c0-13.3-10.7-24-24-24z" />
-                                </svg>
-                                <span
-                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Riwayat
-                                    Kontrak</span>
+                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">
+                                    Matriks
+                                </span>
                             </div>
                         </a>
                     </li>
@@ -265,7 +246,7 @@
                     <li
                         class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['sekolah'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
                         <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(2), ['sekolah'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            href="{{ route('admin.sekolah.index') }}">
+                            href="{{ route('admin.sekolah.index') }}" wire:navigate >
                             <div class="flex items-center">
 
                                 <svg width="16" height="16" class="shrink-0 fill-current @if(in_array(Request::segment(2), ['sekolah'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
@@ -282,7 +263,7 @@
                     <li
                         class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['dasar-hukum'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
                         <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(2), ['dasar-hukum'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            href="{{ route('admin.dasar-hukum.index') }}">
+                            href="{{ route('admin.dasar-hukum.index') }}" wire:navigate>
                             <div class="flex items-center">
 
                                 <svg width="16" height="16" class="shrink-0 fill-current @if(in_array(Request::segment(2), ['dasar-hukum'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
@@ -295,11 +276,31 @@
                         </a>
                     </li>
 
+                    <!-- riwayat_kontrak -->
+                    <li
+                        class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['riwayat-kontrak'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(1), ['calendar'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                            href="{{ route('admin.riwayat-kontrak.index') }}" wire:navigate>
+                            <div class="flex items-center">
+                                <svg fill="currentColor" width="16" height="16"
+                                    class="shrink-0 @if(in_array(Request::segment(2), ['riwayat-kontrak'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif "
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                    <path
+                                        d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9L0 168c0 13.3 10.7 24 24 24l110.1 0c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24l0 104c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65 0-94.1c0-13.3-10.7-24-24-24z" />
+                                </svg>
+                                <span
+                                    class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Riwayat
+                                    Kontrak</span>
+                            </div>
+                        </a>
+                    </li>
+
                     <!-- Laporan -->
                     <li
                         class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['laporan'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
                         <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(2), ['laporan'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            href="{{ route('admin.dashboard') }}">
+                            href="{{ route('admin.dashboard') }}" wire:navigate>
                             <div class="flex items-center">
                                 <svg class="shrink-0 fill-current @if(in_array(Request::segment(2), ['laporan'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif"
                                     xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">

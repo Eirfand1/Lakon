@@ -12,13 +12,10 @@ export default {
         './resources/views/**/*.blade.php',
         './resources/js/**/*.js',
         './resources/css/**/*.js',
+        './resources/css/**/*.css',
         './app/Livewire/**/*Table.php',
-        './vendor/power-components/livewire-powergrid/resources/views/**/*.php',
-        './vendor/power-components/livewire-powergrid/src/Themes/Tailwind.php'
     ],
-    presets: [
-        require("./vendor/power-components/livewire-powergrid/tailwind.config.js"), 
-    ],
+    
     darkMode: 'class',
     theme: {
         extend: {

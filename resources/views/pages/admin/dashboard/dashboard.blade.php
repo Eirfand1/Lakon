@@ -28,16 +28,16 @@
            <x-dashboard.dashboard-card-05 />
 
            <!-- Paket Pekerjaan -->
-           <x-dashboard.dashboard-card-01 :dataFeed="$dataFeed" />
+           <x-dashboard.dashboard-card-01 :paketPekerjaan="$paket_pekerjaan" />
 
            <!-- Tender -->
-           <x-dashboard.dashboard-card-02 :dataFeed="$dataFeed" />
+           <x-dashboard.dashboard-card-02  :tender="$tender"/>
 
            <!-- Non Tender -->
-           <x-dashboard.dashboard-card-03 :dataFeed="$dataFeed" />
+           <x-dashboard.dashboard-card-03 :nonTender="$non_tender" />
 
            <!-- e-Catalog -->
-           <x-dashboard.dashboard-card-04 />
+           <x-dashboard.dashboard-card-04 :eCatalog="$e_catalog" />
         </div>
         <x-dashboard.dashboard-card-06 />
     </div>

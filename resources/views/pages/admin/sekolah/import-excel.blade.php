@@ -1,13 +1,13 @@
 <x-app-layout>
-    <div class="px-4 sm:px-6 lg:px-8 py-8 w-full max-w-9xl mx-auto">
+    <div class="p-5">
         <!-- Header Section -->
-        <div class="mb-8">
+        <div class="mb-3">
             <div class="flex justify-between items-center">
-                <a href="/admin/sekolah"
+                <a href="/admin/sekolah" wire:navigate
                     class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
                     < Kembali </a>
                         <h1 class="text-2xl font-bold text-gray-800 dark:text-gray-100">
-                            Import to Excel
+                            IMPORT FROM EXCEL
                         </h1>
 
             </div>
@@ -60,7 +60,7 @@
                                    file:bg-indigo-50 file:text-indigo-700
                                    hover:file:bg-indigo-100
                                    dark:file:bg-gray-700 dark:file:text-gray-300">
-                        <button type="submit" class="btn w-full text-white btn-success">
+                        <button type="submit" class="btn rounded w-full text-white btn-success">
                             <i class="fa-solid fa-file-import"></i>
                             <span>
                                 Import Data

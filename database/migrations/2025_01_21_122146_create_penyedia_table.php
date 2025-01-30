@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('penyedia', function (Blueprint $table) {
             $table->id('penyedia_id'); 
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->enum('status', ['konsultan','biasa'])->default(null)->nullable();
             $table->char('NIK', 16); 
             $table->string('nama_pemilik', 100); 
             $table->string('alamat_pemilik', 255); 

@@ -5,7 +5,8 @@ Livewire.start()
 import './bootstrap';
 import flatpickr from "flatpickr";
 
-document.addEventListener('DOMContentLoaded', () => {
+
+document.addEventListener('livewire:navigated', () => {
     // Light switcher
     const lightSwitches = document.querySelectorAll('.light-switch');
     if (lightSwitches.length > 0) {
