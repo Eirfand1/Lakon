@@ -25,12 +25,17 @@ use App\Http\Controllers\DashboardController;
 
 
 Route::view('/', 'pages.landing-page');
-Route::get('/registrasi',[PenyediaController::class, 'create'])->name('registrasi'); 
-Route::post('/registrasi',[PenyediaController::class, 'store'])->name('registrasi.store'); 
+Route::get('/registrasi', [PenyediaController::class, 'create'])->name('registrasi');
+Route::post('/registrasi', [PenyediaController::class, 'store'])->name('registrasi.store');
 
 Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(function () {
     Route::get('/riwayat-kontrak', [PenyediaController::class, 'kontrakSaya'])->name('penyedia.riwayat');
     Route::get('/dashboard', [PenyediaController::class, 'dashboard'])->name('penyedia.dashboard');
+
+    Route::middleware('cekStatusPenyedia:konsultan')->group(function () {
+        Route::get('/rencana', [PenyediaController::class, 'konsultanRencanaindex'])->name('penyedia.konsultan.rencana.index');
+        Route::get('/realisasi', [PenyediaController::class, 'konsultanRealisasiIndex'])->name('penyedia.konsultan.realisasi.index');
+    });
 });
 
 Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(function () {
@@ -68,29 +73,32 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
         Route::get('/', [PenyediaController::class, 'index'])->name('admin.penyedia.index');
         Route::put('/{penyedia}', [PenyediaController::class, 'update'])->name('admin.penyedia.edit');
         Route::delete('/{penyedia}', [PenyediaController::class, 'destroy'])->name('admin.penyedia.destroy');
+
+
+
     });
 
 
     Route::get('/paket-pekerjaan', [PaketPekerjaanController::class, 'index'])->name('admin.paket-pekerjaan.index');
 
     Route::prefix('/riwayat-kontrak')->group(function () {
-        Route::get('/', [KontrakController::class,'index'])->name('admin.riwayat-kontrak.index');
-        Route::get('/export', [KontrakController::class,'export'])->name('admin.riwayat-kontrak.export');
+        Route::get('/', [KontrakController::class, 'index'])->name('admin.riwayat-kontrak.index');
+        Route::get('/export', [KontrakController::class, 'export'])->name('admin.riwayat-kontrak.export');
     });
 
     Route::prefix('/sekolah')->group(function () {
-        Route::get('/', [SekolahController::class,'index'])->name('admin.sekolah.index');
+        Route::get('/', [SekolahController::class, 'index'])->name('admin.sekolah.index');
         Route::get('/import-sekolah', [SekolahController::class, 'showImport']);
         Route::post('/import-sekolah', [SekolahController::class, 'import']);
     });
 
     Route::prefix('/dasar-hukum')->group(function () {
-        Route::get('/', [DasarHukumController::class,'index'])->name('admin.dasar-hukum.index');
+        Route::get('/', [DasarHukumController::class, 'index'])->name('admin.dasar-hukum.index');
     });
 
 
 
-    
+
     Route::get('/settings/account', function () {
         return view('pages/settings/account');
     })->name('account');

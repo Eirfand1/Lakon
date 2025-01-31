@@ -233,6 +233,21 @@
                         </div>
                     </div>
 
+                    <h1 class="border-y border-gray-300 dark:border-gray-700 font-bold py-2">AKUN</h1>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                            Status <span class="text-red-500">*</span>
+                            <small class="block text-xs text-gray-500">Pilih status perusahaan</small>
+                        </label>
+                        <select name="status" id="edit_status"
+                            class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            required>
+                            <option value="" disabled selected>Pilih Status</option>
+                            <option value="biasa">Biasa</option>
+                            <option value="konsultan">Konsultan</option>
+                        </select>
+                    </div>
+
                     <div class="flex justify-end space-x-4 modal-action">
                         <button type="submit"
                             class="btn bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center">

@@ -18,7 +18,7 @@ return new class extends Migration {
                 ->constrained('satuan_kerja', 'satker_id')
                 ->cascadeOnDelete();
             $table->string('nama_pekerjaan');
-            $table->smallInteger('waktu_paket');
+            $table->date('waktu_paket');
             $table->string('metode_pemilihan');
             $table->enum('jenis_pengadaan', ['tender', 'non_tender', 'e_catalog']);
             $table->integer('nilai_pagu');

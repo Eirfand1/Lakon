@@ -21,6 +21,7 @@ class PenyediaFactory extends Factory
         return [
             'user_id' => User::factory(),
             'NIK' => $this->faker->numerify('################'), // 16 digit angka acak
+            'status' => $this->faker->randomElement(['konsultan','biasa']),
             'nama_pemilik' => $this->faker->name(),
             'alamat_pemilik' => $this->faker->address(),
             'kontak_hp' => $this->faker->numerify('############'),

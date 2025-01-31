@@ -25,6 +25,7 @@ class Kernel extends HttpKernel
 
     protected $routeMiddleware = [
         'role' => \App\Http\Middleware\RoleMiddleware::class,
+        'cekStatusPenyedia' => \App\Http\Middleware\CekStatusPenyedia::class,
     ];
 
 

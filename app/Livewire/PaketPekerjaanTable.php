@@ -49,7 +49,8 @@ class PaketPekerjaanTable extends DataTableComponent
             IncrementColumn::make('#'),
             Column::make('Nama Pekerjaan', 'nama_pekerjaan')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->collapseAlways(),
 
             Column::make('Sumber Dana', 'sumber_dana')
                 ->sortable()

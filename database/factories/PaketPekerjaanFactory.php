@@ -24,7 +24,7 @@ class PaketPekerjaanFactory extends Factory
             'tahun_anggaran' => $this->faker->year(),
             'satker_id' => SatuanKerja::factory(),
             'nama_pekerjaan' => $this->faker->sentence(),
-            'waktu_paket' => $this->faker->numberBetween(30, 180),
+            'waktu_paket' => $this->faker->date(),
             'metode_pemilihan' => $this->faker->word(),
             'jenis_pengadaan' => $this->faker->randomElement(['tender', 'non_tender', 'e_catalog']),
             'nilai_pagu' => $this->faker->randomFloat(2, 100000, 1000000),

@@ -142,6 +142,7 @@ class PenyediaController extends Controller
     {
         try {
             $validated = $request->validate([
+                'status' => 'in:biasa,konsultan',
                 'NIK' => 'required|unique:penyedia,NIK,' . $penyedia->penyedia_id . ',penyedia_id|max:255',
                 'nama_pemilik' => 'required|max:255',
                 'alamat_pemilik' => 'required|max:255',
@@ -209,5 +210,14 @@ class PenyediaController extends Controller
     public function dashboard()
     {
         return view('pages.penyedia.dashboard.dashboard');
+    }
+
+
+    public function konsultanRencanaindex() {
+        return view('pages.penyedia.konsultan.rencana.rencana');
+    }
+
+    public function konsultanRealisasiindex() {
+        return view('pages.penyedia.konsultan.realisasi.realisasi');
     }
 }
