@@ -21,7 +21,8 @@ return new class extends Migration {
             $table->date('waktu_paket');
             $table->string('metode_pemilihan');
             $table->enum('jenis_pengadaan', ['tender', 'non_tender', 'e_catalog']);
-            $table->integer('nilai_pagu');
+            $table->integer('nilai_pagu_paket');
+            $table->integer('nilai_pagu_anggaran');
             $table->integer('nilai_hps');
             $table->foreignId('ppkom_id')
                 ->constrained('ppkom', 'ppkom_id')

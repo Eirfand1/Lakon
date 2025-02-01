@@ -93,10 +93,15 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make('Nilai Pagu')
+            Column::make('Nilai Pagu Paket')
                 ->searchable()
                 ->sortable()
-                ->format(fn($value, $row) => 'Rp ' . number_format($row->nilai_pagu, 2)),
+                ->format(fn($value, $row) => 'Rp ' . number_format($row->nilai_pagu_paket, 2)),
+
+            Column::make('Nilai Pagu Anggaran')
+                ->searchable()
+                ->sortable()
+                ->format(fn($value, $row) => 'Rp ' . number_format($row->nilai_pagu_anggaran, 2)),
 
             Column::make('Nilai HPS', 'nilai_hps')
                 ->sortable()

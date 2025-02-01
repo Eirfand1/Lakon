@@ -11,9 +11,8 @@
         <!-- Success Message -->
 
         @if (session('success'))
-
             <script>
-               Toastify({
+                Toastify({
                     escapeMarkup: false,
                     text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
                     duration: 3000,
@@ -27,7 +26,6 @@
                     },
                 }).showToast();
             </script>
-
         @endif
         <!-- error message -->
 
@@ -47,9 +45,7 @@
                     },
                 }).showToast();
             </script>
-
         @endif
-
 
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
@@ -68,47 +64,199 @@
 
                 <form action="{{ route('admin.ppkom.store') }}" method="POST" class="space-y-2 ">
                     @csrf
-                    <h1 class="border-b border-gray-200 py-2 dark:border-gray-700 ">Program kerja</h1>
-                    <div class="flex w-full flex-col  ">
-                        <label for="sub_kegiatan" class="w-full sm:w-1/4">Sub Kegiatan*</label>
-                        <select name="sub_kegiatan" id="" class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                            <option value="id">a</option>
-                            <option value="id">b</option>
-                            <option value="id">c</option>
-                            <option value="id">d</option>
-                        </select>
-                        
+                    <h1 class="border-b font-bold border-gray-200 py-2 dark:border-gray-700 ">Program kerja</h1>
+
+                    <div x-data="subKegiatanManager({{ json_encode($subKegiatan) }})" class="space-y-2">
+                        <label for="sub_kegiatan[]">Sub Kegiatan</label>
+                        <template x-for="(input, index) in inputs" :key="index">
+                            <div class="relative w-full">
+                                <div class="flex items-center gap-2">
+                                    <input type="text" x-model="input.search" name="sub_kegiatan[]"
+                                        @input.debounce.300ms="filterOptions(index)" @focus="showDropdown(index)"
+                                        @click.away="input.showDropdown = false" placeholder="Pilih Sub Kegiatan"
+                                        class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+
+                                    <button type="button" @click="removeInput(index)"
+                                        class="text-white bg-error p-2 rounded-lg px-3 hover:text-red-700"
+                                        x-show="inputs.length > 1">
+                                        <i class="fa-solid fa-xmark"></i>
+
+                                    </button>
+                                </div>
+
+                                <div x-show="input.showDropdown && input.filteredOptions.length" x-transition
+                                    class="absolute z-10 w-content mt-2  bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                                    <template x-for="option in input.filteredOptions" :key="option . sub_kegiatan_id">
+                                        <div @click="selectOption(index, option)"
+                                            class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                            x-text="option.nama_sub_kegiatan"></div>
+                                    </template>
+                                </div>
+
+                                <input type="hidden" :name="`sub_kegiatan_id[${index}]`"
+                                    x-model="input.selectedOptionId">
+                            </div>
+                        </template>
+
+                        <button type="button" @click="addInput" class="btn rounded text-white btn-sm btn-primary">
+                            <i class="fa-solid fa-plus"></i> Tambah Sub Kegiatan
+                        </button>
                     </div>
 
-                    <div class="flex w-full flex-col  ">
-                        <label for="sub_kegiatan" class="w-full sm:w-1/4">Sumber dana*</label>
-                        <select name="sub_kegiatan" id="" class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                            <option value="id">a</option>
-                            <option value="id">b</option>
-                            <option value="id">c</option>
-                            <option value="id">d</option>
+
+                    <div class="flex w-full flex-col pb-4 ">
+                        <label for="sumber_dana" class="w-full sm:w-1/4">Sumber dana*</label>
+                        <select name="sumber_dana" id=""
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            <option value="APBN">APBN</option>
+                            <option value="APBD">APBD</option>
+                            <option value="Swasta">Swasta</option>
                         </select>
-                        
                     </div>
 
 
-                    <h1 class="border-y  border-gray-200 py-5 dark:border-gray-700 ">Paket Pekerjaan</h1>
-                    <div>
+                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Paket Pekerjaan</h1>
+
+                    <div class="pt-2">
                         <label for="paket">Paket*</label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-                            <input type="text" name="kode_paket" id="" placeholder="Kode Paket" class="w-1/2 sm:w-1/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                            <input type="text" name="nama_paket" id="" placeholder="Nama Paket"  class="w-full sm:w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            <input type="text" name="kode_paket" id="" placeholder="Kode Paket"
+                                class="w-1/2 sm:w-1/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            <input type="text" name="nama_paket" id="" placeholder="Nama Paket"
+                                class="w-full sm:w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
                         </div>
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="sub_kegiatan" class="w-full sm:w-1/4">waktu paket*</label>
-                        <input type="date" name="waktu_paket" id="" class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                        
+                        <label for="waktu_paket" class="w-full sm:w-1/4">Waktu Paket*</label>
+                        <input type="date" name="waktu_paket" id=""
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                    </div>
+
+                    <div class="flex w-full flex-col  ">
+                        <label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan*</label>
+                        <div class="flex gap-2 flex-wrap sm:flex-nowrap">
+                            <select name="jenis_pengadaan" id="metode_pemilihan"
+                                class="sm:w-1/4 w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                                <option value="tender">Tender</option>
+                                <option value="non-tender">Non-Tender</option>
+                                <option value="e_catalog">E-Catalog</option>
+                            </select>
+
+                            <select name="metode_pemilihan" id="metode_pemilihan"
+                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                                <option value="" disabled selected>Pilih Jenis Pengadaan</option>
+                                <option value="Jasa Konsultasi Pengawasan">Jasa Konsultasi Pengawasan</option>
+                                <option value="Jasa Konsultasi Perencanaan">Jasa Konsultasi Pelaksanaan</option>
+                                <option value="Jasa Konstruksi">Jasa Konstruksi</option>
+                                <option value="Pengadaan Barang">Pengadaan Barang</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="nilai_pagu_paket" class="w-full sm:w-1/4">Nilai Pagu Paket*</label>
+                        <input type="number" name="nilai_pagu_paket" id=""
+                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                    </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="nilai_pagu_anggaran" class="w-full sm:w-1/4">Nilai Pagu Anggaran*</label>
+                        <input type="number" name="nilai_pagu_anggaran" id=""
+                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                    </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="nilai_hps" class="w-full sm:w-1/4">Nilai HPS*</label>
+                        <input type="number" name="nilai_hps" id=""
+                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                    </div>
+
+                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Informasi Satuan Kerja
+                    </h1>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="satker_id" class="w-full sm:w-1/4">Satuan Kerja*</label>
+                        <select name="satker_id" id="satker_id"
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            <option value="" disabled selected>Pilih Satuan Kerja</option>
+                            @foreach($satuanKerja as $satker)
+                                <option value="{{ $satker->satker_id }}">{{ $satker->nama_pimpinan }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="daskum_id" class="w-full sm:w-1/4">Dasar Hukum*</label>
+                        <select name="daskum_id" id="daskum_id"
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            <option value="" disabled selected>Pilih Dasar Hukum</option>
+                            @foreach($dasarHukum as $daskum)
+                                <option value="{{ $daskum->daskum_id }}">{{ $daskum->dasar_hukum }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran*</label>
+                        <input type="number" name="tahun_anggaran" id="tahun_anggaran"
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                    </div>
+
+                    <div class="modal-action pt-4">
+                        <button type="submit" class="btn rounded text-white btn-primary">Simpan</button>
+                        <label for="add-modal" class="btn btn-ghost">Batal</label>
                     </div>
                 </form>
             </div>
         </div>
-        <livewire:paket-pekerjaan-table/>
-    <div>
+        <livewire:paket-pekerjaan-table />
+    </div>
+
+    <script>
+        function subKegiatanManager(options) {
+            return {
+                options: options,
+                inputs: [{
+                    search: '',
+                    filteredOptions: options,
+                    showDropdown: false,
+                    selectedOptionId: null
+                }],
+
+                addInput() {
+                    this.inputs.push({
+                        search: '',
+                        filteredOptions: this.options,
+                        showDropdown: false,
+                        selectedOptionId: null
+                    });
+                },
+
+                removeInput(index) {
+                    if (this.inputs.length > 1) {
+                        this.inputs.splice(index, 1);
+                    }
+                },
+
+                filterOptions(index) {
+                    const searchTerm = this.inputs[index].search.toLowerCase();
+                    this.inputs[index].filteredOptions = this.options.filter(option =>
+                        option.nama_sub_kegiatan.toLowerCase().includes(searchTerm)
+                    );
+                    this.inputs[index].showDropdown = this.inputs[index].filteredOptions.length > 0;
+                },
+
+                showDropdown(index) {
+                    this.inputs[index].showDropdown = true;
+                },
+
+                selectOption(index, option) {
+                    this.inputs[index].search = option.nama_sub_kegiatan;
+                    this.inputs[index].selectedOptionId = option.sub_kegiatan_id;
+                    this.inputs[index].showDropdown = false;
+                }
+            }
+        }
+    </script>
 </x-app-layout>
