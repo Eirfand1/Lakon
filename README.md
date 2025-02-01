@@ -48,3 +48,18 @@ php artisan serve
 
 ### Akses Aplikasi
 Buka browser di `http://localhost:8000`
+
+## Menjalankan docker
+
+1. jalankan docker 
+```bash
+
+# jalankakan docker composer
+./vendor/bin/sail up
+
+# jalankan migrate 
+./vendor/bin/sail artisan migrate
+ 
+```
+
+2. Open localhost

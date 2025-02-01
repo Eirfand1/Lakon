@@ -62,6 +62,7 @@ class PaketPekerjaanTable extends DataTableComponent
             Column::make('Satuan Kerja', 'satuanKerja.nama_pimpinan')
                 ->sortable()
                 ->searchable(),
+        
 
             Column::make('Sub Kegiatan', 'paket_id')
                 ->format(function ($value, $row) {
