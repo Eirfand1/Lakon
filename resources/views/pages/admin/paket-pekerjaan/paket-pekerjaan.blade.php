@@ -47,6 +47,9 @@
             </script>
         @endif
 
+
+        <livewire:paket-pekerjaan-table />
+
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
         <div id="modal_matriks" class="modal">
@@ -62,7 +65,7 @@
                     </label>
                 </div>
 
-                <form action="{{ route('admin.ppkom.store') }}" method="POST" class="space-y-2 ">
+                <form action="{{ route('admin.paket-pekerjaan.store') }}" method="POST" class="space-y-2 ">
                     @csrf
                     <h1 class="border-b font-bold border-gray-200 py-2 dark:border-gray-700 ">Program kerja</h1>
 
@@ -95,6 +98,7 @@
 
                                 <input type="hidden" :name="`sub_kegiatan_id[${index}]`"
                                     x-model="input.selectedOptionId">
+
                             </div>
                         </template>
 
@@ -122,7 +126,7 @@
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
                             <input type="text" name="kode_paket" id="" placeholder="Kode Paket"
                                 class="w-1/2 sm:w-1/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                            <input type="text" name="nama_paket" id="" placeholder="Nama Paket"
+                            <input type="text" name="nama_pekerjaan" id="" placeholder="Nama Paket"
                                 class="w-full sm:w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
                         </div>
                     </div>
@@ -172,6 +176,31 @@
                             class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
                     </div>
 
+                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Pejabat Pembuat Komitmen
+                    </h1>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="daskum_id" class="w-full sm:w-1/4">Ppkom*</label>
+                        <select name="daskum_id" id="daskum_id"
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            <option value="" disabled selected>Pilih Pegawai</option>
+                            @foreach($ppkom as $ppk)
+                                <option value="{{ $ppk->ppkom_id }}">{{ $ppk->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="ppkom_id" class="w-full sm:w-1/4">Dasar Hukum*</label>
+                        <select name="ppkom_id" id="ppkom_id"
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            <option value="" disabled selected>Pilih Dasar Hukum</option>
+                            @foreach($dasarHukum as $daskum)
+                                <option value="{{ $daskum->daskum_id }}">{{ $daskum->dasar_hukum }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Informasi Satuan Kerja
                     </h1>
 
@@ -186,16 +215,7 @@
                         </select>
                     </div>
 
-                    <div class="flex w-full flex-col ">
-                        <label for="daskum_id" class="w-full sm:w-1/4">Dasar Hukum*</label>
-                        <select name="daskum_id" id="daskum_id"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                            <option value="" disabled selected>Pilih Dasar Hukum</option>
-                            @foreach($dasarHukum as $daskum)
-                                <option value="{{ $daskum->daskum_id }}">{{ $daskum->dasar_hukum }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+
 
                     <div class="flex w-full flex-col ">
                         <label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran*</label>
@@ -209,11 +229,37 @@
                     </div>
                 </form>
             </div>
+
+
+
         </div>
-        <livewire:paket-pekerjaan-table />
+
+        <input type="checkbox" id="delete-modal" class="modal-toggle" />
+        <div class="modal modal-top">
+            <div
+                class="modal-box w-auto mt-5 mx-auto rounded-lg dark:text-white text-gray-800 bg-gray-100 dark:bg-gray-800">
+                <h3 class="font-bold text-lg">Konfirmasi Hapus</h3>
+                <p>Apakah Anda yakin ingin menghapus data ini?</p>
+                <form id="deleteForm" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-action">
+                        <button type="submit" class="btn btn-error">
+                            <i class="fa-solid fa-trash"></i>
+                            <span>Hapus</span>
+                        </button>
+                        <label for="delete-modal" class="btn">Batal</label>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script>
+        function setDeleteId(paket_id) {
+            document.getElementById('deleteForm').action = `paket-pekerjaan/${paket_id}`;
+        }
+
         function subKegiatanManager(options) {
             return {
                 options: options,

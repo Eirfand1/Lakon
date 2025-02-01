@@ -49,8 +49,7 @@ class PaketPekerjaanTable extends DataTableComponent
             IncrementColumn::make('#'),
             Column::make('Nama Pekerjaan', 'nama_pekerjaan')
                 ->sortable()
-                ->searchable()
-                ->collapseAlways(),
+                ->searchable(),
 
             Column::make('Sumber Dana', 'sumber_dana')
                 ->sortable()
@@ -64,14 +63,17 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
 
-            // TODO Masih error ahgggggggggggggggggggggggg
-            // Column::make('Sub Kegiatan', 'subKegiatan.nama_sub_kegiatan')
-            //     ->label(function ($row,$value) {
-            //         // Debug untuk melihat isi $row
-            //         return $row->subKegiatan->pluck('nama_sub_kegiatan')->implode(', ');
-            //     }),
+            Column::make('Sub Kegiatan', 'paket_id')
+                ->format(function ($value, $row) {
+                    $data = PaketPekerjaan::find($value);
+                    $subKegiatanList = $data->subKegiatan->pluck('nama_sub_kegiatan');
 
-            // Column::make('asiu', 'subKegiatan.nama_sub_kegiatan'),
+                    return '<ol class="list-[lower-alpha] pl-5 space-y-1">' .
+                        $subKegiatanList->map(fn($item) => "<li>{$item}</li>")->implode('') .
+                        '</ol>';
+                })->html()->collapseAlways(),
+
+
 
             Column::make('Waktu Paket', 'waktu_paket')
                 ->sortable()
@@ -107,6 +109,8 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->sortable()
                 ->searchable()
                 ->format(fn($value, $row) => 'Rp ' . number_format($row->nilai_hps, 2)),
+            Column::make("Aksi", "paket_id")
+                ->format(fn($value, $row) => view('pages.admin.paket-pekerjaan.actions', ['p' => $row])),
         ];
     }
 
