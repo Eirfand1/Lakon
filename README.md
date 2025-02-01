@@ -54,7 +54,7 @@ Buka browser di `http://localhost:8000`
 1. hapus .env
 2. rename/copy .env.docker.example menjadi .env
 
-3. jalankan docker 
+3. ikuti langkah dibawah 
 ```bash
 
 # jalankakan docker composer
@@ -62,6 +62,7 @@ Buka browser di `http://localhost:8000`
 
 # jalankan migrate 
 ./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan db:seed 
  
 ```
 
