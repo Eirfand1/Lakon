@@ -14,6 +14,6 @@ class SatuanKerjaTable extends Seeder
     public function run(): void
     {
         //
-        SatuanKerja::factory()->count(10)->create();
+        SatuanKerja::factory()->count(1)->create();
     }
 }
