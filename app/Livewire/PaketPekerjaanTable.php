@@ -47,7 +47,7 @@ class PaketPekerjaanTable extends DataTableComponent
     {
         return [
             IncrementColumn::make('#'),
-            Column::make('Nama Pekerjaan', 'nama_pekerjaan')
+            Column::make('Nama Paket Pekerjaan', 'nama_pekerjaan')
                 ->sortable()
                 ->searchable(),
 
@@ -68,6 +68,7 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->format(function ($value, $row) {
                     $data = PaketPekerjaan::find($value);
                     $subKegiatanList = $data->subKegiatan->pluck('nama_sub_kegiatan');
+
 
                     return '<ol class="list-[lower-alpha] pl-5 space-y-1">' .
                         $subKegiatanList->map(fn($item) => "<li>{$item}</li>")->implode('') .

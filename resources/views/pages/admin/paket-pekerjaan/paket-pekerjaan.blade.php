@@ -75,7 +75,7 @@
                             <div class="relative w-full">
                                 <div class="flex items-center gap-2">
                                     <input type="text" x-model="input.search" name="sub_kegiatan[]"
-                                        @input.debounce.300ms="filterOptions(index)" @focus="showDropdown(index)"
+                                        @input.debounce.100ms="filterOptions(index)" @focus="showDropdown(index)"
                                         @click.away="input.showDropdown = false" placeholder="Pilih Sub Kegiatan"
                                         class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
 

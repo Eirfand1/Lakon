@@ -4,9 +4,5 @@
 </label>
 </div>
 
-<script>
-function setDeleteId(paket_id) {
-            document.getElementById('deleteForm').action = `penyedia/${paket_id}`;
-}
-</script>
+
 
