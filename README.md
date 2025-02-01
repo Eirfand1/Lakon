@@ -51,7 +51,10 @@ Buka browser di `http://localhost:8000`
 
 ## Menjalankan docker
 
-1. jalankan docker 
+1. hapus .env
+2. rename/copy .env.docker.example menjadi .env
+
+3. jalankan docker 
 ```bash
 
 # jalankakan docker composer
@@ -62,4 +65,4 @@ Buka browser di `http://localhost:8000`
  
 ```
 
-2. Open localhost
+4. Open localhost
