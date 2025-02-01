@@ -39,6 +39,6 @@
            <!-- e-Catalog -->
            <x-dashboard.dashboard-card-04 :eCatalog="$e_catalog" />
         </div>
-        <x-dashboard.dashboard-card-06 />
+        <x-dashboard.dashboard-card-06 :profilePimpinan="$profile_pimpinan"/>
     </div>
 </x-app-layout>
