@@ -112,7 +112,7 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->searchable()
                 ->format(fn($value, $row) => 'Rp ' . number_format($row->nilai_hps, 2)),
             Column::make("Aksi", "paket_id")
-                ->format(fn($value, $row) => view('pages.admin.paket-pekerjaan.actions', ['p' => $row])),
+                ->format(fn($value, $row) => view('pages.admin.paket-pekerjaan.actions', ['p' => PaketPekerjaan::find($value)])),
         ];
     }
 
