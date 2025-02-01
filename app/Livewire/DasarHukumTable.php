@@ -16,6 +16,10 @@ class DasarHukumTable extends DataTableComponent
         $this->setPrimaryKey('daskum_id');
     }
 
+    public function builder(): \Illuminate\Database\Eloquent\Builder{
+        return DasarHukum::query()->orderByDesc('updated_at');
+    }
+
     public function columns(): array
     {
         return [
