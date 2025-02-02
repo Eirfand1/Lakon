@@ -50,7 +50,11 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::get('/json-data-feed', [DataFeedController::class, 'getDataFeed'])->name('json_data_feed');
 
     // Dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
+    Route::prefix('/dashboard')->group(function () {
+        Route::get('/', [DashboardController::class, 'index'])->name('admin.dashboard');
+        Route::put('/{pimpinan}', [DashboardController::class, 'update'])->name('admin.dashboard.update');
+    });
+    // Route::get('/dashboard', [DashboardController::class, 'index'])->name('admin.dashboard');
 
     // PPKOM route
     Route::prefix('/ppkom')->group(function () {
