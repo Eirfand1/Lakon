@@ -21,7 +21,6 @@
                     style: {
                         background: "linear-gradient(135deg, #2ecc71, #27ae60)",
                         fontWeight: "600",
-                        textTransform: "uppercase",
                         padding: "12px 20px",
                     },
                 }).showToast();
@@ -53,7 +52,7 @@
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
         <div id="modal_matriks" class="modal">
-            <div class="modal-box w-10/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
+            <div class="modal-box max-w-[52rem] mx-auto rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
@@ -77,7 +76,8 @@
                                     <input type="text" x-model="input.search" name="sub_kegiatan[]"
                                         @input.debounce.100ms="filterOptions(index)" @focus="showDropdown(index)"
                                         @click.away="input.showDropdown = false" placeholder="Pilih Sub Kegiatan"
-                                        class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                                        class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+
 
                                     <button type="button" @click="removeInput(index)"
                                         class="text-white bg-error p-2 rounded-lg px-3 hover:text-red-700"
@@ -88,10 +88,10 @@
                                 </div>
 
                                 <div x-show="input.showDropdown && input.filteredOptions.length" x-transition
-                                    class="absolute z-10 w-content mt-2  bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                                    class="absolute z-10 w-content mt-2  bg-white dark:bg-gray-700 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
                                     <template x-for="option in input.filteredOptions" :key="option . sub_kegiatan_id">
                                         <div @click="selectOption(index, option)"
-                                            class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
+                                            class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
                                             x-text="option.nama_sub_kegiatan"></div>
                                     </template>
                                 </div>
@@ -111,7 +111,7 @@
                     <div class="flex w-full flex-col pb-4 ">
                         <label for="sumber_dana" class="w-full sm:w-1/4">Sumber dana*</label>
                         <select name="sumber_dana" id=""
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                             <option value="APBN">APBN</option>
                             <option value="APBD">APBD</option>
                             <option value="Swasta">Swasta</option>
@@ -125,30 +125,56 @@
                         <label for="paket">Paket*</label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
                             <input type="text" name="kode_paket" id="" placeholder="Kode Paket"
-                                class="w-1/2 sm:w-1/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                                class="w-1/2 sm:w-1/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                             <input type="text" name="nama_pekerjaan" id="" placeholder="Nama Paket"
-                                class="w-full sm:w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                                class="w-full sm:w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                        </div>
+                    </div>
+
+
+
+                    <div x-data="sekolahManager({{ json_encode($sekolah) }})" class="flex w-full flex-col">
+
+                        <label for="nama_sekolah" class="w-full sm:w-1/4">Sekolah (Optional)</label>
+                        <div class="relative w-full">
+                            <input type="text" x-model="search" @input.debounce.100ms="filterOptions()"
+                                @focus="showDropdown = true" @click.away="showDropdown = false"
+                                placeholder="Pilih Sekolah"
+                                class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+
+
+                            <i class="fas fa-chevron-down text-sm absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300"></i>
+
+                            <div x-show="showDropdown && filteredOptions.length" x-transition
+                                class="absolute z-10 w-full mt-2 bg-white dark:bg-gray-700 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                                <template x-for="option in filteredOptions" :key="option.sekolah_id">
+                                    <div @click="selectOption(option)"
+                                        class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
+                                        x-text="option.nama_sekolah"></div>
+                                </template>
+                            </div>
+                            <input type="hidden" name="nama_sekolah" x-model="selectedOptionId">
                         </div>
                     </div>
 
                     <div class="flex w-full flex-col ">
                         <label for="waktu_paket" class="w-full sm:w-1/4">Waktu Paket*</label>
-                        <input type="date" name="waktu_paket" id=""
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                        <input type="date" name="waktu_paket" id="waktu_paket"
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                     </div>
 
                     <div class="flex w-full flex-col  ">
                         <label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan*</label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
                             <select name="jenis_pengadaan" id="metode_pemilihan"
-                                class="sm:w-1/4 w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                                class="sm:w-1/4 w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                                 <option value="tender">Tender</option>
-                                <option value="non-tender">Non-Tender</option>
+                                <option value="non_tender">Non-Tender</option>
                                 <option value="e_catalog">E-Catalog</option>
                             </select>
 
                             <select name="metode_pemilihan" id="metode_pemilihan"
-                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                                 <option value="" disabled selected>Pilih Jenis Pengadaan</option>
                                 <option value="Jasa Konsultasi Pengawasan">Jasa Konsultasi Pengawasan</option>
                                 <option value="Jasa Konsultasi Perencanaan">Jasa Konsultasi Pelaksanaan</option>
@@ -161,7 +187,7 @@
                     <div class="flex w-full flex-col ">
                         <label for="nilai_pagu_paket" class="w-full sm:w-1/4">Nilai Pagu Paket*</label>
                         <input type="number" name="nilai_pagu_paket" id=""
-                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                     </div>
 
                     <div class="flex w-full flex-col ">
@@ -173,16 +199,22 @@
                     <div class="flex w-full flex-col ">
                         <label for="nilai_hps" class="w-full sm:w-1/4">Nilai HPS*</label>
                         <input type="number" name="nilai_hps" id=""
-                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                    </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran*</label>
+                        <input type="number" name="tahun_anggaran" id="tahun_anggaran"
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                     </div>
 
                     <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Pejabat Pembuat Komitmen
                     </h1>
 
                     <div class="flex w-full flex-col ">
-                        <label for="daskum_id" class="w-full sm:w-1/4">Ppkom*</label>
-                        <select name="daskum_id" id="daskum_id"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                        <label for="ppkom_id" class="w-full sm:w-1/4">Ppkom*</label>
+                        <select name="ppkom_id" id="ppkom_id"
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                             <option value="" disabled selected>Pilih Pegawai</option>
                             @foreach($ppkom as $ppk)
                                 <option value="{{ $ppk->ppkom_id }}">{{ $ppk->nama }}</option>
@@ -190,38 +222,76 @@
                         </select>
                     </div>
 
-                    <div class="flex w-full flex-col ">
-                        <label for="ppkom_id" class="w-full sm:w-1/4">Dasar Hukum*</label>
-                        <select name="ppkom_id" id="ppkom_id"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                            <option value="" disabled selected>Pilih Dasar Hukum</option>
-                            @foreach($dasarHukum as $daskum)
-                                <option value="{{ $daskum->daskum_id }}">{{ $daskum->dasar_hukum }}</option>
-                            @endforeach
-                        </select>
+                    <div x-data="daskumManager({{ json_encode($dasarHukum) }})" class="flex w-full flex-col">
+                        <label for="daskum_id" class="w-full sm:w-1/4">Dasar Hukum*</label>
+                        <div class="relative w-full">
+                            <input type="text" x-model="search" @input.debounce.100ms="filterOptions()"
+                                @focus="showDropdown = true" @click.away="showDropdown = false"
+                                placeholder="Pilih Dasar Hukum"
+                                class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+
+                            <i class="fas fa-chevron-down text-sm absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300"></i>
+
+                            <div x-show="showDropdown && filteredOptions.length" x-transition
+                                class="absolute z-10 w-full mt-2 bg-white dark:bg-gray-700 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                                <template x-for="option in filteredOptions" :key="option . daskum_id">
+                                    <div @click="selectOption(option)"
+                                        class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
+                                        x-text="option.dasar_hukum"></div>
+                                </template>
+                            </div>
+                            <input type="hidden" name="daskum_id" x-model="selectedOptionId">
+                        </div>
                     </div>
 
                     <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Informasi Satuan Kerja
                     </h1>
 
+                    <input type="text" name="satker_id" id="" value="{{$satuanKerja->satker_id}}" hidden readonly>
                     <div class="flex w-full flex-col ">
-                        <label for="satker_id" class="w-full sm:w-1/4">Satuan Kerja*</label>
-                        <select name="satker_id" id="satker_id"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                            <option value="" disabled selected>Pilih Satuan Kerja</option>
-                            @foreach($satuanKerja as $satker)
-                                <option value="{{ $satker->satker_id }}">{{ $satker->nama_pimpinan }}</option>
-                            @endforeach
-                        </select>
+                        <label for="nama_pimpinan" class="w-full sm:w-1/4">Nama pimpinan</label>
+                        <input type="text" name="nama_pimpinan" id="" value="{{$satuanKerja->nama_pimpinan}}"
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            readonly>
+                    </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="jabatan" class="w-full sm:w-1/4">Jabatan</label>
+                        <input type="text" name="jabatan" id="" value="{{$satuanKerja->jabatan}}"
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            readonly>
+                    </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="website" class="w-full sm:w-1/4">Website</label>
+                        <input type="text" name="website" id="" value="{{$satuanKerja->website}}"
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            readonly>
                     </div>
 
 
+                    <div class="flex w-full flex-col ">
+                        <label for="email" class="w-full sm:w-1/4">Email</label>
+                        <input type="text" name="email" id="" value="{{$satuanKerja->email}}"
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            readonly>
+                    </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran*</label>
-                        <input type="number" name="tahun_anggaran" id="tahun_anggaran"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                        <label for="telp" class="w-full sm:w-1/4">Telepon</label>
+                        <input type="text" name="telp" id="" value="{{$satuanKerja->telp}}"
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            readonly>
                     </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="klpd" class="w-full sm:w-1/4">KLPD</label>
+                        <input type="text" name="klpd" id="" value="{{$satuanKerja->klpd}}"
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            readonly>
+                    </div>
+
+
 
                     <div class="modal-action pt-4">
                         <button type="submit" class="btn rounded text-white btn-primary">Simpan</button>
@@ -230,178 +300,6 @@
                 </form>
             </div>
         </div>
-
-        {{-- edit modal --}}
-        <input type="checkbox" id="edit-modal" class="modal-toggle" />
-        <div class="modal">
-            <div class="modal-box w-10/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
-                <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
-                    <div class="flex items-center gap-3">
-                        <i class="fa-solid fa-pen text-2xl text-warning"></i>
-                        <h3 class="font-bold text-xl dark:text-gray-200">Edit Paket Pekerjaan</h3>
-                    </div>
-                    <label for="edit-modal"
-                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">✕</label>
-                </div>
-
-                <form @submit.prevent="updatePaket" class="space-y-2">
-                    @csrf
-                    <input type="hidden">
-
-                    <h1 class="border-b font-bold border-gray-200 py-2 dark:border-gray-700">Program kerja</h1>
-                    <div x-data="subKegiatanManager({{ json_encode($subKegiatan) }})" class="space-y-2">
-                        <label for="sub_kegiatan[]">Sub Kegiatan</label>
-                        <template x-for="(input, index) in inputs" :key="index">
-                            <div class="relative w-full">
-                                <div class="flex items-center gap-2">
-                                    <input type="text" x-model="input.search" name="sub_kegiatan[]"
-                                        @input.debounce.100ms="filterOptions(index)" @focus="showDropdown(index)"
-                                        @click.away="input.showDropdown = false" placeholder="Pilih Sub Kegiatan"
-                                        class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-
-                                    <button type="button" @click="removeInput(index)"
-                                        class="text-white bg-error p-2 rounded-lg px-3 hover:text-red-700"
-                                        x-show="inputs.length > 1">
-                                        <i class="fa-solid fa-xmark"></i>
-
-                                    </button>
-                                </div>
-
-                                <div x-show="input.showDropdown && input.filteredOptions.length" x-transition
-                                    class="absolute z-10 w-content mt-2  bg-white border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
-                                    <template x-for="option in input.filteredOptions" :key="option . sub_kegiatan_id">
-                                        <div @click="selectOption(index, option)"
-                                            class="px-4 py-2 hover:bg-gray-100 cursor-pointer"
-                                            x-text="option.nama_sub_kegiatan"></div>
-                                    </template>
-                                </div>
-
-                                <input type="hidden" :name="`sub_kegiatan_id[${index}]`"
-                                    x-model="input.selectedOptionId">
-
-                            </div>
-                        </template>
-
-                        <button type="button" @click="addInput" class="btn rounded text-white btn-sm btn-primary">
-                            <i class="fa-solid fa-plus"></i> Tambah Sub Kegiatan
-                        </button>
-                    </div>
-
-                    <div class="flex w-full flex-col pb-4">
-                        <label for="sumber_dana" class="w-full sm:w-1/4">Sumber dana*</label>
-                        <select  name="sumber_dana"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                            <option value="APBN">APBN</option>
-                            <option value="APBD">APBD</option>
-                            <option value="Swasta">Swasta</option>
-                        </select>
-                    </div>
-
-                    <h1 class="border-y border-gray-200 font-bold py-3 dark:border-gray-700">Paket Pekerjaan</h1>
-
-                    <div class="pt-2">
-                        <label for="paket">Paket*</label>
-                        <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-                            <input type="text"  placeholder="Kode Paket"
-                                class="w-1/2 sm:w-1/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                            <input type="text" placeholder="Nama Paket"
-                                class="w-full sm:w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                        </div>
-                    </div>
-
-                    <div class="flex w-full flex-col">
-                        <label for="waktu_paket" class="w-full sm:w-1/4">Waktu Paket*</label>
-                        <input type="date" 
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                    </div>
-
-                    <div class="flex w-full flex-col  ">
-                        <label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan*</label>
-                        <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-                            <select name="jenis_pengadaan" id="metode_pemilihan"
-                                class="sm:w-1/4 w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                                <option value="tender">Tender</option>
-                                <option value="non-tender">Non-Tender</option>
-                                <option value="e_catalog">E-Catalog</option>
-                            </select>
-
-                            <select name="metode_pemilihan" id="metode_pemilihan"
-                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                                <option value="" disabled selected>Pilih Jenis Pengadaan</option>
-                                <option value="Jasa Konsultasi Pengawasan">Jasa Konsultasi Pengawasan</option>
-                                <option value="Jasa Konsultasi Perencanaan">Jasa Konsultasi Pelaksanaan</option>
-                                <option value="Jasa Konstruksi">Jasa Konstruksi</option>
-                                <option value="Pengadaan Barang">Pengadaan Barang</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="flex w-full flex-col ">
-                        <label for="nilai_pagu_paket" class="w-full sm:w-1/4">Nilai Pagu Paket*</label>
-                        <input type="number" name="nilai_pagu_paket" id=""
-                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                    </div>
-
-                    <div class="flex w-full flex-col ">
-                        <label for="nilai_pagu_anggaran" class="w-full sm:w-1/4">Nilai Pagu Anggaran*</label>
-                        <input type="number" name="nilai_pagu_anggaran" id=""
-                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                    </div>
-
-                    <div class="flex w-full flex-col ">
-                        <label for="nilai_hps" class="w-full sm:w-1/4">Nilai HPS*</label>
-                        <input type="number" name="nilai_hps" id=""
-                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                    </div>
-
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Pejabat Pembuat Komitmen
-                    </h1>
-
-                    <div class="flex w-full flex-col ">
-                        <label for="daskum_id" class="w-full sm:w-1/4">Ppkom*</label>
-                        <select name="daskum_id" id="daskum_id"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                            <option value="" disabled selected>Pilih Pegawai</option>
-                            @foreach($ppkom as $ppk)
-                                <option value="{{ $ppk->ppkom_id }}">{{ $ppk->nama }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <div class="flex w-full flex-col ">
-                        <label for="ppkom_id" class="w-full sm:w-1/4">Dasar Hukum*</label>
-                        <select name="ppkom_id" id="ppkom_id"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                            <option value="" disabled selected>Pilih Dasar Hukum</option>
-                            @foreach($dasarHukum as $daskum)
-                                <option value="{{ $daskum->daskum_id }}">{{ $daskum->dasar_hukum }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Informasi Satuan Kerja
-                    </h1>
-
-                    <div class="flex w-full flex-col ">
-                        <label for="satker_id" class="w-full sm:w-1/4">Satuan Kerja*</label>
-                        <select name="satker_id" id="satker_id"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
-                            <option value="" disabled selected>Pilih Satuan Kerja</option>
-                            @foreach($satuanKerja as $satker)
-                                <option value="{{ $satker->satker_id }}">{{ $satker->nama_pimpinan }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-
-
-                    <div class="modal-action pt-4">
-                        <button type="submit" class="btn rounded text-white btn-primary">Simpan Perubahan</button>
-                        <label for="edit-modal" class="btn btn-ghost">Batal</label>
-                    </div>
-                </form>
-            </div>
-        </div>
-
 
 
         {{-- delete modal --}}
@@ -427,6 +325,7 @@
     </div>
 
     <script>
+
         function setDeleteId(paket_id) {
             document.getElementById('deleteForm').action = `paket-pekerjaan/${paket_id}`;
         }
@@ -476,6 +375,58 @@
             }
         }
 
+        function daskumManager(options) {
+
+            // console.log("daskum options:", options);
+            return {
+                options: options,
+                search: '',
+                filteredOptions: options,
+                showDropdown: false,
+                selectedOptionId: null,
+
+                filterOptions() {
+                    const searchTerm = this.search.toLowerCase();
+                    this.filteredOptions = this.options.filter(option =>
+                        option.dasar_hukum.toLowerCase().includes(searchTerm)
+                    );
+                    this.showDropdown = this.filteredOptions.length > 0;
+                },
+
+                selectOption(option) {
+                    this.search = option.dasar_hukum;
+                    this.selectedOptionId = option.daskum_id;
+                    this.showDropdown = false;
+                }
+            }
+        }
+
+
+        function sekolahManager(options) {
+            // console.log("SekolahManager options:", options);
+            return {
+                options: options,
+                search: '',
+                filteredOptions: options, 
+                showDropdown: false,
+                selectedOptionId: null,
+
+
+                filterOptions() {
+                    const searchTerm = this.search.toLowerCase();
+                    this.filteredOptions = this.options.filter(option =>
+                        option.nama_sekolah.toLowerCase().includes(searchTerm) 
+                    );
+                    this.showDropdown = this.filteredOptions.length > 0;
+                },
+
+                selectOption(option) {
+                    this.search = option.nama_sekolah;
+                    this.selectedOptionId = option.nama_sekolah;
+                    this.showDropdown = false;
+                }
+            }
+        }
 
     </script>
 </x-app-layout>
