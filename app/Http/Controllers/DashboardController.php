@@ -39,9 +39,8 @@ class DashboardController extends Controller
                 'website' => 'required|string|max:255',
                 'email' => 'required|email|max:255',
                 'telp' => 'required|string|max:255',
-                'kipd' => 'required|string|max:255'
+                'klpd' => 'required|string|max:255'
             ]);
-
             $pimpinan->update($validateData);
             return redirect()->back()->with('success', 'Data berhasil diperbarui.');
         } catch (QueryException $e) {
