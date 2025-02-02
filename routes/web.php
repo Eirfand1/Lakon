@@ -3,6 +3,7 @@
 use App\Http\Controllers\DasarHukumController;
 use App\Http\Controllers\KontrakController;
 use App\Http\Controllers\PaketPekerjaanController;
+use App\Http\Controllers\SubKegiatanController;
 use App\Http\Controllers\PenyediaController;
 use App\Http\Controllers\PpkomController;
 use App\Http\Controllers\SekolahController;
@@ -82,10 +83,18 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
     });
 
-
+    // Paket Pekerjaan (Matriks)
     Route::get('/paket-pekerjaan', [PaketPekerjaanController::class, 'index'])->name('admin.paket-pekerjaan.index');
     Route::post('/paket-pekerjaan', [PaketPekerjaanController::class, 'store'])->name('admin.paket-pekerjaan.store');
     Route::delete('/paket-pekerjaan/{paket_pekerjaan}', [PaketPekerjaanController::class, 'destroy'])->name('admin.paket-pekerjaan.destroy');
+
+    // Sub Kegiatan
+    Route::prefix('/sub-kegiatan')->group(function () {
+        Route::get('/', [SubKegiatanController::class, 'index'])->name('admin.sub-kegiatan.index');
+        Route::post('/', [SubKegiatanController::class, 'store'])->name('admin.sub-kegiatan.store');
+        Route::put('/{sub_kegiatan}', [SubKegiatanController::class, 'update'])->name('admin.sub-kegiatan.edit');
+        Route::delete('/{sub_kegiatan}', [SubKegiatanController::class, 'destroy'])->name('admin.sub-kegiatan.destroy');
+    });
 
     Route::prefix('/riwayat-kontrak')->group(function () {
         Route::get('/', [KontrakController::class, 'index'])->name('admin.riwayat-kontrak.index');
