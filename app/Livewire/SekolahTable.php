@@ -1,12 +1,13 @@
 <?php
 namespace App\Livewire;
 
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Sekolah;
-use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
-use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
+use Illuminate\Support\Facades\DB;
+use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
+use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
+use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
 
 class SekolahTable extends DataTableComponent
 {
@@ -16,6 +17,12 @@ class SekolahTable extends DataTableComponent
     {
         $this->setPrimaryKey('sekolah_id')
              ->setFilterLayout('slide-down');
+    }
+
+    public function builder(): \Illuminate\Database\Eloquent\Builder{
+        return Sekolah::query()
+            ->selectRaw('*, ST_X(koordinat) as lat, ST_Y(koordinat) as lng')
+            ->orderByDesc('updated_at');
     }
 
     public function columns(): array
@@ -52,8 +59,23 @@ class SekolahTable extends DataTableComponent
                 ->sortable(),
 
             Column::make("Koordinat","koordinat")
+                ->format(function ($value, $row) {
+                    // Ambil latitude dan longitude dari kolom koordinat
+                    $lat = $row->lat;
+                    $lng = $row->lng;
+
+                    // Buat tautan ke Google Maps
+                    $mapsUrl = "https://www.google.com/maps?q={$lat},{$lng}";
+
+                    // Tampilkan tautan yang dapat diklik
+                    return "<a href='{$mapsUrl}' target='_blank'>{$lat}, {$lng}</a>";
+                })
+                ->html()
                 ->searchable()
                 ->sortable(),
+
+            Column::make("Aksi", "sekolah_id")
+                ->format(fn($value, $row) => view('pages.admin.sekolah.actions', ['sekolah' => $row])),
         ];
     }
 
