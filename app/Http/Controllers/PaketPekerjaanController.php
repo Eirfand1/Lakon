@@ -7,6 +7,7 @@ use App\Models\PaketPekerjaan;
 use App\Models\PaketSubKegiatan;
 use App\Models\Ppkom;
 use App\Models\SatuanKerja;
+use App\Models\Sekolah;
 use App\Models\SubKegiatan;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
@@ -20,9 +21,10 @@ class PaketPekerjaanController extends Controller
         return view('pages.admin.paket-pekerjaan.paket-pekerjaan', [
             "title" => "paket-pekerjaan",
             "paket" => $pakets,
+            "sekolah" => Sekolah::all(),
             "dasarHukum" => DasarHukum::all(),
             "subKegiatan" => SubKegiatan::all(),
-            "satuanKerja" => SatuanKerja::all(),
+            "satuanKerja" => SatuanKerja::findOrFail(1),
             "ppkom" => Ppkom::all(),
         ]);
     }
@@ -50,7 +52,7 @@ class PaketPekerjaanController extends Controller
             ]);
 
             $paketPekerjaan = PaketPekerjaan::create([
-                'nama_pekerjaan' => $validatedData['nama_pekerjaan'],
+                'nama_pekerjaan' => $validatedData['nama_pekerjaan'] . " " . ($request->nama_sekolah ?? ''),
                 'waktu_paket' => $validatedData['waktu_paket'],
                 'sumber_dana' => $validatedData['sumber_dana'],
                 'tahun_anggaran' => $validatedData['tahun_anggaran'],

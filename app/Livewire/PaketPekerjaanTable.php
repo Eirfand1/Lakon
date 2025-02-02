@@ -51,6 +51,10 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
 
+            Column::make('Kode Paket', 'kode_paket')
+                ->sortable()
+                ->searchable(),
+
             Column::make('Sumber Dana', 'sumber_dana')
                 ->sortable()
                 ->searchable(),
@@ -112,7 +116,7 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->searchable()
                 ->format(fn($value, $row) => 'Rp ' . number_format($row->nilai_hps, 2)),
             Column::make("Aksi", "paket_id")
-                ->format(fn($value, $row) => view('pages.admin.paket-pekerjaan.actions', ['p' => PaketPekerjaan::find($value)])),
+                ->format(fn($value, $row) => view('pages.admin.paket-pekerjaan.actions', ['p' => $row])),
         ];
     }
 
@@ -126,17 +130,6 @@ class PaketPekerjaanTable extends DataTableComponent
     public function filters(): array
     {
         return [
-            // Satuan Kerja Filter
-            TextFilter::make('Satuan Kerja')
-                ->config([
-                    'placeholder' => 'Cari Satuan Kerja',
-                ])
-                ->filter(function ($builder, $value) {
-                    return $builder->whereHas('satuanKerja', function ($query) use ($value) {
-                        $query->where('nama_pimpinan', 'like', '%' . $value . '%');
-                    });
-                }),
-
             // Jenis Pengadaan Filter
             SelectFilter::make('Jenis Pengadaan')
                 ->options([
