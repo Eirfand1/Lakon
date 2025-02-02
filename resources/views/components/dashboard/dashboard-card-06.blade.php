@@ -21,7 +21,7 @@
                     class="border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-500 p-2">
                     <input type="tel" name="telp" placeholder="Phone" value="{{$profilePimpinan->telp}}"
                     class="border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-500 p-2">
-                    <input type="tel" name="kipd" placeholder="KIPD" value="{{$profilePimpinan->kipd}}"
+                    <input type="tel" name="klpd" placeholder="KLPD" value="{{$profilePimpinan->klpd}}"
                     class="border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-500 p-2">
                 </div>
                 <button type="submit" class="p-2 rounded bg-gray-800 hover:bg-gray-700 text-white transition-colors dark:bg-gray-200 dark:hover:bg-gray-300 dark:text-gray-900">Simpan</button>
