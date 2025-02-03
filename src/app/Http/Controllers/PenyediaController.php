@@ -10,8 +10,6 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Google\Client;
-use Google\Service\Drive;
 
 class PenyediaController extends Controller
 {
