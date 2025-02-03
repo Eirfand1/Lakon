@@ -67,37 +67,20 @@
                     </li>
 
                     @if(Auth::user()->penyedia->status == "konsultan")
-                    <li
-                        class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['rencana'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
-                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(2), ['rencana'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            href="{{ route('penyedia.konsultan.rencana.index') }}" wire:navigate>
-                            <div class=" flex items-center">
-                                <svg xmlns="http://www.w3.org/2000/svg"
-                                    fill="currentColor" width="16" height="16"
-                                    viewBox="0 0 576 512"
-                                    class="shrink-0 @if(in_array(Request::segment(2), ['rencana'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif"
-                                    ><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
-                                    <path d="M482.3 192c34.2 0 93.7 29 93.7 64c0 36-59.5 64-93.7 64l-116.6 0L265.2 495.9c-5.7 10-16.3 16.1-27.8 16.1l-56.2 0c-10.6 0-18.3-10.2-15.4-20.4l49-171.6L112 320 68.8 377.6c-3 4-7.8 6.4-12.8 6.4l-42 0c-7.8 0-14-6.3-14-14c0-1.3 .2-2.6 .5-3.9L32 256 .5 145.9c-.4-1.3-.5-2.6-.5-3.9c0-7.8 6.3-14 14-14l42 0c5 0 9.8 2.4 12.8 6.4L112 192l102.9 0-49-171.6C162.9 10.2 170.6 0 181.2 0l56.2 0c11.5 0 22.1 6.2 27.8 16.1L365.7 192l116.6 0z"/>
-                                </svg>
-
-                                <span class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Rencana</span>
-                            </div>
-                        </a>
-                    </li>
 
                     <li
-                        class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['realisasi'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
-                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(2), ['realisasi'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
-                            href="{{ route('penyedia.konsultan.realisasi.index') }}" wire:navigate>
+                        class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['matrik'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">
+                        <a class="block text-gray-800 dark:text-gray-100 truncate transition @if(!in_array(Request::segment(2), ['matrik'])){{ 'hover:text-gray-900 dark:hover:text-white' }}@endif"
+                            href="{{ route('penyedia.konsultan.matrik.index') }}" wire:navigate>
                             <div class=" flex items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 448 512"
                                     fill="currentColor" width="16" height="16"
-                                    class="shrink-0 @if(in_array(Request::segment(2), ['realisasi'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif"
+                                    class="shrink-0 @if(in_array(Request::segment(2), ['matrik'])){{ 'text-violet-500' }}@else{{ 'text-gray-600 dark:text-gray-400' }}@endif"
                                     ><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                     <path d="M0 96C0 43 43 0 96 0L384 0l32 0c17.7 0 32 14.3 32 32l0 320c0 17.7-14.3 32-32 32l0 64c17.7 0 32 14.3 32 32s-14.3 32-32 32l-32 0L96 512c-53 0-96-43-96-96L0 96zM64 416c0 17.7 14.3 32 32 32l256 0 0-64L96 384c-17.7 0-32 14.3-32 32zM320 112c0-35.3-35.8-64-80-64s-80 28.7-80 64c0 20.9 12.6 39.5 32 51.2l0 12.8c0 8.8 7.2 16 16 16l64 0c8.8 0 16-7.2 16-16l0-12.8c19.4-11.7 32-30.3 32-51.2zM208 96a16 16 0 1 1 0 32 16 16 0 1 1 0-32zm48 16a16 16 0 1 1 32 0 16 16 0 1 1 -32 0zM134.3 209.3c-8.1-3.5-17.5 .3-21 8.4s.3 17.5 8.4 21L199.4 272l-77.7 33.3c-8.1 3.5-11.9 12.9-8.4 21s12.9 11.9 21 8.4L240 289.4l105.7 45.3c8.1 3.5 17.5-.3 21-8.4s-.3-17.5-8.4-21L280.6 272l77.7-33.3c8.1-3.5 11.9-12.9 8.4-21s-12.9-11.9-21-8.4L240 254.6 134.3 209.3z"/>
                                 </svg>
-                                <span class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Realisasi</span>
+                                <span class="text-sm font-medium ml-4 lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100 duration-200">Matrik</span>
                             </div>
                         </a>
                     </li>

@@ -1,6 +1,6 @@
 <x-app-layout>
     <div class="p-5">
-        <div class="mb-4 sm:mb-0 flex justify-between">
+        <div class="mb-4 flex justify-between flex-wrap">
             <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">PAKET PEKERJAAN</h1>
             <!-- Add Button -->
             <label for="add-modal" class="btn rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
@@ -66,7 +66,7 @@
 
                 <form action="{{ route('admin.paket-pekerjaan.store') }}" method="POST" class="space-y-2 ">
                     @csrf
-                    <h1 class="border-b font-bold border-gray-200 py-2 dark:border-gray-700 ">Program kerja</h1>
+                    <h1 class="border-b font-bold border-gray-200 pb-2 dark:border-gray-700 ">Program kerja</h1>
 
                     <div x-data="subKegiatanManager({{ json_encode($subKegiatan) }})" class="space-y-2">
                         <label for="sub_kegiatan[]">Sub Kegiatan</label>
@@ -202,7 +202,7 @@
                             class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                     </div>
 
-                    <div class="flex w-full flex-col ">
+                    <div class="flex w-full flex-col pb-4 ">
                         <label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran*</label>
                         <input type="number" name="tahun_anggaran" id="tahun_anggaran"
                             class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
@@ -211,7 +211,7 @@
                     <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Pejabat Pembuat Komitmen
                     </h1>
 
-                    <div class="flex w-full flex-col ">
+                    <div class="flex w-full flex-col pt-2 ">
                         <label for="ppkom_id" class="w-full sm:w-1/4">Ppkom*</label>
                         <select name="ppkom_id" id="ppkom_id"
                             class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
@@ -222,7 +222,7 @@
                         </select>
                     </div>
 
-                    <div x-data="daskumManager({{ json_encode($dasarHukum) }})" class="flex w-full flex-col">
+                    <div x-data="daskumManager({{ json_encode($dasarHukum) }})" class="flex w-full flex-col pb-4">
                         <label for="daskum_id" class="w-full sm:w-1/4">Dasar Hukum*</label>
                         <div class="relative w-full">
                             <input type="text" x-model="search" @input.debounce.100ms="filterOptions()"
@@ -248,7 +248,7 @@
                     </h1>
 
                     <input type="text" name="satker_id" id="" value="{{$satuanKerja->satker_id}}" hidden readonly>
-                    <div class="flex w-full flex-col ">
+                    <div class="flex w-full flex-col py-2 ">
                         <label for="nama_pimpinan" class="w-full sm:w-1/4">Nama pimpinan</label>
                         <input type="text" name="nama_pimpinan" id="" value="{{$satuanKerja->nama_pimpinan}}"
                             class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"

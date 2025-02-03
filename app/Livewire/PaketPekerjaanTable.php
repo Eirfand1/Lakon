@@ -70,7 +70,7 @@ class PaketPekerjaanTable extends DataTableComponent
 
             Column::make('Sub Kegiatan', 'paket_id')
                 ->format(function ($value, $row) {
-                    $data = PaketPekerjaan::find($value);
+                    $data = PaketPekerjaan::with('subKegiatan')->find($value);
                     $subKegiatanList = $data->subKegiatan->pluck('nama_sub_kegiatan');
 
 
