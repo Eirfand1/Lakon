@@ -87,7 +87,7 @@
                             </div>
                             <div>
                                 <label class="block text-sm font-medium dark:text-gray-300 mb-2">Nama Sekolah*</label>
-                                <input type="text" id="namaSekolah" name="nama_sekolah" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                                <input type="text" id="" name="nama_sekolah" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-700 dark:text-gray-200" required />
                             </div>
@@ -303,8 +303,10 @@
 
         function handleEdit(data) {
 
+            console.log(data)
             try {
                 const sekolah = JSON.parse(data);
+
 
                 // Set values for regular inputs
                 document.getElementById('edit_npsn').value = sekolah.npsn;
