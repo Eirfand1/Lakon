@@ -209,15 +209,18 @@ class PenyediaController extends Controller
 
     public function dashboard()
     {
-        return view('pages.penyedia.dashboard.dashboard');
+        $user = auth()->user()->penyedia;
+
+        return view('pages.penyedia.dashboard.dashboard', ['penyedia' => $user]);
+    }
+    public function permohonanKontrakIndex() {
+        return view('pages.penyedia.permohonan-kontrak.permohonan-kontrak', ['penyedia'=> auth()->user()->penyedia]);
     }
 
-
-    public function konsultanRencanaindex() {
-        return view('pages.penyedia.konsultan.rencana.rencana');
+    public function konsultanMatrikIndex() {
+        return view('pages.penyedia.konsultan.matrik.matrik');
     }
 
-    public function konsultanRealisasiindex() {
-        return view('pages.penyedia.konsultan.realisasi.realisasi');
-    }
+    
+    
 }

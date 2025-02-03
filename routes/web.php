@@ -32,10 +32,10 @@ Route::post('/registrasi', [PenyediaController::class, 'store'])->name('registra
 Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(function () {
     Route::get('/riwayat-kontrak', [PenyediaController::class, 'kontrakSaya'])->name('penyedia.riwayat');
     Route::get('/dashboard', [PenyediaController::class, 'dashboard'])->name('penyedia.dashboard');
+    Route::get('/permohonan-kontrak', [PenyediaController::class, 'permohonanKontrakIndex'])->name('penyedia.permohonan-kontrak.index');
 
     Route::middleware('cekStatusPenyedia:konsultan')->group(function () {
-        Route::get('/rencana', [PenyediaController::class, 'konsultanRencanaindex'])->name('penyedia.konsultan.rencana.index');
-        Route::get('/realisasi', [PenyediaController::class, 'konsultanRealisasiIndex'])->name('penyedia.konsultan.realisasi.index');
+        Route::get('/matrik', [PenyediaController::class, 'konsultanMatrikIndex'])->name('penyedia.konsultan.matrik.index');
     });
 });
 
