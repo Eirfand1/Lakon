@@ -21,7 +21,7 @@ class PaketPekerjaanController extends Controller
         return view('pages.admin.paket-pekerjaan.paket-pekerjaan', [
             "title" => "paket-pekerjaan",
             "paket" => $pakets,
-            "sekolah" => Sekolah::all(),
+            "sekolah" => Sekolah::select('nama_sekolah', 'sekolah_id')->get(),
             "dasarHukum" => DasarHukum::all(),
             "subKegiatan" => SubKegiatan::all(),
             "satuanKerja" => SatuanKerja::findOrFail(1),
