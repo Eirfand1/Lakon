@@ -50,9 +50,14 @@ php artisan serve
 Buka browser di `http://localhost:8000`
 
 ## Menjalankan docker
+- Pastikan .env sesuai dengan yang ada di docker-compose, bisa diliat di env.example sudah sesuai
 
-1. docker-compose up -d --build app.
+1. docker-compose up -d --build app
 2. docker-compose run --rm composer install 
-3. docker-compose run --rm npm run dev
-4. docker-compose run --rm artisan migrate
-5. docker-compose run --rm artisan db:seed 
+3. docker-compose run --rm artisan key:generate 
+4. docker-compose run --rm artisan migrate --seed
+5. docker-compose run --rm npm install 
+6. docker-compose run --rm npm run build
+7. docker-compose run --rm npm run dev
+8. Buka halaman ```localhost``` di browser, app di mapping ke port 80 atau http
+
