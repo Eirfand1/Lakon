@@ -51,8 +51,19 @@ Buka browser di `http://localhost:8000`
 
 ## Menjalankan docker
 
-1. docker-compose up -d --build app.
-2. docker-compose run --rm composer install 
-3. docker-compose run --rm npm run dev
-4. docker-compose run --rm artisan migrate
-5. docker-compose run --rm artisan db:seed 
+1. hapus .env
+2. rename/copy .env.docker.example menjadi .env
+
+3. ikuti langkah dibawah 
+```bash
+
+# jalankakan docker composer
+./vendor/bin/sail up
+
+# jalankan migrate 
+./vendor/bin/sail artisan migrate
+./vendor/bin/sail artisan db:seed 
+ 
+```
+
+4. Open localhost
