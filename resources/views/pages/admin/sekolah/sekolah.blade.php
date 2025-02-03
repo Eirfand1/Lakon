@@ -303,8 +303,10 @@
 
         function handleEdit(data) {
 
+            console.log(data)
             try {
                 const sekolah = JSON.parse(data);
+
 
                 // Set values for regular inputs
                 document.getElementById('edit_npsn').value = sekolah.npsn;
