@@ -137,7 +137,7 @@
         </div>
     <div>
 
-    <!-- Script for PPkom Table -->
+    <!-- Script for Dasar Hukum -->
     <script>
         function editDaskum(daskum_id, dasar_hukum) {
             document.getElementById('editForm').action = `dasar-hukum/${daskum_id}`;
