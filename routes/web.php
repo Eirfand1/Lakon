@@ -106,9 +106,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
         Route::get('/import-sekolah', [SekolahController::class, 'showImport']);
         Route::post('/import-sekolah', [SekolahController::class, 'import']);
         Route::post('/', [SekolahController::class, 'store'])->name('admin.sekolah.store');
-        Route::get('/edit-sekolah/{sekolah_id}', [SekolahController::class, 'edit']);
-        Route::put('/', [SekolahController::class, 'update'])->name('admin.sekolah.update');
-        Route::delete('/{sekolah_id}', [SekolahController::class, 'destroy'])->name('admin.sekolah.destroy');
+        Route::put('/{sekolah}', [SekolahController::class, 'update'])->name('admin.sekolah.update');
+        Route::delete('/{sekolah}', [SekolahController::class, 'destroy'])->name('admin.sekolah.destroy');
     });
 
     Route::prefix('/dasar-hukum')->group(function () {
