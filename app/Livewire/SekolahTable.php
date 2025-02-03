@@ -65,10 +65,14 @@ class SekolahTable extends DataTableComponent
                     $lng = $row->lng;
 
                     // Buat tautan ke Google Maps
-                    $mapsUrl = "https://www.google.com/maps?q={$lat},{$lng}";
+                    if ($lat === null || $lng === null) {
+                        $mapsUrl = "-";
+                    }else {
+                        $mapsUrl = "<a href='https://www.google.com/maps?q={$lat},{$lng}' target='_blank'>{$lat}, {$lng}</a>";
+                    }
 
                     // Tampilkan tautan yang dapat diklik
-                    return "<a href='{$mapsUrl}' target='_blank'>{$lat}, {$lng}</a>";
+                    return $mapsUrl;
                 })
                 ->html()
                 ->searchable()
@@ -80,8 +84,12 @@ class SekolahTable extends DataTableComponent
                     $lat = $row->lat;
                     $lng = $row->lng;
 
-                    // gabungkan koordinat menjadi string
-                    $row->koordinat = "$lat,$lng";
+                    if ($lat === null || $lng === null) {
+                        $row->koordinat = "-";
+                    }else {
+                        // gabungkan koordinat menjadi string
+                        $row->koordinat = "$lat,$lng";
+                    }
 
                     return view('pages.admin.sekolah.actions', ['sekolah' => $row]);
                 })

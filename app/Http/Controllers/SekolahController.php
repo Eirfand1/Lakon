@@ -50,12 +50,15 @@ class SekolahController extends Controller
                 'koordinat' => 'nullable',
             ]);
 
-
-
             // Parse input koordinat (format: "latitude,longitude")
-            $koordinat = explode(',', $validateData['koordinat']);
-            $latitude = trim($koordinat[0]);
-            $longitude = trim($koordinat[1]);
+            if ($validateData['koordinat']) {
+                $koordinat = explode(',', $validateData['koordinat']);
+                $latitude = trim($koordinat[0]);
+                $longitude = trim($koordinat[1]);
+                $koordinat = DB::raw("POINT($latitude, $longitude)");
+            }else {
+                $koordinat = null;
+            }
 
             $sekolah = Sekolah::create([
                 'npsn' => $validateData['npsn'],
@@ -65,7 +68,7 @@ class SekolahController extends Controller
                 'alamat' => $validateData['alamat'],
                 'desa' => $validateData['desa'],
                 'kecamatan' => $validateData['kecamatan'],
-                'koordinat' => DB::raw("POINT($latitude, $longitude)"),
+                'koordinat' => $koordinat,
             ]);
             return redirect()->back()->with('success', 'Sekolah berhasil disimpan.');
 
@@ -90,9 +93,14 @@ class SekolahController extends Controller
             ]);
 
             // Parse input koordinat (format: "latitude,longitude")
-            $koordinat = explode(',', $validateData['koordinat']);
-            $latitude = trim($koordinat[0]);
-            $longitude = trim($koordinat[1]);
+            if ($validateData['koordinat']) {
+                $koordinat = explode(',', $validateData['koordinat']);
+                $latitude = trim($koordinat[0]);
+                $longitude = trim($koordinat[1]);
+                $koordinat = DB::raw("POINT($latitude, $longitude)");
+            }else {
+                $koordinat = null;
+            }
 
             $sekolah->update([
                 'npsn' => $validateData['npsn'],
@@ -102,7 +110,7 @@ class SekolahController extends Controller
                 'alamat' => $validateData['alamat'],
                 'desa' => $validateData['desa'],
                 'kecamatan' => $validateData['kecamatan'],
-                'koordinat' => DB::raw("POINT($latitude, $longitude)"),
+                'koordinat' => $koordinat,
             ]);
 
             return redirect()->back()->with('success', 'Data sekolah berhasil diperbarui.');
