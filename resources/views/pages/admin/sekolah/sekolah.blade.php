@@ -81,13 +81,13 @@
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium dark:text-gray-300 mb-2">NPSN*</label>
-                                <input type="text" id="npsn" name="npsn" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                                <input type="text" id="npsn" name="npsn" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-700 dark:text-gray-200" required />
                             </div>
                             <div>
                                 <label class="block text-sm font-medium dark:text-gray-300 mb-2">Nama Sekolah*</label>
-                                <input type="text" id="namaSekolah" name="nama_sekolah" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                                <input type="text" id="nama_sekolah" name="nama_sekolah" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-700 dark:text-gray-200" required />
                             </div>
@@ -97,7 +97,7 @@
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium dark:text-gray-300 mb-2">Jenjang*</label>
-                                <select name="jenjang" id="jenjang" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                                <select name="jenjang" id="jenjang" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-700 dark:text-gray-200">
                                     <option value="">Pilih Jenjang</option>
@@ -109,7 +109,7 @@
                             </div>
                             <div>
                                 <label class="block text-sm font-medium dark:text-gray-300 mb-2">Status*</label>
-                                <select name="status" id="status" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                                <select name="status" id="status" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-700 dark:text-gray-200">
                                     <option value="">Pilih Status</option>
@@ -122,7 +122,7 @@
                         <!-- Alamat -->
                         <div>
                             <label class="block text-sm font-medium dark:text-gray-300 mb-2">Alamat*</label>
-                            <textarea name="alamat" id="alamat" rows="3" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                            <textarea name="alamat" id="alamat" rows="3" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                         dark:bg-gray-700 dark:text-gray-200" required></textarea>
                         </div>
@@ -131,13 +131,13 @@
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium dark:text-gray-300 mb-2">Desa*</label>
-                                <input type="text" id="desa" name="desa" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                                <input type="text" id="desa" name="desa" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-700 dark:text-gray-200" required />
                             </div>
                             <div>
                                 <label class="block text-sm font-medium dark:text-gray-300 mb-2">Kecamatan*</label>
-                                <input type="text" id="kecamatan" name="kecamatan" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                                <input type="text" id="kecamatan" name="kecamatan" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-700 dark:text-gray-200" required />
                             </div>
@@ -146,22 +146,22 @@
                         <!-- Koordinat -->
                         <div>
                             <label class="block text-sm font-medium dark:text-gray-300 mb-2">Koordinat(stil error bro)*</label>
-                            <input type="text" id="koordinat" name="koordinat" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                            <input type="text" id="koordinat" name="koordinat" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                        dark:bg-gray-700 dark:text-gray-200" disabled/>
+                        dark:bg-gray-700 dark:text-gray-200"/>
                         </div>
                     </div>
 
                     <div class="flex justify-end gap-3 mt-8 pt-4 border-t dark:border-gray-700">
                         <button type="submit"
                             class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-                            Update
+                            Tambah
                         </button>
                         <label for="edit-modal"
                             class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
                             Tutup
                         </label>
-                    </div> 
+                    </div>
                 </form>
             </div>
         </div>
@@ -188,13 +188,13 @@
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium dark:text-gray-300 mb-2">NPSN*</label>
-                                <input type="text" id="edit_npsn" name="npsn" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                                <input type="text" id="edit_npsn" name="npsn" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-700 dark:text-gray-200" required />
                             </div>
                             <div>
                                 <label class="block text-sm font-medium dark:text-gray-300 mb-2">Nama Sekolah*</label>
-                                <input type="text" id="namaSekolah" name="nama_sekolah" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                                <input type="text" id="namaSekolah" name="nama_sekolah" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-700 dark:text-gray-200" required />
                             </div>
@@ -204,7 +204,7 @@
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium dark:text-gray-300 mb-2">Jenjang*</label>
-                                <select name="jenjang" id="edit_jenjang" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                                <select name="jenjang" id="edit_jenjang" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-700 dark:text-gray-200">
                                     <option value="">Pilih Jenjang</option>
@@ -216,7 +216,7 @@
                             </div>
                             <div>
                                 <label class="block text-sm font-medium dark:text-gray-300 mb-2">Status*</label>
-                                <select name="status" id="edit_status" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                                <select name="status" id="edit_status" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-700 dark:text-gray-200">
                                     <option value="">Pilih Status</option>
@@ -229,7 +229,7 @@
                         <!-- Alamat -->
                         <div>
                             <label class="block text-sm font-medium dark:text-gray-300 mb-2">Alamat*</label>
-                            <textarea name="alamat" id="edit_alamat" rows="3" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                            <textarea name="alamat" id="edit_alamat" rows="3" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                         dark:bg-gray-700 dark:text-gray-200" required></textarea>
                         </div>
@@ -238,13 +238,13 @@
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <label class="block text-sm font-medium dark:text-gray-300 mb-2">Desa*</label>
-                                <input type="text" id="edit_desa" name="desa" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                                <input type="text" id="edit_desa" name="desa" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-700 dark:text-gray-200" required />
                             </div>
                             <div>
                                 <label class="block text-sm font-medium dark:text-gray-300 mb-2">Kecamatan*</label>
-                                <input type="text" id="edit_kecamatan" name="kecamatan" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                                <input type="text" id="edit_kecamatan" name="kecamatan" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-700 dark:text-gray-200" required />
                             </div>
@@ -253,9 +253,9 @@
                         <!-- Koordinat -->
                         <div>
                             <label class="block text-sm font-medium dark:text-gray-300 mb-2">Koordinat(stil error bro)*</label>
-                            <input type="text" id="edit_koordinat" name="koordinat" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600 
+                            <input type="text" id="edit_koordinat" name="koordinat" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                        dark:bg-gray-700 dark:text-gray-200" disabled/>
+                        dark:bg-gray-700 dark:text-gray-200"/>
                         </div>
                     </div>
 
