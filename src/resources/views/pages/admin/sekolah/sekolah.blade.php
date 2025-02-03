@@ -68,7 +68,7 @@
                         <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
                         <h3 class="font-bold text-xl dark:text-gray-200">Tambah Sekolah</h3>
                     </div>
-                    <label for="add-sekolah"
+                    <label for="add-sekolah"  onclick="mapInputDelete()"
                         class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
                         ✕
                     </label>
@@ -150,6 +150,8 @@
                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                         dark:bg-gray-700 dark:text-gray-200"/>
                         </div>
+                        <!-- Map -->
+                        <div id="map" class="w-full h-96"></div>
                     </div>
 
                     <div class="flex justify-end gap-3 mt-8 pt-4 border-t dark:border-gray-700">
@@ -157,7 +159,7 @@
                             class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
                             Tambah
                         </button>
-                        <label for="edit-modal"
+                        <label for="add-sekolah"  onclick="mapInputDelete()"
                             class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
                             Tutup
                         </label>
@@ -295,6 +297,9 @@
         </div>
     </div>
 
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
     <!-- Script for Sekolah -->
     <script>
         function setDeleteId(sekolah_id) {
@@ -339,5 +344,92 @@
             }
         }
 
+        // Inisialisasi peta
+        const map = L.map('map').setView([-6.2088, 106.8456], 10); // Pusat peta di Jakarta (GANTI CILACAP)
+
+        // Tambahkan layer peta dari OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        let marker = null; // Marker awalnya null (tidak ada)
+
+        // Event saat peta diklik
+        map.on('click', function (event) {
+            const latLng = event.latlng;
+
+            // Jika marker belum ada, buat marker baru
+            if (!marker) {
+                marker = L.marker(latLng, {
+                    draggable: true // Marker bisa digeser
+                }).addTo(map);
+
+                // Event saat marker digeser
+                marker.on('dragend', function (event) {
+                    const newLatLng = marker.getLatLng();
+                    const koordinat = `${newLatLng.lat.toFixed(6)},${newLatLng.lng.toFixed(6)}`;
+                    document.getElementById('koordinat').value = koordinat;
+                });
+            } else {
+                // Jika marker sudah ada, pindahkan ke lokasi baru
+                marker.setLatLng(latLng);
+            }
+
+            // Isi form input dengan koordinat baru
+            const koordinat = `${latLng.lat.toFixed(6)},${latLng.lng.toFixed(6)}`;
+            document.getElementById('koordinat').value = koordinat;
+        });
+
+        // Event saat input koordinat manual diubah
+        document.getElementById('koordinat').addEventListener('input', updateMarkerFromInput);
+
+        function updateMarkerFromInput() {
+            const koordinat = document.getElementById('koordinat').value;
+            const latString = koordinat.split(',')[0];
+            const lngString = koordinat.split(',')[1];
+
+            // Jika input kosong, hapus marker
+            if (latString === '' || lngString === '') {
+                if (marker) {
+                    map.removeLayer(marker); // Hapus marker dari peta
+                    marker = null; // Set marker ke null
+                }
+                return;
+            }
+
+            const lat = parseFloat(latString);
+            const lng = parseFloat(lngString);
+
+            // Periksa apakah nilai latitude dan longitude valid
+            if (!isNaN(lat) && !isNaN(lng)) {
+                const newLatLng = L.latLng(lat, lng);
+
+                // Jika marker belum ada, buat marker baru
+                if (!marker) {
+                    marker = L.marker(newLatLng, {
+                        draggable: true // Marker bisa digeser
+                    }).addTo(map);
+
+                    // Event saat marker digeser
+                    marker.on('dragend', function (event) {
+                        const updatedLatLng = marker.getLatLng();
+                        const updatedKoordinat = `${updatedLatLng.lat.toFixed(6)},${updatedLatLng.lng.toFixed(6)}`;
+                        document.getElementById('koordinat').value = updatedKoordinat;
+                    });
+                } else {
+                    // Jika marker sudah ada, pindahkan ke koordinat baru
+                    marker.setLatLng(newLatLng);
+                }
+
+                // Geser peta ke koordinat baru
+                map.setView(newLatLng, map.getZoom());
+            }
+        }
+
+        function mapInputDelete() {
+            document.getElementById('koordinat').value = '';
+            map.removeLayer(marker); // Hapus marker dari peta
+            marker = null;
+        }
     </script>
 </x-app-layout>

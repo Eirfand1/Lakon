@@ -31,6 +31,9 @@
         </script>
         <script src="https://kit.fontawesome.com/ac8548371f.js" crossorigin="anonymous"></script>
 
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
         <!-- data tables -->
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
