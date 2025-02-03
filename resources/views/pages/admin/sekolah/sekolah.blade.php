@@ -145,7 +145,7 @@
 
                         <!-- Koordinat -->
                         <div>
-                            <label class="block text-sm font-medium dark:text-gray-300 mb-2">Koordinat(stil error bro)*</label>
+                            <label class="block text-sm font-medium dark:text-gray-300 mb-2">Koordinat</label>
                             <input type="text" id="koordinat" name="koordinat" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                         dark:bg-gray-700 dark:text-gray-200"/>
@@ -252,7 +252,7 @@
 
                         <!-- Koordinat -->
                         <div>
-                            <label class="block text-sm font-medium dark:text-gray-300 mb-2">Koordinat(stil error bro)*</label>
+                            <label class="block text-sm font-medium dark:text-gray-300 mb-2">Koordinat</label>
                             <input type="text" id="edit_koordinat" name="koordinat" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                         dark:bg-gray-700 dark:text-gray-200"/>
