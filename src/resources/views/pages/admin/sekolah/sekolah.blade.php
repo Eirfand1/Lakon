@@ -336,7 +336,7 @@
                             editMarker = L.marker(latLng, { draggable: true }).addTo(editMap);
                             editMarker.on('dragend', function (event) {
                                 const updatedLatLng = editMarker.getLatLng();
-                                const updatedKoordinat = `${updatedLatLng.lat.toFixed(11)},${updatedLatLng.lng.toFixed(11)}`;
+                                const updatedKoordinat = `${updatedLatLng.lat.toFixed(13)},${updatedLatLng.lng.toFixed(13)}`;
                                 document.getElementById('edit_koordinat').value = updatedKoordinat;
                             });
                         }
@@ -366,7 +366,7 @@
         }
 
         // Inisialisasi peta
-        const map = L.map('map').setView([-6.2088, 106.8456], 10); // Pusat peta di Jakarta (GANTI CILACAP)
+        const map = L.map('map').setView([-7.7278427548606, 109.0095072984696], 10); // alun alun cilacap
 
         // Tambahkan layer peta dari OpenStreetMap
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -388,7 +388,7 @@
                 // Event saat marker digeser
                 marker.on('dragend', function (event) {
                     const newLatLng = marker.getLatLng();
-                    const koordinat = `${newLatLng.lat.toFixed(11)},${newLatLng.lng.toFixed(11)}`;
+                    const koordinat = `${newLatLng.lat.toFixed(13)},${newLatLng.lng.toFixed(13)}`;
                     document.getElementById('koordinat').value = koordinat;
                 });
             } else {
@@ -397,7 +397,7 @@
             }
 
             // Isi form input dengan koordinat baru
-            const koordinat = `${latLng.lat.toFixed(11)},${latLng.lng.toFixed(11)}`;
+            const koordinat = `${latLng.lat.toFixed(13)},${latLng.lng.toFixed(13)}`;
             document.getElementById('koordinat').value = koordinat;
         });
 
@@ -434,7 +434,7 @@
                     // Event saat marker digeser
                     marker.on('dragend', function (event) {
                         const updatedLatLng = marker.getLatLng();
-                        const updatedKoordinat = `${updatedLatLng.lat.toFixed(11)},${updatedLatLng.lng.toFixed(11)}`;
+                        const updatedKoordinat = `${updatedLatLng.lat.toFixed(13)},${updatedLatLng.lng.toFixed(13)}`;
                         document.getElementById('koordinat').value = updatedKoordinat;
                     });
                 } else {
@@ -448,7 +448,7 @@
         }
 
         // Inisialisasi peta untuk form Edit
-        const editMap = L.map('edit_map').setView([-6.2088, 106.8456], 10); // Pusat peta di Jakarta (GANTI CILACAP)
+        const editMap = L.map('edit_map').setView([-7.7278427548606, 109.0095072984696], 10); // alun alun cilacap
 
         // Tambahkan layer peta dari OpenStreetMap
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -470,7 +470,7 @@
                 // Event saat marker digeser
                 editMarker.on('dragend', function (event) {
                     const newLatLng = editMarker.getLatLng();
-                    const koordinat = `${newLatLng.lat.toFixed(11)},${newLatLng.lng.toFixed(11)}`;
+                    const koordinat = `${newLatLng.lat.toFixed(13)},${newLatLng.lng.toFixed(13)}`;
                     document.getElementById('edit_koordinat').value = koordinat;
                 });
             } else {
@@ -479,7 +479,7 @@
             }
 
             // Isi form input dengan koordinat baru
-            const koordinat = `${latLng.lat.toFixed(11)},${latLng.lng.toFixed(11)}`;
+            const koordinat = `${latLng.lat.toFixed(13)},${latLng.lng.toFixed(13)}`;
             document.getElementById('edit_koordinat').value = koordinat;
         });
 
@@ -516,7 +516,7 @@
                     // Event saat marker digeser
                     editMarker.on('dragend', function (event) {
                         const updatedLatLng = editMarker.getLatLng();
-                        const updatedKoordinat = `${updatedLatLng.lat.toFixed(11)},${updatedLatLng.lng.toFixed(11)}`;
+                        const updatedKoordinat = `${updatedLatLng.lat.toFixed(13)},${updatedLatLng.lng.toFixed(13)}`;
                         document.getElementById('edit_koordinat').value = updatedKoordinat;
                     });
                 } else {
