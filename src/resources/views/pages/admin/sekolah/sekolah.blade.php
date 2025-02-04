@@ -308,6 +308,8 @@
             document.getElementById('deleteForm').action = `sekolah/${sekolah_id}`;
         }
 
+        const maps = {};
+
         function handleEdit(data) {
 
             console.log(data)
@@ -330,17 +332,17 @@
                     const [lat, lng] = sekolah.koordinat.split(',').map(parseFloat);
                     if (!isNaN(lat) && !isNaN(lng)) {
                         const latLng = L.latLng(lat, lng);
-                        if (editMarker) {
-                            editMarker.setLatLng(latLng);
+                        if (maps['edit_map'].marker) {
+                            maps['edit_map'].marker.setLatLng(latLng);
                         } else {
-                            editMarker = L.marker(latLng, { draggable: true }).addTo(editMap);
-                            editMarker.on('dragend', function (event) {
-                                const updatedLatLng = editMarker.getLatLng();
+                            maps['edit_map'].marker = L.marker(latLng, { draggable: true }).addTo(maps['edit_map'].map);
+                            maps['edit_map'].marker.on('dragend', function (event) {
+                                const updatedLatLng = maps['edit_map'].marker.getLatLng();
                                 const updatedKoordinat = `${updatedLatLng.lat.toFixed(13)},${updatedLatLng.lng.toFixed(13)}`;
                                 document.getElementById('edit_koordinat').value = updatedKoordinat;
                             });
                         }
-                        editMap.setView(latLng, editMap.getZoom());
+                        maps['edit_map'].map.setView(latLng, maps['edit_map'].map.getZoom());
                     }
                 }
 
@@ -365,174 +367,70 @@
             }
         }
 
-        // Inisialisasi peta
-        const map = L.map('map').setView([-7.7278427548606, 109.0095072984696], 10); // alun alun cilacap
 
-        // Tambahkan layer peta dari OpenStreetMap
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(map);
+        function inisialisasiMap(mapId, inputId) {
+            const map = L.map(mapId).setView([-7.7278427548606, 109.0095072984696], 10); //alun alun cilacap
+            maps[mapId] = { map, marker: null };
 
-        let marker = null; // Marker awalnya null (tidak ada)
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
 
-        // Event saat peta diklik
-        map.on('click', function (event) {
-            const latLng = event.latlng;
+            map.on('click', function (event) {
+                const latLng = event.latlng;
+                const marker = maps[mapId].marker;
 
-            // Jika marker belum ada, buat marker baru
-            if (!marker) {
-                marker = L.marker(latLng, {
-                    draggable: true // Marker bisa digeser
-                }).addTo(map);
-
-                // Event saat marker digeser
-                marker.on('dragend', function (event) {
-                    const newLatLng = marker.getLatLng();
-                    const koordinat = `${newLatLng.lat.toFixed(13)},${newLatLng.lng.toFixed(13)}`;
-                    document.getElementById('koordinat').value = koordinat;
-                });
-            } else {
-                // Jika marker sudah ada, pindahkan ke lokasi baru
-                marker.setLatLng(latLng);
-            }
-
-            // Isi form input dengan koordinat baru
-            const koordinat = `${latLng.lat.toFixed(13)},${latLng.lng.toFixed(13)}`;
-            document.getElementById('koordinat').value = koordinat;
-        });
-
-        // Event saat input koordinat manual diubah
-        document.getElementById('koordinat').addEventListener('input', updateMarkerFromInput);
-
-        function updateMarkerFromInput() {
-            const koordinat = document.getElementById('koordinat').value;
-            const latString = koordinat.split(',')[0];
-            const lngString = koordinat.split(',')[1];
-
-            // Jika input kosong, hapus marker
-            if (latString === '' || lngString === '') {
-                if (marker) {
-                    map.removeLayer(marker); // Hapus marker dari peta
-                    marker = null; // Set marker ke null
+                if (!marker) {
+                    maps[mapId].marker = L.marker(latLng, { draggable: true }).addTo(map);
+                    maps[mapId].marker.on('dragend', function (event) {
+                        const newLatLng = maps[mapId].marker.getLatLng();
+                        const koordinat = `${newLatLng.lat.toFixed(13)},${newLatLng.lng.toFixed(13)}`;
+                        document.getElementById(inputId).value = koordinat;
+                    });
+                } else {
+                    marker.setLatLng(latLng);
                 }
-                return;
-            }
 
-            const lat = parseFloat(latString);
-            const lng = parseFloat(lngString);
+                document.getElementById(inputId).value = `${latLng.lat.toFixed(13)},${latLng.lng.toFixed(13)}`;
+            });
 
-            // Periksa apakah nilai latitude dan longitude valid
+            document.getElementById(inputId).addEventListener('input', function() {
+                updateMarkerFromInput(map, maps[mapId].marker, inputId);
+            });
+        }
+
+        function updateMarkerFromInput(map, marker, inputId) {
+            const koordinat = document.getElementById(inputId).value;
+            const [lat, lng] = koordinat.split(',').map(parseFloat);
+
             if (!isNaN(lat) && !isNaN(lng)) {
                 const newLatLng = L.latLng(lat, lng);
 
-                // Jika marker belum ada, buat marker baru
                 if (!marker) {
-                    marker = L.marker(newLatLng, {
-                        draggable: true // Marker bisa digeser
-                    }).addTo(map);
-
-                    // Event saat marker digeser
-                    marker.on('dragend', function (event) {
-                        const updatedLatLng = marker.getLatLng();
+                    maps[mapId].marker = L.marker(newLatLng, { draggable: true }).addTo(map);
+                    maps[mapId].marker.on('dragend', function (event) {
+                        const updatedLatLng = maps[mapId].marker.getLatLng();
                         const updatedKoordinat = `${updatedLatLng.lat.toFixed(13)},${updatedLatLng.lng.toFixed(13)}`;
-                        document.getElementById('koordinat').value = updatedKoordinat;
+                        document.getElementById(inputId).value = updatedKoordinat;
                     });
                 } else {
-                    // Jika marker sudah ada, pindahkan ke koordinat baru
                     marker.setLatLng(newLatLng);
                 }
 
-                // Geser peta ke koordinat baru
                 map.setView(newLatLng, map.getZoom());
-            }
-        }
-
-        // Inisialisasi peta untuk form Edit
-        const editMap = L.map('edit_map').setView([-7.7278427548606, 109.0095072984696], 10); // alun alun cilacap
-
-        // Tambahkan layer peta dari OpenStreetMap
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        }).addTo(editMap);
-
-        let editMarker = null; // Marker awalnya null (tidak ada)
-
-        // Event saat peta diklik
-        editMap.on('click', function (event) {
-            const latLng = event.latlng;
-
-            // Jika marker belum ada, buat marker baru
-            if (!editMarker) {
-                editMarker = L.marker(latLng, {
-                    draggable: true // Marker bisa digeser
-                }).addTo(editMap);
-
-                // Event saat marker digeser
-                editMarker.on('dragend', function (event) {
-                    const newLatLng = editMarker.getLatLng();
-                    const koordinat = `${newLatLng.lat.toFixed(13)},${newLatLng.lng.toFixed(13)}`;
-                    document.getElementById('edit_koordinat').value = koordinat;
-                });
-            } else {
-                // Jika marker sudah ada, pindahkan ke lokasi baru
-                editMarker.setLatLng(latLng);
-            }
-
-            // Isi form input dengan koordinat baru
-            const koordinat = `${latLng.lat.toFixed(13)},${latLng.lng.toFixed(13)}`;
-            document.getElementById('edit_koordinat').value = koordinat;
-        });
-
-        // Event saat input koordinat manual diubah
-        document.getElementById('edit_koordinat').addEventListener('input', updateEditMarkerFromInput);
-
-        function updateEditMarkerFromInput() {
-            const koordinat = document.getElementById('edit_koordinat').value;
-            const latString = koordinat.split(',')[0];
-            const lngString = koordinat.split(',')[1];
-
-            // Jika input kosong, hapus marker
-            if (latString === '' || lngString === '') {
-                if (editMarker) {
-                    editMap.removeLayer(editMarker); // Hapus marker dari peta
-                    editMarker = null; // Set marker ke null
-                }
-                return;
-            }
-
-            const lat = parseFloat(latString);
-            const lng = parseFloat(lngString);
-
-            // Periksa apakah nilai latitude dan longitude valid
-            if (!isNaN(lat) && !isNaN(lng)) {
-                const newLatLng = L.latLng(lat, lng);
-
-                // Jika marker belum ada, buat marker baru
-                if (!editMarker) {
-                    editMarker = L.marker(newLatLng, {
-                        draggable: true // Marker bisa digeser
-                    }).addTo(editMap);
-
-                    // Event saat marker digeser
-                    editMarker.on('dragend', function (event) {
-                        const updatedLatLng = editMarker.getLatLng();
-                        const updatedKoordinat = `${updatedLatLng.lat.toFixed(13)},${updatedLatLng.lng.toFixed(13)}`;
-                        document.getElementById('edit_koordinat').value = updatedKoordinat;
-                    });
-                } else {
-                    // Jika marker sudah ada, pindahkan ke koordinat baru
-                    editMarker.setLatLng(newLatLng);
-                }
-
-                // Geser peta ke koordinat baru
-                editMap.setView(newLatLng, editMap.getZoom());
             }
         }
 
         function mapInputDelete() {
             document.getElementById('koordinat').value = '';
-            map.removeLayer(marker); // Hapus marker dari peta
-            marker = null;
+            if (maps['map'] && maps['map'].marker) {
+                maps['map'].map.removeLayer(maps['map'].marker);
+                maps['map'].marker = null;
+            }
         }
+
+        // Inisialisasi peta
+        inisialisasiMap('map', 'koordinat');
+        inisialisasiMap('edit_map', 'edit_koordinat');
     </script>
 </x-app-layout>
