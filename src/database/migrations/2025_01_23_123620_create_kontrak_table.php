@@ -13,28 +13,28 @@ return new class extends Migration {
         Schema::create('kontrak', function (Blueprint $table) {
             $table->id('kontrak_id');
             $table->string('no_kontrak');
-            $table->string('jenis_kontrak');
-            $table->decimal('nilai_kontrak');
-            $table->date('tgl_kontrak');
-            $table->date('waktu_kontrak');
+            $table->string('jenis_kontrak')->nullable();
+            $table->decimal('nilai_kontrak')->nullable();
+            $table->date('tgl_kontrak')->nullable();
+            $table->date('waktu_kontrak')->nullable();
             $table->foreignId('paket_id')
                 ->constrained('paket_pekerjaan', 'paket_id')
                 ->cascadeOnDelete();
-            $table->date('tgl_pembuatan');
+            $table->date('tgl_pembuatan')->nullable();
             $table->foreignId('satker_id')
                 ->constrained('satuan_kerja', 'satker_id')
                 ->cascadeOnDelete();
-            $table->foreignId('sub_kegiatan_id')
+            $table->foreignId('sub_kegiatan_id')->nullable()
                 ->constrained('sub_kegiatan', 'sub_kegiatan_id')
                 ->cascadeOnDelete();
             $table->foreignId('penyedia_id')
                 ->constrained('penyedia', 'penyedia_id')
                 ->cascadeOnDelete();
-            $table->string('nomor_dppl');
-            $table->date('tgl_dppl');
-            $table->string('nomor_bahpl');
-            $table->date('tgl_bahpl');
-            $table->foreignId('verifikator_id')
+            $table->string('nomor_dppl')->nullable();
+            $table->date('tgl_dppl')->nullable();
+            $table->string('nomor_bahpl')->nullable();
+            $table->date('tgl_bahpl')->nullable();
+            $table->foreignId('verifikator_id')->nullable()
                 ->constrained('verifikator', 'verifikator_id')
                 ->cascadeOnDelete();
             $table->boolean('is_verificated');
