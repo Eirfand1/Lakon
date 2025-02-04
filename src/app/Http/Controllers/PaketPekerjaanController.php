@@ -35,7 +35,7 @@ class PaketPekerjaanController extends Controller
             $validatedData = $request->validate([
                 'nama_pekerjaan' => 'required|string|max:255',
                 'waktu_paket' => 'required|date',
-                'sub_kegiatan_id' => 'required|array', 
+                'sub_kegiatan_id' => 'required|array',
                 'sub_kegiatan_id.*' => 'exists:sub_kegiatan,sub_kegiatan_id',
                 'sumber_dana' => 'required|in:APBN,APBD,Swasta',
                 'kode_paket' => 'required|numeric',
@@ -48,7 +48,7 @@ class PaketPekerjaanController extends Controller
                 'ppkom_id' => 'exists:ppkom,ppkom_id',
                 'satker_id' => 'exists:satuan_kerja,satker_id',
                 'tahun_anggaran' => 'required|numeric|min:1000|max:2999',
-                
+
             ]);
 
             $paketPekerjaan = PaketPekerjaan::create([
@@ -84,7 +84,7 @@ class PaketPekerjaanController extends Controller
 
     }
 
-    public function destroy(PaketPekerjaan $paket_pekerjaan): RedirectResponse 
+    public function destroy(PaketPekerjaan $paket_pekerjaan): RedirectResponse
     {
         try {
             $paket_pekerjaan->delete();
@@ -96,6 +96,22 @@ class PaketPekerjaanController extends Controller
             return redirect()->back()
                 ->with('error', $e->getMessage());
         }
+    }
+
+
+    public function getPaketByKode($kode)
+    {
+        $paket = PaketPekerjaan::where('kode_paket', $kode)->first();
+
+        if (!$paket) {
+            return response()->json(['error' => 'Paket tidak ditemukan'], 404);
+        }
+
+        return response()->json([
+            'nama_pekerjaan' => $paket->nama_pekerjaan,
+            'metode_pemilihan' => $paket->metode_pemilihan,
+            'jenis_pengadaan' => $paket->jenis_pengadaan
+        ]);
     }
 
 }

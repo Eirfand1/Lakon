@@ -87,6 +87,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::get('/paket-pekerjaan', [PaketPekerjaanController::class, 'index'])->name('admin.paket-pekerjaan.index');
     Route::post('/paket-pekerjaan', [PaketPekerjaanController::class, 'store'])->name('admin.paket-pekerjaan.store');
     Route::delete('/paket-pekerjaan/{paket_pekerjaan}', [PaketPekerjaanController::class, 'destroy'])->name('admin.paket-pekerjaan.destroy');
+    Route::get('/paket-pekerjaan/{kode}', [PaketPekerjaanController::class, 'getPaketByKode']);
+
 
     // Sub Kegiatan
     Route::prefix('/sub-kegiatan')->group(function () {
