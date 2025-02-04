@@ -159,25 +159,25 @@
 
                     <div class="flex w-full flex-col ">
                         <label for="waktu_paket" class="w-full sm:w-1/4">Waktu Paket*</label>
-                        <input type="date" name="waktu_paket" id="waktu_paket"
+                        <input type="date" name="waktu_paket" id=""
                             class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                     </div>
 
                     <div class="flex w-full flex-col  ">
                         <label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan*</label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-                            <select name="jenis_pengadaan" id="metode_pemilihan"
+                            <select name="jenis_pengadaan" id=""
                                 class="sm:w-1/4 w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                                 <option value="tender">Tender</option>
                                 <option value="non_tender">Non-Tender</option>
                                 <option value="e_catalog">E-Catalog</option>
                             </select>
 
-                            <select name="metode_pemilihan" id="metode_pemilihan"
+                            <select name="metode_pemilihan" id=""
                                 class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                                 <option value="" disabled selected>Pilih Jenis Pengadaan</option>
                                 <option value="Jasa Konsultasi Pengawasan">Jasa Konsultasi Pengawasan</option>
-                                <option value="Jasa Konsultasi Perencanaan">Jasa Konsultasi Pelaksanaan</option>
+                                <option value="Jasa Konsultasi Perencanaan">Jasa Konsultasi Perencanaan</option>
                                 <option value="Jasa Konstruksi">Jasa Konstruksi</option>
                                 <option value="Pengadaan Barang">Pengadaan Barang</option>
                             </select>
@@ -204,7 +204,7 @@
 
                     <div class="flex w-full flex-col pb-4 ">
                         <label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran*</label>
-                        <input type="number" name="tahun_anggaran" id="tahun_anggaran"
+                        <input type="number" name="tahun_anggaran" id=""
                             class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                     </div>
 
@@ -301,6 +301,269 @@
             </div>
         </div>
 
+        <!-- Edit Modal -->
+        <input type="checkbox" id="edit-modal" class="modal-toggle" />
+        <div id="modal_matriks" class="modal">
+            <div class="modal-box max-w-[52rem] mx-auto rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
+                <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
+                    <div class="flex items-center gap-3">
+                        <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
+                        <h3 class="font-bold text-xl dark:text-gray-200">Edit Data Paket Pekerjaan</h3>
+                    </div>
+                    <label for="edit-modal"
+                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
+                        ✕
+                    </label>
+                </div>
+
+                <form action="{{ route('admin.paket-pekerjaan.store') }}" method="POST" class="space-y-2 ">
+                    @csrf
+                    <h1 class="border-b font-bold border-gray-200 pb-2 dark:border-gray-700 ">Program kerja</h1>
+
+                    {{-- sub kegiatan --}}
+                    <div x-data="subKegiatanManager({{ json_encode($subKegiatan) }})" class="space-y-2">
+                        <label for="sub_kegiatan[]">Sub Kegiatan</label>
+                        <template x-for="(input, index) in inputs" :key="index">
+                            <div class="relative w-full">
+
+                                {{-- filed sub kegiatan --}}
+                                <div class="flex items-center gap-2">
+                                    <input type="text" x-model="input.search" name="sub_kegiatan[]" id="sub_kegiatan[]"
+                                        @input.debounce.100ms="filterOptions(index)" @focus="showDropdown(index)"
+                                        @click.away="input.showDropdown = false" placeholder="Pilih Sub Kegiatan"
+                                        class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+
+
+                                    <button type="button" @click="removeInput(index)"
+                                        class="text-white bg-error p-2 rounded-lg px-3 hover:text-red-700"
+                                        x-show="inputs.length > 1">
+                                        <i class="fa-solid fa-xmark"></i>
+
+                                    </button>
+                                </div>
+
+                                <div x-show="input.showDropdown && input.filteredOptions.length" x-transition
+                                    class="absolute z-10 w-content mt-2  bg-white dark:bg-gray-700 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                                    <template x-for="option in input.filteredOptions" :key="option . sub_kegiatan_id">
+                                        <div @click="selectOption(index, option)"
+                                            class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
+                                            x-text="option.nama_sub_kegiatan"></div>
+                                    </template>
+                                </div>
+                                {{-- field sub kegiatan end --}}
+
+                                <input type="hidden" :name="`sub_kegiatan_id[${index}]`"
+                                    x-model="input.selectedOptionId">
+
+                            </div>
+                        </template>
+
+                        <button type="button" @click="addInput" class="btn rounded text-white btn-sm btn-primary">
+                            <i class="fa-solid fa-plus"></i> Tambah Sub Kegiatan
+                        </button>
+                    </div>
+
+                    {{-- sumber dana || DONE --}}
+                    <div class="flex w-full flex-col pb-4 ">
+                        <label for="sumber_dana" class="w-full sm:w-1/4">Sumber dana*</label>
+                        <select name="sumber_dana" id="sumber_dana"
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                            <option value="APBN">APBN</option>
+                            <option value="APBD">APBD</option>
+                            <option value="Swasta">Swasta</option>
+                        </select>
+                    </div>
+
+                    {{-- paket pekerjaan || DONE --}}
+                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Paket Pekerjaan</h1>
+
+                    <div class="pt-2">
+                        <label for="paket">Paket*</label>
+                        <div class="flex gap-2 flex-wrap sm:flex-nowrap">
+                            <input type="text" name="kode_paket" id="kode_paket" placeholder="Kode Paket"
+                                class="w-1/2 sm:w-1/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                            <input type="text" name="nama_pekerjaan" id="nama_pekerjaan" placeholder="Nama Paket"
+                                class="w-full sm:w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                        </div>
+                    </div>
+
+
+                    {{-- Sekolah --}}
+                    <div x-data="sekolahManager({{ json_encode($sekolah) }})" class="flex w-full flex-col">
+
+                        <label for="nama_sekolah" class="w-full sm:w-1/4">Sekolah (Optional)</label>
+                        <div class="relative w-full">
+                            <input type="text" x-model="search" @input.debounce.100ms="filterOptions()" id="nama_sekolah"
+                                @focus="showDropdown = true" @click.away="showDropdown = false"
+                                placeholder="Pilih Sekolah"
+                                class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+
+
+                            <i class="fas fa-chevron-down text-sm absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300"></i>
+
+                            <div x-show="showDropdown && filteredOptions.length" x-transition
+                                class="absolute z-10 w-full mt-2 bg-white dark:bg-gray-700 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                                <template x-for="option in filteredOptions" :key="option.sekolah_id">
+                                    <div @click="selectOption(option)"
+                                        class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
+                                        x-text="option.nama_sekolah"></div>
+                                </template>
+                            </div>
+                            <input type="hidden" name="nama_sekolah" x-model="selectedOptionId">
+                        </div>
+                    </div>
+
+                    {{-- waktu paket || DONE --}}
+                    <div class="flex w-full flex-col ">
+                        <label for="waktu_paket" class="w-full sm:w-1/4">Waktu Paket*</label>
+                        <input type="date" name="waktu_paket" id="waktu_paket"
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                    </div>
+
+                    {{-- pengadaan ||  --}}
+                    <div class="flex w-full flex-col  ">
+                        <label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan*</label>
+                        <div class="flex gap-2 flex-wrap sm:flex-nowrap">
+                            <select name="jenis_pengadaan" id="jenis_pengadaan"
+                                class="sm:w-1/4 w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                                <option value="tender">Tender</option>
+                                <option value="non_tender">Non-Tender</option>
+                                <option value="e_catalog">E-Catalog</option>
+                            </select>
+
+                            {{-- metode pemilihan || DONE --}}
+                            <select name="metode_pemilihan" id="metode_pemilihan"
+                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                                <option value="" disabled selected>Pilih Jenis Pengadaan</option>
+                                <option value="Jasa Konsultasi Pengawasan">Jasa Konsultasi Pengawasan</option>
+                                <option value="Jasa Konsultasi Perencanaan">Jasa Konsultasi Perencanaan</option>
+                                <option value="Jasa Konstruksi">Jasa Konstruksi</option>
+                                <option value="Pengadaan Barang">Pengadaan Barang</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    {{-- nilai pagu paket --}}
+                    <div class="flex w-full flex-col ">
+                        <label for="nilai_pagu_paket" class="w-full sm:w-1/4">Nilai Pagu Paket*</label>
+                        <input type="number" name="nilai_pagu_paket" id="nilai_pagu_paket"
+                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                    </div>
+
+                    {{-- nilai pagu anggaran --}}
+                    <div class="flex w-full flex-col ">
+                        <label for="nilai_pagu_anggaran" class="w-full sm:w-1/4">Nilai Pagu Anggaran*</label>
+                        <input type="number" name="nilai_pagu_anggaran" id="nilai_pagu_anggaran"
+                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                    </div>
+
+                    {{-- nilai HPS --}}
+                    <div class="flex w-full flex-col ">
+                        <label for="nilai_hps" class="w-full sm:w-1/4">Nilai HPS*</label>
+                        <input type="number" name="nilai_hps" id="nilai_hps"
+                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                    </div>
+
+                    {{-- tahun anggaran --}}
+                    <div class="flex w-full flex-col pb-4 ">
+                        <label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran*</label>
+                        <input type="number" name="tahun_anggaran" id="tahun_anggaran"
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                    </div>
+
+                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Pejabat Pembuat Komitmen
+                    </h1>
+
+                    <div class="flex w-full flex-col pt-2 ">
+                        <label for="ppkom_id" class="w-full sm:w-1/4">Ppkom*</label>
+                        <select name="ppkom_id" id="ppkom_id"
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                            <option value="" disabled selected>Pilih Pegawai</option>
+                            @foreach($ppkom as $ppk)
+                                <option value="{{ $ppk->ppkom_id }}">{{ $ppk->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div x-data="daskumManager({{ json_encode($dasarHukum) }})" class="flex w-full flex-col pb-4">
+                        <label for="daskum_id" class="w-full sm:w-1/4">Dasar Hukum*</label>
+                        <div class="relative w-full">
+                            <input type="text" x-model="search" @input.debounce.100ms="filterOptions()"
+                                @focus="showDropdown = true" @click.away="showDropdown = false"
+                                placeholder="Pilih Dasar Hukum"
+                                class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+
+                            <i class="fas fa-chevron-down text-sm absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300"></i>
+
+                            <div x-show="showDropdown && filteredOptions.length" x-transition
+                                class="absolute z-10 w-full mt-2 bg-white dark:bg-gray-700 border border-gray-300 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                                <template x-for="option in filteredOptions" :key="option . daskum_id">
+                                    <div @click="selectOption(option)"
+                                        class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
+                                        x-text="option.dasar_hukum"></div>
+                                </template>
+                            </div>
+                            <input type="hidden" name="daskum_id" x-model="selectedOptionId">
+                        </div>
+                    </div>
+
+                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Informasi Satuan Kerja
+                    </h1>
+
+                    <input type="text" name="satker_id" id="" value="{{$satuanKerja->satker_id}}" hidden readonly>
+                    <div class="flex w-full flex-col py-2 ">
+                        <label for="nama_pimpinan" class="w-full sm:w-1/4">Nama pimpinan</label>
+                        <input type="text" name="nama_pimpinan" id="" value="{{$satuanKerja->nama_pimpinan}}"
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            readonly>
+                    </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="jabatan" class="w-full sm:w-1/4">Jabatan</label>
+                        <input type="text" name="jabatan" id="" value="{{$satuanKerja->jabatan}}"
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            readonly>
+                    </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="website" class="w-full sm:w-1/4">Website</label>
+                        <input type="text" name="website" id="" value="{{$satuanKerja->website}}"
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            readonly>
+                    </div>
+
+
+                    <div class="flex w-full flex-col ">
+                        <label for="email" class="w-full sm:w-1/4">Email</label>
+                        <input type="text" name="email" id="" value="{{$satuanKerja->email}}"
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            readonly>
+                    </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="telp" class="w-full sm:w-1/4">Telepon</label>
+                        <input type="text" name="telp" id="" value="{{$satuanKerja->telp}}"
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            readonly>
+                    </div>
+
+                    <div class="flex w-full flex-col ">
+                        <label for="klpd" class="w-full sm:w-1/4">KLPD</label>
+                        <input type="text" name="klpd" id="" value="{{$satuanKerja->klpd}}"
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            readonly>
+                    </div>
+
+
+
+                    <div class="modal-action pt-4">
+                        <button type="submit" class="btn rounded text-white btn-primary">Simpan</button>
+                        <label for="edit-modal" class="btn btn-ghost">Batal</label>
+                    </div>
+                </form>
+            </div>
+        </div>
+
 
         {{-- delete modal --}}
         <input type="checkbox" id="delete-modal" class="modal-toggle" />
@@ -325,6 +588,51 @@
     </div>
 
     <script>
+        function EditHandler(paket){
+            console.log(paket);
+
+            // input biasa
+            document.getElementById('kode_paket').value = paket.kode_paket
+            document.getElementById('nama_pekerjaan').value = paket.nama_pekerjaan
+            // document.getElementById('nama_sekolah').value = paket.nama_sekolah
+            document.getElementById('waktu_paket').value = paket.waktu_paket
+            document.getElementById('nilai_pagu_paket').value = paket.nilai_pagu_paket
+            document.getElementById('nilai_pagu_anggaran').value = paket.nilai_pagu_anggaran
+            document.getElementById('nilai_hps').value = paket.nilai_hps
+            document.getElementById('tahun_anggaran').value = paket.tahun_anggaran
+
+            // subKegiatanManager(paket.sub_kegiatan)
+
+            let i = 0
+            paket.sub_kegiatan.forEach((e) => {
+                // console.log(e)
+                // document.getElementById(`sub_kegiatan[${i}]`).value = e.nama_sub_kegiatan
+            });
+
+            // sumber dana
+            const sumberDana = document.getElementById('sumber_dana');
+                Array.from(sumberDana.options).forEach(option => {
+                    if (option.value == paket.sumber_dana) {
+                        option.setAttribute("selected", true);
+                    }
+                });
+
+            // jenis pengadaan
+            const jenis_pengadaan = document.getElementById('jenis_pengadaan');
+                Array.from(jenis_pengadaan.options).forEach(option => {
+                    if (option.value == paket.jenis_pengadaan) {
+                        option.setAttribute("selected", true)
+                    }
+                })
+
+            // metode pemilihan
+            const metode_pemilihan = document.getElementById('metode_pemilihan');
+                Array.from(metode_pemilihan.options).forEach(option => {
+                    if (option.value == paket.metode_pemilihan) {
+                        option.setAttribute("selected", true)
+                    }
+                })
+        }
 
         function setDeleteId(paket_id) {
             document.getElementById('deleteForm').action = `paket-pekerjaan/${paket_id}`;
@@ -407,7 +715,7 @@
             return {
                 options: options,
                 search: '',
-                filteredOptions: options, 
+                filteredOptions: options,
                 showDropdown: false,
                 selectedOptionId: null,
 
@@ -415,7 +723,7 @@
                 filterOptions() {
                     const searchTerm = this.search.toLowerCase();
                     this.filteredOptions = this.options.filter(option =>
-                        option.nama_sekolah.toLowerCase().includes(searchTerm) 
+                        option.nama_sekolah.toLowerCase().includes(searchTerm)
                     );
                     this.showDropdown = this.filteredOptions.length > 0;
                 },
