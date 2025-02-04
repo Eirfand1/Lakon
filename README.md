@@ -28,7 +28,7 @@ php artisan key:generate
 5. Migrasi Basis Data
 ```bash
 php artisan migrate
-php artisn db:seed
+php artisan db:seed
 ```
 ### seed awal
 - email = admin@gmail.com <br/>
