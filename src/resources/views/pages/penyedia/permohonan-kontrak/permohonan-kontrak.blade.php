@@ -8,7 +8,7 @@
                 </h2>
             </div>
 
-            <form method="POST" action="/ph/permohonan-kontrak-data-dasar" class="max-w-5xl mx-auto p-2">
+            <form method="POST" action="/penyedia/permohonan-kontrak" class="max-w-5xl mx-auto p-2">
                 <input type="hidden" name="slug" value="fbc70cbb7c0353a4fab7bade1708dd98">
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -43,10 +43,12 @@
                         <div class="space-y-1">
                             <label class="text-gray-700 dark:text-gray-300 block">Nama Perusahaan</label>
                             <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                                <input type="text" name="nama_perusahaan_lengkap" value="{{$penyedia->nama_perusahaan_lengkap}}"
+                                <input type="text" name="nama_perusahaan_lengkap"
+                                    value="{{$penyedia->nama_perusahaan_lengkap}}"
                                     class="sm:col-span-2 w-full bg-gray-100 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2"
                                     readonly>
-                                <input type="text" name="nama_perusahaan_singkat" value="{{$penyedia->nama_perusahaan_singkat}}"
+                                <input type="text" name="nama_perusahaan_singkat"
+                                    value="{{$penyedia->nama_perusahaan_singkat}}"
                                     class="w-full rounded-md bg-gray-100 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2"
                                     readonly>
                             </div>
@@ -56,13 +58,16 @@
                         <div class="space-y-1">
                             <label class="text-gray-700 dark:text-gray-300 block">Akta Notaris</label>
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-                                <input type="text" name="akta_notaris_no" value="{{$penyedia->akta_notaris_no}}" placeholder="Nomor Akta"
+                                <input type="text" name="akta_notaris_no" value="{{$penyedia->akta_notaris_no}}"
+                                    placeholder="Nomor Akta"
                                     class="w-full bg-gray-100 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2"
                                     readonly>
-                                <input type="text" name="akta_notaris_nama" value="{{$penyedia->akta_notaris_nama}}" placeholder="Nama Notaris"
+                                <input type="text" name="akta_notaris_nama" value="{{$penyedia->akta_notaris_nama}}"
+                                    placeholder="Nama Notaris"
                                     class="w-full rounded-md bg-gray-100 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2"
                                     readonly>
-                                <input type="date" name="akta_notaris_tanggal" value="{{$penyedia->akta_notaris_tanggal}}"
+                                <input type="date" name="akta_notaris_tanggal"
+                                    value="{{$penyedia->akta_notaris_tanggal}}"
                                     class="sm:col-span-2 w-full bg-gray-100 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2"
                                     readonly>
                             </div>
@@ -94,13 +99,16 @@
                         <div class="space-y-1">
                             <label class="text-gray-700 dark:text-gray-300 block">No Rekening Perusahaan</label>
                             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
-                                <input type="text" name="rekening_norek" value="{{$penyedia->rekening_norek}}" placeholder="Nomor rekening"
+                                <input type="text" name="rekening_norek" value="{{$penyedia->rekening_norek}}"
+                                    placeholder="Nomor rekening"
                                     class="sm:col-span-2 w-full bg-gray-100 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2"
                                     readonly>
-                                <input type="text" name="rekening_nama" value="{{$penyedia->rekening_nama}}" placeholder="Nama Pemilik"
+                                <input type="text" name="rekening_nama" value="{{$penyedia->rekening_nama}}"
+                                    placeholder="Nama Pemilik"
                                     class="w-full rounded-md bg-gray-100 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2"
                                     readonly>
-                                <input type="text" name="rekening_bank" value="{{$penyedia->rekening_bank}}" placeholder="Nama Bank"
+                                <input type="text" name="rekening_bank" value="{{$penyedia->rekening_bank}}"
+                                    placeholder="Nama Bank"
                                     class="w-full rounded-md bg-gray-100 border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2"
                                     readonly>
                             </div>
@@ -116,8 +124,45 @@
                     </div>
 
                     <!-- Right Column -->
-                    <div class="space-y-4">
-                        <!-- Catatan & Form -->
+                    <div class="space-y-4" x-data="{
+                        kodePaket: '',
+                        errorMessage: '',
+                        successMessage: '',
+                        isLoading: false,
+                        paketData: null,
+                        
+                        async cariPaket() {
+                            this.errorMessage = '';
+                            this.successMessage = '';
+                            this.paketData = null;
+                            
+                            if (!this.kodePaket) {
+                                this.errorMessage = 'Harap masukkan kode paket';
+                                return;
+                            }
+                            
+                            try {
+                                this.isLoading = true;
+                                const response = await fetch(`/api/paket-pekerjaan/${this.kodePaket}`);
+                                
+                                if (!response.ok) {
+                                    throw new Error('Paket tidak ditemukan');
+                                }
+                                
+                                const data = await response.json();
+                                this.paketData = data;
+                                this.successMessage = 'Paket berhasil ditemukan!';
+                                this.errorMessage = '';
+                            } catch (error) {
+                                this.errorMessage = error.message;
+                                this.successMessage = '';
+                                this.paketData = null;
+                            } finally {
+                                this.isLoading = false;
+                            }
+                        }
+                    }">
+                        <!-- Notice Box -->
                         <div class="p-4 bg-blue-50 dark:bg-gray-800 rounded-lg">
                             <p class="text-sm text-gray-700 dark:text-gray-300">
                                 <strong class="block mb-2">📌 Catatan:</strong>
@@ -139,33 +184,48 @@
                                 <label class="text-gray-700 dark:text-gray-300 block">Kode Paket <span
                                         class="text-red-500">*</span></label>
                                 <div class="flex gap-2">
-                                    <input type="text" name="kdpaket" placeholder="Kode paket LPSE"
-                                        class="flex-1 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2">
+                                    <input type="text" x-model="kodePaket" @input.debounce.500ms="cariPaket"
+                                        placeholder="Kode paket LPSE"
+                                        class="flex-1 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 p-2">
                                     <button type="button"
-                                        class="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2">
-                                        <i class="fa fa-search"></i>
+                                        class="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2"
+                                        @click="cariPaket" :disabled="isLoading">
+                                        <i class="fa fa-search" x-show="!isLoading"></i>
+                                        <i class="fa fa-spinner fa-spin" x-show="isLoading"></i>
                                     </button>
+                                </div>
+
+                                <!-- Error/Success Messages -->
+                                <div x-show="errorMessage" class="text-red-500 text-sm mt-1" x-cloak>
+                                    <i class="fa fa-exclamation-circle"></i> <span x-text="errorMessage"></span>
+                                </div>
+                                <div x-show="successMessage" class="text-green-500 text-sm mt-1" x-cloak>
+                                    <i class="fa fa-check-circle"></i> <span x-text="successMessage"></span>
                                 </div>
                             </div>
 
                             <!-- Nama Paket -->
                             <div class="space-y-1">
                                 <label class="text-gray-700 dark:text-gray-300 block">Nama Paket</label>
-                                <input type="text" name="nama_paket" readonly
-                                    class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2 bg-gray-100 dark:bg-gray-800">
+                                <input type="text" id="nama_pekerjaan" name="nama_pekerjaan"
+                                    x-bind:value="paketData?.nama_pekerjaan || ''" readonly
+                                    class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2 bg-gray-100">
                             </div>
+
                             <!-- Metode Pengadaan -->
                             <div class="space-y-1">
                                 <label class="text-gray-700 dark:text-gray-300 block">Metode Pengadaan</label>
-                                <input type="text" name="metode_pengadaan" readonly
-                                    class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2 bg-gray-100 dark:bg-gray-800">
+                                <input type="text" id="metode_pemilihan" name="metode_pemilihan"
+                                    x-bind:value="paketData?.metode_pemilihan || ''" readonly
+                                    class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2 bg-gray-100">
                             </div>
 
                             <!-- Jenis Pengadaan -->
                             <div class="space-y-1">
                                 <label class="text-gray-700 dark:text-gray-300 block">Jenis Pengadaan</label>
-                                <input type="text" name="jenis_pengadaan" readonly
-                                    class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2 bg-gray-100 dark:bg-gray-800">
+                                <input type="text" id="jenis_pengadaan" name="jenis_pengadaan"
+                                    x-bind:value="paketData?.jenis_pengadaan || ''" readonly
+                                    class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-300 p-2 bg-gray-100">
                             </div>
 
                             <!-- Submit Button -->
