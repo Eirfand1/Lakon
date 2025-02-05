@@ -316,12 +316,13 @@
                     </label>
                 </div>
 
-                <form action="{{ route('admin.paket-pekerjaan.store') }}" method="POST" class="space-y-2 ">
+                <form method="POST" class="space-y-2 " id="edit-form">
                     @csrf
+                    @method('PUT')
                     <h1 class="border-b font-bold border-gray-200 pb-2 dark:border-gray-700 ">Program kerja</h1>
 
                     {{-- sub kegiatan --}}
-                    <div x-data="subKegiatanManager({{ json_encode($subKegiatan) }})" class="space-y-2">
+                    <div x-data="subKegiatanManager({{ json_encode($subKegiatan) }})" class="space-y-2" id="sub-kegiatan-edit-manager">
                         <label for="sub_kegiatan[]">Sub Kegiatan</label>
                         <template x-for="(input, index) in inputs" :key="index">
                             <div class="relative w-full">
@@ -389,11 +390,11 @@
 
 
                     {{-- Sekolah --}}
-                    <div x-data="sekolahManager({{ json_encode($sekolah) }})" class="flex w-full flex-col">
+                    <div x-data="sekolahManager({{ json_encode($sekolah) }})" class="flex w-full flex-col" id="sekolah-edit-manager">
 
                         <label for="nama_sekolah" class="w-full sm:w-1/4">Sekolah (Optional)</label>
                         <div class="relative w-full">
-                            <input type="text" x-model="search" @input.debounce.100ms="filterOptions()" id="nama_sekolah"
+                            <input type="text" x-model="search" @input.debounce.100ms="filterOptions()" id="nama_sekolah" value="aaaaaaaaa"
                                 @focus="showDropdown = true" @click.away="showDropdown = false"
                                 placeholder="Pilih Sekolah"
                                 class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
@@ -409,18 +410,16 @@
                                         x-text="option.nama_sekolah"></div>
                                 </template>
                             </div>
-                            <input type="hidden" name="nama_sekolah" x-model="selectedOptionId">
+                            <input type="hidden" name="sekolah_id" x-model="selectedOptionId">
                         </div>
                     </div>
 
-                    {{-- waktu paket || DONE --}}
                     <div class="flex w-full flex-col ">
                         <label for="waktu_paket" class="w-full sm:w-1/4">Waktu Paket*</label>
                         <input type="date" name="waktu_paket" id="waktu_paket"
                             class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                     </div>
 
-                    {{-- pengadaan ||  --}}
                     <div class="flex w-full flex-col  ">
                         <label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan*</label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
@@ -431,7 +430,6 @@
                                 <option value="e_catalog">E-Catalog</option>
                             </select>
 
-                            {{-- metode pemilihan || DONE --}}
                             <select name="metode_pemilihan" id="metode_pemilihan"
                                 class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                                 <option value="" disabled selected>Pilih Jenis Pengadaan</option>
@@ -443,28 +441,24 @@
                         </div>
                     </div>
 
-                    {{-- nilai pagu paket --}}
                     <div class="flex w-full flex-col ">
                         <label for="nilai_pagu_paket" class="w-full sm:w-1/4">Nilai Pagu Paket*</label>
                         <input type="number" name="nilai_pagu_paket" id="nilai_pagu_paket"
                             class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                     </div>
 
-                    {{-- nilai pagu anggaran --}}
                     <div class="flex w-full flex-col ">
                         <label for="nilai_pagu_anggaran" class="w-full sm:w-1/4">Nilai Pagu Anggaran*</label>
                         <input type="number" name="nilai_pagu_anggaran" id="nilai_pagu_anggaran"
                             class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
                     </div>
 
-                    {{-- nilai HPS --}}
                     <div class="flex w-full flex-col ">
                         <label for="nilai_hps" class="w-full sm:w-1/4">Nilai HPS*</label>
                         <input type="number" name="nilai_hps" id="nilai_hps"
                             class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                     </div>
 
-                    {{-- tahun anggaran --}}
                     <div class="flex w-full flex-col pb-4 ">
                         <label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran*</label>
                         <input type="number" name="tahun_anggaran" id="tahun_anggaran"
@@ -485,7 +479,7 @@
                         </select>
                     </div>
 
-                    <div x-data="daskumManager({{ json_encode($dasarHukum) }})" class="flex w-full flex-col pb-4">
+                    <div x-data="daskumManager({{ json_encode($dasarHukum) }})" class="flex w-full flex-col pb-4" id="daskum-edit-manager">
                         <label for="daskum_id" class="w-full sm:w-1/4">Dasar Hukum*</label>
                         <div class="relative w-full">
                             <input type="text" x-model="search" @input.debounce.100ms="filterOptions()"
@@ -588,27 +582,49 @@
     </div>
 
     <script>
-        function EditHandler(paket){
-            console.log(paket);
 
-            // input biasa
+        function EditHandler(paket){
+            const form = document.getElementById('edit-form');
+            form.action = `/admin/paket-pekerjaan/${paket.paket_id}`
+
+            // document.getElementById('edit-modal').action = `/admin/paket-pekerjaan/${paket.paket_id}`
+            console.log('Form action:', document.getElementById('edit-form').action);
+            console.log('Paket ID:', paket.paket_id);
+
+            // INPUT BIASA
             document.getElementById('kode_paket').value = paket.kode_paket
             document.getElementById('nama_pekerjaan').value = paket.nama_pekerjaan
-            // document.getElementById('nama_sekolah').value = paket.nama_sekolah
             document.getElementById('waktu_paket').value = paket.waktu_paket
             document.getElementById('nilai_pagu_paket').value = paket.nilai_pagu_paket
             document.getElementById('nilai_pagu_anggaran').value = paket.nilai_pagu_anggaran
             document.getElementById('nilai_hps').value = paket.nilai_hps
             document.getElementById('tahun_anggaran').value = paket.tahun_anggaran
 
-            // subKegiatanManager(paket.sub_kegiatan)
+            // INPUT YANG ADA ALPINE
+            // sekolah
+            const sekolahEditManagerInstance = Alpine.$data(document.getElementById('sekolah-edit-manager'));
+            sekolahEditManagerInstance.search = paket['sekolah.nama_sekolah'];
+            sekolahEditManagerInstance.selectedOptionId = paket['sekolah.sekolah_id'];
 
-            let i = 0
-            paket.sub_kegiatan.forEach((e) => {
-                // console.log(e)
-                // document.getElementById(`sub_kegiatan[${i}]`).value = e.nama_sub_kegiatan
-            });
+            // dasar hukum
+            const daskumEditManagerInstance = Alpine.$data(document.getElementById('daskum-edit-manager'));
+            daskumEditManagerInstance.search = paket['dasarHukum.dasar_hukum'];
+            daskumEditManagerInstance.selectedOptionId = paket['dasarHukum.dasar_hukum_id'];
 
+            // subKegiatan
+            const subKegiatanEditManagerInstance = Alpine.$data(document.getElementById('sub-kegiatan-edit-manager'));
+            const jumlahInput = paket.sub_kegiatan.length;
+            subKegiatanEditManagerInstance.inputs = [];
+            for (let i = 0; i < jumlahInput; i++) {
+                subKegiatanEditManagerInstance.addInput();
+                subKegiatanEditManagerInstance.inputs[i].search = paket.sub_kegiatan[i].nama_sub_kegiatan;
+                subKegiatanEditManagerInstance.inputs[i].selectedOptionId = paket.sub_kegiatan[i].sub_kegiatan_id;
+            }
+            if (jumlahInput == 0) {
+                subKegiatanEditManagerInstance.addInput();
+            }
+
+            // INPUT TIPE SELECT
             // sumber dana
             const sumberDana = document.getElementById('sumber_dana');
                 Array.from(sumberDana.options).forEach(option => {
