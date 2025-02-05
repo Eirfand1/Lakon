@@ -153,7 +153,7 @@
                                         x-text="option.nama_sekolah"></div>
                                 </template>
                             </div>
-                            <input type="hidden" name="nama_sekolah" x-model="selectedOptionId">
+                            <input type="hidden" name="sekolah_id" x-model="selectedOptionId">
                         </div>
                     </div>
 
@@ -730,7 +730,7 @@
 
                 selectOption(option) {
                     this.search = option.nama_sekolah;
-                    this.selectedOptionId = option.nama_sekolah;
+                    this.selectedOptionId = option.sekolah_id;
                     this.showDropdown = false;
                 }
             }

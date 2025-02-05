@@ -1,15 +1,17 @@
 <?php
 namespace App\Livewire;
 
-use App\Models\SubKegiatan;
 use DB;
-use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Column;
-use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
+use App\Models\Sekolah;
+use App\Models\SubKegiatan;
 use App\Models\PaketPekerjaan;
+use Rappasoft\LaravelLivewireTables\Views\Column;
+use Rappasoft\LaravelLivewireTables\DataTableComponent;
+use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\NumberFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
-use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
+use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
+
 class PaketPekerjaanTable extends DataTableComponent
 {
     protected $model = PaketPekerjaan::class;
@@ -33,6 +35,7 @@ class PaketPekerjaanTable extends DataTableComponent
                 'dasarHukum',
                 'ppkom',
                 'subKegiatan',
+                'sekolah'
             ])->orderBy('paket_pekerjaan.updated_at', 'desc');
         // \DB::enableQueryLog();
         // $result = $query->get();
@@ -48,6 +51,10 @@ class PaketPekerjaanTable extends DataTableComponent
         return [
             IncrementColumn::make('#'),
             Column::make('Nama Paket Pekerjaan', 'nama_pekerjaan')
+                ->format(function ($value, $row) {
+                    $data = Sekolah::with('nama_sekolah')->find($value);
+                    return $value . $data;
+                })
                 ->sortable()
                 ->searchable(),
 
@@ -66,7 +73,7 @@ class PaketPekerjaanTable extends DataTableComponent
             Column::make('Satuan Kerja', 'satuanKerja.nama_pimpinan')
                 ->sortable()
                 ->searchable(),
-        
+
 
             Column::make('Sub Kegiatan', 'paket_id')
                 ->format(function ($value, $row) {
