@@ -5,6 +5,7 @@ namespace Database\Factories;
 use App\Models\DasarHukum;
 use App\Models\Ppkom;
 use App\Models\SatuanKerja;
+use App\Models\Sekolah;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -32,7 +33,8 @@ class PaketPekerjaanFactory extends Factory
             'nilai_hps' => $this->faker->randomFloat(2, 90000, 950000),
             'ppkom_id' => Ppkom::factory(),
             'daskum_id' => DasarHukum::factory(),
-            'kode_paket' => $this->faker->numberBetween(1000,5000)
+            'kode_paket' => $this->faker->numberBetween(1000,5000),
+            'sekolah_id' => Sekolah::factory()
         ];
     }
 }
