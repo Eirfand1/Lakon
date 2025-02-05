@@ -48,11 +48,11 @@ class PaketPekerjaanController extends Controller
                 'ppkom_id' => 'exists:ppkom,ppkom_id',
                 'satker_id' => 'exists:satuan_kerja,satker_id',
                 'tahun_anggaran' => 'required|numeric|min:1000|max:2999',
-
+                'sekolah_id' => 'nullable|numeric'
             ]);
 
             $paketPekerjaan = PaketPekerjaan::create([
-                'nama_pekerjaan' => $validatedData['nama_pekerjaan'] . " " . ($request->nama_sekolah ?? ''),
+                'nama_pekerjaan' => $validatedData['nama_pekerjaan'],
                 'waktu_paket' => $validatedData['waktu_paket'],
                 'sumber_dana' => $validatedData['sumber_dana'],
                 'tahun_anggaran' => $validatedData['tahun_anggaran'],
@@ -65,6 +65,7 @@ class PaketPekerjaanController extends Controller
                 'ppkom_id' => $validatedData['ppkom_id'],
                 'daskum_id' => $validatedData['daskum_id'],
                 'kode_paket' => $validatedData['kode_paket'],
+                'sekolah_id' => $validatedData['sekolah_id']
             ]);
 
 
