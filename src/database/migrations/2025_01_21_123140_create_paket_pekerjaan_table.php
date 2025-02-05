@@ -33,9 +33,13 @@ return new class extends Migration {
                 ->on('dasar_hukum')
                 ->onDelete('cascade');
             $table->integer('kode_paket');
+            $table->foreignId('sekolah_id')
+                ->references('sekolah_id')
+                ->on('sekolah')
+                ->onDelete('cascade')
+                ->nullable();
             $table->timestamps();
         });
-
     }
 
     /**
