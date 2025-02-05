@@ -11,6 +11,7 @@ use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\NumberFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
+use Termwind\Components\Dd;
 
 class PaketPekerjaanTable extends DataTableComponent
 {
@@ -50,13 +51,22 @@ class PaketPekerjaanTable extends DataTableComponent
     {
         return [
             IncrementColumn::make('#'),
+
+            //  TO-DO : buat isi kolom = paket pekerjaan + nama sekolah
             Column::make('Nama Paket Pekerjaan', 'nama_pekerjaan')
-                ->format(function ($value, $row) {
-                    $data = Sekolah::with('nama_sekolah')->find($value);
-                    return $value . $data;
-                })
-                ->sortable()
-                ->searchable(),
+            ->format(function ($value, $row) {
+                // $data = PaketPekerjaan::with('sekolah_id')->find($row['sekolah.sekolah_id']);
+                // dd($data);
+                return $value . /* $data */ '';
+            })
+            ->sortable()
+            ->searchable(),
+
+            Column::make('Sekolah', 'sekolah.nama_sekolah')
+                ->hideIf(true),
+
+            Column::make('Sekolah', 'sekolah.sekolah_id')
+                ->hideIf(true),
 
             Column::make('Kode Paket', 'kode_paket')
                 ->sortable()
@@ -108,6 +118,9 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
 
+            Column::make('Daskum Id', 'dasarHukum.daskum_id')
+                ->hideIf(true),
+
             Column::make('Nilai Pagu Paket')
                 ->searchable()
                 ->sortable()
@@ -123,7 +136,7 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->searchable()
                 ->format(fn($value, $row) => 'Rp ' . number_format($row->nilai_hps, 2)),
             Column::make("Aksi", "paket_id")
-                ->format(fn($value, $row) => view('pages.admin.paket-pekerjaan.actions', ['p' => $row])),
+                ->format(fn($value, $row) => view('pages.admin.paket-pekerjaan.actions', ['paket' => $row])),
         ];
     }
 
