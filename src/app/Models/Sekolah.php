@@ -11,4 +11,14 @@ class Sekolah extends Model
     protected $primaryKey = 'sekolah_id';
     protected $guarded = ['sekolah_id'];
     use HasFactory;
+
+    public function paketPekerjaan()
+    {
+        return $this->belongsToMany(
+            PaketPekerjaan::class,
+            'sekolah',
+            'sekolah_id',
+            'sekolah_id',
+        );
+    }
 }
