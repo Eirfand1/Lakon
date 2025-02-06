@@ -171,6 +171,7 @@ class PaketPekerjaanController extends Controller
         }
 
         return response()->json([
+            'paket_id' => $paket->paket_id,
             'nama_pekerjaan' => $paket->nama_pekerjaan,
             'metode_pemilihan' => $paket->metode_pemilihan,
             'jenis_pengadaan' => $paket->jenis_pengadaan

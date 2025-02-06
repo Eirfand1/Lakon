@@ -47,6 +47,10 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        $tahun = now()->year;
+        $penyediaId = auth()->user()->penyedia->penyedia_id;
+        $nomorKontrak = "KONTRAK/{$penyediaId}/P4/{$tahun}";
+
         Schema::dropIfExists('kontrak');
     }
 };
