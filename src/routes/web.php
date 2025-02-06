@@ -33,6 +33,7 @@ Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(functio
     Route::get('/riwayat-kontrak', [PenyediaController::class, 'kontrakSaya'])->name('penyedia.riwayat');
     Route::get('/dashboard', [PenyediaController::class, 'dashboard'])->name('penyedia.dashboard');
     Route::get('/permohonan-kontrak', [PenyediaController::class, 'permohonanKontrakIndex'])->name('penyedia.permohonan-kontrak.index');
+    Route::post('/permohonan-kontrak', [KontrakController::class, 'store'])->name('penyedia.permohonan-kontrak.store');
 
     Route::middleware('cekStatusPenyedia:konsultan')->group(function () {
         Route::get('/matrik', [PenyediaController::class, 'konsultanMatrikIndex'])->name('penyedia.konsultan.matrik.index');
@@ -86,9 +87,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     // Paket Pekerjaan (Matriks)
     Route::get('/paket-pekerjaan', [PaketPekerjaanController::class, 'index'])->name('admin.paket-pekerjaan.index');
     Route::post('/paket-pekerjaan', [PaketPekerjaanController::class, 'store'])->name('admin.paket-pekerjaan.store');
-    Route::put('/paket-pekerjaan/{paket_pekerjaan}', [PaketPekerjaanController::class, 'update'])->name('admin.paket-pekerjaan.update');
     Route::delete('/paket-pekerjaan/{paket_pekerjaan}', [PaketPekerjaanController::class, 'destroy'])->name('admin.paket-pekerjaan.destroy');
-    Route::get('/paket-pekerjaan/{kode}', [PaketPekerjaanController::class, 'getPaketByKode']);
 
 
     // Sub Kegiatan

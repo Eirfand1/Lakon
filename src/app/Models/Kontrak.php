@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Kontrak extends Model
 {
     protected $table = 'kontrak'; 
+    protected $guarded = ['kontrak_id'];
     use HasFactory;
 
     public function satuanKerja()
