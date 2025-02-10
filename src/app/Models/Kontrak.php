@@ -9,6 +9,7 @@ class Kontrak extends Model
 {
     protected $table = 'kontrak'; 
     protected $guarded = ['kontrak_id'];
+    protected $primaryKey = 'kontrak_id';
     use HasFactory;
 
     public function satuanKerja()
@@ -36,5 +37,9 @@ class Kontrak extends Model
         $kontrak = Kontrak::where('verifikator_id', $verifikator)->get();
 
         return view('pages.verifikator.riwayat.riwayat', compact('kontrak'));
+    }
+
+    public function paketPekerjaan(){
+        return $this->belongsTo(PaketPekerjaan::class,'paket_id');
     }
 }

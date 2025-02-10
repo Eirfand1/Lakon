@@ -20,13 +20,15 @@ class KontrakController extends Controller
         return Excel::download(new KontrakExport, 'kontrak.xlsx');
     }
 
+
     public function store(Request $request)
     {
         try {
             $tahun = now()->year;
             $penyediaId = auth()->user()->penyedia->penyedia_id;
             $nomorKontrak = "KONTRAK/{$penyediaId}/P4/{$tahun}";
-            Kontrak::create([
+
+            $kontrak = Kontrak::create([
                 'no_kontrak' => $nomorKontrak,
                 'paket_id' => $request->paket_id,
                 'penyedia_id' => $penyediaId,
@@ -35,9 +37,14 @@ class KontrakController extends Controller
                 'is_verificated' => false
             ]);
 
-            return redirect()->back()->with('success', 'Ini sukses untuk percobaan');
-        }catch (\Exception $e){
+            return redirect()->route('penyedia.permohonan-kontrak.edit', ['kontrak' => $kontrak->id])->with('success', 'Kontrak berhasil dibuat');
+        } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
+    }
+
+    public function edit(Kontrak $kontrak)
+    {
+        return view('pages.penyedia.permohonan-kontrak.edit-kontrak', compact('kontrak'));
     }
 }
