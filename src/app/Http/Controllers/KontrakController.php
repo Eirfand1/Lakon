@@ -47,4 +47,27 @@ class KontrakController extends Controller
     {
         return view('pages.penyedia.permohonan-kontrak.edit-kontrak', compact('kontrak'));
     }
+
+    public function update(Request $request, Kontrak $kontrak)
+    {
+        try {
+            if ($kontrak->penyedia_id !== auth()->user()->penyedia->penyedia_id) {
+                abort(403, 'Unauthorized action.');
+            }
+
+            $validatedData = $request->validate([
+                'tgl_pembuatan' => now()->toDateString(),
+            ]);
+
+            $kontrak->update($validatedData);
+
+            return redirect()->route('penyedia.dashboard', ['kontrak' => $kontrak->id])
+                ->with('success', 'Permohonan Kontrak berhasil');
+
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Gagal melakukan Permohonan kontrak: ' . $e->getMessage());
+        }
+    }
 }
