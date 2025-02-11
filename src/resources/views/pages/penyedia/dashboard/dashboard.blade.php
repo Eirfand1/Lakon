@@ -4,7 +4,7 @@
         <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
             <!-- Company Info Card -->
             <div class="md:col-span-5">
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg overflow-hidden">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
                     <div class="p-6">
                         <div class="text-center mb-6">
                             <img src="/path-to-your-logo.png" alt="Company Logo" class="w-1/2 mx-auto">
@@ -50,7 +50,7 @@
 
             <!-- Service Application Section -->
             <div class="md:col-span-7">
-                <div class="bg-blue-400 text-gray-50 dark:bg-blue-900 p-6 rounded-2xl shadow-lg">
+                <div class="bg-blue-400 text-gray-50 dark:bg-blue-900 p-6 rounded-xl shadow-lg">
                     <h2 class="text-lg mb-4 dark:text-gray-200">
                         Pengajuan Layanan Kontrak menggunakan LAKON PDK. Segera ajukan permohonan Kontrak dengan
                         mempersiapkan data - data terkait Kontrak Anda.
@@ -64,14 +64,14 @@
                     </a>
                 </div>
 
-                <div class="mt-6 bg-green-500 text-gray-50 dark:bg-green-800 p-6 rounded-2xl shadow-lg text-center">
+                <div class="mt-6 bg-green-500 text-gray-50 dark:bg-green-800 p-6 rounded-xl shadow-lg text-center">
                     <h1 class="text-2xl font-bold">Halo Lakon</h1>
                 </div>
             </div>
 
             <!-- Contract Applications Table -->
             <div class="md:col-span-12">
-                <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg">
+                <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg">
                     <div class="">
                         <h2 class="p-4 font-bold flex items-center dark:text-gray-200">
                             <i class="fa fa-calendar-o mr-2"></i>
