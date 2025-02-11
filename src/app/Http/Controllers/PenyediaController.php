@@ -222,22 +222,7 @@ class PenyediaController extends Controller
         return view('pages.penyedia.konsultan.matrik.matrik');
     }
 
-    public function permohonanKontrakStore(Request $request)
-    {
-        $tahun = now()->year;
-        $penyediaId = auth()->user()->penyedia->penyedia_id;
-        $nomorKontrak = "KONTRAK/{$penyediaId}/P4/{$tahun}";
-        Kontrak::create([
-            'no_kontrak' => $nomorKontrak,
-            'paket_id' => $request->paket_id,
-            'penyedia_id' => $penyediaId,
-            'satker_id' => 1,
-            'tgl_pembuatan' => now()->toDateString(),
-            'is_verificated' => false
-        ]);
-
-        return redirect()->back()->with('success','Ini sukses untuk percobaan');
-    }
+    
 
 
 

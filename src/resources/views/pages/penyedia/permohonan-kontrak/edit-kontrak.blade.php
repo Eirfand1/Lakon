@@ -4,11 +4,12 @@
             DETAIL PERMOHONAN
         </p>
 
-        <form action="{{ route('penyedia.permohonan-kontrak.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('penyedia.permohonan-kontrak.update', $kontrak->kontrak_id) }}" enctype="multipart/form-data">
+            @method('PUT')
             @csrf
-            <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
             <input type="hidden" name="penyedia_id" value="{{ $kontrak->penyedia->penyedia_id }}">
             <input type="hidden" name="paket_id" value="{{ $kontrak->paketPekerjaan->paket_id }}">
+            <input type="hidden" name="tgl_pembuatan" value="{{ $kontrak->tgl_pembuatan }}">
 
             <!-- Section Direktur -->
             <div class="mb-8">
