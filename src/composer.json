@@ -16,6 +16,7 @@
         "maatwebsite/excel": "^3.1",
         "mallardduck/blade-lucide-icons": "^1.23",
         "nesbot/carbon": "2.67",
+        "predis/predis": "^2.3",
         "rappasoft/laravel-livewire-tables": "^3.6"
     },
     "require-dev": {
