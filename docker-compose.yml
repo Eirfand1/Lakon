@@ -3,23 +3,24 @@ version: '3'
 networks:
   laravel:
 
+
 services:
   app:
     build:
       context: ./dockerfiles
-      dockerfile: php.dockerfile  # Ganti dengan Dockerfile yang sudah diperbaiki
+      dockerfile: nginx.dockerfile
       args:
         - UID=${UID:-1000}
         - GID=${GID:-1000}
     ports:
       - "80:80"
-      - "443:443"
     volumes:
-      - ./src:/var/www/html:delegated
-      - ./Caddyfile:/etc/caddy/Caddyfile:ro  # Mount Caddyfile
+      - ./src:/var/www/html:cached
     depends_on:
-      - mysql
+      - php
       - redis
+      - mysql
+      - mailhog
     networks:
       - laravel
 
@@ -36,6 +37,20 @@ services:
       MYSQL_ROOT_PASSWORD: lakon
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
+    networks:
+      - laravel
+
+  php:
+    build:
+      context: ./dockerfiles
+      dockerfile: php.dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    ports:
+      - "9000:9000"
+    volumes:
+      - ./src:/var/www/html:cached
     networks:
       - laravel
 
