@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp:php8.3
+FROM php:8.3-rc-fpm-alpine
 
 ARG UID
 ARG GID
@@ -17,16 +17,17 @@ RUN delgroup dialout
 RUN addgroup -g ${GID} --system laravel
 RUN adduser -G laravel --system -D -s /bin/sh -u ${UID} laravel
 
-# Install ekstensi PHP yang diperlukan
-RUN install-php-extensions pdo pdo_mysql redis
+RUN sed -i "s/user = www-data/user = laravel/g" /usr/local/etc/php-fpm.d/www.conf
+RUN sed -i "s/group = www-data/group = laravel/g" /usr/local/etc/php-fpm.d/www.conf
+RUN echo "php_admin_flag[log_errors] = on" >> /usr/local/etc/php-fpm.d/www.conf
 
-# Set permissions (sesuaikan dengan kebutuhan)
-RUN chown -R laravel:laravel /var/www/html
+RUN docker-php-ext-install pdo pdo_mysql
 
-# Copy Caddyfile (pastikan file ini ada di host)
-COPY ./Caddyfile /etc/caddy/Caddyfile
-
+RUN mkdir -p /usr/src/php/ext/redis \
+    && curl -L https://github.com/phpredis/phpredis/archive/refs/tags/6.1.0.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 \
+    && echo 'redis' >> /usr/src/php-available-exts \
+    && docker-php-ext-install redis
+    
 USER laravel
 
-# Command untuk menjalankan FrankenPHP
-CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]
+CMD ["php-fpm", "-y", "/usr/local/etc/php-fpm.conf", "-R"]
