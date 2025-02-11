@@ -12,20 +12,20 @@
 
             <!-- Section Direktur -->
             <div class="mb-8">
-                <div class="flex items-center mb-4 space-x-2 text-blue-600 dark:text-blue-400">
+                <div class="flex items-center mb-4 space-x-2 text-gray-600 dark:text-gray-300">
                     <i class="fas fa-user fa-lg"></i>
-                    <h3 class="text-xl font-bold">DIREKTUR</h3>
+                    <h3 class=" font-bold">DIREKTUR</h3>
                 </div>
 
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                        <label class="block text-sm font-semibold text-blue-800 dark:text-blue-300">Nama
+                        <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nama
                             Direktur</label>
                         <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->nama_pemilik }}</p>
                     </div>
 
                     <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                        <label class="block text-sm font-semibold text-blue-800 dark:text-blue-300">Alamat
+                        <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Alamat
                             Direktur</label>
                         <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->alamat_pemilik }}</p>
                     </div>
@@ -34,29 +34,59 @@
 
             <!-- Section Perusahaan -->
             <div class="mb-8">
-                <div class="flex items-center mb-4 space-x-2 text-blue-600 dark:text-blue-400">
+                <div class="flex items-center mb-4 space-x-2 text-gray-600 dark:text-gray-300">
                     <i class="fas fa-building fa-lg"></i>
-                    <h3 class="text-xl font-bold">PERUSAHAAN</h3>
+                    <h3 class="font-bold">PERUSAHAAN</h3>
                 </div>
 
                 <div class="grid grid-cols-1 gap-4">
                     <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                        <label class="block text-sm font-semibold text-blue-800 dark:text-blue-300">Nama
+                        <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nama
                             Perusahaan</label>
                         <p class="mt-1 text-gray-700 dark:text-gray-200">
-                            {{ $kontrak->penyedia->nama_perusahaan_lengkap }}</p>
+                            {{ $kontrak->penyedia->nama_perusahaan_lengkap }}
+                        </p>
                     </div>
 
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                            <label class="block text-sm font-semibold text-blue-800 dark:text-blue-300">Nomor
+                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor
                                 Telp</label>
                             <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->kontak_hp }}</p>
                         </div>
 
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                            <label class="block text-sm font-semibold text-blue-800 dark:text-blue-300">Email</label>
+                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Email</label>
                             <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->kontak_email }}</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor
+                                Akta Notaris</label>
+                            <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->akta_notaris_no }}
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nama Akta
+                                Notaris</label>
+                            <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->akta_notaris_nama }}
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Bank</label>
+                            <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->rekening_bank }}</p>
+                        </div>
+
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Rekening</label>
+                            <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->rekening_norek }}
+                                atas nama <strong>{{ $kontrak->penyedia->rekening_nama }}</strong></p>
                         </div>
                     </div>
                 </div>
@@ -64,22 +94,47 @@
 
             <!-- Section Paket Pekerjaan -->
             <div class="mb-8">
-                <div class="flex items-center mb-4 space-x-2 text-blue-600 dark:text-blue-400">
+                <div class="flex items-center mb-4 space-x-2 text-gray-600 dark:text-gray-300">
                     <i class="fas fa-cogs fa-lg"></i>
-                    <h3 class="text-xl font-bold">PAKET PEKERJAAN</h3>
+                    <h3 class="font-bold">PAKET PEKERJAAN</h3>
                 </div>
 
-                <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                        <label class="block text-sm font-semibold text-blue-800 dark:text-blue-300">Kode Paket</label>
-                        <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                            {{ $kontrak->paketPekerjaan->kode_paket }}</p>
+                <div class="grid grid-cols-1 gap-4">
+
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Kode
+                                Paket</label>
+                            <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
+                                {{ $kontrak->paketPekerjaan->kode_paket }}
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nama
+                                Paket</label>
+                            <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
+                                {{ $kontrak->paketPekerjaan->nama_pekerjaan }}
+                            </p>
+                        </div>
                     </div>
 
-                    <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                        <label class="block text-sm font-semibold text-blue-800 dark:text-blue-300">Nama Paket</label>
-                        <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                            {{ $kontrak->paketPekerjaan->nama_pekerjaan }}</p>
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Jenis
+                                Pengadaan</label>
+                            <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
+                                {{ $kontrak->paketPekerjaan->jenis_pengadaan }}
+                            </p>
+                        </div>
+
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Metode
+                                Pemilihan</label>
+                            <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
+                                {{ $kontrak->paketPekerjaan->metode_pemilihan }}
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
