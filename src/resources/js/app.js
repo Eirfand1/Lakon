@@ -74,3 +74,7 @@ document.addEventListener('livewire:navigated', () => {
     applyDarkMode();
     initializeFlatpickr();
 });
+
+document.addEventListener('livewire:update', () => {
+    window.Alpine && window.Alpine.initTree(document.body);
+});
