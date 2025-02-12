@@ -609,7 +609,7 @@
             // dasar hukum
             const daskumEditManagerInstance = Alpine.$data(document.getElementById('daskum-edit-manager'));
             daskumEditManagerInstance.search = paket['dasarHukum.dasar_hukum'];
-            daskumEditManagerInstance.selectedOptionId = paket['dasarHukum.dasar_hukum_id'];
+            daskumEditManagerInstance.selectedOptionId = paket['dasarHukum.daskum_id'];
 
             // subKegiatan
             const subKegiatanEditManagerInstance = Alpine.$data(document.getElementById('sub-kegiatan-edit-manager'));
