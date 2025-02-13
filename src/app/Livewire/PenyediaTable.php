@@ -15,6 +15,8 @@ class PenyediaTable extends DataTableComponent
 {
     protected $model = Penyedia::class;
 
+    protected $lazy = true;
+
     public function configure(): void
     {
         $this->setPrimaryKey('penyedia_id')

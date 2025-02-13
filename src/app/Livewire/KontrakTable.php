@@ -13,6 +13,8 @@ class KontrakTable extends DataTableComponent
 {
     protected $model = Kontrak::class;
 
+    protected $lazy = true;
+
     public function configure(): void
     {
         $this->setPrimaryKey('kontrak_id')

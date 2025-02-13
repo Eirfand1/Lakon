@@ -22,10 +22,10 @@ class PaketPekerjaanController extends Controller
             "title" => "paket-pekerjaan",
             "paket" => $pakets,
             "sekolah" => Sekolah::select('nama_sekolah', 'sekolah_id')->get(),
-            "dasarHukum" => DasarHukum::all(),
-            "subKegiatan" => SubKegiatan::all(),
+            "dasarHukum" => DasarHukum::select('dasar_hukum','daskum_id')->get(),
+            "subKegiatan" => SubKegiatan::select('nama_sub_kegiatan', 'sub_kegiatan_id')->get(),
             "satuanKerja" => SatuanKerja::findOrFail(1),
-            "ppkom" => Ppkom::all(),
+            "ppkom" => Ppkom::select('nama', 'ppkom_id')->get(),
         ]);
     }
 

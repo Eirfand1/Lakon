@@ -13,6 +13,8 @@ class PpkomTable extends DataTableComponent
 {
     protected $model = Ppkom::class;
 
+    protected $lazy = true;
+
     public function configure(): void
     {
         $this->setPrimaryKey('ppkom_id')
