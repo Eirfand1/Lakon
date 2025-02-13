@@ -13,6 +13,8 @@ class SekolahTable extends DataTableComponent
 {
     protected $model = Sekolah::class;
 
+    protected $lazy = true;
+
     public function configure(): void
     {
         $this->setPrimaryKey('sekolah_id')

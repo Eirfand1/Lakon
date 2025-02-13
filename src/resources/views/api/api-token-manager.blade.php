@@ -25,7 +25,6 @@
                     <div class="mt-2 grid grid-cols-1 md:grid-cols-2 gap-4">
                         @foreach (Laravel\Jetstream\Jetstream::$permissions as $permission)
                             <label class="flex items-center">
-                                <x-checkbox wire:model.live="createApiTokenForm.permissions" :value="$permission"/>
                                 <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ $permission }}</span>
                             </label>
                         @endforeach
@@ -128,7 +127,6 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                 @foreach (Laravel\Jetstream\Jetstream::$permissions as $permission)
                     <label class="flex items-center">
-                        <x-checkbox wire:model.live="updateApiTokenForm.permissions" :value="$permission"/>
                         <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ $permission }}</span>
                     </label>
                 @endforeach

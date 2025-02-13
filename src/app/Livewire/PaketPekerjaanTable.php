@@ -16,6 +16,7 @@ use Termwind\Components\Dd;
 class PaketPekerjaanTable extends DataTableComponent
 {
     protected $model = PaketPekerjaan::class;
+    protected $lazy = true;
 
     public function configure(): void
     {
@@ -26,9 +27,6 @@ class PaketPekerjaanTable extends DataTableComponent
     }
     public function builder(): \Illuminate\Database\Eloquent\Builder
     {
-        // return PaketPekerjaan::query()
-        //     ->with(['subKegiatan', 'satuanKerja', 'dasarHukum', 'ppkom'])
-        //     ->orderByDesc('paket_id');
 
         $query = PaketPekerjaan::query()
             ->with([
@@ -38,10 +36,6 @@ class PaketPekerjaanTable extends DataTableComponent
                 'subKegiatan',
                 'sekolah'
             ])->orderBy('paket_pekerjaan.updated_at', 'desc');
-        // \DB::enableQueryLog();
-        // $result = $query->get();
-
-        // dd($query->toSql(), $query->get());
 
         return $query;
     }

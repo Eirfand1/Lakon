@@ -123,26 +123,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     });
 
 
-
-
-    Route::get('/settings/account', function () {
-        return view('pages/settings/account');
-    })->name('account');
-    Route::get('/settings/notifications', function () {
-        return view('pages/settings/notifications');
-    })->name('notifications');
-    Route::get('/settings/apps', function () {
-        return view('pages/settings/apps');
-    })->name('apps');
-    Route::get('/settings/plans', function () {
-        return view('pages/settings/plans');
-    })->name('plans');
-    Route::get('/settings/billing', function () {
-        return view('pages/settings/billing');
-    })->name('billing');
-    Route::get('/settings/feedback', function () {
-        return view('pages/settings/feedback');
-    })->name('feedback');
     Route::get('/utility/404', function () {
         return view('pages/utility/404');
     })->name('404');

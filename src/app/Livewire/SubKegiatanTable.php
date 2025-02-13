@@ -10,6 +10,8 @@ use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
 class SubKegiatanTable extends DataTableComponent
 {
     protected $model = SubKegiatan::class;
+    
+    protected $lazy = true;
 
     public function configure(): void
     {

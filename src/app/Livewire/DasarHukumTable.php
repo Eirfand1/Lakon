@@ -11,6 +11,8 @@ class DasarHukumTable extends DataTableComponent
 {
     protected $model = DasarHukum::class;
 
+    protected $lazy = true;
+
     public function configure(): void
     {
         $this->setPrimaryKey('daskum_id');

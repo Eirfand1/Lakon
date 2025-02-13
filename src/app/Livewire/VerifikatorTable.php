@@ -11,6 +11,8 @@ class VerifikatorTable extends DataTableComponent
 {
     protected $model = Verifikator::class;
 
+    protected $lazy = true;
+
     public function configure(): void
     {
         $this->setPrimaryKey('verifikator_id')
