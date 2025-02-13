@@ -1,0 +1,5 @@
+tefa-2.abm.my.id {
+    route {
+        header Cache-Control "public, max-age=600"
+    }
+}
