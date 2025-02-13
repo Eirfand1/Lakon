@@ -1,17 +1,12 @@
 <?php
 namespace App\Livewire;
 
-use DB;
-use App\Models\Sekolah;
-use App\Models\SubKegiatan;
 use App\Models\PaketPekerjaan;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
-use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\NumberFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
-use Termwind\Components\Dd;
 
 class PaketPekerjaanTable extends DataTableComponent
 {
@@ -24,6 +19,7 @@ class PaketPekerjaanTable extends DataTableComponent
             ->setDefaultSort('created_at', 'desc')
             ->setColumnSelectStatus(true)
             ->setFilterLayout('slide-down');
+
     }
     public function builder(): \Illuminate\Database\Eloquent\Builder
     {
@@ -48,13 +44,13 @@ class PaketPekerjaanTable extends DataTableComponent
 
             //  TO-DO : buat isi kolom = paket pekerjaan + nama sekolah
             Column::make('Nama Paket Pekerjaan', 'nama_pekerjaan')
-            ->format(function ($value, $row) {
-                // $data = PaketPekerjaan::with('sekolah_id')->find($row['sekolah.sekolah_id']);
-                // dd($data);
-                return $value . /* $data */ '';
-            })
-            ->sortable()
-            ->searchable(),
+                ->format(function ($value, $row) {
+                    // $data = PaketPekerjaan::with('sekolah_id')->find($row['sekolah.sekolah_id']);
+                    // dd($data);
+                    return $value . /* $data */ '';
+                })
+                ->sortable()
+                ->searchable(),
 
             Column::make('Sekolah', 'sekolah.nama_sekolah')
                 ->hideIf(true),
@@ -83,7 +79,6 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->format(function ($value, $row) {
                     $data = PaketPekerjaan::with('subKegiatan')->find($value);
                     $subKegiatanList = $data->subKegiatan->pluck('nama_sub_kegiatan');
-
 
                     return '<ol class="list-[lower-alpha] pl-5 space-y-1">' .
                         $subKegiatanList->map(fn($item) => "<li>{$item}</li>")->implode('') .
