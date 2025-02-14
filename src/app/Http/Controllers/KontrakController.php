@@ -34,7 +34,6 @@ class KontrakController extends Controller
                 'paket_id' => $request->paket_id,
                 'penyedia_id' => $penyediaId,
                 'satker_id' => 1,
-                'tgl_pembuatan' => now()->toDateString(),
                 'is_verificated' => false
             ]);
 
@@ -56,15 +55,16 @@ class KontrakController extends Controller
                 abort(403, 'Unauthorized action.');
             }
 
+            $request['tgl_pembuatan'] = now()->toDateString();
+
             $validatedData = $request->validate([
-                'tgl_pembuatan' => now()->toDateString(),
+                'paket_id' => 'required',
+                'tgl_pembuatan' => 'required|date',
             ]);
 
             $kontrak->update($validatedData);
 
-            return redirect()->route('penyedia.dashboard', ['kontrak' => $kontrak->id])
-                ->with('success', 'Permohonan Kontrak berhasil');
-
+            return redirect()->route('penyedia.dashboard')->with('success', 'Permohonan Kontrak berhasil');
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
