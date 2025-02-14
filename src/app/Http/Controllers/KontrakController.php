@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\KontrakExport;
 use App\Models\Kontrak;
+use App\Models\PaketPekerjaan;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -37,7 +38,7 @@ class KontrakController extends Controller
                 'is_verificated' => false
             ]);
 
-            return redirect()->route('penyedia.permohonan-kontrak.edit', ['kontrak' => $kontrak->id])->with('success', 'Kontrak berhasil dibuat');
+            return redirect()->route('penyedia.permohonan-kontrak.edit', ['kontrak' => $kontrak->kontrak_id])->with('success', 'Kontrak berhasil dibuat');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
