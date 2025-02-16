@@ -24,11 +24,12 @@ use App\Http\Controllers\DashboardController;
 */
 
 
-
+// all roles
 Route::view('/', 'pages.landing-page');
 Route::get('/registrasi', [PenyediaController::class, 'create'])->name('registrasi');
 Route::post('/registrasi', [PenyediaController::class, 'store'])->name('registrasi.store');
 
+// penyedia
 Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(function () {
     Route::get('/riwayat-kontrak', [PenyediaController::class, 'kontrakSaya'])->name('penyedia.riwayat');
     Route::get('/dashboard', [PenyediaController::class, 'dashboard'])->name('penyedia.dashboard');
@@ -42,9 +43,11 @@ Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(functio
     });
 });
 
+// verifikator
 Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(function () {
     Route::get('/riwayat-kontrak', [VerifikatorController::class, 'kontrakSaya'])->name('verifikator.riwayat');
     Route::get('/dashboard', [VerifikatorController::class, 'dashboard'])->name('verifikator.dashboard');
+    Route::get('/detail-permohonan/{kontrak}', [VerifikatorController::class, 'detailPermohonan'])->name('verifikator.detail-permohonan');
 });
 
 // TODO make all route to /admin or /penyedia or /verifikator

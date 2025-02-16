@@ -142,4 +142,9 @@ class VerifikatorController extends Controller
     {
         return view('pages.verifikator.dashboard.dashboard');
     }
+
+    public function detailPermohonan()
+    {
+        return view('pages.verifikator.permohonan.detail-permohonan');
+    }
 }
