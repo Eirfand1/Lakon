@@ -29,7 +29,7 @@ return new class extends Migration
             $table->boolean('bulan_10')->default(false);
             $table->boolean('bulan_11')->default(false);
             $table->boolean('bulan_12')->default(false);
-            $table->string('keterangan')->nullable();
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }
