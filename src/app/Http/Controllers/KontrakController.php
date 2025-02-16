@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Exports\KontrakExport;
 use App\Models\Kontrak;
-use App\Models\PaketPekerjaan;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -34,10 +33,11 @@ class KontrakController extends Controller
                 'paket_id' => $request->paket_id,
                 'penyedia_id' => $penyediaId,
                 'satker_id' => 1,
+                'tgl_pembuatan' => now()->toDateString(),
                 'is_verificated' => false
             ]);
 
-            return redirect()->route('penyedia.permohonan-kontrak.edit', ['kontrak' => $kontrak->kontrak_id])->with('success', 'Kontrak berhasil dibuat');
+            return redirect()->route('penyedia.permohonan-kontrak.edit', ['kontrak' => $kontrak->id])->with('success', 'Kontrak berhasil dibuat');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -48,6 +48,10 @@ class KontrakController extends Controller
         return view('pages.penyedia.permohonan-kontrak.edit-kontrak', compact('kontrak'));
     }
 
+    public function nonTenderKonsultasiPerencanaanEdit(Kontrak $kontrak){
+        return view('pages.penyedia.permohonan-kontrak.non-tender_konsultasi-perencanaan', compact('kontrak'));
+    }
+
     public function update(Request $request, Kontrak $kontrak)
     {
         try {
@@ -55,16 +59,15 @@ class KontrakController extends Controller
                 abort(403, 'Unauthorized action.');
             }
 
-            $request['tgl_pembuatan'] = now()->toDateString();
-
             $validatedData = $request->validate([
-                'paket_id' => 'required',
-                'tgl_pembuatan' => 'required|date',
+                'tgl_pembuatan' => now()->toDateString(),
             ]);
 
             $kontrak->update($validatedData);
 
-            return redirect()->route('penyedia.dashboard')->with('success', 'Permohonan Kontrak berhasil');
+            return redirect()->route('penyedia.dashboard', ['kontrak' => $kontrak->id])
+                ->with('success', 'Permohonan Kontrak berhasil');
+
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
