@@ -42,4 +42,29 @@ class Kontrak extends Model
     public function paketPekerjaan(){
         return $this->belongsTo(PaketPekerjaan::class,'paket_id');
     }
+
+    public function tim()
+    {
+        return $this->hasMany(Tim::class, 'kontrak_id', 'kontrak_id');
+    }
+
+    public function jadwalKegiatan()
+    {
+        return $this->hasMany(JadwalKegiatan::class, 'kontrak_id', 'kontrak_id');
+    }
+
+    public function rincianBelanja()
+    {
+        return $this->hasMany(RincianBelanja::class, 'kontrak_id', 'kontrak_id');
+    }
+
+    public function peralatan()
+    {
+        return $this->hasMany(Peralatan::class, 'kontrak_id', 'kontrak_id');
+    }
+
+    public function ruangLingkup()
+    {
+        return $this->hasMany(RuangLingkup::class, 'kontrak_id', 'kontrak_id');
+    }
 }
