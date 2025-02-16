@@ -23,7 +23,7 @@ return new class extends Migration
             $table->integer('jumlah');
             $table->enum('kondisi', ['Baik', 'Sedang', 'Rusak']);
             $table->string('status_kepemilikan');
-            $table->string('keterangan')->nullable();
+            $table->text('keterangan')->nullable();
             $table->timestamps();
         });
     }

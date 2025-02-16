@@ -50,7 +50,7 @@
         <livewire:paket-pekerjaan-table />
 
         <!-- Add Modal -->
-        <input type="checkbox" id="add-modal" class="modal-toggle" />
+        <input type="checkbox" id="add-modal" class="modal-toggle"/>
         <div id="modal_matriks" class="modal">
             <div class="modal-box max-w-[52rem] mx-auto rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
