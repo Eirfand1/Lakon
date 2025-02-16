@@ -31,8 +31,11 @@ php artisan migrate
 php artisan db:seed
 ```
 ### seed awal
-- email = admin@gmail.com <br/>
-- password = JunAedi99Gacor<br/>
+| Role | Email       | Password |
+|-----|------------|------|
+| Admin | admin@gmail.com | JunAedi99Gacor   |
+| Penyedia | penyedia@gmail.com | 123456789 |
+| Verifikator | verifikator@gmail.com | 123456789 |
 - *gunakan ini untuk login pada tombol masuk pojok kanan atas*
 
 6. Instal Dependensi NPM
