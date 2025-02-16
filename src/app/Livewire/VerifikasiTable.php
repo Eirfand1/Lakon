@@ -26,7 +26,8 @@ class VerifikasiTable extends DataTableComponent
     {
         return Kontrak::query()
             ->with(['satuanKerja', 'penyedia', 'verifikator', 'paketPekerjaan'])
-            ->orderByDesc('kontrak.updated_at');
+            ->orderByDesc('kontrak.updated_at')
+            ->where('is_verificated', 0);
     }
     
     public function columns(): array
@@ -40,13 +41,8 @@ class VerifikasiTable extends DataTableComponent
 
             Column::make("Tiket", "kontrak_id")
                 ->format( function($value, $row) {
-                    if($row->is_verificated) {
-                        $class = " bg-green-500 hover:bg-green-600 focus:ring-green-500";
-                    }else {
-                        $class = " bg-red-500 hover:bg-red-600 focus:ring-red-500";
-                    }
-                    return '<a  href="/detail-permohonan/'.$value.'"
-                            class="inline-block px-4 py-2 text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-opacity-50 '. $class .'">
+                    return '<a  href="detail-permohonan/'.$value.'"
+                            class="inline-block px-4 py-2 text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-opacity-50 bg-red-500 hover:bg-red-600 focus:ring-red-500">
                             gak tau apa
                             </a>';
                 })->html(),
