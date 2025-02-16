@@ -19,5 +19,21 @@ class UsersTableSeeder extends Seeder
         'role' => 'admin',
         'password'=> bcrypt('JunAedi99Gacor'),
        ]);
+
+       // Data user penyedia
+       DB::table('users')->insert([
+        'name' => 'penyedia',
+        'email' => 'penyedia@gmail.com',
+        'role' => 'penyedia',
+        'password' => bcrypt('123456789'),
+        ]);
+
+        // Data user verifikator
+        DB::table('users')->insert([
+            'name' => 'verifikator',
+            'email' => 'verifikator@gmail.com',
+            'role' => 'verifikator',
+            'password' => bcrypt('123456789'),
+        ]);
     }
 }
