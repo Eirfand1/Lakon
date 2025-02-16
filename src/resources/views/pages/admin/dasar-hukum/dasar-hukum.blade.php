@@ -67,9 +67,8 @@
                 <form action="{{ route('admin.dasar-hukum.store') }}" method="POST" class="space-y-2 ">
                     @csrf
                     <div class="flex w-full flex-col ">
-                        <label for="dasar_hukum" class="w-full sm:w-1/4">Dasar Hukum*</label>
-                        <input type="text" name="dasar_hukum" id="dasar_hukum"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                        <label for="dasar_hukum" class="w-full sm:w-1/4 font-bold">Dasar Hukum</label>
+                        <textarea name="dasar_hukum" id="dasar_hukum" cols="10" rows="5" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200" required></textarea>
                     </div>
 
                     <div class="modal-action pt-4">
@@ -95,16 +94,12 @@
                     </label>
                 </div>
 
-                <form id="editForm" method="POST" class="space-y-4 pt-4">
+                <form id="editForm" method="POST" class="">
                     @csrf
                     @method('PUT')
-                    <div class="grid md:grid-cols-2 gap-4">
-                        <div class="form-control">
+                    <div class="flex w-full flex-col">
                             <label class="label font-semibold dark:text-gray-300">Dasar Hukum</label>
-                            <input type="text" id="dasarHukum" name="dasar_hukum"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"
-                                required />
-                        </div>
+                            <textarea name="dasar_hukum" id="dasarHukum" cols="10" rows="5" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200" required></textarea>
                     </div>
 
                     <div class="modal-action">

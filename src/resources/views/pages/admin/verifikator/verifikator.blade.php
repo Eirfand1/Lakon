@@ -57,7 +57,7 @@
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
         <div id="modal_verifikator" class="modal modal-top">
-            <div class="modal-box w-10/12 mx-auto mt-4 max-w-2xl rounded  dark:bg-gray-800 bg-gray-100">
+            <div class="modal-box w-10/12 mx-auto mt-4 max-w-3xl rounded  dark:bg-gray-800 bg-gray-100">
                 <div>
                     <label for="add-modal" class="btn btn-sm btn-circle mt-2 btn-ghost absolute right-2 top-2">X</label>
                 </div>
@@ -69,23 +69,23 @@
                     @csrf
                     <div class="form-control">
                         <label class="label">NIP</label>
-                        <input type="number" name="nip" class="input bg-white shadow dark:bg-gray-700" required
+                        <input type="number" name="nip" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" required
                             placeholder="nip" />
                     </div>
                     <div class="form-control">
                         <label class="label">Nama</label>
-                        <input type="text" name="nama_verifikator" class="input bg-white shadow dark:bg-gray-700"
+                        <input type="text" name="nama_verifikator" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
                             required placeholder="nama verifikator" />
                     </div>
 
                     <div class="form-control">
                         <label class="label">Username</label>
-                        <input type="text" name="name" class="input bg-white shadow dark:bg-gray-700 " required
+                        <input type="text" name="name" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200 " required
                             placeholder="username" />
                     </div>
                     <div class="form-control">
                         <label class="label">Email</label>
-                        <input type="text" name="email" class="input bg-white shadow dark:bg-gray-700" required
+                        <input type="text" name="email" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" required
                             placeholder="email" />
                     </div>
 
@@ -93,7 +93,7 @@
                         <label class="label">Password</label>
                         <div class="relative">
                             <input type="password" name="password" id="password"
-                                class="input bg-white shadow dark:bg-gray-700 w-full" required placeholder="password" />
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" required placeholder="password" />
                             <button type="button" class="absolute right-4 top-1/2 transform -translate-y-1/2"
                                 onclick="togglePassword('password')">
                                 <i class="fa-solid fa-eye" id="password-icon"></i>
@@ -112,7 +112,7 @@
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
         <div class="modal modal-top">
-            <div class="modal-box mx-auto mt-4 w-10/12 max-w-2xl rounded  dark:bg-gray-800 bg-gray-100">
+            <div class="modal-box mx-auto mt-4 w-10/12 max-w-3xl rounded  dark:bg-gray-800 bg-gray-100">
                 <h3 class="font-bold text-lg">EDIT DATA VERIVIKATOR</h3>
                 <div>
                     <label for="edit-modal"
@@ -124,23 +124,23 @@
                     <input type="hidden" id="edit_user_id" name="user_id">
                     <div class="form-control">
                         <label class="label">NIP</label>
-                        <input type="number" id="edit_nip" name="nip" class="bg-white shadow dark:bg-gray-700 input"
+                        <input type="number" id="edit_nip" name="nip" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
                             required placeholder="nip" />
                     </div>
                     <div class="form-control">
                         <label class="label">Nama</label>
                         <input type="text" id="edit_nama" name="nama_verifikator"
-                            class="bg-white shadow dark:bg-gray-700 input" required placeholder="nama verifikator" />
+                            class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" required placeholder="nama verifikator" />
                     </div>
 
                     <div class="form-control">
                         <label class="label">Username</label>
-                        <input type="text" id="edit_name" name="edit_name" class="input  bg-white shadow dark:bg-gray-700 " required
+                        <input type="text" id="edit_name" name="edit_name" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" required
                             placeholder="username" />
                     </div>
                     <div class="form-control">
                         <label class="label">Email</label>
-                        <input type="text" id="edit_email" name="edit_email" class="input bg-white shadow dark:bg-gray-700" required
+                        <input type="text" id="edit_email" name="edit_email" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" required
                             placeholder="email" />
                     </div>
 
@@ -149,7 +149,7 @@
                         <label class="label">Password</label>
                         <div class="relative">
                             <input type="password" id="edit_password" name="edit_password" id="edit_password"
-                                class="input bg-white shadow dark:bg-gray-700 w-full" placeholder="password" />
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" placeholder="password" />
                             <button type="button" class="absolute right-4 top-1/2 transform -translate-y-1/2"
                                 onclick="togglePassword('edit_password')">
                                 <i class="fa-solid fa-eye" id="edit_password-icon"></i>

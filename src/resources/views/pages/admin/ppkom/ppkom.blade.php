@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="p-5">
+    <div class="p-5" wire:navigate>
         <div class="sm:flex sm:justify-between sm:items-center p-2 pb-5">
             <div class="">
                 <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">PPKOM</h1>
@@ -77,13 +77,13 @@
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">NIP</label>
                             <input type="number" name="nip" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
                                 required />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Nama</label>
                             <input type="text" name="nama"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
                                 required />
                         </div>
                     </div>
@@ -92,31 +92,31 @@
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Pangkat</label>
                             <input type="text" name="pangkat"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Jabatan</label>
                             <input type="text" name="jabatan"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
                         </div>
                     </div>
 
                     <div class="form-control">
                         <label class="label font-semibold dark:text-gray-300">Alamat</label>
                         <textarea name="alamat"
-                            class="textarea textarea-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"></textarea>
+                            class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"></textarea>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">No. Telp</label>
                             <input type="number" name="no_telp"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Email</label>
                             <input type="email" name="email"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
                         </div>
                     </div>
 
