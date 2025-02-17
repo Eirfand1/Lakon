@@ -56,6 +56,10 @@ class KontrakController extends Controller
         return view('pages.penyedia.permohonan-kontrak.tender_jasa-konstruksi', compact('kontrak'));
     }
 
+    public function nonTenderJasaKonstruksiEdit(Kontrak $kontrak){
+        return view('pages.penyedia.permohonan-kontrak.non-tender_jasa-konstruksi', compact('kontrak'));
+    }
+
     public function tenderJasaKonsultasiEdit(Kontrak $kontrak){
         return view('pages.penyedia.permohonan-kontrak.tender_jasa-konsultasi', compact('kontrak'));
     }
