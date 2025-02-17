@@ -55,17 +55,16 @@ class SubKegiatanTable extends DataTableComponent
                         return "
                             <tr class='hover:bg-gray-50 dark:hover:bg-gray-700'>
                                 <td class='p-2 border-b dark:border-gray-700 text-center'>" . ($index + 1) . "</td>
-                                <td class='p-2 border-b dark:border-gray-700'>{$paket->paket_id}</td>
+                                <td class='p-2 border-b dark:border-gray-700'>{$paket->nama_pekerjaan}</td>
+                                <td class='p-2 border-b dark:border-gray-700'>{$paket->kode_paket}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$paket->sumber_dana}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$paket->tahun_anggaran}</td>
-                                <td class='p-2 border-b dark:border-gray-700'>{$paket->nama_pekerjaan}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$paket->waktu_paket}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$paket->metode_pemilihan}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$paket->jenis_pengadaan}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>Rp " . number_format($paket->nilai_pagu_anggaran, 2) . "</td>
                                 <td class='p-2 border-b dark:border-gray-700'>Rp " . number_format($paket->nilai_pagu_paket, 2) . "</td>
                                 <td class='p-2 border-b dark:border-gray-700'>Rp " . number_format($paket->nilai_hps, 2) . "</td>
-                                <td class='p-2 border-b dark:border-gray-700'>{$paket->kode_paket}</td>
                             </tr>
                         ";
                     })->join('');
@@ -76,17 +75,16 @@ class SubKegiatanTable extends DataTableComponent
                                 <thead class='bg-gray-50 dark:bg-gray-800'>
                                     <tr>
                                         <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>No</th>
-                                        <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Paket ID</th>
+                                        <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Nama Pekerjaan</th>
+                                        <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Kode Paket</th>
                                         <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Sumber Dana</th>
                                         <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Tahun Anggaran</th>
-                                        <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Nama Pekerjaan</th>
                                         <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Waktu Paket</th>
                                         <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Metode Pemilihan</th>
                                         <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Jenis Pengadaan</th>
                                         <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Nilai Pagu Anggaran</th>
                                         <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Nilai Pagu Paket</th>
                                         <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Nilai HPS</th>
-                                        <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Kode Paket</th>
                                     </tr>
                                 </thead>
                                 <tbody class='bg-white divide-y divide-gray-200 dark:bg-gray-600 dark:divide-gray-700'>
