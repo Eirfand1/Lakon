@@ -56,7 +56,7 @@
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
-                        <h3 class="font-bold text-xl dark:text-gray-200">Tambah Dasar Hukum</h3>
+                        <h3 class="font-bold text-xl dark:text-gray-200">Tambah Paket Kegiatan</h3>
                     </div>
                     <label for="add-sub-kegiatan"
                         class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
@@ -102,7 +102,7 @@
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-pen-to-square text-2xl text-primary"></i>
-                        <h3 class="font-bold text-xl dark:text-gray-200">Edit Dasar Hukum</h3>
+                        <h3 class="font-bold text-xl dark:text-gray-200">Edit Sub Kegiatan</h3>
                     </div>
                     <label for="edit-sub-kegiatan"
                         class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
