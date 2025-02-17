@@ -78,11 +78,43 @@ class PaketPekerjaanTable extends DataTableComponent
             Column::make('Sub Kegiatan', 'paket_id')
                 ->format(function ($value, $row) {
                     $data = PaketPekerjaan::with('subKegiatan')->find($value);
-                    $subKegiatanList = $data->subKegiatan->pluck('nama_sub_kegiatan');
+                    $subKegiatanList = $data->subKegiatan;
 
-                    return '<ol class="list-[lower-alpha] pl-5 space-y-1">' .
-                        $subKegiatanList->map(fn($item) => "<li>{$item}</li>")->implode('') .
-                        '</ol>';
+                    if ($subKegiatanList->isEmpty()) {
+                        return '<span class="text-gray-400">Tidak ada sub kegiatan</span>';
+                    }
+
+                    $tableRows = $subKegiatanList->map(function ($subKegiatan, $index) {
+                        return "
+                            <tr class='hover:bg-gray-50 dark:hover:bg-gray-700'>
+                                <td class='p-2 border-b dark:border-gray-700 text-center'>" . ($index + 1) . "</td>
+                                <td class='p-2 border-b dark:border-gray-700'>{$subKegiatan->nama_sub_kegiatan}</td>
+                                <td class='p-2 border-b dark:border-gray-700'>{$subKegiatan->no_rekening}</td>
+                                <td class='p-2 border-b dark:border-gray-700'>{$subKegiatan->gabungan}</td>
+                                <td class='p-2 dark:border-gray-700'>{$subKegiatan->pendidikan}</td>
+                            </tr>
+
+                        ";
+                    })->join('');
+
+                    return "
+                        <div class='overflow-x-auto border rounded-lg w-max border-gray-700/20'>
+                                <table class='divide-y divide-gray-200 dark:divide-gray-700'>
+                                    <thead class='bg-gray-50 dark:bg-gray-800'>
+                                        <tr>
+                                            <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>No</th>
+                                            <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Nama Sub Kegiatan</th>
+                                            <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>No Rekening</th>
+                                            <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Gabungan</th>
+                                            <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Pendidikan</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class='bg-white divide-y divide-gray-200 dark:bg-gray-600 dark:divide-gray-700'>
+                                        {$tableRows}
+                                    </tbody>
+                                </table>
+                        </div>
+                    ";
                 })->html()->collapseAlways(),
 
 
