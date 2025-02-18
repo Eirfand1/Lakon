@@ -11,6 +11,11 @@ use App\Http\Controllers\VerifikatorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\TimController;
+use App\Http\Controllers\JadwalKegiatanController;
+use App\Http\Controllers\RincianBelanjaController;
+use App\Http\Controllers\RuangLingkupController;
+use App\Http\Controllers\PeralatanController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,6 +41,13 @@ Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(functio
     Route::post('/permohonan-kontrak', [KontrakController::class, 'store'])->name('penyedia.permohonan-kontrak.store');
     Route::get('/permohonan-kontrak/{kontrak}', [KontrakController::class, 'edit'])->name('penyedia.permohonan-kontrak.edit');
     Route::put('/permohonan-kontrak/{kontrak}', [KontrakController::class, 'update'])->name('penyedia.permohonan-kontrak.update');
+
+    // lampiran kontrak
+    Route::post('/tim', [TimController::class, 'store'])->name('penyedia.tim.store');
+    Route::post('jadwal-kegiatan', [JadwalKegiatanController::class, 'store'])->name('penyedia.jadwal-kegiatan.store');
+    Route::post('rincian-belanja', [RincianBelanjaController::class, 'store'])->name('penyedia.rincian-belanja.store');
+    Route::post('peralatan', [PeralatanController::class, 'store'])->name('penyedia.peralatan.store');
+    Route::post('ruang-lingkup', [RuangLingkupController::class, 'store'])->name('penyedia.ruang-lingkup.store');
 
     Route::middleware('cekStatusPenyedia:konsultan')->group(function () {
         Route::get('/matrik', [PenyediaController::class, 'konsultanMatrikIndex'])->name('penyedia.konsultan.matrik.index');
