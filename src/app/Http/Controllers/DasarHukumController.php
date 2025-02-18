@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DasarHukum;
 use Illuminate\Database\QueryException;
+use App\Http\Requests\DasarHukumRequest;
 
 class DasarHukumController extends Controller
 {
@@ -15,19 +16,9 @@ class DasarHukumController extends Controller
     }
 
     public function store(Request $request){
-        try{
-            $validateData = $request->validate([
-                'dasar_hukum' => 'required|string|max:255',
-            ]);
-
-            $dasarHukum = DasarHukum::create([
-                'dasar_hukum' => $validateData['dasar_hukum'],
-            ]);
-            return redirect()->back()->with('success', 'Dasar Hukum berhasil disimpan.');
-
-        }catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        $dasarHukum = DasarHukum::create([
+            'dasar_hukum' => $request->dasar_hukum
+        ]);
     }
 
     public function update(Request $request, DasarHukum $dasarHukum){
