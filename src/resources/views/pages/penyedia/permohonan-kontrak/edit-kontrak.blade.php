@@ -165,4 +165,56 @@
             </div>
         </form>
     </div>
+    <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
+        <p class="mb-4 text-sm text-gray-600 dark:text-gray-300">
+            Lampiran
+        </p>
+
+        @php
+            $view = "pages.penyedia.permohonan-kontrak.";
+            $jenis = $kontrak->paketPekerjaan->jenis_pengadaan;
+            $metode = $kontrak->paketPekerjaan->metode_pemilihan;
+        @endphp
+
+        @if ($jenis === 'tender')
+            @php
+                $view =  $view . "tender."
+            @endphp
+            @if ($metode === 'Jasa Konsultasi Pengawasan')
+                @include($view . "konsultasi-pengawasan")
+            @elseif ($metode === 'Jasa Konsultasi Perencanaan')
+                @include($view . "konsultasi-perencanaan")
+            @elseif ($metode === 'Jasa Konstruksi')
+                @include($view . "konstruksi")
+            @elseif ($metode === 'Pengadaan Barang')
+                @include($view . "pengadaan barang")
+            @endif
+        @elseif ($jenis === 'non_tender')
+            @php
+                $view =  $view . "non-tender."
+            @endphp
+            @if ($metode === 'Jasa Konsultasi Pengawasan')
+                @include($view . "konsultasi-pengawasan")
+            @elseif ($metode === 'Jasa Konsultasi Perencanaan')
+                @include($view . "konsultasi-perencanaan")
+            @elseif ($metode === 'Jasa Konstruksi')
+                @include($view . "konstruksi")
+            @elseif ($metode === 'Pengadaan Barang')
+                @include($view . "pengadaan barang")
+            @endif
+        @elseif ($jenis === 'e_catalog')
+            @php
+                $view =  $view . "e-catalog."
+            @endphp
+            @if ($metode === 'Jasa Konsultasi Pengawasan')
+                @include($view . "konsultasi-pengawasan")
+            @elseif ($metode === 'Jasa Konsultasi Perencanaan')
+                @include($view . "konsultasi-perencanaan")
+            @elseif ($metode === 'Jasa Konstruksi')
+                @include($view . "konstruksi")
+            @elseif ($metode === 'Pengadaan Barang')
+                @include($view . "pengadaan barang")
+            @endif
+        @endif
+    </div>
 </x-app-layout>

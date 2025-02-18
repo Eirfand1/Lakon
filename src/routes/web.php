@@ -36,10 +36,6 @@ Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(functio
     Route::post('/permohonan-kontrak', [KontrakController::class, 'store'])->name('penyedia.permohonan-kontrak.store');
     Route::get('/permohonan-kontrak/{kontrak}', [KontrakController::class, 'edit'])->name('penyedia.permohonan-kontrak.edit');
     Route::put('/permohonan-kontrak/{kontrak}', [KontrakController::class, 'update'])->name('penyedia.permohonan-kontrak.update');
-    Route::get('/permohonan-kontrak/non-tender/konsultasi-perencanaan/{kontrak}', [KontrakController::class, 'nonTenderKonsultasiPerencanaanEdit'])->name('penyedia.permohonan-kontrak.non-tender.konsultasi-perencanaan');
-    Route::get('/permohonan-kontrak/non-tender/konstruksi/{kontrak}', [KontrakController::class, 'nonTenderJasaKonstruksiEdit'])->name('penyedia.permohonan-kontrak.non-tender.konstruksi');
-    Route::get('/permohonan-kontrak/tender/konsultasi/{kontrak}', [KontrakController::class, 'tenderJasaKonsultasiEdit'])->name('penyedia.permohonan-kontrak.tender.konsultasi');
-    Route::get('/permohonan-kontrak/tender/konstruksi/{kontrak}', [KontrakController::class, 'tenderJasaKonstruksiEdit'])->name('penyedia.permohonan-kontrak.tender.konstruksi');
 
     Route::middleware('cekStatusPenyedia:konsultan')->group(function () {
         Route::get('/matrik', [PenyediaController::class, 'konsultanMatrikIndex'])->name('penyedia.konsultan.matrik.index');
