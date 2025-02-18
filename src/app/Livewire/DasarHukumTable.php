@@ -6,6 +6,7 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\DasarHukum;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
+use Livewire\Attributes\On; // Tambahkan ini
 
 class DasarHukumTable extends DataTableComponent
 {
@@ -32,5 +33,12 @@ class DasarHukumTable extends DataTableComponent
             Column::make("Aksi", "daskum_id")
                 ->format(fn($value, $row) => view('pages.admin.dasar-hukum.actions', ['daskum' => $row])),
         ];
+    }
+
+    // Dengarkan event `dasarHukumSaved`
+    #[On('dasarHukumSaved')]
+    public function refreshTable()
+    {
+        
     }
 }

@@ -10,42 +10,7 @@
         </div>
         <!-- Success Message -->
 
-        @if (session('success'))
-        <script>
-            Toastify({
-                escapeMarkup: false,
-                text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
-                duration: 3000,
-                gravity: "top", // `top` or `bottom`
-                position: "center", // `left`, `center` or `right`
-                style: {
-                    background: "linear-gradient(135deg, #2ecc71, #27ae60)",
-                    fontWeight: "600",
-                    textTransform: "uppercase",
-                    padding: "12px 20px",
-                },
-            }).showToast();
-        </script>
-        @endif
-        <!-- error message -->
-
-        @if (session('error'))
-        <script>
-            Toastify({
-                escapeMarkup: false,
-                text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
-                duration: 3000,
-                gravity: "top",
-                position: "center",
-                style: {
-                    background: "linear-gradient(to right, #ff5f6d, #ffc371)",
-                    fontWeight: "600",
-                    textTransform: "uppercase",
-                    padding: "12px 20px",
-                },
-            }).showToast();
-        </script>
-        @endif
+        @include('pages.alert')
 
         <livewire:dasar-hukum-table />
 
@@ -64,18 +29,8 @@
                     </label>
                 </div>
 
-                <form action="{{ route('admin.dasar-hukum.store') }}" method="POST" class="space-y-2 ">
-                    @csrf
-                    <div class="flex w-full flex-col ">
-                        <label for="dasar_hukum" class="w-full sm:w-1/4 font-bold">Dasar Hukum</label>
-                        <textarea name="dasar_hukum" id="dasar_hukum" cols="10" rows="5" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200" required></textarea>
-                    </div>
+                @livewire('dasar-hukum-form-add')
 
-                    <div class="modal-action pt-4">
-                        <button type="submit" class="btn rounded text-white btn-primary">Simpan</button>
-                        <label for="add-dasar-hukum" class="btn btn-ghost">Batal</label>
-                    </div>
-                </form>
             </div>
         </div>
 
