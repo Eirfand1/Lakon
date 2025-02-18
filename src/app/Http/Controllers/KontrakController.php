@@ -33,11 +33,10 @@ class KontrakController extends Controller
                 'paket_id' => $request->paket_id,
                 'penyedia_id' => $penyediaId,
                 'satker_id' => 1,
-                'tgl_pembuatan' => now()->toDateString(),
                 'is_verificated' => false
             ]);
 
-            return redirect()->route('penyedia.permohonan-kontrak.edit', ['kontrak' => $kontrak->id])->with('success', 'Kontrak berhasil dibuat');
+            return redirect()->route('penyedia.permohonan-kontrak.edit', ['kontrak' => $kontrak->kontrak_id])->with('success', 'Kontrak berhasil dibuat');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
@@ -46,22 +45,6 @@ class KontrakController extends Controller
     public function edit(Kontrak $kontrak)
     {
         return view('pages.penyedia.permohonan-kontrak.edit-kontrak', compact('kontrak'));
-    }
-
-    public function nonTenderKonsultasiPerencanaanEdit(Kontrak $kontrak){
-        return view('pages.penyedia.permohonan-kontrak.non-tender_konsultasi-perencanaan', compact('kontrak'));
-    }
-
-    public function tenderJasaKonstruksiEdit(Kontrak $kontrak){
-        return view('pages.penyedia.permohonan-kontrak.tender_jasa-konstruksi', compact('kontrak'));
-    }
-
-    public function nonTenderJasaKonstruksiEdit(Kontrak $kontrak){
-        return view('pages.penyedia.permohonan-kontrak.non-tender_jasa-konstruksi', compact('kontrak'));
-    }
-
-    public function tenderJasaKonsultasiEdit(Kontrak $kontrak){
-        return view('pages.penyedia.permohonan-kontrak.tender_jasa-konsultasi', compact('kontrak'));
     }
 
     public function update(Request $request, Kontrak $kontrak)
