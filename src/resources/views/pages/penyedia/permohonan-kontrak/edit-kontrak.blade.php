@@ -187,7 +187,8 @@
             @elseif ($metode === 'Jasa Konstruksi')
                 {{-- kosong --}}
             @elseif ($metode === 'Pengadaan Barang')
-                @include($view . ".pengadaan-barang-tender")
+                @include($view . ".ruang-lingkup")
+                @include($view . ".pengadaan-barang")
             @endif
         @elseif ($jenis === 'non_tender')
             @if ($metode === 'Jasa Konsultasi Pengawasan')
