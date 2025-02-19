@@ -7,6 +7,7 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Filters\NumberFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
+use Laravel\Attributes\On;
 
 class PaketPekerjaanTable extends DataTableComponent
 {
@@ -228,5 +229,11 @@ class PaketPekerjaanTable extends DataTableComponent
     {
         PaketPekerjaan::whereIn('paket_id', $this->getSelected())->delete();
         $this->clearSelected();
+    }
+
+    #[On('Saved')]
+    public function refreshTable()
+    {
+
     }
 }

@@ -10,42 +10,7 @@
         </div>
         <!-- Success Message -->
 
-        @if (session('success'))
-        <script>
-            Toastify({
-                escapeMarkup: false,
-                text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
-                duration: 3000,
-                gravity: "top", // `top` or `bottom`
-                position: "center", // `left`, `center` or `right`
-                style: {
-                    background: "linear-gradient(135deg, #2ecc71, #27ae60)",
-                    fontWeight: "600",
-                    textTransform: "uppercase",
-                    padding: "12px 20px",
-                },
-            }).showToast();
-        </script>
-        @endif
-        <!-- error message -->
-
-        @if (session('error'))
-        <script>
-            Toastify({
-                escapeMarkup: false,
-                text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
-                duration: 3000,
-                gravity: "top",
-                position: "center",
-                style: {
-                    background: "linear-gradient(to right, #ff5f6d, #ffc371)",
-                    fontWeight: "600",
-                    textTransform: "uppercase",
-                    padding: "12px 20px",
-                },
-            }).showToast();
-        </script>
-        @endif
+        @include('pages.alert')
 
         <livewire:sub-kegiatan-table />
 
@@ -64,34 +29,8 @@
                     </label>
                 </div>
 
-                <form action="{{ route('admin.sub-kegiatan.store') }}" method="POST" class="space-y-2 ">
-                    @csrf
-                    <div class="flex w-full flex-col ">
-                        <label for="no_rekening" class="w-full sm:w-1/4">Nomor Rekening*</label>
-                        <input type="number" name="no_rekening" id="no_rekening"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"">
-                    </div>
-                    <div class="flex w-full flex-col ">
-                        <label for="nama_sub_kegiatan" class="w-full sm:w-1/4">Nama Sub Kegiatan*</label>
-                        <input type="text" name="nama_sub_kegiatan" id="nama_sub_kegiatan"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200">
-                    </div>
-                    <div class="flex w-full flex-col ">
-                        <label for="gabungan" class="w-full sm:w-1/4">Gabungan*</label>
-                        <input type="text" name="gabungan" id="gabungan"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200">
-                    </div>
-                    <div class="flex w-full flex-col ">
-                        <label for="pendidikan" class="w-full sm:w-1/4">Pendidikan*</label>
-                        <input type="text" name="pendidikan" id="pendidikan"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200">
-                    </div>
+                @livewire('sub-kegiatan-add')
 
-                    <div class="modal-action pt-4">
-                        <button type="submit" class="btn rounded text-white btn-primary">Simpan</button>
-                        <label for="add-sub-kegiatan" class="btn btn-ghost">Batal</label>
-                    </div>
-                </form>
             </div>
         </div>
 

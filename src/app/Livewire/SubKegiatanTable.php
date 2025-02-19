@@ -6,6 +6,7 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\SubKegiatan;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
+use Livewire\Attributes\On;
 
 class SubKegiatanTable extends DataTableComponent
 {
@@ -98,5 +99,11 @@ class SubKegiatanTable extends DataTableComponent
             Column::make("Aksi", "sub_kegiatan_id")
                 ->format(fn($value, $row) => view('pages.admin.sub-kegiatan.actions', ['sub_kegiatan' => $row])),
         ];
+    }
+
+    #[On('Saved')]
+    public function refreshTable()
+    {
+
     }
 }

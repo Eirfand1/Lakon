@@ -15,24 +15,12 @@ class SubKegiatanController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $validateData = $request->validate([
-                'no_rekening' => 'required|numeric',
-                'nama_sub_kegiatan' => 'required|string|max:255',
-                'gabungan' => 'required|string|max:255',
-                'pendidikan' => 'required|string|max:255',
-            ]);
-
-            $dasarHukum = SubKegiatan::create([
-                'no_rekening' => $validateData['no_rekening'],
-                'nama_sub_kegiatan' => $validateData['nama_sub_kegiatan'],
-                'gabungan' => $validateData['gabungan'],
-                'pendidikan' => $validateData['pendidikan'],
-            ]);
-            return redirect()->back()->with('success', 'Sub Kegiatan berhasil disimpan.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
-        }
+        $dasarHukum = SubKegiatan::create([
+            'no_rekening' => $request['no_rekening'],
+            'nama_sub_kegiatan' => $request['nama_sub_kegiatan'],
+            'gabungan' => $request['gabungan'],
+            'pendidikan' => $request['pendidikan'],
+        ]);
     }
     public function update(Request $request, SubKegiatan $subKegiatan)
     {

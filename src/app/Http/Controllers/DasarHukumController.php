@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DasarHukum;
 use Illuminate\Database\QueryException;
-use App\Http\Requests\DasarHukumRequest;
 
 class DasarHukumController extends Controller
 {
