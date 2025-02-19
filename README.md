@@ -33,7 +33,7 @@ php artisan db:seed
 ### seed awal
 | Role | Email       | Password |
 |-----|------------|------|
-| Admin | admin@gmail.com | JunAedi99Gacor   |
+| Admin | admin@gmail.com | 123456789  |
 | Penyedia | penyedia@gmail.com | 123456789 |
 | Verifikator | verifikator@gmail.com | 123456789 |
 - *gunakan ini untuk login pada tombol masuk pojok kanan atas*

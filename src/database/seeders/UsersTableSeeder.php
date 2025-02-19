@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
         'name'=> 'admin',
         'email'=> 'admin@gmail.com',
         'role' => 'admin',
-        'password'=> bcrypt('JunAedi99Gacor'),
+        'password'=> bcrypt('123456789'),
        ]);
 
        // Data user penyedia
