@@ -1,45 +1,60 @@
-<div class="mb-8 w-full">
-    <div class="flex items-center mb-6 space-x-2 text-gray-600 dark:text-gray-300">
-        <i class="fas fa-cogs fa-lg"></i>
-        <h3 class="font-bold text-xl">Ruang Lingkup Pekerjaan</h3>
+<div class="mb-8" x-data="ruangLingkup">
+    <div class="flex items-center mb-4 space-x-2 text-gray-600 dark:text-gray-300">
+        <i class="fas fa-list-ul fa-lg"></i>
+        <h3 class="font-bold">RUANG LINGKUP PEKERJAAN</h3>
     </div>
 
-    <div x-data="ruangLingkupManager()" class="space-y-4">
-        <!-- Input Fields -->
-        <template x-for="(input, index) in inputs" :key="index">
-            <div class="flex items-center space-x-3">
-                <input type="text" x-model="input.value" name="ruang_lingkup[]"
-                    class="flex-1 rounded-lg border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                    placeholder="Masukkan ruang lingkup..." />
-                <button type="button" @click="removeInput(index)"
-                    class="px-3 py-2 text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 transition-colors"
-                    x-show="inputs.length > 1" title="Hapus Ruang Lingkup">
-                    <i class="fas fa-trash"></i>
-                </button>
-            </div>
-        </template>
+    <div class="space-y-4">
+        <div class="flex space-x-2">
+            <textarea x-model="input"
+                class="flex-1 rounded border border-gray-700/30 dark:bg-gray-600 dark:text-gray-200 p-2"
+                placeholder="Masukkan ruang lingkup..." rows="3"></textarea>
+            <button @click="tambah()"
+                class="px-3 py-1 text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
 
-        <!-- Add Button -->
-        <button type="button" @click="addInput()"
-            class="inline-flex items-center px-4 py-2 text-sm font-medium text-blue-600 bg-blue-50 border border-blue-600 rounded-lg hover:bg-blue-100 dark:text-blue-400 dark:border-blue-400 dark:bg-blue-900/30 dark:hover:bg-blue-900/50 transition-colors">
-            <i class="fas fa-plus mr-2"></i>
-            Tambah Ruang Lingkup
-        </button>
+        <div class="space-y-2">
+            <template x-for="(item, index) in list" :key="index">
+                <div class="flex items-center justify-between p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                    <span x-text="item" class="text-gray-700 dark:text-gray-200"></span>
+                    <div class="flex space-x-2">
+                        <button @click="edit(index)"
+                            class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button @click="hapus(index)"
+                            class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            </template>
+        </div>
     </div>
 </div>
-
 <script>
-    function ruangLingkupManager() {
-        return {
-            inputs: [{ value: '' }],
-            addInput() {
-                this.inputs.push({ value: '' });
-            },
-            removeInput(index) {
-                if (this.inputs.length > 1) {
-                    this.inputs.splice(index, 1);
+    document.addEventListener('alpine:init', () => {
+        Alpine.data('ruangLingkup', () => ({
+            input: '',
+            list: [],
+
+            tambah() {
+                if (this.input.trim()) {
+                    this.list.push(this.input.trim());
+                    this.input = '';
                 }
             },
-        };
-    }
+
+            hapus(index) {
+                this.list.splice(index, 1);
+            },
+
+            edit(index) {
+                this.input = this.list[index];
+                this.list.splice(index, 1);
+            }
+        }));
+    });
 </script>
