@@ -198,7 +198,7 @@
             @elseif ($metode === 'Jasa Konstruksi')
                 @include($view . ".ruang-lingkup")
             @elseif ($metode === 'Pengadaan Barang')
-                @include($view . "rincian-belanja")
+                @include($view . "pengadaan-barang")
             @endif
         @elseif ($jenis === 'e_catalog')
             @if ($metode === 'Jasa Konsultasi Pengawasan')
