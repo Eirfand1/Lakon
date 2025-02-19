@@ -195,7 +195,7 @@
             @elseif ($metode === 'Jasa Konsultasi Perencanaan')
                 {{-- kosong --}}
             @elseif ($metode === 'Jasa Konstruksi')
-                @include($view . "ruang-lingkup")
+                @include($view . ".ruang-lingkup")
             @elseif ($metode === 'Pengadaan Barang')
                 @include($view . "rincian-belanja")
             @endif
