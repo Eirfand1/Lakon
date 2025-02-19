@@ -171,49 +171,43 @@
         </p>
 
         @php
-            $view = "pages.penyedia.permohonan-kontrak.";
+            $view = "pages.penyedia.permohonan-kontrak.lampiran";
             $jenis = $kontrak->paketPekerjaan->jenis_pengadaan;
             $metode = $kontrak->paketPekerjaan->metode_pemilihan;
         @endphp
 
         @if ($jenis === 'tender')
-            @php
-                $view =  $view . "tender."
-            @endphp
             @if ($metode === 'Jasa Konsultasi Pengawasan')
-                @include($view . "konsultasi-pengawasan")
+                {{-- kosong --}}
             @elseif ($metode === 'Jasa Konsultasi Perencanaan')
-                @include($view . "konsultasi-perencanaan")
+                @include($view . "tim")
+                @include($view . "jadwal-kegiatan")
+                @include($view . "rincian-belanja")
+                @include($view . "peralatan")
             @elseif ($metode === 'Jasa Konstruksi')
-                @include($view . "konstruksi")
+                {{-- kosong --}}
             @elseif ($metode === 'Pengadaan Barang')
-                @include($view . "pengadaan barang")
+                @include($view . ".pengadaan-barang-tender")
             @endif
         @elseif ($jenis === 'non_tender')
-            @php
-                $view =  $view . "non-tender."
-            @endphp
             @if ($metode === 'Jasa Konsultasi Pengawasan')
-                @include($view . "konsultasi-pengawasan")
+                {{-- kosong --}}
             @elseif ($metode === 'Jasa Konsultasi Perencanaan')
-                @include($view . "konsultasi-perencanaan")
+                {{-- kosong --}}
             @elseif ($metode === 'Jasa Konstruksi')
-                @include($view . "konstruksi")
+                @include($view . "ruang-lingkup")
             @elseif ($metode === 'Pengadaan Barang')
-                @include($view . "pengadaan barang")
+                @include($view . "rincian-belanja")
             @endif
         @elseif ($jenis === 'e_catalog')
-            @php
-                $view =  $view . "e-catalog."
-            @endphp
             @if ($metode === 'Jasa Konsultasi Pengawasan')
-                @include($view . "konsultasi-pengawasan")
+                {{-- gak tau --}}
             @elseif ($metode === 'Jasa Konsultasi Perencanaan')
-                @include($view . "konsultasi-perencanaan")
+                {{-- gak tau --}}
             @elseif ($metode === 'Jasa Konstruksi')
-                @include($view . "konstruksi")
+                {{-- gak tau --}}
             @elseif ($metode === 'Pengadaan Barang')
-                @include($view . "pengadaan barang")
+                {{-- gak tau --}}
             @endif
         @endif
     </div>
