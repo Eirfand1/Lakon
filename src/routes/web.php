@@ -129,6 +129,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
     Route::prefix('/dasar-hukum')->group(function () {
         Route::get('/', [DasarHukumController::class, 'index'])->name('admin.dasar-hukum.index');
+        Route::post('/', [DasarHukumController::class, 'store'])->name('admin.dasar-hukum.store');
         Route::put('/{dasar_hukum}', [DasarHukumController::class, 'update'])->name('admin.dasar-hukum.update');
         Route::delete('/{dasar_hukum}', [DasarHukumController::class, 'destroy'])->name('admin.dasar-hukum.destroy');
     });
