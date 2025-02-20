@@ -65,7 +65,7 @@ class KontrakController extends Controller
             'rincianBelanja' => $rincianBelanja,
             'totalBiaya' => $totalBiaya,
             'ppn' => $ppn,
-            'peralatan' => $peralatan,
+            'peralatan' => Peralatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'ruangLingkup' => $ruangLingkup
         ]);
     }
