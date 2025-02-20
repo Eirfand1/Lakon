@@ -1,4 +1,6 @@
 <div class="overflow-x-auto p-5">
+
+
     <table class="table border">
         <thead>
             <tr>
@@ -25,23 +27,61 @@
         </thead>
         <tbody>
             <tr>
-                <form action="" method="POST">
-                <td class="text-center border"><input class="w-full" type="text"></td>
-                <td class="text-center border"><input class="w-full" type="text"></td>
-                <td class="text-center border"><input class="w-full" type="text"></td>
-                <td class="text-center border"><input type="checkbox" name="" id=""></td>
-                <td class="text-center border"><input type="checkbox" name="" id=""></td>
-                <td class="text-center border"><input type="checkbox" name="" id=""></td>
-                <td class="text-center border"><input type="checkbox" name="" id=""></td>
-                <td class="text-center border"><input type="checkbox" name="" id=""></td>
-                <td class="text-center border"><input type="checkbox" name="" id=""></td>
-                <td class="text-center border"><input type="checkbox" name="" id=""></td>
-                <td class="text-center border"><input type="checkbox" name="" id=""></td>
-                <td class="text-center border"><input type="checkbox" name="" id=""></td>
-                <td class="text-center border"><input type="checkbox" name="" id=""></td>
-                <td class="text-center border"><input type="checkbox" name="" id=""></td>
-                <td class="text-center border"><input type="checkbox" name="" id=""></td>
-                <td class="text-center border"><button class="btn btn-success">S</button></td>
+                <form action="tim" method="POST">
+                    @csrf
+                <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
+                <td class="text-center border">
+                    <input class="w-full" type="text" name="nama">
+                </td>
+                <td class="text-center border">
+                    <input class="w-full" type="text" name="posisi">
+                </td>
+                <td class="text-center border">
+                    <select class="w-full" name="status_tenaga" id="">
+                        <option value="">Pilih Status Tenaga</option>
+                        <option value="Tenaga Ahli">Tenaga Ahli</option>
+                        <option value="Tenaga Penunjang">Tenaga Penunjang</option>
+                    </select>
+                </td>
+                <td class="text-center border">
+                    <input type="checkbox" name="bulan_1" id="">
+                </td>
+                <td class="text-center border">
+                    <input type="checkbox" name="bulan_2" id="">
+                </td>
+                <td class="text-center border">
+                    <input type="checkbox" name="bulan_3" id="">
+                </td>
+                <td class="text-center border">
+                    <input type="checkbox" name="bulan_4" id="">
+                </td>
+                <td class="text-center border">
+                    <input type="checkbox" name="bulan_5" id="">
+                </td>
+                <td class="text-center border">
+                    <input type="checkbox" name="bulan_6" id="">
+                </td>
+                <td class="text-center border">
+                    <input type="checkbox" name="bulan_7" id="">
+                </td>
+                <td class="text-center border">
+                    <input type="checkbox" name="bulan_8" id="">
+                </td>
+                <td class="text-center border">
+                    <input type="checkbox" name="bulan_9" id="">
+                </td>
+                <td class="text-center border">
+                    <input type="checkbox" name="bulan_10" id="">
+                </td>
+                <td class="text-center border">
+                    <input type="checkbox" name="bulan_11" id="">
+                </td>
+                <td class="text-center border">
+                    <input type="checkbox" name="bulan_12" id="">
+                </td>
+                <td class="text-center border">
+                    <button class="btn btn-success"><i class="fa fa-save"></i></button>
+                </td>
                 </form>
             </tr>
 
@@ -63,7 +103,16 @@
                         <td class="@if ($row->bulan_10) bg-green-400 @else bg-red-400 @endif"></td>
                         <td class="@if ($row->bulan_11) bg-green-400 @else bg-red-400 @endif"></td>
                         <td class="@if ($row->bulan_12) bg-green-400 @else bg-red-400 @endif"></td>
-                        <td>aksi</td>
+                        <td>
+                            <div class="flex gap-1">
+                                <button class="btn btn-warning btn-sm">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button class="btn btn-error btn-sm">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
             </tr>
