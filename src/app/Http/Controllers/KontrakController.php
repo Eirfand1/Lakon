@@ -6,6 +6,12 @@ use App\Exports\KontrakExport;
 use App\Models\Kontrak;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use App\Models\Tim;
+use App\Models\JadwalKegiatan;
+use App\Models\RincianBelanja;
+use App\Models\Peralatan;
+use App\Models\RuangLingkup;
+
 
 class KontrakController extends Controller
 {
@@ -42,9 +48,24 @@ class KontrakController extends Controller
         }
     }
 
-    public function edit(Kontrak $kontrak)
+    public function edit(
+        Kontrak $kontrak,
+        JadwalKegiatan $jadwalKegiatan,
+        RincianBelanja $rincianBelanja,
+        Peralatan $peralatan,
+        RuangLingkup $ruangLingkup
+        )
     {
-        return view('pages.penyedia.permohonan-kontrak.edit-kontrak', compact('kontrak'));
+
+
+        return view('pages.penyedia.permohonan-kontrak.edit-kontrak', [
+            'kontrak' => $kontrak,
+            'tim' => Tim::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'jadwalKegiatan' => $jadwalKegiatan,
+            'rincianBelanja' => $rincianBelanja,
+            'peralatan' => $peralatan,
+            'ruangLingkup' => $ruangLingkup
+        ]);
     }
 
     public function update(Request $request, Kontrak $kontrak)
