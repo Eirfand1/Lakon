@@ -17,7 +17,7 @@ return new class extends Migration
                 ->constrained('kontrak', 'kontrak_id')
                 ->cascadeOnDelete();
             $table->string('jenis');
-            $table->string('uraian');
+            $table->string('uraian')->nullable();
             $table->integer('qty');
             $table->string('satuan');
             $table->integer('harga_satuan');

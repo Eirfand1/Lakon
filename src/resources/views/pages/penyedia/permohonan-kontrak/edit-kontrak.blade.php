@@ -171,7 +171,7 @@
         </p>
 
         @php
-            $view = "pages.penyedia.permohonan-kontrak.lampiran";
+            $view = "pages.penyedia.permohonan-kontrak.lampiran.";
             $jenis = $kontrak->paketPekerjaan->jenis_pengadaan;
             $metode = $kontrak->paketPekerjaan->metode_pemilihan;
         @endphp
@@ -187,8 +187,8 @@
             @elseif ($metode === 'Jasa Konstruksi')
                 {{-- kosong --}}
             @elseif ($metode === 'Pengadaan Barang')
-                @include($view . ".ruang-lingkup")
-                @include($view . ".pengadaan-barang")
+                @include($view . "ruang-lingkup")
+                @include($view . "pengadaan-barang")
             @endif
         @elseif ($jenis === 'non_tender')
             @if ($metode === 'Jasa Konsultasi Pengawasan')
