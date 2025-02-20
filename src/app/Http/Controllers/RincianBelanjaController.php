@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\RincianBelanja;
 
 class RincianBelanjaController extends Controller
 {
@@ -13,20 +14,18 @@ class RincianBelanjaController extends Controller
                 'jenis' => 'required|string|max:255',
                 'uraian' => 'required|string|max:255',
                 'qty' => 'required|numeric',
-                'satuan' => 'requred|string|max:255',
+                'satuan' => 'required|string|max:255',
                 'harga_satuan' => 'required|numeric',
-                'keterangan' => 'string',
+                'keterangan' => '|string',
             ]);
-            $total_harga = $validateData['qty'] * $validateData['harga_satuan'];
 
-            $dasarHukum = Peralatan::create([
+            $dasarHukum = RincianBelanja::create([
                 'kontrak_id' => $validateData['kontrak_id'],
                 'jenis' => $validateData['jenis'],
                 'uraian' => $validateData['uraian'],
                 'qty' => $validateData['qty'],
                 'satuan' => $validateData['satuan'],
                 'harga_satuan' => $validateData['harga_satuan'],
-                'total_harga' => $total_harga,
                 'keterangan' => $validateData['keterangan'],
             ]);
 
