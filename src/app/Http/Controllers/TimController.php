@@ -2,18 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\Tim;
+use App\Models\Tim;
 use Illuminate\Http\Request;
 
 class TimController extends Controller
 {
     public function store(Request $request){
         try{
+            $request->merge([
+                'bulan_1' => $request->has('bulan_1'),
+                'bulan_2' => $request->has('bulan_2'),
+                'bulan_3' => $request->has('bulan_3'),
+                'bulan_4' => $request->has('bulan_4'),
+                'bulan_5' => $request->has('bulan_5'),
+                'bulan_6' => $request->has('bulan_6'),
+                'bulan_7' => $request->has('bulan_7'),
+                'bulan_8' => $request->has('bulan_8'),
+                'bulan_9' => $request->has('bulan_9'),
+                'bulan_10' => $request->has('bulan_10'),
+                'bulan_11' => $request->has('bulan_11'),
+                'bulan_12' => $request->has('bulan_12'),
+            ]);
+            
             $validateData = $request->validate([
                 'kontrak_id' => 'required|exists:kontrak,kontrak_id',
                 'nama' => 'required|string|max:255',
-                'posisi' => 'requred|string|max:255',
-                'status_tenaga' => 'requied|in:Tenaga Ahli,Tenaga Penunjang',
+                'posisi' => 'required|string|max:255',
+                'status_tenaga' => 'required|in:Tenaga Ahli,Tenaga Penunjang',
                 'bulan_1' => 'boolean',
                 'bulan_2' => 'boolean',
                 'bulan_3' => 'boolean',
