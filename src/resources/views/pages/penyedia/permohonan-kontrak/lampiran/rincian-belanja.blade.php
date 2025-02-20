@@ -32,13 +32,13 @@
                     <input class="w-full dark:bg-gray-800 rounded" type="text" name="uraian">
                 </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="qty">
+                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="qty">
                 </td>
                 <td class="text-center border border-gray-400/30">
                     <input class="w-full dark:bg-gray-800 rounded" type="text" name="satuan">
                 </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="harga_satuan">
+                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="harga_satuan">
                 </td>
                 <td> </td>
                 <td class="text-center border border-gray-400/30">
@@ -90,7 +90,4 @@
                 </tr>
         </tbody>
     </table>
-
 </div>
-
-.

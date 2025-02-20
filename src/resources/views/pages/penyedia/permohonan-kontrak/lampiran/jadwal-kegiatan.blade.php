@@ -1,27 +1,32 @@
-<div class="overflow-x-auto p-5">
+<div class="overflow-x-auto pb-5">
+    <h1 class="text-lg dark:text-gray-300 flex gap-2 items-center font-semibold mb-4">
+        <i class="fa fa-clock-o"></i>
+        <span>
+            JADWAL PELAKSANAAN KEGIATAN
+        </span>
+    </h1>
 
-
-    <table class="table border">
-        <thead>
+    <table class="table">
+        <thead class="text-gray-600  dark:text-gray-300">
             <tr>
-                <th rowspan="2" class="text-center border">Kegiatan</th>
-                <th colspan="12" class="text-center border">Jadwal Pelasanaan Kegiatan (Bulan)</th>
-                <th rowspan="2" class="text-center border">Keterangan</th>
-                <th rowspan="2" class="text-center border">Aksi</th>
+                <th rowspan="2" class="text-center border border-gray-400/30">Kegiatan</th>
+                <th colspan="12" class="text-center border border-gray-400/30">Jadwal Pelasanaan Kegiatan (Bulan)</th>
+                <th rowspan="2" class="text-center border border-gray-400/30">Keterangan</th>
+                <th rowspan="2" class="text-center border border-gray-400/30">Aksi</th>
             </tr>
             <tr>
-                <th class="text-center border">1</th>
-                <th class="text-center border">2</th>
-                <th class="text-center border">3</th>
-                <th class="text-center border">4</th>
-                <th class="text-center border">5</th>
-                <th class="text-center border">6</th>
-                <th class="text-center border">7</th>
-                <th class="text-center border">8</th>
-                <th class="text-center border">9</th>
-                <th class="text-center border">10</th>
-                <th class="text-center border">11</th>
-                <th class="text-center border">12</th>
+                <th class="text-center border border-gray-400/30">1</th>
+                <th class="text-center border border-gray-400/30">2</th>
+                <th class="text-center border border-gray-400/30">3</th>
+                <th class="text-center border border-gray-400/30">4</th>
+                <th class="text-center border border-gray-400/30">5</th>
+                <th class="text-center border border-gray-400/30">6</th>
+                <th class="text-center border border-gray-400/30">7</th>
+                <th class="text-center border border-gray-400/30">8</th>
+                <th class="text-center border border-gray-400/30">9</th>
+                <th class="text-center border border-gray-400/30">10</th>
+                <th class="text-center border border-gray-400/30">11</th>
+                <th class="text-center border border-gray-400/30">12</th>
             </tr>
         </thead>
         <tbody>
@@ -29,58 +34,58 @@
                 <form action="jadwal-kegiatan" method="POST">
                     @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
-                <td class="text-center border">
-                    <input class="w-full" type="text" name="kegiatan">
+                <td class="text-center border border-gray-400/30">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="kegiatan">
                 </td>
-                <td class="text-center border">
-                    <input type="checkbox" name="bulan_1" id="">
+                <td class="text-center border-gray-400/30 p-0">
+                    <input type="checkbox" name="bulan_1" id="" class="rounded">
                 </td>
-                <td class="text-center border">
-                    <input type="checkbox" name="bulan_2" id="">
+                <td class="text-center border-gray-400/30 p-0">
+                    <input type="checkbox" name="bulan_2" id="" class="rounded">
                 </td>
-                <td class="text-center border">
-                    <input type="checkbox" name="bulan_3" id="">
+                <td class="text-center border border-gray-400/30 p-0">
+                    <input type="checkbox" name="bulan_3" id="" class="rounded">
                 </td>
-                <td class="text-center border">
-                    <input type="checkbox" name="bulan_4" id="">
+                <td class="text-center border border-gray-400/30 p-0">
+                    <input type="checkbox" name="bulan_4" id="" class="rounded">
                 </td>
-                <td class="text-center border">
-                    <input type="checkbox" name="bulan_5" id="">
+                <td class="text-center border border-gray-400/30 p-0">
+                    <input type="checkbox" name="bulan_5" id="" class="rounded">
                 </td>
-                <td class="text-center border">
-                    <input type="checkbox" name="bulan_6" id="">
+                <td class="text-center border border-gray-400/30 p-0">
+                    <input type="checkbox" name="bulan_6" id="" class="rounded">
                 </td>
-                <td class="text-center border">
-                    <input type="checkbox" name="bulan_7" id="">
+                <td class="text-center border border-gray-400/30 p-0">
+                    <input type="checkbox" name="bulan_7" id="" class="rounded">
                 </td>
-                <td class="text-center border">
-                    <input type="checkbox" name="bulan_8" id="">
+                <td class="text-center border border-gray-400/30 p-0">
+                    <input type="checkbox" name="bulan_8" id="" class="rounded">
                 </td>
-                <td class="text-center border">
-                    <input type="checkbox" name="bulan_9" id="">
+                <td class="text-center border border-gray-400/30 p-0">
+                    <input type="checkbox" name="bulan_9" id="" class="rounded">
                 </td>
-                <td class="text-center border">
-                    <input type="checkbox" name="bulan_10" id="">
+                <td class="text-center border border-gray-400/30 p-0">
+                    <input type="checkbox" name="bulan_10" id="" class="rounded">
                 </td>
-                <td class="text-center border">
-                    <input type="checkbox" name="bulan_11" id="">
+                <td class="text-center border border-gray-400/30 p-0">
+                    <input type="checkbox" name="bulan_11" id="" class="rounded">
                 </td>
-                <td class="text-center border">
-                    <input type="checkbox" name="bulan_12" id="">
+                <td class="text-center border border-gray-400/30 p-0">
+                    <input type="checkbox" name="bulan_12" id="" class="rounded">
                 </td>
 
-                <td class="text-center border">
-                    <input class="w-full" type="text" name="keterangan">
+                <td class="text-center border border-gray-400/30">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan">
                 </td>
-                <td class="text-center border">
-                    <button class="btn btn-success"><i class="fa fa-save"></i></button>
+                <td class="text-center border border-gray-400/30">
+                    <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
                 </td>
                 </form>
             </tr>
 
                 @foreach($jadwalKegiatan as $row)
                     <tr>
-                        <td>{{ $row->kegiatan }}</td>
+                        <td class="border border-gray-400/30">{{ $row->kegiatan }}</td>
                         <td class="@if ($row->bulan_1) bg-green-400 @else bg-red-400 @endif"></td>
                         <td class="@if ($row->bulan_2) bg-green-400 @else bg-red-400 @endif"></td>
                         <td class="@if ($row->bulan_3) bg-green-400 @else bg-red-400 @endif"></td>
@@ -93,13 +98,13 @@
                         <td class="@if ($row->bulan_10) bg-green-400 @else bg-red-400 @endif"></td>
                         <td class="@if ($row->bulan_11) bg-green-400 @else bg-red-400 @endif"></td>
                         <td class="@if ($row->bulan_12) bg-green-400 @else bg-red-400 @endif"></td>
-                        <td>{{ $row->keterangan }}</td>
+                        <td class="border border-gray-400/30">{{ $row->keterangan }}</td>
                         <td>
                             <div class="flex gap-1">
-                                <button class="btn btn-warning btn-sm">
+                                <button class="btn btn-warning btn-sm text-gray-100">
                                     <i class="fa fa-edit"></i>
                                 </button>
-                                <button class="btn btn-error btn-sm">
+                                <button class="btn btn-error btn-sm text-gray-100">
                                     <i class="fa fa-trash"></i>
                                 </button>
                             </div>

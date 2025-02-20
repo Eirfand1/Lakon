@@ -16,9 +16,9 @@ class PeralatanController extends Controller
                 'type' => 'required|string|max:255',
                 'kapasitas' => 'required|string|max:255',
                 'jumlah' => 'required|numeric',
-                'kondisi' => 'requied|in:Baik,Sedang,Rusak',
-                'status_kepemilikan' => 'requred|string|max:255',
-                'keterangan' => 'string',
+                'kondisi' => 'required|in:Baik,Sedang,Rusak',
+                'status_kepemilikan' => 'required|string|max:255',
+                'keterangan' => 'nullable|string',
 
             ]);
 
