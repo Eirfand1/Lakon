@@ -78,7 +78,6 @@
                 </form>
             </tr>
 
-            <tr>
                 @foreach($jadwalKegiatan as $row)
                     <tr>
                         <td>{{ $row->kegiatan }}</td>
@@ -107,7 +106,6 @@
                         </td>
                     </tr>
                 @endforeach
-            </tr>
         </tbody>
     </table>
 </div>
