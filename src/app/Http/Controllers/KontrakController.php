@@ -61,7 +61,7 @@ class KontrakController extends Controller
         return view('pages.penyedia.permohonan-kontrak.edit-kontrak', [
             'kontrak' => $kontrak,
             'tim' => Tim::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
-            'jadwalKegiatan' => $jadwalKegiatan,
+            'jadwalKegiatan' => JadwalKegiatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'rincianBelanja' => $rincianBelanja,
             'peralatan' => $peralatan,
             'ruangLingkup' => $ruangLingkup
