@@ -43,7 +43,7 @@ Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(functio
     Route::put('/permohonan-kontrak/{kontrak}', [KontrakController::class, 'update'])->name('penyedia.permohonan-kontrak.update');
 
     // lampiran kontrak
-    Route::post('/tim', [TimController::class, 'store'])->name('penyedia.tim.store');
+    Route::post('/permohonan-kontrak/tim', [TimController::class, 'store'])->name('penyedia.tim.store');
     Route::post('jadwal-kegiatan', [JadwalKegiatanController::class, 'store'])->name('penyedia.jadwal-kegiatan.store');
     Route::post('rincian-belanja', [RincianBelanjaController::class, 'store'])->name('penyedia.rincian-belanja.store');
     Route::post('peralatan', [PeralatanController::class, 'store'])->name('penyedia.peralatan.store');
