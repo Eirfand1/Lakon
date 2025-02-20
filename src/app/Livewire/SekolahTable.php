@@ -18,7 +18,8 @@ class SekolahTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('sekolah_id')
-             ->setFilterLayout('slide-down');
+             ->setFilterLayout('slide-down')
+             ->setPerPageAccepted([10,25,50,100, -1]);
     }
 
     public function builder(): \Illuminate\Database\Eloquent\Builder{

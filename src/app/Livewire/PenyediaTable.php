@@ -22,7 +22,8 @@ class PenyediaTable extends DataTableComponent
         $this->setPrimaryKey('penyedia_id')
             ->setColumnSelectStatus(true)
             ->setFilterLayout('slide-down')
-            ->setDefaultSort('penyedia_id', 'desc');
+            ->setDefaultSort('penyedia_id', 'desc')
+            ->setPerPageAccepted([10,25,50,100, -1]);
     }
     public function builder(): \Illuminate\Database\Eloquent\Builder {
         return Penyedia::query()->orderByDesc('updated_at');

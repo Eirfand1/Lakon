@@ -18,7 +18,8 @@ class VerifikatorTable extends DataTableComponent
         $this->setPrimaryKey('verifikator_id')
             ->setColumnSelectStatus(true)
             ->setFilterLayout('slide-down')
-            ->setDefaultSort('verifikator_id', 'desc');
+            ->setDefaultSort('verifikator_id', 'desc')
+            ->setPerPageAccepted([10,25,50,100, -1]);
     }
 
     public function builder(): \Illuminate\Database\Eloquent\Builder

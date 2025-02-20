@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="p-5" wire:navigate>
+    <div class="p-5">
         <div class="sm:flex sm:justify-between sm:items-center p-2 pb-5">
             <div class="">
                 <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">PPKOM</h1>

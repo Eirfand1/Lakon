@@ -15,7 +15,8 @@ class DasarHukumTable extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('daskum_id');
+        $this->setPrimaryKey('daskum_id')
+            ->setPerPageAccepted([10,25,50,100, -1]);
     }
 
     public function builder(): \Illuminate\Database\Eloquent\Builder{

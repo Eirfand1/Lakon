@@ -19,7 +19,8 @@ class KontrakTable extends DataTableComponent
     {
         $this->setPrimaryKey('kontrak_id')
             ->setColumnSelectStatus(true)
-            ->setFilterLayout('slide-down');
+            ->setFilterLayout('slide-down')
+            ->setPerPageAccepted([10,25,50,100, -1]);
     }
 
     public function builder(): \Illuminate\Database\Eloquent\Builder
