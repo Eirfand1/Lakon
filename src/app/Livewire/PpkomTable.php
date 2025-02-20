@@ -20,7 +20,8 @@ class PpkomTable extends DataTableComponent
         $this->setPrimaryKey('ppkom_id')
              ->setDefaultSort('ppkom_id', 'desc')
              ->setColumnSelectStatus(true)
-             ->setFilterLayout('slide-down');
+             ->setFilterLayout('slide-down')
+            ->setPerPageAccepted([10,25,50,100, -1]);
     }
 
     public function builder(): \Illuminate\Database\Eloquent\Builder {

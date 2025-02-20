@@ -18,7 +18,8 @@ class PaketPekerjaanTable extends DataTableComponent
         $this->setPrimaryKey('paket_id')
             ->setDefaultSort('created_at', 'desc')
             ->setColumnSelectStatus(true)
-            ->setFilterLayout('slide-down');
+            ->setFilterLayout('slide-down')
+            ->setPerPageAccepted([10,25,50,100, -1]);
 
     }
     public function builder(): \Illuminate\Database\Eloquent\Builder
@@ -199,6 +200,14 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->filter(function ($builder, $value) {
                     return $value ? $builder->where('tahun_anggaran', $value) : $builder;
                 }),
+            
+            SelectFilter::make('Sumber Dana')
+            ->options([
+                '' => "Semua sumber dana"
+            ] + PaketPekerjaan::distinct()->pluck('sumber_dana', 'sumber_dana')->toArray())
+            ->filter(function($builder, $value) {
+                return $value ? $builder->where('sumber_dana', $value) : $builder;
+            }),
 
 
             // Metode Pemilihan Filter

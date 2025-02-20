@@ -15,7 +15,8 @@ class SubKegiatanTable extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('sub_kegiatan_id');
+        $this->setPrimaryKey('sub_kegiatan_id')
+             ->setPerPageAccepted([10,25,50,100, -1]);
     }
 
     public function builder(): \Illuminate\Database\Eloquent\Builder
