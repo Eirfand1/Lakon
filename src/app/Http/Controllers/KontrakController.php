@@ -50,20 +50,22 @@ class KontrakController extends Controller
 
     public function edit(
         Kontrak $kontrak,
-        JadwalKegiatan $jadwalKegiatan,
-        RincianBelanja $rincianBelanja,
         Peralatan $peralatan,
         RuangLingkup $ruangLingkup
         )
     {
-
+        $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
+        $totalBiaya = $rincianBelanja->sum('total_harga');
+        $ppn = $totalBiaya * 0.11;
 
         return view('pages.penyedia.permohonan-kontrak.edit-kontrak', [
             'kontrak' => $kontrak,
             'tim' => Tim::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
-            'jadwalKegiatan' => $jadwalKegiatan,
+            'jadwalKegiatan' => JadwalKegiatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'rincianBelanja' => $rincianBelanja,
-            'peralatan' => $peralatan,
+            'totalBiaya' => $totalBiaya,
+            'ppn' => $ppn,
+            'peralatan' => Peralatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'ruangLingkup' => $ruangLingkup
         ]);
     }
