@@ -24,22 +24,23 @@
                 <form action="rincian-belanja" method="POST">
                     @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
+                <input type="hidden" name="rincian_belanja_id" id="rincianBelanjaId">
                 <input type="hidden" name="uraian" value="-">
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="jenis">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="jenis" id="jenis">
                 </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="qty">
+                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="qty" id="qty">
                 </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="satuan">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="satuan" id="satuan">
                 </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="harga_satuan">
+                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="harga_satuan" id="hargaSatuan">
                 </td>
                 <td> </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan" id="keterangan">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
                     <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
@@ -59,12 +60,12 @@
 
                         <td class="border border-gray-400/30">
                             <div class="flex gap-1">
-                                <button class="btn btn-warning btn-sm text-gray-100">
+                                <label class="btn btn-warning btn-sm text-gray-100" onclick="editRincianBelanja({{ $row }})">
                                     <i class="fa fa-edit"></i>
-                                </button>
-                                <button class="btn btn-error btn-sm text-gray-100">
+                                </label>
+                                <label class="btn btn-error btn-sm text-gray-100" for="delete-modal" onclick="deleteRincianBelanja({{ $row->rincian_belanja_id }})">
                                     <i class="fa fa-trash"></i>
-                                </button>
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -92,3 +93,18 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    function editRincianBelanja(row) {
+        document.getElementById('rincianBelanjaId').value = row.rincian_belanja_id;
+        document.getElementById('jenis').value = row.jenis;
+        document.getElementById('qty').value = row.qty;
+        document.getElementById('satuan').value = row.satuan;
+        document.getElementById('hargaSatuan').value = row.harga_satuan;
+        document.getElementById('keterangan').value = row.keterangan;
+    }
+
+    function deleteRincianBelanja(id) {
+            document.getElementById('deleteForm').action = `rincian-belanja/${id}`;
+    }
+</script>
