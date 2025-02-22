@@ -56,10 +56,12 @@
 
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
-        <div id="modal_verifikator" class="modal modal-top">
-            <div class="modal-box w-10/12 mx-auto mt-4 max-w-3xl rounded  dark:bg-gray-800 bg-gray-100">
+        <div id="modal_verifikator" class="modal modal-top px-3">
+            <div class="modal-box max-w-[52rem] mx-auto m-3 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div>
-                    <label for="add-modal" class="btn btn-sm btn-circle mt-2 btn-ghost absolute right-2 top-2">X</label>
+                    <label for="add-modal" class="btn btn-sm rounded-full shadow-none btn-circle mt-2 btn-ghost absolute right-4 top-2">
+                        ✕
+                    </label>
                 </div>
                 <div class="flex items-center gap-2">
                     <i class="fa-solid fa-square-plus text-xl"></i>
@@ -102,8 +104,8 @@
                     </div>
 
                     <div class="modal-action">
-                        <button type="submit" class="btn text-white btn-primary rounded">Simpan</button>
-                        <label for="add-modal" class="btn rounded">Tutup</label>
+                        <button type="submit" class="btn btn-primary text-white bg-blue-600 rounded">Simpan</button>
+                        <label for="add-modal" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Tutup</label>
                     </div>
                 </form>
             </div>
@@ -111,12 +113,14 @@
 
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
-        <div class="modal modal-top">
-            <div class="modal-box mx-auto mt-4 w-10/12 max-w-3xl rounded  dark:bg-gray-800 bg-gray-100">
+        <div class="modal modal-top px-3">
+            <div class="modal-box max-w-[52rem] mx-auto m-3 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <h3 class="font-bold text-lg">EDIT DATA VERIVIKATOR</h3>
                 <div>
                     <label for="edit-modal"
-                        class="btn btn-sm btn-circle font-bold mt-2 btn-ghost absolute right-2 top-2">X</label>
+                        class="btn btn-sm rounded-full shadow-none btn-circle font-bold mt-2 btn-ghost absolute right-4 top-2">
+                        ✕
+                    </label>
                 </div>
                 <form id="editForm" method="POST">
                     @csrf
@@ -157,8 +161,8 @@
                         </div>
                     </div>
                     <div class="modal-action">
-                        <button type="submit" class="btn text-white btn-primary">Update</button>
-                        <label for="edit-modal" class="btn text-white">Tutup</label>
+                        <button type="submit" class="btn btn-primary text-white bg-blue-600">Update</button>
+                        <label for="edit-modal" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Tutup</label>
                     </div>
                 </form>
             </div>
@@ -166,9 +170,9 @@
 
         <!-- Delete Modal -->
         <input type="checkbox" id="delete-modal" class="modal-toggle" />
-        <div class="modal modal-top">
+        <div class="modal modal-top px-3">
             <div
-                class="modal-box w-auto mt-5 mx-auto rounded-lg dark:text-white text-gray-800 bg-gray-100 dark:bg-gray-800">
+                class="modal-box w-auto mt-3 mx-auto rounded-lg dark:text-white bg-white text-gray-800  dark:bg-gray-800">
                 <h3 class="font-bold text-lg">Konfirmasi Hapus</h3>
                 <p>Apakah Anda yakin ingin menghapus data ini?</p>
                 <form id="deleteForm" method="POST">

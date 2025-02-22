@@ -58,15 +58,15 @@
 
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
-        <div id="modal_ppkom" class="modal">
-            <div class="modal-box w-10/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
+        <div id="modal_ppkom" class="modal modal-top px-3">
+            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
                         <h3 class="font-bold text-xl dark:text-gray-200">Tambah Data PPKOM</h3>
                     </div>
                     <label for="add-modal"
-                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
+                        class="btn btn-sm btn-circle btn-ghost rounded-full shadow-none hover:bg-gray-200 dark:hover:bg-gray-700">
                         ✕
                     </label>
                 </div>
@@ -121,8 +121,8 @@
                     </div>
 
                     <div class="modal-action">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                        <label for="add-modal" class="btn btn-ghost">Tutup</label>
+                        <button type="submit" class="btn bg-blue-600 btn-primary rounded text-white">Simpan</button>
+                        <label for="add-modal" class="btn rounded text-white">Tutup</label>
                     </div>
                 </form>
             </div>
@@ -130,15 +130,15 @@
 
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
-        <div class="modal">
-            <div class="modal-box w-11/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
+        <div class="modal modal-top px-3">
+            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-pen-to-square text-2xl text-primary"></i>
                         <h3 class="font-bold text-xl dark:text-gray-200">Edit Data PPKOM</h3>
                     </div>
                     <label for="edit-modal"
-                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
+                        class="btn btn-sm btn-circle rounded-full shadow-none btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
                         ✕
                     </label>
                 </div>
@@ -150,13 +150,13 @@
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">NIP</label>
                             <input type="number" id="edit_nip" name="nip"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
                                 required />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Nama</label>
                             <input type="text" id="edit_nama" name="nama"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
                                 required />
                         </div>
                     </div>
@@ -165,37 +165,37 @@
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Pangkat</label>
                             <input type="text" id="edit_pangkat" name="pangkat"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Jabatan</label>
                             <input type="text" id="edit_jabatan" name="jabatan"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
                         </div>
                     </div>
 
                     <div class="form-control">
                         <label class="label font-semibold dark:text-gray-300">Alamat</label>
                         <textarea id="edit_alamat" name="alamat"
-                            class="textarea textarea-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"></textarea>
+                            class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"></textarea>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">No. Telp</label>
                             <input type="text" id="edit_no_telp" name="no_telp"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Email</label>
                             <input type="email" id="edit_email" name="email"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700" />
+                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
                         </div>
                     </div>
 
                     <div class="modal-action">
-                        <button type="submit" class="btn btn-primary">Update</button>
-                        <label for="edit-modal" class="btn btn-ghost">Tutup</label>
+                        <button type="submit" class="btn bg-blue-600 rounded-md btn-primary text-white">Update</button>
+                        <label for="edit-modal" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Tutup</label>
                     </div>
                 </form>
             </div>
@@ -203,9 +203,9 @@
 
         <!-- Delete Modal -->
         <input type="checkbox" id="delete-modal" class="modal-toggle" />
-        <div class="modal modal-top">
+        <div class="modal modal-top px-3">
             <div
-                class="modal-box w-auto mt-5 mx-auto rounded-lg dark:text-white text-gray-800 bg-gray-100 dark:bg-gray-800">
+                class="modal-box w-auto mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
                 <h3 class="font-bold text-lg">Konfirmasi Hapus</h3>
                 <p>Apakah Anda yakin ingin menghapus data ini?</p>
                 <form id="deleteForm" method="POST">

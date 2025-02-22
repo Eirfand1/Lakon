@@ -51,15 +51,15 @@
 
         <!-- Tambah Sub Kegiatan -->
         <input type="checkbox" id="add-sub-kegiatan" class="modal-toggle" />
-        <div id="modal_matriks" class="modal">
-            <div class="modal-box w-10/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
+        <div id="modal_matriks" class="modal modal-top px-3">
+            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
-                        <h3 class="font-bold text-xl dark:text-gray-200">Tambah Paket Kegiatan</h3>
+                        <h3 class="font-bold text-xl dark:text-gray-200">Tambah Sub Kegiatan</h3>
                     </div>
                     <label for="add-sub-kegiatan"
-                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
+                        class="btn btn-sm rounded-full shadow-none btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
                         ✕
                     </label>
                 </div>
@@ -69,7 +69,7 @@
                     <div class="flex w-full flex-col ">
                         <label for="no_rekening" class="w-full sm:w-1/4">Nomor Rekening*</label>
                         <input type="number" name="no_rekening" id="no_rekening"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"">
+                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200">
                     </div>
                     <div class="flex w-full flex-col ">
                         <label for="nama_sub_kegiatan" class="w-full sm:w-1/4">Nama Sub Kegiatan*</label>
@@ -88,8 +88,8 @@
                     </div>
 
                     <div class="modal-action pt-4">
-                        <button type="submit" class="btn rounded text-white btn-primary">Simpan</button>
-                        <label for="add-sub-kegiatan" class="btn btn-ghost">Batal</label>
+                        <button type="submit" class="btn rounded-md btn-primary text-white bg-blue-600">Simpan</button>
+                        <label for="add-sub-kegiatan" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                     </div>
                 </form>
             </div>
@@ -97,8 +97,8 @@
 
         <!-- Edit Sub Kegiatan -->
         <input type="checkbox" id="edit-sub-kegiatan" class="modal-toggle" />
-        <div class="modal">
-            <div class="modal-box w-11/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
+        <div class="modal modal-top px-3">
+            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-pen-to-square text-2xl text-primary"></i>
@@ -117,32 +117,32 @@
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Nomor Rekening</label>
                             <input type="number" id="noRekening" name="no_rekening"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"
+                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
                                 required />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Nama Sub Kegiatan</label>
                             <input type="text" id="namaSubKegiatan" name="nama_sub_kegiatan"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"
+                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
                                 required />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Gabungan</label>
                             <input type="text" id="edit_gabungan" name="gabungan"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"
+                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
                                 required />
                         </div>
                         <div class="form-control">
                             <label class="label font-semibold dark:text-gray-300">Pendidikan</label>
                             <input type="text" id="edit_pendidikan" name="pendidikan"
-                                class="input input-bordered w-full bg-gray-100 dark:bg-gray-700 dark:border-gray-700"
+                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
                                 required />
                         </div>
                     </div>
 
                     <div class="modal-action">
-                        <button type="submit" class="btn btn-primary">Update</button>
-                        <label for="edit-sub-kegiatan" class="btn btn-ghost">Tutup</label>
+                        <button type="submit" class="btn bg-blue-600 btn-primary text-white rounded-md">Update</button>
+                        <label for="edit-sub-kegiatan" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Tutup</label>
                     </div>
                 </form>
             </div>
@@ -150,9 +150,9 @@
 
         <!-- Delete Modal -->
         <input type="checkbox" id="delete-sub-kegiatan" class="modal-toggle" />
-        <div class="modal modal-top">
+        <div class="modal modal-top px-3">
             <div
-                class="modal-box w-auto mt-5 mx-auto rounded-lg dark:text-white text-gray-800 bg-gray-100 dark:bg-gray-800">
+                class="modal-box w-auto mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
                 <h3 class="font-bold text-lg">Konfirmasi Hapus</h3>
                 <p>Apakah Anda yakin ingin menghapus data ini?</p>
                 <form id="deleteForm" method="POST">

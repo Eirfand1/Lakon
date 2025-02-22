@@ -61,15 +61,15 @@
 
         <!-- Tambah Sekolah -->
         <input type="checkbox" id="add-sekolah" class="modal-toggle" />
-        <div id="modal_matriks" class="modal">
-            <div class="modal-box w-[52rem] max-w-4xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
+        <div id="modal_matriks" class="modal modal-top px-3">
+            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
                         <h3 class="font-bold text-xl dark:text-gray-200">Tambah Sekolah</h3>
                     </div>
                     <label for="add-sekolah"  onclick="mapInputDelete()"
-                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
+                        class="btn btn-sm btn-circle rounded-full shadow-none btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
                         ✕
                     </label>
                 </div>
@@ -156,11 +156,11 @@
 
                     <div class="flex justify-end gap-3 mt-8 pt-4 border-t dark:border-gray-700">
                         <button type="submit"
-                            class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                            class="px-4 btn py-2 bg-blue-600 text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
                             Tambah
                         </button>
                         <label for="add-sekolah"  onclick="mapInputDelete()"
-                            class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                            class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
                             Tutup
                         </label>
                     </div>
@@ -170,15 +170,15 @@
 
         <!-- Edit Sekolah -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
-        <div class="modal">
-            <div class="modal-box w-[52rem] max-w-4xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
+        <div class="modal modal-top px-3">
+            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-pen-to-square text-2xl text-primary"></i>
                         <h3 class="font-bold text-xl dark:text-gray-200">Edit Sekolah</h3>
                     </div>
                     <label for="edit-modal"
-                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">✕</label>
+                        class="btn btn-sm btn-circle btn-ghost rounded-full shadow-none hover:bg-gray-200 dark:hover:bg-gray-700">✕</label>
                 </div>
 
                 <form id="editForm" method="POST" class="pt-6">
@@ -265,11 +265,11 @@
 
                     <div class="flex justify-end gap-3 mt-8 pt-4 border-t dark:border-gray-700">
                         <button type="submit"
-                            class="px-4 py-2 bg-primary text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                            class="px-4 py-2 bg-blue-600 btn text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
                             Update
                         </button>
                         <label for="edit-modal"
-                            class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                            class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
                             Tutup
                         </label>
                     </div>
@@ -280,9 +280,9 @@
 
     {{-- Delete Sekolah --}}
     <input type="checkbox" id="delete-sekolah" class="modal-toggle" />
-    <div class="modal modal-top">
+    <div class="modal modal-top px-3">
         <div
-            class="modal-box w-auto mt-5 mx-auto rounded-lg dark:text-white text-gray-800 bg-gray-100 dark:bg-gray-800">
+            class="modal-box w-auto mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
             <h3 class="font-bold text-lg">Konfirmasi Hapus</h3>
             <p>Apakah Anda yakin ingin menghapus data ini?</p>
             <form id="deleteForm" method="POST">

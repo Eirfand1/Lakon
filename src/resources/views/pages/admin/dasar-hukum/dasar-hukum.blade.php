@@ -51,15 +51,15 @@
 
         <!-- Tambah Dasar Hukum -->
         <input type="checkbox" id="add-dasar-hukum" class="modal-toggle" />
-        <div id="modal_matriks" class="modal">
-            <div class="modal-box w-10/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
+        <div id="modal_matriks" class="modal modal-top px-3">
+            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
                         <h3 class="font-bold text-xl dark:text-gray-200">Tambah Dasar Hukum</h3>
                     </div>
                     <label for="add-dasar-hukum"
-                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
+                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 rounded-full shadow-none dark:hover:bg-gray-700">
                         ✕
                     </label>
                 </div>
@@ -73,7 +73,7 @@
 
                     <div class="modal-action pt-4">
                         <button type="submit" class="btn rounded text-white btn-primary">Simpan</button>
-                        <label for="add-dasar-hukum" class="btn btn-ghost">Batal</label>
+                        <label for="add-dasar-hukum" class="btn text-white rounded">Batal</label>
                     </div>
                 </form>
             </div>
@@ -81,15 +81,15 @@
 
         <!-- Edit Dasar Hukum -->
         <input type="checkbox" id="edit-daskum" class="modal-toggle" />
-        <div class="modal">
-            <div class="modal-box w-11/12 max-w-3xl rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
+        <div class="modal modal-top px-3">
+            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-pen-to-square text-2xl text-primary"></i>
                         <h3 class="font-bold text-xl dark:text-gray-200">Edit Dasar Hukum</h3>
                     </div>
                     <label for="edit-daskum"
-                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
+                        class="btn btn-sm rounded-full shadow-none btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
                         ✕
                     </label>
                 </div>
@@ -112,9 +112,9 @@
 
         <!-- Delete Modal -->
         <input type="checkbox" id="delete-daskum" class="modal-toggle" />
-        <div class="modal modal-top">
+        <div class="modal modal-top px-3">
             <div
-                class="modal-box w-auto mt-5 mx-auto rounded-lg dark:text-white text-gray-800 bg-gray-100 dark:bg-gray-800">
+                class="modal-box w-auto mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
                 <h3 class="font-bold text-lg">Konfirmasi Hapus</h3>
                 <p>Apakah Anda yakin ingin menghapus data ini?</p>
                 <form id="deleteForm" method="POST">
@@ -125,7 +125,7 @@
                             <i class="fa-solid fa-trash"></i>
                             <span>Hapus</span>
                         </button>
-                        <label for="delete-daskum" class="btn">Batal</label>
+                        <label for="delete-daskum" class="btn text-white">Batal</label>
                     </div>
                 </form>
             </div>

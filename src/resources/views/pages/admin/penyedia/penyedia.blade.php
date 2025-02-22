@@ -51,12 +51,14 @@
         <livewire:penyedia-table />
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
-        <div class="modal">
-            <div class="modal-box w-10/12 max-w-3xl rounded dark:bg-gray-800 bg-gray-50">
+        <div class="modal modal-top px-3">
+            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <h3 class="font-bold text-lg">EDIT DATA PENYEDIA</h3>
                 <div>
                     <label for="edit-modal"
-                        class="btn btn-sm btn-circle font-bold mt-2 btn-ghost absolute right-2 top-2">X</label>
+                        class="btn btn-sm btn-circle rounded-full mt-2 btn-ghost absolute right-4 shadow-none top-2">
+                        ✕
+                    </label>
                 </div>
                 <form id="editForm" method="POST" class="space-y-4" enctype="multipart/form-data">
                     @csrf
@@ -248,9 +250,9 @@
                         </select>
                     </div>
 
-                    <div class="flex justify-end space-x-4 modal-action">
+                    <div class="flex justify-end space-x-2 modal-action">
                         <button type="submit"
-                            class="btn bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center">
+                            class="btn bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
                                 fill="currentColor">
                                 <path
@@ -258,7 +260,7 @@
                             </svg>
                             Simpan
                         </button>
-                        <label for="edit-modal" class="btn">Tutup</label>
+                        <label for="edit-modal" class="btn text-white rounded">Tutup</label>
                     </div>
                 </form>
             </div>
@@ -267,9 +269,9 @@
 
         <!-- Delete Modal -->
         <input type="checkbox" id="delete-modal" class="modal-toggle" />
-        <div class="modal modal-top">
+        <div class="modal modal-top px-3">
             <div
-                class="modal-box w-auto mt-5 mx-auto rounded-lg dark:text-white text-gray-800 bg-gray-100 dark:bg-gray-800">
+                class="modal-box w-auto mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
                 <h3 class="font-bold text-lg">Konfirmasi Hapus</h3>
                 <p>Apakah Anda yakin ingin menghapus data ini?</p>
                 <form id="deleteForm" method="POST">
