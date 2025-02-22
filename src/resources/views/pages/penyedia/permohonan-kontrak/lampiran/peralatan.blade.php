@@ -100,16 +100,11 @@
         document.getElementById('type').value = peralatan.type;
         document.getElementById('kapasitas').value = peralatan.kapasitas;
         document.getElementById('jumlah').value = peralatan.jumlah;
+        document.getElementById('kondisi').value = peralatan.kondisi;
         document.getElementById('statusKepemilikan').value = peralatan.status_kepemilikan;
         console.log(document.getElementById('keterangan'));
         document.getElementById('keteranganPeralatan').value = peralatan.keterangan;
 
-        const kondisi = document.getElementById('kondisi');
-        Array.from(kondisi.options).forEach(option => {
-            if (option.value === peralatan.kondisi) {
-                option.setAttribute("selected", true)
-            }
-        })
     }
 
     function deletePeralatan(id) {
