@@ -22,20 +22,42 @@ class PeralatanController extends Controller
 
             ]);
 
-            $dasarHukum = Peralatan::create([
-                'kontrak_id' => $validateData['kontrak_id'],
-                'nama_peralatan' => $validateData['nama_peralatan'],
-                'merk' => $validateData['merk'],
-                'type' => $validateData['type'],
-                'kapasitas' => $validateData['kapasitas'],
-                'jumlah' => $validateData['jumlah'],
-                'kondisi' => $validateData['kondisi'],
-                'status_kepemilikan' => $validateData['status_kepemilikan'],
-                'keterangan' => $validateData['keterangan'],
-            ]);
+            if ($request->peralatan_id) {
+                Peralatan::where('peralatan_id', $request->peralatan_id)->update([
+                    'kontrak_id' => $validateData['kontrak_id'],
+                    'nama_peralatan' => $validateData['nama_peralatan'],
+                    'merk' => $validateData['merk'],
+                    'type' => $validateData['type'],
+                    'kapasitas' => $validateData['kapasitas'],
+                    'jumlah' => $validateData['jumlah'],
+                    'kondisi' => $validateData['kondisi'],
+                    'status_kepemilikan' => $validateData['status_kepemilikan'],
+                    'keterangan' => $validateData['keterangan'],
+                ]);
+                return redirect()->back()->with('success', 'Data Peralatan berhasil diperbarui.');
+            }else {
+                Peralatan::create([
+                    'kontrak_id' => $validateData['kontrak_id'],
+                    'nama_peralatan' => $validateData['nama_peralatan'],
+                    'merk' => $validateData['merk'],
+                    'type' => $validateData['type'],
+                    'kapasitas' => $validateData['kapasitas'],
+                    'jumlah' => $validateData['jumlah'],
+                    'kondisi' => $validateData['kondisi'],
+                    'status_kepemilikan' => $validateData['status_kepemilikan'],
+                    'keterangan' => $validateData['keterangan'],
+                ]);
+                return redirect()->back()->with('success', 'Data Peralatan berhasil disimpan.');
+            }
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 
-            return redirect()->back()->with('success', 'Data Peralatan berhasil disimpan.');
-
+    public function destroy($peralatan){
+        try{
+            Peralatan::where('peralatan_id', $peralatan)->delete();
+            return redirect()->back()->with('success', 'Data Peralatan berhasil dihapus.');
         }catch(\Exception $e){
             return redirect()->back()->with('error', $e->getMessage());
         }
