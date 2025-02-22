@@ -229,7 +229,7 @@
                 {{-- kosong --}}
             @elseif ($metode === 'Pengadaan Barang')
                 @include($view . "ruang-lingkup")
-                @include($view . "pengadaan-barang")
+                @include($view . "rincian-belanja")
             @endif
         @elseif ($jenis === 'non_tender')
             @if ($metode === 'Jasa Konsultasi Pengawasan')
@@ -237,9 +237,9 @@
             @elseif ($metode === 'Jasa Konsultasi Perencanaan')
                 {{-- kosong --}}
             @elseif ($metode === 'Jasa Konstruksi')
-                @include($view . ".ruang-lingkup")
+                @include($view . "ruang-lingkup")
             @elseif ($metode === 'Pengadaan Barang')
-                @include($view . "pengadaan-barang")
+                @include($view . "rincian-barang")
             @endif
         @elseif ($jenis === 'e_catalog')
             @if ($metode === 'Jasa Konsultasi Pengawasan')
