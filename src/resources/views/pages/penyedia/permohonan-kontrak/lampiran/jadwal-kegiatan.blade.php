@@ -34,48 +34,49 @@
                 <form action="jadwal-kegiatan" method="POST">
                     @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
+                <input type="hidden" name="jadwal_kegiatan_id" id="jadwalKegiatanId">
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="kegiatan">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="kegiatan" id="kegiatan">
                 </td>
                 <td class="text-center border-gray-400/30 p-0">
-                    <input type="checkbox" name="bulan_1" id="" class="rounded">
+                    <input type="checkbox" name="bulan_1" class="rounded" id="kegiatanBulan1">
                 </td>
                 <td class="text-center border-gray-400/30 p-0">
-                    <input type="checkbox" name="bulan_2" id="" class="rounded">
+                    <input type="checkbox" name="bulan_2" class="rounded" id="kegiatanBulan2">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
-                    <input type="checkbox" name="bulan_3" id="" class="rounded">
+                    <input type="checkbox" name="bulan_3" class="rounded" id="kegiatanBulan3">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
-                    <input type="checkbox" name="bulan_4" id="" class="rounded">
+                    <input type="checkbox" name="bulan_4" class="rounded" id="kegiatanBulan4">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
-                    <input type="checkbox" name="bulan_5" id="" class="rounded">
+                    <input type="checkbox" name="bulan_5" class="rounded" id="kegiatanBulan5">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
-                    <input type="checkbox" name="bulan_6" id="" class="rounded">
+                    <input type="checkbox" name="bulan_6" class="rounded" id="kegiatanBulan6">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
-                    <input type="checkbox" name="bulan_7" id="" class="rounded">
+                    <input type="checkbox" name="bulan_7" class="rounded" id="kegiatanBulan7">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
-                    <input type="checkbox" name="bulan_8" id="" class="rounded">
+                    <input type="checkbox" name="bulan_8" class="rounded" id="kegiatanBulan8">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
-                    <input type="checkbox" name="bulan_9" id="" class="rounded">
+                    <input type="checkbox" name="bulan_9" class="rounded" id="kegiatanBulan9">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
-                    <input type="checkbox" name="bulan_10" id="" class="rounded">
+                    <input type="checkbox" name="bulan_10" class="rounded" id="kegiatanBulan10">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
-                    <input type="checkbox" name="bulan_11" id="" class="rounded">
+                    <input type="checkbox" name="bulan_11" class="rounded" id="kegiatanBulan11">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
-                    <input type="checkbox" name="bulan_12" id="" class="rounded">
+                    <input type="checkbox" name="bulan_12" class="rounded" id="kegiatanBulan12">
                 </td>
 
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan" id="kegiatanKeterangan">
                 </td>
                 <td class="text-center border border-gray-400/30">
                     <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
@@ -101,12 +102,12 @@
                         <td class="border border-gray-400/30">{{ $row->keterangan }}</td>
                         <td>
                             <div class="flex gap-1">
-                                <button class="btn btn-warning btn-sm text-gray-100">
+                                <label class="btn btn-warning btn-sm text-gray-100" onclick="editJadwalKegiatan({{ $row }})">
                                     <i class="fa fa-edit"></i>
-                                </button>
-                                <button class="btn btn-error btn-sm text-gray-100">
+                                </label>
+                                <label class="btn btn-error btn-sm text-gray-100" for="delete-modal" onclick="deleteJadwalKegiatan({{ $row->jadwal_kegiatan_id }})">
                                     <i class="fa fa-trash"></i>
-                                </button>
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -115,3 +116,43 @@
     </table>
 </div>
 
+
+<script>
+    function editJadwalKegiatan(jadwal) {
+
+
+        document.getElementById('jadwalKegiatanId').value = jadwal.jadwal_kegiatan_id;
+        document.getElementById('kegiatan').value = jadwal.kegiatan;
+        document.getElementById('kegiatanKeterangan').value = jadwal.keterangan;
+
+        const bulan1 = document.getElementById('kegiatanBulan1');
+        const bulan2 = document.getElementById('kegiatanBulan2');
+        const bulan3 = document.getElementById('kegiatanBulan3');
+        const bulan4 = document.getElementById('kegiatanBulan4');
+        const bulan5 = document.getElementById('kegiatanBulan5');
+        const bulan6 = document.getElementById('kegiatanBulan6');
+        const bulan7 = document.getElementById('kegiatanBulan7');
+        const bulan8 = document.getElementById('kegiatanBulan8');
+        const bulan9 = document.getElementById('kegiatanBulan9');
+        const bulan10 = document.getElementById('kegiatanBulan10');
+        const bulan11 = document.getElementById('kegiatanBulan11');
+        const bulan12 = document.getElementById('kegiatanBulan12');
+
+        bulan1.checked = jadwal.bulan_1;
+        bulan2.checked = jadwal.bulan_2;
+        bulan3.checked = jadwal.bulan_3;
+        bulan4.checked = jadwal.bulan_4;
+        bulan5.checked = jadwal.bulan_5;
+        bulan6.checked = jadwal.bulan_6;
+        bulan7.checked = jadwal.bulan_7;
+        bulan8.checked = jadwal.bulan_8;
+        bulan9.checked = jadwal.bulan_9;
+        bulan10.checked = jadwal.bulan_10;
+        bulan11.checked = jadwal.bulan_11;
+        bulan12.checked = jadwal.bulan_12;
+    }
+
+    function deleteJadwalKegiatan(id) {
+        document.getElementById('deleteForm').action = `jadwal-kegiatan/${id}`;
+    }
+</script>

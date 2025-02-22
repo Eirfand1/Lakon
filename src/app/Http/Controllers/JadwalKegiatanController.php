@@ -23,7 +23,7 @@ class JadwalKegiatanController extends Controller
                 'bulan_11' => $request->has('bulan_11'),
                 'bulan_12' => $request->has('bulan_12'),
             ]);
-            
+
             $validateData = $request->validate([
                 'kontrak_id' => 'required|exists:kontrak,kontrak_id',
                 'kegiatan' => 'required|string|max:255',
@@ -41,26 +41,54 @@ class JadwalKegiatanController extends Controller
                 'bulan_12' => 'boolean',
                 'keterangan' => 'string'
             ]);
+            if ($request->jadwal_kegiatan_id) {
+                JadwalKegiatan::where('jadwal_kegiatan_id', $request->jadwal_kegiatan_id)->update([
+                    'kegiatan' => $validateData['kegiatan'],
+                    'bulan_1' => $validateData['bulan_1'],
+                    'bulan_2' => $validateData['bulan_2'],
+                    'bulan_3' => $validateData['bulan_3'],
+                    'bulan_4' => $validateData['bulan_4'],
+                    'bulan_5' => $validateData['bulan_5'],
+                    'bulan_6' => $validateData['bulan_6'],
+                    'bulan_7' => $validateData['bulan_7'],
+                    'bulan_8' => $validateData['bulan_8'],
+                    'bulan_9' => $validateData['bulan_9'],
+                    'bulan_10' => $validateData['bulan_10'],
+                    'bulan_11' => $validateData['bulan_11'],
+                    'bulan_12' => $validateData['bulan_12'],
+                    'keterangan' => $validateData['keterangan'],
+                ]);
+                return redirect()->back()->with('success', 'Jadwal Kegiatan berhasil diubah.');
+            }else {
+                JadwalKegiatan::create([
+                    'kontrak_id' => $validateData['kontrak_id'],
+                    'kegiatan' => $validateData['kegiatan'],
+                    'bulan_1' => $validateData['bulan_1'],
+                    'bulan_2' => $validateData['bulan_2'],
+                    'bulan_3' => $validateData['bulan_3'],
+                    'bulan_4' => $validateData['bulan_4'],
+                    'bulan_5' => $validateData['bulan_5'],
+                    'bulan_6' => $validateData['bulan_6'],
+                    'bulan_7' => $validateData['bulan_7'],
+                    'bulan_8' => $validateData['bulan_8'],
+                    'bulan_9' => $validateData['bulan_9'],
+                    'bulan_10' => $validateData['bulan_10'],
+                    'bulan_11' => $validateData['bulan_11'],
+                    'bulan_12' => $validateData['bulan_12'],
+                    'keterangan' => $validateData['keterangan'],
+                ]);
+                return redirect()->back()->with('success', 'Jadwal Kegiatan berhasil disimpan.');
+            }
 
-            $dasarHukum = JadwalKegiatan::create([
-                'kontrak_id' => $validateData['kontrak_id'],
-                'kegiatan' => $validateData['kegiatan'],
-                'bulan_1' => $validateData['bulan_1'],
-                'bulan_2' => $validateData['bulan_2'],
-                'bulan_3' => $validateData['bulan_3'],
-                'bulan_4' => $validateData['bulan_4'],
-                'bulan_5' => $validateData['bulan_5'],
-                'bulan_6' => $validateData['bulan_6'],
-                'bulan_7' => $validateData['bulan_7'],
-                'bulan_8' => $validateData['bulan_8'],
-                'bulan_9' => $validateData['bulan_9'],
-                'bulan_10' => $validateData['bulan_10'],
-                'bulan_11' => $validateData['bulan_11'],
-                'bulan_12' => $validateData['bulan_12'],
-                'keterangan' => $validateData['keterangan'],
-            ]);
-            return redirect()->back()->with('success', 'Jadwal Kegiatan berhasil disimpan.');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 
+    public function destroy($jadwal_kegiatan_id){
+        try{
+            JadwalKegiatan::where('jadwal_kegiatan_id', $jadwal_kegiatan_id)->delete();
+            return redirect()->back()->with('success', 'Jadwal Kegiatan berhasil dihapus.');
         }catch(\Exception $e){
             return redirect()->back()->with('error', $e->getMessage());
         }
