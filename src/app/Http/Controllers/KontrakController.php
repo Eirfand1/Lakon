@@ -50,7 +50,6 @@ class KontrakController extends Controller
 
     public function edit(
         Kontrak $kontrak,
-        Peralatan $peralatan,
         RuangLingkup $ruangLingkup
         )
     {
@@ -66,7 +65,7 @@ class KontrakController extends Controller
             'totalBiaya' => $totalBiaya,
             'ppn' => $ppn,
             'peralatan' => Peralatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
-            'ruangLingkup' => $ruangLingkup
+            'ruangLingkup' => RuangLingkup::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
         ]);
     }
 

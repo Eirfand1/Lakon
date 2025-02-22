@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\RuangLingkup;
 use Illuminate\Http\Request;
 
 class RuangLingkupController extends Controller
@@ -13,7 +14,7 @@ class RuangLingkupController extends Controller
                 'ruang_lingkup' => 'required|string|max:255',
             ]);
 
-            $dasarHukum = Peralatan::create([
+            $dasarHukum = RuangLingkup::create([
                 'kontrak_id' => $validateData['kontrak_id'],
                 'ruang_lingkup' => $validateData['ruang_lingkup'],
             ]);
