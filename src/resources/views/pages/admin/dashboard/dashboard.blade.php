@@ -25,7 +25,7 @@
         <div class="grid grid-cols-12 gap-6">
 
             <!-- Permohonan kontrak baru -->
-           <x-dashboard.dashboard-card-05 />
+           <x-dashboard.dashboard-card-05 :permohonanKontrak="$permohonan_kontrak"/>
 
            <!-- Paket Pekerjaan -->
            <x-dashboard.dashboard-card-01 :paketPekerjaan="$paket_pekerjaan" />

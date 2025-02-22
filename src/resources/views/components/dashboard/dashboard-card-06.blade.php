@@ -1,7 +1,8 @@
 <div class=" mt-6 md:w-96 ">
         <div class="flex flex-col bg-white dark:bg-gray-800 shadow-sm rounded-xl">
             <div class="px-5 pt-5">
-                <header class="flex justify-between items-start ">
+                <header class="flex items-center gap-2 ">
+                    <i class="fa fa-user"></i>
                     <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100">Profile Pimpinan</h2>
                 </header>
             </div>

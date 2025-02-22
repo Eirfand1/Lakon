@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kontrak;
 use App\Models\SatuanKerja;
 use App\Models\PaketPekerjaan;
 use Illuminate\Http\Request;
@@ -18,6 +19,7 @@ class DashboardController extends Controller
         $non_tender = PaketPekerjaan::where('jenis_pengadaan', 'non_tender')->count();
         $e_catalog = PaketPekerjaan::where('jenis_pengadaan', 'e_catalog')->count();
         $dataFeed = new DataFeed();
+        $permohonan_kontrak = Kontrak::whereIsVerificated(false)->count();
 
         return view('pages.admin.dashboard.dashboard', [
             "profile_pimpinan" => $profile_pimpinan,
@@ -25,7 +27,9 @@ class DashboardController extends Controller
             "tender" => $tender,
             "non_tender" => $non_tender,
             "e_catalog" => $e_catalog,
-            'dataFeed' => $dataFeed
+            'dataFeed' => $dataFeed,
+            "permohonan_kontrak" => $permohonan_kontrak
+
         ]);
     }
 

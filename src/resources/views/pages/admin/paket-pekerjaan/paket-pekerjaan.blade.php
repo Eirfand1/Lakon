@@ -51,15 +51,15 @@
 
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle"/>
-        <div id="modal_matriks" class="modal">
-            <div class="modal-box max-w-[52rem] mx-auto rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
+        <div id="modal_matriks" class="modal modal-top px-3">
+            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
                         <h3 class="font-bold text-xl dark:text-gray-200">Tambah Data Paket Pekerjaan</h3>
                     </div>
                     <label for="add-modal"
-                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
+                        class="btn btn-sm btn-circle btn-ghost shadow-none rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
                         ✕
                     </label>
                 </div>
@@ -294,8 +294,8 @@
 
 
                     <div class="modal-action pt-4">
-                        <button type="submit" class="btn rounded text-white btn-primary">Simpan</button>
-                        <label for="add-modal" class="btn btn-ghost">Batal</label>
+                        <button type="submit" class="btn rounded-md btn-primary text-white bg-blue-600">Simpan</button>
+                        <label for="add-modal" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                     </div>
                 </form>
             </div>
@@ -303,15 +303,15 @@
 
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
-        <div id="modal_matriks" class="modal">
-            <div class="modal-box max-w-[52rem] mx-auto rounded-lg shadow-xl dark:bg-gray-800 bg-gray-50">
+        <div id="modal_matriks" class="modal modal-top px-3">
+            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
                         <h3 class="font-bold text-xl dark:text-gray-200">Edit Data Paket Pekerjaan</h3>
                     </div>
                     <label for="edit-modal"
-                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
+                        class="btn btn-sm btn-circle rounded-full shadow-none btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
                         ✕
                     </label>
                 </div>
@@ -551,8 +551,8 @@
 
 
                     <div class="modal-action pt-4">
-                        <button type="submit" class="btn rounded text-white btn-primary">Simpan</button>
-                        <label for="edit-modal" class="btn btn-ghost">Batal</label>
+                        <button type="submit" class="btn rounded-md text-white bg-blue-600 btn-primary">Simpan</button>
+                        <label for="edit-modal" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                     </div>
                 </form>
             </div>
@@ -561,9 +561,9 @@
 
         {{-- delete modal --}}
         <input type="checkbox" id="delete-modal" class="modal-toggle" />
-        <div class="modal modal-top">
+        <div class="modal modal-top px-3">
             <div
-                class="modal-box w-auto mt-5 mx-auto rounded-lg dark:text-white text-gray-800 bg-gray-100 dark:bg-gray-800">
+                class="modal-box w-auto mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
                 <h3 class="font-bold text-lg">Konfirmasi Hapus</h3>
                 <p>Apakah Anda yakin ingin menghapus data ini?</p>
                 <form id="deleteForm" method="POST">
