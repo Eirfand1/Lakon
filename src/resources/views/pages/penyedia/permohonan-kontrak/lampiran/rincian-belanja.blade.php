@@ -43,7 +43,7 @@
                 </td>
                 <td> </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan" id="keterangan">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan" id="keteranganBelanja">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
                     <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
@@ -101,7 +101,7 @@
         document.getElementById('qty').value = row.qty;
         document.getElementById('satuan').value = row.satuan;
         document.getElementById('hargaSatuan').value = row.harga_satuan;
-        document.getElementById('keterangan').value = row.keterangan;
+        document.getElementById('keteranganBelanja').value = row.keterangan;
     }
 
     function deleteRincianBelanja(id) {
