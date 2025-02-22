@@ -16,7 +16,7 @@ class RincianBelanjaController extends Controller
                 'qty' => 'required|numeric',
                 'satuan' => 'required|string|max:255',
                 'harga_satuan' => 'required|numeric',
-                'keterangan' => '|string',
+                'keterangan' => 'nullable|string',
             ]);
 
             $dasarHukum = RincianBelanja::create([
