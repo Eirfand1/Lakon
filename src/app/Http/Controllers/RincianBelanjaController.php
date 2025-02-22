@@ -19,18 +19,38 @@ class RincianBelanjaController extends Controller
                 'keterangan' => 'nullable|string',
             ]);
 
-            $dasarHukum = RincianBelanja::create([
-                'kontrak_id' => $validateData['kontrak_id'],
-                'jenis' => $validateData['jenis'],
-                'uraian' => $validateData['uraian'],
-                'qty' => $validateData['qty'],
-                'satuan' => $validateData['satuan'],
-                'harga_satuan' => $validateData['harga_satuan'],
-                'keterangan' => $validateData['keterangan'],
-            ]);
+            if ($request->rincian_belanja_id) {
+                RincianBelanja::where('rincian_belanja_id', $request->rincian_belanja_id)->update([
+                    'kontrak_id' => $validateData['kontrak_id'],
+                    'jenis' => $validateData['jenis'],
+                    'uraian' => $validateData['uraian'],
+                    'qty' => $validateData['qty'],
+                    'satuan' => $validateData['satuan'],
+                    'harga_satuan' => $validateData['harga_satuan'],
+                    'keterangan' => $validateData['keterangan'],
+                ]);
+                return redirect()->back()->with('success', 'data berhasil diperbarui.');
+            }else {
+                RincianBelanja::create([
+                    'kontrak_id' => $validateData['kontrak_id'],
+                    'jenis' => $validateData['jenis'],
+                    'uraian' => $validateData['uraian'],
+                    'qty' => $validateData['qty'],
+                    'satuan' => $validateData['satuan'],
+                    'harga_satuan' => $validateData['harga_satuan'],
+                    'keterangan' => $validateData['keterangan'],
+                ]);
+                return redirect()->back()->with('success', 'Rincian Belanja berhasil disimpan.');
+            }
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', $e->getMessage());
+        }
+    }
 
-            return redirect()->back()->with('success', 'Rincian Belanja berhasil disimpan.');
-
+    public function destroy($rincian_belanja){
+        try{
+            RincianBelanja::where('rincian_belanja_id', $rincian_belanja)->delete();
+            return redirect()->back()->with('success', 'Rincian Belanja berhasil dihapus.');
         }catch(\Exception $e){
             return redirect()->back()->with('error', $e->getMessage());
         }

@@ -52,14 +52,11 @@
 
 <script>
     function editRuangLingkup(row) {
-        console.log(row);
-
         document.getElementById('ruangLingkupId').value = row.ruang_lingkup_id;
         document.getElementById('ruangLingkup').value = row.ruang_lingkup;
     }
 
     function deleteRuangLingkup(id) {
-            document.getElementById('deleteForm').action = `ruang-lingkup/${id}`;
-            // document.getElementById('delete-modal').checked = true;
-        }
+        document.getElementById('deleteForm').action = `ruang-lingkup/${id}`;
+    }
 </script>
