@@ -100,7 +100,7 @@
                         <td class="@if ($row->bulan_11) bg-green-400 @else bg-red-400 @endif"></td>
                         <td class="@if ($row->bulan_12) bg-green-400 @else bg-red-400 @endif"></td>
                         <td class="border border-gray-400/30">{{ $row->keterangan }}</td>
-                        <td>
+                        <td class="border border-gray-400/30">
                             <div class="flex gap-1">
                                 <label class="btn btn-warning btn-sm text-gray-100" onclick="editJadwalKegiatan({{ $row }})">
                                     <i class="fa fa-edit"></i>
@@ -123,33 +123,19 @@
 
         document.getElementById('jadwalKegiatanId').value = jadwal.jadwal_kegiatan_id;
         document.getElementById('kegiatan').value = jadwal.kegiatan;
+        document.getElementById('kegiatanBulan1').checked = jadwal.bulan_1;
+        document.getElementById('kegiatanBulan2').checked = jadwal.bulan_2;
+        document.getElementById('kegiatanBulan3').checked = jadwal.bulan_3;
+        document.getElementById('kegiatanBulan4').checked = jadwal.bulan_4;
+        document.getElementById('kegiatanBulan5').checked = jadwal.bulan_5;
+        document.getElementById('kegiatanBulan6').checked = jadwal.bulan_6;
+        document.getElementById('kegiatanBulan7').checked = jadwal.bulan_7;
+        document.getElementById('kegiatanBulan8').checked = jadwal.bulan_8;
+        document.getElementById('kegiatanBulan9').checked = jadwal.bulan_9;
+        document.getElementById('kegiatanBulan10').checked = jadwal.bulan_10;
+        document.getElementById('kegiatanBulan11').checked = jadwal.bulan_11;
+        document.getElementById('kegiatanBulan12').checked = jadwal.bulan_12;
         document.getElementById('kegiatanKeterangan').value = jadwal.keterangan;
-
-        const bulan1 = document.getElementById('kegiatanBulan1');
-        const bulan2 = document.getElementById('kegiatanBulan2');
-        const bulan3 = document.getElementById('kegiatanBulan3');
-        const bulan4 = document.getElementById('kegiatanBulan4');
-        const bulan5 = document.getElementById('kegiatanBulan5');
-        const bulan6 = document.getElementById('kegiatanBulan6');
-        const bulan7 = document.getElementById('kegiatanBulan7');
-        const bulan8 = document.getElementById('kegiatanBulan8');
-        const bulan9 = document.getElementById('kegiatanBulan9');
-        const bulan10 = document.getElementById('kegiatanBulan10');
-        const bulan11 = document.getElementById('kegiatanBulan11');
-        const bulan12 = document.getElementById('kegiatanBulan12');
-
-        bulan1.checked = jadwal.bulan_1;
-        bulan2.checked = jadwal.bulan_2;
-        bulan3.checked = jadwal.bulan_3;
-        bulan4.checked = jadwal.bulan_4;
-        bulan5.checked = jadwal.bulan_5;
-        bulan6.checked = jadwal.bulan_6;
-        bulan7.checked = jadwal.bulan_7;
-        bulan8.checked = jadwal.bulan_8;
-        bulan9.checked = jadwal.bulan_9;
-        bulan10.checked = jadwal.bulan_10;
-        bulan11.checked = jadwal.bulan_11;
-        bulan12.checked = jadwal.bulan_12;
     }
 
     function deleteJadwalKegiatan(id) {
