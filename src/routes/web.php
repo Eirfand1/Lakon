@@ -47,7 +47,7 @@ Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(functio
     Route::post('/permohonan-kontrak/jadwal-kegiatan', [JadwalKegiatanController::class, 'store'])->name('penyedia.jadwal-kegiatan.store');
     Route::post('/permohonan-kontrak/rincian-belanja', [RincianBelanjaController::class, 'store'])->name('penyedia.rincian-belanja.store');
     Route::post('/permohonan-kontrak/peralatan', [PeralatanController::class, 'store'])->name('penyedia.peralatan.store');
-    Route::post('ruang-lingkup', [RuangLingkupController::class, 'store'])->name('penyedia.ruang-lingkup.store');
+    Route::post('/permohonan-kontrak/ruang-lingkup', [RuangLingkupController::class, 'store'])->name('penyedia.ruang-lingkup.store');
 
     Route::middleware('cekStatusPenyedia:konsultan')->group(function () {
         Route::get('/matrik', [PenyediaController::class, 'konsultanMatrikIndex'])->name('penyedia.konsultan.matrik.index');
