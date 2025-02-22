@@ -37,7 +37,8 @@ return new class extends Migration {
             $table->foreignId('verifikator_id')->nullable()
                 ->constrained('verifikator', 'verifikator_id')
                 ->cascadeOnDelete();
-            $table->boolean('is_verificated');
+            $table->boolean('is_verificated')->default(false);
+            $table->boolean('is_layangkan')->default(false);
             $table->timestamps();
         });
     }
