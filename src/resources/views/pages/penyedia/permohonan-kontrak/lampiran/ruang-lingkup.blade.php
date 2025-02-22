@@ -19,8 +19,9 @@
                 <form action="ruang-lingkup" method="POST">
                     @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
+                <input type="hidden" name="ruang_lingkup_id" id="ruangLingkupId">
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="ruang_lingkup">
+                    <input class="w-full dark:bg-gray-800 rounded" id="ruangLingkup" type="text" name="ruang_lingkup">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
                     <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
@@ -35,12 +36,12 @@
 
                         <td class="border border-gray-400/30">
                             <div class="flex gap-1">
-                                <button class="btn btn-warning btn-sm text-gray-100">
+                                <label class="btn btn-warning btn-sm text-gray-100" onclick="editRuangLingkup({{ $row }})">
                                     <i class="fa fa-edit"></i>
-                                </button>
-                                <button class="btn btn-error btn-sm text-gray-100">
+                                </label>
+                                <label class="btn btn-error btn-sm text-gray-100" for="delete-modal" onclick="deleteRuangLingkup({{ $row->ruang_lingkup_id }})">
                                     <i class="fa fa-trash"></i>
-                                </button>
+                                </label>
                             </div>
                         </td>
                     </tr>
@@ -48,3 +49,17 @@
         </tbody>
     </table>
 </div>
+
+<script>
+    function editRuangLingkup(row) {
+        console.log(row);
+
+        document.getElementById('ruangLingkupId').value = row.ruang_lingkup_id;
+        document.getElementById('ruangLingkup').value = row.ruang_lingkup;
+    }
+
+    function deleteRuangLingkup(id) {
+            document.getElementById('deleteForm').action = `ruang-lingkup/${id}`;
+            // document.getElementById('delete-modal').checked = true;
+        }
+</script>
