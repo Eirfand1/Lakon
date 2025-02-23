@@ -77,10 +77,32 @@ class KontrakController extends Controller
             }
 
             $validatedData = $request->validate([
-                'tgl_pembuatan' => now()->toDateString(),
+                // no dhppl dll di sini yaa
             ]);
 
+            $validatedData['tgl_pembuatan'] = now()->toDateString();
+
             $kontrak->update($validatedData);
+
+            return redirect()->back()->with('success', 'Data dasar berhasil diupdate.');
+
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Gagal menyimpan data dasar: ' . $e->getMessage());
+        }
+    }
+
+    public function layangkan(Request $request, Kontrak $kontrak)
+    {
+        try {
+            if ($kontrak->penyedia_id !== auth()->user()->penyedia->penyedia_id) {
+                abort(403, 'Unauthorized action.');
+            }
+
+            $data['is_layangkan'] = true;
+
+            $kontrak->update($data);
 
             return redirect()->route('penyedia.dashboard', ['kontrak' => $kontrak->id])
                 ->with('success', 'Permohonan Kontrak berhasil');
