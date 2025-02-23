@@ -41,28 +41,18 @@ Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(functio
     Route::post('/permohonan-kontrak', [KontrakController::class, 'store'])->name('penyedia.permohonan-kontrak.store');
     Route::get('/permohonan-kontrak/{kontrak}', [KontrakController::class, 'edit'])->name('penyedia.permohonan-kontrak.edit');
     Route::put('/permohonan-kontrak/{kontrak}', [KontrakController::class, 'update'])->name('penyedia.permohonan-kontrak.update');
-    Route::post('/permohonan-kontrak/layangkan/{kontrak}', [KontrakController::class, 'layangkan'])->name('penyedia.permohonan-kontrak.layangkan');
 
     // lampiran kontrak
-    // tim
-    Route::post('/permohonan-kontrak/tim', [TimController::class, 'store'])->name('penyedia.tim.store');
-    Route::delete('/permohonan-kontrak/tim/{tim}', [TimController::class, 'destroy'])->name('penyedia.tim.destroy');
+    Route::post('/tim', [TimController::class, 'store'])->name('penyedia.tim.store');
+    Route::post('jadwal-kegiatan', [JadwalKegiatanController::class, 'store'])->name('penyedia.jadwal-kegiatan.store');
+    Route::post('rincian-belanja', [RincianBelanjaController::class, 'store'])->name('penyedia.rincian-belanja.store');
+    Route::post('peralatan', [PeralatanController::class, 'store'])->name('penyedia.peralatan.store');
+    Route::post('ruang-lingkup', [RuangLingkupController::class, 'store'])->name('penyedia.ruang-lingkup.store');
 
-    // jadwal kegiatan
-    Route::post('/permohonan-kontrak/jadwal-kegiatan', [JadwalKegiatanController::class, 'store'])->name('penyedia.jadwal-kegiatan.store');
-    Route::delete('/permohonan-kontrak/jadwal-kegiatan/{jadwal_kegiatan}', [JadwalKegiatanController::class, 'destroy'])->name('penyedia.jadwal-kegiatan.destroy');
 
-    // rincian belanja
-    Route::post('/permohonan-kontrak/rincian-belanja', [RincianBelanjaController::class, 'store'])->name('penyedia.rincian-belanja.store');
-    Route::delete('/permohonan-kontrak/rincian-belanja/{rincian_belanja}', [RincianBelanjaController::class, 'destroy'])->name('penyedia.rincian-belanja.destroy');
-
-    // peralatan
-    Route::post('/permohonan-kontrak/peralatan', [PeralatanController::class, 'store'])->name('penyedia.peralatan.store');
-    Route::delete('/permohonan-kontrak/peralatan/{peralatan}', [PeralatanController::class, 'destroy'])->name('penyedia.peralatan.destroy');
-
-    // ruang lingkup
-    Route::post('/permohonan-kontrak/ruang-lingkup', [RuangLingkupController::class, 'store'])->name('penyedia.ruang-lingkup.store');
-    Route::delete('/permohonan-kontrak/ruang-lingkup/{ruang_lingkup}', [RuangLingkupController::class, 'destroy'])->name('penyedia.ruang-lingkup.destroy');
+    // Edit data perusahaan
+    Route::get('data-perusahaan', [PenyediaController::class, 'dataPerusahaanView'])->name('penyedia.data-perusahaan.view');
+    Route::put('data-perusahaan/{penyedia}', [PenyediaController::class, 'update'])->name('penyedia.data-perusahaan.update');
 
     Route::middleware('cekStatusPenyedia:konsultan')->group(function () {
         Route::get('/matrik', [PenyediaController::class, 'konsultanMatrikIndex'])->name('penyedia.konsultan.matrik.index');
@@ -108,8 +98,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
         Route::get('/', [PenyediaController::class, 'index'])->name('admin.penyedia.index');
         Route::put('/{penyedia}', [PenyediaController::class, 'update'])->name('admin.penyedia.edit');
         Route::delete('/{penyedia}', [PenyediaController::class, 'destroy'])->name('admin.penyedia.destroy');
-
-
 
     });
 

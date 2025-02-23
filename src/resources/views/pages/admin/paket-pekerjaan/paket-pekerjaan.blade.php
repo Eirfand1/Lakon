@@ -55,8 +55,7 @@
             <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
-                        <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
-                        <h3 class="font-bold text-xl dark:text-gray-200">Tambah Data Paket Pekerjaan</h3>
+                        <h3 class="font-bold text-xl dark:text-gray-200">TAMBAH PAKET PEKERJAAN</h3>
                     </div>
                     <label for="add-modal"
                         class="btn btn-sm btn-circle btn-ghost shadow-none rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
@@ -66,7 +65,7 @@
 
                 <form action="{{ route('admin.paket-pekerjaan.store') }}" method="POST" class="space-y-2 ">
                     @csrf
-                    <h1 class="border-b font-bold border-gray-200 pb-2 dark:border-gray-700 ">Program kerja</h1>
+                    <h1 class="border-b font-bold border-gray-200 pb-2 dark:border-gray-700 ">PROGRAM KERJA</h1>
 
                     <div x-data="subKegiatanManager({{ json_encode($subKegiatan) }})" class="space-y-2">
                         <x-label for="sub_kegiatan[]">Sub Kegiatan</x-label>
@@ -119,10 +118,10 @@
                     </div>
 
 
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Paket Pekerjaan</h1>
+                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">PAKET PEKERJAAN</h1>
 
                     <div class="pt-2">
-                        <x-label for="paket">Paket*</x-label>
+                        <x-label for="paket">Paket</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
                             <x-input type="text" name="kode_paket" id="" placeholder="Kode Paket"/>
                             <x-input type="text" name="nama_pekerjaan" id="" placeholder="Nama Paket"/>
@@ -206,7 +205,7 @@
                         required/>
                     </div>
 
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Pejabat Pembuat Komitmen
+                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">PEJABAT PEMBUAT KOMITMEN
                     </h1>
 
                     <div class="flex w-full flex-col pt-2 ">
@@ -242,7 +241,7 @@
                         </div>
                     </div>
 
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Informasi Satuan Kerja
+                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">INFORMASI SATUAN KERJA
                     </h1>
 
                     <input type="text" name="satker_id" id="" value="{{$satuanKerja->satker_id}}" hidden readonly>
@@ -305,8 +304,7 @@
             <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
-                        <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
-                        <h3 class="font-bold text-xl dark:text-gray-200">Edit Data Paket Pekerjaan</h3>
+                        <h3 class="font-bold text-xl dark:text-gray-200">EDIT PAKET PEKERJAAN</h3>
                     </div>
                     <label for="edit-modal"
                         class="btn btn-sm btn-circle rounded-full shadow-none btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
@@ -317,7 +315,7 @@
                 <form method="POST" class="space-y-2 " id="edit-form">
                     @csrf
                     @method('PUT')
-                    <h1 class="border-b font-bold border-gray-200 pb-2 dark:border-gray-700 ">Program kerja</h1>
+                    <h1 class="border-b font-bold border-gray-200 pb-2 dark:border-gray-700 ">PROGRAM KERJA</h1>
 
                     {{-- sub kegiatan --}}
                     <div x-data="subKegiatanManager({{ json_encode($subKegiatan) }})" class="space-y-2" id="sub-kegiatan-edit-manager">
@@ -373,7 +371,7 @@
                     </div>
 
                     {{-- paket pekerjaan || DONE --}}
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Paket Pekerjaan</h1>
+                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">PAKET PEKERJAAN</h1>
 
                     <div class="pt-2">
                         <x-label for="paket">Paket</x-label>
@@ -462,7 +460,7 @@
                         required />
                     </div>
 
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Pejabat Pembuat Komitmen
+                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">PEJABAT PEMBUAT KOMITMEN
                     </h1>
 
                     <div class="flex w-full flex-col pt-2 ">
@@ -498,7 +496,7 @@
                         </div>
                     </div>
 
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Informasi Satuan Kerja
+                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">INFORMASI SATUAN KERJA
                     </h1>
 
                     <input type="text" name="satker_id" id="" value="{{$satuanKerja->satker_id}}" hidden readonly>
