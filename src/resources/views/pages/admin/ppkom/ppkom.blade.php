@@ -100,7 +100,7 @@
                     <div class="form-control">
                         <x-label>Alamat</x-label>
                         <textarea name="alamat"
-                            class="rounded bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"></textarea>
+                            class="rounded bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-200"></textarea>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
@@ -109,7 +109,7 @@
                             <x-input type="number" name="no_telp"/>
                         </div>
                         <div class="form-control">
-                            <x-label class="label font-semibold dark:text-gray-300">Email</x-label>
+                            <x-label>Email</x-label>
                             <x-input type="email" name="email"/>
                         </div>
                     </div>
