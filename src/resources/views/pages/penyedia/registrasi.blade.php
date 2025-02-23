@@ -115,7 +115,7 @@
                             </label>
                             <input type="text" name="nama_pemilik" value="{{ old('nama_pemilik') }}" class="mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-blue-200
                             @error('nama_pemilik') border-red-500 @else border-gray-300 @enderror"
-                                placeholder="Nama Pemilik/Direktur sesuai KTP"/>
+                                placeholder="Nama Pemilik/Direktur sesuai KTP" />
                             @error('nama_pemilik')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                             @enderror
@@ -168,25 +168,35 @@
                             Akta Notaris <span class="text-red-500">*</span>
                         </label>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <input type="text" name="akta_notaris_no" value="{{old('akta_notaris_no')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                            <div>
+                                <input type="text" name="akta_notaris_no" value="{{old('akta_notaris_no')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
                                 @error('akta_notaris_no') border-red-500 @else border-gray-300 @enderror"
-                                placeholder="Nomor Akta Notaris" required>
-                            @error('akta_notaris_no')
-                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                            @enderror
-                            <input type="text" name="akta_notaris_nama" value="{{old('akta_notaris_nama')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                    placeholder="Nomor Akta Notaris" required>
+                                @error('akta_notaris_no')
+                                    <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <input type="text" name="akta_notaris_nama" value="{{old('akta_notaris_nama')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
                                 @error('akta_notaris_nama') border-red-500 @else border-gray-300 @enderror"
-                                placeholder="Nama Notaris" required>
-                            @error('akta_notaris_nama')
-                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                            @enderror
-                            <input type="date" name="akta_notaris_tanggal" value="{{old('akta_notaris_tanggal')}}"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                    placeholder="Nama Notaris" required>
+                                @error('akta_notaris_nama')
+                                    <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+                            <div>
+                                <input type="date" name="akta_notaris_tanggal" value="{{old('akta_notaris_tanggal')}}"
+                                    class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
                                 @error('akta_notaris_tanggal') border-red-500 @else border-gray-300 @enderror"
-                                placeholder="Tanggal Notaris" required>
-                            @error('akta_notaris_tanggal')
-                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
-                            @enderror
+                                    placeholder="Tanggal Notaris" required>
+                                @error('akta_notaris_tanggal')
+                                    <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                                @enderror
+                            </div>
+
+
                         </div>
                     </div>
 

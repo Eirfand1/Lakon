@@ -511,12 +511,16 @@
                     <div class="flex w-full flex-col ">
                         <x-label for="jabatan" class="w-full sm:w-1/4">Jabatan</x-label>
                         <x-input type="text" name="jabatan" id="" value="{{$satuanKerja->jabatan}}"
+
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             readonly/>
                     </div>
 
                     <div class="flex w-full flex-col ">
                         <x-label for="website" class="w-full sm:w-1/4">Website</x-label>
                         <x-input type="text" name="website" id="" value="{{$satuanKerja->website}}"
+
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             readonly/>
                     </div>
 
@@ -524,18 +528,24 @@
                     <div class="flex w-full flex-col ">
                         <x-label for="email" class="w-full sm:w-1/4">Email</x-label>
                         <x-input type="text" name="email" id="" value="{{$satuanKerja->email}}"
+
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             readonly/>
                     </div>
 
                     <div class="flex w-full flex-col ">
                         <x-label for="telp" class="w-full sm:w-1/4">Telepon</x-label>
                         <x-input type="text" name="telp" id="" value="{{$satuanKerja->telp}}"
+
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             readonly/>
                     </div>
 
                     <div class="flex w-full flex-col ">
                         <x-label for="klpd" class="w-full sm:w-1/4">KLPD</x-label>
                         <x-input type="text" name="klpd" id="" value="{{$satuanKerja->klpd}}"
+
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             readonly/>
                     </div>
 

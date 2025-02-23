@@ -202,11 +202,7 @@ class PenyediaController extends Controller
             ]);
 
             return redirect()->back()->with('success', 'Data berhasil ditambahkan!');
-        } catch (\Throwable $th) {
-            return redirect()->back()
-                ->with('error', $th->getMessage())
-                ->withInput()
-                ->withErrors($th->getMessage());
+
         } catch (QueryException $th) {
             return redirect()->back()->with('error', $th->getMessage())->withErrors($th->getMessage());
         }
