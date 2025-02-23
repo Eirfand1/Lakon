@@ -206,6 +206,7 @@
             </div>
         </form>
     </div>
+    @if ($kontrak->tgl_pembuatan)
     <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
         <p class="mb-4 text-sm text-gray-600 dark:text-gray-300">
             LAMPIRAN
@@ -276,7 +277,8 @@
             </button>
         </form>
     </div>
-
+    @endif
+    
     <!-- Delete -->
     <input type="checkbox" id="delete-modal" class="modal-toggle" />
     <div class="modal modal-top px-3">

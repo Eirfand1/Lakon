@@ -221,9 +221,4 @@ class PenyediaController extends Controller
     {
         return view('pages.penyedia.konsultan.matrik.matrik');
     }
-
-    
-
-
-
 }
