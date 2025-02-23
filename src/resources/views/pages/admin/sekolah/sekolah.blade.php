@@ -76,30 +76,26 @@
 
                 <form action="{{ route('admin.sekolah.store') }}" method="POST" class="space-y-2 ">
                     @csrf
-                    <div class="space-y-6">
+                    <div class="space-y-2">
                         <!-- NPSN & Nama Sekolah -->
                         <div class="grid grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium dark:text-gray-300 mb-2">NPSN*</label>
-                                <input type="text" id="npsn" name="npsn" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
-                            focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-700 dark:text-gray-200" required />
+                                <x-label>NPSN</x-label>
+                                <x-input type="text" id="npsn" name="npsn"  required />
                             </div>
                             <div>
-                                <label class="block text-sm font-medium dark:text-gray-300 mb-2">Nama Sekolah*</label>
-                                <input type="text" id="nama_sekolah" name="nama_sekolah" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
-                            focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-700 dark:text-gray-200" required />
+                                <x-label>Nama Sekolah</x-label>
+                                <x-input type="text" id="nama_sekolah" name="nama_sekolah"  required />
                             </div>
                         </div>
 
                         <!-- Jenjang & Status -->
                         <div class="grid grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium dark:text-gray-300 mb-2">Jenjang*</label>
-                                <select name="jenjang" id="jenjang" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
+                                <x-label>Jenjang</x-label>
+                                <select name="jenjang" id="jenjang" class="w-full h-10 px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-700 dark:text-gray-200">
+                            dark:bg-gray-900/20 dark:text-gray-200">
                                     <option value="">Pilih Jenjang</option>
                                     <option value="SD">SD</option>
                                     <option value="SMP">SMP</option>
@@ -108,10 +104,10 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium dark:text-gray-300 mb-2">Status*</label>
-                                <select name="status" id="status" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
+                                <x-label >Status</x-label>
+                                <select name="status" id="status" class="w-full px-3 py-2 h-10 rounded-md border border-gray-200 dark:border-gray-700
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-700 dark:text-gray-200">
+                            dark:bg-gray-900/20 dark:text-gray-200">
                                     <option value="">Pilih Status</option>
                                     <option value="NEGERI">Negeri</option>
                                     <option value="SWASTA">Swasta</option>
@@ -121,34 +117,28 @@
 
                         <!-- Alamat -->
                         <div>
-                            <label class="block text-sm font-medium dark:text-gray-300 mb-2">Alamat*</label>
-                            <textarea name="alamat" id="alamat" rows="3" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
+                            <label class="block text-sm font-medium dark:text-gray-300 mb-2">Alamat</label>
+                            <textarea name="alamat" id="alamat" rows="3" class="w-full px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700
                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                        dark:bg-gray-700 dark:text-gray-200" required></textarea>
+                        dark:bg-gray-900/20 dark:text-gray-200" required></textarea>
                         </div>
 
                         <!-- Desa & Kecamatan -->
                         <div class="grid grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium dark:text-gray-300 mb-2">Desa*</label>
-                                <input type="text" id="desa" name="desa" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
-                            focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-700 dark:text-gray-200" required />
+                                <x-label>Desa</x-label>
+                                <x-input type="text" id="desa" name="desa"  required />
                             </div>
                             <div>
-                                <label class="block text-sm font-medium dark:text-gray-300 mb-2">Kecamatan*</label>
-                                <input type="text" id="kecamatan" name="kecamatan" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
-                            focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-700 dark:text-gray-200" required />
+                                <x-label>Kecamatan</x-label>
+                                <x-input type="text" id="kecamatan" name="kecamatan"  required />
                             </div>
                         </div>
 
                         <!-- Koordinat -->
                         <div>
-                            <label class="block text-sm font-medium dark:text-gray-300 mb-2">Koordinat</label>
-                            <input type="text" id="koordinat" name="koordinat" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
-                        focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                        dark:bg-gray-700 dark:text-gray-200"/>
+                            <x-label>Koordinat</x-label>
+                            <x-input type="text" id="koordinat" name="koordinat"/>
                         </div>
                         <!-- Map -->
                         <div id="map" class="w-full h-96"></div>
@@ -185,30 +175,26 @@
                     @csrf
                     @method('PUT')
 
-                    <div class="space-y-6">
+                    <div class="space-y-2">
                         <!-- NPSN & Nama Sekolah -->
                         <div class="grid grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium dark:text-gray-300 mb-2">NPSN*</label>
-                                <input type="text" id="edit_npsn" name="npsn" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
-                            focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-700 dark:text-gray-200" required />
+                                <x-label>NPSN</x-label>
+                                <x-input type="text" id="edit_npsn" name="npsn" required />
                             </div>
                             <div>
-                                <label class="block text-sm font-medium dark:text-gray-300 mb-2">Nama Sekolah*</label>
-                                <input type="text" id="namaSekolah" name="nama_sekolah" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
-                            focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-700 dark:text-gray-200" required />
+                                <x-label>Nama Sekolah</x-label>
+                                <x-input type="text" id="namaSekolah" name="nama_sekolah" required />
                             </div>
                         </div>
 
                         <!-- Jenjang & Status -->
                         <div class="grid grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium dark:text-gray-300 mb-2">Jenjang*</label>
-                                <select name="jenjang" id="edit_jenjang" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
+                                <x-label >Jenjang</x-label>
+                                <select name="jenjang" id="edit_jenjang" class="w-full px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-700 dark:text-gray-200">
+                            dark:bg-gray-900/20 h-10 dark:text-gray-200">
                                     <option value="">Pilih Jenjang</option>
                                     <option value="SD">SD</option>
                                     <option value="SMP">SMP</option>
@@ -217,10 +203,10 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-sm font-medium dark:text-gray-300 mb-2">Status*</label>
-                                <select name="status" id="edit_status" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
+                                <x-label>Status</x-label>
+                                <select name="status" id="edit_status" class="w-full px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-700 dark:text-gray-200">
+                            dark:bg-gray-900/20 h-10 dark:text-gray-200">
                                     <option value="">Pilih Status</option>
                                     <option value="NEGERI">Negeri</option>
                                     <option value="SWASTA">Swasta</option>
@@ -230,34 +216,30 @@
 
                         <!-- Alamat -->
                         <div>
-                            <label class="block text-sm font-medium dark:text-gray-300 mb-2">Alamat*</label>
-                            <textarea name="alamat" id="edit_alamat" rows="3" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
+                            <label class="block text-sm font-medium dark:text-gray-300 mb-2">Alamat</label>
+                            <textarea name="alamat" id="edit_alamat" rows="3" class="w-full px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700
                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                        dark:bg-gray-700 dark:text-gray-200" required></textarea>
+                        dark:bg-gray-900/20 dark:text-gray-200" required></textarea>
                         </div>
 
                         <!-- Desa & Kecamatan -->
                         <div class="grid grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium dark:text-gray-300 mb-2">Desa*</label>
-                                <input type="text" id="edit_desa" name="desa" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
-                            focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-700 dark:text-gray-200" required />
+                                <x-label>Desa</x-label>
+                                <x-input type="text" id="edit_desa" name="desa" required />
                             </div>
                             <div>
-                                <label class="block text-sm font-medium dark:text-gray-300 mb-2">Kecamatan*</label>
-                                <input type="text" id="edit_kecamatan" name="kecamatan" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
-                            focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-700 dark:text-gray-200" required />
+                                <x-label >Kecamatan</x-label>
+                                <x-input type="text" id="edit_kecamatan" name="kecamatan"  required />
                             </div>
                         </div>
 
                         <!-- Koordinat -->
                         <div>
-                            <label class="block text-sm font-medium dark:text-gray-300 mb-2">Koordinat</label>
-                            <input type="text" id="edit_koordinat" name="koordinat" class="w-full px-3 py-2 rounded-md border border-gray-300 dark:border-gray-600
+                            <x-label class="block text-sm font-medium dark:text-gray-300 mb-2">Koordinat</x-label>
+                            <x-input type="text" id="edit_koordinat" name="koordinat" class="w-full px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700
                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                        dark:bg-gray-700 dark:text-gray-200"/>
+                        dark:bg-gray-900/20 dark:text-gray-200"/>
                         </div>
                         <!-- Map -->
                         <div id="edit_map" class="w-full h-96"></div>
@@ -289,11 +271,11 @@
                 @csrf
                 @method('DELETE')
                 <div class="modal-action">
-                    <button type="submit" class="btn btn-error">
-                        <i class="fa-solid fa-trash"></i>
-                        <span>Hapus</span>
-                    </button>
-                    <label for="delete-sekolah" class="btn">Batal</label>
+                        <x-danger-button type="submit">
+                            <i class="fa-solid fa-trash"></i>
+                            <span>Hapus</span>
+                        </x-danger-button>
+                        <label for="delete-sekolah" class="btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                 </div>
             </form>
         </div>

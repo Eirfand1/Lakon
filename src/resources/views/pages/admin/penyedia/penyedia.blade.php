@@ -65,123 +65,108 @@
                     @method('PUT')
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div class="md:col-span-1">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                            <x-label>
                                 NIK <span class="text-red-500">*</span>
                                 <small class="block text-xs text-gray-500">Nomor Induk Kependudukan
                                     Pemilik/Direktur</small>
-                            </label>
-                            <input type="number" name="NIK" id="edit_nik"
-                                class="mt-1 block bg-white dark:bg-gray-50/10 dark:border-gray-600 w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Nomor Induk Kependudukan" required>
+                            </x-label>
+                            <x-input type="number" name="NIK" id="edit_nik"
+                                placeholder="Nomor Induk Kependudukan" required />
                         </div>
                         <div class="md:col-span-1">
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                            <x-label>
                                 Nama <span class="text-red-500">*</span>
                                 <small class="block text-xs text-gray-500">Nama Pemilik/Direktur Perusahaan</small>
-                            </label>
-                            <input type="text" name="nama_pemilik" id="edit_nama_pemilik"
-                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Nama Pemilik/Direktur sesuai KTP" required>
+                            </x-label>
+                            <x-input type="text" name="nama_pemilik" id="edit_nama_pemilik"
+                                placeholder="Nama Pemilik/Direktur sesuai KTP" required />
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                        <x-label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                             Alamat <span class="text-red-500">*</span>
                             <small class="block text-xs text-gray-500">Alamat Pemilik/Direktur Perusahaan</small>
-                        </label>
+                        </x-label>
                         <textarea name="alamat_pemilik" id="edit_alamat_pemilik"
-                            class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            class="mt-1 bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             rows="3" placeholder="Alamat lengkap Pemilik/Direktur sesuai dengan KTP"
                             required></textarea>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                            <x-label>
                                 Nama Perusahaan (lengkap) <span class="text-red-500">*</span>
-                            </label>
-                            <input type="text" name="nama_perusahaan_lengkap" id="edit_nama_perusahaan_lengkap"
-                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Nama Lengkap Perusahaan" required>
+                            </x-label>
+                            <x-input type="text" name="nama_perusahaan_lengkap" id="edit_nama_perusahaan_lengkap"
+                                placeholder="Nama Lengkap Perusahaan" required />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                            <x-label>
                                 Nama Perusahaan (singkat) <span class="text-red-500">*</span>
-                            </label>
-                            <input type="text" name="nama_perusahaan_singkat" id="edit_nama_perusahaan_singkat"
-                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Nama Singkat Perusahaan" required>
+                            </x-label>
+                            <x-input type="text" name="nama_perusahaan_singkat" id="edit_nama_perusahaan_singkat"
+                                placeholder="Nama Singkat Perusahaan" required />
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                        <x-label>
                             Akta Notaris <span class="text-red-500">*</span>
-                        </label>
+                        </x-label>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <input type="text" name="akta_notaris_no" id="edit_akta_notaris_no"
-                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Nomor Akta Notaris" required>
-                            <input type="text" name="akta_notaris_nama" id="edit_akta_notaris_nama"
-                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Nama Notaris" required>
-                            <input type="date" name="akta_notaris_tanggal" id="edit_akta_notaris_tanggal"
-                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Tanggal Notaris" required>
+                            <x-input type="text" name="akta_notaris_no" id="edit_akta_notaris_no"
+                                placeholder="Nomor Akta Notaris" required />
+                            <x-input type="text" name="akta_notaris_nama" id="edit_akta_notaris_nama"
+                                placeholder="Nama Notaris" required />
+                            <x-input type="date" name="akta_notaris_tanggal" id="edit_akta_notaris_tanggal"
+                                placeholder="Tanggal Notaris" required />
                         </div>
                     </div>
 
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                        <x-label>
                             Alamat Perusahaan <span class="text-red-500">*</span>
-                        </label>
+                        </x-label>
                         <textarea name="alamat_perusahaan" id="edit_alamat_perusahaan"
-                            class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            class="mt-1 bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             rows="3" placeholder="Alamat lengkap perusahaan" required></textarea>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                            <x-label>
                                 No. Telepon Perusahaan <span class="text-red-500">*</span>
-                            </label>
-                            <input type="number" name="kontak_hp" id="edit_kontak_hp"
-                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="No. Telp Perusahaan" required>
+                            </x-label>
+                            <x-input type="number" name="kontak_hp" id="edit_kontak_hp"
+                                placeholder="No. Telp Perusahaan" required/>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                            <x-label>
                                 Email Perusahaan <span class="text-red-500">*</span>
-                            </label>
-                            <input type="email" name="kontak_email" id="edit_kontak_email"
-                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Email Perusahaan" required>
+                            </x-label>
+                            <x-input type="email" name="kontak_email" id="edit_kontak_email"
+                                placeholder="Email Perusahaan" required/>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                            <x-label>
                                 NPWP Perusahaan <span class="text-red-500">*</span>
                                 <small class="block text-xs text-gray-500">Nomor Pokok Wajib Pajak</small>
-                            </label>
-                            <input type="text" name="npwp_perusahaan" id="edit_npwp_perusahaan"
-                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Nomor Pokok Wajib Pajak" required>
+                            </x-label>
+                            <x-input type="text" name="npwp_perusahaan" id="edit_npwp_perusahaan"
+                                placeholder="Nomor Pokok Wajib Pajak" required />
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                            <x-label>
                                 Logo Perusahaan
                                 <small class="block text-xs text-gray-500">Unggah logo perusahaan (maks. 2MB)</small>
-                            </label>
-                            <input type="file" name="logo_perusahaan" accept="image/png, image/jpg, image/jpeg" class="mt-1 block w-full text-sm text-gray-500
-                                                                  file:mr-4 border p-1 bg-white dark:bg-gray-50/10 
-                                                                  dark:border-gray-600 file:rounded-md rounded-md 
-                                                                  file:border-0 file:text-sm file:font-medium
-                                                                  file:bg-blue-50 file:text-blue-700
-                                                                  hover:file:bg-blue-100"
-                                onchange="previewLogo(event)">
+                            </x-label>
+                            <x-input type="file" name="logo_perusahaan" accept="image/png, image/jpg, image/jpeg" 
+                                onchange="previewLogo(event)"/>
 
                             <img id="logoPreview" src="" class="mt-2  object-cover rounded-lg"
                                 alt="Logo Preview" width="100">
@@ -210,28 +195,25 @@
 
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                            <x-label>
                                 Nomor Rekening <span class="text-red-500">*</span>
-                            </label>
-                            <input type="text" name="rekening_norek" id="edit_rekening_norek"
-                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Nomor Rekening" required>
+                            </x-label>
+                            <x-input type="text" name="rekening_norek" id="edit_rekening_norek"
+                                placeholder="Nomor Rekening" required/>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                            <x-label>
                                 Nama Rekening <span class="text-red-500">*</span>
-                            </label>
-                            <input type="text" name="rekening_nama" id="edit_rekening_nama"
-                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Nama Pemilik Rekening" required>
+                            </x-label>
+                            <x-input type="text" name="rekening_nama" id="edit_rekening_nama"
+                                placeholder="Nama Pemilik Rekening" required/>
                         </div>
                         <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                            <x-label>
                                 Bank <span class="text-red-500">*</span>
-                            </label>
-                            <input type="text" name="rekening_bank" id="edit_rekening_bank"
-                                class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Nama Bank" required>
+                            </x-label>
+                            <x-input type="text" name="rekening_bank" id="edit_rekening_bank"
+                                placeholder="Nama Bank" required/>
                         </div>
                     </div>
 
@@ -242,7 +224,7 @@
                             <small class="block text-xs text-gray-500">Pilih status perusahaan</small>
                         </label>
                         <select name="status" id="edit_status"
-                            class="mt-1 bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            class="mt-1 bg-white dark:bg-gray-900/20 h-10 text-sm dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             required>
                             <option value="" disabled selected>Pilih Status</option>
                             <option value="biasa">Biasa</option>
@@ -278,11 +260,11 @@
                     @csrf
                     @method('DELETE')
                     <div class="modal-action">
-                        <button type="submit" class="btn btn-error">
+                        <x-danger-button type="submit">
                             <i class="fa-solid fa-trash"></i>
                             <span>Hapus</span>
-                        </button>
-                        <label for="delete-modal" class="btn">Batal</label>
+                        </x-danger-button>
+                        <label for="delete-modal" class="btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                     </div>
                 </form>
             </div>
