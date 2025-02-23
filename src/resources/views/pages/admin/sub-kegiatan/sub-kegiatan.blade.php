@@ -67,24 +67,24 @@
                 <form action="{{ route('admin.sub-kegiatan.store') }}" method="POST" class="space-y-2 ">
                     @csrf
                     <div class="flex w-full flex-col ">
-                        <label for="no_rekening" class="w-full sm:w-1/4">Nomor Rekening*</label>
-                        <input type="number" name="no_rekening" id="no_rekening"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200">
+                        <x-label for="no_rekening" class="w-full sm:w-1/4">Nomor Rekening</x-label>
+                        <x-input type="number" name="no_rekening" id="no_rekening"
+                        />
                     </div>
                     <div class="flex w-full flex-col ">
-                        <label for="nama_sub_kegiatan" class="w-full sm:w-1/4">Nama Sub Kegiatan*</label>
-                        <input type="text" name="nama_sub_kegiatan" id="nama_sub_kegiatan"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200">
+                        <x-label for="nama_sub_kegiatan" class="w-full sm:w-1/4">Nama Sub Kegiatan</x-label>
+                        <x-input type="text" name="nama_sub_kegiatan" id="nama_sub_kegiatan"
+                        />
                     </div>
                     <div class="flex w-full flex-col ">
-                        <label for="gabungan" class="w-full sm:w-1/4">Gabungan*</label>
-                        <input type="text" name="gabungan" id="gabungan"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200">
+                        <x-label for="gabungan" class="w-full sm:w-1/4">Gabungan</x-label>
+                        <x-input type="text" name="gabungan" id="gabungan"
+                        />
                     </div>
                     <div class="flex w-full flex-col ">
-                        <label for="pendidikan" class="w-full sm:w-1/4">Pendidikan*</label>
-                        <input type="text" name="pendidikan" id="pendidikan"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200">
+                        <x-label for="pendidikan" class="w-full sm:w-1/4">Pendidikan</x-label>
+                        <x-input type="text" name="pendidikan" id="pendidikan"
+                        />
                     </div>
 
                     <div class="modal-action pt-4">
@@ -110,35 +110,29 @@
                     </label>
                 </div>
 
-                <form id="editForm" method="POST" class="space-y-4 pt-4">
+                <form id="editForm" method="POST" class="space-y-2">
                     @csrf
                     @method('PUT')
-                    <div class="grid md:grid-cols-1 gap-4">
-                        <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">Nomor Rekening</label>
-                            <input type="number" id="noRekening" name="no_rekening"
-                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
+                        <div class="w-full flex flex-col">
+                            <x-label >Nomor Rekening</x-label>
+                            <x-input type="number" id="noRekening" name="no_rekening"
                                 required />
                         </div>
-                        <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">Nama Sub Kegiatan</label>
-                            <input type="text" id="namaSubKegiatan" name="nama_sub_kegiatan"
-                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
+                        <div class="">
+                            <x-label >Nama Sub Kegiatan</x-label>
+                            <x-input type="text" id="namaSubKegiatan" name="nama_sub_kegiatan"
                                 required />
                         </div>
-                        <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">Gabungan</label>
-                            <input type="text" id="edit_gabungan" name="gabungan"
-                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
+                        <div class="">
+                            <x-label >Gabungan</x-label>
+                            <x-input type="text" id="edit_gabungan" name="gabungan"
                                 required />
                         </div>
-                        <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">Pendidikan</label>
-                            <input type="text" id="edit_pendidikan" name="pendidikan"
-                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
+                        <div class="">
+                            <x-label>Pendidikan</x-label>
+                            <x-input type="text" id="edit_pendidikan" name="pendidikan"
                                 required />
                         </div>
-                    </div>
 
                     <div class="modal-action">
                         <button type="submit" class="btn bg-blue-600 btn-primary text-white rounded-md">Update</button>
@@ -159,11 +153,11 @@
                     @csrf
                     @method('DELETE')
                     <div class="modal-action">
-                        <button type="submit" class="btn btn-error">
+                        <x-danger-button type="submit">
                             <i class="fa-solid fa-trash"></i>
                             <span>Hapus</span>
-                        </button>
-                        <label for="delete-sub-kegiatan" class="btn">Batal</label>
+                        </x-danger-button>
+                        <label for="delete-sub-kegiatan" class="btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                     </div>
                 </form>
             </div>

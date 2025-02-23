@@ -69,22 +69,22 @@
                     <h1 class="border-b font-bold border-gray-200 pb-2 dark:border-gray-700 ">Program kerja</h1>
 
                     <div x-data="subKegiatanManager({{ json_encode($subKegiatan) }})" class="space-y-2">
-                        <label for="sub_kegiatan[]">Sub Kegiatan</label>
+                        <x-label for="sub_kegiatan[]">Sub Kegiatan</x-label>
                         <template x-for="(input, index) in inputs" :key="index">
                             <div class="relative w-full">
                                 <div class="flex items-center gap-2">
-                                    <input type="text" x-model="input.search" name="sub_kegiatan[]"
+                                    <x-input type="text" x-model="input.search" name="sub_kegiatan[]"
                                         @input.debounce.100ms="filterOptions(index)" @focus="showDropdown(index)"
                                         @click.away="input.showDropdown = false" placeholder="Pilih Sub Kegiatan"
-                                        class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                                        />
 
 
-                                    <button type="button" @click="removeInput(index)"
-                                        class="text-white bg-error p-2 rounded-lg px-3 hover:text-red-700"
-                                        x-show="inputs.length > 1">
+                                    <x-danger-button @click="removeInput(index)"
+                                        x-show="inputs.length > 1"
+                                        @class(['py-0', 'btn-sm'])
+                                        >
                                         <i class="fa-solid fa-xmark"></i>
-
-                                    </button>
+                                    </x-danger-button>
                                 </div>
 
                                 <div x-show="input.showDropdown && input.filteredOptions.length" x-transition
@@ -109,9 +109,9 @@
 
 
                     <div class="flex w-full flex-col pb-4 ">
-                        <label for="sumber_dana" class="w-full sm:w-1/4">Sumber dana*</label>
+                        <x-label for="sumber_dana" class="w-full sm:w-1/4">Sumber dana*</x-label>
                         <select name="sumber_dana" id=""
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                            class="w-3/4 h-10 text-sm rounded-lg bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                             <option value="APBN">APBN</option>
                             <option value="APBD">APBD</option>
                             <option value="Swasta">Swasta</option>
@@ -122,12 +122,10 @@
                     <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Paket Pekerjaan</h1>
 
                     <div class="pt-2">
-                        <label for="paket">Paket*</label>
+                        <x-label for="paket">Paket*</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-                            <input type="text" name="kode_paket" id="" placeholder="Kode Paket"
-                                class="w-1/2 sm:w-1/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
-                            <input type="text" name="nama_pekerjaan" id="" placeholder="Nama Paket"
-                                class="w-full sm:w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                            <x-input type="text" name="kode_paket" id="" placeholder="Kode Paket"/>
+                            <x-input type="text" name="nama_pekerjaan" id="" placeholder="Nama Paket"/>
                         </div>
                     </div>
 
@@ -137,10 +135,10 @@
 
                         <label for="nama_sekolah" class="w-full sm:w-1/4">Sekolah (Optional)</label>
                         <div class="relative w-full">
-                            <input type="text" x-model="search" @input.debounce.100ms="filterOptions()"
+                            <x-input type="text" x-model="search" @input.debounce.100ms="filterOptions()"
                                 @focus="showDropdown = true" @click.away="showDropdown = false"
                                 placeholder="Pilih Sekolah"
-                                class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                                />
 
 
                             <i class="fas fa-chevron-down text-sm absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300"></i>
@@ -158,23 +156,23 @@
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="waktu_paket" class="w-full sm:w-1/4">Waktu Paket*</label>
-                        <input type="date" name="waktu_paket" id=""
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                        <x-label for="waktu_paket" class="w-full sm:w-1/4">Waktu Paket</x-label>
+                        <x-input type="date" name="waktu_paket" id=""
+                        />
                     </div>
 
                     <div class="flex w-full flex-col  ">
-                        <label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan*</label>
+                        <x-label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
                             <select name="jenis_pengadaan" id=""
-                                class="sm:w-1/4 w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                                class="sm:w-1/4 w-3/4 text-sm  rounded-lg bg-white h-10 dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                                 <option value="tender">Tender</option>
                                 <option value="non_tender">Non-Tender</option>
                                 <option value="e_catalog">E-Catalog</option>
                             </select>
 
                             <select name="metode_pemilihan" id=""
-                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                                class="w-3/4 text-sm rounded-lg bg-white h-10 dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                                 <option value="" disabled selected>Pilih Jenis Pengadaan</option>
                                 <option value="Jasa Konsultasi Pengawasan">Jasa Konsultasi Pengawasan</option>
                                 <option value="Jasa Konsultasi Perencanaan">Jasa Konsultasi Perencanaan</option>
@@ -185,36 +183,36 @@
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="nilai_pagu_paket" class="w-full sm:w-1/4">Nilai Pagu Paket*</label>
-                        <input type="number" name="nilai_pagu_paket" id=""
-                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                        <x-label for="nilai_pagu_paket" class="w-full sm:w-1/4">Nilai Pagu Paket</x-label>
+                        <x-input type="number" name="nilai_pagu_paket" id=""
+                        required/>
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="nilai_pagu_anggaran" class="w-full sm:w-1/4">Nilai Pagu Anggaran*</label>
-                        <input type="number" name="nilai_pagu_anggaran" id=""
-                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                        <x-label for="nilai_pagu_anggaran" class="w-full sm:w-1/4">Nilai Pagu Anggaran</x-label>
+                        <x-input type="number" name="nilai_pagu_anggaran" id=""
+                        required/>
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="nilai_hps" class="w-full sm:w-1/4">Nilai HPS*</label>
-                        <input type="number" name="nilai_hps" id=""
-                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                        <x-label for="nilai_hps" class="w-full sm:w-1/4">Nilai HPS</x-label>
+                        <x-input type="number" name="nilai_hps" id=""
+                        required/>
                     </div>
 
                     <div class="flex w-full flex-col pb-4 ">
-                        <label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran*</label>
-                        <input type="number" name="tahun_anggaran" id=""
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                        <x-label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran</x-label>
+                        <x-input type="number" name="tahun_anggaran" id=""
+                        required/>
                     </div>
 
                     <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Pejabat Pembuat Komitmen
                     </h1>
 
                     <div class="flex w-full flex-col pt-2 ">
-                        <label for="ppkom_id" class="w-full sm:w-1/4">Ppkom*</label>
+                        <x-label for="ppkom_id" class="w-full sm:w-1/4">Ppkom</x-label>
                         <select name="ppkom_id" id="ppkom_id"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                            class="w-3/4 rounded bg-white h-10 text-sm dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                             <option value="" disabled selected>Pilih Pegawai</option>
                             @foreach($ppkom as $ppk)
                                 <option value="{{ $ppk->ppkom_id }}">{{ $ppk->nama }}</option>
@@ -223,12 +221,12 @@
                     </div>
 
                     <div x-data="daskumManager({{ json_encode($dasarHukum) }})" class="flex w-full flex-col pb-4">
-                        <label for="daskum_id" class="w-full sm:w-1/4">Dasar Hukum*</label>
+                        <x-label for="daskum_id" class="w-full sm:w-1/4">Dasar Hukum</x-label>
                         <div class="relative w-full">
-                            <input type="text" x-model="search" @input.debounce.100ms="filterOptions()"
+                            <x-input type="text" x-model="search" @input.debounce.100ms="filterOptions()"
                                 @focus="showDropdown = true" @click.away="showDropdown = false"
                                 placeholder="Pilih Dasar Hukum"
-                                class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                                required />
 
                             <i class="fas fa-chevron-down text-sm absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300"></i>
 
@@ -249,46 +247,46 @@
 
                     <input type="text" name="satker_id" id="" value="{{$satuanKerja->satker_id}}" hidden readonly>
                     <div class="flex w-full flex-col py-2 ">
-                        <label for="nama_pimpinan" class="w-full sm:w-1/4">Nama pimpinan</label>
-                        <input type="text" name="nama_pimpinan" id="" value="{{$satuanKerja->nama_pimpinan}}"
+                        <x-label for="nama_pimpinan" class="w-full sm:w-1/4">Nama pimpinan</x-label>
+                        <x-input type="text" name="nama_pimpinan" id="" value="{{$satuanKerja->nama_pimpinan}}"
                             class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly>
+                            readonly/>
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="jabatan" class="w-full sm:w-1/4">Jabatan</label>
-                        <input type="text" name="jabatan" id="" value="{{$satuanKerja->jabatan}}"
+                        <x-label for="jabatan" class="w-full sm:w-1/4">Jabatan</x-label>
+                        <x-input type="text" name="jabatan" id="" value="{{$satuanKerja->jabatan}}"
                             class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly>
+                            readonly/>
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="website" class="w-full sm:w-1/4">Website</label>
-                        <input type="text" name="website" id="" value="{{$satuanKerja->website}}"
+                        <x-label for="website" class="w-full sm:w-1/4">Website</x-label>
+                        <x-input type="text" name="website" id="" value="{{$satuanKerja->website}}"
                             class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly>
+                            readonly/>
                     </div>
 
 
                     <div class="flex w-full flex-col ">
-                        <label for="email" class="w-full sm:w-1/4">Email</label>
-                        <input type="text" name="email" id="" value="{{$satuanKerja->email}}"
+                        <x-label for="email" class="w-full sm:w-1/4">Email</x-label>
+                        <x-input type="text" name="email" id="" value="{{$satuanKerja->email}}"
                             class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly>
+                            readonly/>
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="telp" class="w-full sm:w-1/4">Telepon</label>
-                        <input type="text" name="telp" id="" value="{{$satuanKerja->telp}}"
+                        <x-label for="telp" class="w-full sm:w-1/4">Telepon</x-label>
+                        <x-input type="text" name="telp" id="" value="{{$satuanKerja->telp}}"
                             class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly>
+                            readonly/>
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="klpd" class="w-full sm:w-1/4">KLPD</label>
-                        <input type="text" name="klpd" id="" value="{{$satuanKerja->klpd}}"
+                        <x-label for="klpd" class="w-full sm:w-1/4">KLPD</x-label>
+                        <x-input type="text" name="klpd" id="" value="{{$satuanKerja->klpd}}"
                             class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly>
+                            readonly/>
                     </div>
 
 
@@ -323,24 +321,23 @@
 
                     {{-- sub kegiatan --}}
                     <div x-data="subKegiatanManager({{ json_encode($subKegiatan) }})" class="space-y-2" id="sub-kegiatan-edit-manager">
-                        <label for="sub_kegiatan[]">Sub Kegiatan</label>
+                        <x-label for="sub_kegiatan[]">Sub Kegiatan</x-label>
                         <template x-for="(input, index) in inputs" :key="index">
                             <div class="relative w-full">
 
                                 {{-- filed sub kegiatan --}}
                                 <div class="flex items-center gap-2">
-                                    <input type="text" x-model="input.search" name="sub_kegiatan[]" id="sub_kegiatan[]"
+                                    <x-input type="text" x-model="input.search" name="sub_kegiatan[]" id="sub_kegiatan[]"
                                         @input.debounce.100ms="filterOptions(index)" @focus="showDropdown(index)"
                                         @click.away="input.showDropdown = false" placeholder="Pilih Sub Kegiatan"
-                                        class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                                       required />
 
 
-                                    <button type="button" @click="removeInput(index)"
-                                        class="text-white bg-error p-2 rounded-lg px-3 hover:text-red-700"
+                                    <x-danger-button type="button" @click="removeInput(index)"
                                         x-show="inputs.length > 1">
                                         <i class="fa-solid fa-xmark"></i>
 
-                                    </button>
+                                    </x-danger-button>
                                 </div>
 
                                 <div x-show="input.showDropdown && input.filteredOptions.length" x-transition
@@ -366,9 +363,9 @@
 
                     {{-- sumber dana || DONE --}}
                     <div class="flex w-full flex-col pb-4 ">
-                        <label for="sumber_dana" class="w-full sm:w-1/4">Sumber dana*</label>
+                        <x-label for="sumber_dana" class="w-full sm:w-1/4">Sumber dana</x-label>
                         <select name="sumber_dana" id="sumber_dana"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                            class="w-3/4 rounded-lg text-sm bg-white dark:bg-gray-900/20 dark:border-gray-700 h-10 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                             <option value="APBN">APBN</option>
                             <option value="APBD">APBD</option>
                             <option value="Swasta">Swasta</option>
@@ -379,12 +376,12 @@
                     <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Paket Pekerjaan</h1>
 
                     <div class="pt-2">
-                        <label for="paket">Paket*</label>
+                        <x-label for="paket">Paket</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-                            <input type="text" name="kode_paket" id="kode_paket" placeholder="Kode Paket"
-                                class="w-1/2 sm:w-1/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
-                            <input type="text" name="nama_pekerjaan" id="nama_pekerjaan" placeholder="Nama Paket"
-                                class="w-full sm:w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                            <x-input type="text" name="kode_paket" id="kode_paket" placeholder="Kode Paket"
+                            required />
+                            <x-input type="text" name="nama_pekerjaan" id="nama_pekerjaan" placeholder="Nama Paket"
+                             required />
                         </div>
                     </div>
 
@@ -392,12 +389,12 @@
                     {{-- Sekolah --}}
                     <div x-data="sekolahManager({{ json_encode($sekolah) }})" class="flex w-full flex-col" id="sekolah-edit-manager">
 
-                        <label for="nama_sekolah" class="w-full sm:w-1/4">Sekolah (Optional)</label>
+                        <x-label for="nama_sekolah" class="w-full sm:w-1/4">Sekolah (Optional)</x-label>
                         <div class="relative w-full">
-                            <input type="text" x-model="search" @input.debounce.100ms="filterOptions()" id="nama_sekolah" value="aaaaaaaaa"
+                            <x-input type="text" x-model="search" @input.debounce.100ms="filterOptions()" id="nama_sekolah" value="aaaaaaaaa"
                                 @focus="showDropdown = true" @click.away="showDropdown = false"
                                 placeholder="Pilih Sekolah"
-                                class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                               required />
 
 
                             <i class="fas fa-chevron-down text-sm absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300"></i>
@@ -415,23 +412,23 @@
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="waktu_paket" class="w-full sm:w-1/4">Waktu Paket*</label>
-                        <input type="date" name="waktu_paket" id="waktu_paket"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                        <x-label for="waktu_paket" class="w-full sm:w-1/4">Waktu Paket</x-label>
+                        <x-input type="date" name="waktu_paket" id="waktu_paket"
+                        />
                     </div>
 
                     <div class="flex w-full flex-col  ">
-                        <label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan*</label>
+                        <x-label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
                             <select name="jenis_pengadaan" id="jenis_pengadaan"
-                                class="sm:w-1/4 w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                                class="sm:w-1/4 w-3/4 text-sm h-10 rounded-lg bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                                 <option value="tender">Tender</option>
                                 <option value="non_tender">Non-Tender</option>
                                 <option value="e_catalog">E-Catalog</option>
                             </select>
 
                             <select name="metode_pemilihan" id="metode_pemilihan"
-                                class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                                class="w-3/4 rounded text-sm bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                                 <option value="" disabled selected>Pilih Jenis Pengadaan</option>
                                 <option value="Jasa Konsultasi Pengawasan">Jasa Konsultasi Pengawasan</option>
                                 <option value="Jasa Konsultasi Perencanaan">Jasa Konsultasi Perencanaan</option>
@@ -442,36 +439,36 @@
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="nilai_pagu_paket" class="w-full sm:w-1/4">Nilai Pagu Paket*</label>
-                        <input type="number" name="nilai_pagu_paket" id="nilai_pagu_paket"
-                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                        <x-label for="nilai_pagu_paket" class="w-full sm:w-1/4">Nilai Pagu Paket</x-label>
+                        <x-input type="number" name="nilai_pagu_paket" id="nilai_pagu_paket"
+                        required />
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="nilai_pagu_anggaran" class="w-full sm:w-1/4">Nilai Pagu Anggaran*</label>
-                        <input type="number" name="nilai_pagu_anggaran" id="nilai_pagu_anggaran"
-                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                        <x-label for="nilai_pagu_anggaran" class="w-full sm:w-1/4">Nilai Pagu Anggaran*</x-label>
+                        <x-input type="number" name="nilai_pagu_anggaran" id="nilai_pagu_anggaran"
+                        />
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="nilai_hps" class="w-full sm:w-1/4">Nilai HPS*</label>
-                        <input type="number" name="nilai_hps" id="nilai_hps"
-                            class=" rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                        <x-label for="nilai_hps" class="w-full sm:w-1/4">Nilai HPS</x-label>
+                        <x-input type="number" name="nilai_hps" id="nilai_hps"
+                        />
                     </div>
 
                     <div class="flex w-full flex-col pb-4 ">
-                        <label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran*</label>
-                        <input type="number" name="tahun_anggaran" id="tahun_anggaran"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                        <x-label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran</x-label>
+                        <x-input type="number" name="tahun_anggaran" id="tahun_anggaran"
+                        required />
                     </div>
 
                     <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">Pejabat Pembuat Komitmen
                     </h1>
 
                     <div class="flex w-full flex-col pt-2 ">
-                        <label for="ppkom_id" class="w-full sm:w-1/4">Ppkom*</label>
+                        <x-label for="ppkom_id" class="w-full sm:w-1/4">Ppkom</x-label>
                         <select name="ppkom_id" id="ppkom_id"
-                            class="w-3/4 rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                            class="w-3/4  h-10 bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
                             <option value="" disabled selected>Pilih Pegawai</option>
                             @foreach($ppkom as $ppk)
                                 <option value="{{ $ppk->ppkom_id }}">{{ $ppk->nama }}</option>
@@ -480,12 +477,12 @@
                     </div>
 
                     <div x-data="daskumManager({{ json_encode($dasarHukum) }})" class="flex w-full flex-col pb-4" id="daskum-edit-manager">
-                        <label for="daskum_id" class="w-full sm:w-1/4">Dasar Hukum*</label>
+                        <x-label for="daskum_id" class="w-full sm:w-1/4">Dasar Hukum</x-label>
                         <div class="relative w-full">
-                            <input type="text" x-model="search" @input.debounce.100ms="filterOptions()"
+                            <x-input type="text" x-model="search" @input.debounce.100ms="filterOptions()"
                                 @focus="showDropdown = true" @click.away="showDropdown = false"
                                 placeholder="Pilih Dasar Hukum"
-                                class="w-full rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200" required>
+                              required  />
 
                             <i class="fas fa-chevron-down text-sm absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300"></i>
 
@@ -506,46 +503,40 @@
 
                     <input type="text" name="satker_id" id="" value="{{$satuanKerja->satker_id}}" hidden readonly>
                     <div class="flex w-full flex-col py-2 ">
-                        <label for="nama_pimpinan" class="w-full sm:w-1/4">Nama pimpinan</label>
-                        <input type="text" name="nama_pimpinan" id="" value="{{$satuanKerja->nama_pimpinan}}"
-                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly>
+                        <x-label for="nama_pimpinan" class="w-full sm:w-1/4">Nama pimpinan</x-label>
+                        <x-input type="text" name="nama_pimpinan" id="" value="{{$satuanKerja->nama_pimpinan}}"
+                            readonly/>
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="jabatan" class="w-full sm:w-1/4">Jabatan</label>
-                        <input type="text" name="jabatan" id="" value="{{$satuanKerja->jabatan}}"
-                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly>
+                        <x-label for="jabatan" class="w-full sm:w-1/4">Jabatan</x-label>
+                        <x-input type="text" name="jabatan" id="" value="{{$satuanKerja->jabatan}}"
+                            readonly/>
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="website" class="w-full sm:w-1/4">Website</label>
-                        <input type="text" name="website" id="" value="{{$satuanKerja->website}}"
-                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly>
+                        <x-label for="website" class="w-full sm:w-1/4">Website</x-label>
+                        <x-input type="text" name="website" id="" value="{{$satuanKerja->website}}"
+                            readonly/>
                     </div>
 
 
                     <div class="flex w-full flex-col ">
-                        <label for="email" class="w-full sm:w-1/4">Email</label>
-                        <input type="text" name="email" id="" value="{{$satuanKerja->email}}"
-                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly>
+                        <x-label for="email" class="w-full sm:w-1/4">Email</x-label>
+                        <x-input type="text" name="email" id="" value="{{$satuanKerja->email}}"
+                            readonly/>
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="telp" class="w-full sm:w-1/4">Telepon</label>
-                        <input type="text" name="telp" id="" value="{{$satuanKerja->telp}}"
-                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly>
+                        <x-label for="telp" class="w-full sm:w-1/4">Telepon</x-label>
+                        <x-input type="text" name="telp" id="" value="{{$satuanKerja->telp}}"
+                            readonly/>
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <label for="klpd" class="w-full sm:w-1/4">KLPD</label>
-                        <input type="text" name="klpd" id="" value="{{$satuanKerja->klpd}}"
-                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly>
+                        <x-label for="klpd" class="w-full sm:w-1/4">KLPD</x-label>
+                        <x-input type="text" name="klpd" id="" value="{{$satuanKerja->klpd}}"
+                            readonly/>
                     </div>
 
 
@@ -570,11 +561,11 @@
                     @csrf
                     @method('DELETE')
                     <div class="modal-action">
-                        <button type="submit" class="btn btn-error">
+                        <x-danger-button type="submit">
                             <i class="fa-solid fa-trash"></i>
                             <span>Hapus</span>
-                        </button>
-                        <label for="delete-modal" class="btn">Batal</label>
+                        </x-danger-button>
+                        <label for="delete-modal" class="btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                     </div>
                 </form>
             </div>
