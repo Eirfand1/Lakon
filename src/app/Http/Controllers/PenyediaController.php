@@ -12,6 +12,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Illuminate\Validation\Rule;
 
 class PenyediaController extends Controller
 {
@@ -208,12 +209,16 @@ class PenyediaController extends Controller
         }
     }
 
+
     public function update(Request $request, Penyedia $penyedia): RedirectResponse
     {
         try {
             $validated = $request->validate([
                 'status' => 'in:biasa,konsultan',
-                'NIK' => 'required|unique:penyedia,NIK,' . $penyedia->penyedia_id . ',penyedia_id|max:255',
+                'NIK' => [
+                    'required',
+                    'max:255',
+                ],
                 'nama_pemilik' => 'required|max:255',
                 'alamat_pemilik' => 'required|max:255',
                 'nama_perusahaan_lengkap' => 'required|max:255',
@@ -223,12 +228,16 @@ class PenyediaController extends Controller
                 'akta_notaris_tanggal' => 'required|date|max:255',
                 'alamat_perusahaan' => 'required|max:255',
                 'kontak_hp' => 'required|numeric',
-                'kontak_email' => 'required|unique:penyedia,kontak_email,' . $penyedia->penyedia_id . ',penyedia_id|email|max:255',
+                'kontak_email' => [
+                    'required',
+                    'email',
+                    'max:255',
+                ],
                 'rekening_norek' => 'required|numeric',
                 'rekening_nama' => 'required|max:255',
                 'rekening_bank' => 'required|max:255',
                 'npwp_perusahaan' => 'required|max:255',
-                'logo_perusahaan' => 'nullable|max:2048',
+                'logo_perusahaan' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             ]);
 
             if ($request->hasFile('logo_perusahaan')) {
@@ -241,11 +250,11 @@ class PenyediaController extends Controller
         } catch (QueryException $e) {
             return redirect()->back()
                 ->withInput()
-                ->with('error', $e->getMessage());
+                ->with('error', 'Terjadi kesalahan pada database: ' . $e->getMessage());
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
-                ->with('error', $e->getMessage());
+                ->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
 
@@ -294,7 +303,11 @@ class PenyediaController extends Controller
     }
 
 
+    public function dataPerusahaanView()
+    {
+        $user = auth()->user()->penyedia;
 
-
+        return view('pages.penyedia.data-perusahaan.index', ['penyedia' => $user]);
+    }
 
 }
