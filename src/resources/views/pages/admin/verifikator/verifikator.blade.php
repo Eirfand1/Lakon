@@ -69,33 +69,33 @@
                 </div>
                 <form action="{{ route('admin.verifikator.store') }}" method="POST" class="mt-4">
                     @csrf
-                    <div class="form-control">
-                        <label class="label">NIP</label>
-                        <input type="number" name="nip" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" required
+                    <div class="">
+                        <x-label >NIP</x-label>
+                        <x-input type="number" name="nip" required
                             placeholder="nip" />
                     </div>
-                    <div class="form-control">
-                        <label class="label">Nama</label>
-                        <input type="text" name="nama_verifikator" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
+                    <div class="">
+                        <x-label >Nama</x-label>
+                        <x-input type="text" name="nama_verifikator" 
                             required placeholder="nama verifikator" />
                     </div>
 
-                    <div class="form-control">
-                        <label class="label">Username</label>
-                        <input type="text" name="name" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200 " required
+                    <div class="">
+                        <x-label >Username</x-label>
+                        <x-input type="text" name="name" required
                             placeholder="username" />
                     </div>
-                    <div class="form-control">
-                        <label class="label">Email</label>
-                        <input type="text" name="email" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" required
+                    <div class="">
+                        <x-label >Email</x-label>
+                        <x-input type="text" name="email"  required
                             placeholder="email" />
                     </div>
 
                     <div class="form-control">
-                        <label class="label">Password</label>
+                        <x-label >Password</x-label>
                         <div class="relative">
-                            <input type="password" name="password" id="password"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" required placeholder="password" />
+                            <x-input type="password" name="password" id="password"
+                                 required placeholder="password" />
                             <button type="button" class="absolute right-4 top-1/2 transform -translate-y-1/2"
                                 onclick="togglePassword('password')">
                                 <i class="fa-solid fa-eye" id="password-icon"></i>
@@ -104,7 +104,7 @@
                     </div>
 
                     <div class="modal-action">
-                        <button type="submit" class="btn btn-primary text-white bg-blue-600 rounded">Simpan</button>
+                        <button type="submit" class="btn btn-primary text-white bg-blue-600 rounded-md">Simpan</button>
                         <label for="add-modal" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Tutup</label>
                     </div>
                 </form>
@@ -115,7 +115,7 @@
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
         <div class="modal modal-top px-3">
             <div class="modal-box max-w-[52rem] mx-auto m-3 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
-                <h3 class="font-bold text-lg">EDIT DATA VERIVIKATOR</h3>
+                <h3 class="font-bold text-lg mb-3">EDIT DATA VERIVIKATOR</h3>
                 <div>
                     <label for="edit-modal"
                         class="btn btn-sm rounded-full shadow-none btn-circle font-bold mt-2 btn-ghost absolute right-4 top-2">
@@ -127,33 +127,33 @@
                     @method('PUT')
                     <input type="hidden" id="edit_user_id" name="user_id">
                     <div class="form-control">
-                        <label class="label">NIP</label>
-                        <input type="number" id="edit_nip" name="nip" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
+                        <x-label >NIP</x-label>
+                        <x-input type="number" id="edit_nip" name="nip" 
                             required placeholder="nip" />
                     </div>
                     <div class="form-control">
-                        <label class="label">Nama</label>
-                        <input type="text" id="edit_nama" name="nama_verifikator"
-                            class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" required placeholder="nama verifikator" />
+                        <x-label >Nama</x-label>
+                        <x-input type="text" id="edit_nama" name="nama_verifikator"
+                            required placeholder="nama verifikator" />
                     </div>
 
                     <div class="form-control">
-                        <label class="label">Username</label>
-                        <input type="text" id="edit_name" name="edit_name" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" required
+                        <x-label >Username</x-label>
+                        <x-input type="text" id="edit_name" name="edit_name" required
                             placeholder="username" />
                     </div>
                     <div class="form-control">
-                        <label class="label">Email</label>
-                        <input type="text" id="edit_email" name="edit_email" class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" required
+                        <x-label >Email</x-label>
+                        <x-input type="text" id="edit_email" name="edit_email"  required
                             placeholder="email" />
                     </div>
 
 
                     <div class="form-control">
-                        <label class="label">Password</label>
+                        <x-label class="label">Password</x-label>
                         <div class="relative">
-                            <input type="password" id="edit_password" name="edit_password" id="edit_password"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" placeholder="password" />
+                            <x-input type="password" id="edit_password" name="edit_password" id="edit_password"
+                                 placeholder="password" />
                             <button type="button" class="absolute right-4 top-1/2 transform -translate-y-1/2"
                                 onclick="togglePassword('edit_password')">
                                 <i class="fa-solid fa-eye" id="edit_password-icon"></i>
@@ -179,11 +179,11 @@
                     @csrf
                     @method('DELETE')
                     <div class="modal-action">
-                        <button type="submit" class="btn btn-error">
+                        <x-danger-button type="submit">
                             <i class="fa-solid fa-trash"></i>
                             <span>Hapus</span>
-                        </button>
-                        <label for="delete-modal" class="btn">Batal</label>
+                        </x-danger-button>
+                        <label for="delete-modal" class="btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                     </div>
                 </form>
             </div>

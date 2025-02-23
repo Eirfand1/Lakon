@@ -71,52 +71,46 @@
                     </label>
                 </div>
 
-                <form action="{{ route('admin.ppkom.store') }}" method="POST" class="space-y-4 pt-4">
+                <form action="{{ route('admin.ppkom.store') }}" method="POST" class="space-y-2 pt-4">
                     @csrf
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">NIP</label>
-                            <input type="number" name="nip" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
+                            <x-label>NIP</x-label>
+                            <x-input type="number" name="nip" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                 required />
                         </div>
                         <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">Nama</label>
-                            <input type="text" name="nama"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
+                            <x-label>Nama</x-label>
+                            <x-input type="text" name="nama"
                                 required />
                         </div>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">Pangkat</label>
-                            <input type="text" name="pangkat"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
+                            <x-label>Pangkat</x-label>
+                            <x-input type="text" name="pangkat"/>
                         </div>
                         <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">Jabatan</label>
-                            <input type="text" name="jabatan"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
+                            <x-label>Jabatan</x-label>
+                            <x-input type="text" name="jabatan"/>
                         </div>
                     </div>
 
                     <div class="form-control">
-                        <label class="label font-semibold dark:text-gray-300">Alamat</label>
+                        <x-label>Alamat</x-label>
                         <textarea name="alamat"
-                            class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"></textarea>
+                            class="rounded bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"></textarea>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">No. Telp</label>
-                            <input type="number" name="no_telp"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
+                            <x-label>No. Telp</x-label>
+                            <x-input type="number" name="no_telp"/>
                         </div>
                         <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">Email</label>
-                            <input type="email" name="email"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
+                            <x-label class="label font-semibold dark:text-gray-300">Email</x-label>
+                            <x-input type="email" name="email"/>
                         </div>
                     </div>
 
@@ -148,48 +142,42 @@
                     @method('PUT')
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">NIP</label>
-                            <input type="number" id="edit_nip" name="nip"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
+                            <x-label>NIP</x-label>
+                            <x-input type="number" id="edit_nip" name="nip"
                                 required />
                         </div>
                         <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">Nama</label>
-                            <input type="text" id="edit_nama" name="nama"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"
+                            <x-label>Nama</x-label>
+                            <x-input type="text" id="edit_nama" name="nama"
                                 required />
                         </div>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">Pangkat</label>
-                            <input type="text" id="edit_pangkat" name="pangkat"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
+                            <x-label >Pangkat</x-label>
+                            <x-input type="text" id="edit_pangkat" name="pangkat"/>
                         </div>
                         <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">Jabatan</label>
-                            <input type="text" id="edit_jabatan" name="jabatan"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
+                            <x-label>Jabatan</x-label>
+                            <x-input type="text" id="edit_jabatan" name="jabatan"/>
                         </div>
                     </div>
 
                     <div class="form-control">
-                        <label class="label font-semibold dark:text-gray-300">Alamat</label>
+                        <x-label>Alamat</x-label>
                         <textarea id="edit_alamat" name="alamat"
-                            class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200"></textarea>
+                            class="rounded bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-200"></textarea>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">No. Telp</label>
-                            <input type="text" id="edit_no_telp" name="no_telp"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
+                            <x-label>No. Telp</x-label>
+                            <x-input type="text" id="edit_no_telp" name="no_telp"/>
                         </div>
                         <div class="form-control">
-                            <label class="label font-semibold dark:text-gray-300">Email</label>
-                            <input type="email" id="edit_email" name="email"
-                                class="rounded bg-white dark:bg-gray-50/10 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-200" />
+                            <x-label>Email</x-label>
+                            <x-input type="email" id="edit_email" name="email"/>
                         </div>
                     </div>
 
@@ -212,11 +200,11 @@
                     @csrf
                     @method('DELETE')
                     <div class="modal-action">
-                        <button type="submit" class="btn btn-error">
+                        <x-danger-button type="submit">
                             <i class="fa-solid fa-trash"></i>
                             <span>Hapus</span>
-                        </button>
-                        <label for="delete-modal" class="btn">Batal</label>
+                        </x-danger-button>
+                        <label for="delete-modal" class="btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                     </div>
                 </form>
             </div>

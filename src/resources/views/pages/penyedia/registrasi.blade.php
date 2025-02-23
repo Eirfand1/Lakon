@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Company Registration - LAKON PDK Kabupaten Cilacap</title>
-@vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
 <body class="bg-gray-100">
@@ -49,7 +49,8 @@
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <span>{{session('success')}} Silahkan klik <a href="/login" class="text-blue-500 font-bold">Login/Masuk</a></span>
+                        <span>{{session('success')}} Silahkan klik <a href="/login"
+                                class="text-blue-500 font-bold">Login/Masuk</a></span>
                     </div>
                     <script>
                         Toastify({
@@ -87,6 +88,7 @@
                             },
                         }).showToast();
                     </script>
+
                 @endif
 
                 <form action="{{route('registrasi.store')}}" method="POST" enctype="multipart/form-data"
@@ -99,19 +101,26 @@
                                 <small class="block text-xs text-gray-500">Nomor Induk Kependudukan
                                     Pemilik/Direktur</small>
                             </label>
-                            <input type="number" name="NIK"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Nomor Induk Kependudukan" required>
+                            <input type="number" name="NIK" value="{{ old('NIK') }}" class="mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-blue-200 
+                            @error('NIK') border-red-500 @else border-gray-300 @enderror"
+                                placeholder="Nomor Induk Kependudukan">
+                            @error('NIK')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div class="md:col-span-2">
                             <label class="block text-sm font-medium text-gray-700">
                                 Nama <span class="text-red-500">*</span>
                                 <small class="block text-xs text-gray-500">Nama Pemilik/Direktur Perusahaan</small>
                             </label>
-                            <input type="text" name="nama_pemilik"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                                placeholder="Nama Pemilik/Direktur sesuai KTP" required>
+                            <input type="text" name="nama_pemilik" value="{{ old('nama_pemilik') }}" class="mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-blue-200
+                            @error('nama_pemilik') border-red-500 @else border-gray-300 @enderror"
+                                placeholder="Nama Pemilik/Direktur sesuai KTP"/>
+                            @error('nama_pemilik')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
+
                     </div>
 
                     <div>
@@ -119,10 +128,12 @@
                             Alamat <span class="text-red-500">*</span>
                             <small class="block text-xs text-gray-500">Alamat Pemilik/Direktur Perusahaan</small>
                         </label>
-                        <textarea name="alamat_pemilik"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            rows="3" placeholder="Alamat lengkap Pemilik/Direktur sesuai dengan KTP"
-                            required></textarea>
+                        <textarea name="alamat_pemilik" class="mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-blue-200
+                       @error('alamat_pemilik') border-red-500 @else border-gray-300 @enderror" rows="3"
+                            placeholder="Alamat lengkap Pemilik/Direktur sesuai dengan KTP">{{ old('alamat_pemilik') }}</textarea>
+                        @error('alamat_pemilik')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -130,17 +141,25 @@
                             <label class="block text-sm font-medium text-gray-700">
                                 Nama Perusahaan (lengkap) <span class="text-red-500">*</span>
                             </label>
-                            <input type="text" name="nama_perusahaan_lengkap"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            <input type="text" name="nama_perusahaan_lengkap" value="{{old('nama_perusahaan_lengkap')}}"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('nama_perusahaan_lengkap') border-red-500 @else border-gray-300 @enderror"
                                 placeholder="Nama Lengkap Perusahaan" required>
+                            @error('nama_perusahaan_lengkap')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700">
                                 Nama Perusahaan (singkat) <span class="text-red-500">*</span>
                             </label>
-                            <input type="text" name="nama_perusahaan_singkat"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            <input type="text" name="nama_perusahaan_singkat" value="{{old('nama_perusahaan_singkat')}}"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('nama_perusahaan_singkat') border-red-500 @else border-gray-300 @enderror"
                                 placeholder="Nama Singkat Perusahaan" required>
+                            @error('nama_perusahaan_singkat')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -149,15 +168,25 @@
                             Akta Notaris <span class="text-red-500">*</span>
                         </label>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <input type="text" name="akta_notaris_no"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            <input type="text" name="akta_notaris_no" value="{{old('akta_notaris_no')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('akta_notaris_no') border-red-500 @else border-gray-300 @enderror"
                                 placeholder="Nomor Akta Notaris" required>
-                            <input type="text" name="akta_notaris_nama"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            @error('akta_notaris_no')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
+                            <input type="text" name="akta_notaris_nama" value="{{old('akta_notaris_nama')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('akta_notaris_nama') border-red-500 @else border-gray-300 @enderror"
                                 placeholder="Nama Notaris" required>
-                            <input type="date" name="akta_notaris_tanggal"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            @error('akta_notaris_nama')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
+                            <input type="date" name="akta_notaris_tanggal" value="{{old('akta_notaris_tanggal')}}"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('akta_notaris_tanggal') border-red-500 @else border-gray-300 @enderror"
                                 placeholder="Tanggal Notaris" required>
+                            @error('akta_notaris_tanggal')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -165,9 +194,12 @@
                         <label class="block text-sm font-medium text-gray-700">
                             Alamat Perusahaan <span class="text-red-500">*</span>
                         </label>
-                        <textarea name="alamat_perusahaan"
-                            class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            rows="3" placeholder="Alamat lengkap perusahaan" required></textarea>
+                        <textarea name="alamat_perusahaan" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                            @error('alamat_perusahaan') border-red-500 @else border-gray-300 @enderror" rows="3"
+                            placeholder="Alamat lengkap perusahaan" required>{{old('alamat_perusahaan')}}</textarea>
+                        @error('alamat_perusahaan')
+                            <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                        @enderror
                     </div>
 
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -175,17 +207,23 @@
                             <label class="block text-sm font-medium text-gray-700">
                                 No. Telepon Perusahaan <span class="text-red-500">*</span>
                             </label>
-                            <input type="number" name="kontak_hp"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            <input type="number" name="kontak_hp" value="{{old('kontak_hp')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('kontak_hp') border-red-500 @else border-gray-300 @enderror"
                                 placeholder="No. Telp Perusahaan" required>
+                            @error('kontak_hp')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700">
                                 Email Perusahaan <span class="text-red-500">*</span>
                             </label>
-                            <input type="email" name="kontak_email"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            <input type="email" name="kontak_email" value="{{old('kontak_email')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('kontak_email') border-red-500 @else border-gray-300 @enderror"
                                 placeholder="Email Perusahaan" required>
+                            @error('kontak_email')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -195,9 +233,12 @@
                                 NPWP Perusahaan <span class="text-red-500">*</span>
                                 <small class="block text-xs text-gray-500">Nomor Pokok Wajib Pajak</small>
                             </label>
-                            <input type="text" name="npwp_perusahaan"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            <input type="text" name="npwp_perusahaan" value="{{old('npwp_perusahaan')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('npwp_perusahaan') border-red-500 @else border-gray-300 @enderror"
                                 placeholder="Nomor Pokok Wajib Pajak" required>
+                            @error('npwp_perusahaan')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700">
@@ -208,7 +249,12 @@
                                 file:mr-4 border p-1  file:rounded-md rounded-md file:border-0
                                 file:text-sm file:font-medium
                                 file:bg-blue-50 file:text-blue-700
-                                hover:file:bg-blue-100">
+                                hover:file:bg-blue-100
+                                @error('logo_perusahaan') border-red-500 @else border-gray-300 @enderror"
+                                value="{{old('logo_perusahaan')}}">
+                            @error('logo_perusahaan')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -217,25 +263,34 @@
                             <label class="block text-sm font-medium text-gray-700">
                                 Nomor Rekening <span class="text-red-500">*</span>
                             </label>
-                            <input type="text" name="rekening_norek"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            <input type="text" name="rekening_norek" value="{{old('rekening_norek')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('rekening_norek') border-red-500 @else border-gray-300 @enderror"
                                 placeholder="Nomor Rekening" required>
+                            @error('rekening_norek')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700">
                                 Nama Rekening <span class="text-red-500">*</span>
                             </label>
-                            <input type="text" name="rekening_nama"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            <input type="text" name="rekening_nama" value="{{old('rekening_nama')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('rekening_nama') border-red-500 @else border-gray-300 @enderror"
                                 placeholder="Nama Pemilik Rekening" required>
+                            @error('rekening_nama')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label class="block text-sm font-medium text-gray-700">
                                 Bank <span class="text-red-500">*</span>
                             </label>
-                            <input type="text" name="rekening_bank"
-                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            <input type="text" name="rekening_bank" value="{{old('rekening_bank')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('rekening_bank') border-red-500 @else border-gray-300 @enderror"
                                 placeholder="Nama Bank" required>
+                            @error('rekening_bank')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
@@ -245,25 +300,45 @@
                             <label for="name">
                                 username <span class="text-red-500">*</span>
                             </label>
-                            <input type="text" name="name" required placeholder="Nama" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            <input type="text" name="name" required placeholder="Nama" value="{{old('name')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('name') border-red-500 @else border-gray-300 @enderror">
+                            @error('name')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="email">
                                 email <span class="text-red-500">*</span>
                             </label>
-                            <input type="email" name="email" required placeholder="Email" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            <input type="email" name="email" required placeholder="Email" value="{{old('email')}}"
+                                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('email') border-red-500 @else border-gray-300 @enderror">
+
+                            @error('email')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="password">
                                 password <span class="text-red-500">*</span>
                             </label>
-                            <input type="password" name="password" required placeholder="Password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            <input type="password" name="password" required placeholder="Password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('password') border-red-500 @else border-gray-300 @enderror">
+                            @error('password')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                         <div>
                             <label for="password_confirmation">
                                 Konfirmasi password <span class="text-red-500">*</span>
                             </label>
-                            <input type="password" name="password_confirmation" required placeholder="Konfirmasi Password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200">
+                            <input type="password" name="password_confirmation" required
+                                placeholder="Konfirmasi Password" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
+                                @error('password_confirmation') border-red-500 @else border-gray-300 @enderror">
+
+                            @error('password_confirmation')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
                         </div>
                     </div>
 
