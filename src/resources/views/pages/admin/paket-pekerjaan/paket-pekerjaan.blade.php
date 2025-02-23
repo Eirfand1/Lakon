@@ -55,7 +55,7 @@
             <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
-                        <h3 class="font-bold text-xl dark:text-gray-200">TAMBAH PAKET PEKERJAAN</h3>
+                        <h3 class="font-bold text-lg dark:text-gray-200">TAMBAH PAKET PEKERJAAN</h3>
                     </div>
                     <label for="add-modal"
                         class="btn btn-sm btn-circle btn-ghost shadow-none rounded-full hover:bg-gray-200 dark:hover:bg-gray-700">
@@ -65,7 +65,7 @@
 
                 <form action="{{ route('admin.paket-pekerjaan.store') }}" method="POST" class="space-y-2 ">
                     @csrf
-                    <h1 class="border-b font-bold border-gray-200 pb-2 dark:border-gray-700 ">PROGRAM KERJA</h1>
+                    <h1 class="border-b font-bold border-gray-200 text-sm pb-2 dark:border-gray-700 ">PROGRAM KERJA</h1>
 
                     <div x-data="subKegiatanManager({{ json_encode($subKegiatan) }})" class="space-y-2">
                         <x-label for="sub_kegiatan[]">Sub Kegiatan</x-label>
@@ -118,7 +118,7 @@
                     </div>
 
 
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">PAKET PEKERJAAN</h1>
+                    <h1 class="border-y border-gray-200 text-sm font-bold py-3  dark:border-gray-700 ">PAKET PEKERJAAN</h1>
 
                     <div class="pt-2">
                         <x-label for="paket">Paket</x-label>
@@ -205,7 +205,7 @@
                         required/>
                     </div>
 
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">PEJABAT PEMBUAT KOMITMEN
+                    <h1 class="border-y border-gray-200 font-bold py-3 text-sm  dark:border-gray-700 ">PEJABAT PEMBUAT KOMITMEN
                     </h1>
 
                     <div class="flex w-full flex-col pt-2 ">
@@ -241,7 +241,7 @@
                         </div>
                     </div>
 
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">INFORMASI SATUAN KERJA
+                    <h1 class="border-y border-gray-200 font-bold py-3 text-sm  dark:border-gray-700 ">INFORMASI SATUAN KERJA
                     </h1>
 
                     <input type="text" name="satker_id" id="" value="{{$satuanKerja->satker_id}}" hidden readonly>
@@ -304,7 +304,7 @@
             <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
-                        <h3 class="font-bold text-xl dark:text-gray-200">EDIT PAKET PEKERJAAN</h3>
+                        <h3 class="font-bold text-lg dark:text-gray-200">EDIT PAKET PEKERJAAN</h3>
                     </div>
                     <label for="edit-modal"
                         class="btn btn-sm btn-circle rounded-full shadow-none btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
@@ -315,7 +315,7 @@
                 <form method="POST" class="space-y-2 " id="edit-form">
                     @csrf
                     @method('PUT')
-                    <h1 class="border-b font-bold border-gray-200 pb-2 dark:border-gray-700 ">PROGRAM KERJA</h1>
+                    <h1 class="border-b font-bold border-gray-200 text-sm pb-2 dark:border-gray-700 ">PROGRAM KERJA</h1>
 
                     {{-- sub kegiatan --}}
                     <div x-data="subKegiatanManager({{ json_encode($subKegiatan) }})" class="space-y-2" id="sub-kegiatan-edit-manager">
@@ -371,7 +371,7 @@
                     </div>
 
                     {{-- paket pekerjaan || DONE --}}
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">PAKET PEKERJAAN</h1>
+                    <h1 class="border-y border-gray-200 font-bold py-3 text-sm  dark:border-gray-700 ">PAKET PEKERJAAN</h1>
 
                     <div class="pt-2">
                         <x-label for="paket">Paket</x-label>
@@ -443,7 +443,7 @@
                     </div>
 
                     <div class="flex w-full flex-col ">
-                        <x-label for="nilai_pagu_anggaran" class="w-full sm:w-1/4">Nilai Pagu Anggaran*</x-label>
+                        <x-label for="nilai_pagu_anggaran" class="w-full sm:w-1/4">Nilai Pagu Anggaran</x-label>
                         <x-input type="number" name="nilai_pagu_anggaran" id="nilai_pagu_anggaran"
                         />
                     </div>
@@ -460,7 +460,7 @@
                         required />
                     </div>
 
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">PEJABAT PEMBUAT KOMITMEN
+                    <h1 class="border-y border-gray-200 font-bold py-3  text-sm dark:border-gray-700 ">PEJABAT PEMBUAT KOMITMEN
                     </h1>
 
                     <div class="flex w-full flex-col pt-2 ">
@@ -496,7 +496,7 @@
                         </div>
                     </div>
 
-                    <h1 class="border-y border-gray-200 font-bold py-3  dark:border-gray-700 ">INFORMASI SATUAN KERJA
+                    <h1 class="border-y border-gray-200 font-bold py-3 text-sm  dark:border-gray-700 ">INFORMASI SATUAN KERJA
                     </h1>
 
                     <input type="text" name="satker_id" id="" value="{{$satuanKerja->satker_id}}" hidden readonly>
@@ -546,8 +546,6 @@
                             class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             readonly/>
                     </div>
-
-
 
                     <div class="modal-action pt-4">
                         <button type="submit" class="btn rounded-md text-white bg-blue-600 btn-primary">Simpan</button>

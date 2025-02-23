@@ -60,10 +60,9 @@
         <input type="checkbox" id="add-modal" class="modal-toggle" />
         <div id="modal_ppkom" class="modal modal-top px-3">
             <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
-                <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
+                <div class="flex justify-between items-center dark:border-gray-700">
                     <div class="flex items-center gap-3">
-                        <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
-                        <h3 class="font-bold text-xl dark:text-gray-200">Tambah Data PPKOM</h3>
+                        <h3 class="font-bold text-lg dark:text-gray-200">TAMBAH DATA PPKOM</h3>
                     </div>
                     <label for="add-modal"
                         class="btn btn-sm btn-circle btn-ghost rounded-full shadow-none hover:bg-gray-200 dark:hover:bg-gray-700">
@@ -71,7 +70,7 @@
                     </label>
                 </div>
 
-                <form action="{{ route('admin.ppkom.store') }}" method="POST" class="space-y-2 pt-4">
+                <form action="{{ route('admin.ppkom.store') }}" method="POST" class="space-y-2">
                     @csrf
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
@@ -115,8 +114,8 @@
                     </div>
 
                     <div class="modal-action">
-                        <button type="submit" class="btn bg-blue-600 btn-primary rounded text-white">Simpan</button>
-                        <label for="add-modal" class="btn rounded text-white">Tutup</label>
+                        <button type="submit" class="btn bg-blue-600 btn-primary rounded-md text-white">Simpan</button>
+                        <label for="add-modal" class="btn rounded-md text-white">Tutup</label>
                     </div>
                 </form>
             </div>
@@ -126,10 +125,9 @@
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
         <div class="modal modal-top px-3">
             <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
-                <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
+                <div class="flex justify-between items-center dark:border-gray-700">
                     <div class="flex items-center gap-3">
-                        <i class="fa-solid fa-pen-to-square text-2xl text-primary"></i>
-                        <h3 class="font-bold text-xl dark:text-gray-200">Edit Data PPKOM</h3>
+                        <h3 class="font-bold text-lg dark:text-gray-200">EDIT DATA PPKOM</h3>
                     </div>
                     <label for="edit-modal"
                         class="btn btn-sm btn-circle rounded-full shadow-none btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
@@ -137,7 +135,7 @@
                     </label>
                 </div>
 
-                <form id="editForm" method="POST" class="space-y-4 pt-4">
+                <form id="editForm" method="POST" class="space-y-2">
                     @csrf
                     @method('PUT')
                     <div class="grid md:grid-cols-2 gap-4">

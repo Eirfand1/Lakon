@@ -234,7 +234,7 @@
 
                     <div class="flex justify-end space-x-2 modal-action">
                         <button type="submit"
-                            class="btn bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex items-center">
+                            class="btn bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20"
                                 fill="currentColor">
                                 <path
@@ -242,7 +242,7 @@
                             </svg>
                             Simpan
                         </button>
-                        <label for="edit-modal" class="btn text-white rounded">Tutup</label>
+                        <label for="edit-modal" class="btn text-white rounded-md">Tutup</label>
                     </div>
                 </form>
             </div>
