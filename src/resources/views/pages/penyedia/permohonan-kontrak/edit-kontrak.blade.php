@@ -208,7 +208,7 @@
     </div>
     <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
         <p class="mb-4 text-sm text-gray-600 dark:text-gray-300">
-            Lampiran
+            LAMPIRAN
         </p>
 
         @php
@@ -254,6 +254,28 @@
         @endif
     </div>
 
+    <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
+        <p class="mb-4 text-sm text-gray-600 dark:text-gray-300">
+            PERNYATAAN
+        </p>
+        <ul class="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-300">
+            <li>Dengan ini saya menyatakan bahawa data yang saya sampaikan adalah benar sesuai dengan fakta yang ada, dan apabila dikemudian hari data perusahaan yang saya sampaikan tidak benar, maka saya bersedia untuk diproses secara hukum sesuai dengan ketentuan Undang-Undang yang berlaku</li>
+        </ul>
+        <form action="layangkan/{{$kontrak->kontrak_id}}" method="POST">
+            @csrf
+            <div class="flex items-center mt-5">
+                <input type="checkbox" required name="konfirmasi_pernyataan" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                <label class="ml-2 block text-gray-600 dark:text-gray-300">
+                    Saya setuju dengan pernyataan di atas
+                </label>
+
+            </div>
+            <button type="submit"
+                class="w-full px-6 py-3 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all dark:bg-blue-700 dark:hover:bg-blue-800">
+                <i class="mr-2 fas fa-save"></i> LAYANGKAN PERMOHONAN KONTRAK
+            </button>
+        </form>
+    </div>
 
     <!-- Delete -->
     <input type="checkbox" id="delete-modal" class="modal-toggle" />
