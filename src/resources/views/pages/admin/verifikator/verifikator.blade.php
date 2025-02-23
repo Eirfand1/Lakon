@@ -64,8 +64,7 @@
                     </label>
                 </div>
                 <div class="flex items-center gap-2">
-                    <i class="fa-solid fa-square-plus text-xl"></i>
-                    <h3 class="font-bold text-xl">FORM TAMBAH DATA VERIFIKATOR</h3>
+                    <h3 class="font-bold text-lg">FORM TAMBAH DATA VERIFIKATOR</h3>
                 </div>
                 <form action="{{ route('admin.verifikator.store') }}" method="POST" class="mt-4">
                     @csrf
@@ -150,7 +149,7 @@
 
 
                     <div class="form-control">
-                        <x-label class="label">Password</x-label>
+                        <x-label>Password</x-label>
                         <div class="relative">
                             <x-input type="password" id="edit_password" name="edit_password" id="edit_password"
                                  placeholder="password" />

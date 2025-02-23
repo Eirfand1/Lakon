@@ -53,10 +53,9 @@
         <input type="checkbox" id="add-dasar-hukum" class="modal-toggle" />
         <div id="modal_matriks" class="modal modal-top px-3">
             <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
-                <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
+                <div class="flex justify-between items-center dark:border-gray-700">
                     <div class="flex items-center gap-3">
-                        <i class="fa-solid fa-square-plus text-2xl text-primary"></i>
-                        <h3 class="font-bold text-xl dark:text-gray-200">Tambah Dasar Hukum</h3>
+                        <h3 class="font-bold text-lg dark:text-gray-200">TAMBAH DASAR HUKUM</h3>
                     </div>
                     <label for="add-dasar-hukum"
                         class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 rounded-full shadow-none dark:hover:bg-gray-700">
@@ -67,13 +66,13 @@
                 <form action="{{ route('admin.dasar-hukum.store') }}" method="POST" class="space-y-2 ">
                     @csrf
                     <div class="flex w-full flex-col ">
-                        <label for="dasar_hukum" class="w-full sm:w-1/4 font-bold">Dasar Hukum</label>
+                        <x-label for="dasar_hukum">Dasar Hukum</x-label>
                         <textarea name="dasar_hukum" id="dasar_hukum" cols="10" rows="5" class="rounded bg-white dark:bg-gray-900/20 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200" required></textarea>
                     </div>
 
                     <div class="modal-action pt-4">
-                        <button type="submit" class="btn rounded text-white btn-primary">Simpan</button>
-                        <label for="add-dasar-hukum" class="btn text-white rounded">Batal</label>
+                        <button type="submit" class="btn rounded-lg text-white btn-primary bg-blue-500">Simpan</button>
+                        <label for="add-dasar-hukum" class="btn text-white rounded-lg">Batal</label>
                     </div>
                 </form>
             </div>
@@ -83,10 +82,9 @@
         <input type="checkbox" id="edit-daskum" class="modal-toggle" />
         <div class="modal modal-top px-3">
             <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
-                <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
+                <div class="flex justify-between items-center dark:border-gray-700">
                     <div class="flex items-center gap-3">
-                        <i class="fa-solid fa-pen-to-square text-2xl text-primary"></i>
-                        <h3 class="font-bold text-xl dark:text-gray-200">Edit Dasar Hukum</h3>
+                        <h3 class="font-bold text-lg dark:text-gray-200">EDIT DASAR HUKUM</h3>
                     </div>
                     <label for="edit-daskum"
                         class="btn btn-sm rounded-full shadow-none btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
@@ -94,17 +92,17 @@
                     </label>
                 </div>
 
-                <form id="editForm" method="POST" class="">
+                <form id="editForm" method="POST" class="space-y-2">
                     @csrf
                     @method('PUT')
                     <div class="flex w-full flex-col">
-                            <label class="label font-semibold dark:text-gray-300">Dasar Hukum</label>
+                            <x-label>Dasar Hukum</x-label>
                             <textarea name="dasar_hukum" id="dasarHukum" cols="10" rows="5" class="rounded bg-white dark:bg-gray-900/20 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200" required></textarea>
                     </div>
 
                     <div class="modal-action">
-                        <button type="submit" class="btn btn-primary">Update</button>
-                        <label for="edit-daskum" class="btn btn-ghost">Tutup</label>
+                        <button type="submit" class="btn text-white btn-primary bg-blue-500">Update</button>
+                        <label for="edit-daskum" class="btn text-white">Tutup</label>
                     </div>
                 </form>
             </div>
