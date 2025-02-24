@@ -34,11 +34,11 @@
         @endif
         <!-- error message -->
 
-        @if (session('error'))
+        @if ($errors->any())
             <script>
                 Toastify({
                     escapeMarkup: false,
-                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
+                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ $errors->first() }}",
                     duration: 3000,
                     gravity: "top",
                     position: "center",
@@ -66,40 +66,74 @@
                 <div class="flex items-center gap-2">
                     <h3 class="font-bold text-lg">FORM TAMBAH DATA VERIFIKATOR</h3>
                 </div>
-                <form action="{{ route('admin.verifikator.store') }}" method="POST" class="mt-4">
+                <form action="{{ route('admin.verifikator.store') }}" method="POST" class="mt-4 space-y-2">
                     @csrf
-                    <div class="">
-                        <x-label >NIP</x-label>
-                        <x-input type="number" name="nip" required
-                            placeholder="nip" />
+                    <div class="flex gap-2 sm:flex-nowrap flex-wrap">
+                        <div class="sm:w-2/5 w-full">
+                            <x-label >NIP</x-label>
+                            <x-input type="number" name="nip" required
+                                class="{{ $errors->has('nip') ? 'border-red-500' : 'border-gray-200' }}"
+                                placeholder="nip" />
+                            @error('nip')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
+                        </div>
+                        <div class="sm:w-3/5 w-full">
+                            <x-label >Nama</x-label>
+                            <x-input type="text" name="nama_verifikator" 
+                                placeholder="nama verifikator"
+                                class="{{ $errors->has('nama_verifikator') ? 'border-red-500' : 'border-gray-200' }}"
+                                required
+                            />
+
+                            @error('nama_verifikator')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="">
-                        <x-label >Nama</x-label>
-                        <x-input type="text" name="nama_verifikator" 
-                            required placeholder="nama verifikator" />
-                    </div>
+                        
 
                     <div class="">
                         <x-label >Username</x-label>
-                        <x-input type="text" name="name" required
-                            placeholder="username" />
+                        <x-input type="text" name="name"
+                            placeholder="username"
+                            class="{{ $errors->has('name') ? 'border-red-500' : 'border-gray-200' }}"
+                            required
+                            />
+
+                        @error('name')
+                            <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="">
                         <x-label >Email</x-label>
-                        <x-input type="text" name="email"  required
-                            placeholder="email" />
+                        <x-input type="text" name="email" 
+                            placeholder="email"
+                            class="{{ $errors->has('email') ? 'border-red-500' : 'border-gray-200' }}"
+                            required
+                            />
+                        @error('email')
+                            <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                     </div>
 
                     <div class="form-control">
                         <x-label >Password</x-label>
                         <div class="relative">
                             <x-input type="password" name="password" id="password"
-                                 required placeholder="password" />
+                                placeholder="password" 
+                                class="{{ $errors->has('password') ? 'border-red-500' : 'border-gray-200' }}"
+                                required
+                            />
                             <button type="button" class="absolute right-4 top-1/2 transform -translate-y-1/2"
                                 onclick="togglePassword('password')">
                                 <i class="fa-solid fa-eye" id="password-icon"></i>
                             </button>
                         </div>
+
+                        @error('password')
+                            <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                     </div>
 
                     <div class="modal-action">
@@ -114,37 +148,60 @@
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
         <div class="modal modal-top px-3">
             <div class="modal-box max-w-[52rem] mx-auto m-3 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
-                <h3 class="font-bold text-lg mb-3">EDIT DATA VERIVIKATOR</h3>
+                <h3 class="font-bold text-lg mb-3">EDIT DATA VERIFIKATOR</h3>
                 <div>
                     <label for="edit-modal"
                         class="btn btn-sm rounded-full shadow-none btn-circle font-bold mt-2 btn-ghost absolute right-4 top-2">
                         ✕
                     </label>
                 </div>
-                <form id="editForm" method="POST">
+                <form id="editForm" method="POST" class="space-y-2">
                     @csrf
                     @method('PUT')
                     <input type="hidden" id="edit_user_id" name="user_id">
-                    <div class="form-control">
-                        <x-label >NIP</x-label>
-                        <x-input type="number" id="edit_nip" name="nip" 
-                            required placeholder="nip" />
+                    <div class="flex sm:flex-nowrap flex-wrap gap-2">
+                        <div class="sm:w-2/5 w-full">
+                            <x-label >NIP</x-label>
+                            <x-input type="number" id="edit_nip" name="edit_nip" 
+                                placeholder="nip"
+                                class="{{ $errors->has('nip') ? 'border-red-500' : 'border-gray-200' }}"
+                                required
+                            />
+                        @error('edit_nip')
+                            <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
+                        </div>
+                        <div class="sm:w-3/5 w-full">
+                            <x-label >Nama</x-label>
+                            <x-input type="text" id="edit_nama" name="edit_nama_verifikator"
+                            placeholder="nama verifikator"
+                            class="{{ $errors->has('edit_nama_verifikator') ? 'border-red-500' : 'border-gray-200' }}"
+                            required
+                            />
+                        @error('edit_nama_verifikator')
+                            <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
+                        </div>
                     </div>
-                    <div class="form-control">
-                        <x-label >Nama</x-label>
-                        <x-input type="text" id="edit_nama" name="nama_verifikator"
-                            required placeholder="nama verifikator" />
-                    </div>
+                    
 
                     <div class="form-control">
                         <x-label >Username</x-label>
-                        <x-input type="text" id="edit_name" name="edit_name" required
+                        <x-input type="text" id="edit_name" name="edit_name" 
+                            class="{{ $errors->has('edit_name') ? 'border-red-500' : 'border-gray-200' }}"
+                            required
                             placeholder="username" />
+                        @error('edit_name')
+                            <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="form-control">
                         <x-label >Email</x-label>
                         <x-input type="text" id="edit_email" name="edit_email"  required
                             placeholder="email" />
+                        @error('edit_email')
+                            <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                     </div>
 
 
@@ -152,12 +209,17 @@
                         <x-label>Password</x-label>
                         <div class="relative">
                             <x-input type="password" id="edit_password" name="edit_password" id="edit_password"
-                                 placeholder="password" />
+                                placeholder="password"
+                                class="{{ $errors->has('edit_password') ? 'border-red-500' : 'border-gray-200' }}"
+                                />
                             <button type="button" class="absolute right-4 top-1/2 transform -translate-y-1/2"
                                 onclick="togglePassword('edit_password')">
                                 <i class="fa-solid fa-eye" id="edit_password-icon"></i>
                             </button>
                         </div>
+                        @error('edit_password')
+                            <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="modal-action">
                         <button type="submit" class="btn btn-primary text-white bg-blue-600">Update</button>

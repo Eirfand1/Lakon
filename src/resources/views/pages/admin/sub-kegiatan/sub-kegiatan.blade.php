@@ -103,7 +103,7 @@
                         <h3 class="font-bold text-lg dark:text-gray-200">EDIT SUB KEGIATAN</h3>
                     </div>
                     <label for="edit-sub-kegiatan"
-                        class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
+                        class="btn btn-sm btn-circle rounded-full shadow-none btn-ghost hover:bg-gray-200 dark:hover:bg-gray-700">
                         ✕
                     </label>
                 </div>
