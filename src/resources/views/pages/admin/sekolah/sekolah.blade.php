@@ -40,11 +40,11 @@
         @endif
         <!-- error message -->
 
-        @if (session('error'))
+        @if ($errors->any())
             <script>
                 Toastify({
                     escapeMarkup: false,
-                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
+                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ $errors->first() }}",
                     duration: 3000,
                     gravity: "top",
                     position: "center",
@@ -80,11 +80,21 @@
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <x-label>NPSN</x-label>
-                                <x-input type="text" id="npsn" name="npsn"  required />
+                                <x-input type="text" id="npsn" name="npsn"  placeholder="NPSP" value="{{old('npsn')}}"
+                                class="{{ $errors->has('npsn') ? 'border-red-500' : 'border-gray-200' }}"
+                                required />
+                                @error('npsn')
+                                    <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                                @enderror
                             </div>
                             <div>
                                 <x-label>Nama Sekolah</x-label>
-                                <x-input type="text" id="nama_sekolah" name="nama_sekolah"  required />
+                                <x-input type="text" id="nama_sekolah" name="nama_sekolah" placeholder="Nama Sekolah" value="{{old('nama_sekolah')}}"
+                                class="{{ $errors->has('nama_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
+                                required />
+                                @error('nama_sekolah')
+                                    <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                                @enderror
                             </div>
                         </div>
 
@@ -95,21 +105,21 @@
                                 <select name="jenjang" id="jenjang" class="w-full h-10 px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-900/20 dark:text-gray-200">
-                                    <option value="">Pilih Jenjang</option>
-                                    <option value="SD">SD</option>
-                                    <option value="SMP">SMP</option>
-                                    <option value="SMA">SMA</option>
-                                    <option value="SMK">SMK</option>
+                                    <option value="" {{ old('jenjang') ? '' : 'selected' }} disabled >Pilih Jenjang</option>
+                                    <option value="SD" {{ old('jenjang') == 'SD' ? 'selected' : '' }}>SD</option>
+                                    <option value="SMP" {{ old('jenjang') == 'SMP' ? 'selected' : '' }}>SMP</option>
+                                    <option value="SMA" {{old('jenjang') == 'SMA' ? 'selected' : '' }}  >SMA</option>
+                                    <option value="SMK" {{ old('jenjang') == 'SMK' ? 'selected' : '' }}>SMK</option>
                                 </select>
                             </div>
                             <div>
                                 <x-label >Status</x-label>
                                 <select name="status" id="status" class="w-full px-3 py-2 h-10 rounded-md border border-gray-200 dark:border-gray-700
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-900/20 dark:text-gray-200">
-                                    <option value="">Pilih Status</option>
-                                    <option value="NEGERI">Negeri</option>
-                                    <option value="SWASTA">Swasta</option>
+                            dark:bg-gray-900/20 dark:text-gray-200" >
+                                    <option value="" {{ old('status') ? '' : 'selected' }} disabled>Pilih Status</option>
+                                    <option value="NEGERI" {{old('status') == 'NEGERI' ? 'selected' : '' }} >Negeri</option>
+                                    <option value="SWASTA" {{old('status') == 'SWASTA' ? 'selected' : '' }} >Swasta</option>
                                 </select>
                             </div>
                         </div>
@@ -117,27 +127,54 @@
                         <!-- Alamat -->
                         <div>
                             <label class="block text-sm font-medium dark:text-gray-300 mb-2">Alamat</label>
-                            <textarea name="alamat" id="alamat" rows="3" class="w-full px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700
+                            <textarea name="alamat" id="alamat" rows="3" class="w-full px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700 
                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                        dark:bg-gray-900/20 dark:text-gray-200" required></textarea>
+                        dark:bg-gray-900/20 dark:text-gray-200 
+                        {{ $errors->has('alamat') ? 'border-red-500' : 'border-gray-200' }}"
+                         placeholder="alamat"
+                         required>{{old('alamat')}}</textarea>
+                                @error('alamat')
+                                    <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                                @enderror
                         </div>
 
                         <!-- Desa & Kecamatan -->
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <x-label>Desa</x-label>
-                                <x-input type="text" id="desa" name="desa"  required />
+                                <x-input type="text" id="desa" name="desa" 
+                                placeholder="Desa" 
+                                class="{{ $errors->has('nama_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
+                                value="{{old('desa')}}"
+                                required />
+                                @error('desa')
+                                    <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                                @enderror
                             </div>
                             <div>
                                 <x-label>Kecamatan</x-label>
-                                <x-input type="text" id="kecamatan" name="kecamatan"  required />
+                                <x-input type="text" id="kecamatan" name="kecamatan" 
+                                placeholder="Kecamatan" 
+                                class="{{ $errors->has('nama_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
+                                value="{{old('kecamatan')}}"
+                                required />
+                                @error('kecamatan')
+                                    <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                                @enderror
                             </div>
                         </div>
 
                         <!-- Koordinat -->
                         <div>
                             <x-label>Koordinat</x-label>
-                            <x-input type="text" id="koordinat" name="koordinat"/>
+                            <x-input type="text" id="koordinat" name="koordinat"
+                            placeholder="Koordinat Sekolah"
+                            value="{{old('koordinat')}}"
+                             class="{{ $errors->has('nama_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
+                            />
+                            @error('koordinat')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                         </div>
                         <!-- Map -->
                         <div id="map" class="w-full h-96"></div>
@@ -178,11 +215,21 @@
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <x-label>NPSN</x-label>
-                                <x-input type="text" id="edit_npsn" name="npsn" required />
+                                <x-input type="text" id="edit_npsn" name="npsn"
+                                class="{{ $errors->has('npsn') ? 'border-red-500' : 'border-gray-200' }}"
+                                required />
+                                @error('npsn')
+                                    <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                                @enderror
                             </div>
                             <div>
                                 <x-label>Nama Sekolah</x-label>
-                                <x-input type="text" id="namaSekolah" name="nama_sekolah" required />
+                                <x-input type="text" id="namaSekolah" name="nama_sekolah"
+                                class="{{ $errors->has('nama_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
+                                required />
+                                @error('nama_sekolah')
+                                    <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                                @enderror
                             </div>
                         </div>
 
@@ -217,27 +264,45 @@
                             <label class="block text-sm font-medium dark:text-gray-300 mb-2">Alamat</label>
                             <textarea name="alamat" id="edit_alamat" rows="3" class="w-full px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700
                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                        dark:bg-gray-900/20 dark:text-gray-200" required></textarea>
+                        dark:bg-gray-900/20 dark:text-gray-200
+                         {{ $errors->has('nama_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
+                        required></textarea>
+                                @error('alamat')
+                                    <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                                @enderror
                         </div>
 
                         <!-- Desa & Kecamatan -->
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <x-label>Desa</x-label>
-                                <x-input type="text" id="edit_desa" name="desa" required />
+                                <x-input type="text" id="edit_desa" name="desa"
+                                class="{{ $errors->has('desa') ? 'border-red-500' : 'border-gray-200' }}"
+                                required />
+                                @error('desa')
+                                    <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                                @enderror
                             </div>
                             <div>
                                 <x-label >Kecamatan</x-label>
-                                <x-input type="text" id="edit_kecamatan" name="kecamatan"  required />
+                                <x-input type="text" id="edit_kecamatan" name="kecamatan" 
+                                class="{{ $errors->has('kecamatan') ? 'border-red-500' : 'border-gray-200' }}"
+                                required />
+                                @error('kecamatan')
+                                    <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                                @enderror
                             </div>
                         </div>
 
                         <!-- Koordinat -->
                         <div>
                             <x-label class="block text-sm font-medium dark:text-gray-300 mb-2">Koordinat</x-label>
-                            <x-input type="text" id="edit_koordinat" name="koordinat" class="w-full px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700
-                        focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                        dark:bg-gray-900/20 dark:text-gray-200"/>
+                            <x-input type="text" id="edit_koordinat"  name="koordinat"                      
+                                class="{{ $errors->has('kecamatan') ? 'border-red-500' : 'border-gray-200' }}"
+                            />
+                                @error('koordinat')
+                                    <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                                @enderror
                         </div>
                         <!-- Map -->
                         <div id="edit_map" class="w-full h-96"></div>

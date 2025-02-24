@@ -1,7 +1,9 @@
 <?php
 namespace App\Livewire;
 
+use App\Models\DasarHukum;
 use App\Models\PaketPekerjaan;
+use App\Models\SubKegiatan;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Filters\NumberFilter;
@@ -19,7 +21,7 @@ class PaketPekerjaanTable extends DataTableComponent
             ->setDefaultSort('created_at', 'desc')
             ->setColumnSelectStatus(true)
             ->setFilterLayout('slide-down')
-            ->setPerPageAccepted([10,25,50,100, -1]);
+            ->setPerPageAccepted([10, 25, 50, 100, -1]);
 
     }
     public function builder(): \Illuminate\Database\Eloquent\Builder
@@ -172,7 +174,7 @@ class PaketPekerjaanTable extends DataTableComponent
     public function filters(): array
     {
         return [
-            // Jenis Pengadaan Filter
+            // Existing filters
             SelectFilter::make('Jenis Pengadaan')
                 ->options([
                     '' => 'Semua Jenis',
@@ -181,18 +183,32 @@ class PaketPekerjaanTable extends DataTableComponent
                     return $value ? $builder->where('jenis_pengadaan', $value) : $builder;
                 }),
 
-            // Sub Kegiatan Filter
-            // SelectFilter::make('Sub Kegiatan')
-            //     ->options([
-            //         '' => 'Semua Sub Kegiatan',
-            //     ] + SubKegiatan::pluck('nama_sub_kegiatan', 'nama_sub_kegiatan')->toArray())
-            //     ->filter(function ($builder, $value) {
-            //         return $value
-            //             ? $builder->whereHas('subKegiatan', fn($q) => $q->where('nama_sub_kegiatan', $value))
-            //             : $builder;
-            //     }),
+            // Sub Kegiatan Filter (Many to Many)
+            SelectFilter::make('Sub Kegiatan')
+                ->options([
+                    '' => 'Semua Sub Kegiatan',
+                ] + SubKegiatan::orderBy('nama_sub_kegiatan')
+                        ->pluck('nama_sub_kegiatan', 'sub_kegiatan_id')
+                        ->toArray())
+                ->filter(function ($builder, $value) {
+                    return $value
+                        ? $builder->whereHas('subKegiatan', function ($query) use ($value) {
+                            $query->where('sub_kegiatan.sub_kegiatan_id', $value);
+                        })
+                        : $builder;
+                }),
 
-            // Tahun Anggaran Filter
+            // Dasar Hukum Filter
+            SelectFilter::make('Dasar Hukum')
+                ->options([
+                    '' => 'Semua Dasar Hukum',
+                ] + DasarHukum::orderBy('dasar_hukum')
+                        ->pluck('dasar_hukum', 'daskum_id')
+                        ->toArray())
+                ->filter(function ($builder, $value) {
+                    return $value ? $builder->where('dasarHukum.daskum_id', $value) : $builder;
+                }),
+
             SelectFilter::make('Tahun Anggaran')
                 ->options([
                     '' => 'Semua Tahun',
@@ -200,17 +216,15 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->filter(function ($builder, $value) {
                     return $value ? $builder->where('tahun_anggaran', $value) : $builder;
                 }),
-            
+
             SelectFilter::make('Sumber Dana')
-            ->options([
-                '' => "Semua sumber dana"
-            ] + PaketPekerjaan::distinct()->pluck('sumber_dana', 'sumber_dana')->toArray())
-            ->filter(function($builder, $value) {
-                return $value ? $builder->where('sumber_dana', $value) : $builder;
-            }),
+                ->options([
+                    '' => "Semua sumber dana"
+                ] + PaketPekerjaan::distinct()->pluck('sumber_dana', 'sumber_dana')->toArray())
+                ->filter(function ($builder, $value) {
+                    return $value ? $builder->where('sumber_dana', $value) : $builder;
+                }),
 
-
-            // Metode Pemilihan Filter
             SelectFilter::make('Metode Pemilihan')
                 ->options([
                     '' => 'Semua Metode',
@@ -219,9 +233,6 @@ class PaketPekerjaanTable extends DataTableComponent
                     return $value ? $builder->where('metode_pemilihan', $value) : $builder;
                 }),
 
-
-
-            // Nilai Pagu Filter
             NumberFilter::make('Minimal Nilai Pagu')
                 ->config([
                     'min' => 0,

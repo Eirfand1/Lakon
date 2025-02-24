@@ -29,11 +29,11 @@
         @endif
         <!-- error message -->
 
-        @if (session('error'))
+        @if ($errors->any())
         <script>
             Toastify({
                 escapeMarkup: false,
-                text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
+                text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ $errors->first() }}",
                 duration: 3000,
                 gravity: "top",
                 position: "center",
@@ -67,23 +67,43 @@
                     @csrf
                     <div class="flex w-full flex-col ">
                         <x-label for="no_rekening" class="w-full sm:w-1/4">Nomor Rekening</x-label>
-                        <x-input type="number" name="no_rekening" id="no_rekening"
+                        <x-input type="number" name="no_rekening" id="no_rekening" value="{{old('no_rekening')}}"
+                        class="{{ $errors->has('no_rekening') ? 'border-red-500' : 'border-gray-200' }}"
+                        placeholder="Nomor Rekening"
                         />
+                        @error('no_rekening')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="flex w-full flex-col ">
                         <x-label for="nama_sub_kegiatan" class="w-full sm:w-1/4">Nama Sub Kegiatan</x-label>
-                        <x-input type="text" name="nama_sub_kegiatan" id="nama_sub_kegiatan"
+                        <x-input type="text" name="nama_sub_kegiatan" id="nama_sub_kegiatan" value="{{old('nama_sub_kegiatan')}}"
+                        class="{{ $errors->has('nama_sub_kegiatan') ? 'border-red-500' : 'border-gray-200' }}"
+                        placeholder="Nama Sub Kegiatan"
                         />
+                        @error('nama_sub_kegiatan')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="flex w-full flex-col ">
                         <x-label for="gabungan" class="w-full sm:w-1/4">Gabungan</x-label>
-                        <x-input type="text" name="gabungan" id="gabungan"
+                        <x-input type="text" name="gabungan" id="gabungan" value="{{old('gabungan')}}"
+                        class="{{ $errors->has('gabungan') ? 'border-red-500' : 'border-gray-200' }}"
+                        placeholder="Gabungan"
                         />
+                        @error('gabungan')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                     </div>
                     <div class="flex w-full flex-col ">
                         <x-label for="pendidikan" class="w-full sm:w-1/4">Pendidikan</x-label>
-                        <x-input type="text" name="pendidikan" id="pendidikan"
+                        <x-input type="text" name="pendidikan" id="pendidikan" value="{{old('pendidikan')}}"
+                        class="{{ $errors->has('pendidikan') ? 'border-red-500' : 'border-gray-200' }}"
+                        placeholder="Pendidkan"
                         />
+                        @error('pendidikan')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                     </div>
 
                     <div class="modal-action pt-4">
@@ -114,22 +134,38 @@
                         <div class="w-full flex flex-col">
                             <x-label >Nomor Rekening</x-label>
                             <x-input type="number" id="noRekening" name="no_rekening"
-                                required />
+                                class="{{ $errors->has('no_rekening') ? 'border-red-500' : 'border-gray-200' }}"
+                             required />
+                        @error('no_rekening')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                         </div>
                         <div class="">
                             <x-label >Nama Sub Kegiatan</x-label>
                             <x-input type="text" id="namaSubKegiatan" name="nama_sub_kegiatan"
-                                required />
+                                class="{{ $errors->has('nama_sub_kegiatan') ? 'border-red-500' : 'border-gray-200' }}"
+                             required />
+                        @error('nama_sub_kegiatan')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                         </div>
                         <div class="">
                             <x-label >Gabungan</x-label>
                             <x-input type="text" id="edit_gabungan" name="gabungan"
-                                required />
+                                class="{{ $errors->has('gabungan') ? 'border-red-500' : 'border-gray-200' }}"
+                             required />
+                        @error('gabungan')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                         </div>
                         <div class="">
                             <x-label>Pendidikan</x-label>
                             <x-input type="text" id="edit_pendidikan" name="pendidikan"
-                                required />
+                                class="{{ $errors->has('pendidikan') ? 'border-red-500' : 'border-gray-200' }}"
+                            required />
+                        @error('pendidikan')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                         </div>
 
                     <div class="modal-action">
