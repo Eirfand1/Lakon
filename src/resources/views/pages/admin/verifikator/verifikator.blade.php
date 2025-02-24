@@ -73,6 +73,7 @@
                             <x-label >NIP</x-label>
                             <x-input type="number" name="nip" required
                                 class="{{ $errors->has('nip') ? 'border-red-500' : 'border-gray-200' }}"
+                                value="{{old('nip')}}"
                                 placeholder="nip" />
                             @error('nip')
                                 <span class="text-sm text-red-500 mt-1">{{$message}}</span>
@@ -82,6 +83,7 @@
                             <x-label >Nama</x-label>
                             <x-input type="text" name="nama_verifikator" 
                                 placeholder="nama verifikator"
+                                value="{{old('nama_verifikator')}}"
                                 class="{{ $errors->has('nama_verifikator') ? 'border-red-500' : 'border-gray-200' }}"
                                 required
                             />
@@ -97,6 +99,7 @@
                         <x-label >Username</x-label>
                         <x-input type="text" name="name"
                             placeholder="username"
+                            value="{{old('name')}}"
                             class="{{ $errors->has('name') ? 'border-red-500' : 'border-gray-200' }}"
                             required
                             />
@@ -110,6 +113,7 @@
                         <x-input type="text" name="email" 
                             placeholder="email"
                             class="{{ $errors->has('email') ? 'border-red-500' : 'border-gray-200' }}"
+                            value="{{old('email')}}"
                             required
                             />
                         @error('email')
