@@ -178,6 +178,124 @@
                             </p>
                         </div>
                     </div>
+
+                    {{-- tender --}}
+                    @if ($kontrak->paketPekerjaan->jenis_pengadaan == 'tender')
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <div class="flex items-center gap-2">
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor SPPBJ</label>
+                                @if ($kontrak->nomor_sppbj)
+                                    <i class="fa-regular fa-circle-check text-green-500"></i>
+                                @else
+                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
+                                @endif
+                            </div>
+                            <input type="text" name="nomor_sppbj" value="{{ $kontrak->nomor_sppbj }}" required
+                            class="w-full dark:bg-gray-800 rounded mt-2">
+                        </div>
+
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <div class="flex items-center gap-2">
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal SPPBJ</label>
+                                @if ($kontrak->tgl_sppbj)
+                                    <i class="fa-regular fa-circle-check text-green-500"></i>
+                                @else
+                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
+                                @endif
+                            </div>
+                            <input type="date" name="tgl_sppbj" value="{{ $kontrak->tgl_sppbj }}" required
+                            class="w-full dark:bg-gray-800 rounded mt-2">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <div class="flex items-center gap-2">
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor Penetapan Pemenang</label>
+                                @if ($kontrak->nomor_penetapan_pemenang)
+                                    <i class="fa-regular fa-circle-check text-green-500"></i>
+                                @else
+                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
+                                @endif
+                            </div>
+                            <input type="text" name="nomor_penetapan_pemenang" value="{{ $kontrak->nomor_penetapan_pemenang }}" required
+                            class="w-full dark:bg-gray-800 rounded mt-2">
+                        </div>
+
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <div class="flex items-center gap-2">
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal Penetapan Pemenang</label>
+                                @if ($kontrak->tgl_penetapan_pemenang)
+                                    <i class="fa-regular fa-circle-check text-green-500"></i>
+                                @else
+                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
+                                @endif
+                            </div>
+                            <input type="date" name="tgl_penetapan_pemenang" value="{{ $kontrak->tgl_penetapan_pemenang }}" required
+                            class="w-full dark:bg-gray-800 rounded mt-2">
+                        </div>
+                    </div>
+                    @endif
+
+                    {{-- non tender --}}
+                    @if ($kontrak->paketPekerjaan->jenis_pengadaan == 'non_tender')
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <div class="flex items-center gap-2">
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor DPPL</label>
+                                @if ($kontrak->nomor_dppl)
+                                    <i class="fa-regular fa-circle-check text-green-500"></i>
+                                @else
+                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
+                                @endif
+                            </div>
+                            <input type="text" name="nomor_dppl" value="{{ $kontrak->nomor_dppl }}" required
+                            class="w-full dark:bg-gray-800 rounded mt-2">
+                        </div>
+
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <div class="flex items-center gap-2">
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal DPPL</label>
+                                @if ($kontrak->tgl_dppl)
+                                    <i class="fa-regular fa-circle-check text-green-500"></i>
+                                @else
+                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
+                                @endif
+                            </div>
+                            <input type="date" name="tgl_dppl" value="{{ $kontrak->tgl_dppl }}" required
+                            class="w-full dark:bg-gray-800 rounded mt-2">
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <div class="flex items-center gap-2">
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor BAHPL</label>
+                                @if ($kontrak->nomor_bahpl)
+                                    <i class="fa-regular fa-circle-check text-green-500"></i>
+                                @else
+                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
+                                @endif
+                            </div>
+                            <input type="text" name="nomor_bahpl" value="{{ $kontrak->nomor_bahpl }}" required
+                            class="w-full dark:bg-gray-800 rounded mt-2">
+                        </div>
+
+                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                            <div class="flex items-center gap-2">
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal BAHPL</label>
+                                @if ($kontrak->tgl_bahpl)
+                                    <i class="fa-regular fa-circle-check text-green-500"></i>
+                                @else
+                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
+                                @endif
+                            </div>
+                            <input type="date" name="tgl_bahpl" value="{{ $kontrak->tgl_bahpl }}" required
+                            class="w-full dark:bg-gray-800 rounded mt-2">
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
 
@@ -278,7 +396,7 @@
         </form>
     </div>
     @endif
-    
+
     <!-- Delete -->
     <input type="checkbox" id="delete-modal" class="modal-toggle" />
     <div class="modal modal-top px-3">
