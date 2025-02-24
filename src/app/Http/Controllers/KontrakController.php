@@ -77,7 +77,17 @@ class KontrakController extends Controller
             }
 
             $validatedData = $request->validate([
-                // no dhppl dll di sini yaa
+                // tender
+                'nomor_sppbj' => 'nullable|string|max:255',
+                'tgl_sppbj' => 'nullable|date',
+                'nomor_penetapan_pemenang' => 'nullable|string|max:255',
+                'tgl_penetapan_pemenang' => 'nullable|date',
+
+                // non tender
+                'nomor_dppl' => 'nullable|string|max:255',
+                'tgl_dppl' => 'nullable|date',
+                'nomor_bahpl' => 'nullable|string|max:255',
+                'tgl_bahpl' => 'nullable|date',
             ]);
 
             $validatedData['tgl_pembuatan'] = now()->toDateString();
