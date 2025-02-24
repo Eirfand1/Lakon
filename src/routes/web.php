@@ -63,6 +63,10 @@ Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(functio
 Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(function () {
     Route::get('/riwayat-kontrak', [VerifikatorController::class, 'kontrakSaya'])->name('verifikator.riwayat');
     Route::get('/dashboard', [VerifikatorController::class, 'dashboard'])->name('verifikator.dashboard');
+
+    Route::get('/tolak/{kontrak_id}', [VerifikatorController::class, 'tolak'])->name('verifikator.tolak');
+    Route::get('/terima/{kontrak_id}', [VerifikatorController::class, 'terima'])->name('verifikator.terima');
+    Route::get('/detail', [VerifikatorController::class, 'detail'])->name('verifikator.detail');
 });
 
 // TODO make all route to /admin or /penyedia or /verifikator

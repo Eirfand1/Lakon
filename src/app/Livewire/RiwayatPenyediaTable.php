@@ -8,8 +8,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Kontrak;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
+use Illuminate\Support\Facades\Auth;
 
-class VerifikasiTable extends DataTableComponent
+class RiwayatPenyediaTable extends DataTableComponent
 {
     protected $model = Kontrak::class;
 
@@ -20,7 +21,7 @@ class VerifikasiTable extends DataTableComponent
         $this->setPrimaryKey('kontrak_id')
             ->setColumnSelectStatus(true)
             ->setFilterLayout('slide-down')
-             ->setPerPageAccepted([10,25,50,100, -1]);
+            ->setPerPageAccepted([10,25,50,100, -1]);
     }
 
     public function builder(): \Illuminate\Database\Eloquent\Builder
@@ -28,8 +29,8 @@ class VerifikasiTable extends DataTableComponent
         return Kontrak::query()
             ->with(['satuanKerja', 'penyedia', 'verifikator', 'paketPekerjaan'])
             ->orderByDesc('kontrak.updated_at')
-            ->where('is_verificated', 0)
-            ->where('is_layangkan', 1);
+            ->where('is_verificated', 1)
+            ->where('kontrak.penyedia_id', Auth::user()->penyedia->penyedia_id);
     }
 
     public function columns(): array
@@ -64,21 +65,6 @@ class VerifikasiTable extends DataTableComponent
             Column::make("Tanggal Pengajuan", "tgl_pembuatan")
                 ->sortable()
                 ->searchable(),
-
-            Column::make("Aksi", "kontrak_id")
-                ->format( function($value, $row) {
-                    return '
-                            <button type="button" onclick="tolak('.$row->kontrak_id.')"
-                            class="btn btn-sm btn-error dark:text-gray-50">
-                            tolak</button>
-                            <button type="button" onclick="terima('.$row->kontrak_id.')"
-                            class="btn btn-sm btn-success dark:text-gray-50">
-                            terima</button>
-                            <a  href="#"
-                            class="btn btn-sm btn-info dark:text-gray-50">
-                            detail</a>
-                            ';
-                })->html(),
         ];
     }
 }
