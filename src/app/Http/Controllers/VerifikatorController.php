@@ -32,95 +32,70 @@ class VerifikatorController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        try {
-            $validate = $request->validate([
-                'nip' => 'required|unique:verifikator,nip|numeric',
-                'nama_verifikator' => 'required'
-            ]);
+        $validate = $request->validate([
+            'nip' => 'required|unique:verifikator,nip|numeric',
+            'nama_verifikator' => 'required'
+        ]);
 
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email',
-                'password' => 'required|string|min:8',
-            ]);
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required|string|min:8',
+        ]);
 
-            $user = User::create([
-                'name' => $request->name,
-                'role' => 'verifikator',
-                'email' => $request->email,
-                'password' => Hash::make($request->password),
-            ]);
+        $user = User::create([
+            'name' => $request->name,
+            'role' => 'verifikator',
+            'email' => $request->email,
+            'password' => Hash::make($request->password),
+        ]);
 
-            Verifikator::create([
-                'user_id' => $user->id,
-                'nip' => $request->nip,
-                'nama_verifikator' => $request->nama_verifikator,
-            ]);
+        Verifikator::create([
+            'user_id' => $user->id,
+            'nip' => $request->nip,
+            'nama_verifikator' => $request->nama_verifikator,
+        ]);
 
-            return redirect()->back()->with('success', 'data berhasil nambah');
-
-        } catch (QueryException $e) {
-            return redirect()->back()
-                ->withInput()
-                ->with("error", $e->getMessage());
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->withInput()
-                ->with("error", $e->getMessage());
-        }
+        return redirect()->back()->with('success', 'data berhasil nambah');
     }
 
     public function update(Request $request, Verifikator $verifikator): RedirectResponse
     {
-        try {
-            $validate = $request->validate([
-                'edit_nip' => 'required|numeric|unique:verifikator,nip,' . $verifikator->verifikator_id . ',verifikator_id',
-                'edit_nama_verifikator' => 'required'
+        $validate = $request->validate([
+            'edit_nip' => 'required|numeric|unique:verifikator,nip,' . $verifikator->verifikator_id . ',verifikator_id',
+            'edit_nama_verifikator' => 'required',
+            'edit_password' => 'required|string|min:8'
+        ]);
+
+        $user = User::where('id', $verifikator->user_id)->update([
+            'name' => $request->edit_name,
+            'email' => $request->edit_email,
+            'password' => $request->edit_password
+        ]);
+
+        if ($request->password) {
+            User::where('id', $verifikator->user_id)->update([
+                'password' => Hash::make($request->password)
             ]);
-
-            $user = User::where('id', $verifikator->user_id)->update([
-                'name' => $request->edit_name,
-                'email' => $request->edit_email,
-            ]);
-
-            if ($request->password) {
-                User::where('id', $verifikator->user_id)->update([
-                    'password' => Hash::make($request->password)
-                ]);
-            }
-
-            Verifikator::where('verifikator_id', $verifikator->verifikator_id)->update([
-                'nip' => $request->nip,
-                'nama_verifikator' => $request->nama_verifikator,
-            ]);
-
-            return redirect()->back()->with('success', 'Data berhasil di perbarui!');
-        } catch (QueryException $e) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', 'Gagal memperbarui data');
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', 'Terjadi kesalahan tak terduga');
         }
+
+        Verifikator::where('verifikator_id', $verifikator->verifikator_id)->update([
+            'nip' => $request->edit_nip,
+            'nama_verifikator' => $request->edit_nama_verifikator,
+        ]);
+        return redirect()->back()->with('success', 'Data berhasil di perbarui!');
     }
     public function destroy(Verifikator $verifikator): RedirectResponse
     {
-        try {
-            $user = $verifikator->user;
-            $verifikator->delete();
+        $user = $verifikator->user;
+        $verifikator->delete();
 
-            if ($user) {
-                $user->delete();
-            }
-
-            return redirect()->back()->with('success', 'Data berhasil di hapus');
-        } catch (QueryException $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan saat menghapus data');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Terjadi kesalahan tak terduga saat menghapus data');
+        if ($user) {
+            $user->delete();
         }
+
+        return redirect()->back()->with('success', 'Data berhasil di hapus');
+
     }
 
 
