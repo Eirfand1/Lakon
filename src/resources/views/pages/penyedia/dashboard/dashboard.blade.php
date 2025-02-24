@@ -99,6 +99,9 @@
                                     <th scope="col"
                                         class="px-4 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider">
                                         Tanggal</th>
+                                    <th scope="col"
+                                        class="px-4 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider text-center">
+                                        Aksi</th>
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
@@ -115,6 +118,15 @@
                                             {{ $row->paketPekerjaan->metode_pemilihan }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200">
                                             {{ $row->tgl_pembuatan }}</td>
+                                        <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200 text-center">
+                                            @if ($row->is_layangkan)
+                                            <a href="#"
+                                                class="btn btn-sm btn-success dark:text-gray-200">Detail Permohonan</a>
+                                            @else
+                                            <a href="permohonan-kontrak/{{ $row->kontrak_id }}"
+                                                class="btn btn-sm btn-error dark:text-gray-200">Layangkan Permohonan</a>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </tbody>
