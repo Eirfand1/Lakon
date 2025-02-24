@@ -29,7 +29,6 @@ class PpkomController extends Controller
 
     public function store(Request $request): RedirectResponse
     {
-        try {
             $validated = $request->validate([
                 'nip' => 'required|unique:ppkom|max:255',
                 'nama' => 'required|max:255',
@@ -42,20 +41,10 @@ class PpkomController extends Controller
 
             Ppkom::create($validated);
             return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
-        } catch (QueryException $e) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', $e->getMessage());
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', $e->getMessage());
-        }
     }
 
     public function update(Request $request, Ppkom $ppkom): RedirectResponse
     {
-        try {
             $validated = $request->validate([
                 'nip' => 'required|unique:ppkom,nip,' . $ppkom->ppkom_id . ',ppkom_id|max:255',
                 'nama' => 'required|max:255',
@@ -68,28 +57,12 @@ class PpkomController extends Controller
 
             $ppkom->update($validated);
             return redirect()->back()->with('success', 'Data berhasil diperbarui.');
-        } catch (QueryException $e) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', $e->getMessage());
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', $e->getMessage());
-        }
     }
 
     public function destroy(Ppkom $ppkom): RedirectResponse
     {
-        try {
             $ppkom->delete();
             return redirect()->back()->with('success', 'Data berhasil dihapus.');
-        } catch (QueryException $e) {
-            return redirect()->back()
-                ->with('error', $e->getMessage());
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->with('error', $e->getMessage());
-        }
+        
     }
 }

@@ -38,100 +38,85 @@ class SekolahController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            $validateData = $request->validate([
-                'npsn' => 'required|numeric|unique:sekolah,npsn',
-                'nama_sekolah' => 'required|string|max:150',
-                'jenjang' => 'required|in:SD,SMP,SMA,SMK',
-                'status' => 'required|string|max:255',
-                'alamat' => 'required|string|max:255',
-                'desa' => 'required|string|max:100',
-                'kecamatan' => 'required|string|max:100',
-                'koordinat' => 'nullable',
-            ]);
+        $validateData = $request->validate([
+            'npsn' => 'required|numeric|unique:sekolah,npsn',
+            'nama_sekolah' => 'required|string|max:150',
+            'jenjang' => 'required|in:SD,SMP,SMA,SMK',
+            'status' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'desa' => 'required|string|max:100',
+            'kecamatan' => 'required|string|max:100',
+            'koordinat' => 'nullable',
+        ]);
 
-            // Parse input koordinat (format: "latitude,longitude")
-            if ($validateData['koordinat']) {
-                $koordinat = explode(',', $validateData['koordinat']);
-                $latitude = trim($koordinat[0]);
-                $longitude = trim($koordinat[1]);
-                $koordinat = DB::raw("POINT($latitude, $longitude)");
-            }else {
-                $koordinat = null;
-            }
-
-            $sekolah = Sekolah::create([
-                'npsn' => $validateData['npsn'],
-                'nama_sekolah' => $validateData['nama_sekolah'],
-                'jenjang' => $validateData['jenjang'],
-                'status' => $validateData['status'],
-                'alamat' => $validateData['alamat'],
-                'desa' => $validateData['desa'],
-                'kecamatan' => $validateData['kecamatan'],
-                'koordinat' => $koordinat,
-            ]);
-            return redirect()->back()->with('success', 'Sekolah berhasil disimpan.');
-
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+        // Parse input koordinat (format: "latitude,longitude")
+        if ($validateData['koordinat']) {
+            $koordinat = explode(',', $validateData['koordinat']);
+            $latitude = trim($koordinat[0]);
+            $longitude = trim($koordinat[1]);
+            $koordinat = DB::raw("POINT($latitude, $longitude)");
+        } else {
+            $koordinat = null;
         }
+
+        $sekolah = Sekolah::create([
+            'npsn' => $validateData['npsn'],
+            'nama_sekolah' => $validateData['nama_sekolah'],
+            'jenjang' => $validateData['jenjang'],
+            'status' => $validateData['status'],
+            'alamat' => $validateData['alamat'],
+            'desa' => $validateData['desa'],
+            'kecamatan' => $validateData['kecamatan'],
+            'koordinat' => $koordinat,
+        ]);
+        return redirect()->back()->with('success', 'Sekolah berhasil disimpan.');
+
     }
 
 
     public function update(Request $request, Sekolah $sekolah)
     {
-        try {
-            $validateData = $request->validate([
-                'npsn' => 'required|numeric|unique:sekolah,npsn,' . $sekolah->sekolah_id . ',sekolah_id',
-                'nama_sekolah' => 'required|string|max:150',
-                'jenjang' => 'required|in:SD,SMP,SMA,SMK',
-                'status' => 'required|string|max:255',
-                'alamat' => 'required|string|max:255',
-                'desa' => 'required|string|max:100',
-                'kecamatan' => 'required|string|max:100',
-                'koordinat' => 'nullable',
-            ]);
+        $validateData = $request->validate([
+            'npsn' => 'required|numeric|unique:sekolah,npsn,' . $sekolah->sekolah_id . ',sekolah_id',
+            'nama_sekolah' => 'required|string|max:150',
+            'jenjang' => 'required|in:SD,SMP,SMA,SMK',
+            'status' => 'required|string|max:255',
+            'alamat' => 'required|string|max:255',
+            'desa' => 'required|string|max:100',
+            'kecamatan' => 'required|string|max:100',
+            'koordinat' => 'nullable',
+        ]);
 
-            // Parse input koordinat (format: "latitude,longitude")
-            if ($validateData['koordinat']) {
-                $koordinat = explode(',', $validateData['koordinat']);
-                $latitude = trim($koordinat[0]);
-                $longitude = trim($koordinat[1]);
-                $koordinat = DB::raw("POINT($latitude, $longitude)");
-            }else {
-                $koordinat = null;
-            }
-
-            $sekolah->update([
-                'npsn' => $validateData['npsn'],
-                'nama_sekolah' => $validateData['nama_sekolah'],
-                'jenjang' => $validateData['jenjang'],
-                'status' => $validateData['status'],
-                'alamat' => $validateData['alamat'],
-                'desa' => $validateData['desa'],
-                'kecamatan' => $validateData['kecamatan'],
-                'koordinat' => $koordinat,
-            ]);
-
-            return redirect()->back()->with('success', 'Data sekolah berhasil diperbarui.');
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage());
+        // Parse input koordinat (format: "latitude,longitude")
+        if ($validateData['koordinat']) {
+            $koordinat = explode(',', $validateData['koordinat']);
+            $latitude = trim($koordinat[0]);
+            $longitude = trim($koordinat[1]);
+            $koordinat = DB::raw("POINT($latitude, $longitude)");
+        } else {
+            $koordinat = null;
         }
+
+        $sekolah->update([
+            'npsn' => $validateData['npsn'],
+            'nama_sekolah' => $validateData['nama_sekolah'],
+            'jenjang' => $validateData['jenjang'],
+            'status' => $validateData['status'],
+            'alamat' => $validateData['alamat'],
+            'desa' => $validateData['desa'],
+            'kecamatan' => $validateData['kecamatan'],
+            'koordinat' => $koordinat,
+        ]);
+
+        return redirect()->back()->with('success', 'Data sekolah berhasil diperbarui.');
 
     }
 
     public function destroy(Sekolah $sekolah)
     {
-        try {
             $sekolah->delete();
             return redirect()->back()->with('success', 'Data berhasil dihapus.');
-        } catch (QueryException $e) {
-            return redirect()->back()
-                ->with('error', $e->getMessage());
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->with('error', $e->getMessage());
-        }
+        
     }
 
 }

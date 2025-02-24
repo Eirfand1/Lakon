@@ -13,7 +13,8 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet" />
-
+       
+    </style>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -38,6 +39,8 @@
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.8.1"></script>
+ 
 
     </head>
     <body
