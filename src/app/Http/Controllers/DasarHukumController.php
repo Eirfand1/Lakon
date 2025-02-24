@@ -10,57 +10,38 @@ class DasarHukumController extends Controller
 {
     //
 
-    public function index(){
+    public function index()
+    {
         return view("pages.admin.dasar-hukum.dasar-hukum");
     }
 
-    public function store(Request $request){
-        try{
-            $validateData = $request->validate([
-                'dasar_hukum' => 'required|string|max:255',
-            ]);
+    public function store(Request $request)
+    {
+        $validateData = $request->validate([
+            'dasar_hukum' => 'required|string|max:255',
+        ]);
 
-            $dasarHukum = DasarHukum::create([
-                'dasar_hukum' => $validateData['dasar_hukum'],
-            ]);
-            return redirect()->back()->with('success', 'Dasar Hukum berhasil disimpan.');
+        $dasarHukum = DasarHukum::create([
+            'dasar_hukum' => $validateData['dasar_hukum'],
+        ]);
+        return redirect()->back()->with('success', 'Dasar Hukum berhasil disimpan.');
 
-        }catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
-        }
     }
 
-    public function update(Request $request, DasarHukum $dasarHukum){
-        try{
-            $validateData = $request->validate([
-                'dasar_hukum' => 'required|string|max:255',
-            ]);
+    public function update(Request $request, DasarHukum $dasarHukum)
+    {
+        $validateData = $request->validate([
+            'dasar_hukum' => 'required|string|max:255',
+        ]);
 
-            $dasarHukum->update($validateData);
-            return redirect()->back()->with('success', 'Data berhasil diperbarui.');
-        } catch (QueryException $e) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', $e->getMessage());
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->withInput()
-                ->with('error', $e->getMessage());
-        }
+        $dasarHukum->update($validateData);
+        return redirect()->back()->with('success', 'Data berhasil diperbarui.');
 
     }
 
     public function destroy(DasarHukum $dasarHukum)
     {
-        try {
-            $dasarHukum->delete();
-            return redirect()->back()->with('success', 'Data berhasil dihapus.');
-        } catch (QueryException $e) {
-            return redirect()->back()
-                ->with('error', $e->getMessage());
-        } catch (\Exception $e) {
-            return redirect()->back()
-                ->with('error', $e->getMessage());
-        }
+        $dasarHukum->delete();
+        return redirect()->back()->with('success', 'Data berhasil dihapus.');
     }
 }

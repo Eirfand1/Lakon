@@ -34,11 +34,11 @@
         @endif
         <!-- error message -->
 
-        @if (session('error'))
+        @if ($errors->any())
             <script>
                 Toastify({
                     escapeMarkup: false,
-                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
+                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ $errors->first() }}",
                     duration: 3000,
                     gravity: "top",
                     position: "center",
@@ -75,41 +75,86 @@
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
                             <x-label>NIP</x-label>
-                            <x-input type="number" name="nip" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                            <x-input type="number" name="nip" value="{{old('value')}}"
+                                class="{{ $errors->has('nip') ? 'border-red-500' : 'border-gray-200' }}"
+                                placeholder="NIP"
                                 required />
+                            @error('nip')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-control">
                             <x-label>Nama</x-label>
-                            <x-input type="text" name="nama"
+                            <x-input type="text" name="nama" value="{{old('nama')}}"
+                                class="{{ $errors->has('nama') ? 'border-red-500' : 'border-gray-200' }}"
+                                placeholder="Nama"
                                 required />
+
+                            @error('nama')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
                             <x-label>Pangkat</x-label>
-                            <x-input type="text" name="pangkat"/>
+                            <x-input type="text" name="pangkat" value="{{old('pangkat')}}"
+                            class="{{ $errors->has('pangkat') ? 'border-red-500' : 'border-gray-200' }}"
+                            placeholder="Pangkat"
+                            required
+                            />
+                            @error('pangkat')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-control">
                             <x-label>Jabatan</x-label>
-                            <x-input type="text" name="jabatan"/>
+                            <x-input type="text" name="jabatan" value="{{old('jabatan')}}"
+                            placeholder="Jabatan"
+                            class="{{ $errors->has('jabatan') ? 'border-red-500' : 'border-gray-200' }}"
+                            />
+
+                            @error('jabatan')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="form-control">
                         <x-label>Alamat</x-label>
                         <textarea name="alamat"
-                            class="rounded bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-200"></textarea>
+                            class="rounded bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-200
+                            {{ $errors->has('alamat') ? 'border-red-500' : 'border-gray-200' }}"
+                            placeholder="Jabatan"
+                            >{{old('alamat')}}</textarea>
+                            @error('alamat')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
                             <x-label>No. Telp</x-label>
-                            <x-input type="number" name="no_telp"/>
+                            <x-input type="number" name="no_telp"
+                            class="{{ $errors->has('alamat') ? 'border-red-500' : 'border-gray-200' }}"
+                            value="{{old('no_telp')}}"
+                            placeholder="Nomor Telepon"
+                            />
+                            @error('no_telp')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-control">
                             <x-label>Email</x-label>
-                            <x-input type="email" name="email"/>
+                            <x-input type="email" name="email"
+                            class="{{ $errors->has('email') ? 'border-red-500' : 'border-gray-200' }}"
+                            value="{{old('email')}}"
+                            placeholder="Email"
+                            />
+                            @error('email')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
 
@@ -142,40 +187,77 @@
                         <div class="form-control">
                             <x-label>NIP</x-label>
                             <x-input type="number" id="edit_nip" name="nip"
+
+                                class="{{ $errors->has('nip') ? 'border-red-500' : 'border-gray-200' }}"
                                 required />
+
+                            @error('nip')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-control">
                             <x-label>Nama</x-label>
                             <x-input type="text" id="edit_nama" name="nama"
+
+                                class="{{ $errors->has('nama') ? 'border-red-500' : 'border-gray-200' }}"
                                 required />
+                            @error('nama')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
                             <x-label >Pangkat</x-label>
-                            <x-input type="text" id="edit_pangkat" name="pangkat"/>
+                            <x-input type="text" id="edit_pangkat" name="pangkat"
+                             class="{{ $errors->has('pangkat') ? 'border-red-500' : 'border-gray-200' }}"
+                            />
+                            @error('pangkat')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-control">
                             <x-label>Jabatan</x-label>
-                            <x-input type="text" id="edit_jabatan" name="jabatan"/>
+                            <x-input type="text" id="edit_jabatan" name="jabatan"
+                             class="{{ $errors->has('jabatan') ? 'border-red-500' : 'border-gray-200' }}"
+                            />
+                            @error('jabatan')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
 
                     <div class="form-control">
                         <x-label>Alamat</x-label>
                         <textarea id="edit_alamat" name="alamat"
-                            class="rounded bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-200"></textarea>
+                            class="rounded bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-200
+                             {{ $errors->has('alamat') ? 'border-red-500' : 'border-gray-200' }}
+                            "></textarea>
+
+                            @error('alamat')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                     </div>
 
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
                             <x-label>No. Telp</x-label>
-                            <x-input type="text" id="edit_no_telp" name="no_telp"/>
+                            <x-input type="text" id="edit_no_telp" name="no_telp"
+                             class="{{ $errors->has('no_telp') ? 'border-red-500' : 'border-gray-200' }}"
+                            />
+                            @error('no_telp')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                         </div>
                         <div class="form-control">
                             <x-label>Email</x-label>
-                            <x-input type="email" id="edit_email" name="email"/>
+                            <x-input type="email" id="edit_email" name="email"
+                             class="{{ $errors->has('email') ? 'border-red-500' : 'border-gray-200' }}"
+                            />
+                            @error('email')
+                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                            @enderror
                         </div>
                     </div>
 

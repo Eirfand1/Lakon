@@ -67,7 +67,10 @@
                     @csrf
                     <div class="flex w-full flex-col ">
                         <x-label for="dasar_hukum">Dasar Hukum</x-label>
-                        <textarea name="dasar_hukum" id="dasar_hukum" cols="10" rows="5" class="rounded bg-white dark:bg-gray-900/20 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200" required></textarea>
+                        <textarea name="dasar_hukum" id="dasar_hukum" cols="10" rows="5" class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }} rounded bg-white dark:bg-gray-900/20 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200" required>{{old('dasar_hukum')}}</textarea>
+                        @error('dasar_hukum')
+                            <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                     </div>
 
                     <div class="modal-action pt-4">
@@ -97,7 +100,10 @@
                     @method('PUT')
                     <div class="flex w-full flex-col">
                             <x-label>Dasar Hukum</x-label>
-                            <textarea name="dasar_hukum" id="dasarHukum" cols="10" rows="5" class="rounded bg-white dark:bg-gray-900/20 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200" required></textarea>
+                            <textarea name="dasar_hukum" id="dasarHukum" cols="10" rows="5" class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }} rounded bg-white dark:bg-gray-900/20 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200" required></textarea>
+                        @error('dasar_hukum')
+                            <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
                     </div>
 
                     <div class="modal-action">

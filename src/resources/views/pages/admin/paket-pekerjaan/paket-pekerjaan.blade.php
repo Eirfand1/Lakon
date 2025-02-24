@@ -610,6 +610,7 @@
                     <div class="flex w-full flex-col py-2 ">
                         <x-label for="nama_pimpinan" class="w-full sm:w-1/4">Nama pimpinan</x-label>
                         <x-input type="text" name="nama_pimpinan" id="" value="{{$satuanKerja->nama_pimpinan}}"
+                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             readonly />
                     </div>
 
