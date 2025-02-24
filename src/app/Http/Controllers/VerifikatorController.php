@@ -11,6 +11,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 
 class VerifikatorController extends Controller
 {
@@ -146,5 +147,19 @@ class VerifikatorController extends Controller
     public function detailPermohonan()
     {
         return view('pages.verifikator.permohonan.detail-permohonan');
+    }
+
+    public function tolak($kontrak_id, Kontrak $kontrak) {
+        $kontrak->where('kontrak_id', $kontrak_id)->delete();
+        return redirect()->back()->with('success', 'Permohonan berhasil ditolak');
+    }
+
+    public function terima($kontrak_id, Kontrak $kontrak) {
+        $kontrak->where('kontrak_id', $kontrak_id)->update([
+            'tgl_kontrak' => now()->toDateString(),
+            'is_verificated' => true,
+            'verifikator_id' => Auth::user()->verifikator->verifikator_id,
+        ]);
+        return redirect()->back()->with('success', 'Permohonan berhasil diterima');
     }
 }
