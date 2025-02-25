@@ -39,7 +39,7 @@ class JadwalKegiatanController extends Controller
                 'bulan_10' => 'boolean',
                 'bulan_11' => 'boolean',
                 'bulan_12' => 'boolean',
-                'keterangan' => 'string'
+                'keterangan' => 'nullable|string'
             ]);
             if ($request->jadwal_kegiatan_id) {
                 JadwalKegiatan::where('jadwal_kegiatan_id', $request->jadwal_kegiatan_id)->update([
