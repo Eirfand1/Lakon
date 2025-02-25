@@ -1,20 +1,4 @@
 <x-app-layout>
-    @if (session('error'))
-            <script>
-                Toastify({
-                    escapeMarkup: false,
-                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "center",
-                    style: {
-                        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
-                        fontWeight: "600",
-                        padding: "12px 20px",
-                    },
-                }).showToast();
-            </script>
-        @endif
     <div class="bg-white dark:bg-gray-800 shadow-md rounded-xl m-4 transition-colors duration-200">
         <div class="flex justify-between items-center  p-5 border-b border-gray-400/20">
             <a href="{{route('admin.riwayat-kontrak.index')}}" class="btn rounded-full btn-circle btn-sm btn-ghost bg-gray-100 dark:bg-gray-600" wire:navigate>
@@ -229,7 +213,7 @@
                 </div>
             </div>
 
-            
+
 
             <!-- Tombol Tindakan -->
             <div class="flex justify-end space-x-2 mt-6">
@@ -239,7 +223,7 @@
                 </button>
                 <label for="add-modal"
                     class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 transition-colors">
-                    <i class="fas fa-file-download mr-2"></i> Unduh Word 
+                    <i class="fas fa-file-download mr-2"></i> Unduh Word
                 </label>
             </div>
         </div>
@@ -251,7 +235,7 @@
                 <div class="flex items-center gap-3">
                     <h3 class="font-bold text-lg dark:text-gray-200">PRINT WORD</h3>
                 </div>
-                 
+
                 <label for="add-modal"
                     class="btn btn-sm btn-circle btn-ghost rounded-full shadow-none hover:bg-gray-200 dark:hover:bg-gray-700">
                     ✕
@@ -271,7 +255,7 @@
                     <div class="modal-action flex justify-end space-x-2">
                         <label for="add-modal" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Tutup</label>
                         <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
-                            Unduh Word 
+                            Unduh Word
                         </button>
                     </div>
                 </form>

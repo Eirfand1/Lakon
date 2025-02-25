@@ -9,44 +9,6 @@
                 <span>Tambah Data</span>
             </label>
         </div>
-        <!-- Success Message -->
-
-        @if (session('success'))
-            <script>
-                Toastify({
-                    escapeMarkup: false,
-                    text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
-                    duration: 3000,
-                    gravity: "top", // `top` or `bottom`
-                    position: "center", // `left`, `center` or `right`
-                    style: {
-                        background: "linear-gradient(135deg, #2ecc71, #27ae60)",
-                        fontWeight: "600",
-                        padding: "12px 20px",
-                    },
-                }).showToast();
-            </script>
-        @endif
-        <!-- error message -->
-
-        @if ($errors->any())
-            <script>
-                Toastify({
-                    escapeMarkup: false,
-                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ $errors->first() }}",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "center",
-                    style: {
-                        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
-                        fontWeight: "600",
-                        textTransform: "uppercase",
-                        padding: "12px 20px",
-                    },
-                }).showToast();
-            </script>
-
-        @endif
 
 
         <livewire:paket-pekerjaan-table />
@@ -98,7 +60,7 @@
                                 <input type="hidden" :name="`sub_kegiatan_id[${index}]`"
                                     x-model="input.selectedOptionId">
 
-                                
+
                             </div>
                         </template>
                                 @error('sub_kegiatan_id.*')
@@ -243,9 +205,9 @@
 
                     <div class="flex w-full flex-col pb-4 ">
                         <x-label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran</x-label>
-                        <x-input type="number" name="tahun_anggaran" value="{{old('tahun_anggaran')}}" id="" 
+                        <x-input type="number" name="tahun_anggaran" value="{{old('tahun_anggaran')}}" id=""
                         class="{{ $errors->has('tahun_anggaran') ? 'border-red-500' : 'border-gray-200' }}"
-                        
+
                         required />
                         @error('tahun_anggaran')
                             <span class="text-red-500 text-sm mt-1">{{$message}}</span>
@@ -385,7 +347,7 @@
                                     <x-input type="text" x-model="input.search" name="sub_kegiatan[]"
                                         id="sub_kegiatan[]" @input.debounce.100ms="filterOptions(index)"
                                         @focus="showDropdown(index)" @click.away="input.showDropdown = false"
-                                        placeholder="Pilih Sub Kegiatan" 
+                                        placeholder="Pilih Sub Kegiatan"
                                         class="{{ $errors->has('sub_kegiatan_id.*') ? 'border-red-500' : 'border-gray-200' }}"
                                         required />
 
@@ -579,7 +541,7 @@
                         <div class="relative w-full">
                             <x-input type="text" name="daskum" x-model="search" @input.debounce.100ms="filterOptions()"
                                 @focus="showDropdown = true" @click.away="showDropdown = false"
-                                placeholder="Pilih Dasar Hukum" required 
+                                placeholder="Pilih Dasar Hukum" required
                                 class="{{ $errors->has('daskum_id') ? 'border-red-500' : 'border-gray-200' }}"
                                 />
 

@@ -11,46 +11,6 @@
             </label>
         </div>
 
-        <!-- Success Message -->
-
-        @if (session('success'))
-
-            <script>
-                Toastify({
-                    escapeMarkup: false,
-                    text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
-                    duration: 3000,
-                    gravity: "top", // `top` or `bottom`
-                    position: "center", // `left`, `center` or `right`
-                    style: {
-                        background: "linear-gradient(135deg, #2ecc71, #27ae60)",
-                        fontWeight: "600",
-                        textTransform: "uppercase",
-                        padding: "12px 20px",
-                    },
-                }).showToast();
-            </script>
-
-        @endif
-        <!-- error message -->
-
-        @if ($errors->any())
-            <script>
-                Toastify({
-                    escapeMarkup: false,
-                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ $errors->first() }}",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "center",
-                    style: {
-                        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
-                        fontWeight: "600",
-                        padding: "12px 20px",
-                    },
-                }).showToast();
-            </script>
-        @endif
-
         <!-- Table -->
         <livewire:verifikator-table />
 
@@ -81,7 +41,7 @@
                         </div>
                         <div class="sm:w-3/5 w-full">
                             <x-label >Nama</x-label>
-                            <x-input type="text" name="nama_verifikator" 
+                            <x-input type="text" name="nama_verifikator"
                                 placeholder="nama verifikator"
                                 value="{{old('nama_verifikator')}}"
                                 class="{{ $errors->has('nama_verifikator') ? 'border-red-500' : 'border-gray-200' }}"
@@ -93,7 +53,7 @@
                             @enderror
                         </div>
                     </div>
-                        
+
 
                     <div class="">
                         <x-label >Username</x-label>
@@ -110,7 +70,7 @@
                     </div>
                     <div class="">
                         <x-label >Email</x-label>
-                        <x-input type="text" name="email" 
+                        <x-input type="text" name="email"
                             placeholder="email"
                             class="{{ $errors->has('email') ? 'border-red-500' : 'border-gray-200' }}"
                             value="{{old('email')}}"
@@ -125,7 +85,7 @@
                         <x-label >Password</x-label>
                         <div class="relative">
                             <x-input type="password" name="password" id="password"
-                                placeholder="password" 
+                                placeholder="password"
                                 class="{{ $errors->has('password') ? 'border-red-500' : 'border-gray-200' }}"
                                 required
                             />
@@ -166,7 +126,7 @@
                     <div class="flex sm:flex-nowrap flex-wrap gap-2">
                         <div class="sm:w-2/5 w-full">
                             <x-label >NIP</x-label>
-                            <x-input type="number" id="edit_nip" name="edit_nip" 
+                            <x-input type="number" id="edit_nip" name="edit_nip"
                                 placeholder="nip"
                                 class="{{ $errors->has('nip') ? 'border-red-500' : 'border-gray-200' }}"
                                 required
@@ -187,11 +147,11 @@
                         @enderror
                         </div>
                     </div>
-                    
+
 
                     <div class="form-control">
                         <x-label >Username</x-label>
-                        <x-input type="text" id="edit_name" name="edit_name" 
+                        <x-input type="text" id="edit_name" name="edit_name"
                             class="{{ $errors->has('edit_name') ? 'border-red-500' : 'border-gray-200' }}"
                             required
                             placeholder="username" />

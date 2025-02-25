@@ -19,44 +19,6 @@
                 </label>
             </div>
         </div>
-        <!-- Success Message -->
-
-        @if (session('success'))
-            <script>
-                Toastify({
-                    escapeMarkup: false,
-                    text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
-                    duration: 3000,
-                    gravity: "top", // `top` or `bottom`
-                    position: "center", // `left`, `center` or `right`
-                    style: {
-                        background: "linear-gradient(135deg, #2ecc71, #27ae60)",
-                        fontWeight: "600",
-                        textTransform: "uppercase",
-                        padding: "12px 20px",
-                    },
-                }).showToast();
-            </script>
-        @endif
-        <!-- error message -->
-
-        @if ($errors->any())
-            <script>
-                Toastify({
-                    escapeMarkup: false,
-                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ $errors->first() }}",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "center",
-                    style: {
-                        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
-                        fontWeight: "600",
-                        textTransform: "uppercase",
-                        padding: "12px 20px",
-                    },
-                }).showToast();
-            </script>
-        @endif
         <livewire:sekolah-table />
 
         <!-- Tambah Sekolah -->
@@ -127,9 +89,9 @@
                         <!-- Alamat -->
                         <div>
                             <label class="block text-sm font-medium dark:text-gray-300 mb-2">Alamat</label>
-                            <textarea name="alamat" id="alamat" rows="3" class="w-full px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700 
+                            <textarea name="alamat" id="alamat" rows="3" class="w-full px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700
                         focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                        dark:bg-gray-900/20 dark:text-gray-200 
+                        dark:bg-gray-900/20 dark:text-gray-200
                         {{ $errors->has('alamat') ? 'border-red-500' : 'border-gray-200' }}"
                          placeholder="alamat"
                          required>{{old('alamat')}}</textarea>
@@ -142,8 +104,8 @@
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <x-label>Desa</x-label>
-                                <x-input type="text" id="desa" name="desa" 
-                                placeholder="Desa" 
+                                <x-input type="text" id="desa" name="desa"
+                                placeholder="Desa"
                                 class="{{ $errors->has('nama_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
                                 value="{{old('desa')}}"
                                 required />
@@ -153,8 +115,8 @@
                             </div>
                             <div>
                                 <x-label>Kecamatan</x-label>
-                                <x-input type="text" id="kecamatan" name="kecamatan" 
-                                placeholder="Kecamatan" 
+                                <x-input type="text" id="kecamatan" name="kecamatan"
+                                placeholder="Kecamatan"
                                 class="{{ $errors->has('nama_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
                                 value="{{old('kecamatan')}}"
                                 required />
@@ -285,7 +247,7 @@
                             </div>
                             <div>
                                 <x-label >Kecamatan</x-label>
-                                <x-input type="text" id="edit_kecamatan" name="kecamatan" 
+                                <x-input type="text" id="edit_kecamatan" name="kecamatan"
                                 class="{{ $errors->has('kecamatan') ? 'border-red-500' : 'border-gray-200' }}"
                                 required />
                                 @error('kecamatan')
@@ -297,7 +259,7 @@
                         <!-- Koordinat -->
                         <div>
                             <x-label class="block text-sm font-medium dark:text-gray-300 mb-2">Koordinat</x-label>
-                            <x-input type="text" id="edit_koordinat"  name="koordinat"                      
+                            <x-input type="text" id="edit_koordinat"  name="koordinat"
                                 class="{{ $errors->has('kecamatan') ? 'border-red-500' : 'border-gray-200' }}"
                             />
                                 @error('koordinat')

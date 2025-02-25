@@ -6,46 +6,6 @@
             </div>
         </div>
 
-        <!-- Success Message -->
-
-        @if (session('success'))
-
-            <script>
-                Toastify({
-                    escapeMarkup: false,
-                    text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
-                    duration: 3000,
-                    gravity: "top", // `top` or `bottom`
-                    position: "center", // `left`, `center` or `right`
-                    style: {
-                        background: "linear-gradient(135deg, #2ecc71, #27ae60)",
-                        fontWeight: "600",
-                        textTransform: "uppercase",
-                        padding: "12px 20px",
-                    },
-                }).showToast();
-            </script>
-
-        @endif
-        <!-- error message -->
-
-        @if (session('error'))
-            <script>
-                Toastify({
-                    escapeMarkup: false,
-                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "center",
-                    style: {
-                        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
-                        fontWeight: "600",
-                        textTransform: "uppercase",
-                        padding: "12px 20px",
-                    },
-                }).showToast();
-            </script>
-        @endif
 
         {{-- table --}}
         <livewire:penyedia-table />
@@ -165,7 +125,7 @@
                                 Logo Perusahaan
                                 <small class="block text-xs text-gray-500">Unggah logo perusahaan (maks. 2MB)</small>
                             </x-label>
-                            <x-input type="file" name="logo_perusahaan" accept="image/png, image/jpg, image/jpeg" 
+                            <x-input type="file" name="logo_perusahaan" accept="image/png, image/jpg, image/jpeg"
                                 onchange="previewLogo(event)"/>
 
                             <img id="logoPreview" src="" class="mt-2  object-cover rounded-lg"

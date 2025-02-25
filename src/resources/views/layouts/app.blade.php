@@ -88,6 +88,23 @@
 
         @endif
 
+        @if (session('error'))
+            <script>
+                Toastify({
+                    escapeMarkup: false,
+                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "center",
+                    style: {
+                        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                        fontWeight: "600",
+                        padding: "12px 20px",
+                    },
+                }).showToast();
+            </script>
+        @endif
+
         <script>
             if (localStorage.getItem('sidebar-expanded') == 'true') {
                 document.querySelector('body').classList.add('sidebar-expanded');
