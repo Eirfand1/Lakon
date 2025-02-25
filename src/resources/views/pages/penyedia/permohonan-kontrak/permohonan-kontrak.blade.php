@@ -1,43 +1,5 @@
 <x-app-layout>
 
-    <!-- Success Message -->
-
-    @if (session('success'))
-        <script>
-            Toastify({
-                escapeMarkup: false,
-                text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
-                duration: 3000,
-                gravity: "top", // `top` or `bottom`
-                position: "center", // `left`, `center` or `right`
-                style: {
-                    background: "linear-gradient(135deg, #2ecc71, #27ae60)",
-                    fontWeight: "600",
-                    textTransform: "uppercase",
-                    padding: "12px 20px",
-                },
-            }).showToast();
-        </script>
-    @endif
-    <!-- error message -->
-
-    @if (session('error'))
-        <script>
-            Toastify({
-                escapeMarkup: false,
-                text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
-                duration: 3000,
-                gravity: "top",
-                position: "center",
-                style: {
-                    background: "linear-gradient(to right, #ff5f6d, #ffc371)",
-                    fontWeight: "600",
-                    textTransform: "uppercase",
-                    padding: "12px 20px",
-                },
-            }).showToast();
-        </script>
-    @endif
     <div class="container mx-auto p-4">
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
             <!-- Header -->
@@ -170,25 +132,25 @@
                         successMessage: '',
                         isLoading: false,
                         paketData: null,
-                        
+
                         async cariPaket() {
                             this.errorMessage = '';
                             this.successMessage = '';
                             this.paketData = null;
-                            
+
                             if (!this.kodePaket) {
                                 this.errorMessage = 'Harap masukkan kode paket';
                                 return;
                             }
-                            
+
                             try {
                                 this.isLoading = true;
                                 const response = await fetch(`/api/paket-pekerjaan/${this.kodePaket}`);
-                                
+
                                 if (!response.ok) {
                                     throw new Error('Paket tidak ditemukan');
                                 }
-                                
+
                                 const data = await response.json();
                                 this.paketData = data;
                                 this.successMessage = 'Paket berhasil ditemukan!';
