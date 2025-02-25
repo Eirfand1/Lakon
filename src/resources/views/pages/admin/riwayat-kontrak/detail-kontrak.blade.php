@@ -1,7 +1,23 @@
 <x-app-layout>
+    @if (session('error'))
+            <script>
+                Toastify({
+                    escapeMarkup: false,
+                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "center",
+                    style: {
+                        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                        fontWeight: "600",
+                        padding: "12px 20px",
+                    },
+                }).showToast();
+            </script>
+        @endif
     <div class="bg-white dark:bg-gray-800 shadow-md rounded-xl m-4 transition-colors duration-200">
         <div class="flex justify-between items-center  p-5 border-b border-gray-400/20">
-            <a href="{{route('admin.riwayat-kontrak.index')}}" class="btn rounded-full btn-circle btn-sm btn-ghost bg-gray-100" wire:navigate>
+            <a href="{{route('admin.riwayat-kontrak.index')}}" class="btn rounded-full btn-circle btn-sm btn-ghost bg-gray-100 dark:bg-gray-600" wire:navigate>
                 <i class="fas fa-arrow-left text-gray-600 dark:text-gray-300"></i>
             </a>
             <h1 class="text-lg font-semibold text-center text-gray-800 dark:text-white tracking-wide">DETAIL KONTRAK</h1>
@@ -61,7 +77,7 @@
                             {{ number_format($kontrak->paketPekerjaan->nilai_pagu_paket, 0, ',', '.') }}</p>
                     </div>
                     <div
-                        class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
+                        class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
                         <strong class="text-gray-700 dark:text-gray-300 block mb-1">Nilai Pagu Anggaran</strong>
                         <p class="font-medium">Rp.
                             {{ number_format($kontrak->paketPekerjaan->nilai_pagu_anggaran, 0, ',', '.') }}</p>
@@ -213,17 +229,52 @@
                 </div>
             </div>
 
+            
+
             <!-- Tombol Tindakan -->
             <div class="flex justify-end space-x-2 mt-6">
                 <button
                     class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 transition-colors">
                     <i class="fas fa-print mr-2"></i> Cetak
                 </button>
-                <button
+                <label for="add-modal"
                     class="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 transition-colors">
-                    <i class="fas fa-file-download mr-2"></i> Unduh PDF
-                </button>
+                    <i class="fas fa-file-download mr-2"></i> Unduh Word 
+                </label>
             </div>
+        </div>
+    </div>
+    <input type="checkbox" id="add-modal" class="modal-toggle" />
+    <div id="modal_template" class="modal modal-top px-3">
+        <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
+            <div class="flex justify-between items-center dark:border-gray-700">
+                <div class="flex items-center gap-3">
+                    <h3 class="font-bold text-lg dark:text-gray-200">PRINT WORD</h3>
+                </div>
+                 
+                <label for="add-modal"
+                    class="btn btn-sm btn-circle btn-ghost rounded-full shadow-none hover:bg-gray-200 dark:hover:bg-gray-700">
+                    ✕
+                </label>
+            </div>
+            <form action="{{ route('admin.riwayat-kontrak.export-pdf', $kontrak->kontrak_id) }}" method="GET">
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                            Template Dokumen
+                        </label>
+                        <select name="template" class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white">
+                            @foreach($templates as $template)
+                                <option value="{{ $template }}">{{ pathinfo($template, PATHINFO_FILENAME) }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="modal-action flex justify-end space-x-2">
+                        <label for="add-modal" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Tutup</label>
+                        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600">
+                            Unduh Word 
+                        </button>
+                    </div>
+                </form>
         </div>
     </div>
 </x-app-layout>
