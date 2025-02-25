@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             SekolahSeeder::class,
             UsersTableSeeder::class,
             PenyediaSeeder::class,
+            VerifikatorSeeder::class,
             DasarHukumTable::class,
             PpkomTable::class,
             SatuanKerjaTable::class,

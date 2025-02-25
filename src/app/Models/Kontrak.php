@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Kontrak extends Model
 {
-    protected $table = 'kontrak'; 
+    protected $table = 'kontrak';
     protected $guarded = ['kontrak_id'];
     protected $primaryKey = 'kontrak_id';
     use HasFactory;
@@ -66,5 +66,10 @@ class Kontrak extends Model
     public function ruangLingkup()
     {
         return $this->hasMany(RuangLingkup::class, 'kontrak_id', 'kontrak_id');
+    }
+
+    public function realisasi()
+    {
+        return $this->hasMany(Realisasi::class, 'kontrak_id', 'kontrak_id');
     }
 }
