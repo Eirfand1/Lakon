@@ -18,6 +18,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->integer('bulan');
             $table->integer('tahun');
+            $table->string('target');
             $table->string('gambar');
             $table->timestamps();
         });
