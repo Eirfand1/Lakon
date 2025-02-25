@@ -123,6 +123,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
     Route::prefix('/riwayat-kontrak')->group(function () {
         Route::get('/', [KontrakController::class, 'index'])->name('admin.riwayat-kontrak.index');
+        Route::get('/{kontrak}', [KontrakController::class, 'show'])->name('admin.riwayat-kontrak.show');
         Route::get('/export', [KontrakController::class, 'export'])->name('admin.riwayat-kontrak.export');
     });
 

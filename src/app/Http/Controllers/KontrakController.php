@@ -21,6 +21,11 @@ class KontrakController extends Controller
         return view("pages.admin.riwayat-kontrak.riwayat-kontrak", ['title' => 'riwayat kontrak']);
     }
 
+    public function show(Kontrak $kontrak) {
+        $kontrak = Kontrak::where('kontrak_id', $kontrak->kontrak_id)->with(['verifikator', 'penyedia', 'satuanKerja', 'paketPekerjaan'])->first();
+        return view('pages.admin.riwayat-kontrak.detail-kontrak', ['kontrak' => $kontrak]);
+    }
+
     public function export()
     {
         return Excel::download(new KontrakExport, 'kontrak.xlsx');
