@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Exports\KontrakExport;
 use App\Models\Kontrak;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -12,8 +14,10 @@ use App\Models\JadwalKegiatan;
 use App\Models\RincianBelanja;
 use App\Models\Peralatan;
 use App\Models\RuangLingkup;
+use PhpOffice\PhpSpreadsheet\IOFactory;
 use SplFileObject;
 use Swagger\Client\Api\ConvertDocumentApi;
+use TCPDF;
 
 
 class KontrakController extends Controller
@@ -210,7 +214,7 @@ class KontrakController extends Controller
 
             $outputDocx = storage_path('app/temp/' . time() . '_kontrak.docx');
             $templateProcessor->saveAs($outputDocx);
-
+    
             // Download PDF
             return response()->download($outputDocx, 'Kontrak_' . $kontrak->no_kontrak . '.docx')->deleteFileAfterSend(true);
         } catch (\Exception $e) {
