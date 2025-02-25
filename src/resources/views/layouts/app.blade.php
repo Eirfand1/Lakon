@@ -13,7 +13,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet" />
-       
+
     </style>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -40,7 +40,7 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
         <script src="https://cdn.jsdelivr.net/npm/autonumeric@4.8.1"></script>
- 
+
 
     </head>
     <body
@@ -49,6 +49,44 @@
         x-data="{ sidebarOpen: false, sidebarExpanded: localStorage.getItem('sidebar-expanded') == 'true' }"
         x-init="$watch('sidebarExpanded', value => localStorage.setItem('sidebar-expanded', value))"
     >
+            <!-- Success Message -->
+
+            @if (session('success'))
+            <script>
+                Toastify({
+                    escapeMarkup: false,
+                    text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
+                    duration: 3000,
+                    gravity: "top", // `top` or `bottom`
+                    position: "center", // `left`, `center` or `right`
+                    style: {
+                        background: "linear-gradient(135deg, #2ecc71, #27ae60)",
+                        fontWeight: "600",
+                        padding: "12px 20px",
+                    },
+                }).showToast();
+            </script>
+        @endif
+        <!-- error message -->
+
+        @if ($errors->any())
+            <script>
+                Toastify({
+                    escapeMarkup: false,
+                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ $errors->first() }}",
+                    duration: 3000,
+                    gravity: "top",
+                    position: "center",
+                    style: {
+                        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
+                        fontWeight: "600",
+                        textTransform: "uppercase",
+                        padding: "12px 20px",
+                    },
+                }).showToast();
+            </script>
+
+        @endif
 
         <script>
             if (localStorage.getItem('sidebar-expanded') == 'true') {
