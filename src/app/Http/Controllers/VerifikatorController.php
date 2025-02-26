@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Kontrak;
 use App\Models\User;
 use App\Models\Verifikator;
+use App\Models\Penerima;
+use App\Models\DokumenKontrak;
+use App\Models\KeteranganKontrak;
 use Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
@@ -136,5 +139,19 @@ class VerifikatorController extends Controller
             'verifikator_id' => Auth::user()->verifikator->verifikator_id,
         ]);
         return redirect()->back()->with('success', 'Permohonan berhasil diterima');
+    }
+
+    public function detail($kontrak_id, Kontrak $kontrak) {
+        $kontrak = Kontrak::where('kontrak_id', $kontrak_id)->first();
+        return view('pages.verifikator.permohonan.detail-permohonan', [
+            'kontrak' => $kontrak,
+            'penerima' => Penerima::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'dokumen_penagihan' => DokumenKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->where('jenis', 'penagihan')->get(),
+            'dokumen_pekerjaan' => DokumenKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->where('jenis', 'pekerjaan')->get(),
+            'dokumen_tambahan' => DokumenKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->where('jenis', 'tambahan')->get(),
+            'keterangan_hak_dan_kewajiban' => KeteranganKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->where('jenis', 'hak dan kewajiban')->get(),
+            'keterangan_tindakan' => KeteranganKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->where('jenis', 'tindakan')->get(),
+            'keterangan_fasilitas' => KeteranganKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->where('jenis', 'fasilitas')->get(),
+        ]);
     }
 }
