@@ -176,7 +176,9 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${TAHUN_ANGGARAN}', $kontrak->paketPekerjaan->tahun_anggaran);
 
             // Sub Kegiatan
-            $templateProcessor->setValue('${SUB_KEGIATAN}', $kontrak->subKegiatan->nama_sub_kegiatan);
+            // $templateProcessor->setValue('${SUB_KEGIATAN}', $kontrak->subKegiatan->nama_sub_kegiatan);
+            $templateProcessor->setValue('${SUB_KEGIATAN}', $kontrak->paketPekerjaan->subKegiatan->first()->nama_sub_kegiatan ?? '');
+            $templateProcessor->setValue('${REKENING_SUB_KEGIATAN}', $kontrak->paketPekerjaan->subKegiatan->first()->no_rekening ?? '');
 
             // Kontrak
             $templateProcessor->setValue('${NO_KONTRAK}', $kontrak->no_kontrak);
@@ -208,6 +210,22 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${TGL_AKTA}', $kontrak->penyedia->akta_notaris_tanggal);
             $templateProcessor->setValue('${NAMA_NOTARIS}', $kontrak->penyedia->akta_notaris_nama);
 
+            // ruang lingkup
+            $lingkupPekerjaanText = '';
+
+            if ($kontrak->ruangLingkup && $kontrak->ruangLingkup->count() > 0) {
+                foreach ($kontrak->ruangLingkup as $index => $lingkup) {
+                    $lingkupPekerjaanText .= ($index + 1) . ". " . $lingkup->ruang_lingkup . "\n";
+                }
+
+                $lingkupPekerjaanText = rtrim($lingkupPekerjaanText);
+            } else {
+                $lingkupPekerjaanText = '-';
+            }
+
+            // Set nilai ke template Word
+            $templateProcessor->setValue('${LINGKUP_PEKERJAAN}', $lingkupPekerjaanText);
+
 
             // Verifikator
             if ($kontrak->verifikator) {
@@ -234,8 +252,10 @@ class KontrakController extends Controller
                 $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
                 $process = new Process([
                     'unoconv',
-                    '-f', 'pdf',
-                    '-o', $outputPdf,
+                    '-f',
+                    'pdf',
+                    '-o',
+                    $outputPdf,
                     $outputDocx
                 ]);
                 $process->run();
