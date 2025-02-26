@@ -232,7 +232,12 @@ class KontrakController extends Controller
             } else {
                 // Convert to PDF
                 $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
-                $process = new Process(['soffice', '--headless', '--convert-to', 'pdf', $outputDocx, '--outdir', storage_path('app/temp/')]);
+                $process = new Process([
+                    'unoconv',
+                    '-f', 'pdf',
+                    '-o', $outputPdf,
+                    $outputDocx
+                ]);
                 $process->run();
 
                 if (!$process->isSuccessful()) {
