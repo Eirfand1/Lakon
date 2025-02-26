@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Exports\KontrakExport;
 use App\Models\Kontrak;
-use Dompdf\Dompdf;
-use Dompdf\Options;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -15,9 +13,10 @@ use App\Models\RincianBelanja;
 use App\Models\Peralatan;
 use App\Models\RuangLingkup;
 use PhpOffice\PhpSpreadsheet\IOFactory;
-use SplFileObject;
-use Swagger\Client\Api\ConvertDocumentApi;
-use TCPDF;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+
+
 
 
 class KontrakController extends Controller
@@ -165,23 +164,36 @@ class KontrakController extends Controller
             // Setup PhpWord
             $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor($templatePath);
 
-            // Isi variabel dari data kontrak
+            // Paket pekerjaan
             $templateProcessor->setValue('${KODE_PAKET}', $kontrak->paketPekerjaan->kode_paket);
             $templateProcessor->setValue('${PEKERJAAN_JUDUL}', $kontrak->paketPekerjaan->nama_pekerjaan);
             $templateProcessor->setValue('${SUMBER_DANA}', $kontrak->paketPekerjaan->sumber_dana);
-            $templateProcessor->setValue('${SUB_KEGIATAN}', $kontrak->subKegiatan->nama_sub_kegiatan);
-            $templateProcessor->setValue('${NO_KONTRAK}', $kontrak->no_kontrak);
-            $templateProcessor->setValue('${TGL_PEMBUATAN}', $kontrak->tgl_pembuatan);
             $templateProcessor->setValue('${JENIS_PENGADAAN}', $kontrak->paketPekerjaan->jenis_pengadaan);
             $templateProcessor->setValue('${METODE_PEMILIHAN}', $kontrak->paketPekerjaan->metode_pemilihan);
-            $templateProcessor->setValue('${TAHUN_ANGGARAN}', $kontrak->paketPekerjaan->tahun_anggaran);
             $templateProcessor->setValue('${NILAI_PAGU_PAKET}', number_format($kontrak->paketPekerjaan->nilai_pagu_paket, 0, ',', '.'));
             $templateProcessor->setValue('${PAGU_ANGGARAN}', number_format($kontrak->paketPekerjaan->nilai_pagu_anggaran, 0, ',', '.'));
             $templateProcessor->setValue('${NILAI_HPS}', number_format($kontrak->paketPekerjaan->nilai_hps, 0, ',', '.'));
+            $templateProcessor->setValue('${TAHUN_ANGGARAN}', $kontrak->paketPekerjaan->tahun_anggaran);
+
+            // Sub Kegiatan
+            $templateProcessor->setValue('${SUB_KEGIATAN}', $kontrak->subKegiatan->nama_sub_kegiatan);
+
+            // Kontrak
+            $templateProcessor->setValue('${NO_KONTRAK}', $kontrak->no_kontrak);
             $templateProcessor->setValue('${JENIS_KONTRAK}', $kontrak->jenis_kontrak);
+            $templateProcessor->setValue('${TGL_PEMBUATAN}', $kontrak->tgl_pembuatan);
+            $templateProcessor->setValue('${WAKTU_KONTRAK}', $kontrak->waktu_kontrak);
             $templateProcessor->setValue('${NILAI_KONTRAK}', number_format($kontrak->nilai_kontrak, 0, ',', '.'));
             $templateProcessor->setValue('${TGL_KONTRAK}', $kontrak->tgl_kontrak);
             $templateProcessor->setValue('${WAKTU_KONTRAK}', $kontrak->waktu_kontrak);
+            $templateProcessor->setValue('${NOMOR_DPPL}', $kontrak->nomor_dppl);
+            $templateProcessor->setValue('${TGL_DPPL}', $kontrak->tgl_dppl);
+            $templateProcessor->setValue('${NOMOR_BAHPL}', $kontrak->nomor_bahpl);
+            $templateProcessor->setValue('${TGL_BAHPL}', $kontrak->tgl_bahpl);
+            $templateProcessor->setValue('${NOMOR_SPPBJ}', $kontrak->nomor_sppbj);
+            $templateProcessor->setValue('${TGL_SPPBJ}', $kontrak->tgl_sppbj);
+            $templateProcessor->setValue('${NOMOR_PENETAPAN_PEMENANG}', $kontrak->nomor_penetapan_pemenang);
+            $templateProcessor->setValue('${TGL_PENETAPAN_PEMENANG}', $kontrak->tgl_penetapan_pemenang);
 
             // Penyedia
             $templateProcessor->setValue('${NAMA_CV}', $kontrak->penyedia->nama_perusahaan_lengkap);
@@ -195,10 +207,7 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${NO_AKTA}', $kontrak->penyedia->akta_notaris_no);
             $templateProcessor->setValue('${TGL_AKTA}', $kontrak->penyedia->akta_notaris_tanggal);
             $templateProcessor->setValue('${NAMA_NOTARIS}', $kontrak->penyedia->akta_notaris_nama);
-            $templateProcessor->setValue('${NOMOR_DPPL}', $kontrak->nomor_dppl);
-            $templateProcessor->setValue('${TGL_DPPL}', $kontrak->tgl_dppl);
-            $templateProcessor->setValue('${NOMOR_BAHPL}', $kontrak->nomor_bahpl);
-            $templateProcessor->setValue('${TGL_BAHPL}', $kontrak->tgl_bahpl);
+
 
             // Verifikator
             if ($kontrak->verifikator) {
@@ -211,12 +220,28 @@ class KontrakController extends Controller
                 $templateProcessor->setValue('${TGL_VERIFIKASI}', '-');
             }
 
-
             $outputDocx = storage_path('app/temp/' . time() . '_kontrak.docx');
+            $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
             $templateProcessor->saveAs($outputDocx);
-    
-            // Download PDF
-            return response()->download($outputDocx, 'Kontrak_' . $kontrak->no_kontrak . '.docx')->deleteFileAfterSend(true);
+
+            $format = $request->format ?? 'pdf';
+
+            if ($format == 'docx') {
+                // Return DOCX file
+                return response()->download($outputDocx, 'Kontrak_' . $kontrak->no_kontrak . '.docx')->deleteFileAfterSend(true);
+            } else {
+                // Convert to PDF
+                $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
+                $process = new Process(['soffice', '--headless', '--convert-to', 'pdf', $outputDocx, '--outdir', storage_path('app/temp/')]);
+                $process->run();
+
+                if (!$process->isSuccessful()) {
+                    throw new ProcessFailedException($process);
+                }
+
+                // Return PDF file
+                return response()->download($outputPdf, 'Kontrak_' . $kontrak->no_kontrak . '.pdf')->deleteFileAfterSend(true);
+            }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengexport PDF: ' . $e->getMessage());
         }

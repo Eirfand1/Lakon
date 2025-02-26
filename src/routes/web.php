@@ -7,6 +7,7 @@ use App\Http\Controllers\SubKegiatanController;
 use App\Http\Controllers\PenyediaController;
 use App\Http\Controllers\PpkomController;
 use App\Http\Controllers\SekolahController;
+use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\VerifikatorController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
@@ -158,6 +159,13 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
         Route::post('/', [DasarHukumController::class, 'store'])->name('admin.dasar-hukum.store');
         Route::put('/{dasar_hukum}', [DasarHukumController::class, 'update'])->name('admin.dasar-hukum.update');
         Route::delete('/{dasar_hukum}', [DasarHukumController::class, 'destroy'])->name('admin.dasar-hukum.destroy');
+    });
+
+
+    Route::prefix('/template')->group(function() {
+        Route::get('/', [TemplateController::class, 'index'])->name('admin.template.index');
+        Route::post('/', [TemplateController::class, 'store'])->name('admin.template.store');
+        Route::delete('/{template}', [TemplateController::class, 'destroy'])->name('admin.template.destroy');
     });
 
 

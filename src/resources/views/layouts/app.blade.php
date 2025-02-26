@@ -51,59 +51,73 @@
     >
             <!-- Success Message -->
 
-            @if (session('success'))
+       @if (session('success'))
             <script>
-                Toastify({
-                    escapeMarkup: false,
-                    text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
-                    duration: 3000,
-                    gravity: "top", // `top` or `bottom`
-                    position: "center", // `left`, `center` or `right`
-                    style: {
-                        background: "linear-gradient(135deg, #2ecc71, #27ae60)",
-                        fontWeight: "600",
-                        padding: "12px 20px",
-                    },
-                }).showToast();
+            Toastify({
+                escapeMarkup: false,
+                text: '<i class="fas fa-check-circle mr-2"></i>' + "{{ session('success') }}",
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                style: {
+                    background: "linear-gradient(145deg, rgba(40, 167, 69, 0.8), rgba(25, 135, 84, 0.8))",
+                    fontWeight: "500",
+                    padding: "20px 32px",
+                    borderRadius: "8px",
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+                    fontSize: "16px",
+                    color: "#ffffff"
+                },
+                onClick: function(){} // Callback after click
+            }).showToast();
             </script>
         @endif
-        <!-- error message -->
 
         @if ($errors->any())
             <script>
-                Toastify({
-                    escapeMarkup: false,
-                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ $errors->first() }}",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "center",
-                    style: {
-                        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
-                        fontWeight: "600",
-                        textTransform: "uppercase",
-                        padding: "12px 20px",
-                    },
-                }).showToast();
+            Toastify({
+                escapeMarkup: false,
+                text: '<i class="fas fa-exclamation-triangle mr-2"></i>' + "{{ $errors->first() }}",
+                duration: 4000,
+                gravity: "top",
+                position: "right",
+                style: {
+                    background: "linear-gradient(145deg, rgba(220, 53, 69, 0.8), rgba(200, 35, 51, 0.8))",
+                    fontWeight: "500",
+                    padding: "20px 32px",
+                    borderRadius: "8px",
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+                    fontSize: "16px",
+                    color: "#ffffff"
+                },
+                close: true,
+                stopOnFocus: true
+            }).showToast();
             </script>
-
         @endif
 
         @if (session('error'))
             <script>
-                Toastify({
-                    escapeMarkup: false,
-                    text: '<i class="fas fa-exclamation-circle mr-3" style="font-size:20px;"></i>' + "{{ session('error') }}",
-                    duration: 3000,
-                    gravity: "top",
-                    position: "center",
-                    style: {
-                        background: "linear-gradient(to right, #ff5f6d, #ffc371)",
-                        fontWeight: "600",
-                        padding: "12px 20px",
-                    },
-                }).showToast();
+            Toastify({
+                escapeMarkup: false,
+                text: '<i class="fas fa-exclamation-circle mr-2"></i>' + "{{ session('error') }}",
+                duration: 4000,
+                gravity: "top",
+                position: "right",
+                style: {
+                    background: "linear-gradient(145deg, rgba(220, 53, 69, 0.8), rgba(200, 35, 51, 0.8))",
+                    fontWeight: "500",
+                    padding: "20px 32px",
+                    borderRadius: "8px",
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
+                    fontSize: "16px",
+                    color: "#ffffff"
+                },
+                close: true,
+                stopOnFocus: true
+            }).showToast();
             </script>
-        @endif
+        @endif 
 
         <script>
             if (localStorage.getItem('sidebar-expanded') == 'true') {
