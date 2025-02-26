@@ -21,7 +21,7 @@ class DasarHukumController extends Controller
             'dasar_hukum' => 'required|string|max:255',
         ]);
 
-        $dasarHukum = DasarHukum::create([
+        DasarHukum::create([
             'dasar_hukum' => $validateData['dasar_hukum'],
         ]);
         return redirect()->back()->with('success', 'Dasar Hukum berhasil disimpan.');
