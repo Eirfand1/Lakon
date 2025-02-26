@@ -68,6 +68,21 @@ class Kontrak extends Model
         return $this->hasMany(RuangLingkup::class, 'kontrak_id', 'kontrak_id');
     }
 
+    public function penerima()
+    {
+        return $this->hasMany(Penerima::class, 'kontrak_id', 'kontrak_id');
+    }
+
+    public function dokumenKontrak()
+    {
+        return $this->hasMany(DokumenKontrak::class, 'kontrak_id', 'kontrak_id');
+    }
+
+    public function keteranganKontrak()
+    {
+        return $this->hasMany(KeteranganKontrak::class, 'kontrak_id', 'kontrak_id');
+    }
+
     public function realisasi()
     {
         return $this->hasMany(Realisasi::class, 'kontrak_id', 'kontrak_id');
