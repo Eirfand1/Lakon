@@ -16,6 +16,9 @@ use App\Http\Controllers\JadwalKegiatanController;
 use App\Http\Controllers\RincianBelanjaController;
 use App\Http\Controllers\RuangLingkupController;
 use App\Http\Controllers\PeralatanController;
+use App\Http\Controllers\PenerimaController;
+use App\Http\Controllers\DokumenKontrakController;
+use App\Http\Controllers\KeteranganKontrakController;
 
 /*
 |--------------------------------------------------------------------------
@@ -82,7 +85,16 @@ Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(f
 
     Route::get('/tolak/{kontrak_id}', [VerifikatorController::class, 'tolak'])->name('verifikator.tolak');
     Route::get('/terima/{kontrak_id}', [VerifikatorController::class, 'terima'])->name('verifikator.terima');
-    Route::get('/detail', [VerifikatorController::class, 'detail'])->name('verifikator.detail');
+    Route::get('/detail/{kontrak_id}', [VerifikatorController::class, 'detail'])->name('verifikator.detail');
+
+    Route::post('/detail/penerima-barang', [PenerimaController::class, 'store'])->name('verifikator.penerima.store');
+    Route::delete('/detail/penerima-barang/{penerima}', [PenerimaController::class, 'destroy'])->name('verifikator.penerima.destroy');
+
+    Route::post('detail/dokumen', [DokumenKontrakController::class, 'store'])->name('verifikator.dokumen.store');
+    Route::delete('detail/dokumen/{dokumen}', [DokumenKontrakController::class, 'destroy'])->name('verifikator.dokumen.destroy');
+
+    Route::post('detail/keterangan', [KeteranganKontrakController::class, 'store'])->name('verifikator.keterangan.store');
+    Route::delete('detail/keterangan/{keterangan}', [KeteranganKontrakController::class, 'destroy'])->name('verifikator.keterangan.destroy');
 });
 
 // TODO make all route to /admin or /penyedia or /verifikator

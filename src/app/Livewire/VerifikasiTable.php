@@ -74,7 +74,7 @@ class VerifikasiTable extends DataTableComponent
                             <button type="button" onclick="terima('.$row->kontrak_id.')"
                             class="btn btn-sm btn-success dark:text-gray-50">
                             terima</button>
-                            <a  href="#"
+                            <a  href="detail/'.$row->kontrak_id.'"
                             class="btn btn-sm btn-info dark:text-gray-50">
                             detail</a>
                             ';
