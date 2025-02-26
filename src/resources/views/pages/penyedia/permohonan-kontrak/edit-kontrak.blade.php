@@ -290,7 +290,7 @@
         </p>
 
         @php
-            $view = "pages.penyedia.permohonan-kontrak.lampiran.";
+            $view = "pages.lampiran.";
             $jenis = $kontrak->paketPekerjaan->jenis_pengadaan;
             $metode = $kontrak->paketPekerjaan->metode_pemilihan;
         @endphp
