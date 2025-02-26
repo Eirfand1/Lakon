@@ -36,8 +36,11 @@
                     </div>
 
                     <div class="modal-action pt-4">
-                        <button type="submit" class="btn rounded-lg text-white btn-primary bg-blue-500">Simpan</button>
-                        <label for="add-dasar-hukum" class="btn text-white rounded-lg">Batal</label>
+                        <button type="submit" class="btn rounded-lg text-white btn-primary bg-blue-500">
+                            <i class="fas fa-save"></i>
+                            Simpan
+                        </button>
+                        <label for="add-dasar-hukum" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                     </div>
                 </form>
             </div>
@@ -69,8 +72,11 @@
                     </div>
 
                     <div class="modal-action">
-                        <button type="submit" class="btn text-white btn-primary bg-blue-500">Update</button>
-                        <label for="edit-daskum" class="btn text-white">Tutup</label>
+                        <button type="submit" class="btn text-white btn-primary bg-blue-500">
+                            <i class="fas fa-save"></i>
+                            Update
+                        </button>
+                        <label for="edit-daskum" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Tutup</label>
                     </div>
                 </form>
             </div>

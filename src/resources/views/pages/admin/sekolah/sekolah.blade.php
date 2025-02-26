@@ -144,8 +144,9 @@
 
                     <div class="flex justify-end gap-3 mt-8 pt-4 border-t dark:border-gray-700">
                         <button type="submit"
-                            class="px-4 btn py-2 bg-blue-600 text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
-                            Tambah
+                            class="px-4 btn btn-primary py-2 bg-blue-600 text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                            <i class="fas fa-save"></i>
+                            Simpan 
                         </button>
                         <label for="add-sekolah"  onclick="mapInputDelete()"
                             class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
@@ -272,7 +273,8 @@
 
                     <div class="flex justify-end gap-3 mt-8 pt-4 border-t dark:border-gray-700">
                         <button type="submit"
-                            class="px-4 py-2 bg-blue-600 btn text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                            class="px-4 py-2 btn-primary bg-blue-600 btn text-white rounded-md hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                            <i class="fas fa-save"></i>
                             Update
                         </button>
                         <label for="edit-modal"

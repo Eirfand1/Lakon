@@ -308,7 +308,10 @@
 
 
                     <div class="modal-action pt-4">
-                        <button type="submit" class="btn rounded-md btn-primary text-white bg-blue-600">Simpan</button>
+                        <button type="submit" class="btn rounded-md btn-primary text-white bg-blue-600">
+                            <i class="fas fa-save"></i>
+                            Simpan
+                        </button>
                         <label for="add-modal"
                             class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                     </div>
@@ -613,7 +616,10 @@
                     </div>
 
                     <div class="modal-action pt-4">
-                        <button type="submit" class="btn rounded-md text-white bg-blue-600 btn-primary">Simpan</button>
+                        <button type="submit" class="btn rounded-md text-white bg-blue-600 btn-primary">
+                            <i class="fas fa-save"></i>
+                            Update
+                        </button>
                         <label for="edit-modal"
                             class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                     </div>
