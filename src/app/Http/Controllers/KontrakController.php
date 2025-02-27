@@ -70,10 +70,7 @@ class KontrakController extends Controller
         }
     }
 
-    public function edit(
-        Kontrak $kontrak,
-        RuangLingkup $ruangLingkup
-    ) {
+    public function edit(Kontrak $kontrak,) {
         $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
         $totalBiaya = $rincianBelanja->sum('total_harga');
         $ppn = $totalBiaya * 0.11;

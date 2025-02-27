@@ -85,8 +85,14 @@ Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(f
     Route::get('/dashboard', [VerifikatorController::class, 'dashboard'])->name('verifikator.dashboard');
 
     Route::get('/tolak/{kontrak_id}', [VerifikatorController::class, 'tolak'])->name('verifikator.tolak');
-    Route::get('/terima/{kontrak_id}', [VerifikatorController::class, 'terima'])->name('verifikator.terima');
     Route::get('/detail/{kontrak_id}', [VerifikatorController::class, 'detail'])->name('verifikator.detail');
+
+    Route::post('/detail/data-dasar/{kontrak_id}', [VerifikatorController::class, 'dataDasar']);
+    Route::post('/detail/spk/{kontrak_id}', [VerifikatorController::class, 'spk']);
+    Route::post('/detail/lampiran/{kontrak_id}', [VerifikatorController::class, 'lampiran']);
+    Route::post('/detail/spp/{kontrak_id}', [VerifikatorController::class, 'spp']);
+    Route::post('/detail/sskk/{kontrak_id}', [VerifikatorController::class, 'sskk']);
+    Route::post('/detail/terima/{kontrak_id}', [VerifikatorController::class, 'terima'])->name('verifikator.terima');
 
     Route::post('/detail/penerima-barang', [PenerimaController::class, 'store'])->name('verifikator.penerima.store');
     Route::delete('/detail/penerima-barang/{penerima}', [PenerimaController::class, 'destroy'])->name('verifikator.penerima.destroy');
