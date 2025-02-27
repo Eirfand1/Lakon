@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\KontrakExport;
 use App\Models\Kontrak;
+use App\Models\Ppkom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -180,7 +181,7 @@ class KontrakController extends Controller
             // Kontrak
             $templateProcessor->setValue('${NO_KONTRAK}', $kontrak->no_kontrak);
             $templateProcessor->setValue('${JENIS_KONTRAK}', $kontrak->jenis_kontrak);
-            $templateProcessor->setValue('${TGL_PEMBUATAN}', $kontrak->tgl_pembuatan);
+            $templateProcessor->setValue('${TGL_PEMBUATAN}', $kontrak->tanggal_awal);
             $templateProcessor->setValue('${WAKTU_KONTRAK}', $kontrak->waktu_kontrak);
             $templateProcessor->setValue('${NILAI_KONTRAK}', number_format($kontrak->nilai_kontrak, 0, ',', '.'));
             $templateProcessor->setValue('${TGL_KONTRAK}', $kontrak->tgl_kontrak);
@@ -193,6 +194,8 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${TGL_SPPBJ}', $kontrak->tgl_sppbj);
             $templateProcessor->setValue('${NOMOR_PENETAPAN_PEMENANG}', $kontrak->nomor_penetapan_pemenang);
             $templateProcessor->setValue('${TGL_PENETAPAN_PEMENANG}', $kontrak->tgl_penetapan_pemenang);
+            $templateProcessor->setValue('${TGL_SELESAI}', $kontrak->tanggal_akhir);
+            $templateProcessor->setValue('${JANGKA_WAKTU}', $kontrak->waktu_penyelesaian);
 
             // Penyedia
             $templateProcessor->setValue('${NAMA_CV}', $kontrak->penyedia->nama_perusahaan_lengkap);
@@ -202,10 +205,15 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${EMAIL_CV}', $kontrak->penyedia->kontak_email);
             $templateProcessor->setValue('${NAMA_BANK_CV}', $kontrak->penyedia->rekening_bank);
             $templateProcessor->setValue('${REKENING_NO}', $kontrak->penyedia->rekening_norek);
+            $templateProcessor->setValue('${REKENING_NAMA}', $kontrak->penyedia->rekening_nama);
             $templateProcessor->setValue('${NAMA_CV_REKENING}', $kontrak->penyedia->rekening_nama);
             $templateProcessor->setValue('${NO_AKTA}', $kontrak->penyedia->akta_notaris_no);
             $templateProcessor->setValue('${TGL_AKTA}', $kontrak->penyedia->akta_notaris_tanggal);
             $templateProcessor->setValue('${NAMA_NOTARIS}', $kontrak->penyedia->akta_notaris_nama);
+
+            // PPK
+            $templateProcessor->setValue('$NAMA_PPK', Ppkom::first()->nama);
+            $templateProcessor->setValue('$JABATAN_PPK', Ppkom::first()->jabatan);
 
             // ruang lingkup
             $lingkupPekerjaanText = '';
