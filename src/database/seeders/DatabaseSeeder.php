@@ -28,11 +28,6 @@ class DatabaseSeeder extends Seeder
             PaketPekerjaanTable::class,
             PaketSubKegiatanTable::class,
             KontrakSeeder::class,
-            TimTableSeeder::class,
-            JadwalKegiatanTableSeeder::class,
-            RincianBelanjaTableSeeder::class,
-            PeralatanTableSeeder::class,
-            RuangLingkupTableSeeder::class,
         ]);
     }
 }
