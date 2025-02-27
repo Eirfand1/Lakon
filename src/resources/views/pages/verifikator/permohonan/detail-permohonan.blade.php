@@ -1,18 +1,143 @@
+{{-- @dd($kontrak->penyedia) --}}
 <x-app-layout>
 
 <div class="p-4">
     <h2 class="text-2xl font-bold mb-4">
-        <i class="fa fa-calendar-o mr-2"></i> HALLO (BELUM JADI NIH)
+        <i class="fa fa-calendar-o mr-2"></i> DETAIL PERMOHONAN KONTRAK
     </h2>
     <div class="border-b border-gray-300 my-4"></div>
 
-    @include('pages.lampiran.penerima-barang')
-    @include('pages.lampiran.dokumen-penagihan')
-    @include('pages.lampiran.dokumen-pekerjaan')
-    @include('pages.lampiran.dokumen-tambahan')
-    @include('pages.lampiran.keterangan-hak-dan-kewajiban')
-    @include('pages.lampiran.keterangan-tindakan')
-    @include('pages.lampiran.keterangan-fasilitas')
+    @php
+    $jenis = $kontrak->paketPekerjaan->jenis_pengadaan;
+    $metode = $kontrak->paketPekerjaan->metode_pemilihan;
+    @endphp
+
+    <div
+    x-data=
+    "{
+        tab: (localStorage.getItem('isNavigated') === 'true' ? 'tab1' : (sessionStorage.getItem('activeTab') || 'tab1')),
+        setTab(newTab) {
+            this.tab = newTab;
+            sessionStorage.setItem('activeTab', newTab);
+            localStorage.setItem('isNavigated', 'false'); // Tandai bahwa ini bukan navigasi baru
+        },
+        init() {
+            // Saat halaman dimuat, tandai bahwa ini adalah navigasi baru
+            localStorage.setItem('isNavigated', 'true');
+        }
+    }"
+    class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-4">
+        <div class="flex space-x-4 mb-4">
+            <button
+                :class="{
+                    'bg-blue-500 text-white': tab === 'tab1',
+                    'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200': tab !== 'tab1'
+                }"
+                class="px-4 py-2 rounded border border-blue-500 transition-colors duration-200"
+                @click="setTab('tab1')"
+            >
+                Data Dasar
+                <i class="fa-regular {{ $kontrak->data_dasar_done ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
+            </button>
+            <button
+                :class="{
+                    'bg-blue-500 text-white': tab === 'tab2',
+                    'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200': tab !== 'tab2'
+                }"
+                class="px-4 py-2 rounded border border-blue-500 transition-colors duration-200"
+                @click="setTab('tab2')"
+            >
+                SPK
+                <i class="fa-regular {{ $kontrak->spk_done ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
+            </button>
+
+            @if ($jenis == 'tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan'))
+            <button
+                :class="{
+                    'bg-blue-500 text-white': tab === 'tab3',
+                    'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200': tab !== 'tab3'
+                }"
+                class="px-4 py-2 rounded border border-blue-500 transition-colors duration-200"
+                @click="setTab('tab3')"
+            >
+                Lampiran
+                <i class="fa-regular {{ $kontrak->lampiran_done ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
+            </button>
+            @endif
+
+            @if ($metode == 'Pengadaan Barang')
+            <button
+                :class="{
+                    'bg-blue-500 text-white': tab === 'tab4',
+                    'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200': tab !== 'tab4'
+                }"
+                class="px-4 py-2 rounded border border-blue-500 transition-colors duration-200"
+                @click="setTab('tab4')"
+            >
+                SPP
+                <i class="fa-regular {{ $kontrak->spp_done ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
+            </button>
+            @endif
+
+            @if ($jenis == 'non_tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan'))
+            <button
+                :class="{
+                    'bg-blue-500 text-white': tab === 'tab5',
+                    'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200': tab !== 'tab5'
+                }"
+                class="px-4 py-2 rounded border border-blue-500 transition-colors duration-200"
+                @click="setTab('tab5')"
+            >
+                SSKK
+                <i class="fa-regular {{ $kontrak->sskk_done ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
+            </button>
+            @endif
+
+            <button
+                :class="{
+                    'bg-blue-500 text-white': tab === 'tab6',
+                    'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200': tab !== 'tab6'
+                }"
+                class="px-4 py-2 rounded border border-blue-500 transition-colors duration-200"
+                @click="setTab('tab6')"
+            >
+                Verifikasi
+                <i class="fa-regular {{ $kontrak->is_verified ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
+            </button>
+        </div>
+
+
+        {{-- data dasar --}}
+        <div x-show="tab === 'tab1'" class="mt-4">
+            @include('pages.verifikator.permohonan.detail.data-dasar')
+        </div>
+        {{-- spk --}}
+        <div x-show="tab === 'tab2'" class="mt-4">
+            @include('pages.verifikator.permohonan.detail.spk')
+        </div>
+        {{-- lampiran --}}
+        @if ($jenis == 'tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan'))
+        <div x-show="tab === 'tab3'" class="mt-4">
+            @include('pages.verifikator.permohonan.detail.lampiran')
+        </div>
+        @endif
+        {{-- spp --}}
+        @if ($metode == 'Pengadaan Barang')
+        <div x-show="tab === 'tab4'" class="mt-4">
+            @include('pages.verifikator.permohonan.detail.spp')
+        </div>
+        @endif
+        {{-- sskk --}}
+        @if ($jenis == 'non_tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan'))
+        <div x-show="tab === 'tab5'" class="mt-4">
+            @include('pages.verifikator.permohonan.detail.sskk')
+        </div>
+        @endif
+        {{-- verifikasi --}}
+        <div x-show="tab === 'tab6'" class="mt-4">
+            @include('pages.verifikator.permohonan.detail.verifikasi')
+        </div>
+    </div>
 
 </div>
 

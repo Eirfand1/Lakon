@@ -11,7 +11,7 @@
         <thead class="text-gray-600  dark:text-gray-300">
             <tr>
                 <th class="text-center border border-gray-400/30">Ruang Lingkup</th>
-                <th class="text-center border border-gray-400/30">Aksi</th>
+                <th class="text-center border border-gray-400/30 w-1">Aksi</th>
             </tr>
         </thead>
         <tbody>
