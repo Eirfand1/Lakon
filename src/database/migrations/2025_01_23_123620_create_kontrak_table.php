@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('terbilang_nilai_kontrak')->nullable();
             $table->date('tanggal_awal')->nullable();
             $table->date('tanggal_akhir')->nullable();
-            $table->date('waktu_penyelesaian')->nullable();
+            $table->string('waktu_penyelesaian')->nullable();
             $table->string('cara_pembayaran')->nullable();
             $table->integer('uang_muka')->nullable();
             $table->date('waktu_kontrak')->nullable();
