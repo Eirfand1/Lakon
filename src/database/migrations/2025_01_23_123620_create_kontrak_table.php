@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('no_kontrak');
             $table->string('jenis_kontrak')->nullable();
             $table->string('nomor_spk')->nullable();
-            $table->decimal('nilai_kontrak')->nullable();
+            $table->integer('nilai_kontrak')->nullable();
             $table->string('terbilang_nilai_kontrak')->nullable();
             $table->date('tanggal_awal')->nullable();
             $table->date('tanggal_akhir')->nullable();
