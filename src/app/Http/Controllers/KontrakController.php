@@ -164,7 +164,7 @@ class KontrakController extends Controller
 
             // Paket pekerjaan
             $templateProcessor->setValue('${KODE_PAKET}', $kontrak->paketPekerjaan->kode_paket);
-            $templateProcessor->setValue('${PEKERJAAN_JUDUL}', $kontrak->paketPekerjaan->nama_pekerjaan);
+            $templateProcessor->setValue('${PEKERJAAN_JUDUL}', $kontrak->paketPekerjaan->nama_pekerjaan . " " . $kontrak->paketPekerjaan->sekolah->nama_sekolah ?? '');
             $templateProcessor->setValue('${SUMBER_DANA}', $kontrak->paketPekerjaan->sumber_dana);
             $templateProcessor->setValue('${JENIS_PENGADAAN}', $kontrak->paketPekerjaan->jenis_pengadaan);
             $templateProcessor->setValue('${METODE_PEMILIHAN}', $kontrak->paketPekerjaan->metode_pemilihan);
@@ -184,6 +184,7 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${TGL_PEMBUATAN}', $kontrak->tanggal_awal);
             $templateProcessor->setValue('${WAKTU_KONTRAK}', $kontrak->waktu_kontrak);
             $templateProcessor->setValue('${NILAI_KONTRAK}', number_format($kontrak->nilai_kontrak, 0, ',', '.'));
+            $templateProcessor->setValue('${TERBILANG_NILAI_KONTRAK}', $kontrak->terbilang_nilai_kontrak);
             $templateProcessor->setValue('${TGL_KONTRAK}', $kontrak->tgl_kontrak);
             $templateProcessor->setValue('${WAKTU_KONTRAK}', $kontrak->waktu_kontrak);
             $templateProcessor->setValue('${NOMOR_DPPL}', $kontrak->nomor_dppl);
@@ -195,7 +196,9 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${NOMOR_PENETAPAN_PEMENANG}', $kontrak->nomor_penetapan_pemenang);
             $templateProcessor->setValue('${TGL_PENETAPAN_PEMENANG}', $kontrak->tgl_penetapan_pemenang);
             $templateProcessor->setValue('${TGL_SELESAI}', $kontrak->tanggal_akhir);
-            $templateProcessor->setValue('${JANGKA_WAKTU}', $kontrak->waktu_penyelesaian);
+            $templateProcessor->setValue('${JANGKA_WAKTU}', $kontrak->waktu_kontrak);
+            $templateProcessor->setValue('${TERBILANG_JANGKA_WAKTU}', $kontrak->waktu_penyelesaian);
+            $templateProcessor->setValue('${NO_SPK}', $kontrak->nomor_spk);
 
             // Penyedia
             $templateProcessor->setValue('${NAMA_CV}', $kontrak->penyedia->nama_perusahaan_lengkap);
