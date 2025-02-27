@@ -19,10 +19,10 @@ return new class extends Migration {
             $table->string('terbilang_nilai_kontrak')->nullable();
             $table->date('tanggal_awal')->nullable();
             $table->date('tanggal_akhir')->nullable();
+            $table->integer('waktu_kontrak')->virtualAs('DATEDIFF(tanggal_akhir, tanggal_awal) + 1')->nullable();
             $table->string('waktu_penyelesaian')->nullable();
             $table->string('cara_pembayaran')->nullable();
             $table->integer('uang_muka')->nullable();
-            $table->date('waktu_kontrak')->nullable();
             $table->date('tgl_kontrak')->nullable();
             $table->foreignId('paket_id')
                 ->constrained('paket_pekerjaan', 'paket_id')
@@ -64,10 +64,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        $tahun = now()->year;
-        $penyediaId = auth()->user()->penyedia->penyedia_id;
-        $nomorKontrak = "KONTRAK/{$penyediaId}/P4/{$tahun}";
-
         Schema::dropIfExists('kontrak');
     }
 };

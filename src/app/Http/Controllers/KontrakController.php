@@ -181,7 +181,7 @@ class KontrakController extends Controller
             // Kontrak
             $templateProcessor->setValue('${NO_KONTRAK}', $kontrak->no_kontrak);
             $templateProcessor->setValue('${JENIS_KONTRAK}', $kontrak->jenis_kontrak);
-            $templateProcessor->setValue('${TGL_PEMBUATAN}', $kontrak->tgl_pembuatan);
+            $templateProcessor->setValue('${TGL_PEMBUATAN}', $kontrak->tanggal_awal);
             $templateProcessor->setValue('${WAKTU_KONTRAK}', $kontrak->waktu_kontrak);
             $templateProcessor->setValue('${NILAI_KONTRAK}', number_format($kontrak->nilai_kontrak, 0, ',', '.'));
             $templateProcessor->setValue('${TGL_KONTRAK}', $kontrak->tgl_kontrak);
@@ -194,6 +194,8 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${TGL_SPPBJ}', $kontrak->tgl_sppbj);
             $templateProcessor->setValue('${NOMOR_PENETAPAN_PEMENANG}', $kontrak->nomor_penetapan_pemenang);
             $templateProcessor->setValue('${TGL_PENETAPAN_PEMENANG}', $kontrak->tgl_penetapan_pemenang);
+            $templateProcessor->setValue('${TGL_SELESAI}', $kontrak->tanggal_akhir);
+            $templateProcessor->setValue('${JANGKA_WAKTU}', $kontrak->waktu_penyelesaian);
 
             // Penyedia
             $templateProcessor->setValue('${NAMA_CV}', $kontrak->penyedia->nama_perusahaan_lengkap);

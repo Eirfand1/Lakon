@@ -27,7 +27,6 @@ class KontrakFactory extends Factory
             'jenis_kontrak' => $this->faker->randomElement(['Pengadaan Barang', 'Pengadaan Jasa', 'Pengadaan Lainnya']),
             'nilai_kontrak' => $this->faker->numberBetween(1000, 5000),
             'tgl_kontrak' => $this->faker->date(),
-            'waktu_kontrak' => $this->faker->date(), // Waktu kontrak dalam bulan
             'paket_id' => PaketPekerjaan::factory(),
             'tgl_pembuatan' => $this->faker->date(),
             'satker_id' => SatuanKerja::factory(),
@@ -38,7 +37,9 @@ class KontrakFactory extends Factory
             'nomor_bahpl' => strtoupper($this->faker->bothify('BAHPL-####')),
             'tgl_bahpl' => $this->faker->date(),
             'verifikator_id' => Verifikator::factory(),
-            'is_verificated' => $this->faker->boolean()
+            'is_verificated' => $this->faker->boolean(),
+            'tanggal_awal' => $this->faker->date(),
+            'tanggal_akhir' => $this->faker->date()
         ];
     }
 }
