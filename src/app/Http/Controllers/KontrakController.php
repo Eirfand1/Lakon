@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\KontrakExport;
 use App\Models\Kontrak;
+use App\Models\Ppkom;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -205,10 +206,15 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${EMAIL_CV}', $kontrak->penyedia->kontak_email);
             $templateProcessor->setValue('${NAMA_BANK_CV}', $kontrak->penyedia->rekening_bank);
             $templateProcessor->setValue('${REKENING_NO}', $kontrak->penyedia->rekening_norek);
+            $templateProcessor->setValue('${REKENING_NAMA}', $kontrak->penyedia->rekening_nama);
             $templateProcessor->setValue('${NAMA_CV_REKENING}', $kontrak->penyedia->rekening_nama);
             $templateProcessor->setValue('${NO_AKTA}', $kontrak->penyedia->akta_notaris_no);
             $templateProcessor->setValue('${TGL_AKTA}', $kontrak->penyedia->akta_notaris_tanggal);
             $templateProcessor->setValue('${NAMA_NOTARIS}', $kontrak->penyedia->akta_notaris_nama);
+
+            // PPK
+            $templateProcessor->setValue('$NAMA_PPK', Ppkom::first()->nama);
+            $templateProcessor->setValue('$JABATAN_PPK', Ppkom::first()->jabatan);
 
             // ruang lingkup
             $lingkupPekerjaanText = '';
