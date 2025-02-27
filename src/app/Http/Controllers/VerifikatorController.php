@@ -8,6 +8,11 @@ use App\Models\Verifikator;
 use App\Models\Penerima;
 use App\Models\DokumenKontrak;
 use App\Models\KeteranganKontrak;
+use App\Models\Tim;
+use App\Models\JadwalKegiatan;
+use App\Models\RincianBelanja;
+use App\Models\Peralatan;
+use App\Models\RuangLingkup;
 use Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
@@ -127,6 +132,62 @@ class VerifikatorController extends Controller
         return view('pages.verifikator.permohonan.detail-permohonan');
     }
 
+    public function dataDasar($kontrak_id, Kontrak $kontrak) {
+        $kontrak->where('kontrak_id', $kontrak_id)->update([
+            'data_dasar_done' => true
+        ]);
+        return redirect()->back()->with('success', 'Data dasar berhasil di simpan');
+    }
+
+    public function spk($kontrak_id, Kontrak $kontrak, Request $request) {
+        $validate = $request->validate([
+            'jenis_kontrak' => 'required|string|max:255',
+            'nomor_spk' => 'required|string|max:255',
+            'nilai_kontrak' => 'required|numeric',
+            'terbilang_nilai_kontrak' => 'required|string|max:255',
+            'tanggal_awal' => 'required|date',
+            'tanggal_akhir' => 'required|date',
+            'waktu_penyelesaian' => 'required|string|max:255',
+            'cara_pembayaran' => 'required|string|max:255',
+            'uang_muka' => 'required|numeric',
+        ]);
+
+        $kontrak->where('kontrak_id', $kontrak_id)->update([
+            'jenis_kontrak' => $request->jenis_kontrak,
+            'nomor_spk' => $request->nomor_spk,
+            'nilai_kontrak' => $request->nilai_kontrak,
+            'terbilang_nilai_kontrak' => $request->terbilang_nilai_kontrak,
+            'tanggal_awal' => $request->tanggal_awal,
+            'tanggal_akhir' => $request->tanggal_akhir,
+            'waktu_penyelesaian' => $request->waktu_penyelesaian,
+            'cara_pembayaran' => $request->cara_pembayaran,
+            'uang_muka' => $request->uang_muka,
+            'spk_done' => true
+        ]);
+        return redirect()->back()->with('success', 'SPK berhasil di simpan');
+    }
+
+    public function lampiran($kontrak_id, Kontrak $kontrak) {
+        $kontrak->where('kontrak_id', $kontrak_id)->update([
+            'lampiran_done' => true
+        ]);
+        return redirect()->back()->with('success', 'Lampiran berhasil di simpan');
+    }
+
+    public function spp($kontrak_id, Kontrak $kontrak) {
+        $kontrak->where('kontrak_id', $kontrak_id)->update([
+            'spp_done' => true
+        ]);
+        return redirect()->back()->with('success', 'SPP berhasil di simpan');
+    }
+
+    public function sskk($kontrak_id, Kontrak $kontrak) {
+        $kontrak->where('kontrak_id', $kontrak_id)->update([
+            'sskk_done' => true
+        ]);
+        return redirect()->back()->with('success', 'SSKK berhasil di simpan');
+    }
+
     public function tolak($kontrak_id, Kontrak $kontrak) {
         $kontrak->where('kontrak_id', $kontrak_id)->delete();
         return redirect()->back()->with('success', 'Permohonan berhasil ditolak');
@@ -138,11 +199,15 @@ class VerifikatorController extends Controller
             'is_verificated' => true,
             'verifikator_id' => Auth::user()->verifikator->verifikator_id,
         ]);
-        return redirect()->back()->with('success', 'Permohonan berhasil diterima');
+        return redirect('/verifikator/dashboard')->with('success', 'Permohonan berhasil diterima');
     }
 
     public function detail($kontrak_id, Kontrak $kontrak) {
         $kontrak = Kontrak::where('kontrak_id', $kontrak_id)->first();
+        $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
+        $totalBiaya = $rincianBelanja->sum('total_harga');
+        $ppn = $totalBiaya * 0.11;
+
         return view('pages.verifikator.permohonan.detail-permohonan', [
             'kontrak' => $kontrak,
             'penerima' => Penerima::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
@@ -152,6 +217,13 @@ class VerifikatorController extends Controller
             'keterangan_hak_dan_kewajiban' => KeteranganKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->where('jenis', 'hak dan kewajiban')->get(),
             'keterangan_tindakan' => KeteranganKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->where('jenis', 'tindakan')->get(),
             'keterangan_fasilitas' => KeteranganKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->where('jenis', 'fasilitas')->get(),
+            'tim' => Tim::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'jadwalKegiatan' => JadwalKegiatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'rincianBelanja' => $rincianBelanja,
+            'totalBiaya' => $totalBiaya,
+            'ppn' => $ppn,
+            'peralatan' => Peralatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'ruangLingkup' => RuangLingkup::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
         ]);
     }
 }

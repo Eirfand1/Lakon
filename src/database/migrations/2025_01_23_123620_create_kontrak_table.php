@@ -14,9 +14,16 @@ return new class extends Migration {
             $table->id('kontrak_id');
             $table->string('no_kontrak');
             $table->string('jenis_kontrak')->nullable();
+            $table->string('nomor_spk')->nullable();
             $table->decimal('nilai_kontrak')->nullable();
-            $table->date('tgl_kontrak')->nullable();
+            $table->string('terbilang_nilai_kontrak')->nullable();
+            $table->date('tanggal_awal')->nullable();
+            $table->date('tanggal_akhir')->nullable();
+            $table->date('waktu_penyelesaian')->nullable();
+            $table->string('cara_pembayaran')->nullable();
+            $table->integer('uang_muka')->nullable();
             $table->date('waktu_kontrak')->nullable();
+            $table->date('tgl_kontrak')->nullable();
             $table->foreignId('paket_id')
                 ->constrained('paket_pekerjaan', 'paket_id')
                 ->cascadeOnDelete();
@@ -43,6 +50,11 @@ return new class extends Migration {
                 ->cascadeOnDelete();
             $table->boolean('is_verificated')->default(false);
             $table->boolean('is_layangkan')->default(false);
+            $table->boolean('data_dasar_done')->default(false);
+            $table->boolean('spk_done')->default(false);
+            $table->boolean('lampiran_done')->default(false);
+            $table->boolean('spp_done')->default(false);
+            $table->boolean('sskk_done')->default(false);
             $table->timestamps();
         });
     }
