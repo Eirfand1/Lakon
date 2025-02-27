@@ -254,7 +254,7 @@ class KontrakController extends Controller
 
             if ($format == 'docx') {
                 // Return DOCX file
-                return response()->download($outputDocx, 'Kontrak_' . $kontrak->no_kontrak . '.docx')->deleteFileAfterSend(true);
+                return response()->download($outputDocx, 'Kontrak_'. $kontrak->penyedia->nama_perusahaan_lengkap . '.docx')->deleteFileAfterSend(true);
             } else {
                 // Convert to PDF
                 $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
@@ -273,7 +273,7 @@ class KontrakController extends Controller
                 }
 
                 // Return PDF file
-                return response()->download($outputPdf, 'Kontrak_' . $kontrak->no_kontrak . '.pdf')->deleteFileAfterSend(true);
+                return response()->download($outputPdf, 'Kontrak_' . $kontrak->penyedia->nama_perusahaan_lengkap . '.pdf')->deleteFileAfterSend(true);
             }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengexport PDF: ' . $e->getMessage());
