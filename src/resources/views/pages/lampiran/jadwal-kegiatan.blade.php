@@ -38,10 +38,10 @@
                 <td class="text-center border border-gray-400/30">
                     <input class="w-full dark:bg-gray-800 rounded" type="text" name="kegiatan" id="kegiatan">
                 </td>
-                <td class="text-center border-gray-400/30 p-0">
+                <td class="text-center border border-gray-400/30 p-0">
                     <input type="checkbox" name="bulan_1" class="rounded" id="kegiatanBulan1">
                 </td>
-                <td class="text-center border-gray-400/30 p-0">
+                <td class="text-center border border-gray-400/30 p-0">
                     <input type="checkbox" name="bulan_2" class="rounded" id="kegiatanBulan2">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
