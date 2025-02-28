@@ -23,29 +23,29 @@
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nilai Kontrak</label>
-            <input type="number" name="nilai_kontrak" value="{{ $kontrak->nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <input type="number" name="nilai_kontrak" id="nilaiKontrakSPK" oninput="numberToTextFunction()" value="{{ $kontrak->nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
         </div>
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Terbilang Nilai Kontrak</label>
-            <input type="text" name="terbilang_nilai_kontrak" value="{{ $kontrak->terbilang_nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <input type="text" name="terbilang_nilai_kontrak" id="terbilangNilaiKontrakSPK" readonly value="{{ $kontrak->terbilang_nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
         </div>
 
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 mb-4">
             <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                 <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal Awal</label>
-                <input type="date" name="tanggal_awal" value="{{ $kontrak->tanggal_awal }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+                <input type="date" name="tanggal_awal" value="{{ $kontrak->tanggal_awal }}" required id="tanggalAwalSPK" onchange="waktuPenyelesaian()" class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
             </div>
 
             <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                 <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal Akhir</label>
-                <input type="date" name="tanggal_akhir" value="{{ $kontrak->tanggal_akhir }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+                <input type="date" name="tanggal_akhir" value="{{ $kontrak->tanggal_akhir }}" required id="tanggalAkhirSPK" onchange="waktuPenyelesaian()" class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
             </div>
         </div>
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Waktu Penyelesaian</label>
-            <input type="text" name="waktu_penyelesaian" value="{{ $kontrak->waktu_penyelesaian }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <input type="text" name="waktu_penyelesaian" value="{{ $kontrak->waktu_penyelesaian }}" required id="waktuPenyelesaianSPK" readonly class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
         </div>
     </div>
 
@@ -106,3 +106,40 @@
     <p class="ml-2">Data - data diatas sudah sesuai dengan ketentuan dan kebutuhan.</p>
 </div> --}}
 
+<script>
+
+        function numberToTextFunction() {
+            const input = document.getElementById("nilaiKontrakSPK").value
+
+            if (!input) {
+                document.getElementById("terbilangNilaiKontrakSPK").value = "";
+                return;
+            }
+
+            const convert = numberToText.convertToText(input, {
+                language: 'id'
+            })
+
+            hasil = `${convert} Rupiah`
+            document.getElementById("terbilangNilaiKontrakSPK").value = hasil
+        }
+
+        function waktuPenyelesaian(){
+            const tanggal_awal = document.getElementById("tanggalAwalSPK").value
+            const tanggal_akhir = document.getElementById("tanggalAkhirSPK").value
+
+            if (!tanggal_awal || !tanggal_akhir) {
+                document.getElementById("waktuPenyelesaianSPK").value = "";
+                return;
+            }
+
+            // Hitung selisih tanggal dalam milidetik
+            const selisihMs = new Date(tanggal_akhir) - new Date(tanggal_awal);
+
+            // Konversi selisih milidetik ke hari
+            const selisihHari = Math.floor(selisihMs / (1000 * 60 * 60 * 24)) + 1;
+
+            const hasil = `${selisihHari} Hari`
+            document.getElementById("waktuPenyelesaianSPK").value = hasil
+        }
+</script>
