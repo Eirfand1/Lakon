@@ -20,7 +20,13 @@ class TemplateTable extends DataTableComponent
     {
         return [
 
-            IncrementColumn::make('#'),
+            Column::make("Aksi", "id")
+                ->format(
+                    fn($value, $row, Column $column) =>
+                    view('pages.admin.template.actions', [
+                        'template' => Template::find($value)
+                    ])
+                ),
             Column::make("Name", "name")
                 ->sortable()
                 ->searchable(),
@@ -31,13 +37,7 @@ class TemplateTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make("Aksi", "id")
-                ->format(
-                    fn($value, $row, Column $column) =>
-                    view('pages.admin.template.actions', [
-                        'template' => Template::find($value)
-                    ])
-                ),
+            
 
         ];
     }

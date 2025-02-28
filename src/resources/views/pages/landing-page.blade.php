@@ -24,7 +24,7 @@
 
     <!-- Favicon -->
     <link rel="icon"
-        href="https://2.bp.blogspot.com/-aEgbm1FL1mw/WVcXNvQWIwI/AAAAAAAALIw/IXb0Fh3SR807o3iRvs9Ed16PL7xom57sQCLcBGAs/s1600/Logo-Kabupaten-Cilacap.png"
+        href="{{asset('images/Logo-Cilacap.png')}}"
         type="image/png">
 
     <!-- External CSS -->
@@ -99,7 +99,7 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 60px;
+            width: auto;
             height: 60px;
             z-index: 2;
         }
@@ -188,7 +188,7 @@
     <!-- Loading Screen -->
     <div class="loader-container" id="loader">
         <div class="loader">
-            <img src="https://2.bp.blogspot.com/-aEgbm1FL1mw/WVcXNvQWIwI/AAAAAAAALIw/IXb0Fh3SR807o3iRvs9Ed16PL7xom57sQCLcBGAs/s1600/Logo-Kabupaten-Cilacap.png"
+            <img src="{{asset('images/Logo-Cilacap.png')}}"
                 alt="Logo Kabupaten Cilacap" class="loader-logo">
             <div class="loader-circle"></div>
             <div class="loader-inner-circle"></div>
@@ -202,8 +202,8 @@
             <div class="flex items-center justify-between h-16 md:h-20">
                 <!-- Logo and Title -->
                 <a href="/" class="flex items-center space-x-3">
-                    <img src="https://2.bp.blogspot.com/-aEgbm1FL1mw/WVcXNvQWIwI/AAAAAAAALIw/IXb0Fh3SR807o3iRvs9Ed16PL7xom57sQCLcBGAs/s1600/Logo-Kabupaten-Cilacap.png"
-                        alt="Logo Kabupaten Cilacap" class="w-9 h-9">
+                    <img src="{{asset('images/Logo-Cilacap.png')}}"
+                        alt="Logo Kabupaten Cilacap" class="w-auto h-9">
                     <div class="hidden md:block">
                         <h1 class="text-lg font-bold text-gray-800">LAKON PDK</h1>
                         <p class="text-xs text-gray-600">Kabupaten Cilacap</p>
@@ -265,7 +265,7 @@
 
     <!-- Hero Section -->
     <section class="relative pt-32 pb-20 bg-cover bg-center bg-no-repeat min-h-[80vh] flex items-center text-white"
-        style="background-image: url('https://source.unsplash.com/random/1600x900/?ocean,cilacap')">
+        style="background-image: {{asset('images/clp.jpg')}}">
         <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40"></div>
         <div class="container mx-auto px-4 relative z-10">
             <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -441,8 +441,8 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <div>
                     <div class="flex items-center space-x-3 mb-4">
-                        <img src="https://2.bp.blogspot.com/-aEgbm1FL1mw/WVcXNvQWIwI/AAAAAAAALIw/IXb0Fh3SR807o3iRvs9Ed16PL7xom57sQCLcBGAs/s1600/Logo-Kabupaten-Cilacap.png"
-                            alt="Logo Kabupaten Cilacap" class="w-10 h-10">
+                        <img src="{{asset('images/Logo-Cilacap.png')}}"
+                            alt="Logo Kabupaten Cilacap" class="w-auto h-10">
                         <div>
                             <h3 class="font-bold text-lg">LAKON PDK</h3>
                             <p class="text-sm text-gray-400">Kabupaten Cilacap</p>

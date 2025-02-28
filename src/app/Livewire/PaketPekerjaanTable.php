@@ -43,7 +43,8 @@ class PaketPekerjaanTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            IncrementColumn::make('#'),
+            Column::make("Aksi", "paket_id")
+                ->format(fn($value, $row) => view('pages.admin.paket-pekerjaan.actions', ['paket' => $row])),
 
             //  TO-DO : buat isi kolom = paket pekerjaan + nama sekolah
             Column::make('Nama Paket Pekerjaan', 'nama_pekerjaan')
@@ -159,8 +160,7 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->sortable()
                 ->searchable()
                 ->format(fn($value, $row) => 'Rp ' . number_format($row->nilai_hps, 2)),
-            Column::make("Aksi", "paket_id")
-                ->format(fn($value, $row) => view('pages.admin.paket-pekerjaan.actions', ['paket' => $row])),
+            
         ];
     }
 

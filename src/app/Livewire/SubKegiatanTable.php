@@ -29,7 +29,8 @@ class SubKegiatanTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            IncrementColumn::make('#'),
+            Column::make("Aksi", "sub_kegiatan_id")
+                ->format(fn($value, $row) => view('pages.admin.sub-kegiatan.actions', ['sub_kegiatan' => $row])),
 
             Column::make("Nama Sub Kegiatan", "nama_sub_kegiatan")
                 ->sortable()
@@ -96,8 +97,7 @@ class SubKegiatanTable extends DataTableComponent
                     ";
                 })->html()->collapseAlways(),
 
-            Column::make("Aksi", "sub_kegiatan_id")
-                ->format(fn($value, $row) => view('pages.admin.sub-kegiatan.actions', ['sub_kegiatan' => $row])),
+           
         ];
     }
 }

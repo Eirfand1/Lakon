@@ -31,7 +31,21 @@ class SekolahTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            IncrementColumn::make('#'),
+            Column::make("Aksi", "sekolah_id")
+                ->format(function ($value, $row) {
+                    // Ambil latitude dan longitude dari kolom koordinat
+                    $lat = $row->lat;
+                    $lng = $row->lng;
+
+                    if ($lat === null || $lng === null) {
+                        $row->koordinat = "-";
+                    }else {
+                        // gabungkan koordinat menjadi string
+                        $row->koordinat = "$lat,$lng";
+                    }
+
+                    return view('pages.admin.sekolah.actions', ['sekolah' => $row]);
+                }),
 
             Column::make("NPSN","npsn")
                 ->searchable()
@@ -81,21 +95,7 @@ class SekolahTable extends DataTableComponent
                 ->searchable()
                 ->sortable(),
 
-            Column::make("Aksi", "sekolah_id")
-                ->format(function ($value, $row) {
-                    // Ambil latitude dan longitude dari kolom koordinat
-                    $lat = $row->lat;
-                    $lng = $row->lng;
-
-                    if ($lat === null || $lng === null) {
-                        $row->koordinat = "-";
-                    }else {
-                        // gabungkan koordinat menjadi string
-                        $row->koordinat = "$lat,$lng";
-                    }
-
-                    return view('pages.admin.sekolah.actions', ['sekolah' => $row]);
-                })
+            
                 // ->format(fn($value, $row) => view('pages.admin.sekolah.actions', ['sekolah' => $row])),
         ];
     }

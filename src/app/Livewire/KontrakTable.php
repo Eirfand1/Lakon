@@ -47,7 +47,8 @@ class KontrakTable extends DataTableComponent
     {
         return [
 
-            IncrementColumn::make('#'),
+            Column::make("Aksi", "kontrak_id")
+                ->format(fn($value, $row) => view('pages.admin.riwayat-kontrak.actions', ['kontrak' => $row])),
             Column::make("No Kontrak", "no_kontrak")
                 ->sortable()
                 ->searchable(),
@@ -92,8 +93,7 @@ class KontrakTable extends DataTableComponent
                     }
                     return '<div class="badge text-white badge-error gap-2">Belum Terverifikasi</div>';
                 })->html(),
-            Column::make("Aksi", "kontrak_id")
-                ->format(fn($value, $row) => view('pages.admin.riwayat-kontrak.actions', ['kontrak' => $row])),
+            
         ];
     }
 }
