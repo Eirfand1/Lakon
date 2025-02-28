@@ -15,15 +15,20 @@
     <div
     x-data=
     "{
-        tab: (localStorage.getItem('isNavigated') === 'true' ? 'tab1' : (sessionStorage.getItem('activeTab') || 'tab1')),
+        tab: (function() {
+            // Check if we're coming back from another page
+            if (document.referrer !== '' && document.referrer !== window.location.href) {
+                // Coming from a different page - reset to tab1
+                sessionStorage.setItem('activeTab', 'tab1');
+                return 'tab1';
+            } else {
+                // Coming from refresh or first load - use stored value or default
+                return sessionStorage.getItem('activeTab') || 'tab1';
+            }
+        })(),
         setTab(newTab) {
             this.tab = newTab;
             sessionStorage.setItem('activeTab', newTab);
-            localStorage.setItem('isNavigated', 'false'); // Tandai bahwa ini bukan navigasi baru
-        },
-        init() {
-            // Saat halaman dimuat, tandai bahwa ini adalah navigasi baru
-            localStorage.setItem('isNavigated', 'true');
         }
     }"
     class="bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 p-4">
