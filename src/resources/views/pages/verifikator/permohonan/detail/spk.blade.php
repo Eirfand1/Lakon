@@ -66,6 +66,13 @@
         </div>
     </div>
 
+    <div class="h-10 mt-6 mb-8 rounded flex items-center bg-blue-500">
+        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Simpan Data Surat Perintah Kerja
+        </button>
+    </div>
+</form>
+
 @if (($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan') && $jenis == 'non_tender')
 
 <div class="mb-8">
@@ -89,21 +96,13 @@
 </div>
 @endif
 
-<div class="flex items-center mb-4 space-x-2 text-gray-600 dark:text-gray-300">
+{{-- <div class="flex items-center mb-4 space-x-2 text-gray-600 dark:text-gray-300">
     <i class="fas fa-circle-check fa-lg"></i>
     <h3 class=" font-bold">Validasi Kebenaran Data</h3>
-</div>
+</div> --}}
 
-<div class="mb-4 flex">
+{{-- <div class="mb-4 flex">
     <input type="checkbox" name="cek" required class="mt-1 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600">
     <p class="ml-2">Data - data diatas sudah sesuai dengan ketentuan dan kebutuhan.</p>
-</div>
+</div> --}}
 
-<div class="h-10 mt-6 mb-8 rounded flex items-center bg-blue-500">
-    <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-        Simpan Data Surat Perintah Kerja
-    </button>
-</div>
-
-
-</form>
