@@ -33,6 +33,7 @@
         "flatpickr": "^4.6.13",
         "moment": "^2.30.1",
         "nprogress": "^0.2.0",
+        "number-to-text": "^0.3.9",
         "toastify": "^2.0.1",
         "toastify-js": "^1.12.0",
         "toastr": "^2.1.4"

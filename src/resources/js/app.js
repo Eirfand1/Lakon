@@ -4,6 +4,10 @@ Livewire.start();
 import './bootstrap';
 import flatpickr from "flatpickr";
 
+import numberToText from 'number-to-text'
+import 'number-to-text/converters/id'
+window.numberToText = numberToText;
+
 function applyDarkMode() {
     const lightSwitches = document.querySelectorAll('.light-switch');
     if (lightSwitches.length > 0) {

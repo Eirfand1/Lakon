@@ -118,7 +118,7 @@ class PaketPekerjaanTable extends DataTableComponent
                                 </table>
                         </div>
                     ";
-                })->html()->collapseAlways(),
+                })->html()->collapseAlways()->searchable(),
 
 
 

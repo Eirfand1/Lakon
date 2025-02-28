@@ -9,6 +9,7 @@ use App\Http\Controllers\PpkomController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\VerifikatorController;
+use App\Models\Realisasi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
@@ -167,6 +168,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::post('/paket-pekerjaan', [PaketPekerjaanController::class, 'store'])->name('admin.paket-pekerjaan.store');
     Route::delete('/paket-pekerjaan/{paket_pekerjaan}', [PaketPekerjaanController::class, 'destroy'])->name('admin.paket-pekerjaan.destroy');
     Route::put('/paket-pekerjaan/{paket_pekerjaan}', [PaketPekerjaanController::class, 'update'])->name('admin.paket-pekerjaan.update');
+
+
+    // Realisasi
+    // Route::get('/realisasi', [Realisasi::class, 'index'])->name('admin.realisasi.index');
 
 
     // Sub Kegiatan
