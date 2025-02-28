@@ -3,7 +3,8 @@
         <div class="mb-4 flex justify-between items-center">
             <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">DASAR HUKUM</h1>
             <!-- Add Button -->
-            <label for="add-dasar-hukum" class="btn rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
+            <label for="add-dasar-hukum"
+                class="btn rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
                 <i class="fa-solid fa-square-plus"></i>
                 <span>Tambah Data</span>
             </label>
@@ -29,7 +30,9 @@
                     @csrf
                     <div class="flex w-full flex-col ">
                         <x-label for="dasar_hukum">Dasar Hukum</x-label>
-                        <textarea name="dasar_hukum" id="dasar_hukum" cols="10" rows="5" class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }} rounded bg-white dark:bg-gray-900/20 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200" required>{{old('dasar_hukum')}}</textarea>
+                        <textarea name="dasar_hukum" id="dasar_hukum" cols="10" rows="5"
+                            class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }} rounded bg-white dark:bg-gray-900/20 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200"
+                            required>{{old('dasar_hukum')}}</textarea>
                         @error('dasar_hukum')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
@@ -40,7 +43,8 @@
                             <i class="fas fa-save"></i>
                             Simpan
                         </button>
-                        <label for="add-dasar-hukum" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
+                        <label for="add-dasar-hukum"
+                            class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                     </div>
                 </form>
             </div>
@@ -64,8 +68,10 @@
                     @csrf
                     @method('PUT')
                     <div class="flex w-full flex-col">
-                            <x-label>Dasar Hukum</x-label>
-                            <textarea name="dasar_hukum" id="dasarHukum" cols="10" rows="5" class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }} rounded bg-white dark:bg-gray-900/20 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200" required></textarea>
+                        <x-label>Dasar Hukum</x-label>
+                        <textarea name="dasar_hukum" id="dasarHukum" cols="10" rows="5"
+                            class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }} rounded bg-white dark:bg-gray-900/20 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200"
+                            required></textarea>
                         @error('dasar_hukum')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
@@ -76,7 +82,8 @@
                             <i class="fas fa-save"></i>
                             Update
                         </button>
-                        <label for="edit-daskum" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Tutup</label>
+                        <label for="edit-daskum"
+                            class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Tutup</label>
                     </div>
                 </form>
             </div>
@@ -97,21 +104,31 @@
                             <i class="fa-solid fa-trash"></i>
                             <span>Hapus</span>
                         </x-danger-button>
-                        <label for="delete-daskum" class="btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
+                        <label for="delete-daskum"
+                            class="btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
                     </div>
                 </form>
             </div>
         </div>
-    <div>
+        <div>
 
-    <!-- Script for Dasar Hukum -->
-    <script>
-        function editDaskum(daskum_id, dasar_hukum) {
-            document.getElementById('editForm').action = `dasar-hukum/${daskum_id}`;
-            document.getElementById('dasarHukum').value = dasar_hukum;
-        }
-        function setDeleteId(daskum_id) {
-            document.getElementById('deleteForm').action = `dasar-hukum/${daskum_id}`;
-        }
-    </script>
+            <!-- Script for Dasar Hukum -->
+            <script>
+                function editDaskum(daskum_id, dasar_hukum) {
+                    document.getElementById('editForm').action = `dasar-hukum/${daskum_id}`;
+                    document.getElementById('dasarHukum').value = dasar_hukum;
+                }
+                function setDeleteId(daskum_id) {
+                    document.getElementById('deleteForm').action = `dasar-hukum/${daskum_id}`;
+                }
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    console.log(
+                        numberToText.convertToText(12346, {
+                            language: 'id'
+                        })
+                    )
+                })
+
+            </script>
 </x-app-layout>
