@@ -102,6 +102,27 @@ Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(f
 
     Route::post('detail/keterangan', [KeteranganKontrakController::class, 'store'])->name('verifikator.keterangan.store');
     Route::delete('detail/keterangan/{keterangan}', [KeteranganKontrakController::class, 'destroy'])->name('verifikator.keterangan.destroy');
+
+    // lampiran kontrak
+    // tim
+    Route::post('/detail/tim', [TimController::class, 'store'])->name('verifikator.tim.store');
+    Route::delete('/detail/tim/{tim}', [TimController::class, 'destroy'])->name('verifikator.tim.destroy');
+
+    // jadwal kegiatan
+    Route::post('/detail/jadwal-kegiatan', [JadwalKegiatanController::class, 'store'])->name('verifikator.jadwal-kegiatan.store');
+    Route::delete('/detail/jadwal-kegiatan/{jadwal_kegiatan}', [JadwalKegiatanController::class, 'destroy'])->name('verifikator.jadwal-kegiatan.destroy');
+
+    // rincian belanja
+    Route::post('/detail/rincian-belanja', [RincianBelanjaController::class, 'store'])->name('verifikator.rincian-belanja.store');
+    Route::delete('/detail/rincian-belanja/{rincian_belanja}', [RincianBelanjaController::class, 'destroy'])->name('verifikator.rincian-belanja.destroy');
+
+    // peralatan
+    Route::post('/detail/peralatan', [PeralatanController::class, 'store'])->name('verifikator.peralatan.store');
+    Route::delete('/detail/peralatan/{peralatan}', [PeralatanController::class, 'destroy'])->name('verifikator.peralatan.destroy');
+
+    // ruang lingkup
+    Route::post('/detail/ruang-lingkup', [RuangLingkupController::class, 'store'])->name('verifikator.ruang-lingkup.store');
+    Route::delete('/detail/ruang-lingkup/{ruang_lingkup}', [RuangLingkupController::class, 'destroy'])->name('verifikator.ruang-lingkup.destroy');
 });
 
 // TODO make all route to /admin or /penyedia or /verifikator
