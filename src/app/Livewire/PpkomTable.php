@@ -21,7 +21,7 @@ class PpkomTable extends DataTableComponent
              ->setDefaultSort('ppkom_id', 'desc')
              ->setColumnSelectStatus(true)
              ->setFilterLayout('slide-down')
-            ->setPerPageAccepted([10,25,50,100, -1]);
+             ->setPerPageAccepted([10,25,50,100, -1]);
     }
 
     public function builder(): \Illuminate\Database\Eloquent\Builder {
@@ -31,7 +31,8 @@ class PpkomTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            IncrementColumn::make('#'),
+            Column::make("Aksi", "ppkom_id")
+                ->format(fn($value, $row) => view('pages.admin.ppkom.actions', ['ppkom' => $row])),
             Column::make("NIP", "nip")
                 ->sortable()
                 ->searchable(),
@@ -58,8 +59,7 @@ class PpkomTable extends DataTableComponent
             Column::make("Email", "email")
                 ->sortable()
                 ->searchable(),
-            Column::make("Aksi", "ppkom_id")
-                ->format(fn($value, $row) => view('pages.admin.ppkom.actions', ['ppkom' => $row])),
+            
         ];
     }
 

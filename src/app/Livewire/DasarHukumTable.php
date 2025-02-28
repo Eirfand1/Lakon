@@ -26,12 +26,12 @@ class DasarHukumTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            IncrementColumn::make('#'),
+            Column::make("Aksi", "daskum_id")
+                ->format(fn($value, $row) => view('pages.admin.dasar-hukum.actions', ['daskum' => $row])),
             Column::make("Dasar Hukum ", "dasar_hukum")
                 ->sortable()
                 ->searchable(),
-            Column::make("Aksi", "daskum_id")
-                ->format(fn($value, $row) => view('pages.admin.dasar-hukum.actions', ['daskum' => $row])),
+            
         ];
     }
 }

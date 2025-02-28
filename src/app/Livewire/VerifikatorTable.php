@@ -33,7 +33,13 @@ class VerifikatorTable extends DataTableComponent
     {
         return [
 
-            IncrementColumn::make('#'),
+            Column::make("Aksi", "verifikator_id")
+                ->format(
+                    fn($value, $row, Column $column) =>
+                    view('pages.admin.verifikator.actions', [
+                        'verifikator' => Verifikator::find($value)
+                    ])
+                ),
             
             Column::make("Nama verifikator", "nama_verifikator")
                 ->sortable()
@@ -54,13 +60,7 @@ class VerifikatorTable extends DataTableComponent
             Column::make("Updated at", "updated_at")
                 ->sortable()
                 ->searchable(),
-            Column::make("Aksi", "verifikator_id")
-                ->format(
-                    fn($value, $row, Column $column) =>
-                    view('pages.admin.verifikator.actions', [
-                        'verifikator' => Verifikator::find($value)
-                    ])
-                ),
+            
         ];
     }
 

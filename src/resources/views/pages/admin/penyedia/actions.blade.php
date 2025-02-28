@@ -1,5 +1,5 @@
 <div>
-    <label for="edit-modal" class="btn text-gray-200 btn-sm btn-warning" onclick="editPenyedia(
+    <label for="edit-modal" class="btn rounded-md text-gray-200 btn-sm btn-warning" onclick="editPenyedia(
                                        {{ $p->penyedia_id }},
                                         `{{ $p->NIK }}`,
                                         `{{ $p->nama_pemilik }}`,
@@ -23,7 +23,7 @@
         <i class="fa-solid fa-pen-to-square"></i>
     </label>
 
-    <label for="delete-modal" class="btn text-white btn-sm btn-error" onclick="setDeleteId({{ $p->penyedia_id }})">
+    <label for="delete-modal" class="btn rounded-md text-white btn-sm btn-error" onclick="setDeleteId({{ $p->penyedia_id }})">
         <i class="fa-solid fa-trash"></i>
     </label>
 </div>

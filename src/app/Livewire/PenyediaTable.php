@@ -32,7 +32,8 @@ class PenyediaTable extends DataTableComponent
     public function columns(): array
     {
         return [
-            IncrementColumn::make('#'),
+            Column::make("Aksi", "penyedia_id")
+                ->format(fn($value, $row) => view('pages.admin.penyedia.actions', ['p' => $row])),
             Column::make("NIK", "NIK")
                 ->sortable()
                 ->searchable(),
@@ -90,8 +91,7 @@ class PenyediaTable extends DataTableComponent
                 ->sortable(),
             Column::make("Updated at", "updated_at")
                 ->sortable(),
-            Column::make("Aksi", "penyedia_id")
-                ->format(fn($value, $row) => view('pages.admin.penyedia.actions', ['p' => $row])),
+            
         ];
     }
 

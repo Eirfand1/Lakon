@@ -3,13 +3,13 @@
 use App\Http\Controllers\DasarHukumController;
 use App\Http\Controllers\KontrakController;
 use App\Http\Controllers\PaketPekerjaanController;
+use App\Http\Controllers\RealisasiController;
 use App\Http\Controllers\SubKegiatanController;
 use App\Http\Controllers\PenyediaController;
 use App\Http\Controllers\PpkomController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\VerifikatorController;
-use App\Models\Realisasi;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DataFeedController;
 use App\Http\Controllers\DashboardController;
@@ -171,7 +171,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
 
     // Realisasi
-    // Route::get('/realisasi', [Realisasi::class, 'index'])->name('admin.realisasi.index');
+    Route::get('/realisasi', [RealisasiController::class, 'index'])->name('admin.realisasi.index');
 
 
     // Sub Kegiatan

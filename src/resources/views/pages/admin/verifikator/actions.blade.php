@@ -1,5 +1,5 @@
 <div>
-    <label for="edit-modal" class="btn text-gray-200  btn-sm btn-warning"
+    <label for="edit-modal" class="btn text-gray-200 rounded-md btn-sm btn-warning"
         onclick="editVerifikator({{ $verifikator->verifikator_id }}, '{{ $verifikator->nip }}', '{{ $verifikator->nama_verifikator }}', '{{ $verifikator->user->name}}', '{{$verifikator->user->email}}', '{{$verifikator->user->password}}')">
         <i class="fa-solid fa-pen-to-square"></i>
     </label>
