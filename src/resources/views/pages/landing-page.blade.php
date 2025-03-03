@@ -29,6 +29,7 @@
 
     <!-- External CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+
     <script>
         tailwind.config = {
             theme: {
@@ -71,6 +72,7 @@
 
     <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 
     <style>
         /* Loading Animation */
@@ -222,9 +224,6 @@
                         <li><a href="/path-to-pdf/MANUAL_BOOK_PENGGUNA_web.pdf" target="_blank"
                                 class="text-gray-800 hover:text-primary-600 font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary-600 after:transition-all hover:after:w-full">SOP</a>
                         </li>
-                        <li><a href="#verifikasi"
-                                class="text-gray-800 hover:text-primary-600 font-medium transition-colors relative after:absolute after:bottom-0 after:left-0 after:h-0.5 after:w-0 after:bg-primary-600 after:transition-all hover:after:w-full">Verifikasi</a>
-                        </li>
                     </ul>
                 </nav>
 
@@ -250,8 +249,6 @@
                             class="block text-gray-800 hover:text-primary-600 py-2">LPSE Cilacap</a></li>
                     <li><a href="/path-to-pdf/MANUAL_BOOK_PENGGUNA_web.pdf" target="_blank"
                             class="block text-gray-800 hover:text-primary-600 py-2">SOP</a></li>
-                    <li><a href="#verifikasi" class="block text-gray-800 hover:text-primary-600 py-2">Verifikasi</a>
-                    </li>
                     <li class="pt-2">
                         <a href="/login"
                             class="flex items-center justify-center bg-primary-600 text-white px-6 py-2 rounded-full hover:bg-primary-700 transition-colors">
@@ -265,7 +262,7 @@
 
     <!-- Hero Section -->
     <section class="relative pt-32 pb-20 bg-cover bg-center bg-no-repeat min-h-[80vh] flex items-center text-white"
-        style="background-image: {{asset('images/clp.jpg')}}">
+        style="background-image: url('{{ asset('images/clp.jpg') }}')">
         <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40"></div>
         <div class="container mx-auto px-4 relative z-10">
             <div class="grid md:grid-cols-2 gap-12 items-center">
@@ -538,7 +535,7 @@
 
     <!-- Back to Top Button -->
     <button
-        class="fixed bottom-4 right-4 bg-primary-600 text-white p-3 rounded-full shadow-lg hover:bg-primary-700 transition-colors opacity-0 invisible"
+        class="fixed bottom-4 right-4 bg-primary-600 text-white p-3 px-4 rounded-full shadow-lg hover:bg-primary-700 transition-colors opacity-0 invisible"
         id="back-to-top">
         <i class='bx bx-up-arrow-alt text-xl'></i>
     </button>
@@ -677,5 +674,4 @@
         });
     </script>
 </body>
-
 </html>

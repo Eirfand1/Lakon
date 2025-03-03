@@ -74,7 +74,7 @@ class RealisasiTable extends DataTableComponent
                                 <td class='p-2 border-b dark:border-gray-700'>{$realisasi->bulan}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$realisasi->tahun}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$realisasi->target}</td>
-                                <td class='p-2 dark:border-gray-700'><img src='" . asset('storage/' .$realisasi->gambar) . "' class='w-16 h-16 object-cover'></td>
+                                <td class='p-2 dark:border-gray-700'><img src='" . asset('storage/' .$realisasi->gambar) . "' class='w-auto h-48 object-cover'></td>
                             </tr>
 
                         ";
