@@ -264,10 +264,20 @@
                 <div class="space-y-2">
                     <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">
                         Upload Berkas Penawaran <span class="text-red-500">(.pdf)</span>
+                        @if ($kontrak->berkas_penawaran)
+                            <i class="fa-regular fa-circle-check text-green-500"></i>
+                        @else
+                            <i class="fa-regular fa-circle-xmark text-red-500"></i>
+                        @endif
                     </label>
                     <input type="file" name="berkas_penawaran"
                         class="block w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-gray-700 dark:file:text-blue-300 dark:hover:file:bg-gray-600"
                         accept=".pdf">
+                        <label for="berkas_penawaran" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                            @if ($kontrak->berkas_penawaran)
+                                {{ basename($kontrak->berkas_penawaran) }}
+                            @endif
+                        </label>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
                         Pastikan maksimal ukuran berkas 5MB dan bertipe .pdf
                     </p>
@@ -376,4 +386,19 @@
             </form>
         </div>
     </div>
+
+{{-- tampilkan berkas penawaran --}}
+<input type="checkbox" id="berkas_penawaran" class="modal-toggle" />
+<div class="modal modal-middle px-3">
+    <div class="flex flex-col modal-box w-full h-full mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
+        <h3 class="font-bold text-lg">Berkas Penawaran</h3>
+        <div class="w-full h-full">
+            <iframe src="{{ asset('storage/'. $kontrak->berkas_penawaran) }}" type="application/pdf" class="w-full h-full"></iframe>
+        </div>
+        <div class="modal-action">
+            <label for="berkas_penawaran" class="btn">Tutup</label>
+        </div>
+    </div>
+</div>
+
 </x-app-layout>
