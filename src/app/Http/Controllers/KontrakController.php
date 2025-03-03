@@ -106,8 +106,16 @@ class KontrakController extends Controller
                 'tgl_dppl' => 'nullable|date',
                 'nomor_bahpl' => 'nullable|string|max:255',
                 'tgl_bahpl' => 'nullable|date',
+
+                'berkas_penawaran' => 'nullable|file|mimes:pdf|max:2048',
             ]);
 
+            // Upload berkas penawaran (pdf)
+            $pdf = $request->file('berkas_penawaran');
+            $FileName = time() . '_' . $pdf->getClientOriginalName();
+            $pdfFilePath = $pdf->storeAs('storage/uploads/berkasPenawaran', $FileName, 'public');
+
+            $validatedData['berkas_penawaran'] = $pdfFilePath;
             $validatedData['tgl_pembuatan'] = now()->toDateString();
 
             $kontrak->update($validatedData);
