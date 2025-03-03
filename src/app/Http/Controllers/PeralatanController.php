@@ -34,7 +34,7 @@ class PeralatanController extends Controller
                     'status_kepemilikan' => $validateData['status_kepemilikan'],
                     'keterangan' => $validateData['keterangan'],
                 ]);
-                return redirect()->back()->with('success', 'Data Peralatan berhasil diperbarui.');
+                return redirect()->back()->with('success', 'Data Peralatan berhasil diperbarui.')->withFragment('peralatan');
             }else {
                 Peralatan::create([
                     'kontrak_id' => $validateData['kontrak_id'],
@@ -47,19 +47,19 @@ class PeralatanController extends Controller
                     'status_kepemilikan' => $validateData['status_kepemilikan'],
                     'keterangan' => $validateData['keterangan'],
                 ]);
-                return redirect()->back()->with('success', 'Data Peralatan berhasil disimpan.');
+                return redirect()->back()->with('success', 'Data Peralatan berhasil disimpan.')->withFragment('peralatan');
             }
         }catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage())->withFragment('peralatan');
         }
     }
 
     public function destroy($peralatan){
         try{
             Peralatan::where('peralatan_id', $peralatan)->delete();
-            return redirect()->back()->with('success', 'Data Peralatan berhasil dihapus.');
+            return redirect()->back()->with('success', 'Data Peralatan berhasil dihapus.')->withFragment('peralatan');
         }catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage())->withFragment('peralatan');
         }
     }
 }
