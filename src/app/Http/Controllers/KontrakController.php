@@ -113,7 +113,8 @@ class KontrakController extends Controller
             // Upload berkas penawaran (pdf)
             $pdf = $request->file('berkas_penawaran');
             $FileName = time() . '_' . $pdf->getClientOriginalName();
-            $pdfFilePath = $pdf->storeAs('storage/uploads/berkasPenawaran', $FileName, 'public');
+            $pdfFilePath = $pdf->storeAs('uploads/berkasPenawaran', $FileName, 'public');
+            $pdfFilePath = 'storage/' . $pdfFilePath;
 
             $validatedData['berkas_penawaran'] = $pdfFilePath;
             $validatedData['tgl_pembuatan'] = now()->toDateString();

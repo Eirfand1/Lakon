@@ -40,7 +40,8 @@ class RealisasiController extends Controller
         $fileName = time() . '_' . $gambar->getClientOriginalName();
 
         // Store file in the storage/app/public/uploads/realisasi directory
-        $filePath = $gambar->storeAs('storage/uploads/realisasi', $fileName, 'public');
+        $filePath = $gambar->storeAs('uploads/realisasi', $fileName, 'public');
+        $filePath = 'storage/' . $filePath;
 
         Realisasi::create([
             'kontrak_id' => $kontrak_id,

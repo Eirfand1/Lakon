@@ -138,7 +138,7 @@
                                 {{ $item->target }}
                             </td>
                             <td class="p-3 bg-blue-50 dark:bg-gray-700/60 border-2 border-x-3 border-gray-400">
-                                <img src="{{ asset('storage/'.$item->gambar) }}" alt="gambar error" class="w-auto h-[200px] border-2 border-x-3 border-gray-400">
+                                <img src="{{ asset($item->gambar) }}" alt="gambar error" class="w-auto h-[200px] border-2 border-x-3 border-gray-400">
                             </td>
                         </tr>
                     @endforeach
