@@ -45,6 +45,7 @@ return new class extends Migration {
             $table->date('tgl_sppbj')->nullable();
             $table->string('nomor_penetapan_pemenang')->nullable();
             $table->date('tgl_penetapan_pemenang')->nullable();
+            $table->string('berkas_penawaran')->nullable();
             $table->foreignId('verifikator_id')->nullable()
                 ->constrained('verifikator', 'verifikator_id')
                 ->cascadeOnDelete();
