@@ -76,8 +76,8 @@ Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(functio
 
     Route::middleware('cekStatusPenyedia:konsultan')->group(function () {
         Route::get('/matrik', [PenyediaController::class, 'konsultanMatrikIndex'])->name('penyedia.konsultan.matrik.index');
-        Route::get('/realisasi/{kontrak_id}', [PenyediaController::class, 'realisasi'])->name('penyedia.konsultan.realisasi');
-        Route::post('/realisasi/{kontrak_id}', [PenyediaController::class, 'storeRealisasi'])->name('penyedia.konsultan.realisasi.update');
+        Route::get('/realisasi/{kontrak_id}', [RealisasiController::class, 'realisasi'])->name('penyedia.konsultan.realisasi');
+        Route::post('/realisasi/{kontrak_id}', [RealisasiController::class, 'storeRealisasi'])->name('penyedia.konsultan.realisasi.update');
     });
 });
 
