@@ -75,18 +75,19 @@
 
 @if (($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan') && $jenis == 'non_tender')
 
-<div class="mb-8">
-    @include('pages.lampiran.dokumen-penagihan')
-</div>
+<div id="spkLanjutan">
+    <div class="mb-8">
+        @include('pages.lampiran.dokumen-penagihan')
+    </div>
 
-<div class="mb-8">
-    @include('pages.lampiran.ruang-lingkup')
-</div>
+    <div class="mb-8">
+        @include('pages.lampiran.ruang-lingkup')
+    </div>
 
-<div class="mb-8">
-    @include('pages.lampiran.dokumen-tambahan')
+    <div class="mb-8">
+        @include('pages.lampiran.dokumen-tambahan')
+    </div>
 </div>
-
 @endif
 
 @if (($metode == 'Pengadaan Barang' && $jenis == 'tender'))

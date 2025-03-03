@@ -1,4 +1,4 @@
-<div class="overflow-x-auto pb-5">
+<div class="overflow-x-auto pb-5" id="ruangLingkup">
     <h1 class="text-lg dark:text-gray-300 flex gap-2 items-center font-semibold mb-4">
         <i class="fas fa-list-ul fa-lg"></i>
         <span>
@@ -21,7 +21,7 @@
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="ruang_lingkup_id" id="ruangLingkupId">
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" id="ruangLingkup" type="text" name="ruang_lingkup">
+                    <input class="w-full dark:bg-gray-800 rounded" id="ruangLingkupLampiran" type="text" name="ruang_lingkup">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
                     <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
@@ -53,7 +53,7 @@
 <script>
     function editRuangLingkup(row) {
         document.getElementById('ruangLingkupId').value = row.ruang_lingkup_id;
-        document.getElementById('ruangLingkup').value = row.ruang_lingkup;
+        document.getElementById('ruangLingkupLampiran').value = row.ruang_lingkup;
     }
 
     function deleteRuangLingkup(id) {

@@ -164,7 +164,7 @@ class VerifikatorController extends Controller
             'uang_muka' => $request->uang_muka,
             'spk_done' => true
         ]);
-        return redirect()->back()->with('success', 'SPK berhasil di simpan');
+        return redirect()->back()->with('success', 'SPK berhasil di simpan')->withFragment('spkLanjutan');
     }
 
     public function lampiran($kontrak_id, Kontrak $kontrak) {

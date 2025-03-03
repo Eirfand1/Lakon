@@ -112,7 +112,7 @@ class KontrakController extends Controller
 
             $kontrak->update($validatedData);
 
-            return redirect()->back()->with('success', 'Data dasar berhasil diupdate.');
+            return redirect()->back()->with('success', 'Data dasar berhasil diupdate.')->withFragment('lampiran');
 
         } catch (\Exception $e) {
             return redirect()->back()

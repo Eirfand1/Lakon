@@ -16,15 +16,25 @@
     x-data=
     "{
         tab: (function() {
-            // Check if we're coming back from another page
-            if (document.referrer !== '' && document.referrer !== window.location.href) {
-                // Coming from a different page - reset to tab1
+            // Get the URL parameter if it exists
+            const urlParams = new URLSearchParams(window.location.search);
+            const tabParam = urlParams.get('tab');
+
+            // If there's a tab parameter in the URL, use it
+            if (tabParam) {
+                sessionStorage.setItem('activeTab', tabParam);
+                return tabParam;
+            }
+
+            // If we're coming from another page (different URL)
+            if (document.referrer !== '' && new URL(document.referrer).pathname !== window.location.pathname) {
+                // Reset to tab1
                 sessionStorage.setItem('activeTab', 'tab1');
                 return 'tab1';
-            } else {
-                // Coming from refresh or first load - use stored value or default
-                return sessionStorage.getItem('activeTab') || 'tab1';
             }
+
+            // Otherwise use the stored value or default to tab1
+            return sessionStorage.getItem('activeTab') || 'tab1';
         })(),
         setTab(newTab) {
             this.tab = newTab;

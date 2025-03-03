@@ -29,7 +29,7 @@ class RincianBelanjaController extends Controller
                     'harga_satuan' => $validateData['harga_satuan'],
                     'keterangan' => $validateData['keterangan'],
                 ]);
-                return redirect()->back()->with('success', 'data berhasil diperbarui.');
+                return redirect()->back()->with('success', 'data berhasil diperbarui.')->withFragment('rincianBelanja');
             }else {
                 RincianBelanja::create([
                     'kontrak_id' => $validateData['kontrak_id'],
@@ -40,19 +40,19 @@ class RincianBelanjaController extends Controller
                     'harga_satuan' => $validateData['harga_satuan'],
                     'keterangan' => $validateData['keterangan'],
                 ]);
-                return redirect()->back()->with('success', 'Rincian Belanja berhasil disimpan.');
+                return redirect()->back()->with('success', 'Rincian Belanja berhasil disimpan.')->withFragment('rincianBelanja');
             }
         }catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage())->withFragment('rincianBelanja');
         }
     }
 
     public function destroy($rincian_belanja){
         try{
             RincianBelanja::where('rincian_belanja_id', $rincian_belanja)->delete();
-            return redirect()->back()->with('success', 'Rincian Belanja berhasil dihapus.');
+            return redirect()->back()->with('success', 'Rincian Belanja berhasil dihapus.')->withFragment('rincianBelanja');
         }catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage())->withFragment('rincianBelanja');
         }
     }
 }

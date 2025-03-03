@@ -62,7 +62,7 @@ class TimController extends Controller
                     'bulan_11' => $validateData['bulan_11'],
                     'bulan_12' => $validateData['bulan_12'],
                 ]);
-                return redirect()->back()->with('success', 'data berhasil diperbarui.');
+                return redirect()->back()->with('success', 'data berhasil diperbarui.')->withFragment('tim');
             }else {
                 Tim::create([
                     'kontrak_id' => $validateData['kontrak_id'],
@@ -83,19 +83,19 @@ class TimController extends Controller
                     'bulan_12' => $validateData['bulan_12'],
                 ]);
 
-                return redirect()->back()->with('success', 'Data Tim berhasil disimpan.');
+                return redirect()->back()->with('success', 'Data Tim berhasil disimpan.')->withFragment('tim');
             }
         }catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage())->withFragment('tim');
         }
     }
 
     public function destroy($tim_id){
         try{
             Tim::where('tim_id', $tim_id)->delete();
-            return redirect()->back()->with('success', 'Data Tim berhasil dihapus.');
+            return redirect()->back()->with('success', 'Data Tim berhasil dihapus.')->withFragment('tim');
         }catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage())->withFragment('tim');
         }
     }
 }
