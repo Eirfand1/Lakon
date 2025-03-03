@@ -162,9 +162,15 @@ class VerifikatorController extends Controller
             'waktu_penyelesaian' => $request->waktu_penyelesaian,
             'cara_pembayaran' => $request->cara_pembayaran,
             'uang_muka' => $request->uang_muka,
-            'spk_done' => true
         ]);
         return redirect()->back()->with('success', 'SPK berhasil di simpan')->withFragment('spkLanjutan');
+    }
+
+    public function spkDone ($kontrak_id, Kontrak $kontrak) {
+        $kontrak->where('kontrak_id', $kontrak_id)->update([
+            'spk_done' => true
+        ]);
+        return redirect()->back()->with('success', 'SPK berhasil di simpan');
     }
 
     public function lampiran($kontrak_id, Kontrak $kontrak) {
