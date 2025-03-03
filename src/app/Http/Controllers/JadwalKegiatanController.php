@@ -58,7 +58,7 @@ class JadwalKegiatanController extends Controller
                     'bulan_12' => $validateData['bulan_12'],
                     'keterangan' => $validateData['keterangan'],
                 ]);
-                return redirect()->back()->with('success', 'Jadwal Kegiatan berhasil diubah.');
+                return redirect()->back()->with('success', 'Jadwal Kegiatan berhasil diubah.')->withFragment('jadwalKegiatan');
             }else {
                 JadwalKegiatan::create([
                     'kontrak_id' => $validateData['kontrak_id'],
@@ -77,20 +77,20 @@ class JadwalKegiatanController extends Controller
                     'bulan_12' => $validateData['bulan_12'],
                     'keterangan' => $validateData['keterangan'],
                 ]);
-                return redirect()->back()->with('success', 'Jadwal Kegiatan berhasil disimpan.');
+                return redirect()->back()->with('success', 'Jadwal Kegiatan berhasil disimpan.')->withFragment('jadwalKegiatan');
             }
 
         }catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage())->withFragment('jadwalKegiatan');
         }
     }
 
     public function destroy($jadwal_kegiatan_id){
         try{
             JadwalKegiatan::where('jadwal_kegiatan_id', $jadwal_kegiatan_id)->delete();
-            return redirect()->back()->with('success', 'Jadwal Kegiatan berhasil dihapus.');
+            return redirect()->back()->with('success', 'Jadwal Kegiatan berhasil dihapus.')->withFragment('jadwalKegiatan');
         }catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', $e->getMessage())->withFragment('jadwalKegiatan');
         }
     }
 }

@@ -1,4 +1,4 @@
-<div class="overflow-x-auto pb-5">
+<div class="overflow-x-auto pb-5" id="peralatan">
     <h1 class="text-lg dark:text-gray-300 flex gap-2 items-center font-semibold mb-4">
         <i class="fa fa-wrench"></i>
         <span>
