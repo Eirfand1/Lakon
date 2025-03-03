@@ -250,7 +250,7 @@
     <div class="flex flex-col modal-box w-full h-full mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
         <h3 class="font-bold text-lg">Berkas Penawaran</h3>
         <div class="w-full h-full">
-            <iframe src="{{ asset('storage/'. $kontrak->berkas_penawaran) }}" type="application/pdf" class="w-full h-full"></iframe>
+            <iframe src="{{ asset($kontrak->berkas_penawaran) }}" type="application/pdf" class="w-full h-full"></iframe>
         </div>
         <div class="modal-action">
             <label for="berkas_penawaran" class="btn">Tutup</label>
