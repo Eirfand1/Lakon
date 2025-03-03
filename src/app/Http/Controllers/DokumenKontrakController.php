@@ -20,19 +20,20 @@ class DokumenKontrakController extends Controller
                 'keterangan' => $validateData['keterangan'],
                 'jenis' => $validateData['jenis'],
             ]);
-            return redirect()->back()->with('success', 'data berhasil diperbarui.');
+            return redirect()->back()->with('success', 'data berhasil diperbarui.')->withFragment($request->jenis);
         }else{
             DokumenKontrak::create([
                 'kontrak_id' => $validateData['kontrak_id'],
                 'keterangan' => $validateData['keterangan'],
                 'jenis' => $validateData['jenis'],
             ]);
-            return redirect()->back()->with('success', 'Dokumen Kontrak berhasil disimpan.');
+            return redirect()->back()->with('success', 'Dokumen Kontrak berhasil disimpan.')->withFragment($request->jenis);
         }
     }
 
     public function destroy($dokumen_id){
+        $jenis = DokumenKontrak::where('dokumen_id', $dokumen_id)->select('jenis')->first();
         DokumenKontrak::where('dokumen_id', $dokumen_id)->delete();
-        return redirect()->back()->with('success', 'Dokumen Kontrak berhasil dihapus.');
+        return redirect()->back()->with('success', 'Dokumen Kontrak berhasil dihapus.')->withFragment($jenis->jenis);
     }
 }

@@ -21,20 +21,24 @@ class KeteranganKontrakController extends Controller
                 'keterangan' => $validateData['keterangan'],
                 'jenis' => $validateData['jenis'],
             ]);
-            return redirect()->back()->with('success', 'data berhasil diperbarui.');
+            $request->jenis = ($request->jenis == 'hak dan kewajiban') ? 'hakDanKewajiban' : $request->jenis;
+            return redirect()->back()->with('success', 'data berhasil diperbarui.')->withFragment($request->jenis);
         } else {
             KeteranganKontrak::create([
                 'kontrak_id' => $validateData['kontrak_id'],
                 'keterangan' => $validateData['keterangan'],
                 'jenis' => $validateData['jenis'],
             ]);
-            return redirect()->back()->with('success', 'Keterangan Kontrak berhasil disimpan.');
+            $request->jenis = ($request->jenis == 'hak dan kewajiban') ? 'hakDanKewajiban' : $request->jenis;
+            return redirect()->back()->with('success', 'Keterangan Kontrak berhasil disimpan.')->withFragment($request->jenis);
         }
     }
 
     public function destroy($keterangan_id)
     {
+        $jenis = KeteranganKontrak::where('keterangan_id', $keterangan_id)->select('jenis')->first();
         KeteranganKontrak::where('keterangan_id', $keterangan_id)->delete();
-        return redirect()->back()->with('success', 'Keterangan Kontrak berhasil dihapus.');
+        $jenis->jenis = ($jenis->jenis == 'hak dan kewajiban') ? 'hakDanKewajiban' : $jenis->jenis;
+        return redirect()->back()->with('success', 'Keterangan Kontrak berhasil dihapus.')->withFragment($jenis->jenis);
     }
 }
