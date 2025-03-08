@@ -9,6 +9,7 @@ use App\Models\Ppkom;
 use App\Models\SatuanKerja;
 use App\Models\Sekolah;
 use App\Models\SubKegiatan;
+use App\Models\Kontrak;
 use Dotenv\Exception\ValidationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
@@ -145,10 +146,16 @@ class PaketPekerjaanController extends Controller
 
     public function getPaketByKode($kode)
     {
-        $paket = PaketPekerjaan::where('kode_paket', $kode)->first();
+        $paket = PaketPekerjaan::where('kode_sirup', $kode)->first();
 
         if (!$paket) {
             return response()->json(['error' => 'Paket tidak ditemukan'], 404);
+        }
+
+        $kontrak = Kontrak::where('paket_id', $paket->paket_id)->first();
+
+        if ($kontrak) {
+            return response()->json(['error' => 'Paket sudah memiliki kontrak'], 400);
         }
 
         return response()->json([
