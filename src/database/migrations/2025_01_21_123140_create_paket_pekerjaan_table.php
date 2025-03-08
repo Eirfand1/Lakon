@@ -13,7 +13,7 @@ return new class extends Migration {
         Schema::create('paket_pekerjaan', function (Blueprint $table) {
             $table->id('paket_id');
             $table->integer('kode_sirup');
-            $table->enum('sumber_dana', ['APBN', 'DAK', 'BANKEU', 'APBD Perubahan', 'APBD Perubahan Biasa', 'BANKEU Perubahan', 'SG', 'Bantuan Pemerintah']);
+            $table->enum('sumber_dana', ['APBD', 'DAK', 'BANKEU', 'APBD Perubahan', 'APBD Perubahan Biasa', 'BANKEU Perubahan', 'SG', 'Bantuan Pemerintah']);
             $table->smallInteger('tahun_anggaran');
             $table->foreignId('satker_id')
                 ->constrained('satuan_kerja', 'satker_id')

@@ -62,7 +62,11 @@ class PaketPekerjaanTable extends DataTableComponent
             Column::make('Sekolah', 'sekolah.sekolah_id')
                 ->hideIf(true),
 
-            Column::make('Kode Paket', 'kode_paket')
+            Column::make('RUP', 'rup')
+                ->sortable()
+                ->searchable(),
+
+            Column::make('Kode SIRUP', 'kode_sirup')
                 ->sortable()
                 ->searchable(),
 
@@ -160,7 +164,7 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->sortable()
                 ->searchable()
                 ->format(fn($value, $row) => 'Rp ' . number_format($row->nilai_hps, 2)),
-            
+
         ];
     }
 

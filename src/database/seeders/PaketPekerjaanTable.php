@@ -16,7 +16,7 @@ class PaketPekerjaanTable extends Seeder
     {
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 11,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "TENDER, JASA KONSULTASI PENGAWASAN",
@@ -33,7 +33,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 12,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "TENDER, JASA KONSULTASI PERENCANAAN",
@@ -50,7 +50,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 13,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "TENDER, PEKERJAAN KONSTRUKSI",
@@ -67,7 +67,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 14,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "TENDER, PENGADAAN BARANG",
@@ -84,7 +84,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 21,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "NON TENDER, JASA KONSULTASI PENGAWASAN",
@@ -101,7 +101,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 22,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "NON TENDER, JASA KONSULTASI PERENCANAAN",
@@ -118,7 +118,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 23,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "NON TENDER, PENKERJAAN KONSTRUKSI",
@@ -135,7 +135,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 24,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "NON TENDER, PENGADAAN BARANG",
@@ -152,7 +152,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 31,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "E-CATALOG, JASA KONSULTASI PENGAWASAN",
@@ -169,7 +169,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 32,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "E-CATALOG, JASA KONSULTASI PERENCANAAN",
@@ -186,7 +186,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 33,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "E-CATALOG, PEKERJAAN KONSTRUKSI",
@@ -203,7 +203,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 34,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "E-CATALOG, PENGADAAN BARANG",
@@ -220,7 +220,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 41,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "Swakelola, JASA KONSULTASI PENGAWASAN",
@@ -237,7 +237,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 42,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "Swakelola, JASA KONSULTASI PERENCANAAN",
@@ -254,7 +254,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 43,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "Swakelola, Pekerjaan Konstruksi",
@@ -271,7 +271,7 @@ class PaketPekerjaanTable extends Seeder
         ]);
         DB::table('paket_pekerjaan')->insert([
             'kode_sirup' => 44,
-            'sumber_dana' => 'APBN',
+            'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
             'satker_id' => 1,
             'nama_pekerjaan' => "Swakelola, PENGADAAN BARANG",

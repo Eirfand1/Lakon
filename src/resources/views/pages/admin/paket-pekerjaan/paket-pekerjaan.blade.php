@@ -79,9 +79,14 @@
                             class="w-3/4 rounded-lg text-sm bg-white dark:bg-gray-900/20 dark:border-gray-700 h-10 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 @error('sumber_dana') border-red-500 @enderror"
                             required>
                             <option value="">Pilih Sumber Dana</option>
-                            <option value="APBN" {{ old('sumber_dana') == 'APBN' ? 'selected' : '' }}>APBN</option>
                             <option value="APBD" {{ old('sumber_dana') == 'APBD' ? 'selected' : '' }}>APBD</option>
-                            <option value="Swasta" {{ old('sumber_dana') == 'Swasta' ? 'selected' : '' }}>Swasta</option>
+                            <option value="DAK" {{ old('sumber_dana') == 'DAK' ? 'selected' : '' }}>DAK</option>
+                            <option value="BANKEU" {{ old('sumber_dana') == 'BANKEU' ? 'selected' : '' }}>BANKEU</option>
+                            <option value="APBD Perubahan" {{ old('sumber_dana') == 'APBD Perubahan' ? 'selected' : '' }}>APBD Perubahan</option>
+                            <option value="APBD Perubahan Biasa" {{ old('sumber_dana') == 'APBD Perubahan Biasa' ? 'selected' : '' }}>APBD Perubahan Biasa</option>
+                            <option value="BANKEU Perubahan" {{ old('sumber_dana') == 'BANKEU Perubahan' ? 'selected' : '' }}>BANKEU Perubahan</option>
+                            <option value="SG" {{ old('sumber_dana') == 'SG' ? 'selected' : '' }}>SG</option>
+                            <option value="Bantuan Pemerintah" {{ old('sumber_dana') == 'Bantuan Pemerintah' ? 'selected' : '' }}>Bantuan Pemerintah</option>
                         </select>
                         @error('sumber_dana')
                             <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
@@ -96,14 +101,25 @@
                         <x-label for="paket">Paket</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
                             <div class="sm:w-1/4 w-full">
-                                <x-input type="text" name="kode_paket" id="" placeholder="Kode Paket"
-                                    value="{{old('kode_paket')}}"
-                                    class="{{ $errors->has('kode_paket') ? 'border-red-500' : 'border-gray-200' }}"
+                                <x-input type="text" name="rup" id="" placeholder="RUP"
+                                    value="{{old('rup')}}"
+                                    class="{{ $errors->has('rup') ? 'border-red-500' : 'border-gray-200' }}"
                                  />
-                                @error('kode_paket')
+                                @error('rup')
                                     <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
                                 @enderror
                             </div>
+
+                            <div class="sm:w-1/4 w-full">
+                                <x-input type="text" name="kode_sirup" id="" placeholder="Kode Sirup"
+                                    value="{{old('kode_sirup')}}"
+                                    class="{{ $errors->has('kode_sirup') ? 'border-red-500' : 'border-gray-200' }}"
+                                 />
+                                @error('kode_sirup')
+                                    <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+
 
                             <div class="sm:w-3/4 w-full">
                                 <x-input type="text" name="nama_pekerjaan" id="" placeholder="Nama Paket"
@@ -151,12 +167,10 @@
                             <select name="jenis_pengadaan" id=""
                                 class="sm:w-1/4 w-3/4 text-sm  rounded-lg bg-white h-10 dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                                 required>
-                                <option value="tender" {{ old('jenis_pengadaan') == 'tender' ? 'selected' : '' }}>Tender
-                                </option>
-                                <option value="non_tender" {{ old('jenis_pengadaan') == 'non_tender' ? 'selected' : '' }}>
-                                    Non-Tender</option>
-                                <option value="e_catalog" {{ old('jenis_pengadaan') == 'e_catalog' ? 'selected' : '' }}>
-                                    E-Catalog</option>
+                                <option value="Tender" {{ old('jenis_pengadaan') == 'Tender' ? 'selected' : '' }}>Tender</option>
+                                <option value="Non Tender" {{ old('jenis_pengadaan') == 'Non Tender' ? 'selected' : '' }}>Non Tender</option>
+                                <option value="E-Katalog" {{ old('jenis_pengadaan') == 'E-Katalog' ? 'selected' : '' }}>E-Katalog</option>
+                                <option value="Swakelola" {{ old('jenis_pengadaan') == 'Swakelola' ? 'selected' : '' }}>Swakelola</option></option>
                             </select>
 
                             <select name="metode_pemilihan" id=""
@@ -166,7 +180,7 @@
                                     Pengadaan</option>
                                 <option value="Jasa Konsultasi Pengawasan" {{ old('metode_pemilihan') == 'Jasa Konsultasi Pengawasan' ? 'selected' : '' }}>Jasa Konsultasi Pengawasan</option>
                                 <option value="Jasa Konsultasi Perencanaan" {{ old('metode_pemilihan') == 'Jasa Konsultasi Perencanaan' ? 'selected' : '' }}>Jasa Konsultasi Perencanaan</option>
-                                <option value="Jasa Konstruksi" {{ old('metode_pemilihan') == 'Jasa Konstruksi' ? 'selected' : '' }}>Jasa Konstruksi</option>
+                                <option value="Pekerjaan Konstruksi" {{ old('metode_pemilihan') == 'Pekerjaan Konstruksi' ? 'selected' : '' }}>Pekerjaan Konstruksi</option>
                                 <option value="Pengadaan Barang" {{ old('metode_pemilihan') == 'Pengadaan Barang' ? 'selected' : '' }}>Pengadaan Barang</option>
                             </select>
                         </div>
@@ -393,9 +407,14 @@
                         <select name="sumber_dana" id="sumber_dana"
                             class="w-3/4 rounded-lg text-sm bg-white dark:bg-gray-900/20 dark:border-gray-700 h-10 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             required>
-                            <option value="APBN" {{old('sumber_dana') == 'APBN' ? 'selected' : ""}}>APBN</option>
-                            <option value="APBD" {{old('sumber_dana') == 'APBD' ? 'selected' : ""}}>APBD</option>
-                            <option value="Swasta" {{old('sumber_dana') == 'Swasta' ? 'selected' : ""}}>Swasta</option>
+                            <option value="APBD" {{ old('sumber_dana') == 'APBD' ? 'selected' : '' }}>APBD</option>
+                            <option value="DAK" {{ old('sumber_dana') == 'DAK' ? 'selected' : '' }}>DAK</option>
+                            <option value="BANKEU" {{ old('sumber_dana') == 'BANKEU' ? 'selected' : '' }}>BANKEU</option>
+                            <option value="APBD Perubahan" {{ old('sumber_dana') == 'APBD Perubahan' ? 'selected' : '' }}>APBD Perubahan</option>
+                            <option value="APBD Perubahan Biasa" {{ old('sumber_dana') == 'APBD Perubahan Biasa' ? 'selected' : '' }}>APBD Perubahan Biasa</option>
+                            <option value="BANKEU Perubahan" {{ old('sumber_dana') == 'BANKEU Perubahan' ? 'selected' : '' }}>BANKEU Perubahan</option>
+                            <option value="SG" {{ old('sumber_dana') == 'SG' ? 'selected' : '' }}>SG</option>
+                            <option value="Bantuan Pemerintah" {{ old('sumber_dana') == 'Bantuan Pemerintah' ? 'selected' : '' }}>Bantuan Pemerintah</option>
                         </select>
                     </div>
 
@@ -407,13 +426,23 @@
                         <x-label for="paket">Paket</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
                             <div class="sm:w-1/4 w-full">
-                            <x-input type="text" name="kode_paket" id="kode_paket" placeholder="Kode Paket"
-                                class="{{ $errors->has('kode_paket') ? 'border-red-500' : 'border-gray-200' }}"
+                            <x-input type="text" name="rup" id="rup" placeholder="RUP"
+                                class="{{ $errors->has('rup') ? 'border-red-500' : 'border-gray-200' }}"
                                 required />
-                                @error('kode_paket')
+                                @error('rup')
                                     <span class="text-red-500 text-sm mt-1">{{$message}}</span>
                                 @enderror
                             </div>
+
+                            <div class="sm:w-1/4 w-full">
+                            <x-input type="text" name="kode_sirup" id="kode_sirup" placeholder="Kode Sirup"
+                                class="{{ $errors->has('kode_sirup') ? 'border-red-500' : 'border-gray-200' }}"
+                                required />
+                                @error('kode_sirup')
+                                    <span class="text-red-500 text-sm mt-1">{{$message}}</span>
+                                @enderror
+                            </div>
+
                             <div class="sm:w-3/4 w-full">
                             <x-input type="text" name="nama_pekerjaan" id="nama_pekerjaan" placeholder="Nama Paket"
                                 required />
@@ -463,9 +492,10 @@
                             <select name="jenis_pengadaan" id="jenis_pengadaan"
                                 class="sm:w-1/4 w-3/4 text-sm h-10 rounded-lg bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                                 required>
-                                <option value="tender">Tender</option>
-                                <option value="non_tender">Non-Tender</option>
-                                <option value="e_catalog">E-Catalog</option>
+                                <option value="Tender">Tender</option>
+                                <option value="Non Tender">Non Tender</option>
+                                <option value="E-Katalog">E-Katalog</option>
+                                <option value="Swakelola">Swakelola</option>
                             </select>
 
                             <select name="metode_pemilihan" id="metode_pemilihan"
@@ -474,7 +504,7 @@
                                 <option value="" disabled selected>Pilih Jenis Pengadaan</option>
                                 <option value="Jasa Konsultasi Pengawasan">Jasa Konsultasi Pengawasan</option>
                                 <option value="Jasa Konsultasi Perencanaan">Jasa Konsultasi Perencanaan</option>
-                                <option value="Jasa Konstruksi">Jasa Konstruksi</option>
+                                <option value="Pekerjaan Konstruksi">Pekerjaan Konstruksi</option>
                                 <option value="Pengadaan Barang">Pengadaan Barang</option>
                             </select>
                         </div>
@@ -658,11 +688,10 @@
             form.action = `/admin/paket-pekerjaan/${paket.paket_id}`
 
             // document.getElementById('edit-modal').action = `/admin/paket-pekerjaan/${paket.paket_id}`
-            console.log('Form action:', document.getElementById('edit-form').action);
-            console.log('Paket ID:', paket.paket_id);
 
             // INPUT BIASA
-            document.getElementById('kode_paket').value = paket.kode_paket
+            document.getElementById('rup').value = paket.rup
+            document.getElementById('kode_sirup').value = paket.kode_sirup
             document.getElementById('nama_pekerjaan').value = paket.nama_pekerjaan
             document.getElementById('waktu_paket').value = paket.waktu_paket
             document.getElementById('nilai_pagu_paket').value = paket.nilai_pagu_paket

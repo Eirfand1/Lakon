@@ -22,7 +22,7 @@ class PaketPekerjaanFactory extends Factory
     {
         return [
             'kode_sirup' => $this->faker->numberBetween(1000,5000),
-            'sumber_dana' => $this->faker->randomElement(['APBN', 'DAK', 'BANKEU', 'APBD Perubahan', 'APBD Perubahan Biasa', 'BANKEU Perubahan', 'SG', 'Bantuan Pemerintah']),
+            'sumber_dana' => $this->faker->randomElement(['APBD', 'DAK', 'BANKEU', 'APBD Perubahan', 'APBD Perubahan Biasa', 'BANKEU Perubahan', 'SG', 'Bantuan Pemerintah']),
             'tahun_anggaran' => $this->faker->year(),
             'satker_id' => SatuanKerja::factory(),
             'nama_pekerjaan' => $this->faker->sentence(),
