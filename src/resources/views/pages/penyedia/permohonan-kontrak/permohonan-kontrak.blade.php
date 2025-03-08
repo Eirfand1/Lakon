@@ -127,7 +127,7 @@
 
                     <!-- Right Column -->
                     <div class="space-y-4" x-data="{
-                        kodePaket: '',
+                        kodeSirup: '',
                         errorMessage: '',
                         successMessage: '',
                         isLoading: false,
@@ -138,17 +138,18 @@
                             this.successMessage = '';
                             this.paketData = null;
 
-                            if (!this.kodePaket) {
-                                this.errorMessage = 'Harap masukkan kode paket';
+                            if (!this.kodeSirup) {
+                                this.errorMessage = 'Harap masukkan kode sirup terlebih dahulu';
                                 return;
                             }
 
                             try {
                                 this.isLoading = true;
-                                const response = await fetch(`/api/paket-pekerjaan/${this.kodePaket}`);
+                                const response = await fetch(`/api/paket-pekerjaan/${this.kodeSirup}`);
 
                                 if (!response.ok) {
-                                    throw new Error('Paket tidak ditemukan');
+                                    const errorData = await response.json();
+                                    throw new Error(errorData.error || 'Terjadi kesalahan saat memproses permintaan');
                                 }
 
                                 const data = await response.json();
@@ -183,11 +184,11 @@
 
                             <!-- Kode Paket -->
                             <div class="space-y-1">
-                                <label class="text-gray-700 dark:text-gray-300 block">Kode Paket <span
+                                <label class="text-gray-700 dark:text-gray-300 block">Kode Sirup <span
                                         class="text-red-500">*</span></label>
                                 <div class="flex gap-2">
-                                    <input type="text" x-model="kodePaket" @input.debounce.500ms="cariPaket"
-                                        placeholder="Kode paket LPSE"
+                                    <input type="text" x-model="kodeSirup" @input.debounce.500ms="cariPaket"
+                                        placeholder="Kode Sirup"
                                         class="flex-1 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-300 p-2">
                                     <button type="button"
                                         class="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2"
