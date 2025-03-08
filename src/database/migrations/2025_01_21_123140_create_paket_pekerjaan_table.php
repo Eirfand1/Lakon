@@ -12,15 +12,16 @@ return new class extends Migration {
     {
         Schema::create('paket_pekerjaan', function (Blueprint $table) {
             $table->id('paket_id');
-            $table->string('sumber_dana');
+            $table->integer('kode_sirup');
+            $table->enum('sumber_dana', ['APBN', 'DAK', 'BANKEU', 'APBD Perubahan', 'APBD Perubahan Biasa', 'BANKEU Perubahan', 'SG', 'Bantuan Pemerintah']);
             $table->smallInteger('tahun_anggaran');
             $table->foreignId('satker_id')
                 ->constrained('satuan_kerja', 'satker_id')
                 ->cascadeOnDelete();
             $table->string('nama_pekerjaan');
             $table->date('waktu_paket');
-            $table->string('metode_pemilihan');
-            $table->enum('jenis_pengadaan', ['tender', 'non_tender', 'e_catalog']);
+            $table->enum('metode_pemilihan', ['Jasa Konsultasi Pengawasan', 'Jasa Konsultasi Perencanaan', 'Pekerjaan Konstruksi', 'Pengadaan Barang']);
+            $table->enum('jenis_pengadaan', ['Tender', 'Non Tender', 'E-Katalog', 'Swakelola']);
             $table->integer('nilai_pagu_paket');
             $table->integer('nilai_pagu_anggaran');
             $table->integer('nilai_hps');
@@ -32,7 +33,7 @@ return new class extends Migration {
                 ->references('daskum_id')
                 ->on('dasar_hukum')
                 ->onDelete('cascade');
-            $table->integer('kode_paket');
+            $table->integer('rup');
             $table->foreignId('sekolah_id')
                 ->references('sekolah_id')
                 ->on('sekolah')

@@ -21,19 +21,20 @@ class PaketPekerjaanFactory extends Factory
     public function definition(): array
     {
         return [
-            'sumber_dana' => $this->faker->word(),
+            'kode_sirup' => $this->faker->numberBetween(1000,5000),
+            'sumber_dana' => $this->faker->randomElement(['APBN', 'DAK', 'BANKEU', 'APBD Perubahan', 'APBD Perubahan Biasa', 'BANKEU Perubahan', 'SG', 'Bantuan Pemerintah']),
             'tahun_anggaran' => $this->faker->year(),
             'satker_id' => SatuanKerja::factory(),
             'nama_pekerjaan' => $this->faker->sentence(),
             'waktu_paket' => $this->faker->date(),
-            'metode_pemilihan' => $this->faker->word(),
-            'jenis_pengadaan' => $this->faker->randomElement(['tender', 'non_tender', 'e_catalog']),
+            'metode_pemilihan' => $this->faker->randomElement(['Jasa Konsultasi Pengawasan', 'Jasa Konsultasi Perencanaan', 'Pekerjaan Konstruksi', 'Pengadaan Barang']),
+            'jenis_pengadaan' => $this->faker->randomElement(['Tender', 'Non Tender', 'E-Katalog', 'Swakelola']),
             'nilai_pagu_paket' => $this->faker->randomFloat(2, 100000, 1000000),
             'nilai_pagu_anggaran' => $this->faker->randomFloat(2, 100000, 1000000),
             'nilai_hps' => $this->faker->randomFloat(2, 90000, 950000),
             'ppkom_id' => Ppkom::factory(),
             'daskum_id' => DasarHukum::factory(),
-            'kode_paket' => $this->faker->numberBetween(1000,5000),
+            'rup' => $this->faker->numberBetween(1000,5000),
             'sekolah_id' => Sekolah::factory()
         ];
     }
