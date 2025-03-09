@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id('sekolah_id');
             $table->char('npsn', 8)->unique();
             $table->string('nama_sekolah', 150);
-            $table->enum('jenjang', ['SD', 'SMP', 'SMA', 'SMK'])->nullable(); 
+            $table->enum('jenjang', ['SD', 'SMP', 'PAUD'])->nullable(); 
             $table->string('status'); 
+            $table->string('kepala_sekolah');
+            $table->integer('nip_kepala_sekolah');
             $table->string('alamat', 255); 
             $table->string('desa', 100); 
             $table->string('kecamatan', 100); 

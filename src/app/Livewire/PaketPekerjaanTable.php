@@ -43,6 +43,10 @@ class PaketPekerjaanTable extends DataTableComponent
     public function columns(): array
     {
         return [
+            Column::make('Nomor Matrik', 'paket_id')
+                ->searchable()
+                ->sortable(),
+
             Column::make("Aksi", "paket_id")
                 ->format(fn($value, $row) => view('pages.admin.paket-pekerjaan.actions', ['paket' => $row])),
 

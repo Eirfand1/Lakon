@@ -163,7 +163,7 @@
                         </div>
                         <div>
                             <x-label>
-                                Nama Rekening <span class="text-red-500">*</span>
+                                Nama Pemilik Rekening <span class="text-red-500">*</span>
                             </x-label>
                             <x-input type="text" name="rekening_nama" id="edit_rekening_nama"
                                 placeholder="Nama Pemilik Rekening" required/>

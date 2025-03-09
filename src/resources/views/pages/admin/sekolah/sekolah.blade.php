@@ -23,8 +23,8 @@
 
         <!-- Tambah Sekolah -->
         <input type="checkbox" id="add-sekolah" class="modal-toggle" />
-        <div id="modal_matriks" class="modal modal-top px-3">
-            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
+        <div id="modal_matriks" class="modal modal-top">
+            <div class="modal-box max-w-[55rem]  mx-auto my-4 rounded-lg  h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <h3 class="font-bold text-lg dark:text-gray-200">TAMBAH SEKOLAH</h3>
@@ -66,23 +66,40 @@
                                 <x-label>Jenjang</x-label>
                                 <select name="jenjang" id="jenjang" class="w-full h-10 px-3 py-2 rounded-md border border-gray-200 dark:border-gray-700
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-900/20 dark:text-gray-200">
+                            dark:bg-gray-800 dark:text-gray-200">
                                     <option value="" {{ old('jenjang') ? '' : 'selected' }} disabled >Pilih Jenjang</option>
                                     <option value="SD" {{ old('jenjang') == 'SD' ? 'selected' : '' }}>SD</option>
                                     <option value="SMP" {{ old('jenjang') == 'SMP' ? 'selected' : '' }}>SMP</option>
-                                    <option value="SMA" {{old('jenjang') == 'SMA' ? 'selected' : '' }}  >SMA</option>
-                                    <option value="SMK" {{ old('jenjang') == 'SMK' ? 'selected' : '' }}>SMK</option>
+                                    <option value="PAUD" {{old('jenjang') == 'PAUD' ? 'selected' : '' }}  >PAUD</option>
                                 </select>
                             </div>
                             <div>
                                 <x-label >Status</x-label>
                                 <select name="status" id="status" class="w-full px-3 py-2 h-10 rounded-md border border-gray-200 dark:border-gray-700
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
-                            dark:bg-gray-900/20 dark:text-gray-200" >
+                            dark:bg-gray-800 dark:text-gray-200" >
                                     <option value="" {{ old('status') ? '' : 'selected' }} disabled>Pilih Status</option>
                                     <option value="NEGERI" {{old('status') == 'NEGERI' ? 'selected' : '' }} >Negeri</option>
                                     <option value="SWASTA" {{old('status') == 'SWASTA' ? 'selected' : '' }} >Swasta</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <!-- Kepala sekolah -->
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <x-label >Nama Kepala Sekolah</x-label>
+                                <x-input type="text" name="kepala_sekolah" id="kepala_sekolah"  placeholder="Nama Kepala Sekolah"
+                                    class="{{ $errors->has('kepala_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <x-label>Status</x-label>
+                                <x-input type="text" name="nip_kepala_sekolah" id="kepala_sekolah" placeholder="NIP Kepala Sekolah"
+                                    class="{{ $errors->has('nip_kepala_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
+                                    required
+                                />
                             </div>
                         </div>
 
@@ -100,7 +117,7 @@
                                 @enderror
                         </div>
 
-                        <!-- Desa & Kecamatan -->
+                        {{-- <!-- Desa & Kecamatan -->
                         <div class="grid grid-cols-2 gap-6">
                             <div>
                                 <x-label>Desa</x-label>
@@ -124,7 +141,59 @@
                                     <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
+
+                        {{-- <!-- Desa & Kecamatan -->
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <x-label>Desa</x-label>
+                                <x-input type="text" id="desa" name="desa"
+                                    placeholder="Desa"
+                                    class="{{ $errors->has('desa') ? 'border-red-500' : 'border-gray-200' }}"
+                                    value="{{ old('desa') }}"
+                                    required />
+                                @error('desa')
+                                    <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div>
+                                <x-label>Kecamatan</x-label>
+                                <select id="kecamatan" name="kecamatan"
+                                    class="select2 {{ $errors->has('kecamatan') ? 'border-red-500' : 'border-gray-200' }}" required>
+                                    <option value="">Pilih Kecamatan</option>
+                                </select>
+                                @error('kecamatan')
+                                    <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div> --}}
+
+                       <!-- Desa & Kecamatan -->
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <x-label>Kecamatan</x-label>
+                                <select id="kecamatan_dropdown" name="kecamatan_dropdown"
+                                     required>
+                                    <option value="">Pilih Kecamatan</option>
+                                </select>
+                                <input type="hidden" id="kecamatan" name="kecamatan">
+                                @error('kecamatan')
+                                    <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div>
+                                <x-label>Desa</x-label>
+                                <select id="desa_dropdown" name="desa_dropdown"
+                                     required>
+                                    <option value="">Pilih Desa</option>
+                                </select>
+                                <input type="hidden" id="desa" name="desa">
+                                @error('desa')
+                                    <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        </div> 
+
 
                         <!-- Koordinat -->
                         <div>
@@ -219,6 +288,24 @@
                                     <option value="NEGERI">Negeri</option>
                                     <option value="SWASTA">Swasta</option>
                                 </select>
+                            </div>
+                        </div>
+
+                        <!-- Kepala sekolah -->
+                        <div class="grid grid-cols-2 gap-6">
+                            <div>
+                                <x-label >Nama Kepala Sekolah</x-label>
+                                <x-input type="text" name="kepala_sekolah" id="edit_kepala_sekolah" placeholder="Nama Kepala Sekolah"
+                                    class="{{ $errors->has('kepala_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
+                                    required
+                                />
+                            </div>
+                            <div>
+                                <x-label>Status</x-label>
+                                <x-input type="text" name="nip_kepala_sekolah" id="edit_kepala_sekolah" placeholder="NIP Kepala Sekolah"
+                                    class="{{ $errors->has('nip_kepala_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
+                                    required
+                                />
                             </div>
                         </div>
 
@@ -441,5 +528,62 @@
         // Inisialisasi peta
         inisialisasiMap('map', 'koordinat');
         inisialisasiMap('edit_map', 'edit_koordinat');
+
+        
+       $(document).ready(function() {
+    $('#kecamatan_dropdown, #desa_dropdown').select2({
+        placeholder: "Pilih",
+        allowClear: true,
+        width: '100%',
+        containerCssClass: 'select2-tailwind-container',
+        dropdownCssClass: 'select2-tailwind-dropdown',
+        selectionCssClass: 'select2-tailwind-selection'
+    });
+
+    fetch('https://www.emsifa.com/api-wilayah-indonesia/api/districts/3301.json')
+        .then(response => response.json())
+        .then(data => {
+            let kecamatanSelect = $('#kecamatan_dropdown');
+            data.forEach(kecamatan => {
+                // Store the name as data attribute on the option
+                let option = new Option(kecamatan.name, kecamatan.id);
+                $(option).data('name', kecamatan.name);
+                kecamatanSelect.append(option);
+            });
+        })
+        .catch(error => console.error('Error fetching kecamatan:', error));
+
+    $('#kecamatan_dropdown').on('change', function() {
+        let kecamatanID = $(this).val();
+        let desaSelect = $('#desa_dropdown');
+        
+        // Get the text of the selected option for kecamatan
+        let kecamatanName = $("#kecamatan_dropdown option:selected").text();
+        $('#kecamatan').val(kecamatanName);
+
+        desaSelect.empty().append(new Option("Pilih Desa", "")); // Reset desa
+
+        if (kecamatanID) {
+            // Ambil daftar desa dari API
+            fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${kecamatanID}.json`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(desa => {
+                        // Store the name as data attribute on the option
+                        let option = new Option(desa.name, desa.id);
+                        $(option).data('name', desa.name);
+                        desaSelect.append(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching desa:', error));
+        }
+    });
+
+    $('#desa_dropdown').on('change', function() {
+        // Get the text of the selected option for desa
+        let desaName = $("#desa_dropdown option:selected").text();
+        $('#desa').val(desaName);
+    });
+}); 
     </script>
 </x-app-layout>
