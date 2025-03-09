@@ -12,9 +12,9 @@
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Kode
-                                Paket</label>
+                                Sirup</label>
                             <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                                {{ $kontrak->paketPekerjaan->kode_paket }}
+                                {{ $kontrak->paketPekerjaan->kode_sirup }}
                             </p>
                         </div>
 
@@ -80,14 +80,21 @@
                     </div>
 
                     <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                        <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Target</label>
-                        <input type="text" name="target" id="target" placeholder="target" required class="w-full dark:bg-gray-800 rounded mt-2">
+                        <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Target (%)</label>
+                        <input type="text" name="target" id="target" placeholder="target" required oninput="point(this)"
+                        class="w-full dark:bg-gray-800 rounded mt-2">
                     </div>
 
                     <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                        <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Realisasi</label>
-                        <input type="file" name="gambar" id="gambar" required class="block pt-2 w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-gray-700 dark:file:text-blue-300 dark:hover:file:bg-gray-600">
+                        <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Realisasi (%)</label>
+                        <input type="text" name="realisasi" id="realisasi" placeholder="realisasi" required oninput="point(this)"
+                        class="w-full dark:bg-gray-800 rounded mt-2">
                     </div>
+
+                </div>
+                <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                    <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Realisasi</label>
+                    <input type="file" name="gambar" id="gambar" required class="block pt-2 w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-gray-700 dark:file:text-blue-300 dark:hover:file:bg-gray-600">
                 </div>
 
                 <button class="btn bg-blue-600 btn-primary rounded-md text-white w-full">SIMPAN REALISASI KONTRAK</button>
@@ -102,6 +109,7 @@
                         <th class="p-3 bg-blue-50 dark:bg-gray-700/60 text-blue-900 dark:text-blue-300 border-3 border-gray-400">Bulan</th>
                         <th class="p-3 bg-blue-50 dark:bg-gray-700/60 text-blue-900 dark:text-blue-300 border-3 border-gray-400">Target</th>
                         <th class="p-3 bg-blue-50 dark:bg-gray-700/60 text-blue-900 dark:text-blue-300 border-3 border-gray-400">Realisasi</th>
+                        <th class="p-3 bg-blue-50 dark:bg-gray-700/60 text-blue-900 dark:text-blue-300 border-3 border-gray-400">Gambar</th>
                     </tr>
                 </thead>
 
@@ -135,7 +143,26 @@
                                 @php $bulan = $item->bulan @endphp
                             @endif
                             <td class="p-3 bg-blue-50 dark:bg-gray-700/60 border-2 border-x-3 border-gray-400">
-                                {{ $item->target }}
+                                <div class="text-center">
+                                    {{ $item->target }} %
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div
+                                        class="bg-blue-600 h-2.5 rounded-full"
+                                        style="width: {{ str_replace(',', '.', $item->target) }}%;"
+                                    ></div>
+                                </div>
+                            </td>
+                            <td class="p-3 bg-blue-50 dark:bg-gray-700/60 border-2 border-x-3 border-gray-400">
+                                <div class="text-center">
+                                    {{ $item->realisasi }} %
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                                    <div
+                                        class="bg-blue-600 h-2.5 rounded-full"
+                                        style="width: {{ str_replace(',', '.', $item->realisasi) }}%;"
+                                    ></div>
+                                </div>
                             </td>
                             <td class="p-3 bg-blue-50 dark:bg-gray-700/60 border-2 border-x-3 border-gray-400">
                                 <img src="{{ asset($item->gambar) }}" alt="gambar error" class="w-auto h-[200px] border-2 border-x-3 border-gray-400">
@@ -145,5 +172,26 @@
                 </tbody>
             </table>
     </div>
+
+    <script>
+        function point(angka) {
+            const input = event.target;
+            let value = input.value.replace(/[^0-9]/g, '');
+
+            if (value === "") {
+                input.value = "";
+                return;
+            }
+
+            value = (parseInt(value, 10) / 100).toFixed(2);
+            value = value.replace('.', ',');
+
+            if (parseFloat(value.replace(',', '.')) > 100) {
+                value = "100,00";
+            }
+
+            input.value = value;
+        }
+    </script>
 
 </x-app-layout>

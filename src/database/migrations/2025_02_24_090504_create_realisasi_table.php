@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('bulan');
             $table->integer('tahun');
             $table->string('target');
+            $table->string('realisasi');
             $table->string('gambar');
             $table->timestamps();
         });
