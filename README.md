@@ -29,6 +29,7 @@ php artisan key:generate
 ```bash
 php artisan migrate
 php artisan db:seed
+php artisan storage:link
 ```
 ### seed awal
 | Role | Email       | Password |
