@@ -43,7 +43,7 @@ class KontrakController extends Controller
         ]);
     }
 
-    public function export()
+    public function exportKontrak()
     {
         return Excel::download(new KontrakExport, 'kontrak.xlsx');
     }

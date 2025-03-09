@@ -4,9 +4,10 @@ namespace App\Exports;
 
 use App\Models\Kontrak;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
-class KontrakExport implements FromCollection, WithHeadings
+class KontrakExport implements FromCollection, WithHeadings, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
