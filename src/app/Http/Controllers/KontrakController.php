@@ -110,13 +110,13 @@ class KontrakController extends Controller
                 'berkas_penawaran' => 'nullable|file|mimes:pdf|max:2048',
             ]);
 
-            // Upload berkas penawaran (pdf)
-            $pdf = $request->file('berkas_penawaran');
-            $FileName = time() . '_' . $pdf->getClientOriginalName();
-            $pdfFilePath = $pdf->storeAs('uploads/berkasPenawaran', $FileName, 'public');
-            $pdfFilePath = 'storage/' . $pdfFilePath;
-
-            $validatedData['berkas_penawaran'] = $pdfFilePath;
+            if ($request->hasFile('berkas_penawaran')) {
+                $pdf = $request->file('berkas_penawaran');
+                $FileName = time() . '_' . $pdf->getClientOriginalName();
+                $pdfFilePath = $pdf->storeAs('uploads/berkasPenawaran', $FileName, 'public');
+                $pdfFilePath = 'storage/' . $pdfFilePath;
+                $validatedData['berkas_penawaran'] = $pdfFilePath;
+            }
             $validatedData['tgl_pembuatan'] = now()->toDateString();
 
             $kontrak->update($validatedData);

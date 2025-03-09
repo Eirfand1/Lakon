@@ -48,6 +48,7 @@
                         <option value="">Pilih Status Tenaga</option>
                         <option value="Tenaga Ahli">Tenaga Ahli</option>
                         <option value="Tenaga Penunjang">Tenaga Penunjang</option>
+                        <option value="Tenaga Teknis">Tenaga Teknis</option>
                     </select>
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
