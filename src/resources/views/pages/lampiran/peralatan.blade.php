@@ -45,13 +45,17 @@
                 <td class="text-center border border-gray-400/30">
                     <select name="kondisi" class="w-full dark:bg-gray-800 rounded" id="kondisi">
                         <option value="">Pilih Kondisi</option>
-                        <option value="Baik">baik</option>
-                        <option value="Sedang">sedang</option>
-                        <option value="Rusak">rusak</option>
+                        <option value="Baik">Baik</option>
+                        <option value="Sedang">Sedang</option>
+                        <option value="Rusak">Rusak</option>
                     </select>
                 </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="status_kepemilikan" id="statusKepemilikan">
+                    <select name="status_kepemilikan" class="w-full dark:bg-gray-800 rounded" id="statusKepemilikan">
+                        <option value="">Pilih Status Kepemilikan</option>
+                        <option value="Milik">Milik</option>
+                        <option value="Sewa">Sewa</option>
+                    </select>
                 </td>
                 <td class="text-center border border-gray-400/30">
                     <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan" id="keteranganPeralatan">
@@ -102,7 +106,6 @@
         document.getElementById('jumlah').value = peralatan.jumlah;
         document.getElementById('kondisi').value = peralatan.kondisi;
         document.getElementById('statusKepemilikan').value = peralatan.status_kepemilikan;
-        console.log(document.getElementById('keterangan'));
         document.getElementById('keteranganPeralatan').value = peralatan.keterangan;
 
     }

@@ -18,7 +18,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
             $table->string('nama');
             $table->string('posisi');
-            $table->enum('status_tenaga', ['Tenaga Ahli', 'Tenaga Penunjang']);
+            $table->enum('status_tenaga', ['Tenaga Ahli', 'Tenaga Penunjang', 'Tenaga Teknis']);
             $table->boolean('bulan_1')->default(false);
             $table->boolean('bulan_2')->default(false);
             $table->boolean('bulan_3')->default(false);

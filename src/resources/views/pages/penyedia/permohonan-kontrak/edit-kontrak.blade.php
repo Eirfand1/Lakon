@@ -105,9 +105,9 @@
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Kode
-                                Paket</label>
+                                Sirup</label>
                             <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                                {{ $kontrak->paketPekerjaan->kode_paket }}
+                                {{ $kontrak->paketPekerjaan->kode_sirup }}
                             </p>
                         </div>
 
@@ -139,7 +139,7 @@
                     </div>
 
                     {{-- tender --}}
-                    @if ($kontrak->paketPekerjaan->jenis_pengadaan == 'tender')
+                    @if ($kontrak->paketPekerjaan->jenis_pengadaan == 'Tender')
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                             <div class="flex items-center gap-2">
@@ -198,7 +198,7 @@
                     @endif
 
                     {{-- non tender --}}
-                    @if ($kontrak->paketPekerjaan->jenis_pengadaan == 'non_tender')
+                    @if ($kontrak->paketPekerjaan->jenis_pengadaan == 'Non Tender')
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                             <div class="flex items-center gap-2">
@@ -305,41 +305,10 @@
             $metode = $kontrak->paketPekerjaan->metode_pemilihan;
         @endphp
 
-        @if ($jenis === 'tender')
-            @if ($metode === 'Jasa Konsultasi Pengawasan')
-                {{-- kosong --}}
-            @elseif ($metode === 'Jasa Konsultasi Perencanaan')
-                @include($view . "tim")
-                @include($view . "jadwal-kegiatan")
-                @include($view . "rincian-belanja")
-                @include($view . "peralatan")
-            @elseif ($metode === 'Jasa Konstruksi')
-                {{-- kosong --}}
-            @elseif ($metode === 'Pengadaan Barang')
-                @include($view . "ruang-lingkup")
-                @include($view . "rincian-belanja")
-            @endif
-        @elseif ($jenis === 'non_tender')
-            @if ($metode === 'Jasa Konsultasi Pengawasan')
-                {{-- kosong --}}
-            @elseif ($metode === 'Jasa Konsultasi Perencanaan')
-                {{-- kosong --}}
-            @elseif ($metode === 'Jasa Konstruksi')
-                @include($view . "ruang-lingkup")
-            @elseif ($metode === 'Pengadaan Barang')
-                @include($view . "rincian-barang")
-            @endif
-        @elseif ($jenis === 'e_catalog')
-            @if ($metode === 'Jasa Konsultasi Pengawasan')
-                {{-- gak tau --}}
-            @elseif ($metode === 'Jasa Konsultasi Perencanaan')
-                {{-- gak tau --}}
-            @elseif ($metode === 'Jasa Konstruksi')
-                {{-- gak tau --}}
-            @elseif ($metode === 'Pengadaan Barang')
-                {{-- gak tau --}}
-            @endif
-        @endif
+        @include($view . "tim")
+        @include($view . "jadwal-kegiatan")
+        @include($view . "rincian-belanja")
+        @include($view . "peralatan")
     </div>
 
     <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
@@ -360,7 +329,7 @@
             </div>
             <button type="submit"
                 class="w-full px-6 py-3 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all dark:bg-blue-700 dark:hover:bg-blue-800">
-                <i class="mr-2 fas fa-save"></i> LAYANGKAN PERMOHONAN KONTRAK
+                <i class="mr-2 fas fa-save"></i> KIRIMKAN PERMOHONAN KONTRAK
             </button>
         </form>
     </div>
@@ -390,7 +359,7 @@
 {{-- tampilkan berkas penawaran --}}
 <input type="checkbox" id="berkas_penawaran" class="modal-toggle" />
 <div class="modal modal-middle px-3">
-    <div class="flex flex-col modal-box w-full h-full mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
+    <div class="flex flex-col modal-box w-screen max-w-none h-screen max-h-none mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
         <h3 class="font-bold text-lg">Berkas Penawaran</h3>
         <div class="w-full h-full">
             <iframe src="{{ asset($kontrak->berkas_penawaran) }}" type="application/pdf" class="w-full h-full"></iframe>
