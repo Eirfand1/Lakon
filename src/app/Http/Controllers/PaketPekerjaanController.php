@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PaketPekerjaanExport;
 use App\Models\DasarHukum;
 use App\Models\PaketPekerjaan;
 use App\Models\PaketSubKegiatan;
@@ -14,6 +15,7 @@ use Dotenv\Exception\ValidationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PaketPekerjaanController extends Controller
 {
@@ -164,6 +166,11 @@ class PaketPekerjaanController extends Controller
             'metode_pemilihan' => $paket->metode_pemilihan,
             'jenis_pengadaan' => $paket->jenis_pengadaan
         ]);
+    }
+
+    public function exportPaketPekerjaan()
+    {
+        return Excel::download(new PaketPekerjaanExport, 'paket-pekerjaan.xlsx');
     }
 
 }

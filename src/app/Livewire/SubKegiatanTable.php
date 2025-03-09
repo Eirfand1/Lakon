@@ -95,9 +95,29 @@ class SubKegiatanTable extends DataTableComponent
                             </table>
                         </div>
                     ";
-                })->html()->collapseAlways(),
+                })->html()->collapseAlways()
+                ->searchable(function ($query, $searchTerm) {
+                        $query->orWhereHas('paketPekerjaan', function ($subQuery) use ($searchTerm) {
+                            $subQuery->where('nama_pekerjaan', 'like', "%{$searchTerm}%");
+                        });
+                  })
+                ,
+
 
            
         ];
+    }
+
+    public function bulkActions(): array
+    {
+        return [
+            'deleteSelected' => 'Hapus Terpilih',
+        ];
+    }
+
+    public function deleteSelected()
+    {
+        SubKegiatan::whereIn('sub_kegiatan_id', $this->getSelected())->delete();
+        $this->clearSelected();
     }
 }

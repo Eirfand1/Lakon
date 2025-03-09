@@ -14,7 +14,7 @@
         <!-- Tambah Sub Kegiatan -->
         <input type="checkbox" id="add-sub-kegiatan" class="modal-toggle" />
         <div id="modal_matriks" class="modal modal-top px-3">
-            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
+            <div class="modal-box max-w-[55rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <h3 class="font-bold text-lg dark:text-gray-200">TAMBAH SUB KEGIATAN</h3>
@@ -82,7 +82,7 @@
         <!-- Edit Sub Kegiatan -->
         <input type="checkbox" id="edit-sub-kegiatan" class="modal-toggle" />
         <div class="modal modal-top px-3">
-            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
+            <div class="modal-box max-w-[55rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <h3 class="font-bold text-lg dark:text-gray-200">EDIT SUB KEGIATAN</h3>

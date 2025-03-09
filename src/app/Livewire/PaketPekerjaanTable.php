@@ -18,7 +18,6 @@ class PaketPekerjaanTable extends DataTableComponent
     public function configure(): void
     {
         $this->setPrimaryKey('paket_id')
-            ->setDefaultSort('created_at', 'desc')
             ->setColumnSelectStatus(true)
             ->setFilterLayout('slide-down')
             ->setPerPageAccepted([10, 25, 50, 100, -1]);
@@ -82,10 +81,23 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
 
+            Column::make('Sub Kegiatan', 'paket_id')
+                ->format(function($value, $row) {
+                    $data = PaketPekerjaan::with('subKegiatan')->find($value);
+                    $subKegiatanList = $data->subKegiatan->first()->nama_sub_kegiatan ?? '';
+                    return $subKegiatanList;
+                })
+                ->sortable()
+                ->searchable(function ($query, $searchTerm) {
+                        $query->orWhereHas('subKegiatan', function ($subQuery) use ($searchTerm) {
+                            $subQuery->where('nama_sub_kegiatan', 'like', "%{$searchTerm}%");
+                        });
+                  }),
+
+
             Column::make('Satuan Kerja', 'satuanKerja.nama_pimpinan')
                 ->sortable()
                 ->searchable(),
-
 
             Column::make('Sub Kegiatan', 'paket_id')
                 ->format(function ($value, $row) {

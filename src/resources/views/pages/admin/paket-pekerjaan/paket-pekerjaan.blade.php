@@ -3,11 +3,23 @@
     <div class="p-5">
         <div class="mb-4 flex justify-between flex-wrap">
             <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">PAKET PEKERJAAN</h1>
-            <!-- Add Button -->
-            <label for="add-modal" class="btn rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
-                <i class="fa-solid fa-square-plus"></i>
-                <span>Tambah Data</span>
-            </label>
+            <div class="flex gap-2">
+                <div>
+                    <a href="{{ route('admin.paket-pekerjaan.export') }}"
+                        class="btn btn-success btn-sm rounded text-white">
+                        <i class="fa-solid fa-file-export"></i>
+                        <span>
+                            Export to Excel
+                        </span>
+                    </a>
+                </div>
+                <!-- Add Button -->
+                <label for="add-modal" class="btn rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
+                    <i class="fa-solid fa-square-plus"></i>
+                    <span>Tambah Data</span>
+                </label>
+            </div>
+
         </div>
 
 
@@ -16,7 +28,7 @@
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
         <div id="modal_matriks" class="modal modal-top px-3">
-            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
+            <div class="modal-box max-w-[55rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <h3 class="font-bold text-lg dark:text-gray-200">TAMBAH PAKET PEKERJAAN</h3>
@@ -39,8 +51,7 @@
                                     <x-input type="text" x-model="input.search" name="sub_kegiatan[]"
                                         @input.debounce.100ms="filterOptions(index)" @focus="showDropdown(index)"
                                         @click.away="input.showDropdown = false" placeholder="Pilih Sub Kegiatan"
-                                        class="{{ $errors->has('sub_kegiatan_id.*') ? 'border-red-500' : 'border-gray-200' }}"
-                                        />
+                                        class="{{ $errors->has('sub_kegiatan_id.*') ? 'border-red-500' : 'border-gray-200' }}" />
 
                                     <x-danger-button @click="removeInput(index)" x-show="inputs.length > 1"
                                         @class(['py-0', 'btn-sm'])>
@@ -63,9 +74,9 @@
 
                             </div>
                         </template>
-                                @error('sub_kegiatan_id.*')
-                                    <span class="text-red-500 block text-sm">{{$message}}</span>
-                                @enderror
+                        @error('sub_kegiatan_id.*')
+                            <span class="text-red-500 block text-sm">{{$message}}</span>
+                        @enderror
                         <button type="button" @click="addInput" class="btn rounded text-white btn-sm btn-primary">
                             <i class="fa-solid fa-plus"></i> Tambah Sub Kegiatan
                         </button>
@@ -82,7 +93,8 @@
                             <option value="APBD" {{ old('sumber_dana') == 'APBD' ? 'selected' : '' }}>APBD</option>
                             <option value="DAK" {{ old('sumber_dana') == 'DAK' ? 'selected' : '' }}>DAK</option>
                             <option value="BANKEU" {{ old('sumber_dana') == 'BANKEU' ? 'selected' : '' }}>BANKEU</option>
-                            <option value="APBD Perubahan" {{ old('sumber_dana') == 'APBD Perubahan' ? 'selected' : '' }}>APBD Perubahan</option>
+                            <option value="APBD Perubahan" {{ old('sumber_dana') == 'APBD Perubahan' ? 'selected' : '' }}>
+                                APBD Perubahan</option>
                             <option value="APBD Perubahan Biasa" {{ old('sumber_dana') == 'APBD Perubahan Biasa' ? 'selected' : '' }}>APBD Perubahan Biasa</option>
                             <option value="BANKEU Perubahan" {{ old('sumber_dana') == 'BANKEU Perubahan' ? 'selected' : '' }}>BANKEU Perubahan</option>
                             <option value="SG" {{ old('sumber_dana') == 'SG' ? 'selected' : '' }}>SG</option>
@@ -101,10 +113,8 @@
                         <x-label for="paket">Paket</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
                             <div class="sm:w-1/4 w-full">
-                                <x-input type="text" name="rup" id="" placeholder="RUP"
-                                    value="{{old('rup')}}"
-                                    class="{{ $errors->has('rup') ? 'border-red-500' : 'border-gray-200' }}"
-                                 />
+                                <x-input type="text" name="rup" id="" placeholder="RUP" value="{{old('rup')}}"
+                                    class="{{ $errors->has('rup') ? 'border-red-500' : 'border-gray-200' }}" />
                                 @error('rup')
                                     <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
                                 @enderror
@@ -113,8 +123,7 @@
                             <div class="sm:w-1/4 w-full">
                                 <x-input type="text" name="kode_sirup" id="" placeholder="Kode Sirup"
                                     value="{{old('kode_sirup')}}"
-                                    class="{{ $errors->has('kode_sirup') ? 'border-red-500' : 'border-gray-200' }}"
-                                 />
+                                    class="{{ $errors->has('kode_sirup') ? 'border-red-500' : 'border-gray-200' }}" />
                                 @error('kode_sirup')
                                     <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
                                 @enderror
@@ -136,8 +145,7 @@
                             <x-input type="text" x-model="search" @input.debounce.100ms="filterOptions()"
                                 @focus="showDropdown = true" @click.away="showDropdown = false"
                                 placeholder="Pilih Sekolah"
-                                class="{{ $errors->has('sekolah_id') ? 'border-red-500' : 'border-gray-200' }}"
-                                 />
+                                class="{{ $errors->has('sekolah_id') ? 'border-red-500' : 'border-gray-200' }}" />
                             <i
                                 class="fas fa-chevron-down text-sm absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300"></i>
 
@@ -164,13 +172,17 @@
                     <div class="flex w-full flex-col  ">
                         <x-label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-                            <select name="jenis_pengadaan" id=""
-                                class="sm:w-1/4 w-3/4 text-sm  rounded-lg bg-white h-10 dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md  border-gray-200 shadow-sm focus:ring-0
+                            <select name="jenis_pengadaan" id="" class="sm:w-1/4 w-3/4 text-sm  rounded-lg bg-white h-10 dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md  border-gray-200 shadow-sm focus:ring-0"
                                 required>
-                                <option value="Tender" {{ old('jenis_pengadaan') == 'Tender' ? 'selected' : '' }}>Tender</option>
-                                <option value="Non Tender" {{ old('jenis_pengadaan') == 'Non Tender' ? 'selected' : '' }}>Non Tender</option>
-                                <option value="E-Katalog" {{ old('jenis_pengadaan') == 'E-Katalog' ? 'selected' : '' }}>E-Katalog</option>
-                                <option value="Swakelola" {{ old('jenis_pengadaan') == 'Swakelola' ? 'selected' : '' }}>Swakelola</option></option>
+                                <option value=" Tender" {{ old('jenis_pengadaan') == 'Tender' ? 'selected' : '' }}>Tender
+                                </option>
+                                <option value="Non Tender" {{ old('jenis_pengadaan') == 'Non Tender' ? 'selected' : '' }}>
+                                    Non Tender</option>
+                                <option value="E-Katalog" {{ old('jenis_pengadaan') == 'E-Katalog' ? 'selected' : '' }}>
+                                    E-Katalog</option>
+                                <option value="Swakelola" {{ old('jenis_pengadaan') == 'Swakelola' ? 'selected' : '' }}>
+                                    Swakelola</option>
+                                </option>
                             </select>
 
                             <select name="metode_pemilihan" id=""
@@ -189,7 +201,7 @@
                     <div class="flex w-full flex-col ">
                         <x-label for="nilai_pagu_paket" class="w-full sm:w-1/4">Nilai Pagu Paket</x-label>
                         <x-input type="number" name="nilai_pagu_paket" id="" value="{{old('nilai_pagu_paket')}}"
-                             class="{{ $errors->has('nilai_pagu_paket') ? 'border-red-500' : 'border-gray-200' }}"
+                            class="{{ $errors->has('nilai_pagu_paket') ? 'border-red-500' : 'border-gray-200' }}"
                             required />
                         @error('nilai_pagu_paket')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
@@ -209,8 +221,8 @@
                     <div class="flex w-full flex-col ">
                         <x-label for="nilai_hps" class="w-full sm:w-1/4">Nilai HPS</x-label>
                         <x-input type="number" name="nilai_hps" id="" value="{{old('nilai_hps')}}"
-                        class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }}"
-                        required />
+                            class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }}"
+                            required />
 
                         @error('nilai_hps')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
@@ -220,9 +232,8 @@
                     <div class="flex w-full flex-col pb-4 ">
                         <x-label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran</x-label>
                         <x-input type="number" name="tahun_anggaran" value="{{old('tahun_anggaran')}}" id=""
-                        class="{{ $errors->has('tahun_anggaran') ? 'border-red-500' : 'border-gray-200' }}"
-
-                        required />
+                            class="{{ $errors->has('tahun_anggaran') ? 'border-red-500' : 'border-gray-200' }}"
+                            required />
                         @error('tahun_anggaran')
                             <span class="text-red-500 text-sm mt-1">{{$message}}</span>
                         @enderror
@@ -336,7 +347,7 @@
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
         <div id="modal_matriks" class="modal modal-top px-3">
-            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
+            <div class="modal-box max-w-[55rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
                     <div class="flex items-center gap-3">
                         <h3 class="font-bold text-lg dark:text-gray-200">EDIT PAKET PEKERJAAN</h3>
@@ -410,7 +421,8 @@
                             <option value="APBD" {{ old('sumber_dana') == 'APBD' ? 'selected' : '' }}>APBD</option>
                             <option value="DAK" {{ old('sumber_dana') == 'DAK' ? 'selected' : '' }}>DAK</option>
                             <option value="BANKEU" {{ old('sumber_dana') == 'BANKEU' ? 'selected' : '' }}>BANKEU</option>
-                            <option value="APBD Perubahan" {{ old('sumber_dana') == 'APBD Perubahan' ? 'selected' : '' }}>APBD Perubahan</option>
+                            <option value="APBD Perubahan" {{ old('sumber_dana') == 'APBD Perubahan' ? 'selected' : '' }}>
+                                APBD Perubahan</option>
                             <option value="APBD Perubahan Biasa" {{ old('sumber_dana') == 'APBD Perubahan Biasa' ? 'selected' : '' }}>APBD Perubahan Biasa</option>
                             <option value="BANKEU Perubahan" {{ old('sumber_dana') == 'BANKEU Perubahan' ? 'selected' : '' }}>BANKEU Perubahan</option>
                             <option value="SG" {{ old('sumber_dana') == 'SG' ? 'selected' : '' }}>SG</option>
@@ -426,26 +438,25 @@
                         <x-label for="paket">Paket</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
                             <div class="sm:w-1/4 w-full">
-                            <x-input type="text" name="rup" id="rup" placeholder="RUP"
-                                class="{{ $errors->has('rup') ? 'border-red-500' : 'border-gray-200' }}"
-                                required />
+                                <x-input type="text" name="rup" id="rup" placeholder="RUP"
+                                    class="{{ $errors->has('rup') ? 'border-red-500' : 'border-gray-200' }}" required />
                                 @error('rup')
                                     <span class="text-red-500 text-sm mt-1">{{$message}}</span>
                                 @enderror
                             </div>
 
                             <div class="sm:w-1/4 w-full">
-                            <x-input type="text" name="kode_sirup" id="kode_sirup" placeholder="Kode Sirup"
-                                class="{{ $errors->has('kode_sirup') ? 'border-red-500' : 'border-gray-200' }}"
-                                required />
+                                <x-input type="text" name="kode_sirup" id="kode_sirup" placeholder="Kode Sirup"
+                                    class="{{ $errors->has('kode_sirup') ? 'border-red-500' : 'border-gray-200' }}"
+                                    required />
                                 @error('kode_sirup')
                                     <span class="text-red-500 text-sm mt-1">{{$message}}</span>
                                 @enderror
                             </div>
 
                             <div class="sm:w-3/4 w-full">
-                            <x-input type="text" name="nama_pekerjaan" id="nama_pekerjaan" placeholder="Nama Paket"
-                                required />
+                                <x-input type="text" name="nama_pekerjaan" id="nama_pekerjaan" placeholder="Nama Paket"
+                                    required />
                             </div>
                         </div>
                     </div>
@@ -513,8 +524,8 @@
                     <div class="flex w-full flex-col ">
                         <x-label for="nilai_pagu_paket" class="w-full sm:w-1/4">Nilai Pagu Paket</x-label>
                         <x-input type="number" name="nilai_pagu_paket" id="nilai_pagu_paket"
-                        class="{{ $errors->has('nilai_pagu_paket') ? 'border-red-500' : 'border-gray-200' }}"
-                        required />
+                            class="{{ $errors->has('nilai_pagu_paket') ? 'border-red-500' : 'border-gray-200' }}"
+                            required />
                         @error('nilai_pagu_paket')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
@@ -523,8 +534,8 @@
                     <div class="flex w-full flex-col ">
                         <x-label for="nilai_pagu_anggaran" class="w-full sm:w-1/4">Nilai Pagu Anggaran</x-label>
                         <x-input type="number" name="nilai_pagu_anggaran" id="nilai_pagu_anggaran"
-                        class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }}"
-                        required />
+                            class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }}"
+                            required />
 
                         @error('nilai_pagu_anggaran')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
@@ -534,9 +545,7 @@
                     <div class="flex w-full flex-col ">
                         <x-label for="nilai_hps" class="w-full sm:w-1/4">Nilai HPS</x-label>
                         <x-input type="number" name="nilai_hps" id="nilai_hps"
-                        class="{{ $errors->has('nilai_hps') ? 'border-red-500' : 'border-gray-200' }}"
-                        required
-                        />
+                            class="{{ $errors->has('nilai_hps') ? 'border-red-500' : 'border-gray-200' }}" required />
                         @error('nilai_hps')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
@@ -545,8 +554,7 @@
                     <div class="flex w-full flex-col pb-4 ">
                         <x-label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran</x-label>
                         <x-input type="number" name="tahun_anggaran" id="tahun_anggaran" required
-                        class="{{ $errors->has('tahun_anggaran') ? 'border-red-500' : 'border-gray-200' }}"
-                        />
+                            class="{{ $errors->has('tahun_anggaran') ? 'border-red-500' : 'border-gray-200' }}" />
                         @error('tahun_anggaran')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
@@ -575,8 +583,7 @@
                             <x-input type="text" name="daskum" x-model="search" @input.debounce.100ms="filterOptions()"
                                 @focus="showDropdown = true" @click.away="showDropdown = false"
                                 placeholder="Pilih Dasar Hukum" required
-                                class="{{ $errors->has('daskum_id') ? 'border-red-500' : 'border-gray-200' }}"
-                                />
+                                class="{{ $errors->has('daskum_id') ? 'border-red-500' : 'border-gray-200' }}" />
 
                             <i
                                 class="fas fa-chevron-down text-sm absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300"></i>

@@ -169,6 +169,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::post('/paket-pekerjaan', [PaketPekerjaanController::class, 'store'])->name('admin.paket-pekerjaan.store');
     Route::delete('/paket-pekerjaan/{paket_pekerjaan}', [PaketPekerjaanController::class, 'destroy'])->name('admin.paket-pekerjaan.destroy');
     Route::put('/paket-pekerjaan/{paket_pekerjaan}', [PaketPekerjaanController::class, 'update'])->name('admin.paket-pekerjaan.update');
+    Route::get('/paket-pekerjaan/export', [PaketPekerjaanController::class, 'exportPaketPekerjaan'])->name('admin.paket-pekerjaan.export');
 
 
     // Realisasi
