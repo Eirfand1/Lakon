@@ -33,6 +33,7 @@ class RealisasiController extends Controller
             'tahun' => 'required|numeric',
             'bulan' => 'required|numeric',
             'target' => 'required|string|max:255',
+            'realisasi' => 'required|string|max:255',
             'gambar' => 'required|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
@@ -48,6 +49,7 @@ class RealisasiController extends Controller
             'tahun' => $request->tahun,
             'bulan' => $request->bulan,
             'target' => $request->target,
+            'realisasi' => $request->realisasi,
             'gambar' => $filePath,
         ]);
 
