@@ -86,7 +86,7 @@
                                         No.</th>
                                     <th scope="col"
                                         class="px-4 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider">
-                                        Kode Paket</th>
+                                        Kode Sirup</th>
                                     <th scope="col"
                                         class="px-4 py-3 text-left text-xs font-medium text-gray-900 dark:text-gray-200 uppercase tracking-wider">
                                         Nama Paket</th>
@@ -105,11 +105,11 @@
                                 </tr>
                             </thead>
                             <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
-                                @foreach ($penyedia->kontrak as $index => $row)
+                                @foreach ($kontrak as $index => $row)
                                     <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200">{{ $index + 1 }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200">
-                                            {{ $row->paketPekerjaan->kode_paket }}</td>
+                                            {{ $row->paketPekerjaan->kode_sirup }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200">
                                             {{ $row->paketPekerjaan->nama_pekerjaan }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200">
@@ -117,18 +117,25 @@
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200">
                                             {{ $row->paketPekerjaan->metode_pemilihan }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200">
-                                            {{ $row->tgl_pembuatan }}</td>
+                                            {{ $row->tgl_pembuatan ? $row->tgl_pembuatan : '-' }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200 text-center">
                                             @if ($row->is_layangkan)
                                             <a href="#"
                                                 class="btn btn-sm btn-success dark:text-gray-200">Detail Permohonan</a>
                                             @else
                                             <a href="permohonan-kontrak/{{ $row->kontrak_id }}"
-                                                class="btn btn-sm btn-error dark:text-gray-200">Layangkan Permohonan</a>
+                                                class="btn btn-sm btn-error dark:text-gray-200">Kirim Permohonan</a>
                                             @endif
                                         </td>
                                     </tr>
                                 @endforeach
+                                @if (count($kontrak) == 0)
+                                    <tr>
+                                        <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200 text-center" colspan="7">
+                                            tidak ada data permohonan kontrak
+                                        </td>
+                                    </tr>
+                                @endif
                             </tbody>
                         </table>
                     </div>
