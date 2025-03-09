@@ -10,22 +10,22 @@
                 @csrf
                 @method('PUT')
                 <div class="flex flex-col gap-4">
-                    <input type="text" name="nama_pimpinan" placeholder="Nama"  value="{{$profilePimpinan->nama_pimpinan}}"
-                    class="border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-500 p-2">
-                    <input type="text" name="nip" placeholder="NIP"  value="{{$profilePimpinan->nip}}"
-                    class="border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-500 p-2">
-                    <input type="text" name="jabatan" placeholder="Jabatan" value="{{$profilePimpinan->jabatan}}"
-                    class="border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-500 p-2">
-                    <input type="text" name="website" placeholder="Link" value="{{$profilePimpinan->website}}"
-                    class="border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-500 p-2">
-                    <input type="email" name="email" placeholder="Email" value="{{$profilePimpinan->email}}"
-                    class="border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-500 p-2">
-                    <input type="tel" name="telp" placeholder="Phone" value="{{$profilePimpinan->telp}}"
-                    class="border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-500 p-2">
-                    <input type="tel" name="klpd" placeholder="KLPD" value="{{$profilePimpinan->klpd}}"
-                    class="border border-gray-300 rounded dark:bg-gray-700 dark:border-gray-500 p-2">
+                    <x-input type="text" name="nama_pimpinan" placeholder="Nama"  value="{{$profilePimpinan->nama_pimpinan}}"
+                    />
+                    <x-input type="text" name="nip" placeholder="NIP"  value="{{$profilePimpinan->nip}}"
+                    />
+                    <x-input type="text" name="jabatan" placeholder="Jabatan" value="{{$profilePimpinan->jabatan}}"
+                    />
+                    <x-input type="text" name="website" placeholder="Link" value="{{$profilePimpinan->website}}"
+                    />
+                    <x-input type="email" name="email" placeholder="Email" value="{{$profilePimpinan->email}}"
+                    />
+                    <x-input type="tel" name="telp" placeholder="Phone" value="{{$profilePimpinan->telp}}"
+                    />
+                    <x-input type="tel" name="klpd" placeholder="KLPD" value="{{$profilePimpinan->klpd}}"
+                    />
                 </div>
-                <button type="submit" class="p-2 rounded bg-gray-800 hover:bg-gray-700 text-white transition-colors dark:bg-gray-200 dark:hover:bg-gray-300 dark:text-gray-900">Simpan</button>
+                <x-button type="submit" class="">Simpan</x-button>
             </form>
         </div>
 </div>
