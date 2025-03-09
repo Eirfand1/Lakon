@@ -183,8 +183,12 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${TAHUN_ANGGARAN}', $kontrak->paketPekerjaan->tahun_anggaran);
 
             // Sub Kegiatan
-            // $templateProcessor->setValue('${SUB_KEGIATAN}', $kontrak->subKegiatan->nama_sub_kegiatan);
-            $templateProcessor->setValue('${SUB_KEGIATAN}', $kontrak->paketPekerjaan->subKegiatan->first()->nama_sub_kegiatan ?? '');
+            // $templateProcessor->setValue('${SUB_KEGIATAN}', $kontrak->paketPekerjaan->subKegiatan->first()->nama_sub_kegiatan ?? '');
+            $subKegiatanList = $kontrak->paketPekerjaan->subKegiatan
+                ->pluck('nama_sub_kegiatan')
+                ->implode("\n");
+
+            $templateProcessor->setValue('${SUB_KEGIATAN}', $subKegiatanList);
             $templateProcessor->setValue('${REKENING_SUB_KEGIATAN}', $kontrak->paketPekerjaan->subKegiatan->first()->no_rekening ?? '');
 
             // Kontrak

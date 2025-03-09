@@ -4,6 +4,14 @@
             <div class="">
                 <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">PENYEDIA</h1>
             </div>
+            <div>
+                <a href="{{ route('admin.penyedia.export') }}" class="btn btn-success btn-sm rounded text-white">
+                    <i class="fa-solid fa-file-export"></i>
+                    <span>
+                        Export to Excel
+                    </span>
+                </a>
+            </div>
         </div>
 
 
@@ -30,8 +38,8 @@
                                 <small class="block text-xs text-gray-500">Nomor Induk Kependudukan
                                     Pemilik/Direktur</small>
                             </x-label>
-                            <x-input type="number" name="NIK" id="edit_nik"
-                                placeholder="Nomor Induk Kependudukan" required />
+                            <x-input type="number" name="NIK" id="edit_nik" placeholder="Nomor Induk Kependudukan"
+                                required />
                         </div>
                         <div class="md:col-span-1">
                             <x-label>
@@ -100,14 +108,14 @@
                                 No. Telepon Perusahaan <span class="text-red-500">*</span>
                             </x-label>
                             <x-input type="number" name="kontak_hp" id="edit_kontak_hp"
-                                placeholder="No. Telp Perusahaan" required/>
+                                placeholder="No. Telp Perusahaan" required />
                         </div>
                         <div>
                             <x-label>
                                 Email Perusahaan <span class="text-red-500">*</span>
                             </x-label>
                             <x-input type="email" name="kontak_email" id="edit_kontak_email"
-                                placeholder="Email Perusahaan" required/>
+                                placeholder="Email Perusahaan" required />
                         </div>
                     </div>
 
@@ -126,10 +134,10 @@
                                 <small class="block text-xs text-gray-500">Unggah logo perusahaan (maks. 2MB)</small>
                             </x-label>
                             <x-input type="file" name="logo_perusahaan" accept="image/png, image/jpg, image/jpeg"
-                                onchange="previewLogo(event)"/>
+                                onchange="previewLogo(event)" />
 
-                            <img id="logoPreview" src="" class="mt-2  object-cover rounded-lg"
-                                alt="Logo Preview" width="100">
+                            <img id="logoPreview" src="" class="mt-2  object-cover rounded-lg" alt="Logo Preview"
+                                width="100">
                             <script>
                                 function previewLogo(event) {
                                     const logoPreview = document.getElementById('logoPreview');
@@ -159,21 +167,21 @@
                                 Nomor Rekening <span class="text-red-500">*</span>
                             </x-label>
                             <x-input type="text" name="rekening_norek" id="edit_rekening_norek"
-                                placeholder="Nomor Rekening" required/>
+                                placeholder="Nomor Rekening" required />
                         </div>
                         <div>
                             <x-label>
                                 Nama Pemilik Rekening <span class="text-red-500">*</span>
                             </x-label>
                             <x-input type="text" name="rekening_nama" id="edit_rekening_nama"
-                                placeholder="Nama Pemilik Rekening" required/>
+                                placeholder="Nama Pemilik Rekening" required />
                         </div>
                         <div>
                             <x-label>
                                 Bank <span class="text-red-500">*</span>
                             </x-label>
-                            <x-input type="text" name="rekening_bank" id="edit_rekening_bank"
-                                placeholder="Nama Bank" required/>
+                            <x-input type="text" name="rekening_bank" id="edit_rekening_bank" placeholder="Nama Bank"
+                                required />
                         </div>
                     </div>
 
@@ -202,9 +210,8 @@
                             </svg>
                             Simpan
                         </button>
-                        <label for="edit-modal" 
-                            class="btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
-                        >Tutup</label>
+                        <label for="edit-modal"
+                            class="btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Tutup</label>
                     </div>
                 </form>
             </div>
@@ -227,8 +234,8 @@
                             <span>Hapus</span>
                         </x-danger-button>
                         <label for="delete-modal"
-                         class="btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
-                         Batal</label>
+                            class="btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                            Batal</label>
                     </div>
                 </form>
             </div>

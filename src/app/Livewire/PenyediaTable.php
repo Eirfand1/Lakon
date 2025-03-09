@@ -25,7 +25,7 @@ class PenyediaTable extends DataTableComponent
             ->setPerPageAccepted([10,25,50,100, -1]);
     }
     public function builder(): \Illuminate\Database\Eloquent\Builder {
-        return Penyedia::query()->orderByDesc('updated_at');
+        return Penyedia::query()->orderByDesc('penyedia.updated_at');
     }
 
     public function columns(): array
@@ -33,6 +33,12 @@ class PenyediaTable extends DataTableComponent
         return [
             Column::make("Aksi", "penyedia_id")
                 ->format(fn($value, $row) => view('pages.admin.penyedia.actions', ['p' => $row])),
+            Column::make("Username", "user.name")
+                ->sortable()
+                ->searchable(),
+            Column::make('Status Akun', 'status')
+                ->sortable()
+                ->searchable(),
             Column::make("NIK", "NIK")
                 ->sortable()
                 ->searchable(),
@@ -42,9 +48,7 @@ class PenyediaTable extends DataTableComponent
             Column::make("Alamat Pemilik", "alamat_pemilik")
                 ->sortable()
                 ->searchable(),
-            Column::make('Status Akun', 'status')
-                ->sortable()
-                ->searchable(),
+            
             Column::make("Nama Perusahaan Lengkap", "nama_perusahaan_lengkap")
                 ->sortable()
                 ->searchable(),
