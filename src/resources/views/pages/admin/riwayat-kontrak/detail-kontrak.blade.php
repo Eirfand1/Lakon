@@ -24,8 +24,12 @@
 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
-                        <strong class="text-gray-700 dark:text-gray-300 block mb-1">Kode Paket</strong>
-                        <p class="font-medium">{{ $kontrak->paketPekerjaan->kode_paket }}</p>
+                        <strong class="text-gray-700 dark:text-gray-300 block mb-1">Kode RUP</strong>
+                        <p class="font-medium">{{ $kontrak->paketPekerjaan->rup }}</p>
+                    </div>
+                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
+                        <strong class="text-gray-700 dark:text-gray-300 block mb-1">Kode SiRUP</strong>
+                        <p class="font-medium">{{ $kontrak->paketPekerjaan->kode_sirup }}</p>
                     </div>
                     <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
                         <strong class="text-gray-700 dark:text-gray-300 block mb-1">Nama Paket</strong>
@@ -152,22 +156,39 @@
                         <strong class="text-gray-700 dark:text-gray-300 block mb-1">Nama Notaris</strong>
                         <p class="font-medium">{{ $kontrak->penyedia->akta_notaris_nama }}</p>
                     </div>
-                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
-                        <strong class="text-gray-700 dark:text-gray-300 block mb-1">Nomor DPPL</strong>
-                        <p class="font-medium">{{ $kontrak->nomor_dppl }}</p>
-                    </div>
-                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
-                        <strong class="text-gray-700 dark:text-gray-300 block mb-1">Tanggal DPPL</strong>
-                        <p class="font-medium">{{ $kontrak->tgl_dppl }}</p>
-                    </div>
-                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
-                        <strong class="text-gray-700 dark:text-gray-300 block mb-1">Nomor BAHPL</strong>
-                        <p class="font-medium">{{ $kontrak->nomor_bahpl }}</p>
-                    </div>
-                    <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
-                        <strong class="text-gray-700 dark:text-gray-300 block mb-1">Tanggal BAHPL</strong>
-                        <p class="font-medium">{{ $kontrak->tgl_bahpl }}</p>
-                    </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
+                            <strong class="text-gray-700 dark:text-gray-300 block mb-1">Nomor DPPL</strong>
+                            <p class="font-medium">{{ $kontrak->nomor_dppl ?? '-' }}</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
+                            <strong class="text-gray-700 dark:text-gray-300 block mb-1">Tanggal DPPL</strong>
+                            <p class="font-medium">{{ $kontrak->tgl_dppl ?? '-' }}</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
+                            <strong class="text-gray-700 dark:text-gray-300 block mb-1">Nomor BAHPL</strong>
+                            <p class="font-medium">{{ $kontrak->nomor_bahpl ?? '-' }}</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
+                            <strong class="text-gray-700 dark:text-gray-300 block mb-1">Tanggal BAHPL</strong>
+                            <p class="font-medium">{{ $kontrak->tgl_bahpl ?? '-' }}</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
+                            <strong class="text-gray-700 dark:text-gray-300 block mb-1">Nomor SPPBJ</strong>
+                            <p class="font-medium">{{ $kontrak->nomor_sppbj ?? '-' }}</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
+                            <strong class="text-gray-700 dark:text-gray-300 block mb-1">Tanggal SPPBJ</strong>
+                            <p class="font-medium">{{ $kontrak->tgl_sppbj ?? '-'}}</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
+                            <strong class="text-gray-700 dark:text-gray-300 block mb-1">Nomor Penetapan Pemenang</strong>
+                            <p class="font-medium">{{ $kontrak->nomor_penetapan_pemenang ?? '-'}}</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm ">
+                            <strong class="text-gray-700 dark:text-gray-300 block mb-1">Tanggal Penetapan Pemenang</strong>
+                            <p class="font-medium">{{ $kontrak->tgl_penetapan_pemenang ?? '-'}}</p>
+                        </div>
+                    
                 </div>
             </div>
 

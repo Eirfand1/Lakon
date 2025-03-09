@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\PenyediaExport;
 use App\Http\Requests\PenyediaRequest;
 use App\Models\Kontrak;
 use App\Models\Penyedia;
@@ -15,6 +16,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Validation\Rule;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PenyediaController extends Controller
 {
@@ -215,6 +217,11 @@ class PenyediaController extends Controller
         $user = auth()->user()->penyedia;
 
         return view('pages.penyedia.data-perusahaan.index', ['penyedia' => $user]);
+    }
+
+    public function exportPenyedia()
+    {
+        return Excel::download(new PenyediaExport, 'penyedia.xlsx');
     }
 
 }

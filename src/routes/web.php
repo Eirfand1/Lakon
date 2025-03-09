@@ -161,7 +161,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
         Route::get('/', [PenyediaController::class, 'index'])->name('admin.penyedia.index');
         Route::put('/{penyedia}', [PenyediaController::class, 'update'])->name('admin.penyedia.edit');
         Route::delete('/{penyedia}', [PenyediaController::class, 'destroy'])->name('admin.penyedia.destroy');
-
+        Route::Get('/export', [PenyediaController::class, 'exportPenyedia'])->name('admin.penyedia.export');
     });
 
     // Paket Pekerjaan (Matriks)
