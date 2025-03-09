@@ -195,8 +195,9 @@ class PenyediaController extends Controller
     public function dashboard()
     {
         $user = auth()->user()->penyedia;
+        $kontrak = $user->kontrak->where('is_verificated', 0);
 
-        return view('pages.penyedia.dashboard.dashboard', ['penyedia' => $user]);
+        return view('pages.penyedia.dashboard.dashboard', ['penyedia' => $user, 'kontrak' => $kontrak]);
     }
     public function permohonanKontrakIndex()
     {
