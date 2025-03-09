@@ -22,7 +22,6 @@ class PenyediaTable extends DataTableComponent
         $this->setPrimaryKey('penyedia_id')
             ->setColumnSelectStatus(true)
             ->setFilterLayout('slide-down')
-            ->setDefaultSort('penyedia_id', 'desc')
             ->setPerPageAccepted([10,25,50,100, -1]);
     }
     public function builder(): \Illuminate\Database\Eloquent\Builder {
@@ -41,6 +40,9 @@ class PenyediaTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
             Column::make("Alamat Pemilik", "alamat_pemilik")
+                ->sortable()
+                ->searchable(),
+            Column::make('Status Akun', 'status')
                 ->sortable()
                 ->searchable(),
             Column::make("Nama Perusahaan Lengkap", "nama_perusahaan_lengkap")
@@ -79,25 +81,20 @@ class PenyediaTable extends DataTableComponent
             Column::make("NPWP Perusahaan", "npwp_perusahaan")
                 ->sortable()
                 ->searchable(),
-            Column::make("Path Logo perusahaan", "logo_perusahaan")
-                ->sortable()
-                ->searchable()
-                ->format(function ($value, $row) {
-                   return "<img src='" . asset($value) ."' alt='' style='width: auto; height: 30px;' />"; 
-                })
-                ->html(),
-
-            Column::make("Created at", "created_at")
-                ->sortable(),
-            Column::make("Updated at", "updated_at")
-                ->sortable(),
-            
+            // Column::make("Logo perusahaan", "logo_perusahaan")
+            //     ->sortable()
+            //     ->searchable()
+            //     ->format(function ($value, $row) {
+            //        return "<img src='" . asset($value) ."' alt='' style='width: auto; height: 30px;' />"; 
+            //     })
+            //     ->html(),
         ];
     }
 
     public function filters(): array
     {
         $perusahaanOption = Penyedia::distinct()->pluck('nama_perusahaan_lengkap', 'nama_perusahaan_lengkap')->toArray();
+        $statusOption = Penyedia::distinct()->pluck('status', 'status')->toArray();
         return [
             TextFilter::make('Nama')
                 ->config([
@@ -112,6 +109,12 @@ class PenyediaTable extends DataTableComponent
                 ->options(['' => 'Semua Perusahaan'] + $perusahaanOption) // Menambahkan opsi perusahaan dari database
                 ->filter(function ($builder, $value) {
                     return $value ? $builder->where('nama_perusahaan_lengkap', $value) : $builder;
+                }),
+
+            SelectFilter::make('Status Akun')
+                ->options(['' => 'Semua Status'] + $statusOption)
+                ->filter(function ($builder, $value) {
+                    return $value ? $builder->where('status', $value) : $builder;
                 }),
         ];
     }

@@ -43,7 +43,9 @@ class SekolahController extends Controller
             'nama_sekolah' => 'required|string|max:150',
             'jenjang' => 'required|in:SD,SMP,SMA,SMK',
             'status' => 'required|string|max:255',
-            'alamat' => 'required|string|max:255',
+            'kepala_sekolah' => 'required|string|max:255',
+            'nip_kepala_sekolah' => 'required|string|max:255',
+            'alamat' => 'required|number|max:255',
             'desa' => 'required|string|max:100',
             'kecamatan' => 'required|string|max:100',
             'koordinat' => 'nullable',
@@ -81,6 +83,8 @@ class SekolahController extends Controller
             'nama_sekolah' => 'required|string|max:150',
             'jenjang' => 'required|in:SD,SMP,SMA,SMK',
             'status' => 'required|string|max:255',
+            'kepala_sekolah' => 'required|string|max:255',
+            'nip_kepala_sekolah' => 'required|string|max:255',
             'alamat' => 'required|string|max:255',
             'desa' => 'required|string|max:100',
             'kecamatan' => 'required|string|max:100',
@@ -114,9 +118,9 @@ class SekolahController extends Controller
 
     public function destroy(Sekolah $sekolah)
     {
-            $sekolah->delete();
-            return redirect()->back()->with('success', 'Data berhasil dihapus.');
-        
+        $sekolah->delete();
+        return redirect()->back()->with('success', 'Data berhasil dihapus.');
+
     }
 
 }

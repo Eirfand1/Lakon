@@ -76,7 +76,7 @@
                     <div class="flex w-full flex-col pb-4">
                         <x-label for="sumber_dana" class="w-full sm:w-1/4">Sumber dana</x-label>
                         <select name="sumber_dana" id="sumber_dana"
-                            class="w-3/4 rounded-lg text-sm bg-white dark:bg-gray-900/20 dark:border-gray-700 h-10 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 @error('sumber_dana') border-red-500 @enderror"
+                            class="w-3/4 rounded-lg text-sm bg-white dark:bg-gray-800 dark:border-gray-700 h-10 block w-full rounded-md border-gray-200 shadow-sm  focus:ring-gray-600 @error('sumber_dana') border-red-500 @enderror"
                             required>
                             <option value="">Pilih Sumber Dana</option>
                             <option value="APBD" {{ old('sumber_dana') == 'APBD' ? 'selected' : '' }}>APBD</option>
@@ -165,7 +165,7 @@
                         <x-label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
                             <select name="jenis_pengadaan" id=""
-                                class="sm:w-1/4 w-3/4 text-sm  rounded-lg bg-white h-10 dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                class="sm:w-1/4 w-3/4 text-sm  rounded-lg bg-white h-10 dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md  border-gray-200 shadow-sm focus:ring-0
                                 required>
                                 <option value="Tender" {{ old('jenis_pengadaan') == 'Tender' ? 'selected' : '' }}>Tender</option>
                                 <option value="Non Tender" {{ old('jenis_pengadaan') == 'Non Tender' ? 'selected' : '' }}>Non Tender</option>
@@ -235,7 +235,7 @@
                     <div class="flex w-full flex-col pt-2 ">
                         <x-label for="ppkom_id" class="w-full sm:w-1/4">Ppkom</x-label>
                         <select name="ppkom_id" id="ppkom_id"
-                            class="w-3/4 rounded bg-white h-10 text-sm dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            class="w-3/4 rounded bg-white h-10 text-sm dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm "
                             required>
                             <option value="" disabled selected>Pilih Pegawai</option>
                             @foreach($ppkom as $ppk)
@@ -405,7 +405,7 @@
                     <div class="flex w-full flex-col pb-4 ">
                         <x-label for="sumber_dana" class="w-full sm:w-1/4">Sumber dana</x-label>
                         <select name="sumber_dana" id="sumber_dana"
-                            class="w-3/4 rounded-lg text-sm bg-white dark:bg-gray-900/20 dark:border-gray-700 h-10 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            class="w-3/4 rounded-lg text-sm bg-white dark:bg-gray-800 dark:border-gray-700 h-10 block w-full rounded-md border-gray-200 shadow-sm "
                             required>
                             <option value="APBD" {{ old('sumber_dana') == 'APBD' ? 'selected' : '' }}>APBD</option>
                             <option value="DAK" {{ old('sumber_dana') == 'DAK' ? 'selected' : '' }}>DAK</option>
@@ -490,7 +490,7 @@
                         <x-label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
                             <select name="jenis_pengadaan" id="jenis_pengadaan"
-                                class="sm:w-1/4 w-3/4 text-sm h-10 rounded-lg bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                class="sm:w-1/4 w-3/4 text-sm h-10 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm"
                                 required>
                                 <option value="Tender">Tender</option>
                                 <option value="Non Tender">Non Tender</option>
@@ -499,7 +499,7 @@
                             </select>
 
                             <select name="metode_pemilihan" id="metode_pemilihan"
-                                class="w-3/4 rounded text-sm bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                class="w-3/4 rounded text-sm bg-white dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm"
                                 required>
                                 <option value="" disabled selected>Pilih Jenis Pengadaan</option>
                                 <option value="Jasa Konsultasi Pengawasan">Jasa Konsultasi Pengawasan</option>

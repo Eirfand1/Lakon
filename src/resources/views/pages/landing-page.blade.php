@@ -523,7 +523,7 @@
                     Kabupaten Cilacap. All Rights Reserved
                 </div>
                 <div class="text-gray-400 mt-2">
-                    Version 1.10.2022.01 Beta
+                    Version 1.0.2025.01 Beta
                 </div>
                 <div class="text-xs text-gray-500 mt-2">
                     <p>Website ini dioptimalkan untuk browser terbaru. Gunakan Chrome, Firefox, Safari, atau Edge untuk
