@@ -12,7 +12,7 @@
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
         <div class="modal modal-top px-3">
-            <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
+            <div class="modal-box max-w-[55rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <h3 class="font-bold text-lg">EDIT DATA PENYEDIA</h3>
                 <div>
                     <label for="edit-modal"
@@ -186,8 +186,8 @@
                         <select name="status" id="edit_status"
                             class="mt-1 bg-white dark:bg-gray-900/20 h-10 text-sm dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             required>
-                            <option value="" disabled selected>Pilih Status</option>
-                            <option value="biasa">Biasa</option>
+                            <option value="" disabled>Pilih Status</option>
+                            <option value="penyedia">Penyedia</option>
                             <option value="konsultan">Konsultan</option>
                         </select>
                     </div>
@@ -242,7 +242,7 @@
             alamat_pemilik, nama_perusahaan_lengkap,
             nama_perusahaan_singkat, akta_notaris_no, akta_notaris_nama,
             akta_notaris_tanggal, alamat_perusahaan, kontak_hp,
-            kontak_email, rekening_norek, rekening_nama, rekening_bank, npwp_perusahaan, logo_perusahaan
+            kontak_email, rekening_norek, rekening_nama, rekening_bank, npwp_perusahaan, logo_perusahaan, status
         ) {
             document.getElementById('editForm').action = `penyedia/${penyedia_id}`;
             document.getElementById('edit_nik').value = nik;
@@ -260,6 +260,7 @@
             document.getElementById('edit_rekening_nama').value = rekening_nama;
             document.getElementById('edit_rekening_bank').value = rekening_bank;
             document.getElementById('edit_npwp_perusahaan').value = npwp_perusahaan;
+            document.getElementById('edit_status').value = status;
 
             const logoBefore = document.getElementById('logoPreview');
             logoBefore.src = `${logo_perusahaan ? `{{ asset('') }}${logo_perusahaan}` : '{{ asset('images/default-logo.png') }}'}`;
