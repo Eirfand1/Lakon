@@ -19,6 +19,8 @@ class SekolahSeeder extends Seeder
             'nama_sekolah' => "SDN karangkemiri 02",
             'jenjang' => "SD",
             'status' => "Negeri",
+            'kepala_sekolah' => "Budi",
+            'nip_kepala_sekolah' => 1234567890,
             'alamat' => "Jl. Karya Asri No. 1, Karang Kemiri, Kec. Karang Kemiri, Kabupaten Malang, Jawa Timur 65156",
             'desa' => "Karang Kemiri",
             'kecamatan' => "Maos",
