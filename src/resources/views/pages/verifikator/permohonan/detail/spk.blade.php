@@ -23,7 +23,7 @@
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nilai Kontrak</label>
-            <input type="number" name="nilai_kontrak" id="nilaiKontrakSPK" oninput="numberToTextFunction()" value="{{ $kontrak->nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <input type="text" name="nilai_kontrak" id="nilaiKontrakSPK" value="{{ $kontrak->nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
         </div>
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
@@ -120,12 +120,19 @@
 
 <script>
 
-        function numberToTextFunction() {
-            const input = document.getElementById("nilaiKontrakSPK").value
-
-            if (!input) {
-                document.getElementById("terbilangNilaiKontrakSPK").value = "";
+        function numberToTextFunction(input, too_long) {
+            let terbilang_input = document.getElementById("terbilangNilaiKontrakSPK")
+            if (!input || input === 0) {
+                terbilang_input.value = "";
                 return;
+            }
+
+            if (too_long) {
+                terbilang_input.value = "Nilai kontrak terlalu besar";
+                terbilang_input.classList.add("text-red-600", "dark:text-red-600");
+                return;
+            }else{
+                terbilang_input.classList.remove("text-red-600", "dark:text-red-600");
             }
 
             const convert = numberToText.convertToText(input, {
@@ -133,8 +140,44 @@
             })
 
             hasil = `${convert} Rupiah`
-            document.getElementById("terbilangNilaiKontrakSPK").value = hasil
+            terbilang_input.value = hasil
         }
+
+
+        // Fungsi untuk memformat input uang dengan Rp. dan separator ribuan
+        function formatUang(event) {
+            const input = event.target;
+            let value = input.value.replace(/[^0-9]/g, '');
+            let too_long = false;
+
+            if (value.length > 15) {
+                too_long = true;
+                input.classList.add("text-red-600", "dark:text-red-600");
+            }else{
+                input.classList.remove("text-red-600", "dark:text-red-600");
+            }
+
+            numberToTextFunction(value, too_long);
+
+            // Jika input kosong, set ke Rp. 0
+            if (value === "") {
+                input.value = "Rp. 0";
+                return;
+            }
+
+            // Ubah string angka ke number
+            let numberValue = parseInt(value, 10);
+
+            // Format angka dengan separator ribuan
+            let formattedValue = numberValue.toLocaleString('id-ID');
+
+            // Tambahkan "Rp." di depan
+            input.value = `Rp. ${formattedValue}`;
+        }
+
+        // Tambahkan event listener ke input uang
+        document.getElementById('nilaiKontrakSPK').addEventListener('input', formatUang);
+
 
         function waktuPenyelesaian(){
             const tanggal_awal = document.getElementById("tanggalAwalSPK").value
