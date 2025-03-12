@@ -180,8 +180,10 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::prefix('/sub-kegiatan')->group(function () {
         Route::get('/', [SubKegiatanController::class, 'index'])->name('admin.sub-kegiatan.index');
         Route::post('/', [SubKegiatanController::class, 'store'])->name('admin.sub-kegiatan.store');
+        Route::get('/export', [SubKegiatanController::class, 'exportSubKegiatan'])->name('admin.sub-kegiatan.export');
         Route::put('/{sub_kegiatan}', [SubKegiatanController::class, 'update'])->name('admin.sub-kegiatan.edit');
         Route::delete('/{sub_kegiatan}', [SubKegiatanController::class, 'destroy'])->name('admin.sub-kegiatan.destroy');
+
     });
 
     Route::prefix('/riwayat-kontrak')->group(function () {
@@ -189,6 +191,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
         Route::get('/', [KontrakController::class, 'index'])->name('admin.riwayat-kontrak.index');
         Route::get('/{kontrak}', [KontrakController::class, 'show'])->name('admin.riwayat-kontrak.show');
         Route::get('/{kontrak}/export-pdf', [KontrakController::class, 'exportPdf'])->name('admin.riwayat-kontrak.export-pdf');
+        Route::put('/{kontrak}/update-template', [KontrakController::class, 'updateTemplate'])->name('admin.riwayat-kontrak.update-template');
     });
 
     Route::prefix('/sekolah')->group(function () {

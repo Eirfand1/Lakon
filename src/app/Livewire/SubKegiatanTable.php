@@ -35,7 +35,7 @@ class SubKegiatanTable extends DataTableComponent
             Column::make("Nama Sub Kegiatan", "nama_sub_kegiatan")
                 ->sortable()
                 ->searchable(),
-            Column::make("No Rekening ", "no_rekening")
+            Column::make("Kode Rekening ", "no_rekening")
                 ->sortable()
                 ->searchable(),
             Column::make("Gabungan", "gabungan")
