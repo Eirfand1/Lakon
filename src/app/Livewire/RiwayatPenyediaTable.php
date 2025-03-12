@@ -42,6 +42,10 @@ class RiwayatPenyediaTable extends DataTableComponent
             Column::make("is_verificated")
                 ->hideIf(true),
 
+            Column::make("sekolah_id","paketPekerjaan.sekolah.nama_sekolah")
+                ->hideIf(true)
+                ->searchable(),
+
             Column::make("No Kontrak", "no_kontrak")
                 ->sortable()
                 ->searchable(),
@@ -51,6 +55,9 @@ class RiwayatPenyediaTable extends DataTableComponent
                 ->searchable(),
 
             Column::make("Nama Paket", "paketPekerjaan.nama_pekerjaan")
+                ->format(function ($value, $row) {
+                    return $row['paketPekerjaan.nama_pekerjaan'] ." ". $row['paketPekerjaan.sekolah.nama_sekolah'];
+                })
                 ->sortable()
                 ->searchable(),
 

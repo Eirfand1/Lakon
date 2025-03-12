@@ -39,8 +39,19 @@ class KonsultanTable extends DataTableComponent
 
             IncrementColumn::make('#'),
 
+            Column::make("Aksi", "kontrak_id")
+                ->format(function ($value, $row, Column $column) {
+                    return '
+                        <a href="realisasi/'.$value.'" class="btn btn-sm btn-success">Realisasi</a>
+                    ';
+                })->html(),
+
             Column::make("is_verificated")
                 ->hideIf(true),
+
+            Column::make("sekolah_id","paketPekerjaan.sekolah.nama_sekolah")
+                ->hideIf(true)
+                ->searchable(),
 
             Column::make("No Kontrak", "no_kontrak")
                 ->sortable()
@@ -51,6 +62,9 @@ class KonsultanTable extends DataTableComponent
                 ->searchable(),
 
             Column::make("Nama Paket", "paketPekerjaan.nama_pekerjaan")
+                ->format(function ($value, $row) {
+                    return $row['paketPekerjaan.nama_pekerjaan'] ." ". $row['paketPekerjaan.sekolah.nama_sekolah'];
+                })
                 ->sortable()
                 ->searchable(),
 
@@ -65,13 +79,6 @@ class KonsultanTable extends DataTableComponent
             Column::make("Tanggal Pengajuan", "tgl_pembuatan")
                 ->sortable()
                 ->searchable(),
-
-            Column::make("Aksi", "kontrak_id")
-                ->format(function ($value, $row, Column $column) {
-                    return '
-                        <a href="realisasi/'.$value.'" class="btn btn-sm btn-success">Realisasi</a>
-                    ';
-                })->html(),
         ];
     }
 }
