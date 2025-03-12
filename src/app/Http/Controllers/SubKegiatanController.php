@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SubKegiatanExport;
 use App\Models\SubKegiatan;
 use Illuminate\Http\Request;
 use Illuminate\Database\QueryException;
+use Maatwebsite\Excel\Facades\Excel;
 
 class SubKegiatanController extends Controller
 {
@@ -45,5 +47,9 @@ class SubKegiatanController extends Controller
     {
         $subKegiatan->delete();
         return redirect()->back()->with('success', 'Data berhasil dihapus.');
+    }
+
+    public function exportSubKegiatan() {
+        return Excel::download(new SubKegiatanExport, 'sub-kegaitan.xlsx');
     }
 }

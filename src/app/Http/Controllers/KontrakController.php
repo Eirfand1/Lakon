@@ -30,17 +30,33 @@ class KontrakController extends Controller
 
     public function show(Kontrak $kontrak)
     {
-        $kontrak = Kontrak::where('kontrak_id', $kontrak->kontrak_id)->with(['verifikator', 'penyedia', 'satuanKerja', 'paketPekerjaan'])->first();
-
+        $kontrak = Kontrak::where('kontrak_id', $kontrak->kontrak_id)
+            ->with(['verifikator', 'penyedia', 'satuanKerja', 'paketPekerjaan'])
+            ->first();
+        
         $templates = Storage::files('templates/kontrak');
         $templates = array_map(function ($path) {
             return basename($path);
         }, $templates);
-
+        
         return view('pages.admin.riwayat-kontrak.detail-kontrak', [
             'kontrak' => $kontrak,
             'templates' => $templates
         ]);
+    }
+
+    public function updateTemplate(Kontrak $kontrak, Request $request)
+    {
+        $request->validate([
+            'template_dokumen' => 'nullable|string',
+        ]);
+        
+        $kontrak->update([
+            'template' => $request->template_dokumen,
+        ]);
+        
+        return redirect()->route('admin.riwayat-kontrak.show', $kontrak->kontrak_id)
+            ->with('success', 'Template berhasil disimpan.');
     }
 
     public function exportKontrak()
@@ -160,7 +176,10 @@ class KontrakController extends Controller
                 ->first();
 
             // Pilih template
-            $templateName = $request->template ?? 'default_template.docx';
+            // $templateName = $request->template ?? 'default_template.docx';
+            // $templatePath = storage_path('app/templates/kontrak/' . $templateName);
+
+            $templateName = $kontrak->template ?? 'default_template.docx';
             $templatePath = storage_path('app/templates/kontrak/' . $templateName);
 
             // Pastikan template ada
@@ -263,7 +282,7 @@ class KontrakController extends Controller
             $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
             $templateProcessor->saveAs($outputDocx);
 
-            $format = $request->format ?? 'pdf';
+           $format = $request->format ?? 'pdf';
 
             if ($format == 'docx') {
                 // Return DOCX file

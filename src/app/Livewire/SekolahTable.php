@@ -106,10 +106,9 @@ class SekolahTable extends DataTableComponent
             SelectFilter::make('Jenjang')
                 ->options([
                     '' => 'Semua Jenjang',
+                    'PAUD' => 'PAUD',
                     'SD' => 'SD',
                     'SMP' => 'SMP',
-                    'SMA' => 'SMA',
-                    'SMK' => 'SMK',
                 ])
                 ->filter(function($builder, $value) {
                     return $value ? $builder->where('jenjang', $value) : $builder;
