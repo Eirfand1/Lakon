@@ -23,7 +23,8 @@
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nilai Kontrak</label>
-            <input type="text" name="nilai_kontrak" id="nilaiKontrakSPK" value="{{ $kontrak->nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <input type="text" id="nilaiKontrakSPK" value="{{ $kontrak->nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <input type="hidden" name="nilai_kontrak" id="nilaiKontrakSPKHidden" value="{{ $kontrak->nilai_kontrak }}">
         </div>
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
@@ -62,7 +63,11 @@
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Uang Muka</label>
-            <input type="number" name="uang_muka" value="{{ $kontrak->uang_muka }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <select name="uang_muka" id="uangMukaSPK" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+                <option value="" {{ $kontrak->uang_muka == false ? 'selected' : '' }}>Pilih Uang Muka</option>
+                <option value="Terdapat Uang Muka" {{ $kontrak->uang_muka == "Terdapat Uang Muka" ? 'selected' : '' }}>Ada Uang Muka</option>
+                <option value="Tidak Ada Uang Muka" {{ $kontrak->uang_muka == "Tidak Ada Uang Muka" ? 'selected' : '' }}>Tidak Ada Uang Muka</option>
+            </select>
         </div>
     </div>
 
@@ -73,7 +78,7 @@
     </div>
 </form>
 
-@if (($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan') && $jenis == 'non_tender')
+@if ($kontrak->nomor_spk)
 
 <div id="spkLanjutan">
     <div class="mb-8">
@@ -88,16 +93,7 @@
         @include('pages.lampiran.dokumen-tambahan')
     </div>
 </div>
-@endif
 
-@if (($metode == 'Pengadaan Barang' && $jenis == 'tender'))
-
-<div class="mb-8">
-    @include('pages.lampiran.ruang-lingkup')
-</div>
-@endif
-
-@if ($kontrak->nomor_spk)
 <form action="spk-done/{{ $kontrak->kontrak_id }}" method="POST">
     @csrf
     <div class="flex items-center mb-4 space-x-2 text-gray-600 dark:text-gray-300">
@@ -119,7 +115,6 @@
 @endif
 
 <script>
-
         function numberToTextFunction(input, too_long) {
             let terbilang_input = document.getElementById("terbilangNilaiKontrakSPK")
             if (!input || input === 0) {
@@ -150,6 +145,8 @@
             let value = input.value.replace(/[^0-9]/g, '');
             let too_long = false;
 
+            document.getElementById("nilaiKontrakSPKHidden").value = value
+
             if (value.length > 15) {
                 too_long = true;
                 input.classList.add("text-red-600", "dark:text-red-600");
@@ -177,6 +174,11 @@
 
         // Tambahkan event listener ke input uang
         document.getElementById('nilaiKontrakSPK').addEventListener('input', formatUang);
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const input = document.getElementById('nilaiKontrakSPK');
+            formatUang({ target: input });
+        });
 
 
         function waktuPenyelesaian(){
