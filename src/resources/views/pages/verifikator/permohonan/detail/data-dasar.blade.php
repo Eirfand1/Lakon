@@ -108,11 +108,11 @@
 
     <div class="grid grid-cols-1 gap-4">
 
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-1">
             <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Kode Paket</label>
+                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Kode Sirup</label>
                 <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                    {{ $kontrak->paketPekerjaan->kode_paket }}
+                    {{ $kontrak->paketPekerjaan->kode_sirup }}
                 </p>
             </div>
 
@@ -120,6 +120,7 @@
                 <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nama Paket</label>
                 <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
                     {{ $kontrak->paketPekerjaan->nama_pekerjaan }}
+                    {{ $kontrak->paketPekerjaan->sekolah->nama_sekolah }}
                 </p>
             </div>
         </div>

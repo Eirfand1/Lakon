@@ -149,7 +149,7 @@ class VerifikatorController extends Controller
             'tanggal_akhir' => 'required|date',
             'waktu_penyelesaian' => 'required|string|max:255',
             'cara_pembayaran' => 'required|string|max:255',
-            'uang_muka' => 'required|numeric',
+            'uang_muka' => 'required|string|max:255',
         ]);
 
         $kontrak->where('kontrak_id', $kontrak_id)->update([

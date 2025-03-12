@@ -111,7 +111,9 @@
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200">
                                             {{ $row->paketPekerjaan->kode_sirup }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200">
-                                            {{ $row->paketPekerjaan->nama_pekerjaan }}</td>
+                                            {{ $row->paketPekerjaan->nama_pekerjaan }}
+                                            {{ $row->paketPekerjaan->sekolah->nama_sekolah }}
+                                        </td>
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200">
                                             {{ $row->paketPekerjaan->jenis_pengadaan }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200">
