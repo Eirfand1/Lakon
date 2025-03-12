@@ -49,18 +49,16 @@ class PaketPekerjaanTable extends DataTableComponent
             Column::make("Aksi", "paket_id")
                 ->format(fn($value, $row) => view('pages.admin.paket-pekerjaan.actions', ['paket' => $row])),
 
-            //  TO-DO : buat isi kolom = paket pekerjaan + nama sekolah
             Column::make('Nama Paket Pekerjaan', 'nama_pekerjaan')
                 ->format(function ($value, $row) {
-                    // $data = PaketPekerjaan::with('sekolah_id')->find($row['sekolah.sekolah_id']);
-                    // dd($data);
-                    return $value . /* $data */ '';
+                    return $value ." ". $row['sekolah.nama_sekolah'];
                 })
                 ->sortable()
                 ->searchable(),
 
             Column::make('Sekolah', 'sekolah.nama_sekolah')
-                ->hideIf(true),
+                ->hideIf(true)
+                ->searchable(),
 
             Column::make('Sekolah', 'sekolah.sekolah_id')
                 ->hideIf(true),

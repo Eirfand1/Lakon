@@ -41,6 +41,23 @@ class VerifikasiTable extends DataTableComponent
             Column::make("is_verificated")
                 ->hideIf(true),
 
+            Column::make("sekolah_id","paketPekerjaan.sekolah.nama_sekolah")
+                ->hideIf(true)
+                ->searchable(),
+
+            Column::make("Aksi", "kontrak_id")
+                ->format( function($value, $row) {
+                    return '
+                            <button type="button" onclick="tolak('.$row->kontrak_id.')"
+                            class="btn btn-sm btn-error dark:text-gray-50">
+                            tolak</button>
+
+                            <a  href="detail/'.$row->kontrak_id.'"
+                            class="btn btn-sm btn-info dark:text-gray-50">
+                            detail</a>
+                            ';
+                })->html(),
+
             Column::make("No Kontrak", "no_kontrak")
                 ->sortable()
                 ->searchable(),
@@ -50,6 +67,9 @@ class VerifikasiTable extends DataTableComponent
                 ->searchable(),
 
             Column::make("Nama Paket", "paketPekerjaan.nama_pekerjaan")
+                ->format(function ($value, $row) {
+                    return $row['paketPekerjaan.nama_pekerjaan'] ." ". $row['paketPekerjaan.sekolah.nama_sekolah'];
+                })
                 ->sortable()
                 ->searchable(),
 
@@ -65,18 +85,6 @@ class VerifikasiTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make("Aksi", "kontrak_id")
-                ->format( function($value, $row) {
-                    return '
-                            <button type="button" onclick="tolak('.$row->kontrak_id.')"
-                            class="btn btn-sm btn-error dark:text-gray-50">
-                            tolak</button>
-                            
-                            <a  href="detail/'.$row->kontrak_id.'"
-                            class="btn btn-sm btn-info dark:text-gray-50">
-                            detail</a>
-                            ';
-                })->html(),
         ];
     }
 }

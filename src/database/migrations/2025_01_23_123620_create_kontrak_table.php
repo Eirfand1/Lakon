@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->integer('waktu_kontrak')->virtualAs('DATEDIFF(tanggal_akhir, tanggal_awal) + 1')->nullable();
             $table->string('waktu_penyelesaian')->nullable();
             $table->string('cara_pembayaran')->nullable();
-            $table->integer('uang_muka')->nullable();
+            $table->string('uang_muka')->nullable();
             $table->date('tgl_kontrak')->nullable();
             $table->foreignId('paket_id')
                 ->constrained('paket_pekerjaan', 'paket_id')
