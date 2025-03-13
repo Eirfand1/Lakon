@@ -164,7 +164,8 @@ class PaketPekerjaanController extends Controller
             'paket_id' => $paket->paket_id,
             'nama_pekerjaan' => $paket->nama_pekerjaan,
             'metode_pemilihan' => $paket->metode_pemilihan,
-            'jenis_pengadaan' => $paket->jenis_pengadaan
+            'jenis_pengadaan' => $paket->jenis_pengadaan,
+            'sumber_dana' => $paket->sumber_dana,
         ]);
     }
 

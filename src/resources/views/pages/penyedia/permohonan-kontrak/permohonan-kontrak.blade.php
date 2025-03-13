@@ -182,7 +182,7 @@
                                 <i class="fa fa-file-contract"></i> DASAR PERMOHONAN
                             </h2>
 
-                            <!-- Kode Paket -->
+                            <!-- Kode SIRUP -->
                             <div class="space-y-1">
                                 <label class="text-gray-700 dark:text-gray-300 block">Kode Sirup <span
                                         class="text-red-500">*</span></label>
@@ -210,6 +210,7 @@
                             {{-- id paket --}}
 
                             <input type="hidden" name="paket_id" x-bind:value="paketData?.paket_id || ''">
+                            <input type="hidden" name="sumber_dana" x-bind:value="paketData?.sumber_dana || ''">
 
                             <!-- Nama Paket -->
                             <div class="space-y-1">

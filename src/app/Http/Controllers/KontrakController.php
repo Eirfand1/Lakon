@@ -70,7 +70,47 @@ class KontrakController extends Controller
         try {
             $tahun = now()->year;
             $penyediaId = auth()->user()->penyedia->penyedia_id;
-            $nomorKontrak = "KONTRAK/{$penyediaId}/P4/{$tahun}";
+            // 'APBD', 'DAK', 'BANKEU', 'APBD Perubahan', 'APBD Perubahan Biasa', 'BANKEU Perubahan', 'SG', 'Bantuan Pemerintah'
+            switch ($request->sumber_dana) {
+                case 'APBD':
+                    $sumber_dana = 'A';
+                    break;
+                case 'DAK' :
+                    $sumber_dana = 'D';
+                    break;
+                case 'BANKEU' :
+                    $sumber_dana = 'B';
+                    break;
+                case 'APBD Perubahaan' || 'APBD Perubahaan Biasa' || 'BANKEU Perubahaan' || 'Bantuan Pemerintah' : // Masih ngawur
+                    $sumber_dana = 'P';
+                    break;
+                case 'SG' :
+                    $sumber_dana = 'S';
+                    break;
+                default:
+                    $sumber_dana = '';
+                    break;
+            }
+            switch($request->metode_pemilihan) {
+                case 'Jasa Konsultasi Perencanaan' :
+                    $metode = '1';
+                    break;
+                case 'Jasa Konsultasi Pengawasan' :
+                    $metode = '2'; 
+                    break;
+                case 'Pekerjaan Konstruksi' :
+                    $metode = '3';
+                    break;
+                case 'Pengadaan Barang' :
+                    $metode = '4';
+                    break;
+                default:
+                    $metode = '';
+                    break;
+            }
+            // 'Jasa Konsultasi Pengawasan', 'Jasa Konsultasi Perencanaan', 'Pekerjaan Konstruksi', 'Pengadaan Barang'
+
+            $nomorKontrak = "400.3.18/{$request->paket_id}/{$sumber_dana}{$metode}/{$tahun}";
 
             $kontrak = Kontrak::create([
                 'no_kontrak' => $nomorKontrak,
@@ -285,7 +325,7 @@ class KontrakController extends Controller
 
             $format = $request->format ?? 'pdf';
             if ($format == 'docx') {
-                return response()->download($outputDocx, 'Kontrak_' . $kontrak->penyedia->nama_perusahaan_lengkap . '.docx')->deleteFileAfterSend(true);
+                return response()->download($outputDocx, 'Kontrak_' . $kontrak->paketPekerjaan->paket_id . ". " . $kontrak->paketPekerjaan->nama_paket_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').docx')->deleteFileAfterSend(true);
             } else {
                 $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
                 $process = new Process([
@@ -303,7 +343,7 @@ class KontrakController extends Controller
 
                 return response()->file($outputPdf, [
                     'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename="Kontrak_' . $kontrak->penyedia->nama_perusahaan_lengkap . '.pdf"'
+                    'Content-Disposition' => 'inline; filename="Kontrak_' . $kontrak->paketPekerjaan->paket_id . ". " . $kontrak->paketPekerjaan->nama_paket_pekerjaan . " (" .  $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf"'
                 ])->deleteFileAfterSend(true);
             }
         } catch (\Exception $e) {

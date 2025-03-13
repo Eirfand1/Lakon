@@ -297,7 +297,7 @@
                             </div>
                             <div>
                                 <x-label>Status</x-label>
-                                <x-input type="text" name="nip_kepala_sekolah" id="edit_kepala_sekolah"
+                                <x-input type="text" name="nip_kepala_sekolah" id="edit_nip_kepala_sekolah"
                                     placeholder="NIP Kepala Sekolah"
                                     class="{{ $errors->has('nip_kepala_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
                                     required />
@@ -415,6 +415,8 @@
                 document.getElementById('edit_desa').value = sekolah.desa;
                 document.getElementById('edit_kecamatan').value = sekolah.kecamatan;
                 document.getElementById('edit_koordinat').value = sekolah.koordinat;
+                document.getElementById('edit_nip_kepala_sekolah').value = sekolah.nip_kepala_sekolah;
+                document.getElementById('edit_kepala_sekolah').value = sekolah.kepala_sekolah;
 
 
                 // Set posisi marker jika ada data koordinat
