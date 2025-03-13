@@ -33,12 +33,12 @@ class KontrakController extends Controller
         $kontrak = Kontrak::where('kontrak_id', $kontrak->kontrak_id)
             ->with(['verifikator', 'penyedia', 'satuanKerja', 'paketPekerjaan'])
             ->first();
-        
+
         $templates = Storage::files('templates/kontrak');
         $templates = array_map(function ($path) {
             return basename($path);
         }, $templates);
-        
+
         return view('pages.admin.riwayat-kontrak.detail-kontrak', [
             'kontrak' => $kontrak,
             'templates' => $templates
@@ -50,11 +50,11 @@ class KontrakController extends Controller
         $request->validate([
             'template_dokumen' => 'nullable|string',
         ]);
-        
+
         $kontrak->update([
             'template' => $request->template_dokumen,
         ]);
-        
+
         return redirect()->route('admin.riwayat-kontrak.show', $kontrak->kontrak_id)
             ->with('success', 'Template berhasil disimpan.');
     }
@@ -86,7 +86,8 @@ class KontrakController extends Controller
         }
     }
 
-    public function edit(Kontrak $kontrak,) {
+    public function edit(Kontrak $kontrak, )
+    {
         $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
         $totalBiaya = $rincianBelanja->sum('total_harga');
         $ppn = $totalBiaya * 0.11;
@@ -282,13 +283,10 @@ class KontrakController extends Controller
             $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
             $templateProcessor->saveAs($outputDocx);
 
-           $format = $request->format ?? 'pdf';
-
+            $format = $request->format ?? 'pdf';
             if ($format == 'docx') {
-                // Return DOCX file
-                return response()->download($outputDocx, 'Kontrak_'. $kontrak->penyedia->nama_perusahaan_lengkap . '.docx')->deleteFileAfterSend(true);
+                return response()->download($outputDocx, 'Kontrak_' . $kontrak->penyedia->nama_perusahaan_lengkap . '.docx')->deleteFileAfterSend(true);
             } else {
-                // Convert to PDF
                 $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
                 $process = new Process([
                     'unoconv',
@@ -299,13 +297,14 @@ class KontrakController extends Controller
                     $outputDocx
                 ]);
                 $process->run();
-
                 if (!$process->isSuccessful()) {
                     throw new ProcessFailedException($process);
                 }
 
-                // Return PDF file
-                return response()->download($outputPdf, 'Kontrak_' . $kontrak->penyedia->nama_perusahaan_lengkap . '.pdf')->deleteFileAfterSend(true);
+                return response()->file($outputPdf, [
+                    'Content-Type' => 'application/pdf',
+                    'Content-Disposition' => 'inline; filename="Kontrak_' . $kontrak->penyedia->nama_perusahaan_lengkap . '.pdf"'
+                ])->deleteFileAfterSend(true);
             }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengexport PDF: ' . $e->getMessage());
