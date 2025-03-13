@@ -29,9 +29,8 @@ class TemplateController extends Controller
             // Simpan file ke storage/app/templates/kontrak
             $filePath = $file->storeAs('templates/kontrak', $fileName);
 
-            // Simpan informasi ke database
             $template = new Template();
-            $template->name = $fileName;
+            $template->name = $request->name;
             $template->file_path = $filePath;
             $template->save();
 
