@@ -85,7 +85,7 @@
                         <textarea name="alamat"
                             class="rounded bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-200
                             {{ $errors->has('alamat') ? 'border-red-500' : 'border-gray-200' }}"
-                            placeholder="Jabatan"
+                            placeholder="Alamat"
                             >{{old('alamat')}}</textarea>
                             @error('alamat')
                                 <span class="text-sm text-red-500 mt-1">{{$message}}</span>
