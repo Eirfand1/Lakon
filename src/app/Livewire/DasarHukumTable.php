@@ -28,6 +28,9 @@ class DasarHukumTable extends DataTableComponent
         return [
             Column::make("Aksi", "daskum_id")
                 ->format(fn($value, $row) => view('pages.admin.dasar-hukum.actions', ['daskum' => $row])),
+            Column::make('ID', "daskum_id")
+                ->sortable()
+                ->searchable(),
             Column::make("Dasar Hukum ", "dasar_hukum")
                 ->sortable()
                 ->searchable(),

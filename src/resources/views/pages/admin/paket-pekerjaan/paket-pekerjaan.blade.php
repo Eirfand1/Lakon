@@ -172,7 +172,8 @@
                     <div class="flex w-full flex-col  ">
                         <x-label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-                            <select name="jenis_pengadaan" id="" class="sm:w-1/4 w-3/4 text-sm  rounded-lg bg-white h-10 dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md  border-gray-200 shadow-sm focus:ring-0"
+                            <select name="jenis_pengadaan" id=""
+                                class="sm:w-1/4 w-3/4 text-sm  rounded-lg bg-white h-10 dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md  border-gray-200 shadow-sm focus:ring-0"
                                 required>
                                 <option value=" Tender" {{ old('jenis_pengadaan') == 'Tender' ? 'selected' : '' }}>Tender
                                 </option>
@@ -198,32 +199,40 @@
                         </div>
                     </div>
 
-                    <div class="flex w-full flex-col ">
-                        <x-label for="nilai_pagu_paket" class="w-full sm:w-1/4">Nilai Pagu Paket</x-label>
-                        <x-input type="number" name="nilai_pagu_paket" id="" value="{{old('nilai_pagu_paket')}}"
+                    <div class="flex w-full flex-col">
+                        <x-label for="nilai_pagu_paket_display" class="w-full sm:w-1/4">Nilai Pagu Paket</x-label>
+                        <x-input type="text" name="nilai_pagu_paket_display" id="nilai_pagu_paket_display"
+                            value="{{old('nilai_pagu_paket') ? 'Rp ' . number_format(old('nilai_pagu_paket'), 0, ',', '.') : ''}}"
                             class="{{ $errors->has('nilai_pagu_paket') ? 'border-red-500' : 'border-gray-200' }}"
-                            required />
+                            onkeyup="formatRupiah(this, 'nilai_pagu_paket')" placeholder="Nilai Pagu Paket" required />
+                        <input type="hidden" name="nilai_pagu_paket" id="nilai_pagu_paket"
+                            value="{{old('nilai_pagu_paket')}}" />
                         @error('nilai_pagu_paket')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
                     </div>
 
-                    <div class="flex w-full flex-col ">
-                        <x-label for="nilai_pagu_anggaran" class="w-full sm:w-1/4">Nilai Pagu Anggaran</x-label>
-                        <x-input type="number" name="nilai_pagu_anggaran" value="{{old('nilai_pagu_anggaran')}}" id=""
+                    <div class="flex w-full flex-col">
+                        <x-label for="nilai_pagu_anggaran_display" class="w-full sm:w-1/4">Nilai Pagu Anggaran</x-label>
+                        <x-input type="text" name="nilai_pagu_anggaran_display" id="nilai_pagu_anggaran_display"
+                            value="{{old('nilai_pagu_anggaran') ? 'Rp ' . number_format(old('nilai_pagu_anggaran'), 0, ',', '.') : ''}}"
                             class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }}"
+                            onkeyup="formatRupiah(this, 'nilai_pagu_anggaran')" placeholder="Nilai Pagu Anggaran"
                             required />
+                        <input type="hidden" name="nilai_pagu_anggaran" id="nilai_pagu_anggaran"
+                            value="{{old('nilai_pagu_anggaran')}}" />
                         @error('nilai_pagu_anggaran')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
                     </div>
 
-                    <div class="flex w-full flex-col ">
-                        <x-label for="nilai_hps" class="w-full sm:w-1/4">Nilai HPS</x-label>
-                        <x-input type="number" name="nilai_hps" id="" value="{{old('nilai_hps')}}"
-                            class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }}"
-                            required />
-
+                    <div class="flex w-full flex-col">
+                        <x-label for="nilai_hps_display" class="w-full sm:w-1/4">Nilai HPS</x-label>
+                        <x-input type="text" name="nilai_hps_display" id="nilai_hps_display"
+                            value="{{old('nilai_hps') ? 'Rp ' . number_format(old('nilai_hps'), 0, ',', '.') : ''}}"
+                            class="{{ $errors->has('nilai_hps') ? 'border-red-500' : 'border-gray-200' }}"
+                            onkeyup="formatRupiah(this, 'nilai_hps')" placeholder="Nilai HPS" required />
+                        <input type="hidden" name="nilai_hps" id="nilai_hps" value="{{old('nilai_hps')}}" />
                         @error('nilai_hps')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
@@ -233,7 +242,7 @@
                         <x-label for="tahun_anggaran" class="w-full sm:w-1/4">Tahun Anggaran</x-label>
                         <x-input type="number" name="tahun_anggaran" value="{{old('tahun_anggaran')}}" id=""
                             class="{{ $errors->has('tahun_anggaran') ? 'border-red-500' : 'border-gray-200' }}"
-                            required />
+                            placeholder="Tahun Anggaran" required />
                         @error('tahun_anggaran')
                             <span class="text-red-500 text-sm mt-1">{{$message}}</span>
                         @enderror
@@ -521,31 +530,34 @@
                         </div>
                     </div>
 
-                    <div class="flex w-full flex-col ">
-                        <x-label for="nilai_pagu_paket" class="w-full sm:w-1/4">Nilai Pagu Paket</x-label>
-                        <x-input type="number" name="nilai_pagu_paket" id="nilai_pagu_paket"
+                    <div class="flex w-full flex-col">
+                        <x-label for="nilai_pagu_paket_display" class="w-full sm:w-1/4">Nilai Pagu Paket</x-label>
+                        <x-input type="text" name="nilai_pagu_paket_display" id="nilai_pagu_paket_display"
                             class="{{ $errors->has('nilai_pagu_paket') ? 'border-red-500' : 'border-gray-200' }}"
-                            required />
+                            onkeyup="formatRupiah(this, 'nilai_pagu_paket')" required />
+                        <input type="hidden" name="nilai_pagu_paket" id="nilai_pagu_paket" />
                         @error('nilai_pagu_paket')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
                     </div>
 
-                    <div class="flex w-full flex-col ">
-                        <x-label for="nilai_pagu_anggaran" class="w-full sm:w-1/4">Nilai Pagu Anggaran</x-label>
-                        <x-input type="number" name="nilai_pagu_anggaran" id="nilai_pagu_anggaran"
+                    <div class="flex w-full flex-col">
+                        <x-label for="nilai_pagu_anggaran_display" class="w-full sm:w-1/4">Nilai Pagu Anggaran</x-label>
+                        <x-input type="text" name="nilai_pagu_anggaran_display" id="nilai_pagu_anggaran_display"
                             class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }}"
-                            required />
-
+                            onkeyup="formatRupiah(this, 'nilai_pagu_anggaran')" required />
+                        <input type="hidden" name="nilai_pagu_anggaran" id="nilai_pagu_anggaran" />
                         @error('nilai_pagu_anggaran')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
                     </div>
 
-                    <div class="flex w-full flex-col ">
-                        <x-label for="nilai_hps" class="w-full sm:w-1/4">Nilai HPS</x-label>
-                        <x-input type="number" name="nilai_hps" id="nilai_hps"
-                            class="{{ $errors->has('nilai_hps') ? 'border-red-500' : 'border-gray-200' }}" required />
+                    <div class="flex w-full flex-col">
+                        <x-label for="nilai_hps_display" class="w-full sm:w-1/4">Nilai HPS</x-label>
+                        <x-input type="text" name="nilai_hps_display" id="nilai_hps_display"
+                            class="{{ $errors->has('nilai_hps') ? 'border-red-500' : 'border-gray-200' }}"
+                            onkeyup="formatRupiah(this, 'nilai_hps')" required />
+                        <input type="hidden" name="nilai_hps" id="nilai_hps" />
                         @error('nilai_hps')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
@@ -690,21 +702,26 @@
 
     <script>
 
+
         function EditHandler(paket) {
             const form = document.getElementById('edit-form');
-            form.action = `/admin/paket-pekerjaan/${paket.paket_id}`
-
-            // document.getElementById('edit-modal').action = `/admin/paket-pekerjaan/${paket.paket_id}`
+            form.action = `/admin/paket-pekerjaan/${paket.paket_id}`;
 
             // INPUT BIASA
-            document.getElementById('rup').value = paket.rup
-            document.getElementById('kode_sirup').value = paket.kode_sirup
-            document.getElementById('nama_pekerjaan').value = paket.nama_pekerjaan
-            document.getElementById('waktu_paket').value = paket.waktu_paket
-            document.getElementById('nilai_pagu_paket').value = paket.nilai_pagu_paket
-            document.getElementById('nilai_pagu_anggaran').value = paket.nilai_pagu_anggaran
-            document.getElementById('nilai_hps').value = paket.nilai_hps
-            document.getElementById('tahun_anggaran').value = paket.tahun_anggaran
+            document.getElementById('rup').value = paket.rup;
+            document.getElementById('kode_sirup').value = paket.kode_sirup;
+            document.getElementById('nama_pekerjaan').value = paket.nama_pekerjaan;
+            document.getElementById('waktu_paket').value = paket.waktu_paket;
+
+            document.getElementById('nilai_pagu_paket').value = paket.nilai_pagu_paket;
+            document.getElementById('nilai_pagu_anggaran').value = paket.nilai_pagu_anggaran;
+            document.getElementById('nilai_hps').value = paket.nilai_hps;
+
+            document.getElementById('nilai_pagu_paket_display').value = 'Rp ' + formatNumber(paket.nilai_pagu_paket);
+            document.getElementById('nilai_pagu_anggaran_display').value = 'Rp ' + formatNumber(paket.nilai_pagu_anggaran);
+            document.getElementById('nilai_hps_display').value = 'Rp ' + formatNumber(paket.nilai_hps);
+
+            document.getElementById('tahun_anggaran').value = paket.tahun_anggaran;
 
             // INPUT YANG ADA ALPINE
             // sekolah
@@ -743,17 +760,17 @@
             const jenis_pengadaan = document.getElementById('jenis_pengadaan');
             Array.from(jenis_pengadaan.options).forEach(option => {
                 if (option.value == paket.jenis_pengadaan) {
-                    option.setAttribute("selected", true)
+                    option.setAttribute("selected", true);
                 }
-            })
+            });
 
             // metode pemilihan
             const metode_pemilihan = document.getElementById('metode_pemilihan');
             Array.from(metode_pemilihan.options).forEach(option => {
                 if (option.value == paket.metode_pemilihan) {
-                    option.setAttribute("selected", true)
+                    option.setAttribute("selected", true);
                 }
-            })
+            });
         }
 
         function setDeleteId(paket_id) {
@@ -856,6 +873,26 @@
                     this.showDropdown = false;
                 }
             }
+        }
+
+        function formatRupiah(input, hiddenInputId) {
+            // Hapus semua karakter selain angka
+            let value = input.value.replace(/[^\d]/g, '');
+
+            // Simpan nilai original di hidden input
+            document.getElementById(hiddenInputId).value = value;
+
+            // Format dengan number_format
+            if (value) {
+                let formattedValue = formatNumber(value);
+                input.value = 'Rp ' + formattedValue;
+            } else {
+                input.value = '';
+            }
+        }
+
+        function formatNumber(number) {
+            return new Intl.NumberFormat('id-ID').format(number);
         }
 
 

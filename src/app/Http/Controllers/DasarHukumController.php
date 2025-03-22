@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\DasarHukumExport;
 use Illuminate\Http\Request;
 use App\Models\DasarHukum;
-use Illuminate\Database\QueryException;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DasarHukumController extends Controller
 {
@@ -13,6 +14,10 @@ class DasarHukumController extends Controller
     public function index()
     {
         return view("pages.admin.dasar-hukum.dasar-hukum");
+    }
+
+    public function exportDaskum() {
+        return Excel::download(new DasarHukumExport, "daskum.xlsx");
     }
 
     public function store(Request $request)
