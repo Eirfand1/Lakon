@@ -3,11 +3,20 @@
         <div class="mb-4 flex justify-between items-center">
             <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">DASAR HUKUM</h1>
             <!-- Add Button -->
-            <label for="add-dasar-hukum"
-                class="btn rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
-                <i class="fa-solid fa-square-plus"></i>
-                <span>Tambah Data</span>
-            </label>
+            <div class="flex gap-2">
+                <a href="{{ route('admin.dasar-hukum.export') }}" class="btn btn-success btn-sm rounded text-white">
+                    <i class="fa-solid fa-file-export"></i>
+                    <span>
+                        Export to Excel
+                    </span>
+                </a>
+                <label for="add-dasar-hukum"
+                    class="btn rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
+                    <i class="fa-solid fa-square-plus"></i>
+                    <span>Tambah Data</span>
+                </label>
+            </div>
+            
         </div>
 
         <livewire:dasar-hukum-table />

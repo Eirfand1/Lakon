@@ -325,7 +325,7 @@ class KontrakController extends Controller
 
             $format = $request->format ?? 'pdf';
             if ($format == 'docx') {
-                return response()->download($outputDocx, 'Kontrak_' . $kontrak->paketPekerjaan->paket_id . ". " . $kontrak->paketPekerjaan->nama_paket_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').docx')->deleteFileAfterSend(true);
+                return response()->download($outputDocx,  $kontrak->paketPekerjaan->paket_id . ". " . $kontrak->paketPekerjaan->nama_paket_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').docx')->deleteFileAfterSend(true);
             } else {
                 $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
                 $process = new Process([
@@ -343,7 +343,7 @@ class KontrakController extends Controller
 
                 return response()->file($outputPdf, [
                     'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename="Kontrak_' . $kontrak->paketPekerjaan->paket_id . ". " . $kontrak->paketPekerjaan->nama_paket_pekerjaan . " (" .  $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf"'
+                    'Content-Disposition' => 'inline; filename="' . $kontrak->paketPekerjaan->paket_id . ". " . $kontrak->paketPekerjaan->nama_paket_pekerjaan . " (" .  $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf"'
                 ])->deleteFileAfterSend(true);
             }
         } catch (\Exception $e) {
