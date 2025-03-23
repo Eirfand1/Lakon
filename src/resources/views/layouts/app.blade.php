@@ -69,7 +69,7 @@
                 style: {
                     background: "linear-gradient(145deg, rgba(40, 167, 69, 0.8), rgba(25, 135, 84, 0.8))",
                     fontWeight: "500",
-                    padding: "20px 32px",
+                    padding: "15px 25px",
                     borderRadius: "8px",
                     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
                     fontSize: "16px",
@@ -91,7 +91,7 @@
                 style: {
                     background: "linear-gradient(145deg, rgba(220, 53, 69, 0.8), rgba(200, 35, 51, 0.8))",
                     fontWeight: "500",
-                    padding: "20px 32px",
+                    padding: "15px 25px",
                     borderRadius: "8px",
                     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
                     fontSize: "16px",
@@ -114,7 +114,7 @@
                 style: {
                     background: "linear-gradient(145deg, rgba(220, 53, 69, 0.8), rgba(200, 35, 51, 0.8))",
                     fontWeight: "500",
-                    padding: "20px 32px",
+                    padding: "15px 25px",
                     borderRadius: "8px",
                     boxShadow: "0 4px 12px rgba(0, 0, 0, 0.15)",
                     fontSize: "16px",

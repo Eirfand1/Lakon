@@ -407,6 +407,7 @@
                 const sekolah = JSON.parse(data);
                 console.log(sekolah);
 
+                document.getElementById('editForm').action = `sekolah/${sekolah.sekolah_id}`;
 
                 // Set values for regular inputs
                 document.getElementById('edit_npsn').value = sekolah.npsn;
