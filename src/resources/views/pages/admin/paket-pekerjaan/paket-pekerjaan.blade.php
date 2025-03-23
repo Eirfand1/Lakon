@@ -532,10 +532,10 @@
 
                     <div class="flex w-full flex-col">
                         <x-label for="nilai_pagu_paket_display" class="w-full sm:w-1/4">Nilai Pagu Paket</x-label>
-                        <x-input type="text" name="nilai_pagu_paket_display" id="nilai_pagu_paket_display"
+                        <x-input type="text" name="nilai_pagu_paket_display" id="nilai_pagu_paket_display_edit"
                             class="{{ $errors->has('nilai_pagu_paket') ? 'border-red-500' : 'border-gray-200' }}"
                             onkeyup="formatRupiah(this, 'nilai_pagu_paket')" required />
-                        <input type="hidden" name="nilai_pagu_paket" id="nilai_pagu_paket" />
+                        <input type="hidden" name="nilai_pagu_paket" id="nilai_pagu_paket_edit" />
                         @error('nilai_pagu_paket')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
@@ -543,10 +543,10 @@
 
                     <div class="flex w-full flex-col">
                         <x-label for="nilai_pagu_anggaran_display" class="w-full sm:w-1/4">Nilai Pagu Anggaran</x-label>
-                        <x-input type="text" name="nilai_pagu_anggaran_display" id="nilai_pagu_anggaran_display"
+                        <x-input type="text" name="nilai_pagu_anggaran_display" id="nilai_pagu_anggaran_display_edit"
                             class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }}"
                             onkeyup="formatRupiah(this, 'nilai_pagu_anggaran')" required />
-                        <input type="hidden" name="nilai_pagu_anggaran" id="nilai_pagu_anggaran" />
+                        <input type="hidden" name="nilai_pagu_anggaran" id="nilai_pagu_anggaran_edit" />
                         @error('nilai_pagu_anggaran')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
@@ -554,10 +554,10 @@
 
                     <div class="flex w-full flex-col">
                         <x-label for="nilai_hps_display" class="w-full sm:w-1/4">Nilai HPS</x-label>
-                        <x-input type="text" name="nilai_hps_display" id="nilai_hps_display"
+                        <x-input type="text" name="nilai_hps_display" id="nilai_hps_display_edit"
                             class="{{ $errors->has('nilai_hps') ? 'border-red-500' : 'border-gray-200' }}"
                             onkeyup="formatRupiah(this, 'nilai_hps')" required />
-                        <input type="hidden" name="nilai_hps" id="nilai_hps" />
+                        <input type="hidden" name="nilai_hps" id="nilai_hps_edit" />
                         @error('nilai_hps')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
@@ -713,13 +713,13 @@
             document.getElementById('nama_pekerjaan').value = paket.nama_pekerjaan;
             document.getElementById('waktu_paket').value = paket.waktu_paket;
 
-            document.getElementById('nilai_pagu_paket').value = paket.nilai_pagu_paket;
-            document.getElementById('nilai_pagu_anggaran').value = paket.nilai_pagu_anggaran;
-            document.getElementById('nilai_hps').value = paket.nilai_hps;
+            document.getElementById('nilai_pagu_paket_edit').value = paket.nilai_pagu_paket;
+            document.getElementById('nilai_pagu_anggaran_edit').value = paket.nilai_pagu_anggaran;
+            document.getElementById('nilai_hps_edit').value = paket.nilai_hps;
 
-            document.getElementById('nilai_pagu_paket_display').value = 'Rp ' + formatNumber(paket.nilai_pagu_paket);
-            document.getElementById('nilai_pagu_anggaran_display').value = 'Rp ' + formatNumber(paket.nilai_pagu_anggaran);
-            document.getElementById('nilai_hps_display').value = 'Rp ' + formatNumber(paket.nilai_hps);
+            document.getElementById('nilai_pagu_paket_display_edit').value = 'Rp ' + formatNumber(paket.nilai_pagu_paket);
+            document.getElementById('nilai_pagu_anggaran_display_edit').value = 'Rp ' + formatNumber(paket.nilai_pagu_anggaran);
+            document.getElementById('nilai_hps_display_edit').value = 'Rp ' + formatNumber(paket.nilai_hps);
 
             document.getElementById('tahun_anggaran').value = paket.tahun_anggaran;
 
@@ -881,6 +881,7 @@
 
             // Simpan nilai original di hidden input
             document.getElementById(hiddenInputId).value = value;
+            document.getElementById(hiddenInputId + '_edit').value = value;
 
             // Format dengan number_format
             if (value) {
