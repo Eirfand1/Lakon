@@ -40,7 +40,7 @@
                     @csrf
                     <div class="flex w-full flex-col ">
                         <x-label for="no_rekening" class="w-full sm:w-1/4">Nomor Rekening</x-label>
-                        <x-input type="number" name="no_rekening" id="no_rekening" value="{{old('no_rekening')}}"
+                        <x-input type="text" name="no_rekening" id="no_rekening" value="{{old('no_rekening')}}"
                             class="{{ $errors->has('no_rekening') ? 'border-red-500' : 'border-gray-200' }}"
                             placeholder="Nomor Rekening" />
                         @error('no_rekening')
@@ -58,18 +58,9 @@
                         @enderror
                     </div>
                     <div class="flex w-full flex-col ">
-                        <x-label for="gabungan" class="w-full sm:w-1/4">Gabungan</x-label>
-                        <x-input type="text" name="gabungan" id="gabungan" value="{{old('gabungan')}}"
-                            class="{{ $errors->has('gabungan') ? 'border-red-500' : 'border-gray-200' }}"
-                            placeholder="Gabungan" />
-                        @error('gabungan')
-                            <span class="text-sm text-red-500 mt-1">{{$message}}</span>
-                        @enderror
-                    </div>
-                    <div class="flex w-full flex-col ">
                         <x-label for="pendidikan" class="w-full sm:w-1/4">Pendidikan</x-label>
                         <select name="pendidikan" id="pendidikan" class="{{$errors->has('pendidikan') ? 'border-red-500' : 'border-gray-200'}} rounded-md dark:bg-gray-800 dark:border-gray-700">
-                            <option value="PAUD" @if (old('pendidikan') ? '' : 'selected') @endif disabled>Pilih Pendidikan</option>
+                            <option value="" @if (old('pendidikan') ? '' : 'selected') @endif>Pilih Pendidikan</option>
                             <option value="PAUD" @if (old('pendidikan') == 'PAUD' ? 'selected' : '') @endif>PAUD</option>
                             <option value="SD"  @if (old('pendidikan') == 'SD' ? 'selected' : '') @endif>SD</option>
                             <option value="SMP" @if (old('pendidikan') == 'SMP' ? 'selected' : '') @endif>SMP</option>
@@ -111,7 +102,7 @@
                     @method('PUT')
                     <div class="w-full flex flex-col">
                         <x-label>Nomor Rekening</x-label>
-                        <x-input type="number" id="noRekening" name="no_rekening"
+                        <x-input type="text" id="noRekening" name="no_rekening"
                             class="{{ $errors->has('no_rekening') ? 'border-red-500' : 'border-gray-200' }}" required />
                         @error('no_rekening')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
@@ -123,14 +114,6 @@
                             class="{{ $errors->has('nama_sub_kegiatan') ? 'border-red-500' : 'border-gray-200' }}"
                             required />
                         @error('nama_sub_kegiatan')
-                            <span class="text-sm text-red-500 mt-1">{{$message}}</span>
-                        @enderror
-                    </div>
-                    <div class="">
-                        <x-label>Gabungan</x-label>
-                        <x-input type="text" id="edit_gabungan" name="gabungan"
-                            class="{{ $errors->has('gabungan') ? 'border-red-500' : 'border-gray-200' }}" required />
-                        @error('gabungan')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
                     </div>
@@ -186,7 +169,6 @@
                     document.getElementById('editForm').action = `sub-kegiatan/${sub_kegiatan_id}`;
                     document.getElementById('noRekening').value = no_rekening;
                     document.getElementById('namaSubKegiatan').value = nama_sub_kegiatan;
-                    document.getElementById('edit_gabungan').value = gabungan;
                     document.getElementById('edit_pendidikan').value = pendidikan;
                 }
                 function setDeleteId(sub_kegiatan_id) {
