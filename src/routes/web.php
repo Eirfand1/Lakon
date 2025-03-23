@@ -47,6 +47,9 @@ Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(functio
     Route::get('/permohonan-kontrak/{kontrak}', [KontrakController::class, 'edit'])->name('penyedia.permohonan-kontrak.edit');
     Route::put('/permohonan-kontrak/{kontrak}', [KontrakController::class, 'update'])->name('penyedia.permohonan-kontrak.update');
     Route::post('/permohonan-kontrak/layangkan/{kontrak}', [KontrakController::class, 'layangkan'])->name('penyedia.permohonan-kontrak.layangkan');
+    Route::get('/detail-kontrak/{kontrak}', [KontrakController::class, 'detail'])->name('penyedia.detail-kontrak.layangkan');
+    Route::get('/{kontrak}/export-pdf', [KontrakController::class, 'exportPdf'])->name('penyedia.riwayat-kontrak.export-pdf');
+
 
     // lampiran kontrak
     // tim

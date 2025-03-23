@@ -46,6 +46,15 @@ class RiwayatPenyediaTable extends DataTableComponent
                 ->hideIf(true)
                 ->searchable(),
 
+            Column::make("Aksi", "kontrak_id")
+                ->format( function($value, $row) {
+                    return '
+                            <a  href="detail-kontrak/'.$row->kontrak_id.'"
+                            class="btn btn-sm btn-info dark:text-gray-50">
+                            detail</a>
+                            ';
+                })->html(),
+
             Column::make("No Kontrak", "no_kontrak")
                 ->sortable()
                 ->searchable(),
