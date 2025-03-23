@@ -215,6 +215,7 @@
                     </div>
                 </form>
             </div>
+            <label class="modal-backdrop" for="edit-modal">Close</label>
         </div>
 
 
@@ -239,6 +240,8 @@
                     </div>
                 </form>
             </div>
+
+            <label class="modal-backdrop" for="delete-modal">Close</label>
         </div>
     </div>
 

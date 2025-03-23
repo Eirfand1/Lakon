@@ -17,7 +17,7 @@
         <!-- Add Modal -->
         <input type="checkbox" id="add-modal" class="modal-toggle" />
         <div id="modal_verifikator" class="modal modal-top px-3">
-            <div class="modal-box max-w-[52rem] mx-auto m-3 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
+            <div class="modal-box max-w-[55rem] mx-auto m-3 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <div>
                     <label for="add-modal" class="btn btn-sm rounded-full shadow-none btn-circle mt-2 btn-ghost absolute right-4 top-2">
                         ✕
@@ -109,12 +109,14 @@
                     </div>
                 </form>
             </div>
+
+            <label class="modal-backdrop" for="add-modal">Close</label>
         </div>
 
         <!-- Edit Modal -->
         <input type="checkbox" id="edit-modal" class="modal-toggle" />
         <div class="modal modal-top px-3">
-            <div class="modal-box max-w-[52rem] mx-auto m-3 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
+            <div class="modal-box max-w-[55rem] mx-auto m-3 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
                 <h3 class="font-bold text-lg mb-3">EDIT DATA VERIFIKATOR</h3>
                 <div>
                     <label for="edit-modal"
@@ -197,6 +199,7 @@
                     </div>
                 </form>
             </div>
+            <label class="modal-backdrop" for="edit-modal">Close</label>
         </div>
 
         <!-- Delete Modal -->
@@ -218,6 +221,7 @@
                     </div>
                 </form>
             </div>
+            <label class="modal-backdrop" for="delete-modal">Close</label>
         </div>
     </div>
 

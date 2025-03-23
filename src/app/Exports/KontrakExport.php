@@ -28,7 +28,7 @@ class KontrakExport implements FromCollection, WithHeadings, ShouldAutoSize
                     'tgl_kontrak' => $kontrak->tgl_kontrak,
                     'waktu_kontrak' => $kontrak->waktu_kontrak,
                     'tgl_pembuatan' => $kontrak->tgl_pembuatan,
-                    'nama_sub_kegiatan' => $kontrak->subKegiatan->nama_sub_kegiatan,
+                    'nama_sub_kegiatan' => $kontrak->subKegiatan->nama_sub_kegiatan ?? "",
                     'nomor_dppl' => $kontrak->nomor_dppl,
                     'tgl_dppl' => $kontrak->tgl_dppl,
                     'nomor_bahpl' => $kontrak->nomor_bahpl,

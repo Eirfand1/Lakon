@@ -219,6 +219,8 @@
                     </div>
                 </form>
             </div>
+
+            <label class="modal-backdrop" for="add-sekolah">Close</label>
         </div>
 
         <!-- Edit Sekolah -->
@@ -365,6 +367,8 @@
                     </div>
                 </form>
             </div>
+
+        <label class="modal-backdrop" for="edit-modal">Close</label>
         </div>
     </div>
 
@@ -387,6 +391,8 @@
                 </div>
             </form>
         </div>
+
+        <label class="modal-backdrop" for="delete-sekolah">Close</label>
     </div>
 
     <!-- Leaflet JavaScript -->
