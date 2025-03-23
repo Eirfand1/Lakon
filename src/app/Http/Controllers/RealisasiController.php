@@ -13,6 +13,19 @@ class RealisasiController extends Controller
         return view('pages.admin.realisasi.realisasi');
     }
 
+    public function detail($kontrak_id) {
+        $kontrak = Kontrak::where('kontrak_id', $kontrak_id)
+            ->with([
+                'paketPekerjaan',
+                'realisasi' => function ($query) {
+                    $query->orderBy('realisasi.tahun', 'asc')
+                        ->orderBy('realisasi.bulan', 'asc');
+                }])
+            ->first();
+
+        return view('pages.admin.realisasi.detail', ['kontrak' => $kontrak]);
+    }
+
     public function realisasi($kontrak_id)
     {
         $kontrak = Kontrak::where('kontrak_id', $kontrak_id)
