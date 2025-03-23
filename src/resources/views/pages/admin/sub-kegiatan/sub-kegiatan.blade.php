@@ -117,10 +117,14 @@
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
                     </div>
-                    <div class="">
-                        <x-label>Pendidikan</x-label>
-                        <x-input type="text" id="edit_pendidikan" name="pendidikan"
-                            class="{{ $errors->has('pendidikan') ? 'border-red-500' : 'border-gray-200' }}" required />
+
+                    <div class="flex w-full flex-col ">
+                        <x-label for="pendidikan" class="w-full sm:w-1/4">Pendidikan</x-label>
+                        <select name="pendidikan" id="edit_pendidikan" class="{{$errors->has('pendidikan') ? 'border-red-500' : 'border-gray-200'}} rounded-md dark:bg-gray-800 dark:border-gray-700">
+                            <option value="PAUD" @if (old('pendidikan') == 'PAUD' ? 'selected' : '') @endif>PAUD</option>
+                            <option value="SD"  @if (old('pendidikan') == 'SD' ? 'selected' : '') @endif>SD</option>
+                            <option value="SMP" @if (old('pendidikan') == 'SMP' ? 'selected' : '') @endif>SMP</option>
+                        </select>
                         @error('pendidikan')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
@@ -165,11 +169,18 @@
 
             <!-- Script for PPkom Table -->
             <script>
-                function editDaskum(sub_kegiatan_id, no_rekening, nama_sub_kegiatan, gabungan, pendidikan) {
+                function editSubKegiatan(sub_kegiatan_id, no_rekening, nama_sub_kegiatan, gabungan, pendidikan) {
                     document.getElementById('editForm').action = `sub-kegiatan/${sub_kegiatan_id}`;
                     document.getElementById('noRekening').value = no_rekening;
                     document.getElementById('namaSubKegiatan').value = nama_sub_kegiatan;
-                    document.getElementById('edit_pendidikan').value = pendidikan;
+                    // document.getElementById('edit_pendidikan').value = pendidikan;
+
+                    const edit_pendidikan = document.getElementById('edit_pendidikan');
+                    Array.from(edit_pendidikan.options).forEach(option => {
+                        if (option.value == pendidikan) {
+                            option.setAttribute("selected", true);
+                        }
+                    });
                 }
                 function setDeleteId(sub_kegiatan_id) {
                     document.getElementById('deleteForm').action = `sub-kegiatan/${sub_kegiatan_id}`;

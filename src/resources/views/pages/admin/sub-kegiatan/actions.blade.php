@@ -1,5 +1,5 @@
 <label for="edit-sub-kegiatan" class="btn rounded-md text-gray-200 btn-sm btn-warning"
-    onclick="editDaskum(
+    onclick="editSubKegiatan(
         {{ $sub_kegiatan->sub_kegiatan_id }},
         `{{ $sub_kegiatan->no_rekening }}`,
         `{{ $sub_kegiatan->nama_sub_kegiatan }}`,
