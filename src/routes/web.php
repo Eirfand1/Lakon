@@ -35,7 +35,7 @@ use App\Http\Controllers\KeteranganKontrakController;
 
 
 
-Route::view('/', 'pages.landing-page');
+Route::view('/', 'pages.landing-page')->name('dashboard');
 Route::get('/registrasi', [PenyediaController::class, 'create'])->name('registrasi');
 Route::post('/registrasi', [PenyediaController::class, 'store'])->name('registrasi.store');
 
@@ -178,6 +178,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
     // Realisasi
     Route::get('/realisasi', [RealisasiController::class, 'index'])->name('admin.realisasi.index');
+    Route::get('/detail-realisasi/{kontrak_id}', [RealisasiController::class, 'detail'])->name('admin.detail-realisasi');
 
 
     // Sub Kegiatan
