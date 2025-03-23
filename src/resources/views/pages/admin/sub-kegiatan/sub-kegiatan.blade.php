@@ -89,6 +89,7 @@
                     </div>
                 </form>
             </div>
+            <label class="modal-backdrop" for="add-sub-kegiatan">Close</label>
         </div>
 
         <!-- Edit Sub Kegiatan -->
@@ -152,6 +153,7 @@
                     </div>
                 </form>
             </div>
+            <label class="modal-backdrop" for="edit-sub-kegiatan">Close</label>
         </div>
 
         <!-- Delete Modal -->
@@ -174,6 +176,7 @@
                     </div>
                 </form>
             </div>
+            <label class="modal-backdrop" for="delete-sub-kegiatan">Close</label>
         </div>
         <div>
 

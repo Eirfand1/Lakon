@@ -57,6 +57,8 @@
                     </div>
                 </form>
             </div>
+
+            <label class="modal-backdrop" for="add-dasar-hukum">Close</label>
         </div>
 
         <!-- Edit Dasar Hukum -->
@@ -96,6 +98,8 @@
                     </div>
                 </form>
             </div>
+
+            <label class="modal-backdrop" for="edit-daskum">Close</label>
         </div>
 
         <!-- Delete Modal -->
@@ -118,6 +122,8 @@
                     </div>
                 </form>
             </div>
+
+            <label class="modal-backdrop" for="delete-daskum">Close</label>
         </div>
         <div>
 

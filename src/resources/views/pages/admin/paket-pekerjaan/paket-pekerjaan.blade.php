@@ -351,6 +351,7 @@
                     </div>
                 </form>
             </div>
+            <label class="modal-backdrop" for="add-modal">Close</label>
         </div>
 
         <!-- Edit Modal -->
@@ -674,6 +675,7 @@
                     </div>
                 </form>
             </div>
+            <label class="modal-backdrop" for="edit-modal">Close</label>
         </div>
 
 
@@ -697,6 +699,7 @@
                     </div>
                 </form>
             </div>
+            <label class="modal-backdrop" for="delete-modal">Close</label>
         </div>
     </div>
 
