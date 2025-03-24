@@ -32,6 +32,11 @@ class Kontrak extends Model
         return $this->belongsTo(Penyedia::class, 'penyedia_id');
     }
 
+    public function template()
+    {
+        return $this->belongsTo(Template::class, 'template_id');
+    }
+
     public function riwayatKontrak() {
         $verifikator = auth()->user()->verifikator;
         $kontrak = Kontrak::where('verifikator_id', $verifikator)->get();

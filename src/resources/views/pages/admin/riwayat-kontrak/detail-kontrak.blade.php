@@ -26,12 +26,12 @@
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                 Template Dokumen
                             </label>
-                            <select name="template_dokumen"
+                            <select name="template_id"
                                 class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                 <option value="">Pilih Template</option>
                                 @foreach($templates as $template)
-                                    <option value="{{ $template }}" {{ $kontrak->template == $template ? 'selected' : '' }}>
-                                        {{ pathinfo($template, PATHINFO_FILENAME) }}
+                                    <option value="{{ $template->template_id }}" {{ $kontrak->template_id == $template->template_id ? 'selected' : '' }}>
+                                        {{ $template->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -80,7 +80,7 @@
                                 </button>
                             </div>
                         </div>
-                    @endif 
+                    @endif
                 </div>
 
                 <!-- Informasi Paket Pekerjaan -->

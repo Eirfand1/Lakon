@@ -13,6 +13,7 @@ use App\Models\JadwalKegiatan;
 use App\Models\RincianBelanja;
 use App\Models\Peralatan;
 use App\Models\RuangLingkup;
+use App\Models\Template;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
@@ -34,10 +35,7 @@ class KontrakController extends Controller
             ->with(['verifikator', 'penyedia', 'satuanKerja', 'paketPekerjaan'])
             ->first();
 
-        $templates = Storage::files('templates/kontrak');
-        $templates = array_map(function ($path) {
-            return basename($path);
-        }, $templates);
+        $templates = Template::all();
 
         return view('pages.admin.riwayat-kontrak.detail-kontrak', [
             'kontrak' => $kontrak,
@@ -48,11 +46,11 @@ class KontrakController extends Controller
     public function updateTemplate(Kontrak $kontrak, Request $request)
     {
         $request->validate([
-            'template_dokumen' => 'nullable|string',
+            'template_id' => 'nullable|exists:templates,template_id',
         ]);
 
         $kontrak->update([
-            'template' => $request->template_dokumen,
+            'template_id' => $request->template_id,
         ]);
 
         return redirect()->route('admin.riwayat-kontrak.show', $kontrak->kontrak_id)
@@ -230,15 +228,15 @@ class KontrakController extends Controller
         try {
             // Load kontrak dengan relasinya
             $kontrak = Kontrak::where('kontrak_id', $kontrak->kontrak_id)
-                ->with(['verifikator', 'penyedia', 'satuanKerja', 'paketPekerjaan', 'subKegiatan'])
+                ->with(['verifikator', 'penyedia', 'satuanKerja', 'paketPekerjaan', 'subKegiatan', 'template'])
                 ->first();
 
             // Pilih template
             // $templateName = $request->template ?? 'default_template.docx';
             // $templatePath = storage_path('app/templates/kontrak/' . $templateName);
 
-            $templateName = $kontrak->template ?? 'default_template.docx';
-            $templatePath = storage_path('app/templates/kontrak/' . $templateName);
+            $templateName = $kontrak->template->file_path ?? 'default_template.docx';
+            $templatePath = storage_path('app/' . $templateName);
 
             // Pastikan template ada
             if (!file_exists($templatePath)) {
