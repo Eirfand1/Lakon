@@ -54,8 +54,8 @@
                         <td class="border border-gray-400/30 ">{{ $row->jenis }}</td>
                         <td class="border border-gray-400/30">{{ $row->qty }}</td>
                         <td class="border border-gray-400/30">{{ $row->satuan }}</td>
-                        <td class="border border-gray-400/30">{{ $row->harga_satuan }}</td>
-                        <td class="border border-gray-400/30">{{ $row->total_harga }}</td>
+                        <td class="border border-gray-400/30">Rp. {{ $row->harga_satuan }}</td>
+                        <td class="border border-gray-400/30">Rp. {{ $row->total_harga }}</td>
                         <td class="border border-gray-400/30">{{ $row->keterangan }}</td>
 
                         <td class="border border-gray-400/30">
@@ -72,22 +72,17 @@
                 @endforeach
                 <tr>
                     <td colspan="4" class="text-right border border-gray-400/30">Total</td>
-                    <td class="text-right border border-gray-400/30">{{ $totalBiaya }}</td>
+                    <td class="text-right border border-gray-400/30">Rp. {{ $totalBiaya }}</td>
                     <td colspan="2" class="border border-gray-400/30"></td>
                 </tr>
                 <tr>
                     <td colspan="4" class="text-right border border-gray-400/30">PPN 11%</td>
-                    <td class="text-right border border-gray-400/30">{{ $ppn }}</td>
+                    <td class="text-right border border-gray-400/30">Rp. {{ $ppn }}</td>
                     <td colspan="2" class="border border-gray-400/30"></td>
                 </tr>
                 <tr>
                     <td colspan="4" class="text-right border border-gray-400/30">Total Biaya</td>
-                    <td class="text-right border border-gray-400/30">{{ $totalBiaya + $ppn }}</td>
-                    <td colspan="2" class="border border-gray-400/30"></td>
-                </tr>
-                <tr>
-                    <td colspan="4" class="text-right border border-gray-400/30">Pembulatan</td>
-                    <td class="text-right border border-gray-400/30">{{ "gak tau gimana" }}</td>
+                    <td class="text-right border border-gray-400/30">Rp. {{ $totalBiaya + $ppn }}</td>
                     <td colspan="2" class="border border-gray-400/30"></td>
                 </tr>
         </tbody>
