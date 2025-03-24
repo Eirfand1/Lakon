@@ -17,7 +17,8 @@
                                         '{{ $p->rekening_bank ?? '' }}',
                                         '{{ $p->npwp_perusahaan ?? '' }}',
                                         '{{ $p->logo_perusahaan ?? '' }}',
-                                        '{{ $p->status ?? '' }}'
+                                        '{{ $p->status ?? '' }}',
+                                        '{{ $p->user->name ?? ''}}'
 
                                     )">
         <i class="fa-solid fa-pen-to-square"></i>
