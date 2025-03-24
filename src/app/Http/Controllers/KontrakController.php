@@ -272,6 +272,8 @@ class KontrakController extends Controller
                 $templateProcessor->setValue($varName, $subKegiatan->no_rekening ?? '');
             }
 
+            $templateProcessor->setValue('${REKENING_SUB_KEGIATAN}', $kontrak->paketPekerjaan->subKegiatan->first()->no_rekening ?? '');
+
             // Kontrak
             $templateProcessor->setValue('${NO_KONTRAK}', $kontrak->no_kontrak);
             $templateProcessor->setValue('${JENIS_KONTRAK}', $kontrak->jenis_kontrak);
