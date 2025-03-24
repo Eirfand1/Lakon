@@ -66,7 +66,7 @@
                 <i class="fa-regular {{ $kontrak->spk_done ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
             </button>
 
-            @if ($jenis == 'tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan'))
+            {{-- @if ($jenis == 'tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan')) --}}
             <button
                 :class="{
                     'bg-blue-500 text-white': tab === 'tab3',
@@ -78,9 +78,9 @@
                 Lampiran
                 <i class="fa-regular {{ $kontrak->lampiran_done ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
             </button>
-            @endif
+            {{-- @endif --}}
 
-            @if ($metode == 'Pengadaan Barang')
+            {{-- @if ($metode == 'Pengadaan Barang') --}}
             <button
                 :class="{
                     'bg-blue-500 text-white': tab === 'tab4',
@@ -92,9 +92,9 @@
                 SPP
                 <i class="fa-regular {{ $kontrak->spp_done ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
             </button>
-            @endif
+            {{-- @endif --}}
 
-            @if ($jenis == 'non_tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan'))
+            {{-- @if ($jenis == 'non_tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan')) --}}
             <button
                 :class="{
                     'bg-blue-500 text-white': tab === 'tab5',
@@ -106,7 +106,7 @@
                 SSKK
                 <i class="fa-regular {{ $kontrak->sskk_done ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
             </button>
-            @endif
+            {{-- @endif --}}
 
             <button
                 :class="{
@@ -131,23 +131,23 @@
             @include('pages.verifikator.permohonan.detail.spk')
         </div>
         {{-- lampiran --}}
-        @if ($jenis == 'tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan'))
+        {{-- @if ($jenis == 'tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan')) --}}
         <div x-show="tab === 'tab3'" class="mt-4">
             @include('pages.verifikator.permohonan.detail.lampiran')
         </div>
-        @endif
+        {{-- @endif --}}
         {{-- spp --}}
-        @if ($metode == 'Pengadaan Barang')
+        {{-- @if ($metode == 'Pengadaan Barang') --}}
         <div x-show="tab === 'tab4'" class="mt-4">
             @include('pages.verifikator.permohonan.detail.spp')
         </div>
-        @endif
+        {{-- @endif --}}
         {{-- sskk --}}
-        @if ($jenis == 'non_tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan'))
+        {{-- @if ($jenis == 'non_tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan')) --}}
         <div x-show="tab === 'tab5'" class="mt-4">
             @include('pages.verifikator.permohonan.detail.sskk')
         </div>
-        @endif
+        {{-- @endif --}}
         {{-- verifikasi --}}
         <div x-show="tab === 'tab6'" class="mt-4">
             @include('pages.verifikator.permohonan.detail.verifikasi')
