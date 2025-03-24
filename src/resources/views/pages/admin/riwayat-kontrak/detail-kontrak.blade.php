@@ -51,7 +51,7 @@
                         <i class="fas fa-file-export text-blue-500 dark:text-blue-400 mr-2"></i> UNDUH DOKUMEN KONTRAK
                         LENGKAP
                     </div>
-                    @if($kontrak->template)
+                    @if($kontrak->template_id)
                         <!-- Template exists, show enabled buttons -->
                         <div class="flex space-x-3 w-full sm:w-auto">
                             <a href="{{ route('admin.riwayat-kontrak.export-pdf', ['kontrak' => $kontrak->kontrak_id, 'format' => 'pdf']) }}"

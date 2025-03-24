@@ -235,7 +235,7 @@ class KontrakController extends Controller
             // $templateName = $request->template ?? 'default_template.docx';
             // $templatePath = storage_path('app/templates/kontrak/' . $templateName);
 
-            $templateName = $kontrak->template->file_path ?? 'default_template.docx';
+            $templateName = $kontrak->template()->withTrashed()->first()->file_path ?? 'default_template.docx';
             $templatePath = storage_path('app/' . $templateName);
 
             // Pastikan template ada
@@ -268,7 +268,7 @@ class KontrakController extends Controller
 
             foreach ($subKegiatanCollection as $index => $subKegiatan) {
                 $varName = '${REKENING_SUB_KEGIATAN' . ($index + 1) . '}';
-                
+
                 $templateProcessor->setValue($varName, $subKegiatan->no_rekening ?? '');
             }
 
