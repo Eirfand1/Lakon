@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\SekolahExport;
 use App\Imports\SekolahImport;
 use App\Models\Sekolah;
 use Illuminate\Http\Request;
@@ -15,6 +16,10 @@ class SekolahController extends Controller
     public function index()
     {
         return view("pages.admin.sekolah.sekolah", ["title" => "sekolah"]);
+    }
+
+    public function exportSekolah() {
+        return Excel::download(new SekolahExport, "sekolah.xlsx");
     }
 
     public function showImport()
