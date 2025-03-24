@@ -249,7 +249,13 @@ class KontrakController extends Controller
                 ->implode("\n");
 
             $templateProcessor->setValue('${SUB_KEGIATAN}', $subKegiatanList);
-            $templateProcessor->setValue('${REKENING_SUB_KEGIATAN}', $kontrak->paketPekerjaan->subKegiatan->first()->no_rekening ?? '');
+            $subKegiatanCollection = $kontrak->paketPekerjaan->subKegiatan;
+
+            foreach ($subKegiatanCollection as $index => $subKegiatan) {
+                $varName = '${REKENING_SUB_KEGIATAN' . ($index + 1) . '}';
+                
+                $templateProcessor->setValue($varName, $subKegiatan->no_rekening ?? '');
+            }
 
             // Kontrak
             $templateProcessor->setValue('${NO_KONTRAK}', $kontrak->no_kontrak);
@@ -259,7 +265,6 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${NILAI_KONTRAK}', number_format($kontrak->nilai_kontrak, 0, ',', '.'));
             $templateProcessor->setValue('${TERBILANG_NILAI_KONTRAK}', $kontrak->terbilang_nilai_kontrak);
             $templateProcessor->setValue('${TGL_KONTRAK}', $kontrak->tgl_kontrak);
-            $templateProcessor->setValue('${WAKTU_KONTRAK}', $kontrak->waktu_kontrak);
             $templateProcessor->setValue('${NOMOR_DPPL}', $kontrak->nomor_dppl);
             $templateProcessor->setValue('${TGL_DPPL}', $kontrak->tgl_dppl);
             $templateProcessor->setValue('${NOMOR_BAHPL}', $kontrak->nomor_bahpl);
@@ -274,8 +279,9 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${NO_SPK}', $kontrak->nomor_spk);
 
             // Penyedia
-            $templateProcessor->setValue('${NAMA_CV}', $kontrak->penyedia->nama_perusahaan_lengkap);
             $templateProcessor->setValue('${NAMA_DIREKTUR}', $kontrak->penyedia->nama_pemilik);
+            $templateProcessor->setValue('${ALAMAT_PEMILIK}', $kontrak->penyedia->alamat_pemilik);
+            $templateProcessor->setValue('${NAMA_CV}', $kontrak->penyedia->nama_perusahaan_lengkap);
             $templateProcessor->setValue('${ALAMAT_PERUSAHAAN}', $kontrak->penyedia->alamat_perusahaan);
             $templateProcessor->setValue('${KONTAK_HP}', $kontrak->penyedia->kontak_hp);
             $templateProcessor->setValue('${EMAIL_CV}', $kontrak->penyedia->kontak_email);
