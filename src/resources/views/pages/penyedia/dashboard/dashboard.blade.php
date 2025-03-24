@@ -122,11 +122,11 @@
                                             {{ $row->tgl_pembuatan ? $row->tgl_pembuatan : '-' }}</td>
                                         <td class="px-4 py-3 text-sm text-gray-900 dark:text-gray-200 text-center">
                                             @if ($row->is_layangkan)
-                                            <a href="#"
-                                                class="btn btn-sm btn-success dark:text-gray-200">Detail Permohonan</a>
+                                            <a href="detail-kontrak/{{ $row->kontrak_id }}"
+                                                class="btn btn-sm btn-success dark:text-gray-200 flex text-sm whitespace-nowrap">Detail</a>
                                             @else
                                             <a href="permohonan-kontrak/{{ $row->kontrak_id }}"
-                                                class="btn btn-sm btn-error dark:text-gray-200">Kirim Permohonan</a>
+                                                class="btn btn-sm btn-error dark:text-gray-200 flex text-sm whitespace-nowrap">Buat Permohonan</a>
                                             @endif
                                         </td>
                                     </tr>

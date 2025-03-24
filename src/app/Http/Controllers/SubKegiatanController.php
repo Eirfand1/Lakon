@@ -18,16 +18,17 @@ class SubKegiatanController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'no_rekening' => 'required|numeric',
+            'no_rekening' => 'required|string|max:255',
             'nama_sub_kegiatan' => 'required|string|max:255',
-            'gabungan' => 'required|string|max:255',
             'pendidikan' => 'required|string|max:255',
         ]);
+
+        $gabungan = $validateData['no_rekening'] . " " . $validateData['nama_sub_kegiatan'];
 
         $dasarHukum = SubKegiatan::create([
             'no_rekening' => $validateData['no_rekening'],
             'nama_sub_kegiatan' => $validateData['nama_sub_kegiatan'],
-            'gabungan' => $validateData['gabungan'],
+            'gabungan' => $gabungan,
             'pendidikan' => $validateData['pendidikan'],
         ]);
         return redirect()->back()->with('success', 'Sub Kegiatan berhasil disimpan.');
@@ -35,11 +36,13 @@ class SubKegiatanController extends Controller
     public function update(Request $request, SubKegiatan $subKegiatan)
     {
         $validateData = $request->validate([
-            'no_rekening' => 'required|numeric',
+            'no_rekening' => 'required|string|max:255',
             'nama_sub_kegiatan' => 'required|string|max:255',
-            'gabungan' => 'required|string|max:255',
             'pendidikan' => 'required|string|max:255',
         ]);
+
+        $validateData['gabungan'] = $validateData['no_rekening'] . " " . $validateData['nama_sub_kegiatan'];
+
         $subKegiatan->update($validateData);
         return redirect()->back()->with('success', 'Data berhasil diperbarui.');
     }

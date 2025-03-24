@@ -96,7 +96,7 @@ class KontrakController extends Controller
                     $metode = '1';
                     break;
                 case 'Jasa Konsultasi Pengawasan' :
-                    $metode = '2'; 
+                    $metode = '2';
                     break;
                 case 'Pekerjaan Konstruksi' :
                     $metode = '3';
@@ -185,6 +185,23 @@ class KontrakController extends Controller
                 ->withInput()
                 ->with('error', 'Gagal menyimpan data dasar: ' . $e->getMessage());
         }
+    }
+
+    public function detail(Kontrak $kontrak){
+        $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
+        $totalBiaya = $rincianBelanja->sum('total_harga');
+        $ppn = $totalBiaya * 0.11;
+
+        return view('pages.penyedia.permohonan-kontrak.detail-kontrak', [
+            'kontrak' => $kontrak,
+            'tim' => Tim::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'jadwalKegiatan' => JadwalKegiatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'rincianBelanja' => $rincianBelanja,
+            'totalBiaya' => $totalBiaya,
+            'ppn' => $ppn,
+            'peralatan' => Peralatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'ruangLingkup' => RuangLingkup::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+        ]);
     }
 
     public function layangkan(Request $request, Kontrak $kontrak)
