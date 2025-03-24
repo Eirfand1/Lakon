@@ -30,13 +30,13 @@ return new class extends Migration {
             $table->date('tgl_pembuatan')->nullable();
             $table->foreignId('satker_id')
                 ->constrained('satuan_kerja', 'satker_id')
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table->foreignId('sub_kegiatan_id')->nullable()
                 ->constrained('sub_kegiatan', 'sub_kegiatan_id')
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table->foreignId('penyedia_id')
                 ->constrained('penyedia', 'penyedia_id')
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table->string('nomor_dppl')->nullable();
             $table->date('tgl_dppl')->nullable();
             $table->string('nomor_bahpl')->nullable();
@@ -48,7 +48,7 @@ return new class extends Migration {
             $table->string('berkas_penawaran')->nullable();
             $table->foreignId('verifikator_id')->nullable()
                 ->constrained('verifikator', 'verifikator_id')
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table->boolean('is_verificated')->default(false);
             $table->boolean('is_layangkan')->default(false);
             $table->boolean('data_dasar_done')->default(false);

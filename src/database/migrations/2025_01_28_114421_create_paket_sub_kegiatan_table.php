@@ -14,10 +14,10 @@ return new class extends Migration {
             $table->id('paket_sub_kegiatan_id');
             $table->foreignId('paket_id')
                 ->constrained('paket_pekerjaan', 'paket_id')
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table->foreignId('sub_kegiatan_id')
                 ->constrained('sub_kegiatan', 'sub_kegiatan_id')
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table->timestamps();
         });
     }
