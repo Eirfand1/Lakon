@@ -12,6 +12,15 @@
                         </span>
                     </a>
                 </div>
+
+                <div class="sm:w-auto w-full">
+                    <a href="{{ route('admin.sekolah.export') }}" class="btn btn-success btn-sm rounded text-white">
+                        <i class="fa-solid fa-file-export"></i>
+                        <span>
+                            Export to Excel
+                        </span>
+                    </a>
+                </div>
                 <label for="add-sekolah"
                     class="btn sm:w-auto w-full rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
                     <i class="fa-solid fa-square-plus"></i>
@@ -368,7 +377,7 @@
                 </form>
             </div>
 
-        <label class="modal-backdrop" for="edit-modal">Close</label>
+            <label class="modal-backdrop" for="edit-modal">Close</label>
         </div>
     </div>
 
