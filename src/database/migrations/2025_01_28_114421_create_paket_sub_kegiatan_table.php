@@ -12,10 +12,10 @@ return new class extends Migration {
     {
         Schema::create('paket_sub_kegiatan', function (Blueprint $table) {
             $table->id('paket_sub_kegiatan_id');
-            $table->foreignId('paket_id')
+            $table->foreignId('paket_id')->nullable()
                 ->constrained('paket_pekerjaan', 'paket_id')
                 ->nullOnDelete();
-            $table->foreignId('sub_kegiatan_id')
+            $table->foreignId('sub_kegiatan_id')->nullable()
                 ->constrained('sub_kegiatan', 'sub_kegiatan_id')
                 ->nullOnDelete();
             $table->timestamps();
