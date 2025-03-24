@@ -28,13 +28,13 @@ return new class extends Migration {
                 ->constrained('paket_pekerjaan', 'paket_id')
                 ->cascadeOnDelete();
             $table->date('tgl_pembuatan')->nullable();
-            $table->foreignId('satker_id')
+            $table->foreignId('satker_id')->nullable()
                 ->constrained('satuan_kerja', 'satker_id')
                 ->nullOnDelete();
             $table->foreignId('sub_kegiatan_id')->nullable()
                 ->constrained('sub_kegiatan', 'sub_kegiatan_id')
                 ->nullOnDelete();
-            $table->foreignId('penyedia_id')
+            $table->foreignId('penyedia_id')->nullable()
                 ->constrained('penyedia', 'penyedia_id')
                 ->nullOnDelete();
             $table->string('nomor_dppl')->nullable();
