@@ -327,8 +327,27 @@ class KontrakController extends Controller
                 $lingkupPekerjaanText = '-';
             }
 
-            // Set nilai ke template Word
             $templateProcessor->setValue('${LINGKUP_PEKERJAAN}', $lingkupPekerjaanText);
+
+            if ($kontrak->ruangLingkup && $kontrak->ruangLingkup->count() > 0) {
+                foreach ($kontrak->ruangLingkup as $index => $lingkup) {
+                    $varName = '${LINGKUP_PEKERJAAN' . ($index + 1) . '}';
+                    
+                    $templateProcessor->setValue($varName, $lingkup->ruang_lingkup ?? '-');
+                }
+                
+                for ($i = $kontrak->ruangLingkup->count() + 1; $i <= 10; $i++) {
+                    $varName = '${LINGKUP_PEKERJAAN' . $i . '}';
+                    $templateProcessor->setValue($varName, '');
+                }
+            } else {
+                // set ke strip jika tidak ada lingkup pekerjaan
+                for ($i = 1; $i <= 10; $i++) {
+                    $varName = '${LINGKUP_PEKERJAAN' . $i . '}';
+                    $templateProcessor->setValue($varName, '');
+                }
+                $templateProcessor->setValue('${LINGKUP_PEKERJAAN1}', '-');
+            }
 
 
             // Verifikator

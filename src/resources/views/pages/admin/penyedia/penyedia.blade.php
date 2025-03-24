@@ -186,10 +186,19 @@
                     </div>
 
                     <h1 class="border-y border-gray-300 dark:border-gray-700 font-bold py-2">AKUN</h1>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
+                            Username <span class="text-red-500">*</span>
+                            <small class="block text-xs text-gray-500">username</small>
+                            <x-input type="text" name="edit_username" id="edit_username" placeholder="username"
+                                readonly />
+                        </label>
+                    </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 dark:text-gray-100">
                             Status <span class="text-red-500">*</span>
-                            <small class="block text-xs text-gray-500">Pilih status perusahaan</small>
+                            <small class="block text-xs text-gray-500">Pilih status penyedia</small>
                         </label>
                         <select name="status" id="edit_status"
                             class="mt-1 bg-white dark:bg-gray-900/20 h-10 text-sm dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
@@ -199,6 +208,8 @@
                             <option value="konsultan">Konsultan</option>
                         </select>
                     </div>
+
+
 
                     <div class="flex justify-end space-x-2 modal-action">
                         <button type="submit"
@@ -252,7 +263,7 @@
             alamat_pemilik, nama_perusahaan_lengkap,
             nama_perusahaan_singkat, akta_notaris_no, akta_notaris_nama,
             akta_notaris_tanggal, alamat_perusahaan, kontak_hp,
-            kontak_email, rekening_norek, rekening_nama, rekening_bank, npwp_perusahaan, logo_perusahaan, status
+            kontak_email, rekening_norek, rekening_nama, rekening_bank, npwp_perusahaan, logo_perusahaan, status, username
         ) {
             document.getElementById('editForm').action = `penyedia/${penyedia_id}`;
             document.getElementById('edit_nik').value = nik;
@@ -271,6 +282,7 @@
             document.getElementById('edit_rekening_bank').value = rekening_bank;
             document.getElementById('edit_npwp_perusahaan').value = npwp_perusahaan;
             document.getElementById('edit_status').value = status;
+            document.getElementById('edit_username').value = username;
 
             const logoBefore = document.getElementById('logoPreview');
             logoBefore.src = `${logo_perusahaan ? `{{ asset('') }}${logo_perusahaan}` : '{{ asset('images/default-logo.png') }}'}`;

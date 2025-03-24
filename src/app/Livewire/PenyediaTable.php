@@ -32,7 +32,7 @@ class PenyediaTable extends DataTableComponent
     {
         return [
             Column::make("Aksi", "penyedia_id")
-                ->format(fn($value, $row) => view('pages.admin.penyedia.actions', ['p' => $row])),
+                ->format(fn($value, $row) => view('pages.admin.penyedia.actions', ['p' => Penyedia::with('user')->find($value)])),
             Column::make("Username", "user.name")
                 ->sortable()
                 ->searchable(),
