@@ -56,7 +56,9 @@ return new class extends Migration {
             $table->boolean('lampiran_done')->default(false);
             $table->boolean('spp_done')->default(false);
             $table->boolean('sskk_done')->default(false);
-            $table->string('template')->nullable();
+            $table->foreignId('template_id')->nullable()
+                ->constrained('templates', 'template_id')
+                ->cascadeOnDelete();
             $table->timestamps();
         });
     }

@@ -26,12 +26,12 @@
                             <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
                                 Template Dokumen
                             </label>
-                            <select name="template_dokumen"
+                            <select name="template_id"
                                 class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-blue-500 focus:border-blue-500 transition-colors">
                                 <option value="">Pilih Template</option>
                                 @foreach($templates as $template)
-                                    <option value="{{ $template }}" {{ $kontrak->template == $template ? 'selected' : '' }}>
-                                        {{ pathinfo($template, PATHINFO_FILENAME) }}
+                                    <option value="{{ $template->template_id }}" {{ $kontrak->template_id == $template->template_id ? 'selected' : '' }}>
+                                        {{ $template->name }}
                                     </option>
                                 @endforeach
                             </select>
@@ -51,7 +51,7 @@
                         <i class="fas fa-file-export text-blue-500 dark:text-blue-400 mr-2"></i> UNDUH DOKUMEN KONTRAK
                         LENGKAP
                     </div>
-                    @if($kontrak->template)
+                    @if($kontrak->template_id)
                         <!-- Template exists, show enabled buttons -->
                         <div class="flex space-x-3 w-full sm:w-auto">
                             <a href="{{ route('admin.riwayat-kontrak.export-pdf', ['kontrak' => $kontrak->kontrak_id, 'format' => 'pdf']) }}"
@@ -80,7 +80,7 @@
                                 </button>
                             </div>
                         </div>
-                    @endif 
+                    @endif
                 </div>
 
                 <!-- Informasi Paket Pekerjaan -->
