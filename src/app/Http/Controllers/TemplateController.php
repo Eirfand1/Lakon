@@ -48,9 +48,9 @@ class TemplateController extends Controller
         $template = Template::findOrFail($id);
 
         // Hapus file dari storage
-        if (Storage::exists($template->file_path)) {
-            Storage::delete($template->file_path);
-        }
+        // if (Storage::exists($template->file_path)) {
+        //     Storage::delete($template->file_path);
+        // }
 
         // Hapus data dari database
         $template->delete();

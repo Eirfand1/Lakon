@@ -13,14 +13,14 @@ class TemplateTable extends DataTableComponent
 
     public function configure(): void
     {
-        $this->setPrimaryKey('id');
+        $this->setPrimaryKey('template_id');
     }
 
     public function columns(): array
     {
         return [
 
-            Column::make("Aksi", "id")
+            Column::make("Aksi", "template_id")
                 ->format(
                     fn($value, $row, Column $column) =>
                     view('pages.admin.template.actions', [
@@ -37,7 +37,7 @@ class TemplateTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
 
-            
+
 
         ];
     }
