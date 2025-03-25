@@ -4,11 +4,13 @@ namespace App\Livewire;
 use App\Models\DasarHukum;
 use App\Models\PaketPekerjaan;
 use App\Models\SubKegiatan;
+use Carbon\Carbon;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Filters\NumberFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
+Carbon::setLocale('id');
 
 class PaketPekerjaanTable extends DataTableComponent
 {
@@ -142,6 +144,7 @@ class PaketPekerjaanTable extends DataTableComponent
 
 
             Column::make('Waktu Paket', 'waktu_paket')
+                ->format(fn($value) => Carbon::parse($value)->translatedFormat('d F Y'))
                 ->sortable()
                 ->searchable(),
 

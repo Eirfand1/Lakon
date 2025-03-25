@@ -51,10 +51,6 @@ class PpkomTable extends DataTableComponent
             Column::make("No Telp", "no_telp")
                 ->sortable()
                 ->searchable(),
-            Column::make("Created at", "created_at")
-                ->sortable(),
-            Column::make("Updated at", "updated_at")
-                ->sortable(),
             Column::make("Email", "email")
                 ->sortable()
                 ->searchable(),
