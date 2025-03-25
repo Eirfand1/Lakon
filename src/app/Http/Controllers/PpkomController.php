@@ -13,56 +13,48 @@ class PpkomController extends Controller
 {
     public function index(): View
     {
-        try {
-            $ppkom = Ppkom::all();
-            return view('pages.admin.ppkom.ppkom', [
-                "title" => "ppkom",
-                'ppkom' => $ppkom,
-            ]);
-        } catch (\Exception $e) {
-            return view('pages.admin.ppkom.ppkom', [
-                "title" => "ppkom",
-                'ppkom' => [],
-            ])->with('error', 'Terjadi kesalahan saat mengambil data.');
-        }
+        return view('pages.admin.ppkom.ppkom', [
+            "title" => "ppkom",
+        ]);
+
     }
 
     public function store(Request $request): RedirectResponse
     {
-            $validated = $request->validate([
-                'nip' => 'required|unique:ppkom|max:255',
-                'nama' => 'required|max:255',
-                'pangkat' => 'nullable|max:255',
-                'jabatan' => 'nullable|max:255',
-                'alamat' => 'nullable',
-                'no_telp' => 'nullable|max:255',
-                'email' => 'nullable|email|max:255',
-            ]);
+        $validated = $request->validate([
+            'nip' => 'required|unique:ppkom|max:255',
+            'nama' => 'required|max:255',
+            'pangkat' => 'nullable|max:255',
+            'jabatan' => 'nullable|max:255',
+            'alamat' => 'nullable',
+            'no_telp' => 'nullable|max:255',
+            'email' => 'nullable|email|max:255',
+        ]);
 
-            Ppkom::create($validated);
-            return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
+        Ppkom::create($validated);
+        return redirect()->back()->with('success', 'Data berhasil ditambahkan.');
     }
 
     public function update(Request $request, Ppkom $ppkom): RedirectResponse
     {
-            $validated = $request->validate([
-                'nip' => 'required|unique:ppkom,nip,' . $ppkom->ppkom_id . ',ppkom_id|max:255',
-                'nama' => 'required|max:255',
-                'pangkat' => 'nullable|max:255',
-                'jabatan' => 'nullable|max:255',
-                'alamat' => 'nullable',
-                'no_telp' => 'nullable|max:255',
-                'email' => 'nullable|email|max:255',
-            ]);
+        $validated = $request->validate([
+            'nip' => 'required|unique:ppkom,nip,' . $ppkom->ppkom_id . ',ppkom_id|max:255',
+            'nama' => 'required|max:255',
+            'pangkat' => 'nullable|max:255',
+            'jabatan' => 'nullable|max:255',
+            'alamat' => 'nullable',
+            'no_telp' => 'nullable|max:255',
+            'email' => 'nullable|email|max:255',
+        ]);
 
-            $ppkom->update($validated);
-            return redirect()->back()->with('success', 'Data berhasil diperbarui.');
+        $ppkom->update($validated);
+        return redirect()->back()->with('success', 'Data berhasil diperbarui.');
     }
 
     public function destroy(Ppkom $ppkom): RedirectResponse
     {
-            $ppkom->delete();
-            return redirect()->back()->with('success', 'Data berhasil dihapus.');
-        
+        $ppkom->delete();
+        return redirect()->back()->with('success', 'Data berhasil dihapus.');
+
     }
 }

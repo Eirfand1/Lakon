@@ -201,6 +201,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
 
     Route::prefix('/sekolah')->group(function () {
         Route::get('/', [SekolahController::class, 'index'])->name('admin.sekolah.index');
+        Route::get("/export", [SekolahController::class, 'exportSekolah'])->name('admin.sekolah.export');
         Route::get('/import-sekolah', [SekolahController::class, 'showImport']);
         Route::post('/import-sekolah', [SekolahController::class, 'import']);
         Route::post('/', [SekolahController::class, 'store'])->name('admin.sekolah.store');

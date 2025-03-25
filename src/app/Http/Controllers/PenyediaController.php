@@ -23,18 +23,10 @@ class PenyediaController extends Controller
 
     public function index(): View
     {
-        try {
-            $penyedia = Penyedia::all();
             return view('pages.admin.penyedia.penyedia', [
                 "title" => "penyedia",
-                'penyedia' => $penyedia,
             ]);
-        } catch (\Exception $e) {
-            return view('pages.admin.penyedia.penyedia', [
-                "title" => "penyedia",
-                'penyedia' => [],
-            ])->with('error', 'Terjadi kesalahan saat mengambil data.');
-        }
+        
     }
 
     public function create(): View

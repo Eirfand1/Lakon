@@ -26,18 +26,10 @@ class VerifikatorController extends Controller
 {
     public function index(): View
     {
-        try {
-            $verifikator = Verifikator::all();
-            return view('pages.admin.verifikator.verifikator', [
-                "title" => "verifikator",
-                "verifikator" => $verifikator,
-            ]);
-        } catch (\Exception $e) {
-            return view('pages.admin.verifikator.verifikator', [
-                "title" => "verifikator",
-                "verifikator" => [],
-            ])->with('error', 'Terjadi kesalahan saat mengambil data');
-        }
+        return view('pages.admin.verifikator.verifikator', [
+            "title" => "verifikator",
+        ]);
+
     }
 
     public function store(Request $request): RedirectResponse
@@ -133,16 +125,17 @@ class VerifikatorController extends Controller
         return view('pages.verifikator.permohonan.detail-permohonan');
     }
 
-    public function dataDasar($kontrak_id, Kontrak $kontrak) {
+    public function dataDasar($kontrak_id, Kontrak $kontrak)
+    {
         $kontrak->where('kontrak_id', $kontrak_id)->update([
             'data_dasar_done' => true
         ]);
         return redirect()->back()->with('success', 'Data dasar berhasil di simpan');
     }
 
-    public function spk($kontrak_id, Kontrak $kontrak, Request $request) {
 
-        // dd($request->all());
+    public function spk($kontrak_id, Kontrak $kontrak, Request $request)
+    {
         $validate = $request->validate([
             'jenis_kontrak' => 'required|string|max:255',
             'nomor_spk' => 'required|string|max:255',
@@ -182,40 +175,46 @@ class VerifikatorController extends Controller
         return redirect()->back()->with('success', 'SPK berhasil di simpan')->withFragment('spkLanjutan');
     }
 
-    public function spkDone ($kontrak_id, Kontrak $kontrak) {
+    public function spkDone($kontrak_id, Kontrak $kontrak)
+    {
         $kontrak->where('kontrak_id', $kontrak_id)->update([
             'spk_done' => true
         ]);
         return redirect()->back()->with('success', 'SPK berhasil di simpan');
     }
 
-    public function lampiran($kontrak_id, Kontrak $kontrak) {
+    public function lampiran($kontrak_id, Kontrak $kontrak)
+    {
         $kontrak->where('kontrak_id', $kontrak_id)->update([
             'lampiran_done' => true
         ]);
         return redirect()->back()->with('success', 'Lampiran berhasil di simpan');
     }
 
-    public function spp($kontrak_id, Kontrak $kontrak) {
+    public function spp($kontrak_id, Kontrak $kontrak)
+    {
         $kontrak->where('kontrak_id', $kontrak_id)->update([
             'spp_done' => true
         ]);
         return redirect()->back()->with('success', 'SPP berhasil di simpan');
     }
 
-    public function sskk($kontrak_id, Kontrak $kontrak) {
+    public function sskk($kontrak_id, Kontrak $kontrak)
+    {
         $kontrak->where('kontrak_id', $kontrak_id)->update([
             'sskk_done' => true
         ]);
         return redirect()->back()->with('success', 'SSKK berhasil di simpan');
     }
 
-    public function tolak($kontrak_id, Kontrak $kontrak) {
+    public function tolak($kontrak_id, Kontrak $kontrak)
+    {
         $kontrak->where('kontrak_id', $kontrak_id)->delete();
         return redirect()->back()->with('success', 'Permohonan berhasil ditolak');
     }
 
-    public function terima($kontrak_id, Kontrak $kontrak) {
+    public function terima($kontrak_id, Kontrak $kontrak)
+    {
         $kontrak->where('kontrak_id', $kontrak_id)->update([
             'tgl_kontrak' => now()->toDateString(),
             'is_verificated' => true,
@@ -224,7 +223,8 @@ class VerifikatorController extends Controller
         return redirect('/verifikator/dashboard')->with('success', 'Permohonan berhasil diterima');
     }
 
-    public function detail($kontrak_id, Kontrak $kontrak) {
+    public function detail($kontrak_id, Kontrak $kontrak)
+    {
         $kontrak = Kontrak::where('kontrak_id', $kontrak_id)->first();
         $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
         $totalBiaya = $rincianBelanja->sum('total_harga');
