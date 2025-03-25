@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Exports\KontrakExport;
 use App\Models\Kontrak;
 use App\Models\Ppkom;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
@@ -14,9 +15,12 @@ use App\Models\RincianBelanja;
 use App\Models\Peralatan;
 use App\Models\RuangLingkup;
 use App\Models\Template;
+use Number;
+use NumberFormatter;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+Carbon::setLocale('id');
 
 
 
@@ -277,22 +281,40 @@ class KontrakController extends Controller
             // Kontrak
             $templateProcessor->setValue('${NO_KONTRAK}', $kontrak->no_kontrak);
             $templateProcessor->setValue('${JENIS_KONTRAK}', $kontrak->jenis_kontrak);
-            $templateProcessor->setValue('${TGL_PEMBUATAN}', $kontrak->tanggal_awal);
+            $templateProcessor->setValue('${TGL_PEMBUATAN}', Carbon::parse($kontrak->tanggal_awal)->translatedFormat(('d F Y')));
+
+            $terbilang_tgl_pembuatan = Carbon::parse($kontrak->tanggal_awal);
+
+            $bulan = [
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
+            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+            ];
+
+            $formatetter_terbilang_tgl = new NumberFormatter("id", NumberFormatter::SPELLOUT);
+            $tgl_terbilang_tgl = $formatetter_terbilang_tgl->format($terbilang_tgl_pembuatan->day);
+            $tahun_terbilang_tgl = $formatetter_terbilang_tgl->format($terbilang_tgl_pembuatan->year);
+
+            $templateProcessor->setValue('${TERBILANG_TGL_PEMBUATAN}', "{$tgl_terbilang_tgl} {$bulan[$terbilang_tgl_pembuatan->month - 1]} tahun {$tahun_terbilang_tgl}");
+
+
             $templateProcessor->setValue('${WAKTU_KONTRAK}', $kontrak->waktu_kontrak);
             $templateProcessor->setValue('${NILAI_KONTRAK}', number_format($kontrak->nilai_kontrak, 0, ',', '.'));
             $templateProcessor->setValue('${TERBILANG_NILAI_KONTRAK}', $kontrak->terbilang_nilai_kontrak);
-            $templateProcessor->setValue('${TGL_KONTRAK}', $kontrak->tgl_kontrak);
+            $templateProcessor->setValue('${TGL_KONTRAK}', Carbon::parse($kontrak->tgl_kontrak)->translatedFormat('d F Y'));
             $templateProcessor->setValue('${NOMOR_DPPL}', $kontrak->nomor_dppl);
-            $templateProcessor->setValue('${TGL_DPPL}', $kontrak->tgl_dppl);
+            $templateProcessor->setValue('${TGL_DPPL}', Carbon::parse($kontrak->tgl_dppl)->translatedFormat(('d F Y')));
             $templateProcessor->setValue('${NOMOR_BAHPL}', $kontrak->nomor_bahpl);
-            $templateProcessor->setValue('${TGL_BAHPL}', $kontrak->tgl_bahpl);
+            $templateProcessor->setValue('${TGL_BAHPL}', Carbon::parse($kontrak->tgl_bahpl)->translatedFormat('d F Y'));
             $templateProcessor->setValue('${NOMOR_SPPBJ}', $kontrak->nomor_sppbj);
-            $templateProcessor->setValue('${TGL_SPPBJ}', $kontrak->tgl_sppbj);
+            $templateProcessor->setValue('${TGL_SPPBJ}', Carbon::parse($kontrak->tgl_sppbj)->translatedFormat('d F Y'));
             $templateProcessor->setValue('${NOMOR_PENETAPAN_PEMENANG}', $kontrak->nomor_penetapan_pemenang);
             $templateProcessor->setValue('${TGL_PENETAPAN_PEMENANG}', $kontrak->tgl_penetapan_pemenang);
-            $templateProcessor->setValue('${TGL_SELESAI}', $kontrak->tanggal_akhir);
+            $templateProcessor->setValue('${TGL_SELESAI}', Carbon::parse($kontrak->tanggal_akhir)->translatedFormat('d F Y'));
             $templateProcessor->setValue('${JANGKA_WAKTU}', $kontrak->waktu_kontrak);
-            $templateProcessor->setValue('${TERBILANG_JANGKA_WAKTU}', $kontrak->waktu_penyelesaian);
+
+            $digit = new NumberFormatter("id", NumberFormatter::SPELLOUT);
+
+            $templateProcessor->setValue('${TERBILANG_JANGKA_WAKTU}', $digit->format($kontrak->waktu_kontrak));
             $templateProcessor->setValue('${NO_SPK}', $kontrak->nomor_spk);
 
             // Penyedia
@@ -307,7 +329,7 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${REKENING_NAMA}', $kontrak->penyedia->rekening_nama);
             $templateProcessor->setValue('${NAMA_CV_REKENING}', $kontrak->penyedia->rekening_nama);
             $templateProcessor->setValue('${NO_AKTA}', $kontrak->penyedia->akta_notaris_no);
-            $templateProcessor->setValue('${TGL_AKTA}', $kontrak->penyedia->akta_notaris_tanggal);
+            $templateProcessor->setValue('${TGL_AKTA}', Carbon::parse($kontrak->penyedia->akta_notaris_tanggal)->translatedFormat('d F Y'));
             $templateProcessor->setValue('${NAMA_NOTARIS}', $kontrak->penyedia->akta_notaris_nama);
 
             // PPK
@@ -354,7 +376,7 @@ class KontrakController extends Controller
             if ($kontrak->verifikator) {
                 $templateProcessor->setValue('${NIP_VERIFIKATOR}', $kontrak->verifikator->nip ?? '-');
                 $templateProcessor->setValue('${NAMA_VERIFIKATOR}', $kontrak->verifikator->nama_verifikator ?? '-');
-                $templateProcessor->setValue('${TGL_VERIFIKASI}', $kontrak->tgl_verifikasi ?? '-');
+                $templateProcessor->setValue('${TGL_VERIFIKASI}', Carbon::parse($kontrak->tgl_verifikasi)->translatedFormat('d F Y') ?? '-');
             } else {
                 $templateProcessor->setValue('${NIP_VERIFIKATOR}', '-');
                 $templateProcessor->setValue('${NAMA_VERIFIKATOR}', '-');
