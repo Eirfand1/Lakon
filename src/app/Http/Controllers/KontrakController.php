@@ -395,20 +395,22 @@ class KontrakController extends Controller
 
             // tabel-tabel
 
+            $templateVariables = $templateProcessor->getVariables();
             // detail_kontrak
             $detail_kontrak = [];
 
             if ($kontrak->detailKontrak && $kontrak->detailKontrak->count() > 0) {
                 foreach ($kontrak->detailKontrak as $index => $detail) {
                     $detail_kontrak[] = [
-                        'TABEL_DETAIL' => $detail->detail,
-                        'TABEL_NILAI' => number_format($detail->nilai, 0, ',', '.'),
-                        'TABEL_SATUAN' => "coba",
+                        'TABLE_DETAIL' => $detail->detail,
+                        'TABLE_NILAI' => number_format($detail->nilai, 0, ',', '.'),
                     ];
                 }
             }
 
-            $templateProcessor->cloneRowAndSetValues('TABEL_DETAIL', $detail_kontrak);
+            if (in_array('TABLE_DETAIL', $templateVariables)) {
+                $templateProcessor->cloneRowAndSetValues('TABLE_DETAIL', $detail_kontrak);
+            }
 
             // tim
             $tim_table = [];
@@ -428,8 +430,9 @@ class KontrakController extends Controller
                 }
             }
 
-            $templateProcessor->cloneRowAndSetValues('NO_TIM', $tim_table);
-
+            if (in_array('NO_TIM', $templateVariables)) {
+                $templateProcessor->cloneRowAndSetValues('NO_TIM', $tim_table);
+            }
             // peralatan
             $peralatan_table = [];
 
@@ -449,7 +452,12 @@ class KontrakController extends Controller
                 }
             }
 
-            $templateProcessor->cloneRowAndSetValues('NO_PERALATAN', $peralatan_table);
+            if (in_array('NO_PERALATAN', $templateVariables)) {
+                $templateProcessor->cloneRowAndSetValues('NO_PERALATAN', $peralatan_table);
+            }
+
+
+
 
             $outputDocx = storage_path('app/temp/' . time() . '_kontrak.docx');
             $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
