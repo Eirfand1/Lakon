@@ -95,7 +95,7 @@
             {{-- @endif --}}
 
             {{-- @if ($jenis == 'non_tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan')) --}}
-            <button
+            {{-- <button
                 :class="{
                     'bg-blue-500 text-white': tab === 'tab5',
                     'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200': tab !== 'tab5'
@@ -105,7 +105,7 @@
             >
                 SSKK
                 <i class="fa-regular {{ $kontrak->sskk_done ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
-            </button>
+            </button> --}}
             {{-- @endif --}}
 
             <button
@@ -144,9 +144,9 @@
         {{-- @endif --}}
         {{-- sskk --}}
         {{-- @if ($jenis == 'non_tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan')) --}}
-        <div x-show="tab === 'tab5'" class="mt-4">
+        {{-- <div x-show="tab === 'tab5'" class="mt-4">
             @include('pages.verifikator.permohonan.detail.sskk')
-        </div>
+        </div> --}}
         {{-- @endif --}}
         {{-- verifikasi --}}
         <div x-show="tab === 'tab6'" class="mt-4">
