@@ -349,9 +349,9 @@ class KontrakController extends Controller
             // ruang lingkup
             $lingkupPekerjaanText = '';
 
-            if ($kontrak->ruangLingkup && $kontrak->ruangLingkup->count() > 0) {
-                foreach ($kontrak->ruangLingkup as $index => $lingkup) {
-                    $lingkupPekerjaanText .= ($index + 1) . ". " . $lingkup->ruang_lingkup . "\n";
+            if ($kontrak->detailKontrak && $kontrak->detailKontrak->count() > 0) {
+                foreach ($kontrak->detailKontrak as $index => $lingkup) {
+                    $lingkupPekerjaanText .= ($index + 1) . ". " . $lingkup->detail . "\n";
                 }
 
                 $lingkupPekerjaanText = rtrim($lingkupPekerjaanText);
@@ -361,14 +361,14 @@ class KontrakController extends Controller
 
             $templateProcessor->setValue('${LINGKUP_PEKERJAAN}', $lingkupPekerjaanText);
 
-            if ($kontrak->ruangLingkup && $kontrak->ruangLingkup->count() > 0) {
-                foreach ($kontrak->ruangLingkup as $index => $lingkup) {
+            if ($kontrak->detailKontrak && $kontrak->detailKontrak->count() > 0) {
+                foreach ($kontrak->detailKontrak as $index => $lingkup) {
                     $varName = '${LINGKUP_PEKERJAAN' . ($index + 1) . '}';
 
-                    $templateProcessor->setValue($varName, $lingkup->ruang_lingkup ?? '-');
+                    $templateProcessor->setValue($varName, $lingkup->detail ?? '-');
                 }
 
-                for ($i = $kontrak->ruangLingkup->count() + 1; $i <= 10; $i++) {
+                for ($i = $kontrak->detailKontrak->count() + 1; $i <= 10; $i++) {
                     $varName = '${LINGKUP_PEKERJAAN' . $i . '}';
                     $templateProcessor->setValue($varName, '');
                 }

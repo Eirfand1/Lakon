@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Kontrak;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
+use Carbon\Carbon;
 
 class RealisasiTable extends DataTableComponent
 {
@@ -59,6 +60,7 @@ class RealisasiTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
             Column::make("Tanggal Pembuatan", "tgl_pembuatan")
+               ->format(fn ($value) => Carbon::parse($value)->translatedFormat('d F Y'))
                 ->sortable(),
             Column::make('Aksi', 'kontrak_id')
                 ->format(function ($value) {
