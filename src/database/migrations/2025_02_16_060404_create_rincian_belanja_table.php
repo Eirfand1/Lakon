@@ -21,7 +21,8 @@ return new class extends Migration
             $table->integer('qty');
             $table->string('satuan');
             $table->integer('harga_satuan');
-            $table->integer('total_harga')->virtualAs('qty * harga_satuan');
+            $table->integer('ongkos_kirim');
+            $table->integer('total_harga')->virtualAs('(qty * harga_satuan) + ongkos_kirim');
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });
