@@ -8,6 +8,9 @@ use Maatwebsite\Excel\Facades\Excel;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Kontrak;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
+use Carbon\Carbon;
+Carbon::setLocale('id');
+
 
 class KontrakTable extends DataTableComponent
 {
@@ -58,21 +61,30 @@ class KontrakTable extends DataTableComponent
             Column::make("Nilai Kontrak", "nilai_kontrak")
                 ->sortable(),
             Column::make("Tanggal Kontrak", "tgl_kontrak")
-                ->sortable(),
+                ->sortable()
+                ->format(fn ($value)=>  Carbon::parse($value)->translatedFormat('d F Y'))
+                ->searchable(),
             Column::make("Waktu Kontrak (bulan)", "waktu_kontrak")
-                ->sortable(),
+                ->sortable()
+                ->format(fn ($value) => Carbon::parse($value)->translatedFormat('d F Y'))
+                ->searchable(),
             Column::make("Tanggal Pembuatan", "tgl_pembuatan")
-                ->sortable(),
+                ->sortable()
+                ->format(fn ($value) => Carbon::parse($value)->translatedFormat('d F Y'))
+                ->searchable(),
             Column::make("Nomor DPPL", "nomor_dppl")
                 ->sortable()
                 ->searchable(),
             Column::make("Tanggal DPPL", "tgl_dppl")
-                ->sortable(),
+                ->sortable()
+                ->format(fn($value)=> Carbon::parse($value)->translatedFormat('d F Y'))
+                ->searchable(),
             Column::make("Nomor BAHPL", "nomor_bahpl")
                 ->sortable()
                 ->searchable(),
             Column::make("Tanggal BAHPL", "tgl_bahpl")
-                ->sortable(),
+                ->sortable()
+                ->format(fn($value) => Carbon::parse($value)->translatedFormat('d F Y')),
             Column::make("Satker", "satuanKerja.nama_pimpinan") // Relasi
                 ->sortable()
                 ->searchable(),

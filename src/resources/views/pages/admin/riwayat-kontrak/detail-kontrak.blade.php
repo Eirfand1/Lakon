@@ -43,6 +43,7 @@
                             </button>
                         </div>
                     </form>
+                    
                 </div>
 
                 <div
@@ -120,7 +121,7 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 Pembuatan</strong>
-                            <p class="font-medium">{{ $kontrak->tgl_pembuatan }}</p>
+                            <p class="font-medium">{{ date('d F Y', strtotime($kontrak->tgl_pembuatan))  }}</p>
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
@@ -228,7 +229,7 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 Kontrak</strong>
-                            <p class="font-medium">{{ $kontrak->tgl_kontrak }}</p>
+                            <p class="font-medium">{{ date('d F Y', strtotime($kontrak->tgl_kontrak)) }}</p>
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
@@ -316,7 +317,7 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 DPPL</strong>
-                            <p class="font-medium">{{ $kontrak->tgl_dppl ?? '-' }}</p>
+                            <p class="font-medium">{{ date('d F Y', strtotime($kontrak->tgl_dppl))  ?? '-' }}</p>
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
@@ -330,7 +331,7 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 BAHPL</strong>
-                            <p class="font-medium">{{ $kontrak->tgl_bahpl ?? '-' }}</p>
+                            <p class="font-medium">{{ date('d F Y', strtotime($kontrak->tgl_bahpl))  ?? '-' }}</p>
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
@@ -344,7 +345,7 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 SPPBJ</strong>
-                            <p class="font-medium">{{ $kontrak->tgl_sppbj ?? '-'}}</p>
+                            <p class="font-medium">{{ date('d F Y', strtotime( $kontrak->tgl_sppbj) ) ?? '-'}}</p>
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
@@ -358,7 +359,7 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 Penetapan Pemenang</strong>
-                            <p class="font-medium">{{ $kontrak->tgl_penetapan_pemenang ?? '-'}}</p>
+                            <p class="font-medium">{{  date('d F Y', strtotime($kontrak->tgl_penetapan_pemenang))  ?? '-'}}</p>
                         </div>
                     </div>
                 </div>

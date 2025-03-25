@@ -24,7 +24,7 @@ class PaketPekerjaanController extends Controller
         $pakets = PaketPekerjaan::with('subKegiatan')->get();
         return view('pages.admin.paket-pekerjaan.paket-pekerjaan', [
             "title" => "paket-pekerjaan",
-            "paket" => $pakets,
+            // "paket" => $pakets,
             "sekolah" => Sekolah::select('nama_sekolah', 'sekolah_id')->get(),
             "dasarHukum" => DasarHukum::select('dasar_hukum', 'daskum_id')->get(),
             "subKegiatan" => SubKegiatan::select('nama_sub_kegiatan', 'sub_kegiatan_id')->get(),
