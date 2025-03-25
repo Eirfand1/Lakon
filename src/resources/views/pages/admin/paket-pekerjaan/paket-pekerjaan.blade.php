@@ -166,7 +166,7 @@
 
                     <div class="flex w-full flex-col ">
                         <x-label for="waktu_paket" class="w-full sm:w-1/4">Waktu Paket</x-label>
-                        <x-input type="date" name="waktu_paket" id="" value="{{old('waktu_paket')}}" />
+                        <x-input type="date" name="waktu_paket" id="" value="{{old('waktu_paket')}}" required />
                     </div>
 
                     <div class="flex w-full flex-col  ">
@@ -504,7 +504,7 @@
 
                     <div class="flex w-full flex-col ">
                         <x-label for="waktu_paket" class="w-full sm:w-1/4">Waktu Paket</x-label>
-                        <x-input type="date" name="waktu_paket" id="waktu_paket" />
+                        <x-input type="date" name="waktu_paket" id="waktu_paket" required />
                     </div>
 
                     <div class="flex w-full flex-col  ">
