@@ -28,7 +28,7 @@ class TimController extends Controller
                 'kontrak_id' => 'required|exists:kontrak,kontrak_id',
                 'nama' => 'required|string|max:255',
                 'posisi' => 'required|string|max:255',
-                'status_tenaga' => 'required|in:Tenaga Ahli,Tenaga Penunjang, Tenaga Teknis',
+                'status_tenaga' => 'required|in:Tenaga Ahli,Tenaga Penunjang,Tenaga Teknis',
                 'pendidikan' => 'required|string|max:255',
                 'pengalaman' => 'required|string|max:255',
                 'sertifikasi' => 'required|string|max:255',
