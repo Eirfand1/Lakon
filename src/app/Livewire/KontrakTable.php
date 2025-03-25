@@ -58,8 +58,10 @@ class KontrakTable extends DataTableComponent
             Column::make("Jenis Kontrak", "jenis_kontrak")
                 ->sortable()
                 ->searchable(),
-            Column::make("Nilai Kontrak", "nilai_kontrak")
-                ->sortable(),
+            Column::make("Nilai Kontrak")
+                ->sortable()
+                ->searchable()
+                ->format(fn($row, $value) => 'Rp. ' . number_format($row->nilai_kontrak, 2)),
             // Column::make("Tanggal Kontrak", "tgl_kontrak")
             //     ->sortable()
             //     ->format(fn ($value)=>  Carbon::parse($value)->translatedFormat('d F Y'))
