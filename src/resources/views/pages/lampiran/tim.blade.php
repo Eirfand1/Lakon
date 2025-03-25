@@ -10,9 +10,13 @@
     <table class="table">
         <thead class="text-gray-600  dark:text-gray-300">
             <tr>
-                <th rowspan="2" class="text-center border border-gray-400/30">Nama</th>
-                <th rowspan="2" class="text-center border border-gray-400/30">Posisi</th>
-                <th rowspan="2" class="text-center border border-gray-400/30">Status Tenaga</th>
+                <th rowspan="2" class="text-center border border-gray-400/30 min-w-[200px]">Nama</th>
+                <th rowspan="2" class="text-center border border-gray-400/30 min-w-[200px]">Posisi</th>
+                <th rowspan="2" class="text-center border border-gray-400/30 min-w-[200px]">Status Tenaga</th>
+                <th rowspan="2" class="text-center border border-gray-400/30 min-w-[200px]">Pendidikan</th>
+                <th rowspan="2" class="text-center border border-gray-400/30 min-w-[200px]">Pengalaman (tahun)</th>
+                <th rowspan="2" class="text-center border border-gray-400/30 min-w-[200px]">Sertifikasi</th>
+                <th rowspan="2" class="text-center border border-gray-400/30 min-w-[200px]">Keterangan</th>
                 <th colspan="12" class="text-center border border-gray-400/30">Jadwal Pelasanaan Kegiatan (Bulan)</th>
                 <th rowspan="2" class="text-center border border-gray-400/30">Aksi</th>
             </tr>
@@ -50,6 +54,29 @@
                         <option value="Tenaga Penunjang">Tenaga Penunjang</option>
                         <option value="Tenaga Teknis">Tenaga Teknis</option>
                     </select>
+                </td>
+                <td class="text-center border border-gray-400/30">
+                    <select class="w-full dark:bg-gray-800 rounded" name="pendidikan" id="pendidikan">
+                        <option value="">Pilih Pendidikan</option>
+                        <option value="SD">SD</option>
+                        <option value="SMP">SMP</option>
+                        <option value="SMA">SMA</option>
+                        <option value="D1">D1</option>
+                        <option value="D2">D2</option>
+                        <option value="D3">D3</option>
+                        <option value="D4/S1">D4/S1</option>
+                        <option value="S2">S2</option>
+                        <option value="S3">S3</option>
+                    </select>
+                </td>
+                <td class="text-center border border-gray-400/30">
+                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="pengalaman" id="pengalaman">
+                </td>
+                <td class="text-center border border-gray-400/30">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="sertifikasi" id="sertifikasi">
+                </td>
+                <td class="text-center border border-gray-400/30">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan" id="keterangan">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
                     <input type="checkbox" name="bulan_1" class="rounded" id="timBulan1">
@@ -98,6 +125,10 @@
                         <td class="border border-gray-400/30 ">{{ $row->nama }}</td>
                         <td class="border border-gray-400/30">{{ $row->posisi }}</td>
                         <td class="border border-gray-400/30">{{ $row->status_tenaga }}</td>
+                        <td class="border border-gray-400/30">{{ $row->pendidikan }}</td>
+                        <td class="border border-gray-400/30">{{ $row->pengalaman }}</td>
+                        <td class="border border-gray-400/30">{{ $row->sertifikasi }}</td>
+                        <td class="border border-gray-400/30">{{ $row->keterangan }}</td>
                         <td class="@if ($row->bulan_1) bg-green-400 @else bg-red-400 @endif"></td>
                         <td class="@if ($row->bulan_2) bg-green-400 @else bg-red-400 @endif"></td>
                         <td class="@if ($row->bulan_3) bg-green-400 @else bg-red-400 @endif"></td>
@@ -132,6 +163,10 @@
         document.getElementById('nama').value = data.nama;
         document.getElementById('posisi').value = data.posisi;
         document.getElementById('statusTenaga').value = data.status_tenaga;
+        document.getElementById('pendidikan').value = data.pendidikan;
+        document.getElementById('pengalaman').value = data.pengalaman;
+        document.getElementById('sertifikasi').value = data.sertifikasi;
+        document.getElementById('keterangan').value = data.keterangan;
         document.getElementById('timBulan1').checked = data.bulan_1;
         document.getElementById('timBulan2').checked = data.bulan_2;
         document.getElementById('timBulan3').checked = data.bulan_3;
