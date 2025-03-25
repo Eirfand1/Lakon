@@ -1,4 +1,4 @@
-<div class="overflow-x-auto pb-5">
+<div class="overflow-x-auto pb-5" id="rincianBelanja">
     <h1 class="text-lg dark:text-gray-300 flex gap-2 items-center font-semibold mb-4">
         <i class="fa fa-bars"></i>
         <span>
@@ -14,8 +14,8 @@
                 <th class="text-center border border-gray-400/30">Qty</th>
                 <th class="text-center border border-gray-400/30">Satuan</th>
                 <th class="text-center border border-gray-400/30">Harga (per Satuan)</th>
+                <th class="text-center border border-gray-400/30">Ongkos Kirim</th>
                 <th class="text-center border border-gray-400/30">Total Harga</th>
-                <th class="text-center border border-gray-400/30">Keterangan</th>
                 <th class="text-center border border-gray-400/30">Aksi</th>
             </tr>
         </thead>
@@ -38,10 +38,10 @@
                 <td class="text-center border border-gray-400/30">
                     <input class="w-full dark:bg-gray-800 rounded" type="number" name="harga_satuan" id="hargaSatuan">
                 </td>
-                <td> </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan" id="keteranganBarang">
+                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="ongkos_kirim" id="ongkos_kirim">
                 </td>
+                <td> </td>
                 <td class="text-center border border-gray-400/30 p-0">
                     <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
                 </td>
@@ -55,8 +55,8 @@
                         <td class="border border-gray-400/30">{{ $row->qty }}</td>
                         <td class="border border-gray-400/30">{{ $row->satuan }}</td>
                         <td class="border border-gray-400/30">Rp. {{ $row->harga_satuan }}</td>
+                        <td class="border border-gray-400/30">Rp. {{ $row->ongkos_kirim }}</td>
                         <td class="border border-gray-400/30">Rp. {{ $row->total_harga }}</td>
-                        <td class="border border-gray-400/30">{{ $row->keterangan }}</td>
 
                         <td class="border border-gray-400/30">
                             <div class="flex gap-1">
@@ -71,19 +71,19 @@
                     </tr>
                 @endforeach
                 <tr>
-                    <td colspan="4" class="text-right border border-gray-400/30">Total</td>
+                    <td colspan="5" class="text-right border border-gray-400/30">Total</td>
                     <td class="text-right border border-gray-400/30">Rp. {{ $totalBiaya }}</td>
-                    <td colspan="2" class="border border-gray-400/30"></td>
+                    <td class="border border-gray-400/30"></td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="text-right border border-gray-400/30">PPN 11%</td>
+                    <td colspan="5" class="text-right border border-gray-400/30">PPN 11%</td>
                     <td class="text-right border border-gray-400/30">Rp. {{ $ppn }}</td>
-                    <td colspan="2" class="border border-gray-400/30"></td>
+                    <td class="border border-gray-400/30"></td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="text-right border border-gray-400/30">Total Biaya</td>
+                    <td colspan="5" class="text-right border border-gray-400/30">Total Biaya</td>
                     <td class="text-right border border-gray-400/30">Rp. {{ $totalBiaya + $ppn }}</td>
-                    <td colspan="2" class="border border-gray-400/30"></td>
+                    <td class="border border-gray-400/30"></td>
                 </tr>
         </tbody>
     </table>

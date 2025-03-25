@@ -241,7 +241,9 @@ class KontrakController extends Controller
                     'template',
                     'detailKontrak',
                     'tim',
-                    'peralatan'
+                    'peralatan',
+                    'rincianBelanja',
+                    'penerima',
                 ])
                 ->first();
 
@@ -454,6 +456,48 @@ class KontrakController extends Controller
 
             if (in_array('NO_PERALATAN', $templateVariables)) {
                 $templateProcessor->cloneRowAndSetValues('NO_PERALATAN', $peralatan_table);
+            }
+
+            // rincian_belanja / rincian barang
+
+            $rincian_belanja_table = [];
+
+            if ($kontrak->rincianBelanja && $kontrak->rincianBelanja->count() > 0) {
+                foreach ($kontrak->rincianBelanja AS $index => $rincian){
+                    $rincian_belanja_table[] = [
+                        'NO_RINCIAN_BELANJA' => $index + 1,
+                        'TABLE_JENIS' => $rincian->jenis,
+                        'TABLE_QTY' => $rincian->qty,
+                        'TABLE_SATUAN' => $rincian->satuan,
+                        'TABLE_HARGA_SATUAN' => $rincian->harga_satuan,
+                        'TABLE_ONGKOS_KIRIM' => $rincian->ongkos_kirim,
+                        'TABLE_TOTAL_HARGA' => $rincian->total_harga,
+                    ];
+                }
+            }
+
+            if (in_array('NO_RINCIAN_BELANJA', $templateVariables)) {
+                $templateProcessor->cloneRowAndSetValues('NO_RINCIAN_BELANJA', $rincian_belanja_table);
+            }
+
+            // penerima
+
+            $penerima_table = [];
+
+            if ($kontrak->penerima && $kontrak->penerima->count() > 0) {
+                foreach ($kontrak->penerima AS $index => $penerima){
+                    $penerima_table[] = [
+                        'NO_PENERIMA' => $index + 1,
+                        'TABLE_NAMA_SEKOLAH' => $penerima->keterangan_penerima,
+                        'TABLE_ALAMAT' => $penerima->alamat,
+                        'TABLE_QTY' => $penerima->qty,
+                        'TABLE_SATUAN' => $penerima->satuan,
+                    ];
+                }
+            }
+
+            if (in_array('NO_PENERIMA', $templateVariables)) {
+                $templateProcessor->cloneRowAndSetValues('NO_PENERIMA', $penerima_table);
             }
 
 
