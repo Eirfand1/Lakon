@@ -127,7 +127,7 @@
 @if ($kontrak->nomor_spk)
 
 <div id="spkLanjutan">
-    <div class="mb-8">
+    {{-- <div class="mb-8">
         @include('pages.lampiran.dokumen-penagihan')
     </div>
 
@@ -137,7 +137,7 @@
 
     <div class="mb-8">
         @include('pages.lampiran.dokumen-tambahan')
-    </div>
+    </div> --}}
 </div>
 
 <form action="spk-done/{{ $kontrak->kontrak_id }}" method="POST">
