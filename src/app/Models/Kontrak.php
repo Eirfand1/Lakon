@@ -92,4 +92,9 @@ class Kontrak extends Model
     {
         return $this->hasMany(Realisasi::class, 'kontrak_id', 'kontrak_id');
     }
+
+    public function detailKontrak()
+    {
+        return $this->hasMany(DetailKontrak::class, 'kontrak_id', 'kontrak_id');
+    }
 }

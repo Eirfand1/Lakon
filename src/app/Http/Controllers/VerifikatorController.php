@@ -13,6 +13,7 @@ use App\Models\JadwalKegiatan;
 use App\Models\RincianBelanja;
 use App\Models\Peralatan;
 use App\Models\RuangLingkup;
+use App\Models\DetailKontrak;
 use Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
@@ -132,6 +133,7 @@ class VerifikatorController extends Controller
         return redirect()->back()->with('success', 'Data dasar berhasil di simpan');
     }
 
+
     public function spk($kontrak_id, Kontrak $kontrak, Request $request)
     {
         $validate = $request->validate([
@@ -157,6 +159,19 @@ class VerifikatorController extends Controller
             'cara_pembayaran' => $request->cara_pembayaran,
             'uang_muka' => $request->uang_muka,
         ]);
+
+        DetailKontrak::where('kontrak_id', $kontrak_id)->delete();
+
+        if ($request->detail) {
+            foreach ($request->detail as $key => $detail) {
+                DetailKontrak::create([
+                    'kontrak_id' => $kontrak_id,
+                    'detail' => $detail,
+                    'nilai' => $request->nilai[$key]
+                ]);
+            }
+        }
+
         return redirect()->back()->with('success', 'SPK berhasil di simpan')->withFragment('spkLanjutan');
     }
 
