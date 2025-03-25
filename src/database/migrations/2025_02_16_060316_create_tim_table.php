@@ -19,6 +19,10 @@ return new class extends Migration
             $table->string('nama');
             $table->string('posisi');
             $table->enum('status_tenaga', ['Tenaga Ahli', 'Tenaga Penunjang', 'Tenaga Teknis']);
+            $table->string('pendidikan');
+            $table->string('pengalaman');
+            $table->string('sertifikasi');
+            $table->string('keterangan');
             $table->boolean('bulan_1')->default(false);
             $table->boolean('bulan_2')->default(false);
             $table->boolean('bulan_3')->default(false);
