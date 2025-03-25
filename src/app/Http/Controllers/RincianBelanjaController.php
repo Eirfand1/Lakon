@@ -16,7 +16,7 @@ class RincianBelanjaController extends Controller
                 'qty' => 'required|numeric',
                 'satuan' => 'required|string|max:255',
                 'harga_satuan' => 'required|numeric',
-                'keterangan' => 'nullable|string',
+                'ongkos_kirim' => 'required|numeric',
             ]);
 
             if ($request->rincian_belanja_id) {
@@ -27,7 +27,7 @@ class RincianBelanjaController extends Controller
                     'qty' => $validateData['qty'],
                     'satuan' => $validateData['satuan'],
                     'harga_satuan' => $validateData['harga_satuan'],
-                    'keterangan' => $validateData['keterangan'],
+                    'ongkos_kirim' => $validateData['ongkos_kirim'],
                 ]);
                 return redirect()->back()->with('success', 'data berhasil diperbarui.')->withFragment('rincianBelanja');
             }else {
@@ -38,7 +38,7 @@ class RincianBelanjaController extends Controller
                     'qty' => $validateData['qty'],
                     'satuan' => $validateData['satuan'],
                     'harga_satuan' => $validateData['harga_satuan'],
-                    'keterangan' => $validateData['keterangan'],
+                    'ongkos_kirim' => $validateData['ongkos_kirim'],
                 ]);
                 return redirect()->back()->with('success', 'Rincian Belanja berhasil disimpan.')->withFragment('rincianBelanja');
             }
