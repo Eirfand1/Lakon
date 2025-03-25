@@ -23,7 +23,53 @@
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nilai Kontrak</label>
-            <input type="text" id="nilaiKontrakSPK" value="{{ $kontrak->nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <div x-data="detailKontrak({{ json_encode($kontrak) }})" class="space-y-2">
+                <div class="flex gap-4">
+                    <input type="text" id="nilaiKontrakSPK" value="{{ $kontrak->nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+                    <button type="button" @click="addDetailRow" class="btn btn-primary mt-2">Detail</button>
+                </div>
+
+                <template x-for="(detail, index) in details" :key="index">
+                    <div class="flex items-center gap-2 mt-2">
+                        <div class="flex gap-4 w-full">
+                            <!-- Kolom Detail (50%) -->
+                            <div class="w-4/5">
+                                <input
+                                    type="text"
+                                    name="detail[]"
+                                    x-model="detail.namaDetail"
+                                    placeholder="Detail"
+                                    class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md"
+                                >
+                            </div>
+                            <!-- Kolom Nilai (50%) -->
+                            <div class="w-4/5">
+                                <input
+                                    type="text"
+                                    name="nilai[]"
+                                    x-model="detail.nilaiDetail"
+                                    placeholder="Nilai"
+                                    @input="updateNilaiKontrak"
+                                    class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md"
+                                >
+                            </div>
+                        </div>
+                        <!-- Tombol Hapus di bawah tombol Detail -->
+                        <div class="flex justify-end gap-4">
+                            <div class="w-1/10 flex justify-end">
+                                <button
+                                    type="button"
+                                    @click="removeDetailRow(index)"
+                                    class="btn btn-error"
+                                >
+                                    Hapus
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </template>
+            </div>
+
             <input type="hidden" name="nilai_kontrak" id="nilaiKontrakSPKHidden" value="{{ $kontrak->nilai_kontrak }}">
         </div>
 
@@ -199,4 +245,45 @@
             const hasil = `${selisihHari} Hari`
             document.getElementById("waktuPenyelesaianSPK").value = hasil
         }
+
+
+        function detailKontrak(kontrak) {
+            return {
+                nilaiKontrak: kontrak.nilai_kontrak || '',
+                details: [],
+
+                addDetailRow() {
+                    this.details.push({
+                        namaDetail: '',
+                        nilaiDetail: ''
+                    });
+                    document.getElementById("nilaiKontrakSPK").readOnly = true
+                },
+
+                removeDetailRow(index) {
+                    this.details.splice(index, 1);
+                    if (this.details.length === 0) {
+                        document.getElementById("nilaiKontrakSPK").readOnly = false
+                    }
+                    this.updateNilaiKontrak();
+                },
+
+                updateNilaiKontrak() {
+                    let total = 0;
+                    this.details.forEach(detail => {
+                        total += parseFloat(detail.nilaiDetail);
+                    });
+                    const input = document.getElementById("nilaiKontrakSPK");
+                    input.value = total;
+
+                    const event = new Event('input', {
+                        bubbles: true,
+                        cancelable: true,
+                    });
+                    input.dispatchEvent(event);
+                }
+            }
+        }
+
+
 </script>
