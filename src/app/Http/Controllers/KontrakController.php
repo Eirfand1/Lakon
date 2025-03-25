@@ -232,7 +232,17 @@ class KontrakController extends Controller
         try {
             // Load kontrak dengan relasinya
             $kontrak = Kontrak::where('kontrak_id', $kontrak->kontrak_id)
-                ->with(['verifikator', 'penyedia', 'satuanKerja', 'paketPekerjaan', 'subKegiatan', 'template'])
+                ->with([
+                    'verifikator',
+                    'penyedia',
+                    'satuanKerja',
+                    'paketPekerjaan',
+                    'subKegiatan',
+                    'template',
+                    'detailKontrak',
+                    'tim',
+                    'peralatan'
+                ])
                 ->first();
 
             // Pilih template
@@ -286,7 +296,7 @@ class KontrakController extends Controller
             $terbilang_tgl_pembuatan = Carbon::parse($kontrak->tanggal_awal);
 
             $bulan = [
-            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 
+            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
             'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
             ];
 
@@ -354,10 +364,10 @@ class KontrakController extends Controller
             if ($kontrak->ruangLingkup && $kontrak->ruangLingkup->count() > 0) {
                 foreach ($kontrak->ruangLingkup as $index => $lingkup) {
                     $varName = '${LINGKUP_PEKERJAAN' . ($index + 1) . '}';
-                    
+
                     $templateProcessor->setValue($varName, $lingkup->ruang_lingkup ?? '-');
                 }
-                
+
                 for ($i = $kontrak->ruangLingkup->count() + 1; $i <= 10; $i++) {
                     $varName = '${LINGKUP_PEKERJAAN' . $i . '}';
                     $templateProcessor->setValue($varName, '');
@@ -382,6 +392,64 @@ class KontrakController extends Controller
                 $templateProcessor->setValue('${NAMA_VERIFIKATOR}', '-');
                 $templateProcessor->setValue('${TGL_VERIFIKASI}', '-');
             }
+
+            // tabel-tabel
+
+            // detail_kontrak
+            $detail_kontrak = [];
+
+            if ($kontrak->detailKontrak && $kontrak->detailKontrak->count() > 0) {
+                foreach ($kontrak->detailKontrak as $index => $detail) {
+                    $detail_kontrak[] = [
+                        'TABEL_DETAIL' => $detail->detail,
+                        'TABEL_NILAI' => number_format($detail->nilai, 0, ',', '.'),
+                        'TABEL_SATUAN' => "coba",
+                    ];
+                }
+            }
+
+            $templateProcessor->cloneRowAndSetValues('TABEL_DETAIL', $detail_kontrak);
+
+            // tim
+            $tim_table = [];
+
+            if ($kontrak->tim && $kontrak->tim->count() > 0) {
+                foreach ($kontrak->tim as $index => $tim) {
+                    $tim_table[] = [
+                        'NO_TIM' => $index + 1,
+                        'TABLE_NAMA' => $tim->nama,
+                        'TABLE_POSISI' => $tim->posisi,
+                        'TABLE_STATUS_TENAGA' => $tim->status_tenaga,
+                        'TABLE_PENDIDIKAN' => $tim->pendidikan,
+                        'TABLE_PENGALAMAN' => $tim->pengalaman,
+                        'TABLE_SERTIFIKASI' => $tim->sertifikasi,
+                        'TABLE_KETERANGAN' => $tim->keterangan
+                    ];
+                }
+            }
+
+            $templateProcessor->cloneRowAndSetValues('NO_TIM', $tim_table);
+
+            // peralatan
+            $peralatan_table = [];
+
+            if ($kontrak->peralatan && $kontrak->peralatan->count() > 0) {
+                foreach ($kontrak->peralatan AS $index => $peralatan){
+                    $peralatan_table[] = [
+                        'NO_PERALATAN' => $index + 1,
+                        'TABLE_NAMA_PERALATAN' => $peralatan->nama_peralatan,
+                        'TABLE_MERK' => $peralatan->merk,
+                        'TABLE_TYPE' => $peralatan->type,
+                        'TABLE_KAPASITAS' => $peralatan->kapasitas,
+                        'TABLE_JUMLAH' => $peralatan->jumlah,
+                        'TABLE_KONDISI' => $peralatan->kondisi,
+                        'TABLE_STATUS_KEPEMILIKAN' => $peralatan->status_kepemilikan,
+                        'TABLE_KETERANGAN' => $peralatan->keterangan
+                    ];
+                }
+            }
+
+            $templateProcessor->cloneRowAndSetValues('NO_PERALATAN', $peralatan_table);
 
             $outputDocx = storage_path('app/temp/' . time() . '_kontrak.docx');
             $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
