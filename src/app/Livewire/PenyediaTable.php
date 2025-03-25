@@ -2,15 +2,13 @@
 
 namespace App\Livewire;
 
+use Carbon\Carbon;
 use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Penyedia;
-use Rappasoft\LaravelLivewireTables\Views\Columns\ImageColumn;
-use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
-use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectDropdownFilter;
-use Rappasoft\LaravelLivewireTables\Views\Filters\MultiSelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
+Carbon::setLocale('id'); 
 class PenyediaTable extends DataTableComponent
 {
     protected $model = Penyedia::class;
@@ -62,6 +60,7 @@ class PenyediaTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
             Column::make("Tanggal Akta Notaris", "akta_notaris_tanggal")
+                ->format(fn($value) => Carbon::parse($value)->translatedFormat('d F Y'))
                 ->sortable()
                 ->searchable(),
             Column::make("Alamat Perusahaan", "alamat_perusahaan")

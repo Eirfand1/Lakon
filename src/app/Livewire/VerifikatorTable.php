@@ -53,12 +53,7 @@ class VerifikatorTable extends DataTableComponent
             Column::make("Email", "user.email")
                 ->sortable()
                 ->searchable(),
-            Column::make("Created at", "created_at")
-                ->sortable()
-                ->searchable(),
-            Column::make("Updated at", "updated_at")
-                ->sortable()
-                ->searchable(),
+            
             
         ];
     }
