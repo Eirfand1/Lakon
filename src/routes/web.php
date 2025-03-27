@@ -94,7 +94,6 @@ Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(f
 
     Route::post('/detail/data-dasar/{kontrak_id}', [VerifikatorController::class, 'dataDasar']);
     Route::post('/detail/spk/{kontrak_id}', [VerifikatorController::class, 'spk']);
-    Route::post('/detail/spk-done/{kontrak_id}', [VerifikatorController::class, 'spkDone']);
     Route::post('/detail/lampiran/{kontrak_id}', [VerifikatorController::class, 'lampiran']);
     Route::post('/detail/spp/{kontrak_id}', [VerifikatorController::class, 'spp']);
     Route::post('/detail/sskk/{kontrak_id}', [VerifikatorController::class, 'sskk']);

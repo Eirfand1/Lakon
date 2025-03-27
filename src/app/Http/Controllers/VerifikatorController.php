@@ -158,7 +158,9 @@ class VerifikatorController extends Controller
             'waktu_penyelesaian' => $request->waktu_penyelesaian,
             'cara_pembayaran' => $request->cara_pembayaran,
             'uang_muka' => $request->uang_muka,
+            'spk_done' => true
         ]);
+
 
         DetailKontrak::where('kontrak_id', $kontrak_id)->delete();
 
@@ -170,18 +172,18 @@ class VerifikatorController extends Controller
                     'nilai' => $request->nilai[$key]
                 ]);
             }
+        }else {
+            $kontrak = Kontrak::where('kontrak_id', $kontrak_id)->with(['paketPekerjaan', 'paketPekerjaan.sekolah'])->first();
+            DetailKontrak::create([
+                'kontrak_id' => $kontrak_id,
+                'detail' => $kontrak->paketPekerjaan->nama_pekerjaan . " " . $kontrak->paketPekerjaan->sekolah->nama_sekolah,
+                'nilai' => $request->nilai_kontrak
+            ]);
         }
 
-        return redirect()->back()->with('success', 'SPK berhasil di simpan')->withFragment('spkLanjutan');
-    }
-
-    public function spkDone($kontrak_id, Kontrak $kontrak)
-    {
-        $kontrak->where('kontrak_id', $kontrak_id)->update([
-            'spk_done' => true
-        ]);
         return redirect()->back()->with('success', 'SPK berhasil di simpan');
     }
+
 
     public function lampiran($kontrak_id, Kontrak $kontrak)
     {

@@ -117,31 +117,6 @@
         </div>
     </div>
 
-    <div class="flex justify-end">
-        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-            Simpan Data Surat Perintah Kerja
-        </button>
-    </div>
-</form>
-
-@if ($kontrak->nomor_spk)
-
-<div id="spkLanjutan">
-    {{-- <div class="mb-8">
-        @include('pages.lampiran.dokumen-penagihan')
-    </div>
-
-    <div class="mb-8">
-        @include('pages.lampiran.ruang-lingkup')
-    </div>
-
-    <div class="mb-8">
-        @include('pages.lampiran.dokumen-tambahan')
-    </div> --}}
-</div>
-
-<form action="spk-done/{{ $kontrak->kontrak_id }}" method="POST">
-    @csrf
     <div class="flex items-center mb-4 space-x-2 text-gray-600 dark:text-gray-300">
         <i class="fas fa-circle-check fa-lg"></i>
         <h3 class=" font-bold">Validasi Kebenaran Data</h3>
@@ -158,7 +133,6 @@
         </button>
     </div>
 </form>
-@endif
 
 <script>
         function numberToTextFunction(input, too_long) {
