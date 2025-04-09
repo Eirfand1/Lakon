@@ -1,5 +1,5 @@
 <x-app-layout>
-
+{{-- @dd(Auth::user()->penyedia->is_verificated) --}}
     <div class="container mx-auto p-4">
         <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
             <!-- Header -->
@@ -145,7 +145,7 @@
 
                             try {
                                 this.isLoading = true;
-                                const response = await fetch(`/api/paket-pekerjaan/${this.kodeSirup}`);
+                                const response = await fetch(`/penyedia/cari-paket-pekerjaan/${this.kodeSirup}`);
 
                                 if (!response.ok) {
                                     const errorData = await response.json();

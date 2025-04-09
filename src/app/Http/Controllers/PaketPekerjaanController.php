@@ -11,6 +11,7 @@ use App\Models\SatuanKerja;
 use App\Models\Sekolah;
 use App\Models\SubKegiatan;
 use App\Models\Kontrak;
+use Illuminate\Support\Facades\Auth;
 use Dotenv\Exception\ValidationException;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
@@ -148,6 +149,11 @@ class PaketPekerjaanController extends Controller
 
     public function getPaketByKode($kode)
     {
+        $user = Auth::user()->load('penyedia');
+
+        if (!$user->penyedia->is_verificated) {
+            return response()->json(['error' => 'Akun anda belum diverifikasi, silakan hubungi admin'], 403);
+        }
         $paket = PaketPekerjaan::where('kode_sirup', $kode)->first();
 
         if (!$paket) {

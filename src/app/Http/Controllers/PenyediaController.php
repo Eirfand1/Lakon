@@ -26,7 +26,7 @@ class PenyediaController extends Controller
             return view('pages.admin.penyedia.penyedia', [
                 "title" => "penyedia",
             ]);
-        
+
     }
 
     public function create(): View
@@ -216,4 +216,13 @@ class PenyediaController extends Controller
         return Excel::download(new PenyediaExport, 'penyedia.xlsx');
     }
 
+    public function verifikasi(Penyedia $penyedia){
+        $penyedia->update(['is_verificated' => 1]);
+        return redirect()->back()->with('success', 'Data berhasil diverifikasi!');
+    }
+
+    public function batal_verifikasi(Penyedia $penyedia){
+        $penyedia->update(['is_verificated' => 0]);
+        return redirect()->back()->with('success', 'Data berhasil dibatalkan!');
+    }
 }
