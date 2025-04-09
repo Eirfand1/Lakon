@@ -50,6 +50,7 @@ Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(functio
     Route::get('/detail-kontrak/{kontrak}', [KontrakController::class, 'detail'])->name('penyedia.detail-kontrak.layangkan');
     Route::get('/{kontrak}/export-pdf', [KontrakController::class, 'exportPdf'])->name('penyedia.riwayat-kontrak.export-pdf');
 
+    Route::get('/cari-paket-pekerjaan/{kode}', [PaketPekerjaanController::class, 'getPaketByKode']);
 
     // lampiran kontrak
     // tim
@@ -165,6 +166,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
         Route::put('/{penyedia}', [PenyediaController::class, 'update'])->name('admin.penyedia.edit');
         Route::delete('/{penyedia}', [PenyediaController::class, 'destroy'])->name('admin.penyedia.destroy');
         Route::Get('/export', [PenyediaController::class, 'exportPenyedia'])->name('admin.penyedia.export');
+        Route::get('/verifikasi/{penyedia}', [PenyediaController::class, 'verifikasi'])->name('admin.penyedia.verifikasi');
+        Route::get('/batal_verifikasi/{penyedia}', [PenyediaController::class, 'batal_verifikasi'])->name('admin.penyedia.batal_verifikasi');
     });
 
     // Paket Pekerjaan (Matriks)

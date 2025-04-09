@@ -8,7 +8,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Penyedia;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\TextFilter;
-Carbon::setLocale('id'); 
+Carbon::setLocale('id');
 class PenyediaTable extends DataTableComponent
 {
     protected $model = Penyedia::class;
@@ -31,6 +31,8 @@ class PenyediaTable extends DataTableComponent
         return [
             Column::make("Aksi", "penyedia_id")
                 ->format(fn($value, $row) => view('pages.admin.penyedia.actions', ['p' => Penyedia::with('user')->find($value)])),
+            Column::make("Verifikasi", "is_verificated")
+                ->format(fn($value, $row) => view('pages.admin.penyedia.status', ['status' => $value, 'id' => $row->penyedia_id])),
             Column::make("Username", "user.name")
                 ->sortable()
                 ->searchable(),
@@ -46,7 +48,7 @@ class PenyediaTable extends DataTableComponent
             Column::make("Alamat Pemilik", "alamat_pemilik")
                 ->sortable()
                 ->searchable(),
-            
+
             Column::make("Nama Perusahaan Lengkap", "nama_perusahaan_lengkap")
                 ->sortable()
                 ->searchable(),
@@ -88,7 +90,7 @@ class PenyediaTable extends DataTableComponent
             //     ->sortable()
             //     ->searchable()
             //     ->format(function ($value, $row) {
-            //        return "<img src='" . asset($value) ."' alt='' style='width: auto; height: 30px;' />"; 
+            //        return "<img src='" . asset($value) ."' alt='' style='width: auto; height: 30px;' />";
             //     })
             //     ->html(),
         ];

@@ -69,7 +69,7 @@ class User extends Authenticatable
     }
 
     public function isPenyedia() {
-        return $this->role = 'penyedia';
+        return $this->role == 'penyedia';
     }
 
     public function isAdmin() {
@@ -77,6 +77,6 @@ class User extends Authenticatable
     }
 
     public function isVerifikator() {
-        return $this->role ='verifikator';
+        return $this->role =='verifikator';
     }
 }
