@@ -28,8 +28,8 @@ class VerifikasiTable extends DataTableComponent
         return Kontrak::query()
             ->with(['satuanKerja', 'penyedia', 'verifikator', 'paketPekerjaan'])
             ->orderByDesc('kontrak.updated_at')
-            ->where('is_verificated', 0)
-            ->where('is_layangkan', 1);
+            ->where('kontrak.is_verificated', 0)
+            ->where('kontrak.is_layangkan', 1);
     }
 
     public function columns(): array
@@ -58,18 +58,11 @@ class VerifikasiTable extends DataTableComponent
                             ';
                 })->html(),
 
-            Column::make("No Kontrak", "no_kontrak")
-                ->sortable()
-                ->searchable(),
-
             Column::make("Nama Perusahaan", "penyedia.nama_perusahaan_lengkap")
                 ->sortable()
                 ->searchable(),
 
             Column::make("Nama Paket", "paketPekerjaan.nama_pekerjaan")
-                ->format(function ($value, $row) {
-                    return $row['paketPekerjaan.nama_pekerjaan'] ." ". $row['paketPekerjaan.sekolah.nama_sekolah'];
-                })
                 ->sortable()
                 ->searchable(),
 
@@ -85,6 +78,13 @@ class VerifikasiTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
 
+            Column::make("Aksi", "kontrak_id")
+                ->format( function($value, $row) {
+                    return '<a  href="#"
+                            class="inline-block px-4 py-2 text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-opacity-50 bg-red-500 hover:bg-red-600 focus:ring-red-500">
+                            tolak permohonan
+                            </a>';
+                })->html(),
         ];
     }
 }
