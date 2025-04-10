@@ -14,7 +14,7 @@
                     </a>
                 </div>
                 <!-- Add Button -->
-                <label for="add-modal" class="btn rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
+                <label for="add-modal" class="btn rounded btn-sm px-3 bg-gray-800 hover:bg-gray-700 text-white dark:bg-gray-100 dark:text-gray-800 ">
                     <i class="fa-solid fa-square-plus"></i>
                     <span>Tambah Data</span>
                 </label>
@@ -187,7 +187,7 @@
                             </select>
 
                             <select name="metode_pemilihan" id=""
-                                class="w-3/4 text-sm rounded-lg bg-white h-10 dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                                class="w-3/4 text-sm rounded-lg bg-white h-10 dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                                 required>
                                 <option value="" disabled {{ old('metode_pemilihan') ? '' : 'selected' }}>Pilih Jenis
                                     Pengadaan</option>
