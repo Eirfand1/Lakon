@@ -71,12 +71,137 @@ function initializeFlatpickr() {
     });
 }
 
+function sekolahDropDown() {
+    $('#kecamatan_dropdown, #desa_dropdown').select2({
+        placeholder: "Pilih",
+        allowClear: true,
+        width: '100%',
+        containerCssClass: 'select2-tailwind-container',
+        dropdownCssClass: 'select2-tailwind-dropdown',
+        selectionCssClass: 'select2-tailwind-selection'
+    });
+
+    fetch('https://www.emsifa.com/api-wilayah-indonesia/api/districts/3301.json')
+        .then(response => response.json())
+        .then(data => {
+            let kecamatanSelect = $('#kecamatan_dropdown');
+            data.forEach(kecamatan => {
+                // Store the name as data attribute on the option
+                let option = new Option(kecamatan.name, kecamatan.id);
+                $(option).data('name', kecamatan.name);
+                kecamatanSelect.append(option);
+            });
+        })
+        .catch(error => console.error('Error fetching kecamatan:', error));
+
+    $('#kecamatan_dropdown').on('change', function () {
+        let kecamatanID = $(this).val();
+        let desaSelect = $('#desa_dropdown');
+
+        // Get the text of the selected option for kecamatan
+        let kecamatanName = $("#kecamatan_dropdown option:selected").text();
+        $('#kecamatan').val(kecamatanName);
+
+        desaSelect.empty().append(new Option("Pilih Desa", "")); // Reset desa
+
+        if (kecamatanID) {
+            // Ambil daftar desa dari API
+            fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${kecamatanID}.json`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(desa => {
+                        // Store the name as data attribute on the option
+                        let option = new Option(desa.name, desa.id);
+                        $(option).data('name', desa.name);
+                        desaSelect.append(option);
+                    });
+                })
+                .catch(error => console.error('Error fetching desa:', error));
+        }
+    });
+
+    $('#desa_dropdown').on('change', function () {
+        // Get the text of the selected option for desa
+        let desaName = $("#desa_dropdown option:selected").text();
+        $('#desa').val(desaName);
+    });
+};
+
+
+// function inisialisasiMap(mapId, inputId) {
+//     const map = L.map(mapId).setView([-7.7278427548606, 109.0095072984696], 10); //alun alun cilacap
+//     maps[mapId] = { map, marker: null };
+
+//     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+//         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+//     }).addTo(map);
+
+//     map.on('click', function (event) {
+//         const latLng = event.latlng;
+//         const marker = maps[mapId].marker;
+
+//         if (!marker) {
+//             maps[mapId].marker = L.marker(latLng, { draggable: true }).addTo(map);
+//             maps[mapId].marker.on('dragend', function (event) {
+//                 const newLatLng = maps[mapId].marker.getLatLng();
+//                 const koordinat = `${newLatLng.lat.toFixed(13)},${newLatLng.lng.toFixed(13)}`;
+//                 document.getElementById(inputId).value = koordinat;
+//             });
+//         } else {
+//             marker.setLatLng(latLng);
+//         }
+
+//         document.getElementById(inputId).value = `${latLng.lat.toFixed(13)},${latLng.lng.toFixed(13)}`;
+//     });
+
+//     document.getElementById(inputId).addEventListener('input', function () {
+//         updateMarkerFromInput(map, maps[mapId].marker, inputId);
+//     });
+// }
+
+// function updateMarkerFromInput(map, marker, inputId) {
+//     const koordinat = document.getElementById(inputId).value;
+//     const [lat, lng] = koordinat.split(',').map(parseFloat);
+
+//     if (!isNaN(lat) && !isNaN(lng)) {
+//         const newLatLng = L.latLng(lat, lng);
+
+//         if (!marker) {
+//             maps[mapId].marker = L.marker(newLatLng, { draggable: true }).addTo(map);
+//             maps[mapId].marker.on('dragend', function (event) {
+//                 const updatedLatLng = maps[mapId].marker.getLatLng();
+//                 const updatedKoordinat = `${updatedLatLng.lat.toFixed(13)},${updatedLatLng.lng.toFixed(13)}`;
+//                 document.getElementById(inputId).value = updatedKoordinat;
+//             });
+//         } else {
+//             marker.setLatLng(newLatLng);
+//         }
+
+//         map.setView(newLatLng, map.getZoom());
+//     }
+// }
+
+// function mapInputDelete() {
+//     document.getElementById('koordinat').value = '';
+//     if (maps['map'] && maps['map'].marker) {
+//         maps['map'].map.removeLayer(maps['map'].marker);
+//         maps['map'].marker = null;
+//     }
+// }
+
+
 applyDarkMode();
 initializeFlatpickr();
+sekolahDropDown();
+
+// inisialisasiMap('map', 'koordinat');
+// inisialisasiMap('edit_map', 'edit_koordinat');
 
 document.addEventListener('livewire:navigated', () => {
     applyDarkMode();
     initializeFlatpickr();
+    sekolahDropDown();
+
 });
 
 document.addEventListener('livewire:update', () => {

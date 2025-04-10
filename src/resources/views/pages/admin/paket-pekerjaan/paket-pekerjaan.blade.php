@@ -14,7 +14,7 @@
                     </a>
                 </div>
                 <!-- Add Button -->
-                <label for="add-modal" class="btn rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
+                <label for="add-modal" class="btn rounded btn-sm px-3 bg-gray-800 hover:bg-gray-700 text-white dark:bg-gray-100 dark:text-gray-800 ">
                     <i class="fa-solid fa-square-plus"></i>
                     <span>Tambah Data</span>
                 </label>
