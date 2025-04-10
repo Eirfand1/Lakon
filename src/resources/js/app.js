@@ -128,74 +128,9 @@ function sekolahDropDown() {
 };
 
 
-// function inisialisasiMap(mapId, inputId) {
-//     const map = L.map(mapId).setView([-7.7278427548606, 109.0095072984696], 10); //alun alun cilacap
-//     maps[mapId] = { map, marker: null };
-
-//     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-//     }).addTo(map);
-
-//     map.on('click', function (event) {
-//         const latLng = event.latlng;
-//         const marker = maps[mapId].marker;
-
-//         if (!marker) {
-//             maps[mapId].marker = L.marker(latLng, { draggable: true }).addTo(map);
-//             maps[mapId].marker.on('dragend', function (event) {
-//                 const newLatLng = maps[mapId].marker.getLatLng();
-//                 const koordinat = `${newLatLng.lat.toFixed(13)},${newLatLng.lng.toFixed(13)}`;
-//                 document.getElementById(inputId).value = koordinat;
-//             });
-//         } else {
-//             marker.setLatLng(latLng);
-//         }
-
-//         document.getElementById(inputId).value = `${latLng.lat.toFixed(13)},${latLng.lng.toFixed(13)}`;
-//     });
-
-//     document.getElementById(inputId).addEventListener('input', function () {
-//         updateMarkerFromInput(map, maps[mapId].marker, inputId);
-//     });
-// }
-
-// function updateMarkerFromInput(map, marker, inputId) {
-//     const koordinat = document.getElementById(inputId).value;
-//     const [lat, lng] = koordinat.split(',').map(parseFloat);
-
-//     if (!isNaN(lat) && !isNaN(lng)) {
-//         const newLatLng = L.latLng(lat, lng);
-
-//         if (!marker) {
-//             maps[mapId].marker = L.marker(newLatLng, { draggable: true }).addTo(map);
-//             maps[mapId].marker.on('dragend', function (event) {
-//                 const updatedLatLng = maps[mapId].marker.getLatLng();
-//                 const updatedKoordinat = `${updatedLatLng.lat.toFixed(13)},${updatedLatLng.lng.toFixed(13)}`;
-//                 document.getElementById(inputId).value = updatedKoordinat;
-//             });
-//         } else {
-//             marker.setLatLng(newLatLng);
-//         }
-
-//         map.setView(newLatLng, map.getZoom());
-//     }
-// }
-
-// function mapInputDelete() {
-//     document.getElementById('koordinat').value = '';
-//     if (maps['map'] && maps['map'].marker) {
-//         maps['map'].map.removeLayer(maps['map'].marker);
-//         maps['map'].marker = null;
-//     }
-// }
-
-
 applyDarkMode();
 initializeFlatpickr();
 sekolahDropDown();
-
-// inisialisasiMap('map', 'koordinat');
-// inisialisasiMap('edit_map', 'edit_koordinat');
 
 document.addEventListener('livewire:navigated', () => {
     applyDarkMode();
