@@ -5,7 +5,7 @@
                 <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">TEMPLATE</h1>
             </div>
             <!-- Add Button -->
-            <label for="add-modal" class="btn rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
+            <label for="add-modal" class="btn bg-gray-800 hover:bg-gray-700 rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
                 <i class="fa-solid fa-square-plus"></i>
                 <span>Tambah Data</span>
             </label>

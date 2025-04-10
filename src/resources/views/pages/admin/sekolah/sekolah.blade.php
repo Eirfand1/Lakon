@@ -22,7 +22,7 @@
                     </a>
                 </div>
                 <label for="add-sekolah"
-                    class="btn sm:w-auto w-full rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
+                    class="btn sm:w-auto w-full bg-gray-800 hover:bg-gray-700 rounded btn-sm px-3 text-white dark:bg-gray-100 dark:text-gray-800 ">
                     <i class="fa-solid fa-square-plus"></i>
                     <span>Tambah Data</span>
                 </label>
@@ -537,64 +537,9 @@
             }
         }
 
-        // Inisialisasi peta
+        // // Inisialisasi peta
         inisialisasiMap('map', 'koordinat');
         inisialisasiMap('edit_map', 'edit_koordinat');
 
-        document.addEventListener('livewire:navigated', () => {
-            $('#kecamatan_dropdown, #desa_dropdown').select2({
-                placeholder: "Pilih",
-                allowClear: true,
-                width: '100%',
-                containerCssClass: 'select2-tailwind-container',
-                dropdownCssClass: 'select2-tailwind-dropdown',
-                selectionCssClass: 'select2-tailwind-selection'
-            });
-
-            fetch('https://www.emsifa.com/api-wilayah-indonesia/api/districts/3301.json')
-                .then(response => response.json())
-                .then(data => {
-                    let kecamatanSelect = $('#kecamatan_dropdown');
-                    data.forEach(kecamatan => {
-                        // Store the name as data attribute on the option
-                        let option = new Option(kecamatan.name, kecamatan.id);
-                        $(option).data('name', kecamatan.name);
-                        kecamatanSelect.append(option);
-                    });
-                })
-                .catch(error => console.error('Error fetching kecamatan:', error));
-
-            $('#kecamatan_dropdown').on('change', function () {
-                let kecamatanID = $(this).val();
-                let desaSelect = $('#desa_dropdown');
-
-                // Get the text of the selected option for kecamatan
-                let kecamatanName = $("#kecamatan_dropdown option:selected").text();
-                $('#kecamatan').val(kecamatanName);
-
-                desaSelect.empty().append(new Option("Pilih Desa", "")); // Reset desa
-
-                if (kecamatanID) {
-                    // Ambil daftar desa dari API
-                    fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${kecamatanID}.json`)
-                        .then(response => response.json())
-                        .then(data => {
-                            data.forEach(desa => {
-                                // Store the name as data attribute on the option
-                                let option = new Option(desa.name, desa.id);
-                                $(option).data('name', desa.name);
-                                desaSelect.append(option);
-                            });
-                        })
-                        .catch(error => console.error('Error fetching desa:', error));
-                }
-            });
-
-            $('#desa_dropdown').on('change', function () {
-                // Get the text of the selected option for desa
-                let desaName = $("#desa_dropdown option:selected").text();
-                $('#desa').val(desaName);
-            });
-        }); 
     </script>
 </x-app-layout>
