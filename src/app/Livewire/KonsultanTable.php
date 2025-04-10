@@ -29,7 +29,7 @@ class KonsultanTable extends DataTableComponent
         return Kontrak::query()
             ->with(['satuanKerja', 'penyedia', 'verifikator', 'paketPekerjaan'])
             ->orderByDesc('kontrak.updated_at')
-            ->where('is_verificated', 1)
+            ->where('kontrak.is_verificated', 1)
             ->where('kontrak.penyedia_id', Auth::user()->penyedia->penyedia_id);
     }
 

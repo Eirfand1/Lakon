@@ -29,7 +29,7 @@ class RealisasiTable extends DataTableComponent
         return Kontrak::query()
             ->with(['satuanKerja', 'penyedia', 'verifikator', 'realisasi'])
             ->orderByDesc('kontrak.updated_at')
-            ->whereIsVerificated(true);
+            ->where('kontrak.is_verificated', 1);
     }
 
     public function bulkActions(): array
