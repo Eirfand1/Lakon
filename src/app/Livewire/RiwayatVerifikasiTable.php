@@ -29,7 +29,7 @@ class RiwayatVerifikasiTable extends DataTableComponent
         return Kontrak::query()
             ->with(['satuanKerja', 'penyedia', 'verifikator', 'paketPekerjaan'])
             ->orderByDesc('kontrak.updated_at')
-            ->where('is_verificated', 1)
+            ->where('kontrak.is_verificated', 1)
             ->where('verifikator_id', Auth::user()->verifikator->verifikator_id);
     }
 

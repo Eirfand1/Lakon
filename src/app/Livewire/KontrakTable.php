@@ -31,7 +31,7 @@ class KontrakTable extends DataTableComponent
         return Kontrak::query()
             ->with(['satuanKerja', 'penyedia', 'verifikator'])
             ->orderByDesc('kontrak.updated_at')
-            ->whereIsVerificated(true);
+            ->where('kontrak.is_verificated', 1);
     }
 
     public function bulkActions(): array
@@ -107,7 +107,7 @@ class KontrakTable extends DataTableComponent
                     }
                     return '<div class="badge text-white badge-error gap-2">Belum Terverifikasi</div>';
                 })->html(),
-            
+
         ];
     }
 }

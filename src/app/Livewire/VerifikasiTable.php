@@ -28,8 +28,8 @@ class VerifikasiTable extends DataTableComponent
         return Kontrak::query()
             ->with(['satuanKerja', 'penyedia', 'verifikator', 'paketPekerjaan'])
             ->orderByDesc('kontrak.updated_at')
-            ->where('is_verificated', 0)
-            ->where('is_layangkan', 1);
+            ->where('kontrak.is_verificated', 0)
+            ->where('kontrak.is_layangkan', 1);
     }
 
     public function columns(): array
