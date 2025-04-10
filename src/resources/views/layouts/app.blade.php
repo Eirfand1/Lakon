@@ -124,8 +124,12 @@
                 stopOnFocus: true
             }).showToast();
             </script>
-        @endif 
+        @endif
 
+
+        <!-- Leaflet JavaScript -->
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        
         <script>
             if (localStorage.getItem('sidebar-expanded') == 'true') {
                 document.querySelector('body').classList.add('sidebar-expanded');
@@ -151,10 +155,9 @@
             </div>
 
         </div>
-       
 
         @livewireScriptConfig
 
-        
+
     </body>
 </html>

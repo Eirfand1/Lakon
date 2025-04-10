@@ -404,16 +404,13 @@
         <label class="modal-backdrop" for="delete-sekolah">Close</label>
     </div>
 
-    <!-- Leaflet JavaScript -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-
     <!-- Script for Sekolah -->
     <script>
         function setDeleteId(sekolah_id) {
             document.getElementById('deleteForm').action = `sekolah/${sekolah_id}`;
         }
 
-        const maps = {};
+        window.maps = window.maps || {};
 
         function handleEdit(data) {
 
@@ -595,6 +592,6 @@
                 let desaName = $("#desa_dropdown option:selected").text();
                 $('#desa').val(desaName);
             });
-        }); 
+        });
     </script>
 </x-app-layout>
