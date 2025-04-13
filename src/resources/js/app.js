@@ -131,16 +131,96 @@ function sekolahDropDown() {
     });
 };
 
+window.editSekolahDropDown = function(selectedKecamatanName = null, selectedDesaName = null) {
+    $('#edit_kecamatan_dropdown, #edit_desa_dropdown').select2({
+        placeholder: "Pilih",
+        allowClear: true,
+        width: '100%',
+        containerCssClass: 'select2-tailwind-container',
+        dropdownCssClass: 'select2-tailwind-dropdown',
+        selectionCssClass: 'select2-tailwind-selection'
+    });
+
+    fetch('https://www.emsifa.com/api-wilayah-indonesia/api/districts/3301.json')
+        .then(response => response.json())
+        .then(data => {
+            let kecamatanSelect = $('#edit_kecamatan_dropdown');
+            kecamatanSelect.empty().append(new Option("Pilih Kecamatan", "")); // Reset kecamatan
+
+            data.forEach(kecamatan => {
+                let option = new Option(kecamatan.name, kecamatan.id);
+                $(option).data('name', kecamatan.name);
+
+                // Set selected jika nama kecamatan cocok
+                if (selectedKecamatanName && kecamatan.name === selectedKecamatanName) {
+                    $(option).attr('selected', 'selected');
+                }
+
+                kecamatanSelect.append(option);
+            });
+
+            // Trigger change untuk memuat desa jika ada kecamatan yang dipilih
+            if (selectedKecamatanName) {
+                kecamatanSelect.val(function() {
+                    return this.options[this.selectedIndex].value;
+                }).trigger('change');
+            }
+        })
+        .catch(error => console.error('Error fetching kecamatan:', error));
+
+    $('#edit_kecamatan_dropdown').on('change', function () {
+        let kecamatanID = $(this).val();
+        let desaSelect = $('#edit_desa_dropdown');
+
+        // Get the text of the selected option for kecamatan
+        let kecamatanName = $("#edit_kecamatan_dropdown option:selected").text();
+        $('#edit_kecamatan').val(kecamatanName);
+
+        desaSelect.empty().append(new Option("Pilih Desa", "")); // Reset desa
+
+        if (kecamatanID) {
+            fetch(`https://www.emsifa.com/api-wilayah-indonesia/api/villages/${kecamatanID}.json`)
+                .then(response => response.json())
+                .then(data => {
+                    data.forEach(desa => {
+                        let option = new Option(desa.name, desa.id);
+                        $(option).data('name', desa.name);
+
+                        // Set selected jika nama desa cocok
+                        if (selectedDesaName && desa.name === selectedDesaName) {
+                            $(option).attr('selected', 'selected');
+                        }
+
+                        desaSelect.append(option);
+                    });
+
+                    // Trigger change untuk update nilai desa
+                    if (selectedDesaName) {
+                        desaSelect.val(function() {
+                            return this.options[this.selectedIndex].value;
+                        }).trigger('change');
+                    }
+                })
+                .catch(error => console.error('Error fetching desa:', error));
+        }
+    });
+
+    $('#edit_desa_dropdown').on('change', function () {
+        let desaName = $("#edit_desa_dropdown option:selected").text();
+        $('#edit_desa').val(desaName);
+    });
+}
 
 applyDarkMode();
 initializeFlatpickr();
 sekolahDropDown();
+window.editSekolahDropDown();
 
 document.addEventListener('livewire:navigated', () => {
     applyDarkMode();
     initializeFlatpickr();
     sekolahDropDown();
-
+    window.editSekolahDropDown();
 });
 
 document.addEventListener('livewire:update', () => {

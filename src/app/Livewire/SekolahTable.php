@@ -94,7 +94,7 @@ class SekolahTable extends DataTableComponent
                     if ($lat === null || $lng === null) {
                         $mapsUrl = "-";
                     } else {
-                        $mapsUrl = "<a href='https://www.google.com/maps?q={$lat},{$lng}' target='_blank'>{$lat}, {$lng}</a>";
+                        $mapsUrl = "<a class='underline' href='https://www.google.com/maps?q={$lat},{$lng}' target='_blank'>{$lat}, {$lng}</a>";
                     }
 
                     // Tampilkan tautan yang dapat diklik

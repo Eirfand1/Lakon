@@ -79,9 +79,9 @@
                             dark:bg-gray-800 dark:text-gray-200">
                                     <option value="" {{ old('jenjang') ? '' : 'selected' }} disabled>Pilih Jenjang
                                     </option>
+                                    <option value="PAUD" {{old('jenjang') == 'PAUD' ? 'selected' : '' }}>PAUD</option>
                                     <option value="SD" {{ old('jenjang') == 'SD' ? 'selected' : '' }}>SD</option>
                                     <option value="SMP" {{ old('jenjang') == 'SMP' ? 'selected' : '' }}>SMP</option>
-                                    <option value="PAUD" {{old('jenjang') == 'PAUD' ? 'selected' : '' }}>PAUD</option>
                                 </select>
                             </div>
                             <div>
@@ -109,7 +109,7 @@
                                     required />
                             </div>
                             <div>
-                                <x-label>Status</x-label>
+                                <x-label>NIP Kepala Sekolah</x-label>
                                 <x-input type="text" name="nip_kepala_sekolah" id="kepala_sekolah"
                                     placeholder="NIP Kepala Sekolah"
                                     class="{{ $errors->has('nip_kepala_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
@@ -129,52 +129,6 @@
                                 <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                             @enderror
                         </div>
-
-                        {{-- <!-- Desa & Kecamatan -->
-                        <div class="grid grid-cols-2 gap-6">
-                            <div>
-                                <x-label>Desa</x-label>
-                                <x-input type="text" id="desa" name="desa" placeholder="Desa"
-                                    class="{{ $errors->has('nama_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
-                                    value="{{old('desa')}}" required />
-                                @error('desa')
-                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
-                                @enderror
-                            </div>
-                            <div>
-                                <x-label>Kecamatan</x-label>
-                                <x-input type="text" id="kecamatan" name="kecamatan" placeholder="Kecamatan"
-                                    class="{{ $errors->has('nama_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
-                                    value="{{old('kecamatan')}}" required />
-                                @error('kecamatan')
-                                <span class="text-sm text-red-500 mt-1">{{$message}}</span>
-                                @enderror
-                            </div>
-                        </div> --}}
-
-                        {{-- <!-- Desa & Kecamatan -->
-                        <div class="grid grid-cols-2 gap-6">
-                            <div>
-                                <x-label>Desa</x-label>
-                                <x-input type="text" id="desa" name="desa" placeholder="Desa"
-                                    class="{{ $errors->has('desa') ? 'border-red-500' : 'border-gray-200' }}"
-                                    value="{{ old('desa') }}" required />
-                                @error('desa')
-                                <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
-                                @enderror
-                            </div>
-                            <div>
-                                <x-label>Kecamatan</x-label>
-                                <select id="kecamatan" name="kecamatan"
-                                    class="select2 {{ $errors->has('kecamatan') ? 'border-red-500' : 'border-gray-200' }}"
-                                    required>
-                                    <option value="">Pilih Kecamatan</option>
-                                </select>
-                                @error('kecamatan')
-                                <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
-                                @enderror
-                            </div>
-                        </div> --}}
 
                         <!-- Desa & Kecamatan -->
                         <div class="grid grid-cols-2 gap-6">
@@ -279,10 +233,9 @@
                             focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
                             dark:bg-gray-900/20 h-10 dark:text-gray-200">
                                     <option value="">Pilih Jenjang</option>
+                                    <option value="PAUD">PAUD</option>
                                     <option value="SD">SD</option>
                                     <option value="SMP">SMP</option>
-                                    <option value="SMA">SMA</option>
-                                    <option value="SMK">SMK</option>
                                 </select>
                             </div>
                             <div>
@@ -307,7 +260,7 @@
                                     required />
                             </div>
                             <div>
-                                <x-label>Status</x-label>
+                                <x-label>NIP Kepala Sekolah</x-label>
                                 <x-input type="text" name="nip_kepala_sekolah" id="edit_nip_kepala_sekolah"
                                     placeholder="NIP Kepala Sekolah"
                                     class="{{ $errors->has('nip_kepala_sekolah') ? 'border-red-500' : 'border-gray-200' }}"
@@ -331,21 +284,23 @@
                         <!-- Desa & Kecamatan -->
                         <div class="grid grid-cols-2 gap-6">
                             <div>
-                                <x-label>Desa</x-label>
-                                <x-input type="text" id="edit_desa" name="desa"
-                                    class="{{ $errors->has('desa') ? 'border-red-500' : 'border-gray-200' }}"
-                                    required />
-                                @error('desa')
-                                    <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                                <x-label>Kecamatan</x-label>
+                                <select id="edit_kecamatan_dropdown" name="kecamatan_dropdown" required>
+                                    <option value="">Pilih Kecamatan</option>
+                                </select>
+                                <input type="hidden" id="edit_kecamatan" name="kecamatan">
+                                @error('kecamatan')
+                                    <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div>
-                                <x-label>Kecamatan</x-label>
-                                <x-input type="text" id="edit_kecamatan" name="kecamatan"
-                                    class="{{ $errors->has('kecamatan') ? 'border-red-500' : 'border-gray-200' }}"
-                                    required />
-                                @error('kecamatan')
-                                    <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                                <x-label>Desa</x-label>
+                                <select id="edit_desa_dropdown" name="desa_dropdown" required>
+                                    <option value="">Pilih Desa</option>
+                                </select>
+                                <input type="hidden" id="edit_desa" name="desa">
+                                @error('desa')
+                                    <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
                                 @enderror
                             </div>
                         </div>
@@ -425,12 +380,11 @@
                 document.getElementById('edit_npsn').value = sekolah.npsn;
                 document.getElementById('namaSekolah').value = sekolah.nama_sekolah;
                 document.getElementById('edit_alamat').value = sekolah.alamat;
-                document.getElementById('edit_desa').value = sekolah.desa;
-                document.getElementById('edit_kecamatan').value = sekolah.kecamatan;
                 document.getElementById('edit_koordinat').value = sekolah.koordinat;
                 document.getElementById('edit_nip_kepala_sekolah').value = sekolah.nip_kepala_sekolah;
                 document.getElementById('edit_kepala_sekolah').value = sekolah.kepala_sekolah;
 
+                window.editSekolahDropDown(sekolah.kecamatan, sekolah.desa);
 
                 // Set posisi marker jika ada data koordinat
                 if (sekolah.koordinat) {
