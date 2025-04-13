@@ -19,8 +19,7 @@ class SubKegiatanFactory extends Factory
         return [
             'no_rekening' => $this->faker->numerify('######'),
             'nama_sub_kegiatan' => $this->faker->sentence(),
-            'gabungan' => $this->faker->boolean(),
-            'pendidikan' => $this->faker->boolean(),
+            'pendidikan' => $this->faker->randomElement(['SD', 'SMP', 'PAUD']),
         ];
     }
 }

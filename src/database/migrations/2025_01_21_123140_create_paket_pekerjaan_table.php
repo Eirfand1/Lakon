@@ -28,18 +28,15 @@ return new class extends Migration {
             $table->foreignId('ppkom_id')
                 ->constrained('ppkom', 'ppkom_id')
                 ->cascadeOnDelete();
-            $table->unsignedBigInteger('daskum_id');
-            $table->foreign('daskum_id')
-                ->references('daskum_id')
-                ->on('dasar_hukum')
-                ->nullOnDelete()
-                ->nullable();
+            $table->foreignId('daskum_id')
+                ->nullable()
+                ->constrained('dasar_hukum', 'daskum_id')
+                ->nullOnDelete();
             $table->integer('rup');
             $table->foreignId('sekolah_id')
-                ->references('sekolah_id')
-                ->on('sekolah')
-                ->nullOnDelete()
-                ->nullable();
+                ->nullable()
+                ->constrained('sekolah', 'sekolah_id')
+                ->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
         });

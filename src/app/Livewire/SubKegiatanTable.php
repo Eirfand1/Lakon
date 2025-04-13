@@ -32,13 +32,10 @@ class SubKegiatanTable extends DataTableComponent
             Column::make("Aksi", "sub_kegiatan_id")
                 ->format(fn($value, $row) => view('pages.admin.sub-kegiatan.actions', ['sub_kegiatan' => $row])),
 
-            Column::make("Nama Sub Kegiatan", "nama_sub_kegiatan")
-                ->sortable()
-                ->searchable(),
             Column::make("Kode Rekening ", "no_rekening")
                 ->sortable()
                 ->searchable(),
-            Column::make("Gabungan", "gabungan")
+            Column::make("Nama Sub Kegiatan", "nama_sub_kegiatan")
                 ->sortable()
                 ->searchable(),
             Column::make("Pendidikan", "pendidikan")
@@ -104,7 +101,7 @@ class SubKegiatanTable extends DataTableComponent
                 ,
 
 
-           
+
         ];
     }
 

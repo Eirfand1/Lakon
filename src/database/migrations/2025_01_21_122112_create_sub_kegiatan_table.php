@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id('sub_kegiatan_id');
             $table->string('no_rekening', 30);
             $table->string('nama_sub_kegiatan');
-            $table->string('gabungan');
             $table->string('pendidikan');
             $table->timestamps();
         });
