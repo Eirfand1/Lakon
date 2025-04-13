@@ -83,8 +83,11 @@ class KontrakController extends Controller
                 case 'BANKEU' :
                     $sumber_dana = 'B';
                     break;
-                case 'APBD Perubahaan' || 'APBD Perubahaan Biasa' || 'BANKEU Perubahaan' || 'Bantuan Pemerintah' : // Masih ngawur
+                case 'APBD Perubahaan' || 'APBD Perubahaan Biasa' || 'BANKEU Perubahaan':
                     $sumber_dana = 'P';
+                    break;
+                case 'Bantuan Pemerintah' :
+                    $sumber_dana = 'BP';
                     break;
                 case 'SG' :
                     $sumber_dana = 'S';
@@ -335,7 +338,7 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${TGL_SELESAI}', Carbon::parse($kontrak->tanggal_akhir)->translatedFormat('d F Y'));
             $templateProcessor->setValue('${JANGKA_WAKTU}', $kontrak->waktu_kontrak);
 
-            
+
             $digit = new NumberFormatter("id", NumberFormatter::SPELLOUT);
             $terbilang = ucwords($digit->format($kontrak->waktu_kontrak));
 
