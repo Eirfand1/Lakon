@@ -254,13 +254,22 @@ class PaketPekerjaanTable extends DataTableComponent
                     return $value ? $builder->where('metode_pemilihan', $value) : $builder;
                 }),
 
-            NumberFilter::make('Minimal Nilai Pagu Paket')
+            NumberFilter::make('Minimal Pagu Paket')
                 ->config([
                     'min' => 0,
                     'step' => 1000000
                 ])
                 ->filter(function ($builder, $value) {
                     return $value ? $builder->where('nilai_pagu_paket', '>=', $value) : $builder;
+                }),
+
+            NumberFilter::make('Minimal Pagu Anggaran')
+                ->config([
+                    'min' => 0,
+                    'step' => 1000000
+                ])
+                ->filter(function ($builder, $value) {
+                    return $value ? $builder->where('nilai_pagu_anggaran', '>=', $value) : $builder;
                 }),
         ];
     }
