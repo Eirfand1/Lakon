@@ -301,18 +301,23 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${JENIS_KONTRAK}', $kontrak->jenis_kontrak);
             $templateProcessor->setValue('${TGL_PEMBUATAN}', Carbon::parse($kontrak->tanggal_awal)->translatedFormat(('d F Y')));
 
-            $terbilang_tgl_pembuatan = Carbon::parse($kontrak->tanggal_awal);
+            $terbilangTanggal = Carbon::parse($kontrak->tanggal_awal);
 
             $bulan = [
-            'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-            'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
             ];
 
-            $formatetter_terbilang_tgl = new NumberFormatter("id", NumberFormatter::SPELLOUT);
-            $tgl_terbilang_tgl = $formatetter_terbilang_tgl->format($terbilang_tgl_pembuatan->day);
-            $tahun_terbilang_tgl = $formatetter_terbilang_tgl->format($terbilang_tgl_pembuatan->year);
+            $spellout = new NumberFormatter("id", NumberFormatter::SPELLOUT);
 
-            $templateProcessor->setValue('${TERBILANG_TGL_PEMBUATAN}', "{$tgl_terbilang_tgl} {$bulan[$terbilang_tgl_pembuatan->month - 1]} tahun {$tahun_terbilang_tgl}");
+            $hari  = ucwords($spellout->format($terbilangTanggal->day));
+            $tahun = ucwords($spellout->format($terbilangTanggal->year));
+            $namaBulan = $bulan[$terbilangTanggal->month - 1];
+
+            $templateProcessor->setValue(
+                '${TERBILANG_TGL_PEMBUATAN}',
+                "{$hari} {$namaBulan} Tahun {$tahun}"
+            );
 
 
             $templateProcessor->setValue('${WAKTU_KONTRAK}', $kontrak->waktu_kontrak);
@@ -330,9 +335,12 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${TGL_SELESAI}', Carbon::parse($kontrak->tanggal_akhir)->translatedFormat('d F Y'));
             $templateProcessor->setValue('${JANGKA_WAKTU}', $kontrak->waktu_kontrak);
 
+            
             $digit = new NumberFormatter("id", NumberFormatter::SPELLOUT);
+            $terbilang = ucwords($digit->format($kontrak->waktu_kontrak));
 
-            $templateProcessor->setValue('${TERBILANG_JANGKA_WAKTU}', $digit->format($kontrak->waktu_kontrak));
+            $templateProcessor->setValue('${TERBILANG_JANGKA_WAKTU}', $terbilang);
+
             $templateProcessor->setValue('${NO_SPK}', $kontrak->nomor_spk);
 
             // Penyedia
