@@ -1,7 +1,0 @@
-mysql> cek;
-ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cek' at line 1
-mysql> \T Documents\basdat\modul_prak.doc
-mysql> \T Documents\basdat\modul_prak.doc
-mysql> \T /home/yonan/Documents/basdat/modul_1_prak.doc
-mysql> # hi
-mysql> \T /home/yonan/Documents/basdat/modul_1_prak.doc
