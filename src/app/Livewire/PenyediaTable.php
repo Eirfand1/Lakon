@@ -106,7 +106,7 @@ class PenyediaTable extends DataTableComponent
                     'placeholder' => 'Cari Nama',
                 ])
                 ->filter(function ($builder, $value) {
-                    return $builder->where('nama', 'like', '%' . $value . '%');
+                    return $builder->where('nama_pemilik', 'like', '%' . $value . '%');
                 }),
 
 
