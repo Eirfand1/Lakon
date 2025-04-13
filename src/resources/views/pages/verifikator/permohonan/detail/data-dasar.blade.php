@@ -225,10 +225,10 @@
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Berkas Penawaran</label>
-            <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                <label for="berkas_penawaran" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+            <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium cursor-pointer underline">
+                <label for="berkas_penawaran" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 cursor-pointer">
                     @if ($kontrak->berkas_penawaran)
-                        {{ basename($kontrak->berkas_penawaran) }}
+                            {{ basename($kontrak->berkas_penawaran) }}
                     @endif
                 </label>
             </p>
@@ -248,13 +248,13 @@
 {{-- tampilkan berkas penawaran --}}
 <input type="checkbox" id="berkas_penawaran" class="modal-toggle" />
 <div class="modal modal-middle px-3">
-    <div class="flex flex-col modal-box w-full h-full mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
+    <div class="flex flex-col modal-box w-screen max-w-none h-screen max-h-none mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
         <h3 class="font-bold text-lg">Berkas Penawaran</h3>
         <div class="w-full h-full">
             <iframe src="{{ asset($kontrak->berkas_penawaran) }}" type="application/pdf" class="w-full h-full"></iframe>
         </div>
         <div class="modal-action">
-            <label for="berkas_penawaran" class="btn">Tutup</label>
+            <label for="berkas_penawaran" class="btn btn-error">Tutup</label>
         </div>
     </div>
 </div>

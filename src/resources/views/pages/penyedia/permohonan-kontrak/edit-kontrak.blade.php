@@ -228,9 +228,11 @@
                     <input type="file" name="berkas_penawaran"
                         class="block w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-gray-700 dark:file:text-blue-300 dark:hover:file:bg-gray-600"
                         accept=".pdf">
-                        <label for="berkas_penawaran" class="block text-sm font-semibold text-gray-700 dark:text-gray-300">
+                        <label for="berkas_penawaran" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 cursor-pointer">
                             @if ($kontrak->berkas_penawaran)
-                                {{ basename($kontrak->berkas_penawaran) }}
+                                <p class="underline">
+                                    {{ basename($kontrak->berkas_penawaran) }}
+                                </p>
                             @endif
                         </label>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
@@ -320,7 +322,7 @@
             <iframe src="{{ asset($kontrak->berkas_penawaran) }}" type="application/pdf" class="w-full h-full"></iframe>
         </div>
         <div class="modal-action">
-            <label for="berkas_penawaran" class="btn">Tutup</label>
+            <label for="berkas_penawaran" class="btn btn-error">Tutup</label>
         </div>
     </div>
 </div>
