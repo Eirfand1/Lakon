@@ -141,7 +141,7 @@
                                                     Detail
                                                 </a>
                                             @else
-                                                <a href="permohonan-kontrak/{{ $row->kontrak_id }}" class="inline-flex items-center px-3 py-1.5 bg-red-600 text-white rounded text-xs font-medium hover:bg-red-700 transition-colors" wire:navigate>
+                                                <a href="permohonan-kontrak/{{ $row->kontrak_id }}" class="inline-flex items-center px-3 py-1.5 bg-yellow-600 text-white rounded text-xs font-medium hover:bg-yellow-700 transition-colors" wire:navigate>
                                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
                                                     </svg>
