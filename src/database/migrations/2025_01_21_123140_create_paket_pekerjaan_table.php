@@ -32,12 +32,13 @@ return new class extends Migration {
             $table->foreign('daskum_id')
                 ->references('daskum_id')
                 ->on('dasar_hukum')
-                ->onDelete('cascade');
+                ->nullOnDelete()
+                ->nullable();
             $table->integer('rup');
             $table->foreignId('sekolah_id')
                 ->references('sekolah_id')
                 ->on('sekolah')
-                ->onDelete('cascade')
+                ->nullOnDelete()
                 ->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -291,7 +291,13 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${REKENING_SUB_KEGIATAN}', $kontrak->paketPekerjaan->subKegiatan->first()->no_rekening ?? '');
 
             // Kontrak
-            $templateProcessor->setValue('${NO_KONTRAK}', $kontrak->no_kontrak);
+
+            $noKontrak = $kontrak->no_kontrak;
+            $noSpmk = preg_replace('/\/(\d+)\//', '/$1.a/', $noKontrak);
+
+            $templateProcessor->setValue('${NO_KONTRAK}', $noKontrak);
+            $templateProcessor->setValue('${NO_SPMK}', $noSpmk);
+
             $templateProcessor->setValue('${JENIS_KONTRAK}', $kontrak->jenis_kontrak);
             $templateProcessor->setValue('${TGL_PEMBUATAN}', Carbon::parse($kontrak->tanggal_awal)->translatedFormat(('d F Y')));
 
