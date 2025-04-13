@@ -143,12 +143,7 @@
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor SPPBJ</label>
-                                @if ($kontrak->nomor_sppbj)
-                                    <i class="fa-regular fa-circle-check text-green-500"></i>
-                                @else
-                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
-                                @endif
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor SPPBJ <span class="text-red-500">*</span></label>
                             </div>
                             <input type="text" name="nomor_sppbj" value="{{ $kontrak->nomor_sppbj }}" required
                             class="w-full dark:bg-gray-800 rounded mt-2">
@@ -156,12 +151,7 @@
 
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal SPPBJ</label>
-                                @if ($kontrak->tgl_sppbj)
-                                    <i class="fa-regular fa-circle-check text-green-500"></i>
-                                @else
-                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
-                                @endif
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal SPPBJ <span class="text-red-500">*</span></label>
                             </div>
                             <input type="date" name="tgl_sppbj" value="{{ $kontrak->tgl_sppbj }}" required
                             class="w-full dark:bg-gray-800 rounded mt-2">
@@ -171,12 +161,7 @@
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor Penetapan Pemenang</label>
-                                @if ($kontrak->nomor_penetapan_pemenang)
-                                    <i class="fa-regular fa-circle-check text-green-500"></i>
-                                @else
-                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
-                                @endif
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor Penetapan Pemenang <span class="text-red-500">*</span></label>
                             </div>
                             <input type="text" name="nomor_penetapan_pemenang" value="{{ $kontrak->nomor_penetapan_pemenang }}" required
                             class="w-full dark:bg-gray-800 rounded mt-2">
@@ -184,12 +169,7 @@
 
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal Penetapan Pemenang</label>
-                                @if ($kontrak->tgl_penetapan_pemenang)
-                                    <i class="fa-regular fa-circle-check text-green-500"></i>
-                                @else
-                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
-                                @endif
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal Penetapan Pemenang <span class="text-red-500">*</span></label>
                             </div>
                             <input type="date" name="tgl_penetapan_pemenang" value="{{ $kontrak->tgl_penetapan_pemenang }}" required
                             class="w-full dark:bg-gray-800 rounded mt-2">
@@ -202,12 +182,7 @@
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor DPPL</label>
-                                @if ($kontrak->nomor_dppl)
-                                    <i class="fa-regular fa-circle-check text-green-500"></i>
-                                @else
-                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
-                                @endif
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor DPPL <span class="text-red-500">*</span></label>
                             </div>
                             <input type="text" name="nomor_dppl" value="{{ $kontrak->nomor_dppl }}" required
                             class="w-full dark:bg-gray-800 rounded mt-2">
@@ -215,12 +190,7 @@
 
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal DPPL</label>
-                                @if ($kontrak->tgl_dppl)
-                                    <i class="fa-regular fa-circle-check text-green-500"></i>
-                                @else
-                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
-                                @endif
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal DPPL <span class="text-red-500">*</span></label>
                             </div>
                             <input type="date" name="tgl_dppl" value="{{ $kontrak->tgl_dppl }}" required
                             class="w-full dark:bg-gray-800 rounded mt-2">
@@ -230,12 +200,7 @@
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor BAHPL</label>
-                                @if ($kontrak->nomor_bahpl)
-                                    <i class="fa-regular fa-circle-check text-green-500"></i>
-                                @else
-                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
-                                @endif
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor BAHPL <span class="text-red-500">*</span></label>
                             </div>
                             <input type="text" name="nomor_bahpl" value="{{ $kontrak->nomor_bahpl }}" required
                             class="w-full dark:bg-gray-800 rounded mt-2">
@@ -243,12 +208,7 @@
 
                         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal BAHPL</label>
-                                @if ($kontrak->tgl_bahpl)
-                                    <i class="fa-regular fa-circle-check text-green-500"></i>
-                                @else
-                                    <i class="fa-regular fa-circle-xmark text-red-500"></i>
-                                @endif
+                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal BAHPL <span class="text-red-500">*</span></label>
                             </div>
                             <input type="date" name="tgl_bahpl" value="{{ $kontrak->tgl_bahpl }}" required
                             class="w-full dark:bg-gray-800 rounded mt-2">
@@ -264,11 +224,6 @@
                 <div class="space-y-2">
                     <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">
                         Upload Berkas Penawaran <span class="text-red-500">(.pdf)</span>
-                        @if ($kontrak->berkas_penawaran)
-                            <i class="fa-regular fa-circle-check text-green-500"></i>
-                        @else
-                            <i class="fa-regular fa-circle-xmark text-red-500"></i>
-                        @endif
                     </label>
                     <input type="file" name="berkas_penawaran"
                         class="block w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-gray-700 dark:file:text-blue-300 dark:hover:file:bg-gray-600"
@@ -279,7 +234,7 @@
                             @endif
                         </label>
                     <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                        Pastikan maksimal ukuran berkas 5MB dan bertipe .pdf
+                        Pastikan maksimal ukuran berkas 10MB dan bertipe .pdf
                     </p>
                 </div>
             </div>

@@ -169,7 +169,7 @@ class KontrakController extends Controller
                 'nomor_bahpl' => 'nullable|string|max:255',
                 'tgl_bahpl' => 'nullable|date',
 
-                'berkas_penawaran' => 'nullable|file|mimes:pdf|max:2048',
+                'berkas_penawaran' => 'nullable|file|mimes:pdf|max:10240',
             ]);
 
             if ($request->hasFile('berkas_penawaran')) {
