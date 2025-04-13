@@ -1,260 +1,254 @@
 <x-app-layout>
     <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
-        <p class="mb-4 text-sm text-gray-600 dark:text-gray-300">
-            DETAIL PERMOHONAN
-        </p>
+        <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-6">Detail Permohonan Kontrak</h2>
 
-        <form action="{{ route('penyedia.permohonan-kontrak.update', $kontrak->kontrak_id) }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('penyedia.permohonan-kontrak.update', $kontrak->kontrak_id) }}" method="POST" enctype="multipart/form-data" class="space-y-8">
             @method('PUT')
             @csrf
             <input type="hidden" name="penyedia_id" value="{{ $kontrak->penyedia->penyedia_id }}">
             <input type="hidden" name="paket_id" value="{{ $kontrak->paketPekerjaan->paket_id }}">
             <input type="hidden" name="tgl_pembuatan" value="{{ $kontrak->tgl_pembuatan }}">
 
-            <!-- Section Direktur -->
-            <div class="mb-8">
-                <div class="flex items-center mb-4 space-x-2 text-gray-600 dark:text-gray-300">
-                    <i class="fas fa-user fa-lg"></i>
-                    <h3 class=" font-bold">DIREKTUR</h3>
+            <!-- Section: Informasi Direktur -->
+            <section>
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-user-tie fa-lg text-blue-600 dark:text-blue-400"></i>
+                    <h3 class="ml-3 text-lg font-semibold text-gray-800 dark:text-white">Informasi Direktur</h3>
                 </div>
 
                 <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                        <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nama
-                            Direktur</label>
-                        <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->nama_pemilik }}</p>
+                    <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama Direktur</label>
+                        <p class="mt-1 text-gray-800 dark:text-white font-medium">{{ $kontrak->penyedia->nama_pemilik }}</p>
                     </div>
 
-                    <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                        <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Alamat
-                            Direktur</label>
-                        <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->alamat_pemilik }}</p>
+                    <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Alamat Direktur</label>
+                        <p class="mt-1 text-gray-800 dark:text-white font-medium">{{ $kontrak->penyedia->alamat_pemilik }}</p>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Section Perusahaan -->
-            <div class="mb-8">
-                <div class="flex items-center mb-4 space-x-2 text-gray-600 dark:text-gray-300">
-                    <i class="fas fa-building fa-lg"></i>
-                    <h3 class="font-bold">PERUSAHAAN</h3>
+            <!-- Section: Informasi Perusahaan -->
+            <section>
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-building fa-lg text-blue-600 dark:text-blue-400"></i>
+                    <h3 class="ml-3 text-lg font-semibold text-gray-800 dark:text-white">Informasi Perusahaan</h3>
                 </div>
 
                 <div class="grid grid-cols-1 gap-4">
-                    <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                        <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nama
-                            Perusahaan</label>
-                        <p class="mt-1 text-gray-700 dark:text-gray-200">
+                    <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama Perusahaan</label>
+                        <p class="mt-1 text-gray-800 dark:text-white font-medium">
                             {{ $kontrak->penyedia->nama_perusahaan_lengkap }}
                         </p>
                     </div>
 
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor
-                                Telp</label>
-                            <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->kontak_hp }}</p>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nomor Telepon</label>
+                            <p class="mt-1 text-gray-800 dark:text-white font-medium">{{ $kontrak->penyedia->kontak_hp }}</p>
                         </div>
 
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Email</label>
-                            <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->kontak_email }}</p>
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor
-                                Akta Notaris</label>
-                            <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->akta_notaris_no }}
-                            </p>
-                        </div>
-
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nama Akta
-                                Notaris</label>
-                            <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->akta_notaris_nama }}
-                            </p>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Email</label>
+                            <p class="mt-1 text-gray-800 dark:text-white font-medium">{{ $kontrak->penyedia->kontak_email }}</p>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Bank</label>
-                            <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->rekening_bank }}</p>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nomor Akta Notaris</label>
+                            <p class="mt-1 text-gray-800 dark:text-white font-medium">{{ $kontrak->penyedia->akta_notaris_no }}</p>
                         </div>
 
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Rekening</label>
-                            <p class="mt-1 text-gray-700 dark:text-gray-200">{{ $kontrak->penyedia->rekening_norek }}
-                                atas nama <strong>{{ $kontrak->penyedia->rekening_nama }}</strong></p>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama Akta Notaris</label>
+                            <p class="mt-1 text-gray-800 dark:text-white font-medium">{{ $kontrak->penyedia->akta_notaris_nama }}</p>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Bank</label>
+                            <p class="mt-1 text-gray-800 dark:text-white font-medium">{{ $kontrak->penyedia->rekening_bank }}</p>
+                        </div>
+
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Informasi Rekening</label>
+                            <p class="mt-1 text-gray-800 dark:text-white font-medium">{{ $kontrak->penyedia->rekening_norek }}
+                                <span class="text-gray-600 dark:text-gray-400">a.n.</span> <span class="font-semibold">{{ $kontrak->penyedia->rekening_nama }}</span></p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
 
-            <!-- Section Paket Pekerjaan -->
-            <div class="mb-8">
-                <div class="flex items-center mb-4 space-x-2 text-gray-600 dark:text-gray-300">
-                    <i class="fas fa-cogs fa-lg"></i>
-                    <h3 class="font-bold">PAKET PEKERJAAN</h3>
+            <!-- Section: Paket Pekerjaan -->
+            <section>
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-briefcase fa-lg text-blue-600 dark:text-blue-400"></i>
+                    <h3 class="ml-3 text-lg font-semibold text-gray-800 dark:text-white">Detail Paket Pekerjaan</h3>
                 </div>
 
                 <div class="grid grid-cols-1 gap-4">
-
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Kode
-                                Sirup</label>
-                            <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Kode Sirup</label>
+                            <p class="mt-1 text-gray-800 dark:text-white font-medium">
                                 {{ $kontrak->paketPekerjaan->kode_sirup }}
                             </p>
                         </div>
 
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nama
-                                Paket</label>
-                            <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nama Paket</label>
+                            <p class="mt-1 text-gray-800 dark:text-white font-medium">
                                 {{ $kontrak->paketPekerjaan->nama_pekerjaan }}
                             </p>
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Jenis
-                                Pengadaan</label>
-                            <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Jenis Pengadaan</label>
+                            <p class="mt-1 text-gray-800 dark:text-white font-medium">
                                 {{ $kontrak->paketPekerjaan->jenis_pengadaan }}
                             </p>
                         </div>
 
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
-                            <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Metode
-                                Pemilihan</label>
-                            <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Metode Pemilihan</label>
+                            <p class="mt-1 text-gray-800 dark:text-white font-medium">
                                 {{ $kontrak->paketPekerjaan->metode_pemilihan }}
                             </p>
                         </div>
                     </div>
 
-                    {{-- tender --}}
+                    {{-- Tender specific fields --}}
                     @if ($kontrak->paketPekerjaan->jenis_pengadaan == 'Tender')
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor SPPBJ <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nomor SPPBJ <span class="text-red-500">*</span></label>
                             </div>
                             <input type="text" name="nomor_sppbj" value="{{ $kontrak->nomor_sppbj }}" required
-                            class="w-full dark:bg-gray-800 rounded mt-2">
+                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
                         </div>
 
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal SPPBJ <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tanggal SPPBJ <span class="text-red-500">*</span></label>
                             </div>
                             <input type="date" name="tgl_sppbj" value="{{ $kontrak->tgl_sppbj }}" required
-                            class="w-full dark:bg-gray-800 rounded mt-2">
+                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor Penetapan Pemenang <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nomor Penetapan Pemenang <span class="text-red-500">*</span></label>
                             </div>
                             <input type="text" name="nomor_penetapan_pemenang" value="{{ $kontrak->nomor_penetapan_pemenang }}" required
-                            class="w-full dark:bg-gray-800 rounded mt-2">
+                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
                         </div>
 
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal Penetapan Pemenang <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tanggal Penetapan Pemenang <span class="text-red-500">*</span></label>
                             </div>
                             <input type="date" name="tgl_penetapan_pemenang" value="{{ $kontrak->tgl_penetapan_pemenang }}" required
-                            class="w-full dark:bg-gray-800 rounded mt-2">
+                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
                         </div>
                     </div>
                     @endif
 
-                    {{-- non tender --}}
+                    {{-- Non-Tender specific fields --}}
                     @if ($kontrak->paketPekerjaan->jenis_pengadaan == 'Non Tender')
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor DPPL <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nomor DPPL <span class="text-red-500">*</span></label>
                             </div>
                             <input type="text" name="nomor_dppl" value="{{ $kontrak->nomor_dppl }}" required
-                            class="w-full dark:bg-gray-800 rounded mt-2">
+                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
                         </div>
 
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal DPPL <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tanggal DPPL <span class="text-red-500">*</span></label>
                             </div>
                             <input type="date" name="tgl_dppl" value="{{ $kontrak->tgl_dppl }}" required
-                            class="w-full dark:bg-gray-800 rounded mt-2">
+                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
                         </div>
                     </div>
 
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor BAHPL <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nomor BAHPL <span class="text-red-500">*</span></label>
                             </div>
                             <input type="text" name="nomor_bahpl" value="{{ $kontrak->nomor_bahpl }}" required
-                            class="w-full dark:bg-gray-800 rounded mt-2">
+                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
                         </div>
 
-                        <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
-                                <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal BAHPL <span class="text-red-500">*</span></label>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tanggal BAHPL <span class="text-red-500">*</span></label>
                             </div>
                             <input type="date" name="tgl_bahpl" value="{{ $kontrak->tgl_bahpl }}" required
-                            class="w-full dark:bg-gray-800 rounded mt-2">
+                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
                         </div>
                     </div>
                     @endif
                 </div>
-            </div>
+            </section>
 
-            <!-- Form Input Section -->
-            <div class="space-y-6">
-                <!-- File Upload -->
-                <div class="space-y-2">
-                    <label class="block text-sm font-semibold text-gray-700 dark:text-gray-300">
-                        Upload Berkas Penawaran <span class="text-red-500">(.pdf)</span>
+            <!-- Upload Section -->
+            <section>
+                <div class="flex items-center mb-4">
+                    <i class="fas fa-file-upload fa-lg text-blue-600 dark:text-blue-400"></i>
+                    <h3 class="ml-3 text-lg font-semibold text-gray-800 dark:text-white">Dokumen Penawaran</h3>
+                </div>
+                
+                <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
+                        Upload Berkas Penawaran <span class="text-red-500 font-medium">(.pdf)</span>
                     </label>
-                    <input type="file" name="berkas_penawaran"
-                        class="block w-full file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-gray-700 dark:file:text-blue-300 dark:hover:file:bg-gray-600"
-                        accept=".pdf">
-                        <label for="berkas_penawaran" class="block text-sm font-semibold text-gray-700 dark:text-gray-300 cursor-pointer">
-                            @if ($kontrak->berkas_penawaran)
-                                <p class="underline">
-                                    {{ basename($kontrak->berkas_penawaran) }}
-                                </p>
-                            @endif
+                    
+                    <div class="mt-3">
+                        <input type="file" name="berkas_penawaran"
+                            class="w-full file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-gray-700 dark:file:text-blue-300 dark:hover:file:bg-gray-600"
+                            accept=".pdf">
+                    </div>
+                    
+                    @if ($kontrak->berkas_penawaran)
+                    <div class="mt-2 flex items-center text-sm text-blue-600 dark:text-blue-400">
+                        <i class="fas fa-paperclip mr-2"></i>
+                        <label for="berkas_penawaran" class="cursor-pointer hover:underline">
+                            {{ basename($kontrak->berkas_penawaran) }}
                         </label>
-                    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
-                        Pastikan maksimal ukuran berkas 10MB dan bertipe .pdf
+                    </div>
+                    @endif
+                    
+                    <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+                        <i class="fas fa-info-circle mr-1"></i> Maksimum ukuran file 10MB dalam format PDF
                     </p>
                 </div>
-            </div>
+            </section>
 
             <!-- Submit Button -->
-            <div class="mt-8">
+            <div class="pt-4">
                 <button type="submit"
-                    class="w-full px-6 py-3 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all dark:bg-blue-700 dark:hover:bg-blue-800">
-                    <i class="mr-2 fas fa-save"></i> SIMPAN DATA DASAR PERMOHONAN
+                    class="w-full px-6 py-3 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all dark:bg-blue-700 dark:hover:bg-blue-600 flex items-center justify-center">
+                    <i class="fas fa-save mr-2"></i> Simpan Data Permohonan
                 </button>
             </div>
         </form>
     </div>
+
     @if ($kontrak->tgl_pembuatan)
     <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
-        <p class="mb-4 text-sm text-gray-600 dark:text-gray-300" id="lampiran">
-            LAMPIRAN
-        </p>
+        <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-6">Lampiran Dokumen</h2>
 
         @php
             $view = "pages.lampiran.";
@@ -269,62 +263,70 @@
     </div>
 
     <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
-        <p class="mb-4 text-sm text-gray-600 dark:text-gray-300">
-            PERNYATAAN
-        </p>
-        <ul class="list-disc list-inside space-y-1 text-sm text-gray-600 dark:text-gray-300">
-            <li>Dengan ini saya menyatakan bahawa data yang saya sampaikan adalah benar sesuai dengan fakta yang ada, dan apabila dikemudian hari data perusahaan yang saya sampaikan tidak benar, maka saya bersedia untuk diproses secara hukum sesuai dengan ketentuan Undang-Undang yang berlaku</li>
-        </ul>
-        <form action="layangkan/{{$kontrak->kontrak_id}}" method="POST">
+        <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Pernyataan Kesanggupan</h2>
+        
+        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg mb-6">
+            <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
+                Dengan ini saya menyatakan bahwa data yang saya sampaikan adalah benar sesuai dengan fakta yang ada, dan apabila dikemudian hari data perusahaan yang saya sampaikan tidak benar, maka saya bersedia untuk diproses secara hukum sesuai dengan ketentuan Undang-Undang yang berlaku.
+            </p>
+        </div>
+        
+        <form action="layangkan/{{$kontrak->kontrak_id}}" method="POST" class="mt-4">
             @csrf
-            <div class="flex items-center mt-5">
-                <input type="checkbox" required name="konfirmasi_pernyataan" class="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
-                <label class="ml-2 block text-gray-600 dark:text-gray-300">
+            <div class="flex items-center mb-6">
+                <input type="checkbox" required name="konfirmasi_pernyataan" id="konfirmasi" 
+                    class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
+                <label for="konfirmasi" class="ml-3 text-gray-700 dark:text-gray-300 font-medium">
                     Saya setuju dengan pernyataan di atas
                 </label>
-
             </div>
+            
             <button type="submit"
-                class="w-full px-6 py-3 mt-4 text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition-all dark:bg-blue-700 dark:hover:bg-blue-800">
-                <i class="mr-2 fas fa-save"></i> KIRIMKAN PERMOHONAN KONTRAK
+                class="w-full px-6 py-3 text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all dark:bg-green-700 dark:hover:bg-green-600 flex items-center justify-center">
+                <i class="fas fa-paper-plane mr-2"></i> Kirimkan Permohonan Kontrak
             </button>
         </form>
     </div>
     @endif
 
-    <!-- Delete -->
+    <!-- Delete Modal -->
     <input type="checkbox" id="delete-modal" class="modal-toggle" />
     <div class="modal modal-top px-3">
-        <div
-            class="modal-box w-auto mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
-            <h3 class="font-bold text-lg">Konfirmasi Hapus</h3>
-            <p>Apakah Anda yakin ingin menghapus data ini?</p>
+        <div class="modal-box w-auto mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
+            <h3 class="font-bold text-lg mb-4">Konfirmasi Hapus</h3>
+            <p class="mb-6">Apakah Anda yakin ingin menghapus data ini?</p>
             <form id="deleteForm" method="POST">
                 @csrf
                 @method('DELETE')
                 <div class="modal-action">
-                    <button type="submit" class="btn btn-error">
-                        <i class="fa-solid fa-trash"></i>
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors">
+                        <i class="fa-solid fa-trash mr-2"></i>
                         <span>Hapus</span>
                     </button>
-                    <label for="delete-modal" class="btn">Batal</label>
+                    <label for="delete-modal" class="px-4 py-2 bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-white rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors cursor-pointer">Batal</label>
                 </div>
             </form>
         </div>
     </div>
 
-{{-- tampilkan berkas penawaran --}}
-<input type="checkbox" id="berkas_penawaran" class="modal-toggle" />
-<div class="modal modal-middle px-3">
-    <div class="flex flex-col modal-box w-screen max-w-none h-screen max-h-none mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
-        <h3 class="font-bold text-lg">Berkas Penawaran</h3>
-        <div class="w-full h-full">
-            <iframe src="{{ asset($kontrak->berkas_penawaran) }}" type="application/pdf" class="w-full h-full"></iframe>
-        </div>
-        <div class="modal-action">
-            <label for="berkas_penawaran" class="btn btn-error">Tutup</label>
+    <!-- Document Viewer Modal -->
+    <input type="checkbox" id="berkas_penawaran" class="modal-toggle" />
+    <div class="modal modal-middle px-3">
+        <div class="flex flex-col modal-box w-screen max-w-none h-screen max-h-none mt-3 mx-auto rounded-lg dark:text-white text-gray-800 bg-white dark:bg-gray-800">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-bold text-lg">Dokumen Penawaran</h3>
+                <label for="berkas_penawaran" class="cursor-pointer hover:text-red-500 dark:hover:text-red-400 transition-colors">
+                    <i class="fas fa-times text-xl"></i>
+                </label>
+            </div>
+            <div class="w-full h-full border border-gray-200 dark:border-gray-700 rounded-lg overflow-hidden">
+                <iframe src="{{ asset($kontrak->berkas_penawaran) }}" type="application/pdf" class="w-full h-full"></iframe>
+            </div>
+            <div class="mt-4 text-right">
+                <label for="berkas_penawaran" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors cursor-pointer">
+                    <i class="fas fa-times mr-2"></i> Tutup
+                </label>
+            </div>
         </div>
     </div>
-</div>
-
 </x-app-layout>

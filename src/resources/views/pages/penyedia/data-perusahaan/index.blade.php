@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="m-4 rounded-xl p-6 bg-white">
+    <div class="m-4 rounded-xl p-6 bg-white dark:bg-gray-800">
         <h3 class="font-bold text-lg">DATA PERUSAHAAN</h3>
         <div>
             <label for="alert edit-modal"
@@ -174,7 +174,7 @@
                     </svg>
                     Simpan
                 </button>
-                <a class="btn text-white rounded-md" href="/penyedia/dashboard" wire:navigate>Kembali</a>
+                <a class="btn text-gray-700 rounded-md" href="/penyedia/dashboard" wire:navigate>Kembali</a>
             </div>
         </form>
     </div>
