@@ -112,13 +112,6 @@
                     <div class="pt-2">
                         <x-label for="paket">Paket</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-                            <div class="sm:w-1/4 w-full">
-                                <x-input type="text" name="rup" id="" placeholder="RUP" value="{{old('rup')}}"
-                                    class="{{ $errors->has('rup') ? 'border-red-500' : 'border-gray-200' }}" />
-                                @error('rup')
-                                    <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
-                                @enderror
-                            </div>
 
                             <div class="sm:w-1/4 w-full">
                                 <x-input type="text" name="kode_sirup" id="" placeholder="Kode Sirup"
@@ -447,13 +440,6 @@
                     <div class="pt-2">
                         <x-label for="paket">Paket</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-                            <div class="sm:w-1/4 w-full">
-                                <x-input type="text" name="rup" id="rup" placeholder="RUP"
-                                    class="{{ $errors->has('rup') ? 'border-red-500' : 'border-gray-200' }}" required />
-                                @error('rup')
-                                    <span class="text-red-500 text-sm mt-1">{{$message}}</span>
-                                @enderror
-                            </div>
 
                             <div class="sm:w-1/4 w-full">
                                 <x-input type="text" name="kode_sirup" id="kode_sirup" placeholder="Kode Sirup"
@@ -711,7 +697,6 @@
             form.action = `/admin/paket-pekerjaan/${paket.paket_id}`;
 
             // INPUT BIASA
-            document.getElementById('rup').value = paket.rup;
             document.getElementById('kode_sirup').value = paket.kode_sirup;
             document.getElementById('nama_pekerjaan').value = paket.nama_pekerjaan;
             document.getElementById('waktu_paket').value = paket.waktu_paket;

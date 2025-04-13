@@ -43,7 +43,6 @@ class PaketPekerjaanController extends Controller
             'sub_kegiatan_id' => 'required|array',
             'sub_kegiatan_id.*' => 'exists:sub_kegiatan,sub_kegiatan_id',
             'sumber_dana' => 'required|in:APBD,DAK,BANKEU,APBD Perubahan,APBD Perubahan Biasa,BANKEU Perubahan,SG,Bantuan Pemerintah',
-            'rup' => 'required|numeric',
             'kode_sirup' => 'required|numeric',
             'jenis_pengadaan' => 'required|in:Tender,Non Tender,E-Katalog,Swakelola',
             'metode_pemilihan' => 'required|in:Jasa Konsultasi Pengawasan,Jasa Konsultasi Perencanaan,Pekerjaan Konstruksi,Pengadaan Barang',
@@ -72,7 +71,6 @@ class PaketPekerjaanController extends Controller
             'ppkom_id' => $validatedData['ppkom_id'],
             'daskum_id' => $validatedData['daskum_id'],
             'kode_sirup' => $validatedData['kode_sirup'],
-            'rup' => $validatedData['rup'],
             'sekolah_id' => $validatedData['sekolah_id']
         ]);
 
@@ -94,7 +92,6 @@ class PaketPekerjaanController extends Controller
                 'sub_kegiatan_id' => 'required|array',
                 'sub_kegiatan_id.*' => 'exists:sub_kegiatan,sub_kegiatan_id',
                 'sumber_dana' => 'required|in:APBD,DAK,BANKEU,APBD Perubahan,APBD Perubahan Biasa,BANKEU Perubahan,SG,Bantuan Pemerintah',
-                'rup' => 'required|numeric',
                 'kode_sirup' => 'required|numeric',
                 'jenis_pengadaan' => 'required|in:Tender,Non Tender,E-Katalog,Swakelola',
                 'metode_pemilihan' => 'required|in:Jasa Konsultasi Pengawasan,Jasa Konsultasi Perencanaan,Pekerjaan Konstruksi,Pengadaan Barang',
@@ -122,7 +119,6 @@ class PaketPekerjaanController extends Controller
                 'ppkom_id' => $validatedData['ppkom_id'],
                 'daskum_id' => $validatedData['daskum_id'],
                 'kode_sirup' => $validatedData['kode_sirup'],
-                'rup' => $validatedData['rup'],
                 'sekolah_id' => $validatedData['sekolah_id']
             ]);
 

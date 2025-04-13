@@ -34,7 +34,6 @@ class PaketPekerjaanFactory extends Factory
             'nilai_hps' => $this->faker->randomFloat(2, 90000, 950000),
             'ppkom_id' => Ppkom::factory(),
             'daskum_id' => DasarHukum::factory(),
-            'rup' => $this->faker->numberBetween(1000,5000),
             'sekolah_id' => Sekolah::factory()
         ];
     }
