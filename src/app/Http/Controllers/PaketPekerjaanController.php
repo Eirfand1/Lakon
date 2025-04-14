@@ -11,6 +11,7 @@ use App\Models\SatuanKerja;
 use App\Models\Sekolah;
 use App\Models\SubKegiatan;
 use App\Models\Kontrak;
+use App\Models\NoKontrakTracker;
 use Illuminate\Support\Facades\Auth;
 use Dotenv\Exception\ValidationException;
 use Illuminate\Database\QueryException;
@@ -73,8 +74,14 @@ class PaketPekerjaanController extends Controller
             'daskum_id' => $validatedData['daskum_id'],
             'kode_sirup' => $validatedData['kode_sirup'],
             'rup' => $validatedData['rup'],
-            'sekolah_id' => $validatedData['sekolah_id']
+            'sekolah_id' => $validatedData['sekolah_id'],
+            'nomor_matrik' => "ERROR",
         ]);
+        $id_tahun_lalu = NoKontrakTracker::first()->id_kontrak_last_year;
+        $nomor_matriks = $paketPekerjaan->paket_id - $id_tahun_lalu;
+
+        $paketPekerjaan->nomor_matrik = str_pad($nomor_matriks, 3, '0', STR_PAD_LEFT);
+        $paketPekerjaan->save();
 
         foreach ($validatedData['sub_kegiatan_id'] as $subKegiatanId) {
             PaketSubKegiatan::create([

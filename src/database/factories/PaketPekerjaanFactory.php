@@ -21,6 +21,7 @@ class PaketPekerjaanFactory extends Factory
     public function definition(): array
     {
         return [
+            'nomor_matrik' => $this->faker->numberBetween(1000,5000),
             'kode_sirup' => $this->faker->numberBetween(1000,5000),
             'sumber_dana' => $this->faker->randomElement(['APBD', 'DAK', 'BANKEU', 'APBD Perubahan', 'APBD Perubahan Biasa', 'BANKEU Perubahan', 'SG', 'Bantuan Pemerintah']),
             'tahun_anggaran' => $this->faker->year(),
