@@ -12,8 +12,9 @@ return new class extends Migration {
     {
         Schema::create('paket_pekerjaan', function (Blueprint $table) {
             $table->id('paket_id');
+            $table->string('nomor_matrik');
             $table->integer('kode_sirup');
-            $table->enum('sumber_dana', ['APBD', 'DAK', 'BANKEU', 'APBD Perubahan', 'APBD Perubahan Biasa', 'BANKEU Perubahan', 'SG', 'Bantuan Pemerintah']);
+            $table->string('sumber_dana');
             $table->smallInteger('tahun_anggaran');
             $table->foreignId('satker_id')
                 ->nullable()
@@ -21,8 +22,8 @@ return new class extends Migration {
                 ->nullOnDelete();
             $table->string('nama_pekerjaan');
             $table->date('waktu_paket');
-            $table->enum('metode_pemilihan', ['Jasa Konsultasi Pengawasan', 'Jasa Konsultasi Perencanaan', 'Pekerjaan Konstruksi', 'Pengadaan Barang']);
-            $table->enum('jenis_pengadaan', ['Tender', 'Non Tender', 'E-Katalog', 'Swakelola']);
+            $table->string('metode_pemilihan');
+            $table->string('jenis_pengadaan');
             $table->integer('nilai_pagu_paket');
             $table->integer('nilai_pagu_anggaran');
             $table->integer('nilai_hps');

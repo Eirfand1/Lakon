@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             PaketPekerjaanTable::class,
             PaketSubKegiatanTable::class,
             KontrakSeeder::class,
+            NoKontrakTrackerSeeder::class
         ]);
     }
 }

@@ -15,6 +15,7 @@ class PaketPekerjaanTable extends Seeder
     public function run(): void
     {
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '001',
             'kode_sirup' => 11,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -31,6 +32,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '002',
             'kode_sirup' => 12,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -47,6 +49,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '003',
             'kode_sirup' => 13,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -63,6 +66,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '004',
             'kode_sirup' => 14,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -79,6 +83,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '005',
             'kode_sirup' => 21,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -95,6 +100,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '006',
             'kode_sirup' => 22,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -111,6 +117,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '007',
             'kode_sirup' => 23,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -127,6 +134,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '008',
             'kode_sirup' => 24,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -143,6 +151,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '009',
             'kode_sirup' => 31,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -159,6 +168,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '010',
             'kode_sirup' => 32,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -175,6 +185,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '011',
             'kode_sirup' => 33,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -191,6 +202,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '012',
             'kode_sirup' => 34,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -207,6 +219,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '013',
             'kode_sirup' => 41,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -223,6 +236,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '014',
             'kode_sirup' => 42,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -239,6 +253,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '015',
             'kode_sirup' => 43,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
@@ -255,6 +270,7 @@ class PaketPekerjaanTable extends Seeder
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
+            'nomor_matrik' => '016',
             'kode_sirup' => 44,
             'sumber_dana' => 'APBD',
             'tahun_anggaran' => '2025',
