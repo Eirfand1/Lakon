@@ -99,13 +99,6 @@
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Kode
-                                RUP</strong>
-                            <p class="font-medium">{{ $kontrak->paketPekerjaan->rup }}</p>
-                        </div>
-                        <div
-                            class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
-                            <strong
-                                class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Kode
                                 SiRUP</strong>
                             <p class="font-medium">{{ $kontrak->paketPekerjaan->kode_sirup }}</p>
                         </div>

@@ -29,7 +29,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 11,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -47,7 +46,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 12,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -65,7 +63,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 13,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -83,7 +80,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 14,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -101,7 +97,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 21,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -119,7 +114,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 22,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -137,7 +131,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 23,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -155,7 +148,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 24,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -173,7 +165,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 31,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -191,7 +182,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 32,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -209,7 +199,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 33,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -227,7 +216,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 34,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -245,7 +233,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 41,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -263,7 +250,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 42,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -281,7 +267,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 43,
             'sekolah_id' => 1,
         ]);
         DB::table('paket_pekerjaan')->insert([
@@ -299,7 +284,6 @@ class PaketPekerjaanTable extends Seeder
             'nilai_hps' => "1000000",
             'ppkom_id' => 1,
             'daskum_id' => 1,
-            'rup' => 44,
             'sekolah_id' => 1,
         ]);
 

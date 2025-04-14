@@ -17,8 +17,9 @@ return new class extends Migration {
             $table->string('sumber_dana');
             $table->smallInteger('tahun_anggaran');
             $table->foreignId('satker_id')
+                ->nullable()
                 ->constrained('satuan_kerja', 'satker_id')
-                ->cascadeOnDelete();
+                ->nullOnDelete();
             $table->string('nama_pekerjaan');
             $table->date('waktu_paket');
             $table->string('metode_pemilihan');
@@ -27,16 +28,18 @@ return new class extends Migration {
             $table->integer('nilai_pagu_anggaran');
             $table->integer('nilai_hps');
             $table->foreignId('ppkom_id')
-                ->constrained('ppkom', 'ppkom_id')
-                ->cascadeOnDelete();
-            $table->foreignId('daskum_id')
                 ->nullable()
-                ->constrained('dasar_hukum', 'daskum_id')
+                ->constrained('ppkom', 'ppkom_id')
                 ->nullOnDelete();
-            $table->integer('rup');
+            $table->unsignedBigInteger('daskum_id')->nullable();
+            $table->foreign('daskum_id')
+                ->references('daskum_id')
+                ->on('dasar_hukum')
+                ->nullOnDelete();
             $table->foreignId('sekolah_id')
                 ->nullable()
-                ->constrained('sekolah', 'sekolah_id')
+                ->references('sekolah_id')
+                ->on('sekolah')
                 ->nullOnDelete();
             $table->timestamps();
             $table->softDeletes();
