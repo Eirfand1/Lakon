@@ -42,7 +42,7 @@
                     <img src="{{asset('images/logo-lakon.png')}}" alt="" class="mb-4" width="200">
                     <h1 class="text-2xl font-bold text-black">REGISTRASI PERUSAHAAN</h1>
                 </div>
-                {{-- @if (session('success')) --}}
+                @if (session('success'))
                     <div role="alert" class="alert alert-success text-white bg-green-700/70 rounded-md">
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
                             viewBox="0 0 24 24">
@@ -64,7 +64,7 @@
                         }).showToast();
                     </script>
 
-                {{-- @endif --}}
+                @endif
                 <!-- error message -->
 
                 @if (session('error'))
