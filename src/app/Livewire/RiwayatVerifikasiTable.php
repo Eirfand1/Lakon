@@ -39,6 +39,9 @@ class RiwayatVerifikasiTable extends DataTableComponent
 
             IncrementColumn::make('#'),
 
+            Column::make("Aksi", "kontrak_id")
+                ->format(fn($value, $row) => view('pages.admin.riwayat-kontrak.actions', ['kontrak' => $row])),
+
             Column::make("is_verificated")
                 ->hideIf(true),
 

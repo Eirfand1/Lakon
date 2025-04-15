@@ -88,6 +88,11 @@ Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(functio
 
 Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(function () {
     Route::get('/riwayat-kontrak', [VerifikatorController::class, 'kontrakSaya'])->name('verifikator.riwayat');
+
+    Route::get('/riwayat-kontrak/{kontrak}', [KontrakController::class, 'show'])->name('verifikator.riwayat-kontrak.show');
+    Route::get('/riwayat-kontrak/{kontrak}/export-pdf', [KontrakController::class, 'exportPdf'])->name('verifikator.riwayat-kontrak.export-pdf');
+    Route::put('/riwayat-kontrak/{kontrak}/update-template', [KontrakController::class, 'updateTemplate'])->name('verifikator.riwayat-kontrak.update-template');
+
     Route::get('/dashboard', [VerifikatorController::class, 'dashboard'])->name('verifikator.dashboard');
 
     Route::get('/tolak/{kontrak_id}', [VerifikatorController::class, 'tolak'])->name('verifikator.tolak');
@@ -129,6 +134,8 @@ Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(f
     // ruang lingkup
     Route::post('/detail/ruang-lingkup', [RuangLingkupController::class, 'store'])->name('verifikator.ruang-lingkup.store');
     Route::delete('/detail/ruang-lingkup/{ruang_lingkup}', [RuangLingkupController::class, 'destroy'])->name('verifikator.ruang-lingkup.destroy');
+
+
 });
 
 // TODO make all route to /admin or /penyedia or /verifikator

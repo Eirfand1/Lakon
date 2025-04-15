@@ -7,6 +7,7 @@ use App\Models\Kontrak;
 use App\Models\Ppkom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Tim;
@@ -41,7 +42,14 @@ class KontrakController extends Controller
 
         $templates = Template::all();
 
-        return view('pages.admin.riwayat-kontrak.detail-kontrak', [
+        if(Auth::user()->role == 'admin') {
+            return view('pages.admin.riwayat-kontrak.detail-kontrak', [
+                'kontrak' => $kontrak,
+                'templates' => $templates
+            ]);
+        }
+
+        return view('pages.verifikator.riwayat.detail-kontrak', [
             'kontrak' => $kontrak,
             'templates' => $templates
         ]);
