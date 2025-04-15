@@ -13,5 +13,6 @@ class NoKontrakTracker extends Model
     protected $table = 'no_kontrak_tracker';
     protected $fillable = [
         'id_kontrak_last_year',
+        'this_year',
     ];
 }

@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('no_kontrak_tracker', function (Blueprint $table) {
             $table->id();
             $table->integer('id_kontrak_last_year')->default(0);
+            $table->integer('this_year');
         });
     }
 

@@ -14,7 +14,8 @@ class NoKontrakTrackerSeeder extends Seeder
     public function run(): void
     {
         DB::table('no_kontrak_tracker')->insert([
-            'id_kontrak_last_year' => 0
+            'id_kontrak_last_year' => 0,
+            'this_year' => date('Y'),
         ]);
     }
 }

@@ -75,7 +75,15 @@ class PaketPekerjaanController extends Controller
             'sekolah_id' => $validatedData['sekolah_id'],
             'nomor_matrik' => "ERROR",
         ]);
-        $id_tahun_lalu = NoKontrakTracker::first()->id_kontrak_last_year;
+        $tracker = NoKontrakTracker::first();
+        $tahun_saat_ini = $tracker->this_year;
+        if ($tahun_saat_ini != date('Y')) {
+            $tracker->update([
+                'id_kontrak_last_year' => $paketPekerjaan->paket_id - 1,
+                'this_year' => date('Y'),
+            ]);
+        }
+        $id_tahun_lalu = $tracker->id_kontrak_last_year;
         $nomor_matriks = $paketPekerjaan->paket_id - $id_tahun_lalu;
 
         $paketPekerjaan->nomor_matrik = str_pad($nomor_matriks, 3, '0', STR_PAD_LEFT);
@@ -126,7 +134,7 @@ class PaketPekerjaanController extends Controller
                 'ppkom_id' => $validatedData['ppkom_id'],
                 'daskum_id' => $validatedData['daskum_id'],
                 'kode_sirup' => $validatedData['kode_sirup'],
-                'sekolah_id' => $validatedData['sekolah_id']
+                    'sekolah_id' => $validatedData['sekolah_id']
             ]);
 
             // Hapus semua data yang memiliki paket_id yang sama
