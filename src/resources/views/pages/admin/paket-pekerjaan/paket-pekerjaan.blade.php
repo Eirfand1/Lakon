@@ -168,6 +168,8 @@
                             <select name="jenis_pengadaan" id=""
                                 class="sm:w-1/4 w-3/4 text-sm  rounded-lg bg-white h-10 dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md  border-gray-200 shadow-sm focus:ring-0"
                                 required>
+                                <option value="" disabled {{ old('jenis_pengadaan') ? '' : 'selected' }}>Pilih Jenis
+                                    Pengadaan</option>
                                 <option value=" Tender" {{ old('jenis_pengadaan') == 'Tender' ? 'selected' : '' }}>Tender
                                 </option>
                                 <option value="Non Tender" {{ old('jenis_pengadaan') == 'Non Tender' ? 'selected' : '' }}>
@@ -182,8 +184,7 @@
                             <select name="metode_pemilihan" id=""
                                 class="w-3/4 text-sm rounded-lg bg-white h-10 dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                                 required>
-                                <option value="" disabled {{ old('metode_pemilihan') ? '' : 'selected' }}>Pilih Jenis
-                                    Pengadaan</option>
+                                <option value="" disabled {{ old('metode_pemilihan') ? '' : 'selected' }}>Pilih Metode Pemilihan</option>
                                 <option value="Jasa Konsultasi Pengawasan" {{ old('metode_pemilihan') == 'Jasa Konsultasi Pengawasan' ? 'selected' : '' }}>Jasa Konsultasi Pengawasan</option>
                                 <option value="Jasa Konsultasi Perencanaan" {{ old('metode_pemilihan') == 'Jasa Konsultasi Perencanaan' ? 'selected' : '' }}>Jasa Konsultasi Perencanaan</option>
                                 <option value="Pekerjaan Konstruksi" {{ old('metode_pemilihan') == 'Pekerjaan Konstruksi' ? 'selected' : '' }}>Pekerjaan Konstruksi</option>
@@ -508,7 +509,6 @@
                             <select name="metode_pemilihan" id="metode_pemilihan"
                                 class="w-3/4 rounded text-sm bg-white dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm"
                                 required>
-                                <option value="" disabled selected>Pilih Jenis Pengadaan</option>
                                 <option value="Jasa Konsultasi Pengawasan">Jasa Konsultasi Pengawasan</option>
                                 <option value="Jasa Konsultasi Perencanaan">Jasa Konsultasi Perencanaan</option>
                                 <option value="Pekerjaan Konstruksi">Pekerjaan Konstruksi</option>
