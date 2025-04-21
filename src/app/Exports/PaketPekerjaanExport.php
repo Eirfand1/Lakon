@@ -19,15 +19,17 @@ class PaketPekerjaanExport implements FromCollection, WithHeadings, WithCustomSt
     {
         // Get all SubKegiatan records with their related PaketPekerjaan and other relationships
         $subKegiatans = SubKegiatan::with([
-            'paketPekerjaan', 
-            'paketPekerjaan.sekolah', 
+            'paketPekerjaan',
+            'paketPekerjaan.sekolah',
             'paketPekerjaan.satuanKerja',
             'paketPekerjaan.dasarHukum',
-            'paketPekerjaan.ppkom'
+            'paketPekerjaan.ppkom',
+            'paketPekerjaan.kontrak',
+            'paketPekerjaan.kontrak.penyedia',
         ])->get();
-        
+
         $rows = new Collection();
-        
+
         foreach ($subKegiatans as $subKegiatan) {
             if ($subKegiatan->paketPekerjaan->isEmpty()) {
                 $rows->push([
@@ -46,17 +48,31 @@ class PaketPekerjaanExport implements FromCollection, WithHeadings, WithCustomSt
                     'nilai_hps' => '',
                     'pptkom' => '',
                     'dasar_hukum' => '',
-                    'sekolah' => ''
+                    'sekolah' => '',
+                    'nilai_kontrak' => '',
+                    'tanggal_awal' => '',
+                    'tanggal_akhir' => '',
+                    'nama_perusahaan' => '',
+                    'npwp_perusahaan' => '',
+                    'nama_pemilik' => '',
+                    'kontak_hp' => '',
+                    'kontak_email' => '',
+                    'rekening_norek' => '',
+                    'rekening_nama' => '',
+                    'rekening_bank' => '',
+                    'no_akta_notaris' => '',
+                    'nama_notaris' => '',
+                    'tanggal_akta_notaris' => '',
                 ]);
                 continue;
             }
-            
+
             foreach ($subKegiatan->paketPekerjaan as $index => $paket) {
                 $rows->push([
                     'no' => $index === 0 ? $subKegiatan->no_rekening : '',
                     'sub_kegiatan' => $index === 0 ? $subKegiatan->nama_sub_kegiatan : '',
-                    'paket_id' => $paket->paket_id,
-                    'nama_paket' => $paket->nama_pekerjaan,
+                    'paket_id' => $paket->nomor_matrik,
+                    'nama_paket' => $paket->nama_pekerjaan ." ". $paket->sekolah->nama_sekolah,
                     'kode_sirup' => $paket->kode_sirup,
                     'sumber_dana' => $paket->sumber_dana,
                     'tahun_anggaran' => $paket->tahun_anggaran,
@@ -68,11 +84,25 @@ class PaketPekerjaanExport implements FromCollection, WithHeadings, WithCustomSt
                     'nilai_hps' => $paket->nilai_hps,
                     'ppkom' => $paket->ppkom->nama ?? '-',
                     'dasar_hukum' => $paket->dasarHukum->dasar_hukum ?? '-',
-                    'sekolah' => $paket->sekolah->nama_sekolah ?? '-'
+                    'sekolah' => $paket->sekolah->nama_sekolah ?? '-',
+                    'nilai_kontrak' => $paket->kontrak->nilai_kontrak ?? '-',
+                    'tanggal_awal' => $paket->kontrak->tanggal_awal ?? '-',
+                    'tanggal_akhir' => $paket->kontrak->tanggal_akhir ?? '-',
+                    'nama_perusahaan' => $paket->kontrak->penyedia->nama_perusahaan_lengkap ?? '-',
+                    'npwp_perusahaan' => $paket->kontrak->penyedia->npwp_perusahaan ?? '-',
+                    'nama_pemilik' => $paket->kontrak->penyedia->nama_pemilik ?? '-',
+                    'kontak_hp' => $paket->kontrak->penyedia->kontak_hp ?? '-',
+                    'kontak_email' => $paket->kontrak->penyedia->kontak_email ?? '-',
+                    'rekening_norek' => $paket->kontrak->penyedia->rekening_norek ?? '-',
+                    'rekening_nama' => $paket->kontrak->penyedia->rekening_nama ?? '-',
+                    'rekening_bank' => $paket->kontrak->penyedia->rekening_bank ?? '-',
+                    'no_akta_notaris' => $paket->kontrak->penyedia->akta_notaris_no ?? '-',
+                    'nama_notaris' => $paket->kontrak->penyedia->akta_notaris_nama ?? '-',
+                    'tanggal_akta_notaris' => $paket->kontrak->penyedia->akta_notaris_tanggal ?? '-',
                 ]);
             }
         }
-        
+
         return $rows;
     }
 
@@ -97,10 +127,24 @@ class PaketPekerjaanExport implements FromCollection, WithHeadings, WithCustomSt
             'Nilai HPS',
             'PPKOM',
             'Dasar Hukum',
-            'Sekolah'
+            'Sekolah',
+            'Nilai Kontrak',
+            'Tanggal Awal',
+            'Tanggal Akhir',
+            'Nama Perusahaan',
+            'NPWP Perusahaan',
+            'Nama Pemilik',
+            'Kontak HP',
+            'Kontak Email',
+            'Rekening Norek',
+            'Rekening Nama',
+            'Rekening Bank',
+            'No Akta Notaris',
+            'Nama Notaris',
+            'Tanggal Akta Notaris',
         ];
     }
-    
+
     /**
      * @return string
      */
@@ -108,7 +152,7 @@ class PaketPekerjaanExport implements FromCollection, WithHeadings, WithCustomSt
     {
         return 'A1';
     }
-    
+
     /**
      * @param Worksheet $sheet
      */
@@ -130,8 +174,27 @@ class PaketPekerjaanExport implements FromCollection, WithHeadings, WithCustomSt
         $sheet->getColumnDimension('N')->setWidth(20);
         $sheet->getColumnDimension('O')->setWidth(30);
         $sheet->getColumnDimension('P')->setWidth(30);
-        
-        $sheet->getStyle('A1:Q1')->applyFromArray([
+        $sheet->getColumnDimension('Q')->setWidth(30);
+        $sheet->getColumnDimension('R')->setWidth(30);
+        $sheet->getColumnDimension('S')->setWidth(30);
+        $sheet->getColumnDimension('T')->setWidth(30);
+        $sheet->getColumnDimension('U')->setWidth(30);
+        $sheet->getColumnDimension('V')->setWidth(30);
+        $sheet->getColumnDimension('W')->setWidth(30);
+        $sheet->getColumnDimension('X')->setWidth(30);
+        $sheet->getColumnDimension('Y')->setWidth(30);
+        $sheet->getColumnDimension('Z')->setWidth(30);
+        $sheet->getColumnDimension('AA')->setWidth(30);
+        $sheet->getColumnDimension('AB')->setWidth(30);
+        $sheet->getColumnDimension('AC')->setWidth(30);
+        $sheet->getColumnDimension('AD')->setWidth(30);
+
+
+
+
+
+
+        $sheet->getStyle('A1:AD1')->applyFromArray([
             'font' => [
                 'bold' => true,
             ],
@@ -140,9 +203,9 @@ class PaketPekerjaanExport implements FromCollection, WithHeadings, WithCustomSt
                 'vertical' => \PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER,
             ],
         ]);
-        
+
         $lastRow = $sheet->getHighestRow();
-        $sheet->getStyle('A1:Q' . $lastRow)->applyFromArray([
+        $sheet->getStyle('A1:AD' . $lastRow)->applyFromArray([
             'borders' => [
                 'allBorders' => [
                     'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_THIN,
@@ -150,35 +213,35 @@ class PaketPekerjaanExport implements FromCollection, WithHeadings, WithCustomSt
                 ],
             ],
         ]);
-        
+
         $currentNo = null;
         $startRow = 2;
-        
+
         for ($row = 2; $row <= $lastRow; $row++) {
             $no = $sheet->getCellByColumnAndRow(1, $row)->getValue();
-            
-            
+
+
             if (!empty($no)) {
                 if ($currentNo !== null && $row > $startRow) {
                     $sheet->mergeCells('A' . $startRow . ':A' . ($row - 1));
                     $sheet->mergeCells('B' . $startRow . ':B' . ($row - 1));
-                    
+
                     $sheet->getStyle('A' . $startRow)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
                     $sheet->getStyle('B' . $startRow)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
                 }
-                
+
                 $currentNo = $no;
                 $startRow = $row;
             }
         }
-        
+
         if ($currentNo !== null && $lastRow >= $startRow) {
             $sheet->mergeCells('A' . $startRow . ':A' . $lastRow);
             $sheet->mergeCells('B' . $startRow . ':B' . $lastRow);
             $sheet->getStyle('A' . $startRow)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
             $sheet->getStyle('B' . $startRow)->getAlignment()->setVertical(\PhpOffice\PhpSpreadsheet\Style\Alignment::VERTICAL_CENTER);
         }
-        
-        $sheet->getStyle('A1:Q' . $lastRow)->getAlignment()->setWrapText(true);
+
+        $sheet->getStyle('A1:AD' . $lastRow)->getAlignment()->setWrapText(true);
     }
 }
