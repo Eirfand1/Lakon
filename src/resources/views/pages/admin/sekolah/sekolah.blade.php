@@ -369,10 +369,8 @@
 
         function handleEdit(data) {
 
-            console.log(data)
             try {
                 const sekolah = JSON.parse(data);
-                console.log(sekolah);
 
                 document.getElementById('editForm').action = `sekolah/${sekolah.sekolah_id}`;
 
