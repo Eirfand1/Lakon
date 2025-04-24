@@ -43,4 +43,8 @@ class PaketPekerjaan extends Model
         return $this->belongsTo(Sekolah::class, 'sekolah_id', 'sekolah_id');
     }
 
+    public function kontrak()
+    {
+        return $this->hasOne(Kontrak::class, 'paket_id', 'paket_id');
+    }
 }
