@@ -220,18 +220,6 @@
             document.getElementById("waktuPenyelesaianSPK").value = hasil
         }
 
-        // let detail = @json($detail);
-        // console.log(detail);
-
-        // const detailEditManagerInstance = Alpine.$data(document.getElementById("detail-edit-manager"));
-        // const jumlahDetail = detail.length;
-        // detailEditManagerInstance.details = [];
-        // for (let i = 0; i < jumlahDetail; i++) {
-        //     detailEditManagerInstance.details.addDetailRow();
-        //     detailEditManagerInstance.details[i].namaDetail = detail[i].detail;
-        //     detailEditManagerInstance.details[i].nilaiDetail = detail[i].nilai;
-        // }
-
         function detailKontrak(kontrak) {
             return {
                 nilaiKontrak: kontrak.nilai_kontrak || '',
