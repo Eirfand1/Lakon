@@ -128,6 +128,8 @@ class KontrakController extends Controller
             $kontrak = Kontrak::create([
                 'no_kontrak' => $nomorKontrak,
                 'paket_id' => $request->paket_id,
+                'jenis_kontrak' => $request->metode_pemilihan,
+                'nomor_spk' => $nomorKontrak,
                 'penyedia_id' => $penyediaId,
                 'satker_id' => 1,
                 'is_verificated' => false
