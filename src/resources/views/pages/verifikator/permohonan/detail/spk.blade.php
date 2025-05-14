@@ -23,7 +23,7 @@
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nilai Kontrak</label>
-            <div x-data="detailKontrak({{ json_encode($kontrak) }})" class="space-y-2">
+            <div x-data="detailKontrak({{ json_encode($kontrak) }})" x-init="initDetail({{ json_encode($detail) }})" id="detail-edit-manager" class="space-y-2">
                 <div class="flex gap-4">
                     <input type="text" id="nilaiKontrakSPK" value="{{ $kontrak->nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
                     <button type="button" @click="addDetailRow" class="btn btn-primary mt-2">Detail</button>
@@ -220,6 +220,17 @@
             document.getElementById("waktuPenyelesaianSPK").value = hasil
         }
 
+        // let detail = @json($detail);
+        // console.log(detail);
+
+        // const detailEditManagerInstance = Alpine.$data(document.getElementById("detail-edit-manager"));
+        // const jumlahDetail = detail.length;
+        // detailEditManagerInstance.details = [];
+        // for (let i = 0; i < jumlahDetail; i++) {
+        //     detailEditManagerInstance.details.addDetailRow();
+        //     detailEditManagerInstance.details[i].namaDetail = detail[i].detail;
+        //     detailEditManagerInstance.details[i].nilaiDetail = detail[i].nilai;
+        // }
 
         function detailKontrak(kontrak) {
             return {
@@ -255,9 +266,27 @@
                         cancelable: true,
                     });
                     input.dispatchEvent(event);
+                },
+
+                initDetail(detailArray) {
+                    if (!Array.isArray(detailArray)) return;
+                    this.details = [];
+
+                    detailArray.forEach(item => {
+                        this.details.push({
+                            namaDetail: item.detail,
+                            nilaiDetail: item.nilai
+                        });
+                    });
+
+                    if (this.details.length > 0) {
+                        document.getElementById("nilaiKontrakSPK").readOnly = true;
+                        this.updateNilaiKontrak();
+                    }
                 }
-            }
+            };
         }
+
 
 
 </script>
