@@ -64,7 +64,7 @@
                                     <template x-for="option in input.filteredOptions" :key="option . sub_kegiatan_id">
                                         <div @click="selectOption(index, option)"
                                             class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
-                                            x-text="option.nama_sub_kegiatan"></div>
+                                            x-text="option.pendidikan ? '(' + option.pendidikan + ') ' + option.nama_sub_kegiatan :  option.nama_sub_kegiatan"></div>
                                     </template>
                                 </div>
 
@@ -396,7 +396,7 @@
                                     <template x-for="option in input.filteredOptions" :key="option . sub_kegiatan_id">
                                         <div @click="selectOption(index, option)"
                                             class="px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 cursor-pointer"
-                                            x-text="option.nama_sub_kegiatan"></div>
+                                            x-text="option.pendidikan ? '(' + option.pendidikan + ') ' + option.nama_sub_kegiatan :  option.nama_sub_kegiatan"></div>
                                     </template>
                                 </div>
                                 {{-- field sub kegiatan end --}}
@@ -728,7 +728,9 @@
             subKegiatanEditManagerInstance.inputs = [];
             for (let i = 0; i < jumlahInput; i++) {
                 subKegiatanEditManagerInstance.addInput();
-                subKegiatanEditManagerInstance.inputs[i].search = paket.sub_kegiatan[i].nama_sub_kegiatan;
+                subKegiatanEditManagerInstance.inputs[i].search = paket.sub_kegiatan[i].pendidikan
+                    ? `(${paket.sub_kegiatan[i].pendidikan}) ${paket.sub_kegiatan[i].nama_sub_kegiatan}`
+                    : paket.sub_kegiatan[i].nama_sub_kegiatan;
                 subKegiatanEditManagerInstance.inputs[i].selectedOptionId = paket.sub_kegiatan[i].sub_kegiatan_id;
             }
             if (jumlahInput == 0) {
@@ -803,7 +805,7 @@
                 },
 
                 selectOption(index, option) {
-                    this.inputs[index].search = option.nama_sub_kegiatan;
+                    this.inputs[index].search = option.pendidikan ? "(" + option.pendidikan + ") " + option.nama_sub_kegiatan : option.nama_sub_kegiatan;
                     this.inputs[index].selectedOptionId = option.sub_kegiatan_id;
                     this.inputs[index].showDropdown = false;
                 }
