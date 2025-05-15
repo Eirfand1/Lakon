@@ -123,7 +123,7 @@ class KontrakController extends Controller
             }
             // 'Jasa Konsultasi Pengawasan', 'Jasa Konsultasi Perencanaan', 'Pekerjaan Konstruksi', 'Pengadaan Barang'
 
-            $nomorKontrak = "400.3.18/{$request->paket_id}/{$sumber_dana}{$metode}/{$tahun}";
+            $nomorKontrak = "400.3.13/{$request->paket_id}/{$sumber_dana}{$metode}/{$tahun}";
 
             $kontrak = Kontrak::create([
                 'no_kontrak' => $nomorKontrak,

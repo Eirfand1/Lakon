@@ -52,9 +52,6 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->format(fn($value, $row) => view('pages.admin.paket-pekerjaan.actions', ['paket' => $row])),
 
             Column::make('Nama Paket Pekerjaan', 'nama_pekerjaan')
-                ->format(function ($value, $row) {
-                    return $value ." ". $row['sekolah.nama_sekolah'];
-                })
                 ->sortable()
                 ->searchable(),
 
@@ -229,7 +226,7 @@ class PaketPekerjaanTable extends DataTableComponent
             SelectFilter::make('Tahun Anggaran')
                 ->options([
                     '' => 'Semua Tahun',
-                ] + PaketPekerjaan::distinct()->orderBy('tahun_anggaran', 'desc')->pluck('tahun_anggaran', 'tahun_anggaran')->toArray()) 
+                ] + PaketPekerjaan::distinct()->orderBy('tahun_anggaran', 'desc')->pluck('tahun_anggaran', 'tahun_anggaran')->toArray())
                 ->filter(function ($builder, $value) {
                     return $value ? $builder->where('tahun_anggaran', $value) : $builder;
                 }),
@@ -255,19 +252,19 @@ class PaketPekerjaanTable extends DataTableComponent
                     'min' => 0,
                     'step' => 1000000
                 ])
- 
+
                 ->filter(function ($builder, $value) {
                     return $value ? $builder->where('nilai_pagu_paket', '>=', $value) : $builder;
- 
+
                 }),
-            
+
                 NumberFilter::make('Minimal Pagu Anggaran')
                 ->config([
                     'min' => 0,
                     'step' => 1000000
                 ])
                 ->filter(function ($builder, $value) {
- 
+
                     return $value ? $builder->where('nilai_pagu_anggaran', '>=', $value) : $builder;
                 })
 

@@ -23,7 +23,7 @@ class DasarHukumController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
-            'dasar_hukum' => 'required|string|max:255',
+            'dasar_hukum' => 'required|string',
         ]);
 
         DasarHukum::create([
@@ -36,7 +36,7 @@ class DasarHukumController extends Controller
     public function update(Request $request, DasarHukum $dasarHukum)
     {
         $validateData = $request->validate([
-            'dasar_hukum' => 'required|string|max:255',
+            'dasar_hukum' => 'required|string',
         ]);
 
         $dasarHukum->update($validateData);
