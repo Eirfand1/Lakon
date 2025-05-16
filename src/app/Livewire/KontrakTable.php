@@ -37,7 +37,6 @@ class KontrakTable extends DataTableComponent
     public function bulkActions(): array
     {
         return [
-            'deleteSelected' => 'Hapus Terpilih',
             'export' => 'Download excel'
         ];
     }

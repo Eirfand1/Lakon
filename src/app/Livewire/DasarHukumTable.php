@@ -23,6 +23,19 @@ class DasarHukumTable extends DataTableComponent
         return DasarHukum::query()->orderByDesc('updated_at');
     }
 
+    public function bulkActions(): array
+    {
+        return [
+            'deleteSelected' => 'Hapus Terpilih',
+        ];
+    }
+
+    public function deleteSelected()
+    {
+        DasarHukum::whereIn('daskum_id', $this->getSelected())->delete();
+        $this->clearSelected();
+    }
+
     public function columns(): array
     {
         return [
@@ -33,8 +46,10 @@ class DasarHukumTable extends DataTableComponent
                 ->searchable(),
             Column::make("Dasar Hukum ", "dasar_hukum")
                 ->sortable()
-                ->searchable(),
-            
+                ->searchable()
+                ->format(fn($value) => '<div class="w-full whitespace-normal break-words">' . e($value) . '</div>')
+                ->html(),
+
         ];
     }
 }
