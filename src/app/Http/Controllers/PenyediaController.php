@@ -92,7 +92,7 @@ class PenyediaController extends Controller
             // Upload file kalau ada
             if ($request->hasFile('logo_perusahaan')) {
                 $logo = $request->file('logo_perusahaan');
-                $validated['logo_perusahaan'] = $this->uploadLocal($logo); // ✅ path-nya
+                $validated['logo_perusahaan'] = $this->uploadLocal($logo);
             }
 
             // Buat user
@@ -106,7 +106,8 @@ class PenyediaController extends Controller
             $validated['user_id'] = $user->id;
 
             // Simpan ke DB
-            Penyedia::create($validated); // ✅ pakai data yang benar
+            Penyedia::create($validated); 
+
 
             return redirect()->back()->with('success', 'Registrasi berhasil ditambahkan!');
         } catch (QueryException $th) {
@@ -121,7 +122,7 @@ class PenyediaController extends Controller
     {
         try {
             $validated = $request->validate([
-                'status' => 'in:biasa,konsultan',
+                'status' => 'in:penyedia,konsultan',
                 'NIK' => [
                     'required',
                     'max:255',
