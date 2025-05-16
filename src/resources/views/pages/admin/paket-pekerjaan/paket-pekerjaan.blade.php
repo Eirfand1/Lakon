@@ -51,7 +51,7 @@
                                     <x-input type="text" x-model="input.search" name="sub_kegiatan[]"
                                         @input.debounce.100ms="filterOptions(index)" @focus="showDropdown(index)"
                                         @click.away="input.showDropdown = false" placeholder="Pilih Sub Kegiatan"
-                                        class="{{ $errors->has('sub_kegiatan_id.*') ? 'border-red-500' : 'border-gray-200' }}" />
+                                        class="{{ $errors->has('sub_kegiatan_id.*') ? 'border-red-500' : 'border-gray-200' }}" autocomplete="off" />
 
                                     <x-danger-button @click="removeInput(index)" x-show="inputs.length > 1"
                                         @class(['py-0', 'btn-sm'])>
@@ -381,6 +381,7 @@
                                         @focus="showDropdown(index)" @click.away="input.showDropdown = false"
                                         placeholder="Pilih Sub Kegiatan"
                                         class="{{ $errors->has('sub_kegiatan_id.*') ? 'border-red-500' : 'border-gray-200' }}"
+                                        autocomplete="off"
                                         required />
 
 

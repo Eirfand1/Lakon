@@ -14,7 +14,8 @@
 
                     @if ($kontrak->template)
                         <a href="{{ route('penyedia.riwayat-kontrak.export-pdf', ['kontrak' => $kontrak->kontrak_id, 'format' => 'pdf']) }}"
-                            class="flex-1 sm:flex-none px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 transition-all transform hover:scale-[1.02] flex items-center justify-center">
+                            class="flex-1 sm:flex-none px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 transition-all transform hover:scale-[1.02] flex items-center justify-center"
+                            target="_blank">
                             <i class="fas fa-file-pdf mr-2"></i> Unduh PDF
                         </a>
                     @else
