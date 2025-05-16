@@ -16,10 +16,12 @@
                     <span>Tambah Data</span>
                 </label>
             </div>
-            
+
         </div>
 
-        <livewire:dasar-hukum-table />
+        <div class="overflow-x-hidden">
+            <livewire:dasar-hukum-table />
+        </div>
 
         <!-- Tambah Dasar Hukum -->
         <input type="checkbox" id="add-dasar-hukum" class="modal-toggle" />
