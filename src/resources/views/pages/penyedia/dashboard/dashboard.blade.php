@@ -10,7 +10,7 @@
                     <div class="p-6">
                         <div class="flex justify-center mb-8">
                             <div class="w-40 h-40 bg-gray-100 dark:bg-gray-700 rounded-full flex items-center justify-center">
-                                <img src="/path-to-your-logo.png" alt="Company Logo" class="max-w-full max-h-full p-4">
+                                <img src="{{ asset($penyedia->logo_perusahaan)  }}" alt="Company Logo" class="max-w-full max-h-full p-4">
                             </div>
                         </div>
                         <div class="space-y-4">
@@ -58,7 +58,7 @@
                             Gunakan LAKON PDK untuk mengajukan permohonan kontrak dengan lebih efisien. Siapkan dokumen dan data pendukung untuk memperlancar proses pengajuan Anda.
                         </p>
                         <a href="permohonan-kontrak" 
-                           class="block w-full bg-white hover:bg-gray-100 text-blue-700 font-bold py-3 px-4 rounded-lg text-center transition-colors duration-200 shadow-md" 
+                           class="block w-full bg-gray-100 hover:bg-gray-200 text-blue-700 dark:text-blue-800 font-bold py-3 px-4 rounded-lg text-center transition-colors duration-200 shadow-md" 
                            wire:navigate>
                             <span class="inline-flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

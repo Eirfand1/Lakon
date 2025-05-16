@@ -22,23 +22,27 @@
         </div>
 
         <!-- Cards -->
-        <div class="grid grid-cols-12 gap-6">
+        <div class="flex flex-col md:flex-row gap-6 ">
+			<x-dashboard.dashboard-card-06 :profilePimpinan="$profile_pimpinan"/>
+			<div class="w-full md:flex-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-4 auto-rows-max">
+				<x-dashboard.dashboard-card-05 :permohonanKontrak="$permohonan_kontrak"/>
 
+				<!-- Paket Pekerjaan -->
+				<x-dashboard.dashboard-card-01 :paketPekerjaan="$paket_pekerjaan" />
+
+				<!-- Tender -->
+				<x-dashboard.dashboard-card-02  :tender="$tender"/>
+
+				<!-- Non Tender -->
+				<x-dashboard.dashboard-card-03 :nonTender="$non_tender" />
+
+				<!-- e-Catalog -->
+				<x-dashboard.dashboard-card-04 :eCatalog="$e_catalog" />
+			</div>
             <!-- Permohonan kontrak baru -->
-           <x-dashboard.dashboard-card-05 :permohonanKontrak="$permohonan_kontrak"/>
-
-           <!-- Paket Pekerjaan -->
-           <x-dashboard.dashboard-card-01 :paketPekerjaan="$paket_pekerjaan" />
-
-           <!-- Tender -->
-           <x-dashboard.dashboard-card-02  :tender="$tender"/>
-
-           <!-- Non Tender -->
-           <x-dashboard.dashboard-card-03 :nonTender="$non_tender" />
-
-           <!-- e-Catalog -->
-           <x-dashboard.dashboard-card-04 :eCatalog="$e_catalog" />
+			
+			
         </div>
-        <x-dashboard.dashboard-card-06 :profilePimpinan="$profile_pimpinan"/>
+        
     </div>
 </x-app-layout>

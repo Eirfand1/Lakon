@@ -23,10 +23,9 @@ class PenyediaController extends Controller
 
     public function index(): View
     {
-            return view('pages.admin.penyedia.penyedia', [
-                "title" => "penyedia",
-            ]);
-
+        return view('pages.admin.penyedia.penyedia', [
+            "title" => "penyedia",
+        ]);
     }
 
     public function create(): View
@@ -70,45 +69,53 @@ class PenyediaController extends Controller
     public function store(PenyediaRequest $request)
     {
         try {
+            $validated = $request->validate([
+                'status' => 'in:biasa,konsultan',
+                'NIK' => ['required', 'max:255'],
+                'nama_pemilik' => 'required|max:255',
+                'alamat_pemilik' => 'required|max:255',
+                'nama_perusahaan_lengkap' => 'required|max:255',
+                'nama_perusahaan_singkat' => 'nullable|max:255',
+                'akta_notaris_no' => 'required|numeric',
+                'akta_notaris_nama' => 'required|max:255',
+                'akta_notaris_tanggal' => 'required|date|max:255',
+                'alamat_perusahaan' => 'required|max:255',
+                'kontak_hp' => 'required|numeric',
+                'kontak_email' => ['required', 'email', 'max:255'],
+                'rekening_norek' => 'required|numeric',
+                'rekening_nama' => 'required|max:255',
+                'rekening_bank' => 'required|max:255',
+                'npwp_perusahaan' => 'required|max:255',
+                'logo_perusahaan' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+            ]);
 
+            // Upload file kalau ada
+            if ($request->hasFile('logo_perusahaan')) {
+                $logo = $request->file('logo_perusahaan');
+                $validated['logo_perusahaan'] = $this->uploadLocal($logo);
+            }
+
+            // Buat user
             $user = User::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
 
-            $logoPath = null;
-            if ($request->hasFile('logo_perusahaan')) {
-                $logoPath = $request->file('logo_perusahaan')->store('logos', 'public');
-            }
+            // Tambahkan user_id ke array validated
+            $validated['user_id'] = $user->id;
 
-            Penyedia::create([
-                'user_id' => $user->id,
-                'NIK' => $request->NIK,
-                'nama_pemilik' => $request->nama_pemilik,
-                'alamat_pemilik' => $request->alamat_pemilik,
-                'nama_perusahaan_lengkap' => $request->nama_perusahaan_lengkap,
-                'nama_perusahaan_singkat' => $request->nama_perusahaan_singkat,
-                'akta_notaris_no' => $request->akta_notaris_no,
-                'akta_notaris_nama' => $request->akta_notaris_nama,
-                'akta_notaris_tanggal' => $request->akta_notaris_tanggal,
-                'alamat_perusahaan' => $request->alamat_perusahaan,
-                'kontak_hp' => $request->kontak_hp,
-                'kontak_email' => $request->kontak_email,
-                'rekening_norek' => $request->rekening_norek,
-                'rekening_nama' => $request->rekening_nama,
-                'rekening_bank' => $request->rekening_bank,
-                'npwp_perusahaan' => $request->npwp_perusahaan,
-                'logo_perusahaan' => $logoPath,
-                'status' => 'penyedia',
-            ]);
+            // Simpan ke DB
+            Penyedia::create($validated); 
 
-            return redirect()->back()->with('success', 'Data berhasil ditambahkan!');
 
+            return redirect()->back()->with('success', 'Registrasi berhasil ditambahkan!');
         } catch (QueryException $th) {
             return redirect()->back()->with('error', $th->getMessage())->withErrors($th->getMessage());
         }
     }
+
+    
 
 
     public function update(Request $request, Penyedia $penyedia): RedirectResponse
