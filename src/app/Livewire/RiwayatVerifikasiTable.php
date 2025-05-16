@@ -40,7 +40,12 @@ class RiwayatVerifikasiTable extends DataTableComponent
             IncrementColumn::make('#'),
 
             Column::make("Aksi", "kontrak_id")
-                ->format(fn($value, $row) => view('pages.admin.riwayat-kontrak.actions', ['kontrak' => $row])),
+                ->format( function($value, $row) {
+                    return '<a href="riwayat-kontrak/'.$row->kontrak_id.'" class="btn rounded-md flex  btn-sm btn-warning text-white" wire:navigate>
+                                <i class="fa fa-eye text-sm inline">
+                                </i>
+                            </a>';
+                })->html(),
 
             Column::make("is_verificated")
                 ->hideIf(true),
@@ -58,9 +63,6 @@ class RiwayatVerifikasiTable extends DataTableComponent
                 ->searchable(),
 
             Column::make("Nama Paket", "paketPekerjaan.nama_pekerjaan")
-                ->format(function ($value, $row) {
-                    return $row['paketPekerjaan.nama_pekerjaan'] ." ". $row['paketPekerjaan.sekolah.nama_sekolah'];
-                })
                 ->sortable()
                 ->searchable(),
 

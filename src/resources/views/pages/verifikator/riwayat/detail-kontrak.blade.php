@@ -23,7 +23,7 @@
                     @if($kontrak->template_id)
                         <!-- Template exists, show enabled buttons -->
                         <div class="flex space-x-3 w-full sm:w-auto">
-                            <a href="{{ route('verifikator.riwayat-kontrak.export-pdf', ['kontrak' => $kontrak->kontrak_id, 'format' => 'pdf']) }}"
+                            <a target="_blank" href="{{ route('verifikator.riwayat-kontrak.export-pdf', ['kontrak' => $kontrak->kontrak_id, 'format' => 'pdf']) }}"
                                 class="flex-1 sm:flex-none px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600 dark:bg-green-600 dark:hover:bg-green-700 transition-all transform hover:scale-[1.02] flex items-center justify-center">
                                 <i class="fas fa-file-pdf mr-2"></i> Unduh PDF
                             </a>

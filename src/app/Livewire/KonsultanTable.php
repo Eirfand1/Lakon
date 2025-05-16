@@ -62,9 +62,6 @@ class KonsultanTable extends DataTableComponent
                 ->searchable(),
 
             Column::make("Nama Paket", "paketPekerjaan.nama_pekerjaan")
-                ->format(function ($value, $row) {
-                    return $row['paketPekerjaan.nama_pekerjaan'] ." ". $row['paketPekerjaan.sekolah.nama_sekolah'];
-                })
                 ->sortable()
                 ->searchable(),
 

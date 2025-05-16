@@ -100,6 +100,7 @@ class PenyediaController extends Controller
                 'rekening_bank' => $request->rekening_bank,
                 'npwp_perusahaan' => $request->npwp_perusahaan,
                 'logo_perusahaan' => $logoPath,
+                'status' => 'penyedia',
             ]);
 
             return redirect()->back()->with('success', 'Data berhasil ditambahkan!');

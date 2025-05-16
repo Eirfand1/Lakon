@@ -77,14 +77,6 @@ class VerifikasiTable extends DataTableComponent
             Column::make("Tanggal Pengajuan", "tgl_pembuatan")
                 ->sortable()
                 ->searchable(),
-
-            Column::make("Aksi", "kontrak_id")
-                ->format( function($value, $row) {
-                    return '<a  href="#"
-                            class="inline-block px-4 py-2 text-white font-semibold rounded-lg focus:outline-none focus:ring-2 focus:ring-opacity-50 bg-red-500 hover:bg-red-600 focus:ring-red-500">
-                            tolak permohonan
-                            </a>';
-                })->html(),
         ];
     }
 }
