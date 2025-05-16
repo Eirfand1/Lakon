@@ -114,7 +114,7 @@ class PenyediaController extends Controller
     {
         try {
             $validated = $request->validate([
-                'status' => 'in:biasa,konsultan',
+                'status' => 'in:penyedia,konsultan',
                 'NIK' => [
                     'required',
                     'max:255',
