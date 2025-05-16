@@ -209,6 +209,7 @@
 
                             {{-- id paket --}}
 
+                            <input type="hidden" name="nomor_matrik" x-bind:value="paketData?.nomor_matrik || ''">
                             <input type="hidden" name="paket_id" x-bind:value="paketData?.paket_id || ''">
                             <input type="hidden" name="sumber_dana" x-bind:value="paketData?.sumber_dana || ''">
 

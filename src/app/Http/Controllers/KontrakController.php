@@ -123,7 +123,7 @@ class KontrakController extends Controller
             }
             // 'Jasa Konsultasi Pengawasan', 'Jasa Konsultasi Perencanaan', 'Pekerjaan Konstruksi', 'Pengadaan Barang'
 
-            $nomorKontrak = "400.3.13/{$request->paket_id}/{$sumber_dana}{$metode}/{$tahun}";
+            $nomorKontrak = "400.3.13/{$request->nomor_matrik}/{$sumber_dana}{$metode}/{$tahun}";
 
             $kontrak = Kontrak::create([
                 'no_kontrak' => $nomorKontrak,
@@ -552,9 +552,11 @@ class KontrakController extends Controller
                     throw new ProcessFailedException($process);
                 }
 
+                $filename = $kontrak->paketPekerjaan->paket_id . ". " . $kontrak->paketPekerjaan->nama_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf';
+
                 return response()->file($outputPdf, [
                     'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename="' . $kontrak->paketPekerjaan->paket_id . ". " . $kontrak->paketPekerjaan->nama_paket_pekerjaan . " (" .  $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf"'
+                    'Content-Disposition' => 'inline; filename="' . $filename . '"',
                 ])->deleteFileAfterSend(true);
             }
         } catch (\Exception $e) {
