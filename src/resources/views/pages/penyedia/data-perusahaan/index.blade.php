@@ -174,7 +174,7 @@
                     </svg>
                     Simpan
                 </button>
-                <a class="btn text-gray-700 rounded-md" href="/penyedia/dashboard" wire:navigate>Kembali</a>
+                <a class="btn text-gray-700 dark:text-white bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 border rounded-md" href="/penyedia/dashboard" wire:navigate>< Kembali</a>
             </div>
         </form>
     </div>

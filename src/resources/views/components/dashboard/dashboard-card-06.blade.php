@@ -1,4 +1,4 @@
-<div class=" mt-6 md:w-96 ">
+<div class="w-full md:max-w-sm ">
         <div class="flex flex-col bg-white dark:bg-gray-800 shadow-sm rounded-xl">
             <div class="px-5 pt-5">
                 <header class="flex items-center gap-2 ">
