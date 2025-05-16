@@ -170,7 +170,10 @@ class PenyediaController extends Controller
     public function destroy(Penyedia $penyedia): RedirectResponse
     {
         try {
+            $user = $penyedia->user;
             $penyedia->delete();
+            $user->delete();
+            
             return redirect()->back()->with('success', 'Data berhasil dihapus.');
         } catch (QueryException $e) {
             return redirect()->back()
@@ -198,6 +201,10 @@ class PenyediaController extends Controller
     {
         $user = auth()->user()->penyedia;
         $kontrak = $user->kontrak->where('is_verificated', 0);
+
+        if (!$user) {
+            abort(403, 'Akun ini belum terdaftar sebagai penyedia.');
+        }
 
         return view('pages.penyedia.dashboard.dashboard', ['penyedia' => $user, 'kontrak' => $kontrak]);
     }
