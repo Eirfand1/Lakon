@@ -15,9 +15,10 @@ class DashboardController extends Controller
     {
         $profile_pimpinan = SatuanKerja::where('satker_id', '=', '1')->firstOrFail();
         $paket_pekerjaan = PaketPekerjaan::count();
-        $tender = PaketPekerjaan::where('jenis_pengadaan', 'tender')->count();
-        $non_tender = PaketPekerjaan::where('jenis_pengadaan', 'non_tender')->count();
-        $e_catalog = PaketPekerjaan::where('jenis_pengadaan', 'e_catalog')->count();
+        $tender = PaketPekerjaan::where('jenis_pengadaan', 'Tender')->count();
+        $non_tender = PaketPekerjaan::where('jenis_pengadaan', 'Non Tender')->count();
+        $e_catalog = PaketPekerjaan::where('jenis_pengadaan', 'E-Katalog')->count();
+        $swakelola = PaketPekerjaan::where('jenis_pengadaan', 'Swakelola')->count();
         $dataFeed = new DataFeed();
         $permohonan_kontrak = Kontrak::whereIsVerificated(false)->count();
 
@@ -28,8 +29,8 @@ class DashboardController extends Controller
             "non_tender" => $non_tender,
             "e_catalog" => $e_catalog,
             'dataFeed' => $dataFeed,
-            "permohonan_kontrak" => $permohonan_kontrak
-
+            "permohonan_kontrak" => $permohonan_kontrak,
+            "swakelola" => $swakelola
         ]);
     }
 

@@ -38,11 +38,14 @@
 
 				<!-- e-Catalog -->
 				<x-dashboard.dashboard-card-04 :eCatalog="$e_catalog" />
+
+                <!-- Swakelola -->
+                <x-dashboard.dashboard-card-07 :swakelola="$swakelola" />
 			</div>
             <!-- Permohonan kontrak baru -->
-			
-			
+
+
         </div>
-        
+
     </div>
 </x-app-layout>
