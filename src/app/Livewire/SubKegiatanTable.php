@@ -49,13 +49,17 @@ class SubKegiatanTable extends DataTableComponent
                     if ($paketList->isEmpty()) {
                         return '<span class="text-gray-400">Tidak ada paket pekerjaan</span>';
                     }
+                    // Hitung total
+                    $totalPaguAnggaran = $paketList->sum('nilai_pagu_anggaran');
+                    $totalPaguPaket = $paketList->sum('nilai_pagu_paket');
+                    $totalHPS = $paketList->sum('nilai_hps');
 
-                    $tableRows = $paketList->map(function ($paket, $index) {
+                    $tableRows = $paketList->map(function ($paket) {
                         return "
                             <tr class='hover:bg-gray-50 dark:hover:bg-gray-700'>
-                                <td class='p-2 border-b dark:border-gray-700 text-center'>" . ($index + 1) . "</td>
+                                <td class='p-2 border-b dark:border-gray-700'>{$paket->nomor_matrik}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$paket->nama_pekerjaan}</td>
-                                <td class='p-2 border-b dark:border-gray-700'>{$paket->kode_paket}</td>
+                                <td class='p-2 border-b dark:border-gray-700'>{$paket->kode_sirup}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$paket->sumber_dana}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$paket->tahun_anggaran}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$paket->waktu_paket}</td>
@@ -68,14 +72,26 @@ class SubKegiatanTable extends DataTableComponent
                         ";
                     })->join('');
 
+                    $footerRow = "
+                            <tr class='bg-gray-100 dark:bg-gray-800 font-semibold'>
+                                <td class='p-2 border-t dark:border-gray-700' colspan='8'>Total</td>
+                                <td class='p-2 border-t dark:border-gray-700'>Rp " . number_format($totalPaguAnggaran, 2) . "</td>
+                                <td class='p-2 border-t dark:border-gray-700'>Rp " . number_format($totalPaguPaket, 2) . "</td>
+                                <td class='p-2 border-t dark:border-gray-700'>Rp " . number_format($totalHPS, 2) . "</td>
+                            </tr>
+                        ";
+
+
+
+
                     return "
                         <div class='overflow-x-auto border rounded-lg w-max border-gray-700/20'>
                             <table class='divide-y divide-gray-200 dark:divide-gray-700'>
                                 <thead class='bg-gray-50 dark:bg-gray-800'>
                                     <tr>
-                                        <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>No</th>
+                                        <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Nomor Matrik</th>
                                         <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Nama Pekerjaan</th>
-                                        <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Kode Paket</th>
+                                        <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Kode Sirup</th>
                                         <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Sumber Dana</th>
                                         <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Tahun Anggaran</th>
                                         <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Waktu Paket</th>
@@ -89,6 +105,9 @@ class SubKegiatanTable extends DataTableComponent
                                 <tbody class='bg-white divide-y divide-gray-200 dark:bg-gray-600 dark:divide-gray-700'>
                                     {$tableRows}
                                 </tbody>
+                                <tfoot>
+                                    {$footerRow}
+                                </tfoot>
                             </table>
                         </div>
                     ";
