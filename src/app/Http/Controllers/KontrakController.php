@@ -314,12 +314,13 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${JENIS_KONTRAK}', $kontrak->jenis_kontrak);
             $templateProcessor->setValue('${TGL_PEMBUATAN}', Carbon::parse($kontrak->tanggal_awal)->translatedFormat(('d F Y')));
 
-            $terbilangTanggal = Carbon::parse($kontrak->tanggal_awal);
 
             $bulan = [
                 'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
                 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
             ];
+
+            $terbilangTanggal = Carbon::parse($kontrak->tanggal_awal);
 
             $spellout = new NumberFormatter("id", NumberFormatter::SPELLOUT);
 
@@ -332,6 +333,16 @@ class KontrakController extends Controller
                 "{$hari} {$namaBulan} Tahun {$tahun}"
             );
 
+            $terbilangTanggalPenetapanPemenang = Carbon::parse($kontrak->tgl_penetapan_pemenang);
+
+            $hari = ucwords($spellout->format($terbilangTanggalPenetapanPemenang->day));
+            $tahun = ucwords($spellout->format($terbilangTanggalPenetapanPemenang->year));
+            $namaBulan = $bulan[$terbilangTanggalPenetapanPemenang->month - 1];
+
+            $templateProcessor->setValue(
+                '${TERBILANG_TGL_PENETAPAN_PEMENANG}',
+                "{$hari} {$namaBulan} Tahun {$tahun}"
+            );
 
             $templateProcessor->setValue('${WAKTU_KONTRAK}', $kontrak->waktu_kontrak);
             $templateProcessor->setValue('${NILAI_KONTRAK}', number_format($kontrak->nilai_kontrak, 0, ',', '.'));
