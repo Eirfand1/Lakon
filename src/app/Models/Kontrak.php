@@ -97,4 +97,9 @@ class Kontrak extends Model
     {
         return $this->hasMany(DetailKontrak::class, 'kontrak_id', 'kontrak_id');
     }
+
+    public function ePurchasing()
+    {
+        return $this->hasMany(EPurchasing::class, 'kontrak_id', 'kontrak_id');
+    }
 }

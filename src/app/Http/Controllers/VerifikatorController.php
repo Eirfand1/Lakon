@@ -14,6 +14,7 @@ use App\Models\RincianBelanja;
 use App\Models\Peralatan;
 use App\Models\RuangLingkup;
 use App\Models\DetailKontrak;
+use App\Models\EPurchasing;
 use Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
@@ -209,6 +210,32 @@ class VerifikatorController extends Controller
         return redirect()->back()->with('success', 'SSKK berhasil di simpan');
     }
 
+    public function sp($kontrak_id, Kontrak $kontrak, Request $request){
+        $validate = $request->validate([
+            'nomor_sp' => 'required|string|max:255',
+            'tgl_sp' => 'required|date',
+            'id_paket' => 'required|array',
+        ]);
+        $kontrak->where('kontrak_id', $kontrak_id)->update([
+            'nomor_sp' => $request->nomor_sp,
+            'tgl_sp' => $request->tgl_sp,
+            'sp_done' => true
+        ]);
+
+        EPurchasing::where('kontrak_id', $kontrak_id)->delete();
+
+        if ($request->id_paket[0] == null) {
+            return redirect()->back()->with('success', 'SP berhasil di simpan');
+        }
+        foreach ($request->id_paket as $key => $id_paket) {
+            EPurchasing::create([
+                'kontrak_id' => $kontrak_id,
+                'id_paket' => $id_paket,
+            ]);
+        }
+        return redirect()->back()->with('success', 'SP berhasil di simpan');
+    }
+
     public function tolak($kontrak_id, Kontrak $kontrak)
     {
         $kontrak->where('kontrak_id', $kontrak_id)->delete();
@@ -249,6 +276,7 @@ class VerifikatorController extends Controller
             'peralatan' => Peralatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'ruangLingkup' => RuangLingkup::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'detail' => DetailKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'id_paket' => EPurchasing::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
         ]);
     }
 }

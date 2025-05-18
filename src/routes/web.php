@@ -103,6 +103,7 @@ Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(f
     Route::post('/detail/lampiran/{kontrak_id}', [VerifikatorController::class, 'lampiran']);
     Route::post('/detail/spp/{kontrak_id}', [VerifikatorController::class, 'spp']);
     Route::post('/detail/sskk/{kontrak_id}', [VerifikatorController::class, 'sskk']);
+    Route::post('/detail/sp/{kontrak_id}', [VerifikatorController::class, 'sp']);
     Route::post('/detail/terima/{kontrak_id}', [VerifikatorController::class, 'terima'])->name('verifikator.terima');
 
     Route::post('/detail/penerima-barang', [PenerimaController::class, 'store'])->name('verifikator.penerima.store');

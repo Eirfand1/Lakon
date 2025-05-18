@@ -116,6 +116,18 @@
                 class="px-4 py-2 rounded border border-blue-500 transition-colors duration-200"
                 @click="setTab('tab6')"
             >
+                SP
+                <i class="fa-regular {{ $kontrak->sp_done ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
+            </button>
+
+            <button
+                :class="{
+                    'bg-blue-500 text-white': tab === 'tab7',
+                    'bg-gray-200 text-gray-800 dark:bg-gray-700 dark:text-gray-200': tab !== 'tab7'
+                }"
+                class="px-4 py-2 rounded border border-blue-500 transition-colors duration-200"
+                @click="setTab('tab7')"
+            >
                 Verifikasi
                 <i class="fa-regular {{ $kontrak->is_verified ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
             </button>
@@ -150,6 +162,9 @@
         {{-- @endif --}}
         {{-- verifikasi --}}
         <div x-show="tab === 'tab6'" class="mt-4">
+            @include('pages.verifikator.permohonan.detail.sp')
+        </div>
+        <div x-show="tab === 'tab7'" class="mt-4">
             @include('pages.verifikator.permohonan.detail.verifikasi')
         </div>
     </div>
