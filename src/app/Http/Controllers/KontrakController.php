@@ -557,6 +557,8 @@ class KontrakController extends Controller
                     '-o',
                     $outputPdf,
                     $outputDocx
+                ], null, [
+                    'HOME' => '/tmp/libreoffice-profile'
                 ]);
                 $process->run();
                 if (!$process->isSuccessful()) {
