@@ -17,17 +17,17 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             DashboardTableSeeder::class,
-            SekolahSeeder::class,
+            // SekolahSeeder::class,
             UsersTableSeeder::class,
             PenyediaSeeder::class,
             VerifikatorSeeder::class,
-            DasarHukumTable::class,
-            PpkomTable::class,
+            // DasarHukumTable::class,
+            // PpkomTable::class,
             SatuanKerjaTable::class,
-            SubKegiatanTable::class,
-            PaketPekerjaanTable::class,
-            PaketSubKegiatanTable::class,
-            KontrakSeeder::class,
+            // SubKegiatanTable::class,
+            // PaketPekerjaanTable::class,
+            // PaketSubKegiatanTable::class,
+            // KontrakSeeder::class,
             NoKontrakTrackerSeeder::class
         ]);
     }

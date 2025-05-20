@@ -19,6 +19,6 @@ class VerifikatorSeeder extends Seeder
             'user_id' => 3,
             'nama_verifikator' => 'verivikator',
         ]);
-        Verifikator::factory()->count(10)->create();
+        // Verifikator::factory()->count(10)->create();
     }
 }
