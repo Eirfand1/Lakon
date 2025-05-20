@@ -33,7 +33,7 @@ class PenyediaSeeder extends Seeder
             'rekening_bank' => 'BCA',
             'npwp_perusahaan' => '12.123.123.1-123.123',
         ]);
-        
-        Penyedia::factory()->count(10)->create();
+
+        // Penyedia::factory()->count(10)->create();
     }
 }
