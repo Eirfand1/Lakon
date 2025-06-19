@@ -119,7 +119,7 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">{{ $index + 1 }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-700 dark:text-gray-300">{{ $row->paketPekerjaan->kode_sirup }}</td>
                                         <td class="px-6 py-4 text-sm text-gray-700 dark:text-gray-300">
-                                            {{ $row->paketPekerjaan->nama_pekerjaan }}
+                                            {{ $row->paketPekerjaan->nama_pekerjaan ?? "" }}
                                             <div class="text-xs text-gray-500 dark:text-gray-400 mt-1">{{ $row->paketPekerjaan->sekolah->nama_sekolah }}</div>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">{{ $row->paketPekerjaan->jenis_pengadaan }}</td>
