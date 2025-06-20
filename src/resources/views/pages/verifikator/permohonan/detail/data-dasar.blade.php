@@ -120,7 +120,7 @@
                 <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nama Paket</label>
                 <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
                     {{ $kontrak->paketPekerjaan->nama_pekerjaan }}
-                    {{ $kontrak->paketPekerjaan->sekolah->nama_sekolah }}
+                    {{ $kontrak->paketPekerjaan->sekolah->nama_sekolah ?? "" }}
                 </p>
             </div>
         </div>
