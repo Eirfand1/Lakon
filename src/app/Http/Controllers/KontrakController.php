@@ -21,6 +21,7 @@ use NumberFormatter;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
+
 Carbon::setLocale('id');
 
 
@@ -42,7 +43,7 @@ class KontrakController extends Controller
 
         $templates = Template::all();
 
-        if(Auth::user()->role == 'admin') {
+        if (Auth::user()->role == 'admin') {
             return view('pages.admin.riwayat-kontrak.detail-kontrak', [
                 'kontrak' => $kontrak,
                 'templates' => $templates
@@ -85,36 +86,36 @@ class KontrakController extends Controller
                 case 'APBD':
                     $sumber_dana = 'A';
                     break;
-                case 'DAK' :
+                case 'DAK':
                     $sumber_dana = 'D';
                     break;
-                case 'BANKEU' :
+                case 'BANKEU':
                     $sumber_dana = 'B';
                     break;
                 case 'APBD Perubahaan' || 'APBD Perubahaan Biasa' || 'BANKEU Perubahaan':
                     $sumber_dana = 'P';
                     break;
-                case 'Bantuan Pemerintah' :
+                case 'Bantuan Pemerintah':
                     $sumber_dana = 'BP';
                     break;
-                case 'SG' :
+                case 'SG':
                     $sumber_dana = 'S';
                     break;
                 default:
                     $sumber_dana = '';
                     break;
             }
-            switch($request->metode_pemilihan) {
-                case 'Jasa Konsultasi Perencanaan' :
+            switch ($request->metode_pemilihan) {
+                case 'Jasa Konsultasi Perencanaan':
                     $metode = '1';
                     break;
-                case 'Jasa Konsultasi Pengawasan' :
+                case 'Jasa Konsultasi Pengawasan':
                     $metode = '2';
                     break;
-                case 'Pekerjaan Konstruksi' :
+                case 'Pekerjaan Konstruksi':
                     $metode = '3';
                     break;
-                case 'Pengadaan Barang' :
+                case 'Pengadaan Barang':
                     $metode = '4';
                     break;
                 default:
@@ -141,7 +142,7 @@ class KontrakController extends Controller
         }
     }
 
-    public function edit(Kontrak $kontrak, )
+    public function edit(Kontrak $kontrak,)
     {
         $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
         $totalBiaya = $rincianBelanja->sum('total_harga');
@@ -194,7 +195,6 @@ class KontrakController extends Controller
             $kontrak->update($validatedData);
 
             return redirect()->back()->with('success', 'Data dasar berhasil diupdate.')->withFragment('lampiran');
-
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
@@ -202,7 +202,8 @@ class KontrakController extends Controller
         }
     }
 
-    public function detail(Kontrak $kontrak){
+    public function detail(Kontrak $kontrak)
+    {
         $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
         $totalBiaya = $rincianBelanja->sum('total_harga');
         $ppn = $totalBiaya * 0.11;
@@ -232,7 +233,6 @@ class KontrakController extends Controller
 
             return redirect()->route('penyedia.dashboard', ['kontrak' => $kontrak->id])
                 ->with('success', 'Permohonan Kontrak berhasil');
-
         } catch (\Exception $e) {
             return redirect()->back()
                 ->withInput()
@@ -267,7 +267,7 @@ class KontrakController extends Controller
             $templateName = $kontrak->template()->withTrashed()->first()->file_path ?? 'default_template.docx';
             $templatePath = storage_path('app/' . $templateName);
 
-       
+
             // Pastikan template ada
             if (!file_exists($templatePath)) {
                 return redirect()->back()->with('error', 'Template tidak ditemukan!');
@@ -278,7 +278,7 @@ class KontrakController extends Controller
 
             // Paket pekerjaan
             $templateProcessor->setValue('${KODE_PAKET}', $kontrak->paketPekerjaan->kode_paket);
-            $templateProcessor->setValue('${PEKERJAAN_JUDUL}', $kontrak->paketPekerjaan->nama_pekerjaan . " " . $kontrak->paketPekerjaan->sekolah->nama_sekolah ?? '');
+            $templateProcessor->setValue('${PEKERJAAN_JUDUL}', ($kontrak->paketPekerjaan->nama_pekerjaan) . " " . ($kontrak->paketPekerjaan->sekolah->nama_sekolah ?? ''));
             $templateProcessor->setValue('${SUMBER_DANA}', $kontrak->paketPekerjaan->sumber_dana);
             $templateProcessor->setValue('${JENIS_PENGADAAN}', $kontrak->paketPekerjaan->jenis_pengadaan);
             $templateProcessor->setValue('${METODE_PEMILIHAN}', $kontrak->paketPekerjaan->metode_pemilihan);
@@ -317,8 +317,18 @@ class KontrakController extends Controller
 
 
             $bulan = [
-                'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-                'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+                'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember'
             ];
 
             $terbilangTanggal = Carbon::parse($kontrak->tanggal_awal);
@@ -359,7 +369,6 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${TGL_PENETAPAN_PEMENANG}', $kontrak->tgl_penetapan_pemenang);
             $templateProcessor->setValue('${TGL_SELESAI}', Carbon::parse($kontrak->tanggal_akhir)->translatedFormat('d F Y'));
             $templateProcessor->setValue('${JANGKA_WAKTU}', $kontrak->waktu_kontrak);
-
 
             $digit = new NumberFormatter("id", NumberFormatter::SPELLOUT);
             $terbilang = ucwords($digit->format($kontrak->waktu_kontrak));
@@ -478,7 +487,7 @@ class KontrakController extends Controller
             $peralatan_table = [];
 
             if ($kontrak->peralatan && $kontrak->peralatan->count() > 0) {
-                foreach ($kontrak->peralatan AS $index => $peralatan){
+                foreach ($kontrak->peralatan as $index => $peralatan) {
                     $peralatan_table[] = [
                         'NO_PERALATAN' => $index + 1,
                         'TABLE_NAMA_PERALATAN' => $peralatan->nama_peralatan,
@@ -502,7 +511,7 @@ class KontrakController extends Controller
             $rincian_belanja_table = [];
 
             if ($kontrak->rincianBelanja && $kontrak->rincianBelanja->count() > 0) {
-                foreach ($kontrak->rincianBelanja AS $index => $rincian){
+                foreach ($kontrak->rincianBelanja as $index => $rincian) {
                     $rincian_belanja_table[] = [
                         'NO_RINCIAN_BELANJA' => $index + 1,
                         'TABLE_JENIS' => $rincian->jenis,
@@ -524,7 +533,7 @@ class KontrakController extends Controller
             $penerima_table = [];
 
             if ($kontrak->penerima && $kontrak->penerima->count() > 0) {
-                foreach ($kontrak->penerima AS $index => $penerima){
+                foreach ($kontrak->penerima as $index => $penerima) {
                     $penerima_table[] = [
                         'NO_PENERIMA' => $index + 1,
                         'TABLE_NAMA_SEKOLAH' => $penerima->keterangan_penerima,

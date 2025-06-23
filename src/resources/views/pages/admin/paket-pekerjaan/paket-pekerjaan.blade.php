@@ -253,7 +253,7 @@
                             required>
                             <option value="" disabled selected>Pilih Pegawai</option>
                             @foreach($ppkom as $ppk)
-                                <option value="{{ $ppk->ppkom_id }}">{{ $ppk->nama }}</option>
+                                <option value="{{ $ppk->ppkom_id }}" selected>{{ $ppk->nama }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -470,7 +470,7 @@
                                 id="nama_sekolah" value="aaaaaaaaa" @focus="showDropdown = true"
                                 @click.away="showDropdown = false" placeholder="Pilih Sekolah"
                                 class="{{ $errors->has('sekolah_id') ? 'border-red-500' : 'border-gray-200' }}"
-                                required />
+                                />
                             <i
                                 class="fas fa-chevron-down text-sm absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-300"></i>
 
@@ -571,7 +571,7 @@
                             required>
                             <option value="" disabled selected>Pilih Pegawai</option>
                             @foreach($ppkom as $ppk)
-                                <option value="{{ $ppk->ppkom_id }}">{{ $ppk->nama }}</option>
+                                <option value="{{ $ppk->ppkom_id }}" selected>{{ $ppk->nama }}</option>
                             @endforeach
                         </select>
                     </div>

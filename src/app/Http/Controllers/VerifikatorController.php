@@ -30,7 +30,6 @@ class VerifikatorController extends Controller
         return view('pages.admin.verifikator.verifikator', [
             "title" => "verifikator",
         ]);
-
     }
 
     public function store(Request $request): RedirectResponse
@@ -98,7 +97,6 @@ class VerifikatorController extends Controller
         }
 
         return redirect()->back()->with('success', 'Data berhasil di hapus');
-
     }
 
 
@@ -173,11 +171,11 @@ class VerifikatorController extends Controller
                     'nilai' => $request->nilai[$key]
                 ]);
             }
-        }else {
+        } else {
             $kontrak = Kontrak::where('kontrak_id', $kontrak_id)->with(['paketPekerjaan', 'paketPekerjaan.sekolah'])->first();
             DetailKontrak::create([
                 'kontrak_id' => $kontrak_id,
-                'detail' => $kontrak->paketPekerjaan->nama_pekerjaan . " " . $kontrak->paketPekerjaan->sekolah->nama_sekolah,
+                'detail' => $kontrak->paketPekerjaan->nama_pekerjaan . " " . ($kontrak->paketPekerjaan->sekolah->nama_sekolah ?? ""),
                 'nilai' => $request->nilai_kontrak
             ]);
         }
@@ -210,7 +208,8 @@ class VerifikatorController extends Controller
         return redirect()->back()->with('success', 'SSKK berhasil di simpan');
     }
 
-    public function sp($kontrak_id, Kontrak $kontrak, Request $request){
+    public function sp($kontrak_id, Kontrak $kontrak, Request $request)
+    {
         $validate = $request->validate([
             'nomor_sp' => 'required|string|max:255',
             'tgl_sp' => 'required|date',

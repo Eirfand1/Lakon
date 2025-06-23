@@ -214,9 +214,9 @@
             const selisihMs = new Date(tanggal_akhir) - new Date(tanggal_awal);
 
             // Konversi selisih milidetik ke hari
-            const selisihHari = Math.floor(selisihMs / (1000 * 60 * 60 * 24)) + 1;
+            const selisihHari = Math.floor(selisihMs / (1000 * 60 * 60 * 24)) - 1;
 
-            const hasil = `${selisihHari} Hari`
+            const hasil = `${selisihHari} Hari Kalender`
             document.getElementById("waktuPenyelesaianSPK").value = hasil
         }
 
