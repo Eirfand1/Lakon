@@ -26,7 +26,7 @@
             <div x-data="detailKontrak({{ json_encode($kontrak) }})" x-init="initDetail({{ json_encode($detail) }})" id="detail-edit-manager" class="space-y-2">
                 <div class="flex gap-4">
                     <input type="text" id="nilaiKontrakSPK" value="{{ $kontrak->nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
-                    <button type="button" @click="addDetailRow" class="btn btn-primary mt-2">Detail</button>
+                    <button type="button" @click="addDetailRow" class="btn btn-primary mt-2">+</button>
                 </div>
 
                 <template x-for="(detail, index) in details" :key="index">
@@ -50,8 +50,9 @@
                                     x-model="detail.nilaiDetail"
                                     placeholder="Nilai"
                                     @input="updateNilaiKontrak"
-                                    class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md"
+                                    class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md detail-nilai-input"
                                 >
+                                <input type="hidden" :name="'nilai_raw[' + index + ']'" x-model="detail.nilaiDetailRaw">
                             </div>
                         </div>
                         <!-- Tombol Hapus di bawah tombol Detail -->
@@ -62,7 +63,7 @@
                                     @click="removeDetailRow(index)"
                                     class="btn btn-error"
                                 >
-                                    Hapus
+                                    -
                                 </button>
                             </div>
                         </div>
@@ -192,6 +193,38 @@
             input.value = `Rp. ${formattedValue}`;
         }
 
+        // Fungsi untuk memformat input detail nilai
+        function formatDetailNilai(event) {
+            const input = event.target;
+            let value = input.value.replace(/[^0-9]/g, '');
+
+            if (value === "") {
+                input.value = "Rp. 0";
+                return value;
+            }
+
+            let numberValue = parseInt(value, 10);
+            let formattedValue = numberValue.toLocaleString('id-ID');
+            input.value = `Rp. ${formattedValue}`;
+
+            return value;
+        }
+
+        // Event delegation untuk input detail nilai yang ditambahkan secara dinamis
+        document.addEventListener('input', function(event) {
+            if (event.target.classList.contains('detail-nilai-input')) {
+                const rawValue = formatDetailNilai(event);
+
+                const alpineComponent = Alpine.$data(document.getElementById('detail-edit-manager'));
+                const inputElement = event.target;
+                const container = inputElement.closest('[x-data]');
+                if (container) {
+                    const scope = Alpine.$data(container);
+                    scope.updateNilaiKontrak();
+                }
+            }
+        });
+
         // Tambahkan event listener ke input uang
         document.getElementById('nilaiKontrakSPK').addEventListener('input', formatUang);
 
@@ -228,9 +261,19 @@
                 addDetailRow() {
                     this.details.push({
                         namaDetail: '',
-                        nilaiDetail: ''
+                        nilaiDetail: 'Rp. 0',
+                        nilaiDetailRaw: '0'
                     });
-                    document.getElementById("nilaiKontrakSPK").readOnly = true
+                    document.getElementById("nilaiKontrakSPK").readOnly = true;
+
+                    // Format input detail setelah ditambahkan
+                    this.$nextTick(() => {
+                        const detailInputs = document.querySelectorAll('.detail-nilai-input');
+                        const lastInput = detailInputs[detailInputs.length - 1];
+                        if (lastInput) {
+                            formatDetailNilai({ target: lastInput });
+                        }
+                    });
                 },
 
                 removeDetailRow(index) {
@@ -243,9 +286,13 @@
 
                 updateNilaiKontrak() {
                     let total = 0;
-                    this.details.forEach(detail => {
-                        total += parseFloat(detail.nilaiDetail);
+                    this.details.forEach((detail, index) => {
+                        // Ambil nilai raw dari input
+                        const rawValue = detail.nilaiDetail.replace(/[^0-9]/g, '');
+                        detail.nilaiDetailRaw = rawValue;
+                        total += parseFloat(rawValue || 0);
                     });
+
                     const input = document.getElementById("nilaiKontrakSPK");
                     input.value = total;
 
@@ -261,9 +308,11 @@
                     this.details = [];
 
                     detailArray.forEach(item => {
+                        const formattedValue = item.nilai ? `Rp. ${parseInt(item.nilai).toLocaleString('id-ID')}` : 'Rp. 0';
                         this.details.push({
                             namaDetail: item.detail,
-                            nilaiDetail: item.nilai
+                            nilaiDetail: formattedValue,
+                            nilaiDetailRaw: item.nilai || '0'
                         });
                     });
 
