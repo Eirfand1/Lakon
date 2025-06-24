@@ -9,12 +9,12 @@
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor SP</label>
-            <input type="text" name="nomor_sp" value="{{ $kontrak->nomor_sp }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <x-input type="text" name="nomor_sp" value="{{ $kontrak->nomor_sp }}" required></x-input>
         </div>
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal SP</label>
-            <input type="date" name="tgl_sp" value="{{ $kontrak->tgl_sp }}" required id="tanggalAwalSPK" class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <x-input type="date" name="tgl_sp" value="{{ $kontrak->tgl_sp }}" required id="tanggalAwalSPK" ></x-input>
         </div>
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
@@ -24,13 +24,12 @@
                     <div class="flex items-center gap-2 mt-2">
                         <div class="flex gap-4 w-full">
                             <div class="w-full">
-                                <input
+                                <x-input
                                     type="text"
                                     name="id_paket[]"
                                     x-model="paket.idPaket"
                                     placeholder="ID Paket"
-                                    class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md"
-                                >
+                                ></x-input>
                             </div>
                         </div>
                         <!-- Tombol Hapus di samping kanan, hanya tampil jika idPaket > 1 -->
@@ -39,16 +38,18 @@
                                 <button
                                     type="button"
                                     @click="removeIdPaketRow(index)"
-                                    class="btn btn-error"
+                                    class="btn btn-error text-white px-4 py-0 space-x-0"
                                 >
-                                    Hapus
+                                    <i class="fa-solid fa-minus"></i>
                                 </button>
                             </div>
                         </div>
                     </div>
                 </template>
                 <div class="flex gap-4">
-                    <button type="button" @click="addIdPaketRow" class="btn btn-primary mt-2">Tambah</button>
+                    <button type="button" @click="addIdPaketRow" class="btn bg-blue-500 px-4 mt-2 text-white">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -64,8 +65,9 @@
         <p class="ml-2">Data - data diatas sudah sesuai dengan ketentuan dan kebutuhan.</p>
     </div>
 
-    <div class="h-10 mt-6 mb-8 rounded flex items-center bg-blue-500">
-        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    <div class="h-10 mt-6 mb-8 rounded-md flex items-center bg-green-500">
+        <button type="submit" class="w-full bg-green-500 hover:bg-green-700 text-white  py-2 px-4 rounded-md">
+            <i class="fa-solid fa-check"></i>
             Simpan Data Surat Perintah Kerja
         </button>
     </div>

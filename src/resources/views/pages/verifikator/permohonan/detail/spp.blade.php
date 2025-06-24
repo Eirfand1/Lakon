@@ -12,8 +12,9 @@
 
 <form action="spp/{{ $kontrak->kontrak_id }}" method="POST">
     @csrf
-    <div class="h-10 mt-6 rounded flex items-center bg-blue-500">
-        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    <div class="h-10 mt-6 rounded-md flex items-center bg-green-500">
+        <button type="submit" class="w-full bg-green-500 hover:bg-green-700 text-white  py-2 px-4 rounded-md">
+            <i class="fa-solid fa-check"></i>
             Simpan Surat Perintah Pengiriman
         </button>
     </div>

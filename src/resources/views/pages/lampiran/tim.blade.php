@@ -115,7 +115,7 @@
                     <input type="checkbox" name="bulan_12" class="rounded" id="timBulan12">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
-                    <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
+                    <button class="btn btn-success px-4"><i class="fa fa-save text-gray-100"></i></button>
                 </td>
                 </form>
             </tr>

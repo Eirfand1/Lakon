@@ -116,7 +116,7 @@
                 class="px-4 py-2 rounded border border-blue-500 transition-colors duration-200"
                 @click="setTab('tab6')"
             >
-                SP
+                SP/SPMK
                 <i class="fa-regular {{ $kontrak->sp_done ? 'fa-circle-check text-green-500' : 'fa-circle-xmark text-red-500' }}"></i>
             </button>
 
