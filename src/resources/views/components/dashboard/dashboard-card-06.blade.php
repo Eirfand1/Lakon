@@ -3,7 +3,7 @@
             <div class="px-5 pt-5">
                 <header class="flex items-center gap-2 ">
                     <i class="fa fa-user"></i>
-                    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100">Profile Pimpinan</h2>
+                    <h2 class="text-lg font-semibold text-gray-800 dark:text-gray-100">Kepala Dinas</h2>
                 </header>
             </div>
             <form method="post" class="flex flex-col p-5 gap-4" action="{{ route('admin.dashboard.update', 1) }}">

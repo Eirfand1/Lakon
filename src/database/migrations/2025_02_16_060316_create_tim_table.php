@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('pendidikan');
             $table->string('pengalaman');
             $table->string('sertifikasi');
-            $table->string('keterangan');
+            $table->string('keterangan')->nullable();
             $table->boolean('bulan_1')->default(false);
             $table->boolean('bulan_2')->default(false);
             $table->boolean('bulan_3')->default(false);
