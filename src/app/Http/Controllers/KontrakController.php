@@ -396,6 +396,14 @@ class KontrakController extends Controller
             $templateProcessor->setValue('$NAMA_PPK', Ppkom::first()->nama);
             $templateProcessor->setValue('$JABATAN_PPK', Ppkom::first()->jabatan);
 
+
+            // kepana dinas/ satuan kerja/ pimpinan
+            $templateProcessor->setValue('${NAMA_KEPALA_DINAS}', $kontrak->satuanKerja->nama_pimpinan);
+            $templateProcessor->setValue('${NIP_KEPALA_DINAS}', $kontrak->satuanKerja->nip);
+            $templateProcessor->setValue('${EMAIL_KEPALA_DINAS}', $kontrak->satuanKerja->email);
+            $templateProcessor->setValue('${TELP_KEPALA_DINAS}', $kontrak->satuanKerja->telp);
+            $templateProcessor->setValue('${KLPD_KEPALA_DINAS}', $kontrak->satuanKerja->klpd);
+
             // ruang lingkup
             $lingkupPekerjaanText = '';
 

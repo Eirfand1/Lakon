@@ -9,14 +9,13 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class DasarHukumController extends Controller
 {
-    //
-
     public function index()
     {
         return view("pages.admin.dasar-hukum.dasar-hukum");
     }
 
-    public function exportDaskum() {
+    public function exportDaskum()
+    {
         return Excel::download(new DasarHukumExport, "daskum.xlsx");
     }
 
@@ -30,7 +29,6 @@ class DasarHukumController extends Controller
             'dasar_hukum' => $validateData['dasar_hukum'],
         ]);
         return redirect()->back()->with('success', 'Dasar Hukum berhasil disimpan.');
-
     }
 
     public function update(Request $request, DasarHukum $dasarHukum)
@@ -41,7 +39,6 @@ class DasarHukumController extends Controller
 
         $dasarHukum->update($validateData);
         return redirect()->back()->with('success', 'Data berhasil diperbarui.');
-
     }
 
     public function destroy(DasarHukum $dasarHukum)
