@@ -9,12 +9,12 @@
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor SP</label>
-            <x-input type="text" name="nomor_sp" value="{{ $kontrak->nomor_sp }}" required></x-input>
+            <x-input type="text" name="nomor_sp" value="{{ $kontrak->nomor_sp }}"></x-input>
         </div>
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal SP</label>
-            <x-input type="date" name="tgl_sp" value="{{ $kontrak->tgl_sp }}" required id="tanggalAwalSPK" ></x-input>
+            <x-input type="date" name="tgl_sp" value="{{ $kontrak->tgl_sp }}" id="tanggalAwalSPK" ></x-input>
         </div>
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
@@ -53,16 +53,6 @@
                 </div>
             </div>
         </div>
-    </div>
-
-    <div class="flex items-center mb-4 space-x-2 text-gray-600 dark:text-gray-300 mt-8">
-        <i class="fas fa-circle-check fa-lg"></i>
-        <h3 class=" font-bold">Validasi Kebenaran Data</h3>
-    </div>
-
-    <div class="mb-4 flex">
-        <input type="checkbox" name="cek" required class="mt-1 dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600">
-        <p class="ml-2">Data - data diatas sudah sesuai dengan ketentuan dan kebutuhan.</p>
     </div>
 
     <div class="h-10 mt-6 mb-8 rounded-md flex items-center bg-green-500">
