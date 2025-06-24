@@ -13,7 +13,8 @@ return new class extends Migration {
         Schema::create('paket_pekerjaan', function (Blueprint $table) {
             $table->id('paket_id');
             $table->string('nomor_matrik');
-            $table->integer('kode_sirup');
+            $table->string('nomor_kontrak');
+            $table->integer('kode_sirup')->unique();
             $table->string('sumber_dana');
             $table->smallInteger('tahun_anggaran');
             $table->foreignId('satker_id')

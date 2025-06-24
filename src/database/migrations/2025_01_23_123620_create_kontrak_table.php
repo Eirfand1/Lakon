@@ -12,7 +12,6 @@ return new class extends Migration {
     {
         Schema::create('kontrak', function (Blueprint $table) {
             $table->id('kontrak_id');
-            $table->string('no_kontrak');
             $table->string('jenis_kontrak')->nullable();
             $table->string('nomor_spk')->nullable();
             $table->integer('nilai_kontrak')->nullable();

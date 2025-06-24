@@ -35,6 +35,54 @@ class PaketPekerjaanController extends Controller
         ]);
     }
 
+    private function kode_sumber_dana($sumber_dana)
+    {
+        switch ($sumber_dana) {
+            case 'APBD':
+                return 'A';
+                break;
+            case 'DAK':
+                return 'D';
+                break;
+            case 'BANKEU':
+                return 'B';
+                break;
+            case 'APBD Perubahaan' || 'APBD Perubahaan Biasa' || 'BANKEU Perubahaan':
+                return 'P';
+                break;
+            case 'Bantuan Pemerintah':
+                return 'BP';
+                break;
+            case 'SG':
+                return 'S';
+                break;
+            default:
+                return '';
+                break;
+        }
+    }
+
+    private function kode_jenis_pengadaan($jenis_pengadaan)
+    {
+        switch ($jenis_pengadaan) {
+            case 'Jasa Konsultasi Perencanaan':
+                return '1';
+                break;
+            case 'Jasa Konsultasi Pengawasan':
+                return '2';
+                break;
+            case 'Pekerjaan Konstruksi':
+                return '3';
+                break;
+            case 'Pengadaan Barang':
+                return '4';
+                break;
+            default:
+                return '';
+                break;
+        }
+    }
+
     public function store(Request $request)
     {
         // Validasi data
@@ -43,10 +91,10 @@ class PaketPekerjaanController extends Controller
             'waktu_paket' => 'required|date',
             'sub_kegiatan_id' => 'required|array',
             'sub_kegiatan_id.*' => 'exists:sub_kegiatan,sub_kegiatan_id',
-            'sumber_dana' => 'required|in:APBD,DAK,BANKEU,APBD Perubahan,APBD Perubahan Biasa,BANKEU Perubahan,SG,Bantuan Pemerintah',
-            'kode_sirup' => 'required|numeric',
-            'jenis_pengadaan' => 'required|in:Tender,Non Tender,E-Katalog,Swakelola',
-            'metode_pemilihan' => 'required|in:Jasa Konsultasi Pengawasan,Jasa Konsultasi Perencanaan,Pekerjaan Konstruksi,Pengadaan Barang',
+            'sumber_dana' => 'required|string|max:255',
+            'kode_sirup' => 'required|numeric|unique:paket_pekerjaan,kode_sirup',
+            'jenis_pengadaan' => 'required|string|max:255',
+            'metode_pemilihan' => 'required|string|max:255',
             'nilai_pagu_paket' => 'required|numeric',
             'nilai_pagu_anggaran' => 'required|numeric',
             'nilai_hps' => 'required|numeric',
@@ -74,7 +122,12 @@ class PaketPekerjaanController extends Controller
             'kode_sirup' => $validatedData['kode_sirup'],
             'sekolah_id' => $validatedData['sekolah_id'],
             'nomor_matrik' => "ERROR",
+            'nomor_kontrak' => "ERROR",
         ]);
+
+        $sumber_dana = $this->kode_sumber_dana($validatedData['sumber_dana']);
+        $jenis = $this->kode_jenis_pengadaan($validatedData['jenis_pengadaan']);
+
         $tracker = NoKontrakTracker::first();
         $tahun_saat_ini = $tracker->this_year;
         if ($tahun_saat_ini != date('Y')) {
@@ -86,7 +139,12 @@ class PaketPekerjaanController extends Controller
         $id_tahun_lalu = $tracker->id_kontrak_last_year;
         $nomor_matriks = $paketPekerjaan->paket_id - $id_tahun_lalu;
 
+        // nomor matrik
         $paketPekerjaan->nomor_matrik = str_pad($nomor_matriks, 3, '0', STR_PAD_LEFT);
+
+        // nomor kontrak
+        $paketPekerjaan->nomor_kontrak = "400.3.13/{$paketPekerjaan->nomor_matrik}/{$sumber_dana}{$jenis}/".date('Y');
+
         $paketPekerjaan->save();
 
         foreach ($validatedData['sub_kegiatan_id'] as $subKegiatanId) {
@@ -107,7 +165,7 @@ class PaketPekerjaanController extends Controller
                 'sub_kegiatan_id' => 'required|array',
                 'sub_kegiatan_id.*' => 'exists:sub_kegiatan,sub_kegiatan_id',
                 'sumber_dana' => 'required|string|max:255',
-                'kode_sirup' => 'required|numeric',
+                'kode_sirup' => 'required|numeric|unique:paket_pekerjaan,kode_sirup,' . $paketPekerjaan->paket_id . ',paket_id',
                 'jenis_pengadaan' => 'required|string|max:255',
                 'metode_pemilihan' => 'required|string|max:255',
                 'nilai_pagu_paket' => 'required|numeric',
@@ -119,6 +177,11 @@ class PaketPekerjaanController extends Controller
                 'tahun_anggaran' => 'required|numeric|min:1000|max:2999',
                 'sekolah_id' => 'nullable|numeric'
             ]);
+
+            $sumber_dana = $this->kode_sumber_dana($validatedData['sumber_dana']);
+            $jenis = $this->kode_jenis_pengadaan($validatedData['jenis_pengadaan']);
+            $year = optional($paketPekerjaan->created_at)->format('Y') ?? now()->format('Y');
+            $paketPekerjaan->nomor_kontrak = "400.3.13/{$paketPekerjaan->nomor_matrik}/{$sumber_dana}{$jenis}/{$year}";
 
             $paketPekerjaan->update([
                 'nama_pekerjaan' => $validatedData['nama_pekerjaan'],
@@ -134,7 +197,7 @@ class PaketPekerjaanController extends Controller
                 'ppkom_id' => $validatedData['ppkom_id'],
                 'daskum_id' => $validatedData['daskum_id'],
                 'kode_sirup' => $validatedData['kode_sirup'],
-                    'sekolah_id' => $validatedData['sekolah_id']
+                'sekolah_id' => $validatedData['sekolah_id']
             ]);
 
             // Hapus semua data yang memiliki paket_id yang sama
@@ -179,7 +242,7 @@ class PaketPekerjaanController extends Controller
 
         return response()->json([
             'paket_id' => $paket->paket_id,
-            'nomor_matrik' => $paket->nomor_matrik,
+            'nomor_kontrak' => $paket->nomor_kontrak,
             'nama_pekerjaan' => $paket->nama_pekerjaan,
             'metode_pemilihan' => $paket->metode_pemilihan,
             'jenis_pengadaan' => $paket->jenis_pengadaan,

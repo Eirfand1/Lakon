@@ -55,7 +55,7 @@ class RiwayatPenyediaTable extends DataTableComponent
                             ';
                 })->html(),
 
-            Column::make("No Kontrak", "no_kontrak")
+            Column::make("No Kontrak", "paketPekerjaan.nomor_kontrak")
                 ->sortable()
                 ->searchable(),
 

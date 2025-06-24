@@ -163,32 +163,26 @@
                     </div>
 
                     <div class="flex w-full flex-col  ">
-                        <x-label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan</x-label>
+                        <x-label for="metode_pemilihan" class="w-full sm:w-1/4">Pengadaan</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-                            <select name="jenis_pengadaan" id=""
+                            <select name="metode_pemilihan" id=""
                                 class="sm:w-1/4 w-3/4 text-sm  rounded-lg bg-white h-10 dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md  border-gray-200 shadow-sm focus:ring-0"
                                 required>
-                                <option value="" disabled {{ old('jenis_pengadaan') ? '' : 'selected' }}>Pilih Jenis
-                                    Pengadaan</option>
-                                <option value=" Tender" {{ old('jenis_pengadaan') == 'Tender' ? 'selected' : '' }}>Tender
-                                </option>
-                                <option value="Non Tender" {{ old('jenis_pengadaan') == 'Non Tender' ? 'selected' : '' }}>
-                                    Non Tender</option>
-                                <option value="E-Katalog" {{ old('jenis_pengadaan') == 'E-Katalog' ? 'selected' : '' }}>
-                                    E-Katalog</option>
-                                <option value="Swakelola" {{ old('jenis_pengadaan') == 'Swakelola' ? 'selected' : '' }}>
-                                    Swakelola</option>
-                                </option>
+                                <option value="" disabled {{ old('metode_pemilihan') ? '' : 'selected' }}>Pilih Metode Pemilihan</option>
+                                <option value=" Tender" {{ old('metode_pemilihan') == 'Tender' ? 'selected' : '' }}>Tender</option>
+                                <option value="Non Tender" {{ old('metode_pemilihan') == 'Non Tender' ? 'selected' : '' }}>Non Tender</option>
+                                <option value="E-Katalog" {{ old('metode_pemilihan') == 'E-Katalog' ? 'selected' : '' }}>E-Katalog</option>
+                                <option value="Swakelola" {{ old('metode_pemilihan') == 'Swakelola' ? 'selected' : '' }}>Swakelola</option>
                             </select>
 
-                            <select name="metode_pemilihan" id=""
+                            <select name="jenis_pengadaan" id=""
                                 class="w-3/4 text-sm rounded-lg bg-white h-10 dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                                 required>
-                                <option value="" disabled {{ old('metode_pemilihan') ? '' : 'selected' }}>Pilih Metode Pemilihan</option>
-                                <option value="Jasa Konsultasi Pengawasan" {{ old('metode_pemilihan') == 'Jasa Konsultasi Pengawasan' ? 'selected' : '' }}>Jasa Konsultasi Pengawasan</option>
-                                <option value="Jasa Konsultasi Perencanaan" {{ old('metode_pemilihan') == 'Jasa Konsultasi Perencanaan' ? 'selected' : '' }}>Jasa Konsultasi Perencanaan</option>
-                                <option value="Pekerjaan Konstruksi" {{ old('metode_pemilihan') == 'Pekerjaan Konstruksi' ? 'selected' : '' }}>Pekerjaan Konstruksi</option>
-                                <option value="Pengadaan Barang" {{ old('metode_pemilihan') == 'Pengadaan Barang' ? 'selected' : '' }}>Pengadaan Barang</option>
+                                <option value="" disabled {{ old('jenis_pengadaan') ? '' : 'selected' }}>Pilih Jenis Pengadaan</option>
+                                <option value="Jasa Konsultasi Pengawasan" {{ old('jenis_pengadaan') == 'Jasa Konsultasi Pengawasan' ? 'selected' : '' }}>Jasa Konsultasi Pengawasan</option>
+                                <option value="Jasa Konsultasi Perencanaan" {{ old('jenis_pengadaan') == 'Jasa Konsultasi Perencanaan' ? 'selected' : '' }}>Jasa Konsultasi Perencanaan</option>
+                                <option value="Pekerjaan Konstruksi" {{ old('jenis_pengadaan') == 'Pekerjaan Konstruksi' ? 'selected' : '' }}>Pekerjaan Konstruksi</option>
+                                <option value="Pengadaan Barang" {{ old('jenis_pengadaan') == 'Pengadaan Barang' ? 'selected' : '' }}>Pengadaan Barang</option>
                             </select>
                         </div>
                     </div>
@@ -496,9 +490,9 @@
                     </div>
 
                     <div class="flex w-full flex-col  ">
-                        <x-label for="jenis_pengadaan" class="w-full sm:w-1/4">Pengadaan</x-label>
+                        <x-label for="metode_pemilihan" class="w-full sm:w-1/4">Pengadaan</x-label>
                         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-                            <select name="jenis_pengadaan" id="jenis_pengadaan"
+                            <select name="metode_pemilihan" id="metode_pemilihan"
                                 class="sm:w-1/4 w-3/4 text-sm h-10 rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm"
                                 required>
                                 <option value="Tender">Tender</option>
@@ -507,7 +501,7 @@
                                 <option value="Swakelola">Swakelola</option>
                             </select>
 
-                            <select name="metode_pemilihan" id="metode_pemilihan"
+                            <select name="jenis_pengadaan" id="jenis_pengadaan"
                                 class="w-3/4 rounded text-sm bg-white dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm"
                                 required>
                                 <option value="Jasa Konsultasi Pengawasan">Jasa Konsultasi Pengawasan</option>
