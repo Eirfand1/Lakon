@@ -46,7 +46,7 @@ class SekolahController extends Controller
         $validateData = $request->validate([
             'npsn' => 'required|numeric|unique:sekolah,npsn',
             'nama_sekolah' => 'required|string|max:150',
-            'jenjang' => 'required|in:SD,SMP,SMA,SMK',
+            'jenjang' => 'required|in:PAUD,SD,SMP',
             'status' => 'required|string|max:255',
             'kepala_sekolah' => 'required|string|max:255',
             'nip_kepala_sekolah' => 'required|string|max:255',
@@ -88,7 +88,7 @@ class SekolahController extends Controller
         $validateData = $request->validate([
             'npsn' => 'required|numeric|unique:sekolah,npsn,' . $sekolah->sekolah_id . ',sekolah_id',
             'nama_sekolah' => 'required|string|max:150',
-            'jenjang' => 'required|in:SD,SMP,SMA,SMK',
+            'jenjang' => 'required|in:PAUD,SD,SMP',
             'status' => 'required|string|max:255',
             'kepala_sekolah' => 'required|string|max:255',
             'nip_kepala_sekolah' => 'required|string|max:255',

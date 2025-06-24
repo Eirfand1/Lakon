@@ -27,7 +27,7 @@ class RealisasiTable extends DataTableComponent
     public function builder(): \Illuminate\Database\Eloquent\Builder
     {
         return Kontrak::query()
-            ->with(['satuanKerja', 'penyedia', 'verifikator', 'realisasi'])
+            ->with(['satuanKerja', 'penyedia', 'verifikator', 'realisasi', 'paketPekerjaan'])
             ->orderByDesc('kontrak.updated_at')
             ->where('kontrak.is_verificated', 1);
     }
@@ -50,7 +50,7 @@ class RealisasiTable extends DataTableComponent
         return [
 
             IncrementColumn::make('#'),
-            Column::make("No Kontrak", "no_kontrak")
+            Column::make("No Kontrak", "paketPekerjaan.nomor_kontrak")
                 ->sortable()
                 ->searchable(),
             Column::make("Penyedia", "penyedia.nama_perusahaan_lengkap") // Relasi

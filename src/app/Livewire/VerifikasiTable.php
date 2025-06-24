@@ -66,11 +66,11 @@ class VerifikasiTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make("Jenis Pengadaan", "paketPekerjaan.metode_pemilihan")
+            Column::make("Jenis Pengadaan", "paketPekerjaan.jenis_pengadaan")
                 ->sortable()
                 ->searchable(),
 
-            Column::make("Metode Pengadaan", "paketPekerjaan.jenis_pengadaan")
+            Column::make("Metode Pengadaan", "paketPekerjaan.metode_pemilihan")
                 ->sortable()
                 ->searchable(),
 

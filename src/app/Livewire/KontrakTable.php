@@ -29,7 +29,7 @@ class KontrakTable extends DataTableComponent
     public function builder(): \Illuminate\Database\Eloquent\Builder
     {
         return Kontrak::query()
-            ->with(['satuanKerja', 'penyedia', 'verifikator'])
+            ->with(['satuanKerja', 'penyedia', 'verifikator', 'paketPekerjaan'])
             ->orderByDesc('kontrak.updated_at')
             ->where('kontrak.is_verificated', 1);
     }
@@ -51,7 +51,7 @@ class KontrakTable extends DataTableComponent
 
             Column::make("Aksi", "kontrak_id")
                 ->format(fn($value, $row) => view('pages.admin.riwayat-kontrak.actions', ['kontrak' => $row])),
-            Column::make("No Kontrak", "no_kontrak")
+            Column::make("No Kontrak", "paketPekerjaan.nomor_kontrak")
                 ->sortable()
                 ->searchable(),
             Column::make("Jenis Kontrak", "jenis_kontrak")

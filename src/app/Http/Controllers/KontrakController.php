@@ -79,58 +79,12 @@ class KontrakController extends Controller
     public function store(Request $request)
     {
         try {
-            $tahun = now()->year;
             $penyediaId = auth()->user()->penyedia->penyedia_id;
-            // 'APBD', 'DAK', 'BANKEU', 'APBD Perubahan', 'APBD Perubahan Biasa', 'BANKEU Perubahan', 'SG', 'Bantuan Pemerintah'
-            switch ($request->sumber_dana) {
-                case 'APBD':
-                    $sumber_dana = 'A';
-                    break;
-                case 'DAK':
-                    $sumber_dana = 'D';
-                    break;
-                case 'BANKEU':
-                    $sumber_dana = 'B';
-                    break;
-                case 'APBD Perubahaan' || 'APBD Perubahaan Biasa' || 'BANKEU Perubahaan':
-                    $sumber_dana = 'P';
-                    break;
-                case 'Bantuan Pemerintah':
-                    $sumber_dana = 'BP';
-                    break;
-                case 'SG':
-                    $sumber_dana = 'S';
-                    break;
-                default:
-                    $sumber_dana = '';
-                    break;
-            }
-            switch ($request->metode_pemilihan) {
-                case 'Jasa Konsultasi Perencanaan':
-                    $metode = '1';
-                    break;
-                case 'Jasa Konsultasi Pengawasan':
-                    $metode = '2';
-                    break;
-                case 'Pekerjaan Konstruksi':
-                    $metode = '3';
-                    break;
-                case 'Pengadaan Barang':
-                    $metode = '4';
-                    break;
-                default:
-                    $metode = '';
-                    break;
-            }
-            // 'Jasa Konsultasi Pengawasan', 'Jasa Konsultasi Perencanaan', 'Pekerjaan Konstruksi', 'Pengadaan Barang'
-
-            $nomorKontrak = "400.3.13/{$request->nomor_matrik}/{$sumber_dana}{$metode}/{$tahun}";
 
             $kontrak = Kontrak::create([
-                'no_kontrak' => $nomorKontrak,
                 'paket_id' => $request->paket_id,
-                'jenis_kontrak' => $request->metode_pemilihan,
-                'nomor_spk' => $nomorKontrak,
+                'jenis_kontrak' => $request->jenis_pengadaan,
+                'nomor_spk' => $request->nomor_kontrak,
                 'penyedia_id' => $penyediaId,
                 'satker_id' => 1,
                 'is_verificated' => false
