@@ -211,6 +211,12 @@ class VerifikatorController extends Controller
 
     public function sp($kontrak_id, Kontrak $kontrak, Request $request)
     {
+        if (empty($request->nomor_sp) && empty($request->tgl_sp)) {
+            $kontrak->where('kontrak_id', $kontrak_id)->update([
+                'sp_done' => true
+            ]);
+            return redirect()->back()->with('success', 'SP berhasil di simpan');
+        }
         $validate = $request->validate([
             'nomor_sp' => 'required|string|max:255',
             'tgl_sp' => 'required|date',
