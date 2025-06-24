@@ -25,7 +25,7 @@ class PenerimaController extends Controller
                 'qty' => $validateData['qty'],
                 'satuan' => $validateData['satuan'],
             ]);
-            return redirect()->back()->with('success', 'data berhasil diperbarui.');
+            return redirect()->back()->with('success', 'data berhasil diperbarui.')->withFragment('penerimaBarang');
         } else {
             Penerima::create([
                 'kontrak_id' => $validateData['kontrak_id'],
@@ -34,13 +34,13 @@ class PenerimaController extends Controller
                 'qty' => $validateData['qty'],
                 'satuan' => $validateData['satuan'],
             ]);
-            return redirect()->back()->with('success', 'Penerima berhasil disimpan.');
+            return redirect()->back()->with('success', 'Penerima berhasil disimpan.')->withFragment('penerimaBarang');
         }
     }
 
     public function destroy($penerima_id)
     {
         Penerima::where('penerima_id', $penerima_id)->delete();
-        return redirect()->back()->with('success', 'Penerima berhasil dihapus.');
+        return redirect()->back()->with('success', 'Penerima berhasil dihapus.')->withFragment('penerimaBarang');
     }
 }
