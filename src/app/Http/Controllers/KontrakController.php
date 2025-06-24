@@ -260,7 +260,7 @@ class KontrakController extends Controller
 
             // Kontrak
 
-            $noKontrak = $kontrak->no_kontrak;
+            $noKontrak = $kontrak->paketPekerjaan->nomor_kontrak;
             $noSpmk = preg_replace('/\/(\d+)\//', '/$1.a/', $noKontrak);
 
             $templateProcessor->setValue('${NO_KONTRAK}', $noKontrak);
@@ -347,8 +347,9 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${NAMA_NOTARIS}', $kontrak->penyedia->akta_notaris_nama);
 
             // PPK
-            $templateProcessor->setValue('$NAMA_PPK', Ppkom::first()->nama);
-            $templateProcessor->setValue('$JABATAN_PPK', Ppkom::first()->jabatan);
+            $templateProcessor->setValue('${NAMA_PPK}', $kontrak->paketPekerjaan->ppkom->nama);
+            $templateProcessor->setValue('${JABATAN_PPK}', $kontrak->paketPekerjaan->ppkom->jabatan);
+            $templateProcessor->setValue('${NIP_PPK}', $kontrak->paketPekerjaan->ppkom->nip);
 
 
             // kepana dinas/ satuan kerja/ pimpinan
@@ -357,6 +358,7 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${EMAIL_KEPALA_DINAS}', $kontrak->satuanKerja->email);
             $templateProcessor->setValue('${TELP_KEPALA_DINAS}', $kontrak->satuanKerja->telp);
             $templateProcessor->setValue('${KLPD_KEPALA_DINAS}', $kontrak->satuanKerja->klpd);
+            $templateProcessor->setValue('${JABATAN_KEPALA_DINAS}', $kontrak->satuanKerja->jabatan);
 
             // ruang lingkup
             $lingkupPekerjaanText = '';
