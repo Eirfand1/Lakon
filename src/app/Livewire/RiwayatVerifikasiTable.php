@@ -21,7 +21,7 @@ class RiwayatVerifikasiTable extends DataTableComponent
         $this->setPrimaryKey('kontrak_id')
             ->setColumnSelectStatus(true)
             ->setFilterLayout('slide-down')
-            ->setPerPageAccepted([10,25,50,100, -1]);
+            ->setPerPageAccepted([10, 25, 50, 100, -1]);
     }
 
     public function builder(): \Illuminate\Database\Eloquent\Builder
@@ -40,17 +40,25 @@ class RiwayatVerifikasiTable extends DataTableComponent
             IncrementColumn::make('#'),
 
             Column::make("Aksi", "kontrak_id")
-                ->format( function($value, $row) {
-                    return '<a href="riwayat-kontrak/'.$row->kontrak_id.'" class="btn rounded-md flex  btn-sm btn-warning text-white" wire:navigate>
+                ->format(function ($value, $row) {
+                    return '
+                       <div class="flex gap-1">
+                            <a href="riwayat-kontrak/' . $row->kontrak_id . '" class="btn rounded-md flex  btn-sm bg-blue-500 text-white" wire:navigate>
                                 <i class="fa fa-eye text-sm inline">
                                 </i>
-                            </a>';
+                            </a>
+                            <a href="detail/' . $row->kontrak_id . '" class="btn rounded-md flex  btn-sm btn-warning text-white" wire:navigate>
+                                <i class="fa fa-pen text-sm inline">
+                                </i>
+                            </a>
+                       </div>
+                        ';
                 })->html(),
 
             Column::make("is_verificated")
                 ->hideIf(true),
 
-            Column::make("sekolah_id","paketPekerjaan.sekolah.nama_sekolah")
+            Column::make("sekolah_id", "paketPekerjaan.sekolah.nama_sekolah")
                 ->hideIf(true)
                 ->searchable(),
 

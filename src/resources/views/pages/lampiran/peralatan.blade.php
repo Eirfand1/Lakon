@@ -10,14 +10,14 @@
     <table class="table">
         <thead class="text-gray-600  dark:text-gray-300">
             <tr>
-                <th class="text-center border border-gray-400/30">Nama Peralatan</th>
-                <th class="text-center border border-gray-400/30">Merk</th>
-                <th class="text-center border border-gray-400/30">Type</th>
-                <th class="text-center border border-gray-400/30">Kapasitas</th>
-                <th class="text-center border border-gray-400/30">Jumlah</th>
-                <th class="text-center border border-gray-400/30">Kondisi</th>
-                <th class="text-center border border-gray-400/30">Status Kepemilikan</th>
-                <th class="text-center border border-gray-400/30">Keterangan</th>
+                <th class="text-center border border-gray-400/30 min-w-[200px]">Nama Peralatan</th>
+                <th class="text-center border border-gray-400/30 min-w-[200px]">Merk</th>
+                <th class="text-center border border-gray-400/30 min-w-[200px]">Type</th>
+                <th class="text-center border border-gray-400/30 min-w-[200px]">Kapasitas</th>
+                <th class="text-center border border-gray-400/30 min-w-[200px]">Jumlah</th>
+                <th class="text-center border border-gray-400/30 min-w-[200px]">Kondisi</th>
+                <th class="text-center border border-gray-400/30 min-w-[200px]">Status Kepemilikan</th>
+                <th class="text-center border border-gray-400/30 min-w-[200px]">Keterangan</th>
                 <th class="text-center border border-gray-400/30">Aksi</th>
             </tr>
         </thead>
@@ -60,8 +60,8 @@
                 <td class="text-center border border-gray-400/30">
                     <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan" id="keteranganPeralatan">
                 </td>
-                <td class="text-center border border-gray-400/30 p-0">
-                    <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
+                <td class="text-center border border-gray-400/30 p-0 ">
+                    <button class="btn btn-success px-4"><i class="fa fa-save text-gray-100"></i></button>
                 </td>
 
                 </form>

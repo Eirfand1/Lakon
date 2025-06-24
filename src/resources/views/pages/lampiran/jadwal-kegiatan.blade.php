@@ -9,9 +9,9 @@
     <table class="table">
         <thead class="text-gray-600  dark:text-gray-300">
             <tr>
-                <th rowspan="2" class="text-center border border-gray-400/30">Kegiatan</th>
+                <th rowspan="2" class="text-center border border-gray-400/30 min-w-[200px]">Kegiatan</th>
                 <th colspan="12" class="text-center border border-gray-400/30">Jadwal Pelasanaan Kegiatan (Bulan)</th>
-                <th rowspan="2" class="text-center border border-gray-400/30">Keterangan</th>
+                <th rowspan="2" class="text-center border border-gray-400/30 min-w-[200px] ">Keterangan</th>
                 <th rowspan="2" class="text-center border border-gray-400/30">Aksi</th>
             </tr>
             <tr>
@@ -35,7 +35,7 @@
                     @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="jadwal_kegiatan_id" id="jadwalKegiatanId">
-                <td class="text-center border border-gray-400/30">
+                <td class="text-center border border-gray-400/30 min-w-[200px]">
                     <input class="w-full dark:bg-gray-800 rounded" type="text" name="kegiatan" id="kegiatan">
                 </td>
                 <td class="text-center border border-gray-400/30 p-0">
@@ -76,10 +76,10 @@
                 </td>
 
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan" id="kegiatanKeterangan">
+                    <input class="w-full dark:bg-gray-800 min-w-[200px] rounded" type="text" name="keterangan" id="kegiatanKeterangan">
                 </td>
                 <td class="text-center border border-gray-400/30">
-                    <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
+                    <button class="btn btn-success px-4"><i class="fa fa-save text-gray-100"></i></button>
                 </td>
                 </form>
             </tr>

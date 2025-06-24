@@ -13,20 +13,22 @@
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Jenis Kontrak</label>
-            <input type="text" name="jenis_kontrak" value="{{ $kontrak->jenis_kontrak }}" required readonly class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <x-input type="text" name="jenis_kontrak" value="{{ $kontrak->jenis_kontrak }}" required readonly></x-input>
         </div>
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor SPK</label>
-            <input type="text" name="nomor_spk" value="{{ $kontrak->nomor_spk }}" required readonly class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <x-input type="text" name="nomor_spk" value="{{ $kontrak->nomor_spk }}" required readonly ></x-input>
         </div>
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nilai Kontrak</label>
             <div x-data="detailKontrak({{ json_encode($kontrak) }})" x-init="initDetail({{ json_encode($detail) }})" id="detail-edit-manager" class="space-y-2">
-                <div class="flex gap-4">
-                    <input type="text" id="nilaiKontrakSPK" value="{{ $kontrak->nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
-                    <button type="button" @click="addDetailRow" class="btn btn-primary mt-2">+</button>
+                <div class="flex gap-2">
+                    <x-input type="text" id="nilaiKontrakSPK" value="{{ $kontrak->nilai_kontrak }}" required></x-input>
+                    <button type="button" @click="addDetailRow" class="btn bg-blue-500 text-white">
+                        <i class="fa-solid fa-plus"></i>
+                    </button>
                 </div>
 
                 <template x-for="(detail, index) in details" :key="index">
@@ -34,36 +36,34 @@
                         <div class="flex gap-4 w-full">
                             <!-- Kolom Detail (50%) -->
                             <div class="w-4/5">
-                                <input
+                                <x-input
                                     type="text"
                                     name="detail[]"
                                     x-model="detail.namaDetail"
                                     placeholder="Detail"
-                                    class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md"
-                                >
+                                ></x-input>
                             </div>
                             <!-- Kolom Nilai (50%) -->
                             <div class="w-4/5">
-                                <input
+                                <x-input
                                     type="text"
                                     name="nilai[]"
                                     x-model="detail.nilaiDetail"
                                     placeholder="Nilai"
                                     @input="updateNilaiKontrak"
-                                    class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md detail-nilai-input"
-                                >
+                                ></x-input>
                                 <input type="hidden" :name="'nilai_raw[' + index + ']'" x-model="detail.nilaiDetailRaw">
                             </div>
                         </div>
                         <!-- Tombol Hapus di bawah tombol Detail -->
                         <div class="flex justify-end gap-4">
-                            <div class="w-1/10 flex justify-end">
+                            <div class="w-1/10 flex justify-end ">
                                 <button
                                     type="button"
                                     @click="removeDetailRow(index)"
-                                    class="btn btn-error"
+                                    class="btn btn-error text-white"
                                 >
-                                    -
+                                    <i class="fa-solid fa-minus"></i>
                                 </button>
                             </div>
                         </div>
@@ -76,24 +76,24 @@
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Terbilang Nilai Kontrak</label>
-            <input type="text" name="terbilang_nilai_kontrak" id="terbilangNilaiKontrakSPK" readonly value="{{ $kontrak->terbilang_nilai_kontrak }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <x-input type="text" name="terbilang_nilai_kontrak" id="terbilangNilaiKontrakSPK" readonly value="{{ $kontrak->terbilang_nilai_kontrak }}" required></x-input>
         </div>
 
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 mb-4">
             <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                 <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal Awal</label>
-                <input type="date" name="tanggal_awal" value="{{ $kontrak->tanggal_awal }}" required id="tanggalAwalSPK" onchange="waktuPenyelesaian()" class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+                <x-input type="date" name="tanggal_awal" value="{{ $kontrak->tanggal_awal }}" required id="tanggalAwalSPK" onchange="waktuPenyelesaian()"></x-input>
             </div>
 
             <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                 <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal Akhir</label>
-                <input type="date" name="tanggal_akhir" value="{{ $kontrak->tanggal_akhir }}" required id="tanggalAkhirSPK" onchange="waktuPenyelesaian()" class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+                <x-input type="date" name="tanggal_akhir" value="{{ $kontrak->tanggal_akhir }}" required id="tanggalAkhirSPK" onchange="waktuPenyelesaian()"></x-input>
             </div>
         </div>
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Waktu Penyelesaian</label>
-            <input type="text" name="waktu_penyelesaian" value="{{ $kontrak->waktu_penyelesaian }}" required id="waktuPenyelesaianSPK" readonly class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <x-input type="text" name="waktu_penyelesaian" value="{{ $kontrak->waktu_penyelesaian }}" required id="waktuPenyelesaianSPK" readonly></x-input>
         </div>
     </div>
 
@@ -105,12 +105,12 @@
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tata Cara Pembayaran</label>
-            <input type="text" name="cara_pembayaran" value="{{ $kontrak->cara_pembayaran }}" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <x-input type="text" name="cara_pembayaran" value="{{ $kontrak->cara_pembayaran }}" required></x-input>
         </div>
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Uang Muka</label>
-            <select name="uang_muka" id="uangMukaSPK" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md">
+            <select name="uang_muka" id="uangMukaSPK" required class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 border-gray-200 rounded-md">
                 <option value="" {{ $kontrak->uang_muka == false ? 'selected' : '' }}>Pilih Uang Muka</option>
                 <option value="Terdapat Uang Muka" {{ $kontrak->uang_muka == "Terdapat Uang Muka" ? 'selected' : '' }}>Ada Uang Muka</option>
                 <option value="Tidak Ada Uang Muka" {{ $kontrak->uang_muka == "Tidak Ada Uang Muka" ? 'selected' : '' }}>Tidak Ada Uang Muka</option>
@@ -128,8 +128,9 @@
         <p class="ml-2">Data - data diatas sudah sesuai dengan ketentuan dan kebutuhan.</p>
     </div>
 
-    <div class="h-10 mt-6 mb-8 rounded flex items-center bg-blue-500">
-        <button type="submit" class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+    <div class="h-10 mt-6 mb-8 rounded-md flex items-center bg-green-500">
+        <button type="submit" class="w-full bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-md">
+            <i class="fa-solid fa-check"></i>
             Simpan Data Surat Perintah Kerja
         </button>
     </div>

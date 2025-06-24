@@ -18,7 +18,8 @@ class SekolahController extends Controller
         return view("pages.admin.sekolah.sekolah", ["title" => "sekolah"]);
     }
 
-    public function exportSekolah() {
+    public function exportSekolah()
+    {
         return Excel::download(new SekolahExport, "sekolah.xlsx");
     }
 
@@ -79,7 +80,6 @@ class SekolahController extends Controller
             'koordinat' => $koordinat,
         ]);
         return redirect()->back()->with('success', 'Sekolah berhasil disimpan.');
-
     }
 
 
@@ -120,14 +120,11 @@ class SekolahController extends Controller
         ]);
 
         return redirect()->back()->with('success', 'Data sekolah berhasil diperbarui.');
-
     }
 
     public function destroy(Sekolah $sekolah)
     {
         $sekolah->delete();
         return redirect()->back()->with('success', 'Data berhasil dihapus.');
-
     }
-
 }

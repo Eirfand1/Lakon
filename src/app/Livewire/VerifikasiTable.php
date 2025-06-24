@@ -20,7 +20,7 @@ class VerifikasiTable extends DataTableComponent
         $this->setPrimaryKey('kontrak_id')
             ->setColumnSelectStatus(true)
             ->setFilterLayout('slide-down')
-             ->setPerPageAccepted([10,25,50,100, -1]);
+            ->setPerPageAccepted([10, 25, 50, 100, -1]);
     }
 
     public function builder(): \Illuminate\Database\Eloquent\Builder
@@ -41,20 +41,20 @@ class VerifikasiTable extends DataTableComponent
             Column::make("is_verificated")
                 ->hideIf(true),
 
-            Column::make("sekolah_id","paketPekerjaan.sekolah.nama_sekolah")
+            Column::make("sekolah_id", "paketPekerjaan.sekolah.nama_sekolah")
                 ->hideIf(true)
                 ->searchable(),
 
             Column::make("Aksi", "kontrak_id")
-                ->format( function($value, $row) {
+                ->format(function ($value, $row) {
                     return '
-                            <button type="button" onclick="tolak('.$row->kontrak_id.')"
-                            class="btn btn-sm btn-error dark:text-gray-50">
-                            tolak</button>
+                            <button type="button" onclick="tolak(' . $row->kontrak_id . ')"
+                            class="btn btn-sm btn-error text-gray-100 rounded-md">
+                            Tolak</button>
 
-                            <a  href="detail/'.$row->kontrak_id.'"
-                            class="btn btn-sm btn-info dark:text-gray-50">
-                            detail</a>
+                            <a  href="detail/' . $row->kontrak_id . '"
+                            class="btn btn-sm btn-warning text-gray-100 rounded-md">
+                            Detail</a>
                             ';
                 })->html(),
 
