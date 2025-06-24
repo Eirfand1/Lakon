@@ -15,6 +15,7 @@ use App\Models\Peralatan;
 use App\Models\RuangLingkup;
 use App\Models\DetailKontrak;
 use App\Models\EPurchasing;
+use App\Models\PaketPekerjaan;
 use Hash;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
@@ -255,11 +256,13 @@ class VerifikatorController extends Controller
     {
         $kontrak = Kontrak::where('kontrak_id', $kontrak_id)->first();
         $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
+        $nilai_hps = PaketPekerjaan::with('kontrak')->where('paket_id', $kontrak->paket_id)->first()->nilai_hps;
         $totalBiaya = $rincianBelanja->sum('total_harga');
         $ppn = $totalBiaya * 0.11;
 
         return view('pages.verifikator.permohonan.detail-permohonan', [
             'kontrak' => $kontrak,
+            'nilai_hps' => $nilai_hps,
             'penerima' => Penerima::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'dokumen_penagihan' => DokumenKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->where('jenis', 'penagihan')->get(),
             'dokumen_pekerjaan' => DokumenKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->where('jenis', 'pekerjaan')->get(),

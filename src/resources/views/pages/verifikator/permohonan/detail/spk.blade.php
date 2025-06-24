@@ -137,7 +137,9 @@
 
 <script>
         function numberToTextFunction(input, too_long) {
-            let terbilang_input = document.getElementById("terbilangNilaiKontrakSPK")
+            let terbilang_input = document.getElementById("terbilangNilaiKontrakSPK");
+            const nilai_hps = parseFloat({{ $nilai_hps }});
+
             if (!input || input === 0) {
                 terbilang_input.value = "";
                 return;
@@ -147,16 +149,16 @@
                 terbilang_input.value = "Nilai kontrak terlalu besar";
                 terbilang_input.classList.add("text-red-600", "dark:text-red-600");
                 return;
-            }else{
+            } else if (input > nilai_hps) {
+                terbilang_input.value = "Nilai kontrak melebihi nilai HPS: " + nilai_hps.toLocaleString("id-ID");
+                terbilang_input.classList.add("text-red-600", "dark:text-red-600");
+                return;
+            } else {
                 terbilang_input.classList.remove("text-red-600", "dark:text-red-600");
             }
 
-            const convert = numberToText.convertToText(input, {
-                language: 'id'
-            })
-
-            hasil = `${convert} Rupiah`
-            terbilang_input.value = hasil
+            const convert = numberToText.convertToText(input, { language: 'id' });
+            terbilang_input.value = `${convert} Rupiah`;
         }
 
 
