@@ -251,12 +251,6 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${SUB_KEGIATAN}', $subKegiatanList);
             $subKegiatanCollection = $kontrak->paketPekerjaan->subKegiatan;
 
-            foreach ($subKegiatanCollection as $index => $subKegiatan) {
-                $varName = '${REKENING_SUB_KEGIATAN' . ($index + 1) . '}';
-
-                $templateProcessor->setValue($varName, $subKegiatan->no_rekening ?? '');
-            }
-
             $templateProcessor->setValue('${REKENING_SUB_KEGIATAN}', $kontrak->paketPekerjaan->subKegiatan->first()->no_rekening ?? '');
 
             // Kontrak
@@ -394,27 +388,6 @@ class KontrakController extends Controller
             }
 
             $templateProcessor->setValue('${LINGKUP_PEKERJAAN}', $lingkupPekerjaanText);
-
-            if ($kontrak->detailKontrak && $kontrak->detailKontrak->count() > 0) {
-                foreach ($kontrak->detailKontrak as $index => $lingkup) {
-                    $varName = '${LINGKUP_PEKERJAAN' . ($index + 1) . '}';
-
-                    $templateProcessor->setValue($varName, $lingkup->detail ?? '-');
-                }
-
-                for ($i = $kontrak->detailKontrak->count() + 1; $i <= 10; $i++) {
-                    $varName = '${LINGKUP_PEKERJAAN' . $i . '}';
-                    $templateProcessor->setValue($varName, '');
-                }
-            } else {
-                // set ke strip jika tidak ada lingkup pekerjaan
-                for ($i = 1; $i <= 10; $i++) {
-                    $varName = '${LINGKUP_PEKERJAAN' . $i . '}';
-                    $templateProcessor->setValue($varName, '');
-                }
-                $templateProcessor->setValue('${LINGKUP_PEKERJAAN1}', '-');
-            }
-
 
             // Verifikator
             if ($kontrak->verifikator) {
