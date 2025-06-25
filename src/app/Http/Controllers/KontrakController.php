@@ -211,6 +211,7 @@ class KontrakController extends Controller
                     'peralatan',
                     'rincianBelanja',
                     'penerima',
+                    'ePurchasing'
                 ])
                 ->first();
 
@@ -359,6 +360,24 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${TELP_KEPALA_DINAS}', $kontrak->satuanKerja->telp);
             $templateProcessor->setValue('${KLPD_KEPALA_DINAS}', $kontrak->satuanKerja->klpd);
             $templateProcessor->setValue('${JABATAN_KEPALA_DINAS}', $kontrak->satuanKerja->jabatan);
+
+            // sp
+            $templateProcessor->setValue('${NO_SP}', $kontrak->nomor_sp);
+            $templateProcessor->setValue('${TANGGAL_SP}', Carbon::parse($kontrak->tanggal_sp)->translatedFormat('d F Y'));
+
+            // ID Paket
+            $idPaket = '';
+            if ($kontrak->ePurchasing && $kontrak->ePurchasing->count() > 0) {
+                foreach ($kontrak->ePurchasing as $index => $ePurchasing) {
+                    $idPaket .= ($index + 1) . ". " . $ePurchasing->id_paket . "\n";
+                }
+
+                $idPaket = rtrim($idPaket);
+            }else{
+                $idPaket = '-';
+            }
+
+            $templateProcessor->setValue('${ID_PAKET}', $idPaket);
 
             // ruang lingkup
             $lingkupPekerjaanText = '';

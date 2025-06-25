@@ -54,9 +54,9 @@
                         <td class="border border-gray-400/30 ">{{ $row->jenis }}</td>
                         <td class="border border-gray-400/30">{{ $row->qty }}</td>
                         <td class="border border-gray-400/30">{{ $row->satuan }}</td>
-                        <td class="border border-gray-400/30">Rp. {{ $row->harga_satuan }}</td>
-                        <td class="border border-gray-400/30">Rp. {{ $row->ongkos_kirim }}</td>
-                        <td class="border border-gray-400/30">Rp. {{ $row->total_harga }}</td>
+                        <td class="border border-gray-400/30 text-right">Rp. {{ number_format($row->harga_satuan, 0, ',', '.') }}</td>
+                        <td class="border border-gray-400/30 text-right">Rp. {{ number_format($row->ongkos_kirim, 0, ',', '.') }}</td>
+                        <td class="border border-gray-400/30 text-right">Rp. {{ number_format($row->total_harga, 0, ',', '.') }}</td>
 
                         <td class="border border-gray-400/30">
                             <div class="flex gap-1">
@@ -72,17 +72,7 @@
                 @endforeach
                 <tr>
                     <td colspan="5" class="text-right border border-gray-400/30">Total</td>
-                    <td class="text-right border border-gray-400/30">Rp. {{ $totalBiaya }}</td>
-                    <td class="border border-gray-400/30"></td>
-                </tr>
-                <tr>
-                    <td colspan="5" class="text-right border border-gray-400/30">PPN 11%</td>
-                    <td class="text-right border border-gray-400/30">Rp. {{ $ppn }}</td>
-                    <td class="border border-gray-400/30"></td>
-                </tr>
-                <tr>
-                    <td colspan="5" class="text-right border border-gray-400/30">Total Biaya</td>
-                    <td class="text-right border border-gray-400/30">Rp. {{ $totalBiaya + $ppn }}</td>
+                    <td class="text-right border border-gray-400/30">Rp. {{ number_format($totalBiaya, 0, ',', '.') }}</td>
                     <td class="border border-gray-400/30"></td>
                 </tr>
         </tbody>
