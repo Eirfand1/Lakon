@@ -351,6 +351,7 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${NAMA_PPK}', $kontrak->paketPekerjaan->ppkom->nama);
             $templateProcessor->setValue('${JABATAN_PPK}', $kontrak->paketPekerjaan->ppkom->jabatan);
             $templateProcessor->setValue('${NIP_PPK}', $kontrak->paketPekerjaan->ppkom->nip);
+            $templateProcessor->setValue('${ALAMAT_PPK}', $kontrak->paketPekerjaan->ppkom->alamat);
 
 
             // kepana dinas/ satuan kerja/ pimpinan
