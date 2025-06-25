@@ -124,22 +124,20 @@
                     </div>
 
                     {{-- Tender specific fields --}}
-                    @if ($kontrak->paketPekerjaan->jenis_pengadaan == 'Tender')
+                    @if ($kontrak->paketPekerjaan->metode_pemilihan == 'Tender')
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nomor SPPBJ <span class="text-red-500">*</span></label>
                             </div>
-                            <input type="text" name="nomor_sppbj" value="{{ $kontrak->nomor_sppbj }}" required
-                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
+                            <x-input type="text" name="nomor_sppbj" value="{{ $kontrak->nomor_sppbj }}" required></x-input>
                         </div>
 
                         <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tanggal SPPBJ <span class="text-red-500">*</span></label>
                             </div>
-                            <input type="date" name="tgl_sppbj" value="{{ $kontrak->tgl_sppbj }}" required
-                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
+                            <x-input type="date" name="tgl_sppbj" value="{{ $kontrak->tgl_sppbj }}" required></x-input>
                         </div>
                     </div>
 
@@ -148,37 +146,33 @@
                             <div class="flex items-center gap-2">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nomor Penetapan Pemenang <span class="text-red-500">*</span></label>
                             </div>
-                            <input type="text" name="nomor_penetapan_pemenang" value="{{ $kontrak->nomor_penetapan_pemenang }}" required
-                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
+                            <x-input type="text" name="nomor_penetapan_pemenang" value="{{ $kontrak->nomor_penetapan_pemenang }}" required></x-input>
                         </div>
 
                         <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tanggal Penetapan Pemenang <span class="text-red-500">*</span></label>
                             </div>
-                            <input type="date" name="tgl_penetapan_pemenang" value="{{ $kontrak->tgl_penetapan_pemenang }}" required
-                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
+                            <x-input type="date" name="tgl_penetapan_pemenang" value="{{ $kontrak->tgl_penetapan_pemenang }}" required></x-input>
                         </div>
                     </div>
                     @endif
 
                     {{-- Non-Tender specific fields --}}
-                    @if ($kontrak->paketPekerjaan->jenis_pengadaan == 'Non Tender')
+                    @if ($kontrak->paketPekerjaan->metode_pemilihan == 'Non Tender')
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nomor DPPL <span class="text-red-500">*</span></label>
                             </div>
-                            <input type="text" name="nomor_dppl" value="{{ $kontrak->nomor_dppl }}" required
-                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
+                            <x-input type="text" name="nomor_dppl" value="{{ $kontrak->nomor_dppl }}" required></x-input>
                         </div>
 
                         <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tanggal DPPL <span class="text-red-500">*</span></label>
                             </div>
-                            <input type="date" name="tgl_dppl" value="{{ $kontrak->tgl_dppl }}" required
-                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
+                            <x-input type="date" name="tgl_dppl" value="{{ $kontrak->tgl_dppl }}" required></x-input>
                         </div>
                     </div>
 
@@ -187,16 +181,14 @@
                             <div class="flex items-center gap-2">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Nomor BAHPL <span class="text-red-500">*</span></label>
                             </div>
-                            <input type="text" name="nomor_bahpl" value="{{ $kontrak->nomor_bahpl }}" required
-                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
+                            <x-input type="text" name="nomor_bahpl" value="{{ $kontrak->nomor_bahpl }}" required></x-input>
                         </div>
 
                         <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                             <div class="flex items-center gap-2">
                                 <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Tanggal BAHPL <span class="text-red-500">*</span></label>
                             </div>
-                            <input type="date" name="tgl_bahpl" value="{{ $kontrak->tgl_bahpl }}" required
-                                class="mt-2 w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:focus:ring-blue-400 dark:focus:border-blue-400">
+                            <x-input type="date" name="tgl_bahpl" value="{{ $kontrak->tgl_bahpl }}" required></x-input>
                         </div>
                     </div>
                     @endif
@@ -209,18 +201,16 @@
                     <i class="fas fa-file-upload fa-lg text-blue-600 dark:text-blue-400"></i>
                     <h3 class="ml-3 text-lg font-semibold text-gray-800 dark:text-white">Dokumen Penawaran</h3>
                 </div>
-                
+
                 <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
                     <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">
                         Upload Berkas Penawaran <span class="text-red-500 font-medium">(.pdf)</span>
                     </label>
-                    
+
                     <div class="mt-3">
-                        <input type="file" name="berkas_penawaran"
-                            class="w-full file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-medium file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 dark:file:bg-gray-700 dark:file:text-blue-300 dark:hover:file:bg-gray-600"
-                            accept=".pdf">
+                        <x-input type="file" name="berkas_penawaran" accept=".pdf"></x-input>
                     </div>
-                    
+
                     @if ($kontrak->berkas_penawaran)
                     <div class="mt-2 flex items-center text-sm text-blue-600 dark:text-blue-400">
                         <i class="fas fa-paperclip mr-2"></i>
@@ -229,7 +219,7 @@
                         </label>
                     </div>
                     @endif
-                    
+
                     <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
                         <i class="fas fa-info-circle mr-1"></i> Maksimum ukuran file 10MB dalam format PDF
                     </p>
@@ -264,23 +254,23 @@
 
     <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
         <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Pernyataan Kesanggupan</h2>
-        
+
         <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg mb-6">
             <p class="text-gray-700 dark:text-gray-300 leading-relaxed">
                 Dengan ini saya menyatakan bahwa data yang saya sampaikan adalah benar sesuai dengan fakta yang ada, dan apabila dikemudian hari data perusahaan yang saya sampaikan tidak benar, maka saya bersedia untuk diproses secara hukum sesuai dengan ketentuan Undang-Undang yang berlaku.
             </p>
         </div>
-        
+
         <form action="layangkan/{{$kontrak->kontrak_id}}" method="POST" class="mt-4">
             @csrf
             <div class="flex items-center mb-6">
-                <input type="checkbox" required name="konfirmasi_pernyataan" id="konfirmasi" 
+                <input type="checkbox" required name="konfirmasi_pernyataan" id="konfirmasi"
                     class="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded">
                 <label for="konfirmasi" class="ml-3 text-gray-700 dark:text-gray-300 font-medium">
                     Saya setuju dengan pernyataan di atas
                 </label>
             </div>
-            
+
             <button type="submit"
                 class="w-full px-6 py-3 text-white bg-green-600 rounded-md hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 transition-all dark:bg-green-700 dark:hover:bg-green-600 flex items-center justify-center">
                 <i class="fas fa-paper-plane mr-2"></i> Kirimkan Permohonan Kontrak
