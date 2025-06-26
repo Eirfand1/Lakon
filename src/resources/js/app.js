@@ -1,12 +1,16 @@
 import { Livewire } from '../../vendor/livewire/livewire/dist/livewire.esm';
 Livewire.start();
-
 import './bootstrap';
 import flatpickr from "flatpickr";
+
+import "choices.js/public/assets/styles/choices.css";
+import Choices from 'choices.js';
+window.Choices = Choices;
 
 import numberToText from 'number-to-text'
 import 'number-to-text/converters/id'
 window.numberToText = numberToText;
+
 
 import L from 'leaflet';
 window.L = L;
@@ -98,7 +102,7 @@ function sekolahDropDown() {
         })
         .catch(error => console.error('Error fetching kecamatan:', error));
 
-    $('#kecamatan_dropdown').on('change', function () {
+    $('#kecamatan_dropdown').on('change', function() {
         let kecamatanID = $(this).val();
         let desaSelect = $('#desa_dropdown');
 
@@ -124,7 +128,7 @@ function sekolahDropDown() {
         }
     });
 
-    $('#desa_dropdown').on('change', function () {
+    $('#desa_dropdown').on('change', function() {
         // Get the text of the selected option for desa
         let desaName = $("#desa_dropdown option:selected").text();
         $('#desa').val(desaName);
@@ -168,7 +172,7 @@ window.editSekolahDropDown = function(selectedKecamatanName = null, selectedDesa
         })
         .catch(error => console.error('Error fetching kecamatan:', error));
 
-    $('#edit_kecamatan_dropdown').on('change', function () {
+    $('#edit_kecamatan_dropdown').on('change', function() {
         let kecamatanID = $(this).val();
         let desaSelect = $('#edit_desa_dropdown');
 
@@ -205,7 +209,7 @@ window.editSekolahDropDown = function(selectedKecamatanName = null, selectedDesa
         }
     });
 
-    $('#edit_desa_dropdown').on('change', function () {
+    $('#edit_desa_dropdown').on('change', function() {
         let desaName = $("#edit_desa_dropdown option:selected").text();
         $('#edit_desa').val(desaName);
     });
