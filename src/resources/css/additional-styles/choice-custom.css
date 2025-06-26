@@ -1,6 +1,6 @@
 /* Dark Mode */
 .dark .choices__inner {
-    @apply bg-gray-900/30;
+    @apply bg-gray-900/30 !important;
     border-color: #4b5563;
     color: #f9fafb;
 }
@@ -21,15 +21,17 @@
     background-color: transparent !important;
     outline: transparent !important;
     border-color: white !important;
+
+}
+.dark input.choices__input.choices__input--cloned {
+    @apply bg-gray-800 !important;
+    color: white !important;
 }
 
-.dark .choices__input {
-    color: #f9fafb;
-    border: none;
-}
+
 
 .dark .choices__placeholder {
-    color: #9ca3af;
+    color: white !important;
 }
 
 
@@ -38,23 +40,9 @@
 }
 
 
-.dark .choices__item--selectable:hover {
-    background-color: black;
-}
-
 .dark .choices__item--choice {
     background-color: rgb(31 41 55);
     color: #ffffff;
-}
-
-.dark .choices__item--choice.is-selected {
-    background-color: black;
-}
-
-.dark .choices__list--dropdown {
-    background-color: black;
-    border-color: #4b5563;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
 }
 
 .dark .choices__list--dropdown .choices__item--selectable {
