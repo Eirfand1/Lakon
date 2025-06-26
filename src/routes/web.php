@@ -135,8 +135,6 @@ Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(f
     // ruang lingkup
     Route::post('/detail/ruang-lingkup', [RuangLingkupController::class, 'store'])->name('verifikator.ruang-lingkup.store');
     Route::delete('/detail/ruang-lingkup/{ruang_lingkup}', [RuangLingkupController::class, 'destroy'])->name('verifikator.ruang-lingkup.destroy');
-
-
 });
 
 // TODO make all route to /admin or /penyedia or /verifikator
@@ -198,7 +196,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
         Route::get('/export', [SubKegiatanController::class, 'exportSubKegiatan'])->name('admin.sub-kegiatan.export');
         Route::put('/{sub_kegiatan}', [SubKegiatanController::class, 'update'])->name('admin.sub-kegiatan.edit');
         Route::delete('/{sub_kegiatan}', [SubKegiatanController::class, 'destroy'])->name('admin.sub-kegiatan.destroy');
-
     });
 
     Route::prefix('/riwayat-kontrak')->group(function () {
@@ -228,10 +225,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     });
 
 
-    Route::prefix('/template')->group(function() {
+    Route::prefix('/template')->group(function () {
         Route::get('/', [TemplateController::class, 'index'])->name('admin.template.index');
         Route::post('/', [TemplateController::class, 'store'])->name('admin.template.store');
-        Route::delete('/{template}', [TemplateController::class, 'destroy'])->name('admin.template.destroy');
+        Route::delete('/{id}', [TemplateController::class, 'destroy'])->name('admin.template.destroy');
+        Route::get('/{id}/edit', [TemplateController::class, 'edit'])->name('template.edit');
+        Route::put('/{id}', [TemplateController::class, 'update'])->name('template.update');
+        Route::get('/download/{id}', [TemplateController::class, 'download'])->name('template.download');
+        Route::delete('/{id}', [TemplateController::class, 'destroy'])->name('template.destroy');
     });
 
 

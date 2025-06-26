@@ -16,22 +16,22 @@
                         <div class="space-y-4">
                             <div class="flex border-b border-gray-100 dark:border-gray-700 pb-3">
                                 <div class="w-2/5 font-medium text-gray-700 dark:text-gray-300">Nama Perusahaan</div>
-                                <div class="w-1/20 text-gray-600 dark:text-gray-400">:</div>
+                                <div class="w-1/20 text-gray-600 dark:text-gray-400 pr-1">:</div>
                                 <div class="flex-1 text-gray-800 dark:text-gray-200">{{$penyedia->nama_perusahaan_lengkap}}</div>
                             </div>
                             <div class="flex border-b border-gray-100 dark:border-gray-700 pb-3">
                                 <div class="w-2/5 font-medium text-gray-700 dark:text-gray-300">Alamat Perusahaan</div>
-                                <div class="w-1/20 text-gray-600 dark:text-gray-400">:</div>
+                                <div class="w-1/20 text-gray-600 dark:text-gray-400 pr-1">:</div>
                                 <div class="flex-1 text-gray-800 dark:text-gray-200">{{$penyedia->alamat_perusahaan}}</div>
                             </div>
                             <div class="flex border-b border-gray-100 dark:border-gray-700 pb-3">
                                 <div class="w-2/5 font-medium text-gray-700 dark:text-gray-300">No. Telepon</div>
-                                <div class="w-1/20 text-gray-600 dark:text-gray-400">:</div>
+                                <div class="w-1/20 text-gray-600 dark:text-gray-400 pr-1">:</div>
                                 <div class="flex-1 text-gray-800 dark:text-gray-200">{{$penyedia->kontak_hp}}</div>
                             </div>
                             <div class="flex border-b border-gray-100 dark:border-gray-700 pb-3">
                                 <div class="w-2/5 font-medium text-gray-700 dark:text-gray-300">Email</div>
-                                <div class="w-1/20 text-gray-600 dark:text-gray-400">:</div>
+                                <div class="w-1/20 text-gray-600 dark:text-gray-400 pr-1">:</div>
                                 <div class="flex-1 text-gray-800 dark:text-gray-200">{{$penyedia->kontak_email}}</div>
                             </div>
                         </div>
@@ -57,8 +57,8 @@
                         <p class="text-blue-100 mb-6">
                             Gunakan LAKON PDK untuk mengajukan permohonan kontrak dengan lebih efisien. Siapkan dokumen dan data pendukung untuk memperlancar proses pengajuan Anda.
                         </p>
-                        <a href="permohonan-kontrak" 
-                           class="block w-full bg-gray-100 hover:bg-gray-200 text-blue-700 dark:text-blue-800 font-bold py-3 px-4 rounded-lg text-center transition-colors duration-200 shadow-md" 
+                        <a href="permohonan-kontrak"
+                           class="block w-full bg-gray-100 hover:bg-gray-200 text-blue-700 dark:text-blue-800 font-bold py-3 px-4 rounded-lg text-center transition-colors duration-200 shadow-md"
                            wire:navigate>
                             <span class="inline-flex items-center justify-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">

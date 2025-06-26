@@ -18,6 +18,7 @@ use App\Models\RuangLingkup;
 use App\Models\Template;
 use Number;
 use NumberFormatter;
+// use PhpOffice\PhpSpreadsheet\Style\NumberFormat\NumberFormatter;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\Process\Process;
 use Symfony\Component\Process\Exception\ProcessFailedException;
@@ -360,6 +361,12 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${NO_SP}', $kontrak->nomor_sp);
             $templateProcessor->setValue('${TANGGAL_SP}', Carbon::parse($kontrak->tanggal_sp)->translatedFormat('d F Y'));
 
+
+            // dasar hukum
+
+            $templateProcessor->setValue('${DASAR_HUKUM}', $kontrak->paketPekerjaan->dasarHukum->dasar_hukum);
+
+
             // ID Paket
             $idPaket = '';
             if ($kontrak->ePurchasing && $kontrak->ePurchasing->count() > 0) {
@@ -368,7 +375,7 @@ class KontrakController extends Controller
                 }
 
                 $idPaket = rtrim($idPaket);
-            }else{
+            } else {
                 $idPaket = '-';
             }
 
@@ -532,7 +539,7 @@ class KontrakController extends Controller
                     throw new ProcessFailedException($process);
                 }
 
-                $filename = $kontrak->paketPekerjaan->paket_id . ". " . $kontrak->paketPekerjaan->nama_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf';
+                $filename = $kontrak->paketPekerjaan->nomor_matrik . ". " . $kontrak->paketPekerjaan->nama_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf';
 
                 return response()->file($outputPdf, [
                     'Content-Type' => 'application/pdf',

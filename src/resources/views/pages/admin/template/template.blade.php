@@ -56,6 +56,46 @@
             </div>
         </div>
 
+
+        <!-- Edit Modal -->
+        <input type="checkbox" id="edit-modal" class="modal-toggle" />
+        <div class="modal modal-top px-3">
+        <div class="modal-box max-w-[52rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
+        <div class="flex justify-between items-center dark:border-gray-700">
+            <div class="flex items-center gap-3">
+                <h3 class="font-bold text-lg dark:text-gray-200">EDIT TEMPLATE</h3>
+            </div>
+            <label for="edit-modal"
+                class="btn btn-sm btn-circle btn-ghost hover:bg-gray-200 rounded-full shadow-none dark:hover:bg-gray-700">
+                ✕
+            </label>
+        </div>
+
+        <form id="editForm" method="POST" class="space-y-2" enctype="multipart/form-data">
+            @csrf
+            @method('PUT')
+            <div class="flex w-full flex-col">
+                <x-label for="edit_name">Nama Template</x-label>
+                <x-input type="text" id="edit_name" name="name" required />
+            </div>
+
+            <div class="flex w-full flex-col">
+                <x-label for="edit_file">File Template (Kosongkan jika tidak ingin mengubah file)</x-label>
+                <x-input name="file_path" type="file" />
+                <small class="text-gray-500 dark:text-gray-400 mt-1">File saat ini: <span id="current_file"></span></small>
+            </div>
+
+            <div class="modal-action pt-4">
+                <button type="submit" class="btn rounded-md text-white btn-primary bg-blue-500">
+                    <i class="fas fa-save"></i>
+                    Update
+                </button>
+                <label for="edit-modal" class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
+            </div>
+        </form>
+        </div>
+        </div>
+
         <!-- Delete Modal -->
         <input type="checkbox" id="delete-template" class="modal-toggle" />
         <div class="modal modal-top px-3">
@@ -161,6 +201,10 @@
                         <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
                             <code class="text-sm font-mono text-purple-600 dark:text-purple-400">${SUB_KEGIATAN}</code>
                             <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Daftar sub kegiatan (dengan enter)</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                            <code class="text-sm font-mono text-purple-600 dark:text-purple-400">${DASAR_HUKUM}</code>
+                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Dasar Hukum</p>
                         </div>
                     </div>
                 </div>
@@ -584,6 +628,16 @@
 
             // Add active class to clicked tab
             event.target.classList.add('tab-active');
+        }
+
+        function setEditData(id, name, fileName) {
+            document.getElementById('editForm').action = `{{ url('admin/template') }}/${id}`;
+            document.getElementById('edit_name').value = name;
+            document.getElementById('current_file').textContent = fileName;
+        }
+
+        function downloadTemplate(id) {
+            window.location.href = `{{ url('admin/template/download') }}/${id}`;
         }
     </script>
 

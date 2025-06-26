@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Livewire;
 
 use App\Models\DasarHukum;
@@ -10,6 +11,7 @@ use Rappasoft\LaravelLivewireTables\DataTableComponent;
 use Rappasoft\LaravelLivewireTables\Views\Filters\NumberFilter;
 use Rappasoft\LaravelLivewireTables\Views\Filters\SelectFilter;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
+
 Carbon::setLocale('id');
 
 class PaketPekerjaanTable extends DataTableComponent
@@ -23,7 +25,6 @@ class PaketPekerjaanTable extends DataTableComponent
             ->setColumnSelectStatus(true)
             ->setFilterLayout('slide-down')
             ->setPerPageAccepted([10, 25, 50, 100, -1]);
-
     }
     public function builder(): \Illuminate\Database\Eloquent\Builder
     {
@@ -75,17 +76,17 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->searchable(),
 
             Column::make('Sub Kegiatan', 'paket_id')
-                ->format(function($value, $row) {
+                ->format(function ($value, $row) {
                     $data = PaketPekerjaan::with('subKegiatan')->find($value);
                     $subKegiatanList = $data->subKegiatan->first()->nama_sub_kegiatan ?? '';
                     return $subKegiatanList;
                 })
                 ->sortable()
                 ->searchable(function ($query, $searchTerm) {
-                        $query->orWhereHas('subKegiatan', function ($subQuery) use ($searchTerm) {
-                            $subQuery->where('nama_sub_kegiatan', 'like', "%{$searchTerm}%");
-                        });
-                  }),
+                    $query->orWhereHas('subKegiatan', function ($subQuery) use ($searchTerm) {
+                        $subQuery->where('nama_sub_kegiatan', 'like', "%{$searchTerm}%");
+                    });
+                }),
 
 
             Column::make('Satuan Kerja', 'satuanKerja.nama_pimpinan')
@@ -107,7 +108,7 @@ class PaketPekerjaanTable extends DataTableComponent
                                 <td class='p-2 border-b dark:border-gray-700 text-center'>" . ($index + 1) . "</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$subKegiatan->nama_sub_kegiatan}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$subKegiatan->no_rekening}</td>
-                                <td class='p-2 border-b dark:border-gray-700'>{$subKegiatan->gabungan}</td>
+                                <!-- <td class='p-2 border-b dark:border-gray-700'>{$subKegiatan->no_rekening} {$subKegiatan->nama_sub_kegiatan}</td> -->
                                 <td class='p-2 dark:border-gray-700'>{$subKegiatan->pendidikan}</td>
                             </tr>
 
@@ -122,7 +123,7 @@ class PaketPekerjaanTable extends DataTableComponent
                                             <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>No</th>
                                             <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Nama Sub Kegiatan</th>
                                             <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>No Rekening</th>
-                                            <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Gabungan</th>
+                                            <!-- <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Gabungan</th> -->
                                             <th class='p-2 text-left text-xs font-medium text-gray-500 dark:text-gray-300'>Pendidikan</th>
                                         </tr>
                                     </thead>
@@ -202,8 +203,8 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->options([
                     '' => 'Semua Sub Kegiatan',
                 ] + SubKegiatan::orderBy('nama_sub_kegiatan')
-                        ->pluck('nama_sub_kegiatan', 'sub_kegiatan_id')
-                        ->toArray())
+                    ->pluck('nama_sub_kegiatan', 'sub_kegiatan_id')
+                    ->toArray())
                 ->filter(function ($builder, $value) {
                     return $value
                         ? $builder->whereHas('subKegiatan', function ($query) use ($value) {
@@ -217,8 +218,8 @@ class PaketPekerjaanTable extends DataTableComponent
                 ->options([
                     '' => 'Semua Dasar Hukum',
                 ] + DasarHukum::orderBy('dasar_hukum')
-                        ->pluck('dasar_hukum', 'daskum_id')
-                        ->toArray())
+                    ->pluck('dasar_hukum', 'daskum_id')
+                    ->toArray())
                 ->filter(function ($builder, $value) {
                     return $value ? $builder->where('dasarHukum.daskum_id', $value) : $builder;
                 }),
@@ -255,10 +256,9 @@ class PaketPekerjaanTable extends DataTableComponent
 
                 ->filter(function ($builder, $value) {
                     return $value ? $builder->where('nilai_pagu_paket', '>=', $value) : $builder;
-
                 }),
 
-                NumberFilter::make('Minimal Pagu Anggaran')
+            NumberFilter::make('Minimal Pagu Anggaran')
                 ->config([
                     'min' => 0,
                     'step' => 1000000

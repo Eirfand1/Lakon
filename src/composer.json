@@ -6,8 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.3",
-        "cloudmersive/cloudmersive_document_convert_api_client": "^3.2",
-        "elibyy/tcpdf-laravel": "^11.2",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.10",
         "laravel/jetstream": "^4.2",
