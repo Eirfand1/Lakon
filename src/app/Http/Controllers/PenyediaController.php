@@ -9,6 +9,7 @@ use App\Models\Penyedia;
 use App\Models\SatuanKerja;
 use App\Models\User;
 use App\Models\Realisasi;
+use Carbon\Carbon;
 use Dotenv\Exception\ValidationException;
 use Hash;
 use Illuminate\Database\QueryException;
@@ -17,6 +18,8 @@ use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
+
+Carbon::setLocale('id');
 
 class PenyediaController extends Controller
 {
@@ -106,7 +109,7 @@ class PenyediaController extends Controller
             $validated['user_id'] = $user->id;
 
             // Simpan ke DB
-            Penyedia::create($validated); 
+            Penyedia::create($validated);
 
 
             return redirect()->back()->with('success', 'Registrasi berhasil ditambahkan!');
@@ -115,7 +118,7 @@ class PenyediaController extends Controller
         }
     }
 
-    
+
 
 
     public function update(Request $request, Penyedia $penyedia): RedirectResponse
@@ -173,7 +176,7 @@ class PenyediaController extends Controller
             $user = $penyedia->user;
             $penyedia->delete();
             $user->delete();
-            
+
             return redirect()->back()->with('success', 'Data berhasil dihapus.');
         } catch (QueryException $e) {
             return redirect()->back()
@@ -206,7 +209,11 @@ class PenyediaController extends Controller
             abort(403, 'Akun ini belum terdaftar sebagai penyedia.');
         }
 
-        return view('pages.penyedia.dashboard.dashboard', ['penyedia' => $user, 'kontrak' => $kontrak]);
+
+        return view('pages.penyedia.dashboard.dashboard', [
+            'penyedia' => $user,
+            'kontrak' => $kontrak,
+        ]);
     }
     public function permohonanKontrakIndex()
     {
@@ -231,12 +238,14 @@ class PenyediaController extends Controller
         return Excel::download(new PenyediaExport, 'penyedia.xlsx');
     }
 
-    public function verifikasi(Penyedia $penyedia){
+    public function verifikasi(Penyedia $penyedia)
+    {
         $penyedia->update(['is_verificated' => 1]);
         return redirect()->back()->with('success', 'Data berhasil diverifikasi!');
     }
 
-    public function batal_verifikasi(Penyedia $penyedia){
+    public function batal_verifikasi(Penyedia $penyedia)
+    {
         $penyedia->update(['is_verificated' => 0]);
         return redirect()->back()->with('success', 'Data berhasil dibatalkan!');
     }

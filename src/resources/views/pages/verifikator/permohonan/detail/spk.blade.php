@@ -51,9 +51,9 @@
                                     x-model="detail.nilaiDetail"
                                     placeholder="Nilai"
                                     @input="updateNilaiKontrak"
-                                    class="mt-1 block w-full dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 rounded-md detail-nilai-input"
+                                    class="mt-1 block detail-nilai-input"
                                 ></x-input>
-                                <input type="hidden" :name="'nilai_raw[' + index + ']'" x-model="detail.nilaiDetailRaw">
+                                <input type="hidden" x-bind:name="'nilai_raw[' + index + ']'" x-model="detail.nilaiDetailRaw">
                             </div>
                         </div>
                         <!-- Tombol Hapus di bawah tombol Detail -->

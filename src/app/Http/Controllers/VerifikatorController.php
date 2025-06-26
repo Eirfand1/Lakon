@@ -169,7 +169,7 @@ class VerifikatorController extends Controller
                 DetailKontrak::create([
                     'kontrak_id' => $kontrak_id,
                     'detail' => $detail,
-                    'nilai' => $request->nilai[$key]
+                    'nilai' => $request->nilai_raw[$key]
                 ]);
             }
         } else {

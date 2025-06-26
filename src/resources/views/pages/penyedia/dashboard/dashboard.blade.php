@@ -126,7 +126,9 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">{{ $row->paketPekerjaan->metode_pemilihan }}</td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700 dark:text-gray-300">
                                             @if($row->tgl_pembuatan)
-                                                <span class="font-medium">{{ $row->tgl_pembuatan }}</span>
+                                                <span class="font-medium">
+                                                    {{ \Carbon\Carbon::parse($row->tgl_pembuatan)->translatedFormat('d F Y') }}
+                                                </span>
                                             @else
                                                 <span class="text-gray-400 dark:text-gray-500">-</span>
                                             @endif
