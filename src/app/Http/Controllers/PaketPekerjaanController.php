@@ -24,8 +24,25 @@ class PaketPekerjaanController extends Controller
     public function index()
     {
         $pakets = PaketPekerjaan::with('subKegiatan')->get();
+
+        $nomor_matriks = PaketPekerjaan::select('paket_id')->orderBy('paket_id', 'DESC')->first();
+        $tracker = NoKontrakTracker::select('id_kontrak_last_year')->first();
+        $next_nomor_matrik = $nomor_matriks->paket_id - $tracker->id_kontrak_last_year + 1;
+
+        $tracker = NoKontrakTracker::first();
+        $tahun_saat_ini = $tracker->this_year;
+        if ($tahun_saat_ini != date('Y')) {
+            $tracker->update([
+                'id_kontrak_last_year' => $nomor_matriks->paket_id,
+                'this_year' => date('Y'),
+            ]);
+            $next_nomor_matrik = 1;
+        }
+        // buat jadi 3 digit dengan 0 di depan
+        $next_nomor_matrik = str_pad($next_nomor_matrik, 3, '0', STR_PAD_LEFT);
         return view('pages.admin.paket-pekerjaan.paket-pekerjaan', [
             "title" => "paket-pekerjaan",
+            "next_nomor_matrik" => $next_nomor_matrik,
             // "paket" => $pakets,
             "sekolah" => Sekolah::select('nama_sekolah', 'sekolah_id')->get(),
             "dasarHukum" => DasarHukum::select('dasar_hukum', 'daskum_id')->get(),
@@ -87,6 +104,7 @@ class PaketPekerjaanController extends Controller
     {
         // Validasi data
         $validatedData = $request->validate([
+            'nomor_matrik' => 'required|string|max:3|min:3',
             'nama_pekerjaan' => 'required|string|max:255',
             'waktu_paket' => 'required|date',
             'sub_kegiatan_id' => 'required|array',
@@ -107,6 +125,7 @@ class PaketPekerjaanController extends Controller
 
         // Buat paket pekerjaan
         $paketPekerjaan = PaketPekerjaan::create([
+            'nomor_matrik' => $validatedData['nomor_matrik'],
             'nama_pekerjaan' => $validatedData['nama_pekerjaan'],
             'waktu_paket' => $validatedData['waktu_paket'],
             'sumber_dana' => $validatedData['sumber_dana'],
@@ -121,29 +140,13 @@ class PaketPekerjaanController extends Controller
             'daskum_id' => $validatedData['daskum_id'],
             'kode_sirup' => $validatedData['kode_sirup'],
             'sekolah_id' => $validatedData['sekolah_id'],
-            'nomor_matrik' => "ERROR",
             'nomor_kontrak' => "ERROR",
         ]);
 
         $sumber_dana = $this->kode_sumber_dana($validatedData['sumber_dana']);
         $jenis = $this->kode_jenis_pengadaan($validatedData['jenis_pengadaan']);
 
-        $tracker = NoKontrakTracker::first();
-        $tahun_saat_ini = $tracker->this_year;
-        if ($tahun_saat_ini != date('Y')) {
-            $tracker->update([
-                'id_kontrak_last_year' => $paketPekerjaan->paket_id - 1,
-                'this_year' => date('Y'),
-            ]);
-        }
-        $id_tahun_lalu = $tracker->id_kontrak_last_year;
-        $nomor_matriks = $paketPekerjaan->paket_id - $id_tahun_lalu;
-
-        // nomor matrik
-        $paketPekerjaan->nomor_matrik = str_pad($nomor_matriks, 3, '0', STR_PAD_LEFT);
-
-        // nomor kontrak
-        $paketPekerjaan->nomor_kontrak = "400.3.13/{$paketPekerjaan->nomor_matrik}/{$sumber_dana}{$jenis}/".date('Y');
+        $paketPekerjaan->nomor_kontrak = "400.3.13/{$validatedData['nomor_matrik']}/{$sumber_dana}{$jenis}/".date('Y');
 
         $paketPekerjaan->save();
 
@@ -160,6 +163,7 @@ class PaketPekerjaanController extends Controller
     public function update(Request $request, PaketPekerjaan $paketPekerjaan)
     {
             $validatedData = $request->validate([
+                'nomor_matrik' => 'required|string|max:3|min:3',
                 'nama_pekerjaan' => 'required|string|max:255',
                 'waktu_paket' => 'required|date',
                 'sub_kegiatan_id' => 'required|array',
@@ -181,9 +185,10 @@ class PaketPekerjaanController extends Controller
             $sumber_dana = $this->kode_sumber_dana($validatedData['sumber_dana']);
             $jenis = $this->kode_jenis_pengadaan($validatedData['jenis_pengadaan']);
             $year = optional($paketPekerjaan->created_at)->format('Y') ?? now()->format('Y');
-            $paketPekerjaan->nomor_kontrak = "400.3.13/{$paketPekerjaan->nomor_matrik}/{$sumber_dana}{$jenis}/{$year}";
+            $paketPekerjaan->nomor_kontrak = "400.3.13/{$validatedData['nomor_matrik']}/{$sumber_dana}{$jenis}/{$year}";
 
             $paketPekerjaan->update([
+                'nomor_matrik' => $validatedData['nomor_matrik'],
                 'nama_pekerjaan' => $validatedData['nama_pekerjaan'],
                 'waktu_paket' => $validatedData['waktu_paket'],
                 'sumber_dana' => $validatedData['sumber_dana'],

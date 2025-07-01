@@ -1,5 +1,5 @@
 <x-app-layout>
-    
+
     <div class="p-5">
         <div class="mb-4 flex justify-between flex-wrap">
             <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">PAKET PEKERJAAN</h1>
@@ -19,12 +19,12 @@
                 <span>Tambah Data</span>
             </label>
         </div>
-        
+
     </div>
-    
-    
+
+
     <livewire:paket-pekerjaan-table />
-    
+
     <!-- Add Modal -->
     <input type="checkbox" id="add-modal" class="modal-toggle" />
     <div id="modal_matriks" class="modal modal-top px-3">
@@ -38,11 +38,17 @@
                 ✕
             </label>
         </div>
-        
+
         <form action="{{ route('admin.paket-pekerjaan.store') }}" method="POST" class="space-y-2 ">
             @csrf
+
+            <div class="flex w-full flex-col ">
+                <x-label for="nomor_matrik" class="w-full sm:w-1/4">Nomor Matrik</x-label>
+                <x-input type="text" name="nomor_matrik" id="" value="{{old('nomor_matrik', $next_nomor_matrik)}}" required />
+            </div>
+
             <h1 class="border-b font-bold border-gray-200 text-sm pb-2 dark:border-gray-700 ">PROGRAM KERJA</h1>
-            
+
             <div x-data="subKegiatanMultipleManager({{ json_encode($subKegiatan) }})" class="space-y-2">
                 <x-label for="sub_kegiatan">Sub Kegiatan</x-label>
                 <select name="sub_kegiatan_id[]"
@@ -51,7 +57,7 @@
                 multiple
                 x-ref="multipleSelect">
                 <template x-for="option in options" :key="option.sub_kegiatan_id">
-                    
+
                     <option :value="option.sub_kegiatan_id"
                     x-text="option.pendidikan ? '(' + option.pendidikan + ') ' + option.nama_sub_kegiatan : option.nama_sub_kegiatan">
                 </option>
@@ -61,8 +67,8 @@
         <span class="text-red-500 block text-sm">{{$message}}</span>
         @enderror
     </div>
-    
-    
+
+
     <div class="flex w-full flex-col pb-4">
         <x-label for="sumber_dana" class="w-full sm:w-1/4">Sumber dana</x-label>
         <select name="sumber_dana" id="sumber_dana"
@@ -83,15 +89,15 @@
         <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
         @enderror
     </div>
-    
-    
+
+
     <h1 class="border-y border-gray-200 text-sm font-bold py-3  dark:border-gray-700 ">PAKET PEKERJAAN
     </h1>
-    
+
     <div class="pt-2">
         <x-label for="paket">Paket</x-label>
         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-            
+
             <div class="sm:w-1/4 w-full">
                 <x-input type="text" name="kode_sirup" id="" placeholder="Kode Sirup"
                 value="{{old('kode_sirup')}}"
@@ -100,27 +106,27 @@
                 <span class="text-red-500 text-sm mt-1">{{ $message }}</span>
                 @enderror
             </div>
-            
-            
+
+
             <div class="sm:w-3/4 w-full">
                 <x-input type="text" name="nama_pekerjaan" id="" placeholder="Nama Paket"
                 value="{{old('nama_pekerjaan')}}" />
             </div>
         </div>
     </div>
-    
-    
-    
+
+
+
     <div x-data="sekolahSingleManager( {{ json_encode($sekolah) }})" x-init="init" class="w-full">
         <label for="sekolah_id" class="block mb-1">Sekolah (Optional)</label>
         <select x-ref="sekolahSelect" name="sekolah_id" id="sekolah_id"
         class="choices w-full {{ $errors->has('sekolah_id') ? 'border-red-500' : 'border-gray-200' }}">
-        
+
         <option selected disabled>Pilih Sekolah</option>
         <template x-for="option in options" :key="option.sekolah_id">
             <option :value="option.sekolah_id" x-text="option.nama_sekolah"></option>
         </template>
-        
+
     </select>
     @error('sekolah_id')
     <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
@@ -144,7 +150,7 @@
         <option value="E-Katalog" {{ old('metode_pemilihan') == 'E-Katalog' ? 'selected' : '' }}>E-Katalog</option>
         <option value="Swakelola" {{ old('metode_pemilihan') == 'Swakelola' ? 'selected' : '' }}>Swakelola</option>
     </select>
-    
+
     <select name="jenis_pengadaan" id=""
     class="w-3/4 text-sm rounded-lg bg-white h-10 dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
     required>
@@ -227,12 +233,12 @@
     <label for="daskum_id" class="block mb-1">Dasar Hukum</label>
     <select x-ref="daskumSelect" name="daskum_id" id="daskum_id"
     class="choices w-full {{ $errors->has('daskum_id') ? 'border-red-500' : 'border-gray-200' }}">
-    
+
     <option selected disabled>Pilih dasar hukum</option>
     <template x-for="option in options" :key="option.daskum_id">
         <option :value="option.daskum_id" x-text="option.dasar_hukum"></option>
     </template>
-    
+
 </select>
 @error('daskum_id')
 <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
@@ -251,44 +257,44 @@
         class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
         readonly />
     </div>
-    
+
     <div class="flex w-full flex-col ">
         <x-label for="jabatan" class="w-full sm:w-1/4">Jabatan</x-label>
         <x-input type="text" name="jabatan" id="" value="{{$satuanKerja->jabatan}}"
             class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
             readonly />
         </div>
-        
+
         <div class="flex w-full flex-col ">
             <x-label for="website" class="w-full sm:w-1/4">Website</x-label>
             <x-input type="text" name="website" id="" value="{{$satuanKerja->website}}"
                 class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                 readonly />
             </div>
-            
-            
+
+
             <div class="flex w-full flex-col ">
                 <x-label for="email" class="w-full sm:w-1/4">Email</x-label>
                 <x-input type="text" name="email" id="" value="{{$satuanKerja->email}}"
                     class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                     readonly />
                 </div>
-                
+
                 <div class="flex w-full flex-col ">
                     <x-label for="telp" class="w-full sm:w-1/4">Telepon</x-label>
                     <x-input type="text" name="telp" id="" value="{{$satuanKerja->telp}}"
                         class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                         readonly />
                     </div>
-                    
+
                     <div class="flex w-full flex-col ">
                         <x-label for="klpd" class="w-full sm:w-1/4">KLPD</x-label>
                         <x-input type="text" name="klpd" id="" value="{{$satuanKerja->klpd}}"
                             class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             readonly />
                         </div>
-                        
-                        
+
+
                         <div class="modal-action pt-4">
                             <button type="submit" class="btn rounded-md btn-primary text-white bg-blue-600">
                                 <i class="fas fa-save"></i>
@@ -301,7 +307,7 @@
                 </div>
                 <label class="modal-backdrop" for="add-modal">Close</label>
             </div>
-            
+
             <!-- Edit Modal -->
             <input type="checkbox" id="edit-modal" class="modal-toggle" />
             <div id="modal_matriks" class="modal modal-top px-3">
@@ -315,12 +321,18 @@
                         ✕
                     </label>
                 </div>
-                
+
                 <form method="POST" class="space-y-2 " id="edit-form">
                     @csrf
                     @method('PUT')
+
+                    <div class="flex w-full flex-col ">
+                        <x-label for="nomor_matrik" class="w-full sm:w-1/4">Nomor Matrik</x-label>
+                        <x-input type="text" name="nomor_matrik" id="nomor_matrik_edit" value="{{old('nomor_matrik')}}" required />
+                    </div>
+
                     <h1 class="border-b font-bold border-gray-200 text-sm pb-2 dark:border-gray-700 ">PROGRAM KERJA</h1>
-                    
+
                     <div x-data="subKegiatanMultipleManager({{ json_encode($subKegiatan) }})" class="space-y-2" id="sub-kegiatan-edit-manager">
                         <x-label for="sub_kegiatan">Sub Kegiatan</x-label>
                         <select name="sub_kegiatan_id[]"
@@ -339,9 +351,9 @@
                 <span class="text-sm text-red-500">{{$message}}</span>
                 @enderror
             </div>
-            
-            
-            
+
+
+
             {{-- sumber dana || DONE --}}
             <div class="flex w-full flex-col pb-4 ">
                 <x-label for="sumber_dana" class="w-full sm:w-1/4">Sumber dana</x-label>
@@ -359,15 +371,15 @@
                     <option value="Bantuan Pemerintah" {{ old('sumber_dana') == 'Bantuan Pemerintah' ? 'selected' : '' }}>Bantuan Pemerintah</option>
                 </select>
             </div>
-            
+
             {{-- paket pekerjaan || DONE --}}
             <h1 class="border-y border-gray-200 font-bold py-3 text-sm  dark:border-gray-700 ">PAKET PEKERJAAN
             </h1>
-            
+
             <div class="pt-2">
                 <x-label for="paket">Paket</x-label>
                 <div class="flex gap-2 flex-wrap sm:flex-nowrap">
-                    
+
                     <div class="sm:w-1/4 w-full">
                         <x-input type="text" name="kode_sirup" id="kode_sirup" placeholder="Kode Sirup"
                         class="{{ $errors->has('kode_sirup') ? 'border-red-500' : 'border-gray-200' }}"
@@ -376,21 +388,21 @@
                         <span class="text-red-500 text-sm mt-1">{{$message}}</span>
                         @enderror
                     </div>
-                    
+
                     <div class="sm:w-3/4 w-full">
                         <x-input type="text" name="nama_pekerjaan" id="nama_pekerjaan" placeholder="Nama Paket"
                         required />
                     </div>
                 </div>
             </div>
-            
-            
+
+
             <div x-data="sekolahSingleManager({{ json_encode($sekolah) }})"
             class="space-y-2"
             id="sekolah-edit-manager">
-            
+
             <x-label for="sekolah_id">Sekolah (Optional)</x-label>
-            
+
             <select name="sekolah_id"
             id="sekolah_single_edit"
             class="choices w-full {{ $errors->has('sekolah_id') ? 'border-red-500' : 'border-gray-200' }}"
@@ -400,19 +412,19 @@
                 <option :value="option.sekolah_id" x-text="option.nama_sekolah"></option>
             </template>
         </select>
-        
+
         @error('sekolah_id')
         <span class="text-sm text-red-500">{{ $message }}</span>
         @enderror
     </div>
-    
-    
-    
+
+
+
     <div class="flex w-full flex-col ">
         <x-label for="waktu_paket" class="w-full sm:w-1/4">Waktu Paket</x-label>
         <x-input type="date" name="waktu_paket" id="waktu_paket" required />
     </div>
-    
+
     <div class="flex w-full flex-col  ">
         <x-label for="metode_pemilihan" class="w-full sm:w-1/4">Pengadaan</x-label>
         <div class="flex gap-2 flex-wrap sm:flex-nowrap">
@@ -424,7 +436,7 @@
             <option value="E-Katalog">E-Katalog</option>
             <option value="Swakelola">Swakelola</option>
         </select>
-        
+
         <select name="jenis_pengadaan" id="jenis_pengadaan"
         class="w-3/4 rounded text-sm bg-white dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm"
         required>
@@ -527,43 +539,43 @@ required>
         class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
         readonly />
     </div>
-    
+
     <div class="flex w-full flex-col ">
         <x-label for="jabatan" class="w-full sm:w-1/4">Jabatan</x-label>
         <x-input type="text" name="jabatan" id="" value="{{$satuanKerja->jabatan}}"
             class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
             readonly />
         </div>
-        
+
         <div class="flex w-full flex-col ">
             <x-label for="website" class="w-full sm:w-1/4">Website</x-label>
             <x-input type="text" name="website" id="" value="{{$satuanKerja->website}}"
                 class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                 readonly />
             </div>
-            
-            
+
+
             <div class="flex w-full flex-col ">
                 <x-label for="email" class="w-full sm:w-1/4">Email</x-label>
                 <x-input type="text" name="email" id="" value="{{$satuanKerja->email}}"
                     class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                     readonly />
                 </div>
-                
+
                 <div class="flex w-full flex-col ">
                     <x-label for="telp" class="w-full sm:w-1/4">Telepon</x-label>
                     <x-input type="text" name="telp" id="" value="{{$satuanKerja->telp}}"
                         class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                         readonly />
                     </div>
-                    
+
                     <div class="flex w-full flex-col ">
                         <x-label for="klpd" class="w-full sm:w-1/4">KLPD</x-label>
                         <x-input type="text" name="klpd" id="" value="{{$satuanKerja->klpd}}"
                             class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
                             readonly />
                         </div>
-                        
+
                         <div class="modal-action pt-4">
                             <button type="submit" class="btn rounded-md text-white bg-blue-600 btn-primary">
                                 <i class="fas fa-save"></i>
@@ -576,8 +588,8 @@ required>
                 </div>
                 <label class="modal-backdrop" for="edit-modal">Close</label>
             </div>
-            
-            
+
+
             {{-- delete modal --}}
             <input type="checkbox" id="delete-modal" class="modal-toggle" />
             <div class="modal modal-top px-3">
@@ -601,16 +613,17 @@ required>
             <label class="modal-backdrop" for="delete-modal">Close</label>
         </div>
     </div>
-    
+
     <script>
-        
-        
-        
+
+
+
         function EditHandler(paket) {
             const form = document.getElementById('edit-form');
             form.action = `/admin/paket-pekerjaan/${paket.paket_id}`;
-            
+
             // INPUT BIASA
+            document.getElementById('nomor_matrik_edit').value = paket.nomor_matrik;
             document.getElementById('kode_sirup').value = paket.kode_sirup;
             document.getElementById('nama_pekerjaan').value = paket.nama_pekerjaan;
             document.getElementById('waktu_paket').value = paket.waktu_paket;
@@ -621,18 +634,18 @@ required>
             document.getElementById('nilai_pagu_anggaran_display_edit').value = 'Rp ' + formatNumber(paket.nilai_pagu_anggaran);
             document.getElementById('nilai_hps_display_edit').value = 'Rp ' + formatNumber(paket.nilai_hps);
             document.getElementById('tahun_anggaran').value = paket.tahun_anggaran;
-            
+
             // INPUT YANG ADA ALPINE
             // sekolah
             const sekolahEditManagerInstance = Alpine.$data(document.getElementById('sekolah-edit-manager'));
-            
+
             setTimeout(() => {
                 if (paket['sekolah.sekolah_id']) {
                     sekolahEditManagerInstance.setSelectedValue(paket['sekolah.sekolah_id']);
                 }
             }, 200);
             const sekolahManagerInstance = Alpine.$data(document.getElementById('sekolah-edit-manager'));
-            
+
             // dasar hukum
             const daskumEditManagerInstance = Alpine.$data(document.getElementById('daskum-edit-manager'));
             setTimeout(() => {
@@ -640,20 +653,20 @@ required>
                     daskumEditManagerInstance.setSelectedValue(paket['dasarHukum.daskum_id']);
                 }
             }, 200)
-            
+
             const daskumManagerInstance = Alpine.$data(document.getElementById('daskum-edit-manager'));
-            
+
             // subKegiatan - menggunakan Choices.js multiple select
             const subKegiatanEditManagerInstance = Alpine.$data(document.getElementById('sub-kegiatan-edit-manager'));
             if (paket.sub_kegiatan && paket.sub_kegiatan.length > 0) {
                 const selectedSubKegiatanIds = paket.sub_kegiatan.map(item => item.sub_kegiatan_id);
-                
+
                 // Tunggu sedikit untuk memastikan Choices.js sudah terinisialisasi
                 setTimeout(() => {
                     subKegiatanEditManagerInstance.setSelectedValues(selectedSubKegiatanIds);
                 }, 100);
             }
-            
+
             // INPUT TIPE SELECT
             // sumber dana
             const sumberDana = document.getElementById('sumber_dana');
@@ -662,7 +675,7 @@ required>
                     option.setAttribute("selected", true);
                 }
             });
-            
+
             // jenis pengadaan
             const jenis_pengadaan = document.getElementById('jenis_pengadaan');
             Array.from(jenis_pengadaan.options).forEach(option => {
@@ -670,7 +683,7 @@ required>
                     option.setAttribute("selected", true);
                 }
             });
-            
+
             // metode pemilihan
             const metode_pemilihan = document.getElementById('metode_pemilihan');
             Array.from(metode_pemilihan.options).forEach(option => {
@@ -685,16 +698,16 @@ required>
                 options: options,
                 choicesInstance: null,
                 selectedValues: [],
-                
+
                 init() {
                     this.$nextTick(() => {
                         this.initializeChoicesMultiple();
                     });
                 },
-                
+
                 initializeChoicesMultiple() {
                     const selectElement = this.$refs.multipleSelect;
-                    
+
                     if (selectElement && !this.choicesInstance) {
                         this.choicesInstance = new Choices(selectElement, {
                             removeItemButton: true,
@@ -741,42 +754,42 @@ required>
                                 noChoices: 'has-no-choices'
                             }
                         });
-                        
+
                         // Event listener untuk perubahan selection
                         selectElement.addEventListener('change', (event) => {
                             this.selectedValues = Array.from(event.target.selectedOptions).map(option => option.value);
                         });
-                        
+
                         selectElement.addEventListener('addItem', (event) => {
                             this.selectedValues.push(event.detail.value);
                         });
-                        
+
                         selectElement.addEventListener('removeItem', (event) => {
                             this.selectedValues = this.selectedValues.filter(val => val !== event.detail.value);
                         });
                     }
                 },
-                
+
                 // Method untuk set selected values (digunakan saat edit)
                 setSelectedValues(values) {
                     if (this.choicesInstance && Array.isArray(values)) {
                         // Clear existing selections
                         this.choicesInstance.removeActiveItems();
-                        
+
                         // Set new selections
                         values.forEach(value => {
                             this.choicesInstance.setChoiceByValue(value.toString());
                         });
-                        
+
                         this.selectedValues = values;
                     }
                 },
-                
+
                 // Method untuk mendapatkan selected values
                 getSelectedValues() {
                     return this.selectedValues;
                 },
-                
+
                 // Method untuk clear selections
                 clearSelections() {
                     if (this.choicesInstance) {
@@ -784,7 +797,7 @@ required>
                         this.selectedValues = [];
                     }
                 },
-                
+
                 // Destroy instance (untuk cleanup)
                 destroy() {
                     if (this.choicesInstance) {
@@ -794,15 +807,15 @@ required>
                 }
             }
         }
-       
+
 
 
         function setDeleteId(paket_id) {
             document.getElementById('deleteForm').action = `paket-pekerjaan/${paket_id}`;
         }
-        
+
         function daskumManager(options) {
-            
+
             // console.log("daskum options:", options);
             return {
                 options: options,
@@ -810,7 +823,7 @@ required>
                 filteredOptions: options,
                 showDropdown: false,
                 selectedOptionId: null,
-                
+
                 filterOptions() {
                     const searchTerm = this.search.toLowerCase();
                     this.filteredOptions = this.options.filter(option =>
@@ -818,7 +831,7 @@ required>
                     );
                     this.showDropdown = this.filteredOptions.length > 0;
                 },
-                
+
                 selectOption(option) {
                     this.search = option.dasar_hukum;
                     this.selectedOptionId = option.daskum_id;
@@ -826,23 +839,23 @@ required>
                 }
             }
         }
-        
-        
+
+
         function daskumSingleManager(options) {
             return {
                 options: options,
                 choicesInstance: null,
                 selectedValue: null,
-                
+
                 init() {
                     this.$nextTick(() => {
                         this.initializeChoicesSingle();
                     });
                 },
-                
+
                 initializeChoicesSingle() {
                     const selectElement = this.$refs.daskumSelect;
-                    
+
                     if (selectElement && !this.choicesInstance) {
                         this.choicesInstance = new Choices(selectElement, {
                             searchEnabled: true,
@@ -852,27 +865,27 @@ required>
                             noResultsText: 'Tidak ada hasil ditemukan',
                             noChoicesText: 'Tidak ada pilihan tersedia',
                         });
-                        
+
                         // Sync ke model Alpine
                         selectElement.addEventListener('change', (event) => {
                             this.selectedValue = event.target.value;
                         });
                     }
                 },
-                
+
                 setSelectedValue(value) {
                     console.log('Setting selected value:', value); // Debug log
-                    
+
                     if (this.choicesInstance && value) {
                         try {
                             // Pastikan value adalah string
                             const stringValue = value.toString();
-                            
+
                             // Cek apakah value ada dalam options
                             const validOption = this.options.find(option =>
                             option.daskum_id.toString() === stringValue
                             );
-                            
+
                             if (validOption) {
                                 this.choicesInstance.setChoiceByValue(stringValue);
                                 this.selectedValue = stringValue;
@@ -887,18 +900,18 @@ required>
                         console.warn('Choices instance not ready or value is empty');
                     }
                 },
-                
+
                 getSelectedValue() {
                     return this.selectedValue;
                 },
-                
+
                 clearSelection() {
                     if (this.choicesInstance) {
                         this.choicesInstance.removeActiveItems();
                         this.selectedValue = null;
                     }
                 },
-                
+
                 destroy() {
                     if (this.choicesInstance) {
                         this.choicesInstance.destroy();
@@ -907,23 +920,23 @@ required>
                 }
             }
         }
-                
-        
+
+
         function sekolahSingleManager(options) {
             return {
                 options: options,
                 choicesInstance: null,
                 selectedValue: null,
-                
+
                 init() {
                     this.$nextTick(() => {
                         this.initializeChoicesSingle();
                     });
                 },
-                
+
                 initializeChoicesSingle() {
                     const selectElement = this.$refs.sekolahSelect;
-                    
+
                     if (selectElement && !this.choicesInstance) {
                         this.choicesInstance = new Choices(selectElement, {
                             searchEnabled: true,
@@ -933,27 +946,27 @@ required>
                             noResultsText: 'Tidak ada hasil ditemukan',
                             noChoicesText: 'Tidak ada pilihan tersedia',
                         });
-                        
+
                         // Sync ke model Alpine
                         selectElement.addEventListener('change', (event) => {
                             this.selectedValue = event.target.value;
                         });
                     }
                 },
-                
+
                 setSelectedValue(value) {
                     console.log('Setting selected value:', value); // Debug log
-                    
+
                     if (this.choicesInstance && value) {
                         try {
                             // Pastikan value adalah string
                             const stringValue = value.toString();
-                            
+
                             // Cek apakah value ada dalam options
                             const validOption = this.options.find(option =>
                             option.sekolah_id.toString() === stringValue
                             );
-                            
+
                             if (validOption) {
                                 this.choicesInstance.setChoiceByValue(stringValue);
                                 this.selectedValue = stringValue;
@@ -968,18 +981,18 @@ required>
                         console.warn('Choices instance not ready or value is empty');
                     }
                 },
-                
+
                 getSelectedValue() {
                     return this.selectedValue;
                 },
-                
+
                 clearSelection() {
                     if (this.choicesInstance) {
                         this.choicesInstance.removeActiveItems();
                         this.selectedValue = null;
                     }
                 },
-                
+
                 destroy() {
                     if (this.choicesInstance) {
                         this.choicesInstance.destroy();
@@ -988,15 +1001,15 @@ required>
                 }
             }
         }
-        
+
         function formatRupiah(input, hiddenInputId) {
             // Hapus semua karakter selain angka
             let value = input.value.replace(/[^\d]/g, '');
-            
+
             // Simpan nilai original di hidden input
             document.getElementById(hiddenInputId).value = value;
             document.getElementById(hiddenInputId + '_edit').value = value;
-            
+
             // Format dengan number_format
             if (value) {
                 let formattedValue = formatNumber(value);
@@ -1005,11 +1018,11 @@ required>
                 input.value = '';
             }
         }
-        
+
         function formatNumber(number) {
             return new Intl.NumberFormat('id-ID').format(number);
         }
-        
-        
+
+
     </script>
 </x-app-layout>
