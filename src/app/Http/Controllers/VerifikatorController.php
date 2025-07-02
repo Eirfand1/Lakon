@@ -263,12 +263,14 @@ class VerifikatorController extends Controller
         $kontrak = Kontrak::where('kontrak_id', $kontrak_id)->first();
         $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
         $nilai_hps = PaketPekerjaan::with('kontrak')->where('paket_id', $kontrak->paket_id)->first()->nilai_hps;
+        $nomor_kontrak = PaketPekerjaan::with('kontrak')->where('paket_id', $kontrak->paket_id)->first()->nomor_kontrak;
+        $noSpmk = preg_replace('/\/(\d+)\//', '/$1.a/', $nomor_kontrak);
         $totalBiaya = $rincianBelanja->sum('total_harga');
-        $ppn = $totalBiaya * 0.11;
 
         return view('pages.verifikator.permohonan.detail-permohonan', [
             'kontrak' => $kontrak,
             'nilai_hps' => $nilai_hps,
+            'noSpmk' => $noSpmk,
             'penerima' => Penerima::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'dokumen_penagihan' => DokumenKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->where('jenis', 'penagihan')->get(),
             'dokumen_pekerjaan' => DokumenKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->where('jenis', 'pekerjaan')->get(),
@@ -280,7 +282,6 @@ class VerifikatorController extends Controller
             'jadwalKegiatan' => JadwalKegiatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'rincianBelanja' => $rincianBelanja,
             'totalBiaya' => $totalBiaya,
-            'ppn' => $ppn,
             'peralatan' => Peralatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'ruangLingkup' => RuangLingkup::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'detail' => DetailKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),

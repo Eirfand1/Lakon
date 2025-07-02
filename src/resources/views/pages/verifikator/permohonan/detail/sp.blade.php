@@ -1,15 +1,14 @@
 <div class="w-full h-10 mb-8 rounded flex items-center bg-blue-500">
-    <h1 class="font-bold text-gray-100 ml-4">Surat Pesanan</h1>
+    <h1 class="font-bold text-gray-100 ml-4">Surat Pesanan / Surat Perintah Mulai Kerja</h1>
 </div>
 
 <form action="sp/{{ $kontrak->kontrak_id }}" method="POST">
 @csrf
-
     <div class="mb-8">
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">
             <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor SP</label>
-            <x-input type="text" name="nomor_sp" value="{{ $kontrak->nomor_sp }}"></x-input>
+            <x-input type="text" name="nomor_sp" value="{{ $noSpmk }}" readonly></x-input>
         </div>
 
         <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg mb-4">

@@ -237,7 +237,7 @@
     </div>
 
     @if ($kontrak->tgl_pembuatan)
-    <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
+    <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl" id="lampiran">
         <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-6">Lampiran Dokumen</h2>
 
         @php
@@ -319,4 +319,17 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const hash = window.location.hash;
+            if (hash === "#lampiran") {
+                const target = document.getElementById("lampiran");
+                if (target) {
+                    target.scrollIntoView({ behavior: "smooth" });
+                }
+            }
+        });
+    </script>
+
 </x-app-layout>
