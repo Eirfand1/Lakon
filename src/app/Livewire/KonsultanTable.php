@@ -53,7 +53,7 @@ class KonsultanTable extends DataTableComponent
                 ->hideIf(true)
                 ->searchable(),
 
-            Column::make("No Kontrak", "no_kontrak")
+            Column::make("No Kontrak", "paketPekerjaan.nomor_kontrak")
                 ->sortable()
                 ->searchable(),
 

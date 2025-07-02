@@ -15,10 +15,10 @@ class DashboardController extends Controller
     {
         $profile_pimpinan = SatuanKerja::where('satker_id', '=', '1')->firstOrFail();
         $paket_pekerjaan = PaketPekerjaan::count();
-        $tender = PaketPekerjaan::where('jenis_pengadaan', 'Tender')->count();
-        $non_tender = PaketPekerjaan::where('jenis_pengadaan', 'Non Tender')->count();
-        $e_catalog = PaketPekerjaan::where('jenis_pengadaan', 'E-Katalog')->count();
-        $swakelola = PaketPekerjaan::where('jenis_pengadaan', 'Swakelola')->count();
+        $tender = PaketPekerjaan::where('metode_pemilihan', 'Tender')->count();
+        $non_tender = PaketPekerjaan::where('metode_pemilihan', 'Non Tender')->count();
+        $e_catalog = PaketPekerjaan::where('metode_pemilihan', 'E-Katalog')->count();
+        $swakelola = PaketPekerjaan::where('metode_pemilihan', 'Swakelola')->count();
         $dataFeed = new DataFeed();
         $permohonan_kontrak = Kontrak::whereIsVerificated(false)->count();
 
