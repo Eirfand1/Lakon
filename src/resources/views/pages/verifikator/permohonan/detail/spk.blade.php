@@ -130,7 +130,7 @@
     </div>
 
     <div class="h-10 mt-6 mb-8 rounded-md flex items-center bg-green-500">
-        <button type="submit" class="w-full bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-md">
+        <button id="button_submit_spk" type="submit" class="w-full bg-green-500 hover:bg-green-700 text-white py-2 px-4 rounded-md">
             <i class="fa-solid fa-check"></i>
             Simpan Data Surat Perintah Kerja
         </button>
@@ -147,16 +147,27 @@
                 return;
             }
 
+            let button_submit = document.getElementById("button_submit_spk");
+
             if (too_long) {
                 terbilang_input.value = "Nilai kontrak terlalu besar";
                 terbilang_input.classList.add("text-red-600", "dark:text-red-600");
+                button_submit.disabled = true;
+                button_submit.classList.remove("bg-green-500, hover:bg-green-700");
+                button_submit.classList.add("cursor-not-allowed, bg-gray-500, hover:bg-gray-700");
                 return;
             } else if (input > nilai_hps) {
                 terbilang_input.value = "Nilai kontrak melebihi nilai HPS: " + nilai_hps.toLocaleString("id-ID");
                 terbilang_input.classList.add("text-red-600", "dark:text-red-600");
+                button_submit.disabled = true;
+                button_submit.classList.remove("bg-green-500", "hover:bg-green-700");
+                button_submit.classList.add("cursor-not-allowed", "bg-gray-500", "hover:bg-gray-700");
                 return;
             } else {
                 terbilang_input.classList.remove("text-red-600", "dark:text-red-600");
+                button_submit.disabled = false;
+                button_submit.classList.remove("cursor-not-allowed", "bg-gray-500", "hover:bg-gray-700");
+                button_submit.classList.add("bg-green-500", "hover:bg-green-700");
             }
 
             const convert = numberToText.convertToText(input, { language: 'id' });
