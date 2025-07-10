@@ -8,8 +8,6 @@
 .choices__inner {
     background-color: white !important;
     border-radius: 7px !important;
-    height: 8px !important;
-    
 }
 
 .dark .choices__inner:focus-within {
