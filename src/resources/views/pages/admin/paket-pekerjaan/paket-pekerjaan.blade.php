@@ -26,7 +26,7 @@
     <livewire:paket-pekerjaan-table />
 
     <!-- Add Modal -->
-    <input type="checkbox" id="add-modal" class="modal-toggle" />
+    <input type="checkbox" id="add-modal" class="modal-toggle" {{ $errors->any() ? 'checked' : '' }} />
     <div id="modal_matriks" class="modal modal-top px-3">
         <div class="modal-box max-w-[55rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
             <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">
@@ -59,7 +59,8 @@
                 <template x-for="option in options" :key="option.sub_kegiatan_id">
 
                     <option :value="option.sub_kegiatan_id"
-                    x-text="option.pendidikan ? '(' + option.pendidikan + ') ' + option.nama_sub_kegiatan : option.nama_sub_kegiatan">
+                    x-text="option.pendidikan ? '(' + option.pendidikan + ') ' + option.nama_sub_kegiatan : option.nama_sub_kegiatan"
+                    :selected="({{ json_encode(old('sub_kegiatan_id', [])) }}).includes(String(option.sub_kegiatan_id))">
                 </option>
             </template>
         </select>
@@ -124,7 +125,7 @@
 
         <option selected disabled>Pilih Sekolah</option>
         <template x-for="option in options" :key="option.sekolah_id">
-            <option :value="option.sekolah_id" x-text="option.nama_sekolah"></option>
+            <option :value="option.sekolah_id" x-text="option.nama_sekolah" x-bind:selected="option.sekolah_id == {{old('sekolah_id')}} ? 'selected' : ''"></option>
         </template>
 
     </select>
@@ -236,7 +237,7 @@
 
     <option selected disabled>Pilih dasar hukum</option>
     <template x-for="option in options" :key="option.daskum_id">
-        <option :value="option.daskum_id" x-text="option.dasar_hukum"></option>
+        <option :value="option.daskum_id" x-text="option.dasar_hukum" :selected="option.daskum_id == {{ json_encode(old('daskum_id')) }}"></option>
     </template>
 
 </select>
