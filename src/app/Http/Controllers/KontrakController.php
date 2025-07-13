@@ -8,6 +8,7 @@ use App\Models\Ppkom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Tim;
@@ -520,27 +521,22 @@ class KontrakController extends Controller
             $templateProcessor->saveAs($outputDocx);
 
             $format = $request->format ?? 'pdf';
-            if ($format == 'docx') {
-                return response()->download($outputDocx,  $kontrak->paketPekerjaan->paket_id . ". " . $kontrak->paketPekerjaan->nama_paket_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').docx')->deleteFileAfterSend(true);
-            } else {
-                $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
-                $process = new Process([
-                    'unoconv',
-                    '-f',
-                    'pdf',
-                    '-o',
-                    $outputPdf,
-                    $outputDocx
-                ], null, [
-                    'HOME' => '/tmp/libreoffice-profile'
-                ]);
-                $process->run();
-                if (!$process->isSuccessful()) {
-                    throw new ProcessFailedException($process);
+
+            $response = Http::timeout(60) // Set timeout 60 detik
+            ->attach('file', file_get_contents($outputDocx), 'document.docx')
+            ->post('http://localhost:3000/convert/docx-to-pdf');
+
+            if ($response->successful()) {
+                
+                file_put_contents($outputPdf, $response->body());
+                
+                
+                if (file_exists($outputDocx)) {
+                    unlink($outputDocx);
                 }
-
-                $filename = $kontrak->paketPekerjaan->nomor_matrik . ". " . $kontrak->paketPekerjaan->nama_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf';
-
+                
+                $filename = $kontrak->paketPekerjaan->nomor_matrik . ". Kontrak " . $kontrak->paketPekerjaan->nama_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf';
+                
                 return response()->file($outputPdf, [
                     'Content-Type' => 'application/pdf',
                     'Content-Disposition' => 'inline; filename="' . $filename . '"',
