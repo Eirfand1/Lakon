@@ -522,25 +522,29 @@ class KontrakController extends Controller
 
             $format = $request->format ?? 'pdf';
 
-            $response = Http::timeout(60) // Set timeout 60 detik
-            ->attach('file', file_get_contents($outputDocx), 'document.docx')
-            ->post('http://localhost:3000/convert/docx-to-pdf');
+            if ($format == 'docx') {
+                return response()->download($outputDocx, $kontrak->paketPekerjaan->nomor_matrik . ". Kontrak " . $kontrak->paketPekerjaan->nama_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').docx')->deleteFileAfterSend(true);
+            } else {
+                $response = Http::timeout(60) // Set timeout 60 detik
+                ->attach('file', file_get_contents($outputDocx), 'document.docx')
+                ->post('http://localhost:3000/convert/docx-to-pdf');
 
-            if ($response->successful()) {
-                
-                file_put_contents($outputPdf, $response->body());
-                
-                
-                if (file_exists($outputDocx)) {
-                    unlink($outputDocx);
-                }
-                
-                $filename = $kontrak->paketPekerjaan->nomor_matrik . ". Kontrak " . $kontrak->paketPekerjaan->nama_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf';
-                
-                return response()->file($outputPdf, [
-                    'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename="' . $filename . '"',
-                ])->deleteFileAfterSend(true);
+                if ($response->successful()) {
+                    
+                    file_put_contents($outputPdf, $response->body());
+                    
+                    
+                    if (file_exists($outputDocx)) {
+                        unlink($outputDocx);
+                    }
+                    
+                    $filename = $kontrak->paketPekerjaan->nomor_matrik . ". Kontrak " . $kontrak->paketPekerjaan->nama_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf';
+                    
+                    return response()->file($outputPdf, [
+                        'Content-Type' => 'application/pdf',
+                        'Content-Disposition' => 'inline; filename="' . $filename . '"',
+                    ])->deleteFileAfterSend(true);
+                }    
             }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengexport PDF: ' . $e->getMessage());
