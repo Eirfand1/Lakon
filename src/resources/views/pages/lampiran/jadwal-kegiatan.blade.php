@@ -31,7 +31,7 @@
         </thead>
         <tbody>
             <tr>
-                <form action="jadwal-kegiatan" method="POST">
+                <form action="{{ route('jadwal-kegiatan.store') }}" method="POST">
                     @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="jadwal_kegiatan_id" id="jadwalKegiatanId">
@@ -139,6 +139,9 @@
     }
 
     function deleteJadwalKegiatan(id) {
-        document.getElementById('deleteForm').action = `jadwal-kegiatan/${id}`;
+        const baseUrl = @json(route('jadwal-kegiatan.destroy', ['jadwal_kegiatan' => '__ID__']));
+        const actionUrl = baseUrl.replace('__ID__', id);
+        document.getElementById('deleteForm').action = actionUrl;
+
     }
 </script>

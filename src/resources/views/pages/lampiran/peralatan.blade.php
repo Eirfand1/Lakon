@@ -23,7 +23,7 @@
         </thead>
         <tbody>
             <tr>
-                <form action="peralatan" method="POST">
+                <form action="{{ route('peralatan.store') }}" method="POST">
                     @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="peralatan_id" id="peralatanId">
@@ -53,7 +53,7 @@
                 <td class="text-center border border-gray-400/30">
                     <select name="status_kepemilikan" class="w-full dark:bg-gray-800 rounded" id="statusKepemilikan">
                         <option value="">Pilih Status Kepemilikan</option>
-                        <option value="Milik">Milik</option>
+                        <option value="Milik sendiri">Milik sendiri</option>
                         <option value="Sewa">Sewa</option>
                     </select>
                 </td>
@@ -110,7 +110,10 @@
 
     }
 
+
     function deletePeralatan(id) {
-        document.getElementById('deleteForm').action = `peralatan/${id}`;
+        const baseUrl = @json(route('peralatan.destroy', ['peralatan' => '__ID__']));
+        const actionUrl = baseUrl.replace('__ID__', id);
+        document.getElementById('deleteForm').action = actionUrl;
     }
 </script>

@@ -302,7 +302,7 @@
 
         @include($view . "tim")
         @include($view . "jadwal-kegiatan")
-        @include($view . "rincian-belanja")
+        @include($view . "rincian-barang")
         @include($view . "peralatan")
     </div>
 
