@@ -139,14 +139,14 @@ class PaketPekerjaanController extends Controller
             'ppkom_id' => $validatedData['ppkom_id'],
             'daskum_id' => $validatedData['daskum_id'],
             'kode_sirup' => $validatedData['kode_sirup'],
-            'sekolah_id' => $validatedData['sekolah_id'],
+            'sekolah_id' => $validatedData['sekolah_id'] ?? null,
             'nomor_kontrak' => "ERROR",
         ]);
 
         $sumber_dana = $this->kode_sumber_dana($validatedData['sumber_dana']);
         $jenis = $this->kode_jenis_pengadaan($validatedData['jenis_pengadaan']);
 
-        $paketPekerjaan->nomor_kontrak = "400.3.13/{$validatedData['nomor_matrik']}/{$sumber_dana}{$jenis}/".date('Y');
+        $paketPekerjaan->nomor_kontrak = "400.3.13/{$validatedData['nomor_matrik']}/{$sumber_dana}{$jenis}/" . date('Y');
 
         $paketPekerjaan->save();
 
@@ -162,61 +162,61 @@ class PaketPekerjaanController extends Controller
 
     public function update(Request $request, PaketPekerjaan $paketPekerjaan)
     {
-            $validatedData = $request->validate([
-                'nomor_matrik' => 'required|string|max:3|min:3',
-                'nama_pekerjaan' => 'required|string|max:255',
-                'waktu_paket' => 'required|date',
-                'sub_kegiatan_id' => 'required|array',
-                'sub_kegiatan_id.*' => 'exists:sub_kegiatan,sub_kegiatan_id',
-                'sumber_dana' => 'required|string|max:255',
-                'kode_sirup' => 'required|numeric|unique:paket_pekerjaan,kode_sirup,' . $paketPekerjaan->paket_id . ',paket_id',
-                'jenis_pengadaan' => 'required|string|max:255',
-                'metode_pemilihan' => 'required|string|max:255',
-                'nilai_pagu_paket' => 'required|numeric',
-                'nilai_pagu_anggaran' => 'required|numeric',
-                'nilai_hps' => 'required|numeric',
-                'daskum_id' => 'exists:dasar_hukum,daskum_id',
-                'ppkom_id' => 'exists:ppkom,ppkom_id',
-                'satker_id' => 'exists:satuan_kerja,satker_id',
-                'tahun_anggaran' => 'required|numeric|min:1000|max:2999',
-                'sekolah_id' => 'nullable|numeric'
+        $validatedData = $request->validate([
+            'nomor_matrik' => 'required|string|max:3|min:3',
+            'nama_pekerjaan' => 'required|string|max:255',
+            'waktu_paket' => 'required|date',
+            'sub_kegiatan_id' => 'required|array',
+            'sub_kegiatan_id.*' => 'exists:sub_kegiatan,sub_kegiatan_id',
+            'sumber_dana' => 'required|string|max:255',
+            'kode_sirup' => 'required|numeric|unique:paket_pekerjaan,kode_sirup,' . $paketPekerjaan->paket_id . ',paket_id',
+            'jenis_pengadaan' => 'required|string|max:255',
+            'metode_pemilihan' => 'required|string|max:255',
+            'nilai_pagu_paket' => 'required|numeric',
+            'nilai_pagu_anggaran' => 'required|numeric',
+            'nilai_hps' => 'required|numeric',
+            'daskum_id' => 'exists:dasar_hukum,daskum_id',
+            'ppkom_id' => 'exists:ppkom,ppkom_id',
+            'satker_id' => 'exists:satuan_kerja,satker_id',
+            'tahun_anggaran' => 'required|numeric|min:1000|max:2999',
+            'sekolah_id' => 'nullable|numeric'
+        ]);
+
+        $sumber_dana = $this->kode_sumber_dana($validatedData['sumber_dana']);
+        $jenis = $this->kode_jenis_pengadaan($validatedData['jenis_pengadaan']);
+        $year = optional($paketPekerjaan->created_at)->format('Y') ?? now()->format('Y');
+        $paketPekerjaan->nomor_kontrak = "400.3.13/{$validatedData['nomor_matrik']}/{$sumber_dana}{$jenis}/{$year}";
+
+        $paketPekerjaan->update([
+            'nomor_matrik' => $validatedData['nomor_matrik'],
+            'nama_pekerjaan' => $validatedData['nama_pekerjaan'],
+            'waktu_paket' => $validatedData['waktu_paket'],
+            'sumber_dana' => $validatedData['sumber_dana'],
+            'tahun_anggaran' => $validatedData['tahun_anggaran'],
+            'satker_id' => $validatedData['satker_id'],
+            'metode_pemilihan' => $validatedData['metode_pemilihan'],
+            'jenis_pengadaan' => $validatedData['jenis_pengadaan'],
+            'nilai_pagu_paket' => $validatedData['nilai_pagu_paket'],
+            'nilai_pagu_anggaran' => $validatedData['nilai_pagu_anggaran'],
+            'nilai_hps' => $validatedData['nilai_hps'],
+            'ppkom_id' => $validatedData['ppkom_id'],
+            'daskum_id' => $validatedData['daskum_id'],
+            'kode_sirup' => $validatedData['kode_sirup'],
+            'sekolah_id' => $validatedData['sekolah_id']
+        ]);
+
+        // Hapus semua data yang memiliki paket_id yang sama
+        PaketSubKegiatan::where('paket_id', $paketPekerjaan->paket_id)->delete();
+
+        // simpan id di tabel pivot
+        foreach ($validatedData['sub_kegiatan_id'] as $subKegiatanId) {
+            PaketSubKegiatan::create([
+                'paket_id' => $paketPekerjaan->paket_id,
+                'sub_kegiatan_id' => $subKegiatanId,
             ]);
+        }
 
-            $sumber_dana = $this->kode_sumber_dana($validatedData['sumber_dana']);
-            $jenis = $this->kode_jenis_pengadaan($validatedData['jenis_pengadaan']);
-            $year = optional($paketPekerjaan->created_at)->format('Y') ?? now()->format('Y');
-            $paketPekerjaan->nomor_kontrak = "400.3.13/{$validatedData['nomor_matrik']}/{$sumber_dana}{$jenis}/{$year}";
-
-            $paketPekerjaan->update([
-                'nomor_matrik' => $validatedData['nomor_matrik'],
-                'nama_pekerjaan' => $validatedData['nama_pekerjaan'],
-                'waktu_paket' => $validatedData['waktu_paket'],
-                'sumber_dana' => $validatedData['sumber_dana'],
-                'tahun_anggaran' => $validatedData['tahun_anggaran'],
-                'satker_id' => $validatedData['satker_id'],
-                'metode_pemilihan' => $validatedData['metode_pemilihan'],
-                'jenis_pengadaan' => $validatedData['jenis_pengadaan'],
-                'nilai_pagu_paket' => $validatedData['nilai_pagu_paket'],
-                'nilai_pagu_anggaran' => $validatedData['nilai_pagu_anggaran'],
-                'nilai_hps' => $validatedData['nilai_hps'],
-                'ppkom_id' => $validatedData['ppkom_id'],
-                'daskum_id' => $validatedData['daskum_id'],
-                'kode_sirup' => $validatedData['kode_sirup'],
-                'sekolah_id' => $validatedData['sekolah_id']
-            ]);
-
-            // Hapus semua data yang memiliki paket_id yang sama
-            PaketSubKegiatan::where('paket_id', $paketPekerjaan->paket_id)->delete();
-
-            // simpan id di tabel pivot
-            foreach ($validatedData['sub_kegiatan_id'] as $subKegiatanId) {
-                PaketSubKegiatan::create([
-                    'paket_id' => $paketPekerjaan->paket_id,
-                    'sub_kegiatan_id' => $subKegiatanId,
-                ]);
-            }
-
-            return redirect()->back()->with('success', 'Data berhasil diperbarui.');
+        return redirect()->back()->with('success', 'Data berhasil diperbarui.');
     }
 
     public function destroy(PaketPekerjaan $paket_pekerjaan): RedirectResponse
@@ -259,5 +259,4 @@ class PaketPekerjaanController extends Controller
     {
         return Excel::download(new PaketPekerjaanExport, 'paket-pekerjaan.xlsx');
     }
-
 }

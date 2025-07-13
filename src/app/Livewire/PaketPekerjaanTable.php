@@ -47,7 +47,9 @@ class PaketPekerjaanTable extends DataTableComponent
         return [
             Column::make('Nomor Matrik', 'nomor_matrik')
                 ->searchable()
-                ->sortable(),
+                ->sortable(function ($builder, $direction) {
+                    return $builder->orderByRaw('CAST(nomor_matrik AS UNSIGNED) ' . $direction);
+                }),
 
             Column::make("Aksi", "paket_id")
                 ->format(fn($value, $row) => view('pages.admin.paket-pekerjaan.actions', ['paket' => $row])),

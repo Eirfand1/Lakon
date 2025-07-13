@@ -8,6 +8,7 @@ use App\Models\Ppkom;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Tim;
@@ -26,62 +27,59 @@ use Symfony\Component\Process\Exception\ProcessFailedException;
 Carbon::setLocale('id');
 
 
-
-
-class KontrakController extends Controller
-{
+class KontrakController extends Controller {
     //
     public function index()
     {
         return view("pages.admin.riwayat-kontrak.riwayat-kontrak", ['title' => 'riwayat kontrak']);
     }
-
+    
     public function show(Kontrak $kontrak)
     {
         $kontrak = Kontrak::where('kontrak_id', $kontrak->kontrak_id)
-            ->with(['verifikator', 'penyedia', 'satuanKerja', 'paketPekerjaan'])
-            ->first();
-
+        ->with(['verifikator', 'penyedia', 'satuanKerja', 'paketPekerjaan'])
+        ->first();
+        
         $templates = Template::all();
-
+        
         if (Auth::user()->role == 'admin') {
             return view('pages.admin.riwayat-kontrak.detail-kontrak', [
                 'kontrak' => $kontrak,
                 'templates' => $templates
             ]);
         }
-
+        
         return view('pages.verifikator.riwayat.detail-kontrak', [
             'kontrak' => $kontrak,
             'templates' => $templates
         ]);
     }
-
+    
     public function updateTemplate(Kontrak $kontrak, Request $request)
     {
         $request->validate([
             'template_id' => 'nullable|exists:templates,template_id',
         ]);
-
+        
         $kontrak->update([
             'template_id' => $request->template_id,
         ]);
-
+        
         return redirect()->route('admin.riwayat-kontrak.show', $kontrak->kontrak_id)
-            ->with('success', 'Template berhasil disimpan.');
+        ->with('success', 'Template berhasil disimpan.');
     }
-
+    
     public function exportKontrak()
     {
         return Excel::download(new KontrakExport, 'kontrak.xlsx');
     }
-
-
+    
+    
     public function store(Request $request)
     {
         try {
             $penyediaId = auth()->user()->penyedia->penyedia_id;
-
+            
             $kontrak = Kontrak::create([
                 'paket_id' => $request->paket_id,
                 'jenis_kontrak' => $request->jenis_pengadaan,
@@ -90,19 +88,19 @@ class KontrakController extends Controller
                 'satker_id' => 1,
                 'is_verificated' => false
             ]);
-
+            
             return redirect()->route('penyedia.permohonan-kontrak.edit', ['kontrak' => $kontrak->kontrak_id])->with('success', 'Kontrak berhasil dibuat');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage());
         }
     }
-
+    
     public function edit(Kontrak $kontrak,)
     {
         $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
         $totalBiaya = $rincianBelanja->sum('total_harga');
         $ppn = $totalBiaya * 0.11;
-
+        
         return view('pages.penyedia.permohonan-kontrak.edit-kontrak', [
             'kontrak' => $kontrak,
             'tim' => Tim::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
@@ -114,30 +112,30 @@ class KontrakController extends Controller
             'ruangLingkup' => RuangLingkup::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
         ]);
     }
-
+    
     public function update(Request $request, Kontrak $kontrak)
     {
         try {
             if ($kontrak->penyedia_id !== auth()->user()->penyedia->penyedia_id) {
                 abort(403, 'Unauthorized action.');
             }
-
+            
             $validatedData = $request->validate([
                 // tender
                 'nomor_sppbj' => 'nullable|string|max:255',
                 'tgl_sppbj' => 'nullable|date',
                 'nomor_penetapan_pemenang' => 'nullable|string|max:255',
                 'tgl_penetapan_pemenang' => 'nullable|date',
-
+                
                 // non tender
                 'nomor_dppl' => 'nullable|string|max:255',
                 'tgl_dppl' => 'nullable|date',
                 'nomor_bahpl' => 'nullable|string|max:255',
                 'tgl_bahpl' => 'nullable|date',
-
+                
                 'berkas_penawaran' => 'nullable|file|mimes:pdf|max:10240',
             ]);
-
+            
             if ($request->hasFile('berkas_penawaran')) {
                 $pdf = $request->file('berkas_penawaran');
                 $FileName = time() . '_' . $pdf->getClientOriginalName();
@@ -146,23 +144,23 @@ class KontrakController extends Controller
                 $validatedData['berkas_penawaran'] = $pdfFilePath;
             }
             $validatedData['tgl_pembuatan'] = now()->toDateString();
-
+            
             $kontrak->update($validatedData);
-
+            
             return redirect()->back()->with('success', 'Data dasar berhasil diupdate.')->withFragment('lampiran');
         } catch (\Exception $e) {
             return redirect()->back()
-                ->withInput()
-                ->with('error', 'Gagal menyimpan data dasar: ' . $e->getMessage());
+            ->withInput()
+            ->with('error', 'Gagal menyimpan data dasar: ' . $e->getMessage());
         }
     }
-
+    
     public function detail(Kontrak $kontrak)
     {
         $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
         $totalBiaya = $rincianBelanja->sum('total_harga');
         $ppn = $totalBiaya * 0.11;
-
+        
         return view('pages.penyedia.permohonan-kontrak.detail-kontrak', [
             'kontrak' => $kontrak,
             'tim' => Tim::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
@@ -174,65 +172,63 @@ class KontrakController extends Controller
             'ruangLingkup' => RuangLingkup::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
         ]);
     }
-
+    
     public function layangkan(Request $request, Kontrak $kontrak)
     {
         try {
             if ($kontrak->penyedia_id !== auth()->user()->penyedia->penyedia_id) {
                 abort(403, 'Unauthorized action.');
             }
-
+            
             $data['is_layangkan'] = true;
-
+            
             $kontrak->update($data);
-
+            
             return redirect()->route('penyedia.dashboard', ['kontrak' => $kontrak->id])
-                ->with('success', 'Permohonan Kontrak berhasil');
+            ->with('success', 'Permohonan Kontrak berhasil');
         } catch (\Exception $e) {
             return redirect()->back()
-                ->withInput()
-                ->with('error', 'Gagal melakukan Permohonan kontrak: ' . $e->getMessage());
+            ->withInput()
+            ->with('error', 'Gagal melakukan Permohonan kontrak: ' . $e->getMessage());
         }
     }
-
-    public function exportPdf(Kontrak $kontrak, Request $request)
-    {
+    
+    public function exportPdf(Kontrak $kontrak, Request $request){
         try {
             // Load kontrak dengan relasinya
             $kontrak = Kontrak::where('kontrak_id', $kontrak->kontrak_id)
-                ->with([
-                    'verifikator',
-                    'penyedia',
-                    'satuanKerja',
-                    'paketPekerjaan',
-                    'subKegiatan',
-                    'template',
-                    'detailKontrak',
-                    'tim',
-                    'peralatan',
-                    'rincianBelanja',
-                    'penerima',
-                    'ePurchasing'
-                ])
-                ->first();
-
+            ->with([
+                'verifikator',
+                'penyedia',
+                'satuanKerja',
+                'paketPekerjaan',
+                'subKegiatan',
+                'template',
+                'detailKontrak',
+                'tim',
+                'peralatan',
+                'rincianBelanja',
+                'penerima',
+                'ePurchasing'
+                ])->first();
+                
             // Pilih template
             // $templateName = $request->template ?? 'default_template.docx';
             // $templatePath = storage_path('app/templates/kontrak/' . $templateName);
-
+                
             $templateName = $kontrak->template()->withTrashed()->first()->file_path ?? 'default_template.docx';
             $templatePath = storage_path('app/' . $templateName);
-
-
-            // Pastikan template ada
+                
+                
+                // Pastikan template ada
             if (!file_exists($templatePath)) {
                 return redirect()->back()->with('error', 'Template tidak ditemukan!');
             }
-
-            // Setup PhpWord
+                
+                // Setup PhpWord
             $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor($templatePath);
-
-            // Paket pekerjaan
+                
+                // Paket pekerjaan
             $templateProcessor->setValue('${KODE_PAKET}', $kontrak->paketPekerjaan->kode_paket);
             $templateProcessor->setValue('${PEKERJAAN_JUDUL}', ($kontrak->paketPekerjaan->nama_pekerjaan) . " " . ($kontrak->paketPekerjaan->sekolah->nama_sekolah ?? ''));
             $templateProcessor->setValue('${SUMBER_DANA}', $kontrak->paketPekerjaan->sumber_dana);
@@ -242,69 +238,67 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${PAGU_ANGGARAN}', number_format($kontrak->paketPekerjaan->nilai_pagu_anggaran, 0, ',', '.'));
             $templateProcessor->setValue('${NILAI_HPS}', number_format($kontrak->paketPekerjaan->nilai_hps, 0, ',', '.'));
             $templateProcessor->setValue('${TAHUN_ANGGARAN}', $kontrak->paketPekerjaan->tahun_anggaran);
-
+               
             // Sub Kegiatan
             // $templateProcessor->setValue('${SUB_KEGIATAN}', $kontrak->paketPekerjaan->subKegiatan->first()->nama_sub_kegiatan ?? '');
             $subKegiatanList = $kontrak->paketPekerjaan->subKegiatan
-                ->pluck('nama_sub_kegiatan')
-                ->implode("\n");
-
+            ->pluck('nama_sub_kegiatan')
+            ->implode("\n");
+                
             $templateProcessor->setValue('${SUB_KEGIATAN}', $subKegiatanList);
-            $subKegiatanCollection = $kontrak->paketPekerjaan->subKegiatan;
-
             $templateProcessor->setValue('${REKENING_SUB_KEGIATAN}', $kontrak->paketPekerjaan->subKegiatan->first()->no_rekening ?? '');
-
-            // Kontrak
-
+                
+                // Kontrak
+                
             $noKontrak = $kontrak->paketPekerjaan->nomor_kontrak;
             $noSpmk = preg_replace('/\/(\d+)\//', '/$1.a/', $noKontrak);
-
+                
             $templateProcessor->setValue('${NO_KONTRAK}', $noKontrak);
             $templateProcessor->setValue('${NO_SPMK}', $noSpmk);
-
+               
             $templateProcessor->setValue('${JENIS_KONTRAK}', $kontrak->jenis_kontrak);
             $templateProcessor->setValue('${TGL_PEMBUATAN}', Carbon::parse($kontrak->tanggal_awal)->translatedFormat(('d F Y')));
-
-
+                
+                
             $bulan = [
-                'Januari',
-                'Februari',
-                'Maret',
-                'April',
-                'Mei',
-                'Juni',
-                'Juli',
-                'Agustus',
-                'September',
-                'Oktober',
-                'November',
-                'Desember'
+                    'Januari',
+                    'Februari',
+                    'Maret',
+                    'April',
+                    'Mei',
+                    'Juni',
+                    'Juli',
+                    'Agustus',
+                    'September',
+                    'Oktober',
+                    'November',
+                    'Desember'
             ];
-
+                
             $terbilangTanggal = Carbon::parse($kontrak->tanggal_awal);
-
+                
             $spellout = new NumberFormatter("id", NumberFormatter::SPELLOUT);
-
+                
             $hari  = ucwords($spellout->format($terbilangTanggal->day));
             $tahun = ucwords($spellout->format($terbilangTanggal->year));
             $namaBulan = $bulan[$terbilangTanggal->month - 1];
-
+                
             $templateProcessor->setValue(
-                '${TERBILANG_TGL_PEMBUATAN}',
-                "{$hari} {$namaBulan} Tahun {$tahun}"
+               '${TERBILANG_TGL_PEMBUATAN}',
+               "{$hari} {$namaBulan} Tahun {$tahun}"
             );
-
+                
             $terbilangTanggalPenetapanPemenang = Carbon::parse($kontrak->tgl_penetapan_pemenang);
-
+                
             $hari = ucwords($spellout->format($terbilangTanggalPenetapanPemenang->day));
             $tahun = ucwords($spellout->format($terbilangTanggalPenetapanPemenang->year));
             $namaBulan = $bulan[$terbilangTanggalPenetapanPemenang->month - 1];
-
+                
             $templateProcessor->setValue(
                 '${TERBILANG_TGL_PENETAPAN_PEMENANG}',
                 "{$hari} {$namaBulan} Tahun {$tahun}"
             );
-
+                
             $templateProcessor->setValue('${WAKTU_KONTRAK}', $kontrak->waktu_kontrak);
             $templateProcessor->setValue('${NILAI_KONTRAK}', number_format($kontrak->nilai_kontrak, 0, ',', '.'));
             $templateProcessor->setValue('${TERBILANG_NILAI_KONTRAK}', $kontrak->terbilang_nilai_kontrak);
@@ -319,14 +313,14 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${TGL_PENETAPAN_PEMENANG}', $kontrak->tgl_penetapan_pemenang);
             $templateProcessor->setValue('${TGL_SELESAI}', Carbon::parse($kontrak->tanggal_akhir)->translatedFormat('d F Y'));
             $templateProcessor->setValue('${JANGKA_WAKTU}', $kontrak->waktu_kontrak);
-
+                
             $digit = new NumberFormatter("id", NumberFormatter::SPELLOUT);
             $terbilang = ucwords($digit->format($kontrak->waktu_kontrak));
-
+                
             $templateProcessor->setValue('${TERBILANG_JANGKA_WAKTU}', $terbilang);
-
+                
             $templateProcessor->setValue('${NO_SPK}', $kontrak->nomor_spk);
-
+                
             // Penyedia
             $templateProcessor->setValue('${NAMA_DIREKTUR}', $kontrak->penyedia->nama_pemilik);
             $templateProcessor->setValue('${ALAMAT_PEMILIK}', $kontrak->penyedia->alamat_pemilik);
@@ -341,61 +335,61 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${NO_AKTA}', $kontrak->penyedia->akta_notaris_no);
             $templateProcessor->setValue('${TGL_AKTA}', Carbon::parse($kontrak->penyedia->akta_notaris_tanggal)->translatedFormat('d F Y'));
             $templateProcessor->setValue('${NAMA_NOTARIS}', $kontrak->penyedia->akta_notaris_nama);
-
-            // PPK
+                
+                // PPK
             $templateProcessor->setValue('${NAMA_PPK}', $kontrak->paketPekerjaan->ppkom->nama);
             $templateProcessor->setValue('${JABATAN_PPK}', $kontrak->paketPekerjaan->ppkom->jabatan);
             $templateProcessor->setValue('${NIP_PPK}', $kontrak->paketPekerjaan->ppkom->nip);
             $templateProcessor->setValue('${ALAMAT_PPK}', $kontrak->paketPekerjaan->ppkom->alamat);
-
-
-            // kepana dinas/ satuan kerja/ pimpinan
+                
+                
+                // kepana dinas/ satuan kerja/ pimpinan
             $templateProcessor->setValue('${NAMA_KEPALA_DINAS}', $kontrak->satuanKerja->nama_pimpinan);
             $templateProcessor->setValue('${NIP_KEPALA_DINAS}', $kontrak->satuanKerja->nip);
             $templateProcessor->setValue('${EMAIL_KEPALA_DINAS}', $kontrak->satuanKerja->email);
             $templateProcessor->setValue('${TELP_KEPALA_DINAS}', $kontrak->satuanKerja->telp);
             $templateProcessor->setValue('${KLPD_KEPALA_DINAS}', $kontrak->satuanKerja->klpd);
             $templateProcessor->setValue('${JABATAN_KEPALA_DINAS}', $kontrak->satuanKerja->jabatan);
-
+                
             // sp
             $templateProcessor->setValue('${NO_SP}', $kontrak->nomor_sp);
             $templateProcessor->setValue('${TANGGAL_SP}', Carbon::parse($kontrak->tanggal_sp)->translatedFormat('d F Y'));
-
-
-            // dasar hukum
-
+                
+                
+           // dasar hukum
+                
             $templateProcessor->setValue('${DASAR_HUKUM}', $kontrak->paketPekerjaan->dasarHukum->dasar_hukum);
-
-
-            // ID Paket
+                
+                
+                // ID Paket
             $idPaket = '';
             if ($kontrak->ePurchasing && $kontrak->ePurchasing->count() > 0) {
                 foreach ($kontrak->ePurchasing as $index => $ePurchasing) {
                     $idPaket .= ($index + 1) . ". " . $ePurchasing->id_paket . "\n";
                 }
-
+                    
                 $idPaket = rtrim($idPaket);
             } else {
                 $idPaket = '-';
             }
-
+                
             $templateProcessor->setValue('${ID_PAKET}', $idPaket);
-
-            // ruang lingkup
+                
+                // ruang lingkup
             $lingkupPekerjaanText = '';
-
+                
             if ($kontrak->detailKontrak && $kontrak->detailKontrak->count() > 0) {
                 foreach ($kontrak->detailKontrak as $index => $lingkup) {
                     $lingkupPekerjaanText .= ($index + 1) . ". " . $lingkup->detail . "\n";
                 }
-
+                    
                 $lingkupPekerjaanText = rtrim($lingkupPekerjaanText);
             } else {
                 $lingkupPekerjaanText = '-';
             }
-
+                
             $templateProcessor->setValue('${LINGKUP_PEKERJAAN}', $lingkupPekerjaanText);
-
+                
             // Verifikator
             if ($kontrak->verifikator) {
                 $templateProcessor->setValue('${NIP_VERIFIKATOR}', $kontrak->verifikator->nip ?? '-');
@@ -406,29 +400,29 @@ class KontrakController extends Controller
                 $templateProcessor->setValue('${NAMA_VERIFIKATOR}', '-');
                 $templateProcessor->setValue('${TGL_VERIFIKASI}', '-');
             }
-
-            // tabel-tabel
-
+                
+                // tabel-tabel
+                
             $templateVariables = $templateProcessor->getVariables();
             // detail_kontrak
             $detail_kontrak = [];
-
+                
             if ($kontrak->detailKontrak && $kontrak->detailKontrak->count() > 0) {
                 foreach ($kontrak->detailKontrak as $index => $detail) {
-                    $detail_kontrak[] = [
+                   $detail_kontrak[] = [
                         'TABLE_DETAIL' => $detail->detail,
                         'TABLE_NILAI' => number_format($detail->nilai, 0, ',', '.'),
                     ];
                 }
             }
-
+                
             if (in_array('TABLE_DETAIL', $templateVariables)) {
                 $templateProcessor->cloneRowAndSetValues('TABLE_DETAIL', $detail_kontrak);
             }
-
-            // tim
+                
+                // tim
             $tim_table = [];
-
+                
             if ($kontrak->tim && $kontrak->tim->count() > 0) {
                 foreach ($kontrak->tim as $index => $tim) {
                     $tim_table[] = [
@@ -443,13 +437,13 @@ class KontrakController extends Controller
                     ];
                 }
             }
-
+                
             if (in_array('NO_TIM', $templateVariables)) {
                 $templateProcessor->cloneRowAndSetValues('NO_TIM', $tim_table);
             }
             // peralatan
             $peralatan_table = [];
-
+                
             if ($kontrak->peralatan && $kontrak->peralatan->count() > 0) {
                 foreach ($kontrak->peralatan as $index => $peralatan) {
                     $peralatan_table[] = [
@@ -465,16 +459,16 @@ class KontrakController extends Controller
                     ];
                 }
             }
-
+                
             if (in_array('NO_PERALATAN', $templateVariables)) {
                 $templateProcessor->cloneRowAndSetValues('NO_PERALATAN', $peralatan_table);
             }
-
+                
             // rincian_belanja / rincian barang
-
+                
             $rincian_belanja_table = [];
-
-            if ($kontrak->rincianBelanja && $kontrak->rincianBelanja->count() > 0) {
+                
+           if ($kontrak->rincianBelanja && $kontrak->rincianBelanja->count() > 0) {
                 foreach ($kontrak->rincianBelanja as $index => $rincian) {
                     $rincian_belanja_table[] = [
                         'NO_RINCIAN_BELANJA' => $index + 1,
@@ -486,16 +480,16 @@ class KontrakController extends Controller
                         'TABLE_TOTAL_HARGA' => $rincian->total_harga,
                     ];
                 }
-            }
-
+           }
+                
             if (in_array('NO_RINCIAN_BELANJA', $templateVariables)) {
                 $templateProcessor->cloneRowAndSetValues('NO_RINCIAN_BELANJA', $rincian_belanja_table);
             }
-
+                
             // penerima
-
+                
             $penerima_table = [];
-
+                
             if ($kontrak->penerima && $kontrak->penerima->count() > 0) {
                 foreach ($kontrak->penerima as $index => $penerima) {
                     $penerima_table[] = [
@@ -507,47 +501,43 @@ class KontrakController extends Controller
                     ];
                 }
             }
-
+                
             if (in_array('NO_PENERIMA', $templateVariables)) {
                 $templateProcessor->cloneRowAndSetValues('NO_PENERIMA', $penerima_table);
             }
-
-
-
-
+                
             $outputDocx = storage_path('app/temp/' . time() . '_kontrak.docx');
             $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
             $templateProcessor->saveAs($outputDocx);
-
+                
             $format = $request->format ?? 'pdf';
             if ($format == 'docx') {
-                return response()->download($outputDocx,  $kontrak->paketPekerjaan->paket_id . ". " . $kontrak->paketPekerjaan->nama_paket_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').docx')->deleteFileAfterSend(true);
+                return response()->download($outputDocx,  $kontrak->paketPekerjaan->nomor_matrik . ". Kontrak " . $kontrak->paketPekerjaan->nama_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').docx')->deleteFileAfterSend(true);
             } else {
-                $outputPdf = storage_path('app/temp/' . time() . '_kontrak.pdf');
-                $process = new Process([
-                    'unoconv',
-                    '-f',
-                    'pdf',
-                    '-o',
-                    $outputPdf,
-                    $outputDocx
-                ], null, [
-                    'HOME' => '/tmp/libreoffice-profile'
-                ]);
-                $process->run();
-                if (!$process->isSuccessful()) {
-                    throw new ProcessFailedException($process);
+                $response = Http::timeout(60) // Set timeout 60 detik
+                ->attach('file', file_get_contents($outputDocx), 'document.docx')
+                ->post('http://localhost:3000/convert/docx-to-pdf');
+                    
+                if ($response->successful()) {
+                    // Simpan hasil PDF dari API
+                    file_put_contents($outputPdf, $response->body());
+                        
+                    // Hapus file DOCX temporary
+                    if (file_exists($outputDocx)) {
+                        unlink($outputDocx);
+                    }
+                        
+                    $filename = $kontrak->paketPekerjaan->nomor_matrik . ". Kontrak " . $kontrak->paketPekerjaan->nama_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf';
+                      
+                    return response()->file($outputPdf, [
+                        'Content-Type' => 'application/pdf',
+                        'Content-Disposition' => 'inline; filename="' . $filename . '"',
+                        ])->deleteFileAfterSend(true);
+                    }
                 }
-
-                $filename = $kontrak->paketPekerjaan->nomor_matrik . ". " . $kontrak->paketPekerjaan->nama_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf';
-
-                return response()->file($outputPdf, [
-                    'Content-Type' => 'application/pdf',
-                    'Content-Disposition' => 'inline; filename="' . $filename . '"',
-                ])->deleteFileAfterSend(true);
+            } catch (\Exception $e) {
+                return redirect()->back()->with('error', 'Gagal mengexport PDF: ' . $e->getMessage());
             }
-        } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Gagal mengexport PDF: ' . $e->getMessage());
         }
-    }
 }
+        
