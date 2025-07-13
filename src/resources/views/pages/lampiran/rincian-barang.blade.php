@@ -21,25 +21,25 @@
         </thead>
         <tbody>
             <tr>
-                <form action="rincian-belanja" method="POST">
+                <form action="{{ route('rincian-belanja.store') }}" method="POST">
                     @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
-                <input type="hidden" name="rincian_belanja_id" id="rincianBelanjaId">
+                <input type="hidden" name="rincian_belanja_id" id="rincianBelanjaId_belanja">
                 <input type="hidden" name="uraian" value="-">
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="jenis" id="jenis">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="jenis" id="jenis_belanja">
                 </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="qty" id="qty">
+                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="qty" id="qty_belanja">
                 </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="satuan" id="satuan">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="satuan" id="satuan_belanja">
                 </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="harga_satuan" id="hargaSatuan">
+                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="harga_satuan" id="hargaSatuan_belanja">
                 </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="ongkos_kirim" id="ongkos_kirim">
+                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="ongkos_kirim" id="ongkos_kirim_belanja">
                 </td>
                 <td> </td>
                 <td class="text-center border border-gray-400/30 p-0">
@@ -60,10 +60,10 @@
 
                         <td class="border border-gray-400/30">
                             <div class="flex gap-1">
-                                <label class="btn btn-warning btn-sm text-gray-100" onclick="editRincianBelanja({{ $row }})">
+                                <label class="btn btn-warning btn-sm text-gray-100" onclick='editRincianBelanja(@json($row))'">
                                     <i class="fa fa-edit"></i>
                                 </label>
-                                <label class="btn btn-error btn-sm text-gray-100" for="delete-modal" onclick="deleteRincianBelanja({{ $row->rincian_belanja_id }})">
+                                <label class="btn btn-error btn-sm text-gray-100" for="delete-modal"  onclick="deleteRincianBelanja({{ $row->rincian_belanja_id }})">
                                     <i class="fa fa-trash"></i>
                                 </label>
                             </div>
@@ -81,15 +81,19 @@
 
 <script>
     function editRincianBelanja(row) {
-        document.getElementById('rincianBelanjaId').value = row.rincian_belanja_id;
-        document.getElementById('jenis').value = row.jenis;
-        document.getElementById('qty').value = row.qty;
-        document.getElementById('satuan').value = row.satuan;
-        document.getElementById('hargaSatuan').value = row.harga_satuan;
-        document.getElementById('keteranganBarang').value = row.keterangan;
+        console.log(row);
+        document.getElementById('rincianBelanjaId_belanja').value = row.rincian_belanja_id;
+        document.getElementById('jenis_belanja').value = row.jenis;
+        document.getElementById('qty_belanja').value = row.qty;
+        document.getElementById('satuan_belanja').value = row.satuan;
+        document.getElementById('hargaSatuan_belanja').value = row.harga_satuan;
+        document.getElementById('ongkos_kirim_belanja').value = row.ongkos_kirim;
     }
 
     function deleteRincianBelanja(id) {
-            document.getElementById('deleteForm').action = `rincian-belanja/${id}`;
+        const baseUrl = @json(route('rincian-belanja.destroy', ['rincian_belanja' => '__ID__']));
+        const actionUrl = baseUrl.replace('__ID__', id);
+        document.getElementById('deleteForm').action = actionUrl;
+
     }
 </script>

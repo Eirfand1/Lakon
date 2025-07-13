@@ -22,7 +22,7 @@ return new class extends Migration
             $table->string('kapasitas');
             $table->integer('jumlah');
             $table->enum('kondisi', ['Baik', 'Sedang', 'Rusak']);
-            $table->enum('status_kepemilikan', ['Milik', 'Sewa']);
+            $table->enum('status_kepemilikan', ['Milik', 'Sewa', 'Milik sendiri']);
             $table->text('keterangan')->nullable();
             $table->timestamps();
         });

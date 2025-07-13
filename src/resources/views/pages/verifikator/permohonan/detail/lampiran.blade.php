@@ -11,10 +11,6 @@
 </div>
 
 <div class="mb-8">
-    @include('pages.lampiran.rincian-barang')
-</div>
-
-<div class="mb-8">
     @include('pages.lampiran.peralatan')
 </div>
 

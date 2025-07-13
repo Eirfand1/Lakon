@@ -22,7 +22,7 @@
         </thead>
         <tbody>
             <tr>
-                <form action="rincian-belanja" method="POST">
+                <form action="{{ route('rincian-belanja.store') }}" method="POST">
                     @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="rincian_belanja_id" id="rincianBelanjaId">
@@ -79,16 +79,7 @@
                     <td class="text-right border border-gray-400/30">{{ $totalBiaya }}</td>
                     <td colspan="2" class="border border-gray-400/30"></td>
                 </tr>
-                <tr>
-                    <td colspan="5" class="text-right border border-gray-400/30">ppn</td>
-                    <td class="text-right border border-gray-400/30">{{ $ppn }}</td>
-                    <td colspan="2" class="border border-gray-400/30"></td>
-                </tr>
-                <tr>
-                    <td colspan="5" class="text-right border border-gray-400/30">Total Biaya</td>
-                    <td class="text-right border border-gray-400/30">{{ $totalBiaya + $ppn }}</td>
-                    <td colspan="2" class="border border-gray-400/30"></td>
-                </tr>
+
         </tbody>
     </table>
 </div>
@@ -104,7 +95,12 @@
         document.getElementById('keteranganBelanja').value = row.keterangan;
     }
 
+
     function deleteRincianBelanja(id) {
-            document.getElementById('deleteForm').action = `rincian-belanja/${id}`;
+        const baseUrl = @json(route('rincian-belanja.destroy', ['rincian_belanja' => '__ID__']));
+        const actionUrl = baseUrl.replace('__ID__', id);
+        document.getElementById('deleteForm').action = actionUrl;
     }
+
 </script>
+
