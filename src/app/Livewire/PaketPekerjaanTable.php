@@ -24,7 +24,8 @@ class PaketPekerjaanTable extends DataTableComponent
         $this->setPrimaryKey('paket_id')
             ->setColumnSelectStatus(true)
             ->setFilterLayout('slide-down')
-            ->setPerPageAccepted([10, 25, 50, 100, -1]);
+            ->setPerPageAccepted([10, 25, 50, 100, -1])
+            ->setDefaultSort('updated_at', 'desc');
     }
     public function builder(): \Illuminate\Database\Eloquent\Builder
     {
@@ -36,7 +37,7 @@ class PaketPekerjaanTable extends DataTableComponent
                 'ppkom',
                 'subKegiatan',
                 'sekolah'
-            ])->orderBy('paket_pekerjaan.updated_at', 'desc');
+            ]);
 
         return $query;
     }
