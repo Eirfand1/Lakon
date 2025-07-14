@@ -69,7 +69,7 @@
 
 
     <!-- Add Modal -->
-    <input type="checkbox" id="add-modal" class="modal-toggle" {{ $errors->any() ? 'checked' : '' }} />
+    <input type="checkbox" id="add-modal" class="modal-toggle" {{ $errors->any() && session('modal') === 'add-modal' ? 'checked' : '' }} />
     <div id="modal_matriks" class="modal modal-top px-3">
         <div class="modal-box max-w-[55rem] mx-auto m-4 rounded-lg shadow-xl h-max dark:bg-gray-800 bg-white">
             <div class="flex justify-between items-center border-b pb-3 dark:border-gray-700">

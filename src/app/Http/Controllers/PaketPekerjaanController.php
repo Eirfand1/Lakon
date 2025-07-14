@@ -103,6 +103,9 @@ class PaketPekerjaanController extends Controller
     public function store(Request $request)
     {
         // Validasi data
+
+        session()->flash('modal', 'add-modal'); // beri tanda modal yang harus dibuka
+
         $validatedData = $request->validate([
             'nomor_matrik' => 'required|string|max:3|min:3',
             'nama_pekerjaan' => 'required|string|max:255',
