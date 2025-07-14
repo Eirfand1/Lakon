@@ -86,6 +86,28 @@ Route::middleware(['auth', 'role:penyedia'])->prefix('/penyedia')->group(functio
     });
 });
 
+Route::middleware(['auth', 'role:penyedia,verifikator'])->prefix('/lampiran')->group(function () {
+    // tim
+    Route::post('/permohonan-kontrak/tim', [TimController::class, 'store'])->name('tim.store');
+    Route::delete('/permohonan-kontrak/tim/{tim}', [TimController::class, 'destroy'])->name('tim.destroy');
+
+    // jadwal kegiatan
+    Route::post('/permohonan-kontrak/jadwal-kegiatan', [JadwalKegiatanController::class, 'store'])->name('jadwal-kegiatan.store');
+    Route::delete('/permohonan-kontrak/jadwal-kegiatan/{jadwal_kegiatan}', [JadwalKegiatanController::class, 'destroy'])->name('jadwal-kegiatan.destroy');
+
+    // rincian belanja
+    Route::post('/permohonan-kontrak/rincian-belanja', [RincianBelanjaController::class, 'store'])->name('rincian-belanja.store');
+    Route::delete('/permohonan-kontrak/rincian-belanja/{rincian_belanja}', [RincianBelanjaController::class, 'destroy'])->name('rincian-belanja.destroy');
+
+    // peralatan
+    Route::post('/permohonan-kontrak/peralatan', [PeralatanController::class, 'store'])->name('peralatan.store');
+    Route::delete('/permohonan-kontrak/peralatan/{peralatan}', [PeralatanController::class, 'destroy'])->name('peralatan.destroy');
+
+    // ruang lingkup
+    Route::post('/permohonan-kontrak/ruang-lingkup', [RuangLingkupController::class, 'store'])->name('ruang-lingkup.store');
+    Route::delete('/permohonan-kontrak/ruang-lingkup/{ruang_lingkup}', [RuangLingkupController::class, 'destroy'])->name('ruang-lingkup.destroy');
+});
+
 Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(function () {
     Route::get('/riwayat-kontrak', [VerifikatorController::class, 'kontrakSaya'])->name('verifikator.riwayat');
 

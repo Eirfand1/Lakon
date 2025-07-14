@@ -261,7 +261,7 @@
 </h1>
 
 <div class="flex w-full flex-col pt-2 ">
-    <x-label for="ppkom_id" class="w-full sm:w-1/4">Ppkom</x-label>
+    <x-label for="ppkom_id" class="w-full sm:w-1/4">Pejabat Pembuat Komitmen (PPK)</x-label>
     <select name="ppkom_id" id="ppkom_id"
     class="w-3/4 rounded bg-white h-10 text-sm dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm "
     required>
@@ -539,7 +539,7 @@
 </h1>
 
 <div class="flex w-full flex-col pt-2 ">
-    <x-label for="ppkom_id" class="w-full sm:w-1/4">Ppkom</x-label>
+    <x-label for="ppkom_id" class="w-full sm:w-1/4">Pejabat Pembuat Komitmen (PPK)</x-label>
     <select name="ppkom_id" id="ppkom_id"
     class="w-3/4  h-10 bg-white dark:bg-gray-900/20 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
     required>
@@ -765,9 +765,12 @@ required>
                             uniqueItemText: 'Item ini sudah dipilih',
                             shouldSort: false,
                             searchFields: ['label'],
-                            fuseOptions: {
-                                includeScore: true,
-                                threshold: 0.3
+                            searchResultLimit: 999,
+                            fuseOptions: null,
+                            searchFn: function (value){
+                                return function (choice) {
+                                    return choice.label.toLowerCase().includes(value.toLowerCase());
+                                }
                             },
                             classNames: {
                                 containerOuter: 'choices',
