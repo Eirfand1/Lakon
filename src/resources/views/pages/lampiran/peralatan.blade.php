@@ -53,7 +53,7 @@
                 <td class="text-center border border-gray-400/30">
                     <select name="status_kepemilikan" class="w-full dark:bg-gray-800 rounded" id="statusKepemilikan">
                         <option value="">Pilih Status Kepemilikan</option>
-                        <option value="Milik sendiri">Milik sendiri</option>
+                        <option value="Milik Sendiri">Milik Sendiri</option>
                         <option value="Sewa">Sewa</option>
                     </select>
                 </td>
