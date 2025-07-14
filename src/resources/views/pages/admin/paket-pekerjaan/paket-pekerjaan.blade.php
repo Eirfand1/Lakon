@@ -5,14 +5,30 @@
             <h1 class="text-2xl text-gray-800 dark:text-gray-100 font-bold">PAKET PEKERJAAN</h1>
             <div class="flex gap-2">
                 <div>
+                    <div class="flex items-center gap-2">
+                        <div class="text-sm text-gray-700 dark:text-gray-200">
+                            Nomor Matrik Selanjutnya:
+                            <span class="font-semibold">
+                                {{ $next_nomor_matrik ?? '-' }}
+                            </span>
+                        </div>
+
+                        <label for="penomoran-modal"
+                        class="btn btn-sm bg-blue-600 text-white rounded hover:bg-blue-500 cursor-pointer">
+                            <i class="fa-solid fa-pen-to-square mr-1"></i> Ubah Penomoran
+                        </label>
+                    </div>
+                </div>
+
+                <div>
                     <a href="{{ route('admin.paket-pekerjaan.export') }}"
                     class="btn btn-success btn-sm rounded text-white">
                     <i class="fa-solid fa-file-export"></i>
                     <span>
                         Export to Excel
                     </span>
-                </a>
-            </div>
+                    </a>
+                </div>
             <!-- Add Button -->
             <label for="add-modal" class="btn rounded btn-sm px-3 bg-gray-800 hover:bg-gray-700 text-white dark:bg-gray-100 dark:text-gray-800 ">
                 <i class="fa-solid fa-square-plus"></i>
@@ -24,6 +40,33 @@
 
 
     <livewire:paket-pekerjaan-table />
+
+    <input type="checkbox" id="penomoran-modal" class="modal-toggle" />
+    <div class="modal modal-bottom sm:modal-middle">
+        <div class="modal-box bg-white dark:bg-gray-800">
+            <h3 class="font-bold text-lg text-gray-800 dark:text-gray-100 mb-4">Ubah Penomoran Nomor Matrik</h3>
+
+            <form action="{{ route('admin.paket-pekerjaan.penomoran') }}" method="POST" class="space-y-4">
+                @csrf
+                @method('POST')
+
+                <div>
+                    <label for="no_kontrak_next" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Angka Awal</label>
+                    <input type="number" id="no_kontrak_next" name="no_kontrak_next" min="1"
+                        class="input input-bordered w-full dark:bg-gray-700 dark:text-white"
+                        value="{{ old('no_kontrak_next', $next_nomor_matrik) }}" required>
+                </div>
+
+                <div class="modal-action">
+                    <label for="penomoran-modal" class="btn">Batal</label>
+                    <button type="submit" class="btn btn-primary">
+                        Simpan Perubahan
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
     <!-- Add Modal -->
     <input type="checkbox" id="add-modal" class="modal-toggle" {{ $errors->any() ? 'checked' : '' }} />

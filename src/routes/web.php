@@ -182,6 +182,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
     Route::delete('/paket-pekerjaan/{paket_pekerjaan}', [PaketPekerjaanController::class, 'destroy'])->name('admin.paket-pekerjaan.destroy');
     Route::put('/paket-pekerjaan/{paket_pekerjaan}', [PaketPekerjaanController::class, 'update'])->name('admin.paket-pekerjaan.update');
     Route::get('/paket-pekerjaan/export', [PaketPekerjaanController::class, 'exportPaketPekerjaan'])->name('admin.paket-pekerjaan.export');
+    Route::post('/paket-pekerjaan/penomoran', [PaketPekerjaanController::class, 'penomoran'])->name('admin.paket-pekerjaan.penomoran');
 
 
     // Realisasi

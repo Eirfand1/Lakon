@@ -259,4 +259,30 @@ class PaketPekerjaanController extends Controller
     {
         return Excel::download(new PaketPekerjaanExport, 'paket-pekerjaan.xlsx');
     }
+
+    public function penomoran(Request $request)
+    {
+        $request->validate([
+            'no_kontrak_next' => 'required|string|min:3|max:3',
+        ]);
+
+        $nextNomorMatrikRequest = $request->input('no_kontrak_next');
+
+        $lastPaket = PaketPekerjaan::orderByDesc('paket_id')->first();
+        if (!$lastPaket) {
+            $lastPaket->paket_id = 0;
+        }
+
+        $lastPaketId = $lastPaket->paket_id;
+
+        $newIdKontrakLastYear = $lastPaketId - $nextNomorMatrikRequest + 1;
+
+        $tracker = NoKontrakTracker::first();
+        $tracker->update([
+            'id_kontrak_last_year' => $newIdKontrakLastYear,
+        ]);
+
+        return back()->with('success', 'Nomor matrik berhasil diperbarui ke: ' . $nextNomorMatrikRequest);
+    }
+
 }
