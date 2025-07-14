@@ -166,7 +166,7 @@
         <select x-ref="sekolahSelect" name="sekolah_id" id="sekolah_id"
         class="choices w-full {{ $errors->has('sekolah_id') ? 'border-red-500' : 'border-gray-200' }}">
 
-        <option selected disabled>Pilih Sekolah</option>
+        <option selected value="">Pilih Sekolah</option>
         <template x-for="option in options" :key="option.sekolah_id">
             <option :value="option.sekolah_id" x-text="option.nama_sekolah" x-bind:selected="option.sekolah_id == {{old('sekolah_id')}} ? 'selected' : ''"></option>
         </template>
@@ -452,6 +452,7 @@
             class="choices w-full {{ $errors->has('sekolah_id') ? 'border-red-500' : 'border-gray-200' }}"
             x-ref="sekolahSelect"
             required>
+            <option value="">Pilih Sekolah</option>
             <template x-for="option in options" :key="option.sekolah_id">
                 <option :value="option.sekolah_id" x-text="option.nama_sekolah"></option>
             </template>
