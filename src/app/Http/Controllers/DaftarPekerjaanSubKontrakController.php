@@ -27,7 +27,7 @@ class DaftarPekerjaanSubKontrakController extends Controller
                     'kualifikasi_sub_penyedia' => $validateData['kualifikasi_sub_penyedia'],
                     'keterangan' => $validateData['keterangan'],
                 ]);
-                return redirect()->back()->with('success', 'Data Peralatan berhasil diperbarui.')->withFragment('peralatan');
+                return redirect()->back()->with('success', 'Data Pekerjaan Sub Kontrak berhasil diperbarui.')->withFragment('daftarPekerjaanSubKontrak');
             }else {
                 DaftarPekerjaanSubKontrak::create([
                     'kontrak_id' => $validateData['kontrak_id'],
@@ -37,10 +37,19 @@ class DaftarPekerjaanSubKontrakController extends Controller
                     'kualifikasi_sub_penyedia' => $validateData['kualifikasi_sub_penyedia'],
                     'keterangan' => $validateData['keterangan'],
                 ]);
-                return redirect()->back()->with('success', 'Data Peralatan berhasil disimpan.')->withFragment('peralatan');
+                return redirect()->back()->with('success', 'Data Pekerjaan Sub Kontrak berhasil disimpan.')->withFragment('daftarPekerjaanSubKontrak');
             }
         }catch(\Exception $e){
-            return redirect()->back()->with('error', $e->getMessage())->withFragment('peralatan');
+            return redirect()->back()->with('error', $e->getMessage())->withFragment('daftarPekerjaanSubKontrak');
+        }
+    }
+
+    public function destroy($id){
+        try{
+            DaftarPekerjaanSubKontrak::where('daftar_pekerjaan_sub_kontrak_id', $id)->delete();
+            return redirect()->back()->with('success', 'Data Pekerjaan Sub Kontrak berhasil dihapus.')->withFragment('daftarPekerjaanSubKontrak');
+        }catch(\Exception $e){
+            return redirect()->back()->with('error', $e->getMessage())->withFragment('daftarPekerjaanSubKontrak');
         }
     }
 }
