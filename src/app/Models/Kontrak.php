@@ -102,4 +102,19 @@ class Kontrak extends Model
     {
         return $this->hasMany(EPurchasing::class, 'kontrak_id', 'kontrak_id');
     }
+
+    public function daftarPekerjaanSubKontrak()
+    {
+        return $this->hasMany(DaftarPekerjaanSubKontrak::class, 'kontrak_id', 'kontrak_id');
+    }
+
+    public function daftarKeluaranDanHarga()
+    {
+        return $this->hasMany(DaftarKeluaranDanHarga::class, 'kontrak_id', 'kontrak_id');
+    }
+
+    public function biayaPersonel()
+    {
+        return $this->hasMany(BiayaPersonel::class, 'kontrak_id', 'kontrak_id');
+    }
 }
