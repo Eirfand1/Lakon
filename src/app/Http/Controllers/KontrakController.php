@@ -18,6 +18,7 @@ use App\Models\Peralatan;
 use App\Models\RuangLingkup;
 use App\Models\Template;
 use App\Models\DaftarPekerjaanSubKontrak;
+use App\Models\DaftarKeluaranDanHarga;
 use Number;
 use NumberFormatter;
 // use PhpOffice\PhpSpreadsheet\Style\NumberFormat\NumberFormatter;
@@ -115,6 +116,7 @@ class KontrakController extends Controller
             'peralatan' => Peralatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'ruangLingkup' => RuangLingkup::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'daftarPekerjaanSubKontrak' => DaftarPekerjaanSubKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'daftarKeluaranDanHarga' => DaftarKeluaranDanHarga::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
         ]);
     }
 

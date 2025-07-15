@@ -252,6 +252,7 @@
         @include($view . "peralatan")
 
         @include($view . "daftar-pekerjaan-sub-kontrak")
+        @include($view . "daftar-keluaran-dan-harga")
     </div>
 
     <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
