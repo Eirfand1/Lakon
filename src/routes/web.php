@@ -21,6 +21,7 @@ use App\Http\Controllers\PeralatanController;
 use App\Http\Controllers\PenerimaController;
 use App\Http\Controllers\DokumenKontrakController;
 use App\Http\Controllers\KeteranganKontrakController;
+use App\Http\Controllers\DaftarPekerjaanSubKontrakController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +107,10 @@ Route::middleware(['auth', 'role:penyedia,verifikator'])->prefix('/lampiran')->g
     // ruang lingkup
     Route::post('/permohonan-kontrak/ruang-lingkup', [RuangLingkupController::class, 'store'])->name('ruang-lingkup.store');
     Route::delete('/permohonan-kontrak/ruang-lingkup/{ruang_lingkup}', [RuangLingkupController::class, 'destroy'])->name('ruang-lingkup.destroy');
+
+    // daftar pekerjaan sub kontrak
+    Route::post('/permohonan-kontrak/daftar-pekerjaan-sub-kontrak', [DaftarPekerjaanSubKontrakController::class, 'store'])->name('daftar-pekerjaan-sub-kontrak.store');
+    Route::delete('/permohonan-kontrak/daftar-pekerjaan-sub-kontrak/{daftar_pekerjaan_sub_kontrak}', [DaftarPekerjaanSubKontrakController::class, 'destroy'])->name('daftar-pekerjaan-sub-kontrak.destroy');
 });
 
 Route::middleware(['auth', 'role:verifikator'])->prefix('/verifikator')->group(function () {

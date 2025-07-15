@@ -17,6 +17,7 @@ use App\Models\RincianBelanja;
 use App\Models\Peralatan;
 use App\Models\RuangLingkup;
 use App\Models\Template;
+use App\Models\DaftarPekerjaanSubKontrak;
 use Number;
 use NumberFormatter;
 // use PhpOffice\PhpSpreadsheet\Style\NumberFormat\NumberFormatter;
@@ -113,6 +114,7 @@ class KontrakController extends Controller
             'ppn' => $ppn,
             'peralatan' => Peralatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'ruangLingkup' => RuangLingkup::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'daftarPekerjaanSubKontrak' => DaftarPekerjaanSubKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
         ]);
     }
 
@@ -530,21 +532,21 @@ class KontrakController extends Controller
                 ->post('http://localhost:3000/convert/docx-to-pdf');
 
                 if ($response->successful()) {
-                    
+
                     file_put_contents($outputPdf, $response->body());
-                    
-                    
+
+
                     if (file_exists($outputDocx)) {
                         unlink($outputDocx);
                     }
-                    
+
                     $filename = $kontrak->paketPekerjaan->nomor_matrik . ". Kontrak " . $kontrak->paketPekerjaan->nama_pekerjaan . " (" . $kontrak->penyedia->nama_perusahaan_lengkap . ').pdf';
-                    
+
                     return response()->file($outputPdf, [
                         'Content-Type' => 'application/pdf',
                         'Content-Disposition' => 'inline; filename="' . $filename . '"',
                     ])->deleteFileAfterSend(true);
-                }    
+                }
             }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Gagal mengexport PDF: ' . $e->getMessage());
