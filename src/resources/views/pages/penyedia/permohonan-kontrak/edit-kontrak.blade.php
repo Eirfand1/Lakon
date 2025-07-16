@@ -248,11 +248,17 @@
 
         @include($view . "tim")
         @include($view . "jadwal-kegiatan")
-        @include($view . "rincian-barang")
-        @include($view . "peralatan")
+        @if($jenis == 'Pengadaan Barang')
+            @include($view . "rincian-barang")
+        @endif
+        @if($jenis == 'Jasa Konsultasi Perencanaan' || $jenis == 'Pekerjaan Konstruksi')
+            @include($view . "peralatan")
+        @endif
 
-        @include($view . "daftar-pekerjaan-sub-kontrak")
-        @include($view . "daftar-keluaran-dan-harga")
+        @if($metode == 'Tender' && $jenis == 'Jasa Konsultasi Perencanaan')
+            @include($view . "daftar-pekerjaan-sub-kontrak")
+            @include($view . "daftar-keluaran-dan-harga")
+        @endif
     </div>
 
     <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
