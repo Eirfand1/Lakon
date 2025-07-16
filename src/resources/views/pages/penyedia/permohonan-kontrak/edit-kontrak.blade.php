@@ -247,7 +247,7 @@
         @endphp
 
         @include($view . "tim")
-        @include($view . "jadwal-kegiatan")
+        {{-- @include($view . "jadwal-kegiatan") --}}
         @if($jenis == 'Pengadaan Barang')
             @include($view . "rincian-barang")
         @endif
