@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DaftarKeluaranDanHarga;
+use App\Models\DaftarPekerjaanSubKontrak;
 use App\Models\Kontrak;
 use App\Models\User;
 use App\Models\Verifikator;
@@ -17,11 +19,9 @@ use App\Models\DetailKontrak;
 use App\Models\EPurchasing;
 use App\Models\PaketPekerjaan;
 use Hash;
-use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use Exception;
 use Illuminate\Support\Facades\Auth;
 
 class VerifikatorController extends Controller
@@ -286,6 +286,8 @@ class VerifikatorController extends Controller
             'ruangLingkup' => RuangLingkup::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'detail' => DetailKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'id_paket' => EPurchasing::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'daftarPekerjaanSubKontrak' => DaftarPekerjaanSubKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'daftarKeluaranDanHarga' => DaftarKeluaranDanHarga::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
         ]);
     }
 }

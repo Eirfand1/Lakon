@@ -531,7 +531,7 @@ class KontrakController extends Controller
             } else {
                 $response = Http::timeout(60) // Set timeout 60 detik
                 ->attach('file', file_get_contents($outputDocx), 'document.docx')
-                ->post('http://localhost:3000/convert/docx-to-pdf');
+                ->post('https://tefa-pnc-abm.my.id/convert/docx-to-pdf');
 
                 if ($response->successful()) {
 
