@@ -157,7 +157,7 @@
             </div>
         </div>
 
-        @if ($kontrak->paketPekerjaan->jenis_pengadaan == 'tender')
+        @if ($kontrak->paketPekerjaan->metode_pemilihan == 'Tender')
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                     <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor SPPBJ</label>
@@ -189,7 +189,7 @@
                     </p>
                 </div>
             </div>
-        @elseif ($kontrak->paketPekerjaan->jenis_pengadaan == 'non_tender')
+        @elseif ($kontrak->paketPekerjaan->metode_pemilihan == 'Non Tender')
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                     <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor DPPL</label>
