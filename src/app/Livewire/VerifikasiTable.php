@@ -53,7 +53,7 @@ class VerifikasiTable extends DataTableComponent
                             Tolak</button>
 
                             <a  href="detail/' . $row->kontrak_id . '"
-                            class="btn btn-sm btn-warning text-gray-100 rounded-md">
+                            class="btn btn-sm btn-warning text-gray-100 rounded-md" wire:navigate>
                             Detail</a>
                             ';
                 })->html(),

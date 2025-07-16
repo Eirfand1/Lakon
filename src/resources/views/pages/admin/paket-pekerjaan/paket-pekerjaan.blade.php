@@ -42,7 +42,7 @@
     <livewire:paket-pekerjaan-table />
 
     <input type="checkbox" id="penomoran-modal" class="modal-toggle" />
-    <div class="modal modal-bottom sm:modal-middle">
+    <div class="modal rounded-lg  modal-bottom sm:modal-middle">
         <div class="modal-box bg-white dark:bg-gray-800">
             <h3 class="font-bold text-lg text-gray-800 dark:text-gray-100 mb-4">Ubah Penomoran Nomor Matrik</h3>
 
@@ -52,16 +52,19 @@
 
                 <div>
                     <label for="no_kontrak_next" class="block text-sm font-medium text-gray-700 dark:text-gray-300">Angka Awal</label>
-                    <input type="number" id="no_kontrak_next" name="no_kontrak_next" min="1"
-                        class="input input-bordered w-full dark:bg-gray-700 dark:text-white"
-                        value="{{ old('no_kontrak_next', $next_nomor_matrik) }}" required>
+                    <x-input type="number" id="no_kontrak_next" name="no_kontrak_next" min="1"
+                        value="{{ old('no_kontrak_next', $next_nomor_matrik) }}" required></x-input>
                 </div>
 
                 <div class="modal-action">
-                    <label for="penomoran-modal" class="btn">Batal</label>
-                    <button type="submit" class="btn btn-primary">
-                        Simpan Perubahan
+                    <label for="penomoran-modal"
+                            class="px-4 btn bg-white text-black dark:bg-gray-800 dark:text-white py-2 border border-gray-300 dark:border-gray-600 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Batal</label>
+
+                    <button type="submit" class="btn rounded-md btn-primary text-white bg-blue-600">
+                        <i class="fas fa-save"></i>
+                        Simpan
                     </button>
+
                 </div>
             </form>
         </div>

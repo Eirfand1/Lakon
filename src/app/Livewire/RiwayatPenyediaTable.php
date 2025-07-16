@@ -21,7 +21,7 @@ class RiwayatPenyediaTable extends DataTableComponent
         $this->setPrimaryKey('kontrak_id')
             ->setColumnSelectStatus(true)
             ->setFilterLayout('slide-down')
-            ->setPerPageAccepted([10,25,50,100, -1]);
+            ->setPerPageAccepted([10, 25, 50, 100, -1]);
     }
 
     public function builder(): \Illuminate\Database\Eloquent\Builder
@@ -42,16 +42,16 @@ class RiwayatPenyediaTable extends DataTableComponent
             Column::make("is_verificated")
                 ->hideIf(true),
 
-            Column::make("sekolah_id","paketPekerjaan.sekolah.nama_sekolah")
+            Column::make("sekolah_id", "paketPekerjaan.sekolah.nama_sekolah")
                 ->hideIf(true)
                 ->searchable(),
 
             Column::make("Aksi", "kontrak_id")
-                ->format( function($value, $row) {
+                ->format(function ($value, $row) {
                     return '
-                            <a  href="detail-kontrak/'.$row->kontrak_id.'"
-                            class="btn btn-sm btn-info dark:text-gray-50">
-                            detail</a>
+                            <a  href="detail-kontrak/' . $row->kontrak_id . '"
+                            class="btn btn-sm btn-warning dark:text-gray-50" text-white wire:navigate>
+                            Detail</a>
                             ';
                 })->html(),
 
