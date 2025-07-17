@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BiayaPersonel;
 use App\Models\DaftarKeluaranDanHarga;
 use App\Models\DaftarPekerjaanSubKontrak;
 use App\Models\Kontrak;
@@ -262,6 +263,8 @@ class VerifikatorController extends Controller
     {
         $kontrak = Kontrak::where('kontrak_id', $kontrak_id)->first();
         $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
+        $biayaPersonel =  BiayaPersonel::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
+        $totalBiayaPersonel = $biayaPersonel->sum('jumlah');
         $nilai_hps = PaketPekerjaan::with('kontrak')->where('paket_id', $kontrak->paket_id)->first()->nilai_hps;
         $nomor_kontrak = PaketPekerjaan::with('kontrak')->where('paket_id', $kontrak->paket_id)->first()->nomor_kontrak;
         $noSpmk = preg_replace('/\/(\d+)\//', '/$1.a/', $nomor_kontrak);
@@ -288,6 +291,8 @@ class VerifikatorController extends Controller
             'id_paket' => EPurchasing::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'daftarPekerjaanSubKontrak' => DaftarPekerjaanSubKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'daftarKeluaranDanHarga' => DaftarKeluaranDanHarga::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'biayaPersonel' => $biayaPersonel,
+            'totalBiayaPersonel' => $totalBiayaPersonel
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\KontrakExport;
+use App\Models\BiayaPersonel;
 use App\Models\Kontrak;
 use App\Models\Ppkom;
 use Carbon\Carbon;
@@ -103,7 +104,9 @@ class KontrakController extends Controller
     public function edit(Kontrak $kontrak,)
     {
         $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
+        $biayaPersonel = BiayaPersonel::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
         $totalBiaya = $rincianBelanja->sum('total_harga');
+        $totalBiayaPersonel = $biayaPersonel->sum('jumlah');
         $ppn = $totalBiaya * 0.11;
 
         return view('pages.penyedia.permohonan-kontrak.edit-kontrak', [
@@ -117,6 +120,9 @@ class KontrakController extends Controller
             'ruangLingkup' => RuangLingkup::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'daftarPekerjaanSubKontrak' => DaftarPekerjaanSubKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'daftarKeluaranDanHarga' => DaftarKeluaranDanHarga::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'biayaPersonel' => $biayaPersonel,
+            'totalBiayaPersonel' => $totalBiayaPersonel
+
         ]);
     }
 
@@ -166,6 +172,8 @@ class KontrakController extends Controller
     {
         $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
         $totalBiaya = $rincianBelanja->sum('total_harga');
+        $biayaPersonel = BiayaPersonel::with('kontrak')->where('kontrak_id', $kontrak->id)->get();
+        $totalBiayaPersonel = $biayaPersonel->sum('jumlah');
         $ppn = $totalBiaya * 0.11;
 
         return view('pages.penyedia.permohonan-kontrak.detail-kontrak', [
@@ -177,6 +185,8 @@ class KontrakController extends Controller
             'ppn' => $ppn,
             'peralatan' => Peralatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'ruangLingkup' => RuangLingkup::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'biayaPersonel' => $biayaPersonel,
+            'totalBiayaPersonel' => $totalBiayaPersonel
         ]);
     }
 

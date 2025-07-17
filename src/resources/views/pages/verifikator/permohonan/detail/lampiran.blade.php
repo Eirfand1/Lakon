@@ -34,6 +34,12 @@ $metode = $kontrak->paketPekerjaan->metode_pemilihan;
 
 @endif
 
+@if($metode == 'Tender' && $jenis == 'Jasa Konsultasi Pengawasan')
+<div class="mb-8">
+    @include($view . "biaya-personel")
+</div>
+@endif
+
 <form action="lampiran/{{ $kontrak->kontrak_id }}" method="POST">
     @csrf
     <div class="h-10 mt-6 rounded-md flex items-center bg-green-500">

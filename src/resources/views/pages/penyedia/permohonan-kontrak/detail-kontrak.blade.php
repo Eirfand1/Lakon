@@ -301,9 +301,22 @@
         @endphp
 
         @include($view . "tim")
-        @include($view . "jadwal-kegiatan")
-        @include($view . "rincian-barang")
-        @include($view . "peralatan")
+        {{-- @include($view . "jadwal-kegiatan") --}}
+        @if($jenis == 'Pengadaan Barang')
+            @include($view . "rincian-barang")
+        @endif
+        @if($jenis == 'Jasa Konsultasi Perencanaan' || $jenis == 'Pekerjaan Konstruksi')
+            @include($view . "peralatan")
+        @endif
+
+        @if($metode == 'Tender' && $jenis == 'Jasa Konsultasi Perencanaan')
+            @include($view . "daftar-pekerjaan-sub-kontrak")
+            @include($view . "daftar-keluaran-dan-harga")
+        @endif
+
+        @if($metode == 'Tender' && $jenis == 'Jasa Konsultasi Pengawasan')
+            @include($view . "biaya-personel")
+        @endif
     </div>
 
 
