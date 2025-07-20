@@ -18,7 +18,9 @@
                 <th class="text-center border border-gray-400/30 min-w-[200px]">Kondisi</th>
                 <th class="text-center border border-gray-400/30 min-w-[200px]">Status Kepemilikan</th>
                 <th class="text-center border border-gray-400/30 min-w-[200px]">Keterangan</th>
-                <th class="text-center border border-gray-400/30">Aksi</th>
+                @if ($crud_lampiran)
+                    <th class="text-center border border-gray-400/30">Aksi</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -60,9 +62,11 @@
                 <td class="text-center border border-gray-400/30">
                     <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan" id="keteranganPeralatan">
                 </td>
-                <td class="text-center border border-gray-400/30 p-0 ">
-                    <button class="btn btn-success px-4"><i class="fa fa-save text-gray-100"></i></button>
-                </td>
+                @if ($crud_lampiran)
+                    <td class="text-center border border-gray-400/30 p-0 ">
+                        <button class="btn btn-success px-4"><i class="fa fa-save text-gray-100"></i></button>
+                    </td>
+                @endif
 
                 </form>
             </tr>
@@ -78,16 +82,18 @@
                         <td class="border border-gray-400/30">{{ $row->status_kepemilikan }}</td>
                         <td class="border border-gray-400/30">{{ $row->keterangan }}</td>
 
-                        <td class="border border-gray-400/30">
-                            <div class="flex gap-1">
-                                <label class="btn btn-warning btn-sm text-gray-100" onclick="editPeralatan({{ $row }})">
-                                    <i class="fa fa-edit"></i>
-                                </label>
-                                <label class="btn btn-error btn-sm text-gray-100" for="delete-modal" onclick="deletePeralatan({{ $row->peralatan_id }})">
-                                    <i class="fa fa-trash"></i>
-                                </label>
-                            </div>
-                        </td>
+                        @if ($crud_lampiran)
+                            <td class="border border-gray-400/30">
+                                <div class="flex gap-1">
+                                    <label class="btn btn-warning btn-sm text-gray-100" onclick="editPeralatan({{ $row }})">
+                                        <i class="fa fa-edit"></i>
+                                    </label>
+                                    <label class="btn btn-error btn-sm text-gray-100" for="delete-modal" onclick="deletePeralatan({{ $row->peralatan_id }})">
+                                        <i class="fa fa-trash"></i>
+                                    </label>
+                                </div>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
         </tbody>

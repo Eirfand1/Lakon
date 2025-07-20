@@ -14,7 +14,9 @@
                 <th class="text-center border border-gray-400/30">Alamat Sub Penyedia</th>
                 <th class="text-center border border-gray-400/30">Kualifikasi Sub Penyedia</th>
                 <th class="text-center border border-gray-400/30">keterangan</th>
-                <th class="text-center border border-gray-400/30 w-1">Aksi</th>
+                @if ($crud_lampiran)
+                    <th class="text-center border border-gray-400/30 w-1">Aksi</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -38,9 +40,11 @@
                 <td class="text-center border border-gray-400/30">
                     <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan" id="keteranganDaftarSubKontrak">
                 </td>
-                <td class="text-center border border-gray-400/30 p-0">
-                    <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
-                </td>
+                @if ($crud_lampiran)
+                    <td class="text-center border border-gray-400/30 p-0">
+                        <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
+                    </td>
+                @endif
 
                 </form>
             </tr>
@@ -53,16 +57,18 @@
                         <td class="border border-gray-400/30">{{ $row->kualifikasi_sub_penyedia }}</td>
                         <td class="border border-gray-400/30">{{ $row->keterangan }}</td>
 
-                        <td class="border border-gray-400/30">
-                            <div class="flex gap-1">
-                                <label class="btn btn-warning btn-sm text-gray-100" onclick="editDaftarPekerjaanSubKontrak({{ $row }})">
-                                    <i class="fa fa-edit"></i>
-                                </label>
-                                <label class="btn btn-error btn-sm text-gray-100" for="delete-modal" onclick="deleteDaftarPekerjaanSubKontrak({{ $row->daftar_pekerjaan_sub_kontrak_id }})">
-                                    <i class="fa fa-trash"></i>
-                                </label>
-                            </div>
-                        </td>
+                        @if ($crud_lampiran)
+                            <td class="border border-gray-400/30">
+                                <div class="flex gap-1">
+                                    <label class="btn btn-warning btn-sm text-gray-100" onclick="editDaftarPekerjaanSubKontrak({{ $row }})">
+                                        <i class="fa fa-edit"></i>
+                                    </label>
+                                    <label class="btn btn-error btn-sm text-gray-100" for="delete-modal" onclick="deleteDaftarPekerjaanSubKontrak({{ $row->daftar_pekerjaan_sub_kontrak_id }})">
+                                        <i class="fa fa-trash"></i>
+                                    </label>
+                                </div>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
         </tbody>

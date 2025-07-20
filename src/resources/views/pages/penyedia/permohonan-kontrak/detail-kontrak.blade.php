@@ -1,4 +1,7 @@
 <x-app-layout>
+    @php
+        $crud_lampiran = false;
+    @endphp
     <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
         <p class="mb-4 text-sm text-gray-600 dark:text-gray-300">
             DETAIL KONTRAK

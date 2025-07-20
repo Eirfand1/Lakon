@@ -12,7 +12,9 @@
                 <th class="text-center border border-gray-400/30">Keluaran</th>
                 <th class="text-center border border-gray-400/30">Satuan</th>
                 <th class="text-center border border-gray-400/30">Total Harga</th>
-                <th class="text-center border border-gray-400/30 w-1">Aksi</th>
+                @if ($crud_lampiran)
+                    <th class="text-center border border-gray-400/30 w-1">Aksi</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -30,29 +32,33 @@
                 <td class="text-center border border-gray-400/30">
                     <input class="w-full dark:bg-gray-800 rounded" type="number" min="0" name="total_harga" id="totalHargaDaftarKeluaranDanHarga">
                 </td>
-                <td class="text-center border border-gray-400/30 p-0">
-                    <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
-                </td>
+                @if ($crud_lampiran)
+                    <td class="text-center border border-gray-400/30 p-0">
+                        <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
+                    </td>
+                @endif
 
                 </form>
             </tr>
 
                 @foreach($daftarKeluaranDanHarga as $row)
                     <tr>
-                         <td class="border border-gray-400/30">{{ $row->keluaran }}</td>
+                        <td class="border border-gray-400/30">{{ $row->keluaran }}</td>
                         <td class="border border-gray-400/30">{{ $row->satuan }}</td>
-                        <td class="border border-gray-400/30">{{ $row->total_harga }}</td>
+                        <td class="border border-gray-400/30">Rp. {{ number_format($row->total_harga, 0, ',', '.') }}</td>
 
-                        <td class="border border-gray-400/30">
-                            <div class="flex gap-1">
-                                <label class="btn btn-warning btn-sm text-gray-100" onclick="editDaftarKeluaranDanHarga({{ $row }})">
-                                    <i class="fa fa-edit"></i>
-                                </label>
-                                <label class="btn btn-error btn-sm text-gray-100" for="delete-modal" onclick="deleteDaftarKeluaranDanHarga({{ $row->daftar_keluaran_dan_harga_id }})">
-                                    <i class="fa fa-trash"></i>
-                                </label>
-                            </div>
-                        </td>
+                        @if ($crud_lampiran)
+                            <td class="border border-gray-400/30">
+                                <div class="flex gap-1">
+                                    <label class="btn btn-warning btn-sm text-gray-100" onclick="editDaftarKeluaranDanHarga({{ $row }})">
+                                        <i class="fa fa-edit"></i>
+                                    </label>
+                                    <label class="btn btn-error btn-sm text-gray-100" for="delete-modal" onclick="deleteDaftarKeluaranDanHarga({{ $row->daftar_keluaran_dan_harga_id }})">
+                                        <i class="fa fa-trash"></i>
+                                    </label>
+                                </div>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
         </tbody>

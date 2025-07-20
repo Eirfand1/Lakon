@@ -23,7 +23,9 @@
                 <th class="text-center border border-gray-400/30 min-w-[200px]">Harga</th>
                 <th class="text-center border border-gray-400/30 min-w-[200px]">Keterangan</th>
                 <th class="text-center border border-gray-400/30 min-w-[200px]">Total Harga</th>
-                <th class="text-center border border-gray-400/30">Aksi</th>
+                @if ($crud_lampiran)
+                    <th class="text-center border border-gray-400/30">Aksi</th>
+                @endif
             </tr>
         </thead>
         <tbody>
@@ -50,10 +52,12 @@
                 <td class="text-center border border-gray-400/30">
                     <input class="w-full dark:bg-gray-800 rounded" type="text" name="keterangan" id="keterangan_biaya_personel">
                 </td>
-                <td> </td>
-                <td class="text-center border border-gray-400/30 p-0">
-                    <button class="btn btn-success px-4"><i class="fa fa-save text-gray-100"></i></button>
-                </td>
+                <td class="text-center border border-gray-400/30"> </td>
+                @if ($crud_lampiran)
+                    <td class="text-center border border-gray-400/30 p-0">
+                        <button class="btn btn-success px-4"><i class="fa fa-save text-gray-100"></i></button>
+                    </td>
+                @endif
 
                 </form>
             </tr>
@@ -68,22 +72,26 @@
                         <td class="border border-gray-400/30 text-right">{{ $row->keterangan }}</td>
                         <td class="border border-gray-400/30 text-right">Rp. {{ number_format($row->jumlah, 0, ',', '.') }}</td>
 
-                        <td class="border border-gray-400/30">
-                            <div class="flex gap-1">
-                                <label class="btn btn-warning btn-sm text-gray-100" onclick='editBiayaPersonel(@json($row))'">
-                                    <i class="fa fa-edit"></i>
-                                </label>
-                                <label class="btn btn-error btn-sm text-gray-100" for="delete-modal"  onclick="deleteBiayaPersonel({{ $row->biaya_personel_id }})">
-                                    <i class="fa fa-trash"></i>
-                                </label>
-                            </div>
-                        </td>
+                        @if ($crud_lampiran)
+                            <td class="border border-gray-400/30">
+                                <div class="flex gap-1">
+                                    <label class="btn btn-warning btn-sm text-gray-100" onclick='editBiayaPersonel(@json($row))'">
+                                        <i class="fa fa-edit"></i>
+                                    </label>
+                                    <label class="btn btn-error btn-sm text-gray-100" for="delete-modal"  onclick="deleteBiayaPersonel({{ $row->biaya_personel_id }})">
+                                        <i class="fa fa-trash"></i>
+                                    </label>
+                                </div>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
                 <tr>
                     <td colspan="6" class="text-right border border-gray-400/30">Total</td>
                     <td class="text-right border border-gray-400/30">Rp. {{ number_format($totalBiayaPersonel, 0, ',', '.') }}</td>
-                    <td class="border border-gray-400/30"></td>
+                    @if ($crud_lampiran)
+                        <td class="border border-gray-400/30"></td>
+                    @endif
                 </tr>
         </tbody>
     </table>

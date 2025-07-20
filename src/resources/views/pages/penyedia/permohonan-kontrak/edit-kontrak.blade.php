@@ -1,4 +1,7 @@
 <x-app-layout>
+    @php
+        $crud_lampiran = true;
+    @endphp
     <div class="m-4 p-6 bg-white dark:bg-gray-800 rounded-lg shadow-md dark:shadow-xl">
         <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-6">Detail Permohonan Kontrak</h2>
 

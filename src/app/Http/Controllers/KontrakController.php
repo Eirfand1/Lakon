@@ -172,7 +172,7 @@ class KontrakController extends Controller
     {
         $rincianBelanja = RincianBelanja::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
         $totalBiaya = $rincianBelanja->sum('total_harga');
-        $biayaPersonel = BiayaPersonel::with('kontrak')->where('kontrak_id', $kontrak->id)->get();
+        $biayaPersonel = BiayaPersonel::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get();
         $totalBiayaPersonel = $biayaPersonel->sum('jumlah');
         $ppn = $totalBiaya * 0.11;
 
@@ -185,6 +185,8 @@ class KontrakController extends Controller
             'ppn' => $ppn,
             'peralatan' => Peralatan::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'ruangLingkup' => RuangLingkup::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'daftarPekerjaanSubKontrak' => DaftarPekerjaanSubKontrak::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
+            'daftarKeluaranDanHarga' => DaftarKeluaranDanHarga::with('kontrak')->where('kontrak_id', $kontrak->kontrak_id)->get(),
             'biayaPersonel' => $biayaPersonel,
             'totalBiayaPersonel' => $totalBiayaPersonel
         ]);

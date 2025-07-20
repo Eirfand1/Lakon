@@ -18,7 +18,9 @@
                 <th rowspan="2" class="text-center border border-gray-400/30 min-w-[200px]">Sertifikasi</th>
                 <th rowspan="2" class="text-center border border-gray-400/30 min-w-[200px]">Keterangan</th>
                 <th colspan="12" class="text-center border border-gray-400/30">Jadwal Pelasanaan Kegiatan (Bulan)</th>
-                <th rowspan="2" class="text-center border border-gray-400/30">Aksi</th>
+                @if ($crud_lampiran)
+                    <th rowspan="2" class="text-center border border-gray-400/30">Aksi</th>
+                @endif
             </tr>
             <tr>
                 <th class="text-center border border-gray-400/30">1</th>
@@ -114,9 +116,11 @@
                 <td class="text-center border border-gray-400/30 p-0">
                     <input type="checkbox" name="bulan_12" class="rounded" id="timBulan12">
                 </td>
-                <td class="text-center border border-gray-400/30 p-0">
-                    <button class="btn btn-success px-4"><i class="fa fa-save text-gray-100"></i></button>
-                </td>
+                @if ($crud_lampiran)
+                    <td class="text-center border border-gray-400/30 p-0">
+                        <button class="btn btn-success px-4"><i class="fa fa-save text-gray-100"></i></button>
+                    </td>
+                @endif
                 </form>
             </tr>
 
@@ -141,16 +145,18 @@
                         <td class="@if ($row->bulan_10) bg-green-400 @else bg-red-400 @endif"></td>
                         <td class="@if ($row->bulan_11) bg-green-400 @else bg-red-400 @endif"></td>
                         <td class="@if ($row->bulan_12) bg-green-400 @else bg-red-400 @endif"></td>
-                        <td class="border border-gray-400/30">
-                            <div class="flex gap-1">
-                                <label class="btn btn-warning btn-sm text-gray-100" onclick="editTim({{ $row }})">
-                                    <i class="fa fa-edit"></i>
-                                </label>
-                                <label class="btn btn-error btn-sm text-gray-100" for="delete-modal" onclick="deleteTim({{ $row->tim_id }})">
-                                    <i class="fa fa-trash"></i>
-                                </label>
-                            </div>
-                        </td>
+                        @if ($crud_lampiran)
+                            <td class="border border-gray-400/30">
+                                <div class="flex gap-1">
+                                    <label class="btn btn-warning btn-sm text-gray-100" onclick="editTim({{ $row }})">
+                                        <i class="fa fa-edit"></i>
+                                    </label>
+                                    <label class="btn btn-error btn-sm text-gray-100" for="delete-modal" onclick="deleteTim({{ $row->tim_id }})">
+                                        <i class="fa fa-trash"></i>
+                                    </label>
+                                </div>
+                            </td>
+                        @endif
                     </tr>
                 @endforeach
         </tbody>

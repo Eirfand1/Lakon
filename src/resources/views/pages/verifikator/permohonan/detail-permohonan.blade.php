@@ -1,6 +1,9 @@
 {{-- @dd($kontrak->penyedia) --}}
 <x-app-layout>
 
+    @php
+        $crud_lampiran = true;
+    @endphp
 <div class="p-4">
     <h2 class="text-2xl font-bold mb-4">
         <i class="fa fa-calendar-o mr-2"></i> DETAIL PERMOHONAN KONTRAK
