@@ -2,12 +2,12 @@
     <h1 class="text-lg dark:text-gray-300 flex gap-2 items-center font-semibold mb-4">
         <i class="fa fa-bars"></i>
         <span>
-            Biaya non Personel
+            Biaya Non Personel
         </span>
     </h1>
 
 
-       
+
         @if (session('error'))
             <div>
                 {{ session('error') }}
@@ -73,7 +73,7 @@
                                 <label class="btn btn-warning btn-sm text-gray-100" onclick='editBiayaPersonel(@json($row))'">
                                     <i class="fa fa-edit"></i>
                                 </label>
-                                <label class="btn btn-error btn-sm text-gray-100" for="delete-modal"  onclick="deleteRincianBelanja({{ $row->biaya_personel_id }})">
+                                <label class="btn btn-error btn-sm text-gray-100" for="delete-modal"  onclick="deleteBiayaPersonel({{ $row->biaya_personel_id }})">
                                     <i class="fa fa-trash"></i>
                                 </label>
                             </div>
@@ -96,13 +96,13 @@
         document.getElementById('jenis_biaya_personel').value = row.jenis_biaya;
         document.getElementById('uraian_biaya_personel').value = row.uraian_biaya;
         document.getElementById('satuan_biaya_personel').value = row.satuan;
-        document.getElementById('qty_biaya_personel').value = row.qty;        
-        document.getElementById('harga_biaya_personel').value = row.harga_satuan;
-        document.getElementById('keterangan_biaya_personel').value = row.biaya_personel;
+        document.getElementById('qty_biaya_personel').value = row.qty;
+        document.getElementById('harga_biaya_personel').value = row.harga;
+        document.getElementById('keterangan_biaya_personel').value = row.keterangan;
     }
 
-    function deleteRincianBelanja(id) {
-        const baseUrl = @json(route('rincian-belanja.destroy', ['rincian_belanja' => '__ID__']));
+    function deleteBiayaPersonel(id) {
+        const baseUrl = @json(route('biaya-personel.destroy', ['biaya_personel' => '__ID__']));
         const actionUrl = baseUrl.replace('__ID__', id);
         document.getElementById('deleteForm').action = actionUrl;
 

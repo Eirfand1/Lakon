@@ -118,6 +118,7 @@ Route::middleware(['auth', 'role:penyedia,verifikator'])->prefix('/lampiran')->g
     Route::post('/permohonan-kontrak/daftar-keluaran-dan-harga', [DaftarKeluaranDanHargaController::class, 'store'])->name('daftar-keluaran-dan-harga.store');
     Route::delete('/permohonan-kontrak/daftar-keluaran-dan-harga/{daftar_keluaran_dan_harga}', [DaftarKeluaranDanHargaController::class, 'destroy'])->name('daftar-keluaran-dan-harga.destroy');
 
+    // biaya personel
     Route::post('/permohonan-kontrak/biaya-personel.store', [BiayaPersonelController::class, 'store'])->name('biaya-personel.store');
     Route::delete('/permohonan-kontrak/biaya-personel.store/{biaya_personel}', [BiayaPersonelController::class, 'destroy'])->name('biaya-personel.destroy');
 });

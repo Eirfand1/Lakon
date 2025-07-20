@@ -20,8 +20,8 @@ class BiayaPersonelController extends Controller
                 'keterangan' => 'required|string',
             ]);
 
-            if ($request->rincian_belanja_id) {
-                BiayaPersonel::where('rincian_belanja_id', $request->rincian_belanja_id)->update([
+            if ($request->biaya_personel_id) {
+                BiayaPersonel::where('biaya_personel_id', $request->biaya_personel_id)->update([
                     'kontrak_id' => $validateData['kontrak_id'],
                     'jenis_biaya' => $validateData['jenis_biaya'],
                     'uraian_biaya' => $validateData['uraian_biaya'],
@@ -30,7 +30,7 @@ class BiayaPersonelController extends Controller
                     'harga' => $validateData['harga'],
                     'keterangan' => $request->keterangan,
                 ]);
-                return redirect()->back()->with('success', 'Biaya non Personel berhasil diperbarui.')->withFragment('rincianBelanja');
+                return redirect()->back()->with('success', 'Biaya non Personel berhasil diperbarui.')->withFragment('biayaNonPersonel');
             } else {
                 BiayaPersonel::create([
                     'kontrak_id' => $validateData['kontrak_id'],
@@ -41,7 +41,7 @@ class BiayaPersonelController extends Controller
                     'harga' => $validateData['harga'],
                     'keterangan' => $request->keterangan,
                 ]);
-                return redirect()->back()->with('success', 'Biaya non Personel berhasil disimpan.')->withFragment('biayaNonPersonela');
+                return redirect()->back()->with('success', 'Biaya non Personel berhasil disimpan.')->withFragment('biayaNonPersonel');
             }
         } catch (\Exception $e) {
             return redirect()->back()->with('error', $e->getMessage())->withFragment('biayaNonPersonel');
@@ -51,10 +51,10 @@ class BiayaPersonelController extends Controller
     public function destroy($biaya_personel)
     {
         try {
-            BiayaPersonel::where('rincian_belanja_id', $biaya_personel)->delete();
-            return redirect()->back()->with('success', 'Biaya non Personel berhasil dihapus.')->withFragment('biayaNonPersonela');
+            BiayaPersonel::where('biaya_personel_id', $biaya_personel)->delete();
+            return redirect()->back()->with('success', 'Biaya non Personel berhasil dihapus.')->withFragment('biayaNonPersonel');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', $e->getMessage())->withFragment('biayaNonPersonela');
+            return redirect()->back()->with('error', $e->getMessage())->withFragment('biayaNonPersonel');
         }
     }
 }
