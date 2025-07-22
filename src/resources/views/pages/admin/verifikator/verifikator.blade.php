@@ -31,10 +31,11 @@
                     <div class="flex gap-2 sm:flex-nowrap flex-wrap">
                         <div class="sm:w-2/5 w-full">
                             <x-label >NIP</x-label>
-                            <x-input type="number" name="nip" required
+                            <x-input type="text" name="nip" required
                                 class="{{ $errors->has('nip') ? 'border-red-500' : 'border-gray-200' }}"
                                 value="{{old('nip')}}"
-                                placeholder="nip" />
+                                placeholder="nip"
+                                id="add_nip"/>
                             @error('nip')
                                 <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                             @enderror
@@ -131,7 +132,7 @@
                     <div class="flex sm:flex-nowrap flex-wrap gap-2">
                         <div class="sm:w-2/5 w-full">
                             <x-label >NIP</x-label>
-                            <x-input type="number" id="edit_nip" name="edit_nip"
+                            <x-input type="text" id="edit_nip" name="edit_nip"
                                 placeholder="nip"
                                 class="{{ $errors->has('nip') ? 'border-red-500' : 'border-gray-200' }}"
                                 required
@@ -254,5 +255,44 @@
         function setDeleteId(verifikator_id) {
             document.getElementById('deleteForm').action = `verifikator/${verifikator_id}`;
         }
+
+
+        document.getElementById('edit_nip').addEventListener('input', function(e) {
+            let val = e.target.value.replace(/\D/g, '');
+            if (val.length > 20) val = val.slice(0, 20);
+
+            let formatted = '';
+
+            if (val.length <= 8) {
+                formatted = val;
+            } else if (val.length <= 14) {
+                formatted = val.slice(0, 8) + ' ' + val.slice(8);
+            } else if (val.length <= 15) {
+                formatted = val.slice(0, 8) + ' ' + val.slice(8, 14) + ' ' + val.slice(14);
+            } else {
+                formatted = val.slice(0, 8) + ' ' + val.slice(8, 14) + ' ' + val.slice(14, 15) + ' ' + val.slice(15, 18);
+            }
+
+            e.target.value = formatted;
+        });
+
+        document.getElementById('add_nip').addEventListener('input', function(e) {
+            let val = e.target.value.replace(/\D/g, '');
+            if (val.length > 20) val = val.slice(0, 20);
+
+            let formatted = '';
+
+            if (val.length <= 8) {
+                formatted = val;
+            } else if (val.length <= 14) {
+                formatted = val.slice(0, 8) + ' ' + val.slice(8);
+            } else if (val.length <= 15) {
+                formatted = val.slice(0, 8) + ' ' + val.slice(8, 14) + ' ' + val.slice(14);
+            } else {
+                formatted = val.slice(0, 8) + ' ' + val.slice(8, 14) + ' ' + val.slice(14, 15) + ' ' + val.slice(15, 18);
+            }
+
+            e.target.value = formatted;
+        });
     </script>
 </x-app-layout>

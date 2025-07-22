@@ -33,11 +33,12 @@
                     @csrf
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
-                            <x-label>NIP aaa</x-label>
+                            <x-label>NIP</x-label>
                             <x-input type="text" name="nip" value="{{old('value')}}"
                                 class="{{ $errors->has('nip') ? 'border-red-500' : 'border-gray-200' }}"
                                 placeholder="NIP"
-                                required />
+                                required
+                                id="add_nip"/>
                             @error('nip')
                                 <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                             @enderror
@@ -275,6 +276,45 @@
         function setDeleteId(ppkom_id) {
             document.getElementById('deleteForm').action = `ppkom/${ppkom_id}`;
         }
+
+    document.getElementById('edit_nip').addEventListener('input', function(e) {
+        let val = e.target.value.replace(/\D/g, '');
+        if (val.length > 20) val = val.slice(0, 20);
+
+        let formatted = '';
+
+        if (val.length <= 8) {
+            formatted = val;
+        } else if (val.length <= 14) {
+            formatted = val.slice(0, 8) + ' ' + val.slice(8);
+        } else if (val.length <= 15) {
+            formatted = val.slice(0, 8) + ' ' + val.slice(8, 14) + ' ' + val.slice(14);
+        } else {
+            formatted = val.slice(0, 8) + ' ' + val.slice(8, 14) + ' ' + val.slice(14, 15) + ' ' + val.slice(15, 18);
+        }
+
+        e.target.value = formatted;
+    });
+
+    document.getElementById('add_nip').addEventListener('input', function(e) {
+        let val = e.target.value.replace(/\D/g, '');
+        if (val.length > 20) val = val.slice(0, 20);
+
+        let formatted = '';
+
+        if (val.length <= 8) {
+            formatted = val;
+        } else if (val.length <= 14) {
+            formatted = val.slice(0, 8) + ' ' + val.slice(8);
+        } else if (val.length <= 15) {
+            formatted = val.slice(0, 8) + ' ' + val.slice(8, 14) + ' ' + val.slice(14);
+        } else {
+            formatted = val.slice(0, 8) + ' ' + val.slice(8, 14) + ' ' + val.slice(14, 15) + ' ' + val.slice(15, 18);
+        }
+
+        e.target.value = formatted;
+    });
     </script>
+
 
 </x-app-layout>

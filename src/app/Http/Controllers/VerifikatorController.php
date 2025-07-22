@@ -37,7 +37,7 @@ class VerifikatorController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validate = $request->validate([
-            'nip' => 'required|unique:verifikator,nip|numeric',
+            'nip' => 'required|unique:verifikator,nip|string',
             'nama_verifikator' => 'required'
         ]);
 
@@ -66,7 +66,7 @@ class VerifikatorController extends Controller
     public function update(Request $request, Verifikator $verifikator): RedirectResponse
     {
         $validate = $request->validate([
-            'edit_nip' => 'required|numeric|unique:verifikator,nip,' . $verifikator->verifikator_id . ',verifikator_id',
+            'edit_nip' => 'required|string|unique:verifikator,nip,' . $verifikator->verifikator_id . ',verifikator_id',
             'edit_nama_verifikator' => 'required',
             'edit_password' => 'required|string|min:8'
         ]);
