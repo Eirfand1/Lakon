@@ -454,7 +454,7 @@
             id="sekolah_single_edit"
             class="choices w-full {{ $errors->has('sekolah_id') ? 'border-red-500' : 'border-gray-200' }}"
             x-ref="sekolahSelect"
-            required>
+            >
             <option value="">Pilih Sekolah</option>
             <template x-for="option in options" :key="option.sekolah_id">
                 <option :value="option.sekolah_id" x-text="option.nama_sekolah"></option>

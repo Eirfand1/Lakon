@@ -33,6 +33,12 @@ class PenyediaTable extends DataTableComponent
                 ->format(fn($value, $row) => view('pages.admin.penyedia.actions', ['p' => Penyedia::with('user')->find($value)])),
             Column::make("Verifikasi", "is_verificated")
                 ->format(fn($value, $row) => view('pages.admin.penyedia.status', ['status' => $value, 'id' => $row->penyedia_id])),
+            Column::make("Nama Perusahaan Lengkap", "nama_perusahaan_lengkap")
+                ->sortable()
+                ->searchable(),
+            Column::make("Nama Perusahaan Singkat", "nama_perusahaan_singkat")
+                ->sortable()
+                ->searchable(),
             Column::make("Username", "user.name")
                 ->sortable()
                 ->searchable(),
@@ -49,12 +55,6 @@ class PenyediaTable extends DataTableComponent
                 ->sortable()
                 ->searchable(),
 
-            Column::make("Nama Perusahaan Lengkap", "nama_perusahaan_lengkap")
-                ->sortable()
-                ->searchable(),
-            Column::make("Nama Perusahaan Singkat", "nama_perusahaan_singkat")
-                ->sortable()
-                ->searchable(),
             Column::make("No. Akta Notaris", "akta_notaris_no")
                 ->sortable()
                 ->searchable(),

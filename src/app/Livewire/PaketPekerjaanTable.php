@@ -92,9 +92,10 @@ class PaketPekerjaanTable extends DataTableComponent
 
             Column::make('Satuan Kerja', 'satuanKerja.nama_pimpinan')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->deselected(),
 
-            Column::make('Sub Kegiatan', 'paket_id')
+            Column::make('Sub Kegiatan (Detail)', 'paket_id')
                 ->format(function ($value, $row) {
                     $data = PaketPekerjaan::with('subKegiatan')->find($value);
                     $subKegiatanList = $data->subKegiatan;
@@ -134,14 +135,15 @@ class PaketPekerjaanTable extends DataTableComponent
                                 </table>
                         </div>
                     ";
-                })->html()->collapseAlways()->searchable(),
+                })->html()->collapseAlways()->searchable()->excludeFromColumnSelect(),
 
 
 
             Column::make('Waktu Paket', 'waktu_paket')
                 ->format(fn($value) => Carbon::parse($value)->translatedFormat('d F Y'))
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->deselected(),
 
             Column::make('Metode Pemilihan', 'metode_pemilihan')
                 ->sortable()
@@ -153,11 +155,13 @@ class PaketPekerjaanTable extends DataTableComponent
 
             Column::make('Ppkom', 'ppkom.nama')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->deselected(),
 
             Column::make('Dasar Hukum', 'dasarHukum.dasar_hukum')
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->deselected(),
 
             Column::make('Daskum Id', 'dasarHukum.daskum_id')
                 ->hideIf(true),
