@@ -51,48 +51,31 @@ class KontrakTable extends DataTableComponent
 
             Column::make("Aksi", "kontrak_id")
                 ->format(fn($value, $row) => view('pages.admin.riwayat-kontrak.actions', ['kontrak' => $row])),
-            Column::make("No Kontrak", "paketPekerjaan.nomor_kontrak")
+            Column::make("Nama Paket", "paketPekerjaan.nama_pekerjaan")
                 ->sortable()
                 ->searchable(),
-            Column::make("Jenis Kontrak", "jenis_kontrak")
+            Column::make("Nama Penyedia", "penyedia.nama_perusahaan_lengkap")
+                ->sortable()
+                ->searchable(),
+            Column::make("No Kontrak", "paketPekerjaan.nomor_kontrak")
                 ->sortable()
                 ->searchable(),
             Column::make("Nilai Kontrak")
                 ->sortable()
                 ->searchable()
                 ->format(fn($value, $row) => 'Rp. ' . number_format($row->nilai_kontrak, 2)),
-            // Column::make("Tanggal Kontrak", "tgl_kontrak")
-            //     ->sortable()
-            //     ->format(fn ($value)=>  Carbon::parse($value)->translatedFormat('d F Y'))
-            //     ->searchable(),
-            Column::make("Waktu Kontrak (bulan)", "waktu_kontrak")
-                ->sortable()
-                ->searchable(),
-            Column::make("Tanggal Pembuatan", "tgl_pembuatan")
+            Column::make("Tanggal Kontrak", "tgl_pembuatan")
                 ->sortable()
                 ->format(fn ($value) => Carbon::parse($value)->translatedFormat('d F Y'))
                 ->searchable(),
-            // Column::make("Nomor DPPL", "nomor_dppl")
-            //     ->sortable()
-            //     ->searchable(),
-            // Column::make("Tanggal DPPL", "tgl_dppl")
-            //     ->sortable()
-            //     ->format(fn($value)=> Carbon::parse($value)->translatedFormat('d F Y'))
-            //     ->searchable(),
-            // Column::make("Nomor BAHPL", "nomor_bahpl")
-            //     ->sortable()
-            //     ->searchable(),
-            // Column::make("Tanggal BAHPL", "tgl_bahpl")
-            //     ->sortable()
-            //     ->format(fn($value) => Carbon::parse($value)->translatedFormat('d F Y')),
-            Column::make("Tanggal Pembuatan", "tanggal_akhir")
+            Column::make("Waktu Kontrak (HK)", "waktu_kontrak")
                 ->sortable()
-                ->format(fn ($value) => Carbon::parse($value)->translatedFormat('d F Y'))
-                ->searchable(),
-            Column::make("Satker", "satuanKerja.nama_pimpinan") // Relasi
+                ->searchable()
+                ->format(fn($value, $row) => $row->waktu_kontrak . ' Hari Kerja'),
+            Column::make("Jenis Pengadaan", "paketPekerjaan.jenis_pengadaan")
                 ->sortable()
                 ->searchable(),
-            Column::make("Penyedia", "penyedia.nama_perusahaan_lengkap") // Relasi
+            Column::make("Metode Pemilihan", "paketPekerjaan.metode_pemilihan")
                 ->sortable()
                 ->searchable(),
             Column::make("Verifikator", "verifikator.nama_verifikator") // Relasi

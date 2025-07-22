@@ -9,6 +9,7 @@ use Rappasoft\LaravelLivewireTables\Views\Column;
 use App\Models\Kontrak;
 use Rappasoft\LaravelLivewireTables\Views\Columns\IncrementColumn;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class RiwayatVerifikasiTable extends DataTableComponent
 {
@@ -55,24 +56,32 @@ class RiwayatVerifikasiTable extends DataTableComponent
                         ';
                 })->html(),
 
-            Column::make("is_verificated")
-                ->hideIf(true),
+            Column::make("Nama Paket", "paketPekerjaan.nama_pekerjaan")
+                ->sortable()
+                ->searchable(),
 
-            Column::make("sekolah_id", "paketPekerjaan.sekolah.nama_sekolah")
-                ->hideIf(true)
+            Column::make("Nama Penyedia", "penyedia.nama_perusahaan_lengkap")
+                ->sortable()
                 ->searchable(),
 
             Column::make("No Kontrak", "paketPekerjaan.nomor_kontrak")
                 ->sortable()
                 ->searchable(),
 
-            Column::make("Nama Perusahaan", "penyedia.nama_perusahaan_lengkap")
+            Column::make("Nilai Kontrak", "nilai_kontrak")
                 ->sortable()
+                ->searchable()
+                ->format(fn($value, $row) => 'Rp. ' . number_format($row->nilai_kontrak, 2)),
+
+            Column::make("Tanggal Kontrak", "tgl_pembuatan")
+                ->sortable()
+                ->format(fn ($value) => Carbon::parse($value)->translatedFormat('d F Y'))
                 ->searchable(),
 
-            Column::make("Nama Paket", "paketPekerjaan.nama_pekerjaan")
+            Column::make("Waktu Kontrak (HK)", "waktu_kontrak")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->format(fn($value, $row) => $row->waktu_kontrak . ' Hari Kerja'),
 
             Column::make("Jenis Pengadaan", "paketPekerjaan.metode_pemilihan")
                 ->sortable()
@@ -84,6 +93,14 @@ class RiwayatVerifikasiTable extends DataTableComponent
 
             Column::make("Tanggal Pengajuan", "tgl_pembuatan")
                 ->sortable()
+                ->searchable()
+                ->format(fn ($value) => Carbon::parse($value)->translatedFormat('d F Y')),
+
+            Column::make("is_verificated")
+                ->hideIf(true),
+
+            Column::make("sekolah_id", "paketPekerjaan.sekolah.nama_sekolah")
+                ->hideIf(true)
                 ->searchable(),
         ];
     }
