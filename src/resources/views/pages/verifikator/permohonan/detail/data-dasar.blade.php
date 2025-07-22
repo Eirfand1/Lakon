@@ -2,6 +2,10 @@
     <h1 class="font-bold text-gray-100 ml-4">Data Dasar Permohonan Kontrak</h1>
 </div>
 
+
+<form action="data-dasar/{{ $kontrak->kontrak_id }}" method="POST">
+    @csrf
+
 <!-- Section Direktur -->
 <div class="mb-8">
     <div class="flex items-center mb-4 space-x-2 text-gray-600 dark:text-gray-300">
@@ -161,64 +165,48 @@
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                     <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor SPPBJ</label>
-                    <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                        {{ $kontrak->nomor_sppbj }}
-                    </p>
+                    <x-input type="text" name="nomor_sppbj" value="{{ $kontrak->nomor_sppbj }}" required></x-input>
                 </div>
 
                 <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                     <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal SPPBJ</label>
-                    <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                        {{ $kontrak->tgl_sppbj }}
-                    </p>
+                    <x-input type="date" name="tgl_sppbj" value="{{ $kontrak->tgl_sppbj }}" required></x-input>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                     <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor Penetapan Pemenang</label>
-                    <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                        {{ $kontrak->nomor_penetapan_pemenang }}
-                    </p>
+                    <x-input type="text" name="nomor_penetapan_pemenang" value="{{ $kontrak->nomor_penetapan_pemenang }}" required></x-input>
                 </div>
 
                 <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                     <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal Penetapan Pemenang</label>
-                    <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                        {{ $kontrak->tgl_penetapan_pemenang }}
-                    </p>
+                    <x-input type="date" name="tgl_penetapan_pemenang" value="{{ $kontrak->tgl_penetapan_pemenang }}" required></x-input>
                 </div>
             </div>
         @elseif ($kontrak->paketPekerjaan->metode_pemilihan == 'Non Tender')
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                     <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor DPPL</label>
-                    <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                        {{ $kontrak->nomor_dppl }}
-                    </p>
+                    <x-input type="text" name="nomor_dppl" value="{{ $kontrak->nomor_dppl }}" required></x-input>
                 </div>
 
                 <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                     <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal DPPL</label>
-                    <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                        {{ $kontrak->tgl_dppl }}
-                    </p>
+                    <x-input type="date" name="tgl_dppl" value="{{ $kontrak->tgl_dppl }}" required></x-input>
                 </div>
             </div>
 
             <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                     <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Nomor BAHPL</label>
-                    <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                        {{ $kontrak->nomor_bahpl }}
-                    </p>
+                    <x-input type="text" name="nomor_bahpl" value="{{ $kontrak->nomor_bahpl }}" required></x-input>
                 </div>
 
                 <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg">
                     <label class="block text-sm font-semibold text-blue-900 dark:text-blue-300">Tanggal BAHPL</label>
-                    <p class="mt-1 text-gray-700 dark:text-gray-200 font-medium">
-                        {{ $kontrak->tgl_bahpl }}
-                    </p>
+                    <x-input type="date" name="tgl_bahpl" value="{{ $kontrak->tgl_bahpl }}" required></x-input>
                 </div>
             </div>
         @endif
@@ -235,17 +223,15 @@
         </div>
     </div>
 
-    <form action="data-dasar/{{ $kontrak->kontrak_id }}" method="POST">
-        @csrf
         <div class="h-10 mt-6 rounded-md flex items-center bg-green-500">
             <button type="submit" class="w-full bg-success hover:bg-green-700 text-white  py-2 px-4 rounded-md">
                 <i class="fa-solid fa-check"></i>
                 Simpan Data Dasar
             </button>
         </div>
-    </form>
-</div>
+    </div>
 
+</form>
 {{-- tampilkan berkas penawaran --}}
 <input type="checkbox" id="berkas_penawaran" class="modal-toggle" />
 <div class="modal modal-middle px-3">

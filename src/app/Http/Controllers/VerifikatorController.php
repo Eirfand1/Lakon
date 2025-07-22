@@ -126,9 +126,32 @@ class VerifikatorController extends Controller
         return view('pages.verifikator.permohonan.detail-permohonan');
     }
 
-    public function dataDasar($kontrak_id, Kontrak $kontrak)
+    public function dataDasar($kontrak_id, Kontrak $kontrak, Request $request)
     {
+        $validatedData = $request->validate([
+            // tender
+            'nomor_sppbj' => 'nullable|string|max:255',
+            'tgl_sppbj' => 'nullable|date',
+            'nomor_penetapan_pemenang' => 'nullable|string|max:255',
+            'tgl_penetapan_pemenang' => 'nullable|date',
+
+            // non tender
+            'nomor_dppl' => 'nullable|string|max:255',
+            'tgl_dppl' => 'nullable|date',
+            'nomor_bahpl' => 'nullable|string|max:255',
+            'tgl_bahpl' => 'nullable|date',
+        ]);
+
         $kontrak->where('kontrak_id', $kontrak_id)->update([
+            'nomor_sppbj' => $request->nomor_sppbj,
+            'tgl_sppbj' => $request->tgl_sppbj,
+            'nomor_penetapan_pemenang' => $request->nomor_penetapan_pemenang,
+            'tgl_penetapan_pemenang' => $request->tgl_penetapan_pemenang,
+
+            'nomor_dppl' => $request->nomor_dppl,
+            'tgl_dppl' => $request->tgl_dppl,
+            'nomor_bahpl' => $request->nomor_bahpl,
+            'tgl_bahpl' => $request->tgl_bahpl,
             'data_dasar_done' => true
         ]);
         return redirect()->back()->with('success', 'Data dasar berhasil di simpan');
