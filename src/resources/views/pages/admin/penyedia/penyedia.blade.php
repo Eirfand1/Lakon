@@ -259,6 +259,46 @@
     <!-- Script for penyedia Table -->
     <script>
 
+    const input = document.getElementById('edit_npwp_perusahaan');
+
+    input.addEventListener('input', function (e) {
+        const cursorPos = input.selectionStart;
+        const oldValue = input.value;
+
+        // Hapus semua non-digit
+        let numbers = oldValue.replace(/\D/g, '');
+
+        // Batasi panjang NPWP
+        if (numbers.length > 15) numbers = numbers.slice(0, 15);
+
+        // Format: 12.345.678.9-012.345
+        let parts = [];
+        if (numbers.length > 0) parts.push(numbers.slice(0, 2));
+        if (numbers.length >= 3) parts.push(numbers.slice(2, 5));
+        if (numbers.length >= 6) parts.push(numbers.slice(5, 8));
+        if (numbers.length >= 9) parts.push(numbers.slice(8, 9));
+        if (numbers.length >= 10) parts.push(numbers.slice(9, 12));
+        if (numbers.length >= 13) parts.push(numbers.slice(12, 15));
+
+        let formatted = '';
+        if (numbers.length <= 2) {
+            formatted = parts[0];
+        } else if (numbers.length <= 5) {
+            formatted = `${parts[0]}.${parts[1]}`;
+        } else if (numbers.length <= 8) {
+            formatted = `${parts[0]}.${parts[1]}.${parts[2]}`;
+        } else if (numbers.length <= 9) {
+            formatted = `${parts[0]}.${parts[1]}.${parts[2]}.${parts[3]}`;
+        } else if (numbers.length <= 12) {
+            formatted = `${parts[0]}.${parts[1]}.${parts[2]}.${parts[3]}-${parts[4]}`;
+        } else {
+            formatted = `${parts[0]}.${parts[1]}.${parts[2]}.${parts[3]}-${parts[4]}.${parts[5]}`;
+        }
+
+        // Set ulang value
+        input.value = formatted || '';
+    });
+
         function editPenyedia(penyedia_id, nik, nama_pemilik,
             alamat_pemilik, nama_perusahaan_lengkap,
             nama_perusahaan_singkat, akta_notaris_no, akta_notaris_nama,

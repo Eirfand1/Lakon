@@ -101,7 +101,7 @@
                                 <small class="block text-xs text-gray-500">Nomor Induk Kependudukan
                                     Pemilik/Direktur</small>
                             </label>
-                            <input type="number" name="NIK" value="{{ old('NIK') }}" class="mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-blue-200 
+                            <input type="number" name="NIK" value="{{ old('NIK') }}" class="mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-blue-200
                             @error('NIK') border-red-500 @else border-gray-300 @enderror"
                                 placeholder="Nomor Induk Kependudukan">
                             @error('NIK')
@@ -245,7 +245,7 @@
                             </label>
                             <input type="text" name="npwp_perusahaan" value="{{old('npwp_perusahaan')}}" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200
                                 @error('npwp_perusahaan') border-red-500 @else border-gray-300 @enderror"
-                                placeholder="Nomor Pokok Wajib Pajak" required>
+                                placeholder="Nomor Pokok Wajib Pajak" required id="npwp_perusahaan">
                             @error('npwp_perusahaan')
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                             @enderror
@@ -410,3 +410,45 @@
 </body>
 
 </html>
+
+<script>
+    const input = document.getElementById('npwp_perusahaan');
+
+    input.addEventListener('input', function (e) {
+        const cursorPos = input.selectionStart;
+        const oldValue = input.value;
+
+        // Hapus semua non-digit
+        let numbers = oldValue.replace(/\D/g, '');
+
+        // Batasi panjang NPWP
+        if (numbers.length > 15) numbers = numbers.slice(0, 15);
+
+        // Format: 12.345.678.9-012.345
+        let parts = [];
+        if (numbers.length > 0) parts.push(numbers.slice(0, 2));
+        if (numbers.length >= 3) parts.push(numbers.slice(2, 5));
+        if (numbers.length >= 6) parts.push(numbers.slice(5, 8));
+        if (numbers.length >= 9) parts.push(numbers.slice(8, 9));
+        if (numbers.length >= 10) parts.push(numbers.slice(9, 12));
+        if (numbers.length >= 13) parts.push(numbers.slice(12, 15));
+
+        let formatted = '';
+        if (numbers.length <= 2) {
+            formatted = parts[0];
+        } else if (numbers.length <= 5) {
+            formatted = `${parts[0]}.${parts[1]}`;
+        } else if (numbers.length <= 8) {
+            formatted = `${parts[0]}.${parts[1]}.${parts[2]}`;
+        } else if (numbers.length <= 9) {
+            formatted = `${parts[0]}.${parts[1]}.${parts[2]}.${parts[3]}`;
+        } else if (numbers.length <= 12) {
+            formatted = `${parts[0]}.${parts[1]}.${parts[2]}.${parts[3]}-${parts[4]}`;
+        } else {
+            formatted = `${parts[0]}.${parts[1]}.${parts[2]}.${parts[3]}-${parts[4]}.${parts[5]}`;
+        }
+
+        // Set ulang value
+        input.value = formatted || '';
+    });
+    </script>
