@@ -33,8 +33,8 @@
                     @csrf
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
-                            <x-label>NIP</x-label>
-                            <x-input type="number" name="nip" value="{{old('value')}}"
+                            <x-label>NIP aaa</x-label>
+                            <x-input type="text" name="nip" value="{{old('value')}}"
                                 class="{{ $errors->has('nip') ? 'border-red-500' : 'border-gray-200' }}"
                                 placeholder="NIP"
                                 required />
@@ -149,7 +149,7 @@
                     <div class="grid md:grid-cols-2 gap-4">
                         <div class="form-control">
                             <x-label>NIP</x-label>
-                            <x-input type="number" id="edit_nip" name="nip"
+                            <x-input type="text" id="edit_nip" name="nip"
 
                                 class="{{ $errors->has('nip') ? 'border-red-500' : 'border-gray-200' }}"
                                 required />
