@@ -119,9 +119,9 @@ class PaketPekerjaanController extends Controller
             'nilai_pagu_paket' => 'required|numeric',
             'nilai_pagu_anggaran' => 'required|numeric',
             'nilai_hps' => 'required|numeric',
-            'daskum_id' => 'exists:dasar_hukum,daskum_id',
-            'ppkom_id' => 'exists:ppkom,ppkom_id',
-            'satker_id' => 'exists:satuan_kerja,satker_id',
+            'daskum_id' => 'required|exists:dasar_hukum,daskum_id',
+            'ppkom_id' => 'required|exists:ppkom,ppkom_id',
+            'satker_id' => 'required|exists:satuan_kerja,satker_id',
             'tahun_anggaran' => 'required|numeric|min:1000|max:2999',
             'sekolah_id' => 'nullable|numeric'
         ]);
@@ -178,9 +178,9 @@ class PaketPekerjaanController extends Controller
             'nilai_pagu_paket' => 'required|numeric',
             'nilai_pagu_anggaran' => 'required|numeric',
             'nilai_hps' => 'required|numeric',
-            'daskum_id' => 'exists:dasar_hukum,daskum_id',
-            'ppkom_id' => 'exists:ppkom,ppkom_id',
-            'satker_id' => 'exists:satuan_kerja,satker_id',
+            'daskum_id' => 'required|exists:dasar_hukum,daskum_id',
+            'ppkom_id' => 'required|exists:ppkom,ppkom_id',
+            'satker_id' => 'required|exists:satuan_kerja,satker_id',
             'tahun_anggaran' => 'required|numeric|min:1000|max:2999',
             'sekolah_id' => 'nullable|numeric'
         ]);
