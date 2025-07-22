@@ -529,6 +529,68 @@ class KontrakController extends Controller
                 $templateProcessor->cloneRowAndSetValues('NO_PENERIMA', $penerima_table);
             }
 
+            // daftar pekerjaan sub kontrak
+
+            $daftar_pekerjaan_sub_kontrak_table = [];
+
+            if ($kontrak->daftarPekerjaanSubKontrak && $kontrak->daftarPekerjaanSubKontrak->count() > 0) {
+                foreach ($kontrak->daftarPekerjaanSubKontrak as $index => $daftar) {
+                    $daftar_pekerjaan_sub_kontrak_table[] = [
+                        'NO_DAFTAR_PEKERJAAN' => $index + 1,
+                        'TABLE_BAGIAN_PEKERJAAN' => $daftar->bagian_pekerjaan,
+                        'TABLE_NAMA_SUB_PENYEDIA' => $daftar->nama_sub_penyedia,
+                        'TABLE_ALAMAT_SUB_PENYEDIA' => $daftar->alamat_sub_penyedia,
+                        'TABLE_KUALIFIKASI_SUB_PENYEDIA' => $daftar->kualifikasi_sub_penyedia,
+                        'TABLE_KETERANGAN' => $daftar->keterangan
+                    ];
+                }
+            }
+
+            if (in_array('NO_DAFTAR_PEKERJAAN', $templateVariables)) {
+                $templateProcessor->cloneRowAndSetValues('NO_DAFTAR_PEKERJAAN', $daftar_pekerjaan_sub_kontrak_table);
+            }
+
+            // daftar keluaran dan harga
+
+            $daftar_keluaran_dan_harga_table = [];
+
+            if ($kontrak->daftarKeluaranDanHarga && $kontrak->daftarKeluaranDanHarga->count() > 0) {
+                foreach ($kontrak->daftarKeluaranDanHarga as $index => $daftar) {
+                    $daftar_keluaran_dan_harga_table[] = [
+                        'NO_DAFTAR_KELUARAN_DAN_HARGA' => $index + 1,
+                        'TABLE_KELUARAN' => $daftar->keluaran,
+                        'TABLE_SATUAN' => $daftar->satuan,
+                        'TABLE_TOTAL_HARGA' => number_format($daftar->total_harga, 2, ',', '.'),
+                    ];
+                }
+            }
+
+            if (in_array('NO_DAFTAR_KELUARAN_DAN_HARGA', $templateVariables)) {
+                $templateProcessor->cloneRowAndSetValues('NO_DAFTAR_KELUARAN_DAN_HARGA', $daftar_keluaran_dan_harga_table);
+            }
+
+            // biaya personel
+
+            $biaya_personel_table = [];
+
+            if ($kontrak->biayaPersonel && $kontrak->biayaPersonel->count() > 0) {
+                foreach ($kontrak->biayaPersonel as $index => $biaya) {
+                    $biaya_personel_table[] = [
+                        'TABLE_JENIS_BIAYA_PERSONEL' => $biaya->jenis_biaya,
+                        'TABLE_URAIAN_BIAYA' => $biaya->uraian_biaya,
+                        'TABLE_SATUAN' => $biaya->satuan,
+                        'TABLE_QTY' => $biaya->qty,
+                        'TABLE_HARGA' => number_format($biaya->harga, 2, ',', '.'),
+                        'TABLE_JUMLAH' => number_format($biaya->jumlah, 2, ',', '.'),
+                        'TABLE_KETERANGAN' => $biaya->keterangan
+                    ];
+                }
+            }
+
+            if (in_array('TABLE_JENIS_BIAYA_PERSONEL', $templateVariables)) {
+                $templateProcessor->cloneRowAndSetValues('TABLE_JENIS_BIAYA_PERSONEL', $biaya_personel_table);
+            }
+
 
 
 

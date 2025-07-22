@@ -535,6 +535,114 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- 'NO_DAFTAR_PEKERJAAN' => $index + 1,
+                        'TABLE_BAGIAN_PEKERJAAN' => $daftar->bagian_pekerjaan,
+                        'TABLE_NAMA_SUB_PENYEDIA' => $daftar->nama_sub_penyedia,
+                        'TABLE_ALAMAT_SUB_PENYEDIA' => $daftar->alamat_sub_penyedia,
+                        'TABLE_KUALIFIKASI_SUB_PENYEDIA' => $daftar->kualifikasi_sub_penyedia,
+                        'TABLE_KETERANGAN' => $daftar->keterangan --}}
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                        <div>
+                            <h6 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Daftar Pekerjaan Sub Kontrak</h6>
+                            <div class="space-y-2">
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">NO_DAFTAR_PEKERJAAN</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Nomor urut daftar pekerjaan</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_BAGIAN_PEKERJAAN</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Nama bagian pekerjaan</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_NAMA_SUB_PENYEDIA</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Nama sub penyedia</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_ALAMAT_SUB_PENYEDIA</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Alamat sub penyedia</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_KUALIFIKASI_SUB_PENYEDIA</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Kualifikasi sub penyedia</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_KETERANGAN</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Keterangan</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h6 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Daftar Keluaran Dan Harga</h6>
+                            <div class="space-y-2">
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">NO_DAFTAR_KELUARAN_DAN_HARGA</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Nomor urut daftar keluaran dan harga</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_KELUARAN</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Keluaran</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_SATUAN</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Satuan</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_TOTAL_HARGA</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Total harga</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- 'TABLE_JENIS_BIAYA_PERSONEL' => $biaya->jenis_biaya,
+                        'TABLE_URAIAN_BIAYA' => $biaya->uraian_biaya,
+                        'TABLE_SATUAN' => $biaya->satuan,
+                        'TABLE_QTY' => $biaya->qty,
+                        'TABLE_HARGA' => number_format($biaya->harga, 2, ',', '.'),
+                        'TABLE_JUMLAH' => number_format($biaya->jumlah, 2, ',', '.'),
+                        'TABLE_KETERANGAN' => $biaya->keterangan --}}
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                        <div>
+                            <h6 class="font-medium text-gray-700 dark:text-gray-300 mb-2">Biaya Non Personel</h6>
+                            <div class="space-y-2">
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_JENIS_BIAYA_PERSONEL</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Jenis biaya</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_URAIAN_BIAYA</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Uraian biaya</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_SATUAN</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Satuan</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_QTY</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Qty</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_HARGA</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Harga</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_JUMLAH</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Jumlah</p>
+                                </div>
+                                <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                                    <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_KETERANGAN</code>
+                                    <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Keterangan</p>
+                                </div>  
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
                 </div>
             </div>
 
