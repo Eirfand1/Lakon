@@ -71,7 +71,7 @@ class RiwayatVerifikasiTable extends DataTableComponent
             Column::make("Nilai Kontrak", "nilai_kontrak")
                 ->sortable()
                 ->searchable()
-                ->format(fn($value, $row) => 'Rp. ' . number_format($row->nilai_kontrak, 2)),
+                ->format(fn($value, $row) => 'Rp. ' . number_format($row->nilai_kontrak, 0, '', '.')),
 
             Column::make("Tanggal Kontrak", "tgl_pembuatan")
                 ->sortable()

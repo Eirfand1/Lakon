@@ -65,9 +65,9 @@ class SubKegiatanTable extends DataTableComponent
                                 <td class='p-2 border-b dark:border-gray-700'>{$paket->waktu_paket}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$paket->metode_pemilihan}</td>
                                 <td class='p-2 border-b dark:border-gray-700'>{$paket->jenis_pengadaan}</td>
-                                <td class='p-2 border-b dark:border-gray-700'>Rp " . number_format($paket->nilai_pagu_anggaran, 2) . "</td>
-                                <td class='p-2 border-b dark:border-gray-700'>Rp " . number_format($paket->nilai_pagu_paket, 2) . "</td>
-                                <td class='p-2 border-b dark:border-gray-700'>Rp " . number_format($paket->nilai_hps, 2) . "</td>
+                                <td class='p-2 border-b dark:border-gray-700'>Rp " . number_format($paket->nilai_pagu_anggaran, 0, '', '.') . "</td>
+                                <td class='p-2 border-b dark:border-gray-700'>Rp " . number_format($paket->nilai_pagu_paket, 0, '', '.') . "</td>
+                                <td class='p-2 border-b dark:border-gray-700'>Rp " . number_format($paket->nilai_hps, 0, '', '.') . "</td>
                             </tr>
                         ";
                     })->join('');
@@ -75,9 +75,9 @@ class SubKegiatanTable extends DataTableComponent
                     $footerRow = "
                             <tr class='bg-gray-100 dark:bg-gray-800 font-semibold'>
                                 <td class='p-2 border-t dark:border-gray-700' colspan='8'>Total</td>
-                                <td class='p-2 border-t dark:border-gray-700'>Rp " . number_format($totalPaguAnggaran, 2) . "</td>
-                                <td class='p-2 border-t dark:border-gray-700'>Rp " . number_format($totalPaguPaket, 2) . "</td>
-                                <td class='p-2 border-t dark:border-gray-700'>Rp " . number_format($totalHPS, 2) . "</td>
+                                <td class='p-2 border-t dark:border-gray-700'>Rp " . number_format($totalPaguAnggaran, 0, '', '.') . "</td>
+                                <td class='p-2 border-t dark:border-gray-700'>Rp " . number_format($totalPaguPaket, 0, '', '.') . "</td>
+                                <td class='p-2 border-t dark:border-gray-700'>Rp " . number_format($totalHPS, 0, '', '.') . "</td>
                             </tr>
                         ";
 

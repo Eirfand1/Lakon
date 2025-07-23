@@ -208,7 +208,7 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Nomor
                                 Kontrak</strong>
-                            <p class="font-medium">{{ $kontrak->no_kontrak }}</p>
+                            <p class="font-medium">{{ $kontrak->paketPekerjaan->nomor_kontrak }}</p>
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
@@ -222,14 +222,14 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 Kontrak</strong>
-                            <p class="font-medium">{{ date('d F Y', strtotime($kontrak->tgl_kontrak)) }}</p>
+                            <p class="font-medium">{{ date('d F Y', strtotime($kontrak->tanggal_awal)) }}</p>
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Waktu
                                 Pelaksanaan Kontrak</strong>
-                            <p class="font-medium">{{ $kontrak->waktu_kontrak }} hari</p>
+                            <p class="font-medium">{{ $kontrak->waktu_kontrak }} Hari Kalender</p>
                         </div>
                     </div>
                 </div>

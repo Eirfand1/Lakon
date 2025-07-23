@@ -38,10 +38,12 @@
                     <input class="w-full dark:bg-gray-800 rounded" type="text" name="satuan" id="satuan_belanja">
                 </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="harga_satuan" id="hargaSatuan_belanja">
+                    <input class="w-full dark:bg-gray-800 rounded" type="hidden" name="harga_satuan_separator" id="hargaSatuan_separator_belanja">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="harga_satuan" id="hargaSatuan_belanja">
                 </td>
                 <td class="text-center border border-gray-400/30">
-                    <input class="w-full dark:bg-gray-800 rounded" type="number" name="ongkos_kirim" id="ongkos_kirim_belanja">
+                    <input class="w-full dark:bg-gray-800 rounded" type="hidden" name="ongkos_kirim_separator" id="ongkos_kirim_separator_belanja">
+                    <input class="w-full dark:bg-gray-800 rounded" type="text" name="ongkos_kirim" id="ongkos_kirim_belanja">
                 </td>
                 <td class="text-center border border-gray-400/30"> </td>
 
@@ -90,7 +92,6 @@
 
 <script>
     function editRincianBelanja(row) {
-        console.log(row);
         document.getElementById('rincianBelanjaId_belanja').value = row.rincian_belanja_id;
         document.getElementById('jenis_belanja').value = row.jenis;
         document.getElementById('qty_belanja').value = row.qty;
@@ -104,5 +105,39 @@
         const actionUrl = baseUrl.replace('__ID__', id);
         document.getElementById('deleteForm').action = actionUrl;
 
+
+
+    function formatRupiah(angka) {
+        let number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split = number_string.split(','),
+            sisa  = split[0].length % 3,
+            rupiah  = split[0].substr(0, sisa),
+            ribuan  = split[0].substr(sisa).match(/\d{3}/gi);
+
+        if (ribuan) {
+            let separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
+        }
+
+        rupiah = split[1] !== undefined ? rupiah + ',' + split[1] : rupiah;
+        return rupiah;
     }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const inputHarga = document.getElementById('hargaSatuan_belanja');
+        const inputOngkir = document.getElementById('ongkos_kirim_belanja');
+        const hiddenHarga = document.getElementById('hargaSatuan_separator_belanja');
+        const hiddenOngkir = document.getElementById('ongkos_kirim_separator_belanja');
+
+        function handleInputFormat(inputElement, hiddenElement) {
+            inputElement.addEventListener('input', function (e) {
+                let raw = this.value.replace(/[^0-9]/g, '');
+                hiddenElement.value = raw;
+                this.value = formatRupiah(this.value);
+            });
+        }
+
+        handleInputFormat(inputHarga, hiddenHarga);
+        handleInputFormat(inputOngkir, hiddenOngkir);
+    });}
 </script>

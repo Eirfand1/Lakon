@@ -8,12 +8,45 @@
                     wire:navigate>
                     <i class="fas fa-arrow-left text-gray-600 dark:text-gray-300"></i>
                 </a>
-                <h1 class="text-xl font-bold text-gray-800 dark:text-white">DETAIL KONTRAK</h1>
+                <h1 class="text-xl font-bold text-gray-800 dark:text-white">DETAIL aaa KONTRAK</h1>
             </div>
 
 
 
             <div class="space-y-4 text-sm dark:text-gray-200 p-4 sm:p-6">
+
+                <!-- Template Selection Form -->
+                <div
+                    class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600">
+                    <form action="{{ route('verifikator.riwayat-kontrak.update-template', $kontrak->kontrak_id) }}"
+                        method="POST" class="grid grid-cols-1 md:grid-cols-3 gap-4 items-end">
+                        @csrf
+                        @method('PUT')
+
+                        <div class="col-span-1 md:col-span-2">
+                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                                Template Dokumen
+                            </label>
+                            <select name="template_id"
+                                class="w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white focus:ring-blue-500 focus:border-blue-500 transition-colors">
+                                <option value="">Pilih Template</option>
+                                @foreach($templates as $template)
+                                    <option value="{{ $template->template_id }}" {{ $kontrak->template_id == $template->template_id ? 'selected' : '' }}>
+                                        {{ $template->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <button type="submit"
+                                class="w-full px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 dark:bg-blue-600 dark:hover:bg-blue-700 transition-all transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-400 flex items-center justify-center">
+                                <i class="fas fa-save mr-2"></i> Simpan Template
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+
                 <div
                     class="bg-gray-50 dark:bg-gray-700 p-4 rounded-md border border-gray-200 dark:border-gray-600 flex flex-col sm:flex-row items-center justify-between">
                     <div class="text-lg font-bold text-gray-800 dark:text-white mb-3 sm:mb-0 flex items-center">
@@ -174,9 +207,8 @@
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
                             <strong
-                                class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Nomor
-                                Kontrak</strong>
-                            <p class="font-medium">{{ $kontrak->no_kontrak }}</p>
+                                class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Nomor Kontrak</strong>
+                            <p class="font-medium">{{ $kontrak->paketPekerjaan->nomor_kontrak }}</p>
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
@@ -190,14 +222,14 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 Kontrak</strong>
-                            <p class="font-medium">{{ date('d F Y', strtotime($kontrak->tgl_kontrak)) }}</p>
+                            <p class="font-medium">{{ date('d F Y', strtotime($kontrak->tanggal_awal)) }}</p>
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Waktu
                                 Pelaksanaan Kontrak</strong>
-                            <p class="font-medium">{{ $kontrak->waktu_kontrak }} hari</p>
+                            <p class="font-medium">{{ $kontrak->waktu_kontrak }} Hari Kalender</p>
                         </div>
                     </div>
                 </div>

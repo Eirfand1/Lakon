@@ -71,7 +71,12 @@ class KontrakController extends Controller
             'template_id' => $request->template_id,
         ]);
 
-        return redirect()->route('admin.riwayat-kontrak.show', $kontrak->kontrak_id)
+        if (Auth::user()->role == 'admin') {
+            return redirect()->route('admin.riwayat-kontrak.show', $kontrak->kontrak_id)
+                ->with('success', 'Template berhasil disimpan.');
+        }
+
+        return redirect()->route('verifikator.riwayat-kontrak.show', $kontrak->kontrak_id)
             ->with('success', 'Template berhasil disimpan.');
     }
 
@@ -376,7 +381,7 @@ class KontrakController extends Controller
 
             // sp
             $templateProcessor->setValue('${NO_SP}', $kontrak->nomor_sp);
-            $templateProcessor->setValue('${TANGGAL_SP}', Carbon::parse($kontrak->tanggal_sp)->translatedFormat('d F Y'));
+            $templateProcessor->setValue('${TANGGAL_SP}', Carbon::parse($kontrak->tgl_sp)->translatedFormat('d F Y'));
 
 
             // dasar hukum
@@ -388,7 +393,7 @@ class KontrakController extends Controller
             $idPaket = '';
             if ($kontrak->ePurchasing && $kontrak->ePurchasing->count() > 0) {
                 foreach ($kontrak->ePurchasing as $index => $ePurchasing) {
-                    $idPaket .= ($index + 1) . ". " . $ePurchasing->id_paket . "\n";
+                    $idPaket .= $ePurchasing->id_paket . "\n";
                 }
 
                 $idPaket = rtrim($idPaket);
@@ -498,9 +503,10 @@ class KontrakController extends Controller
                         'TABLE_JENIS' => $rincian->jenis,
                         'TABLE_QTY' => $rincian->qty,
                         'TABLE_SATUAN' => $rincian->satuan,
-                        'TABLE_HARGA_SATUAN' => $rincian->harga_satuan,
-                        'TABLE_ONGKOS_KIRIM' => $rincian->ongkos_kirim,
-                        'TABLE_TOTAL_HARGA' => $rincian->total_harga,
+                        // separator ribuan
+                        'TABLE_HARGA_SATUAN' => number_format($rincian->harga_satuan, 0, ',', '.'),
+                        'TABLE_ONGKOS_KIRIM' => number_format($rincian->ongkos_kirim, 0, ',', '.'),
+                        'TABLE_TOTAL_HARGA' => number_format($rincian->total_harga, 0, ',', '.'),
                     ];
                 }
             }
@@ -512,9 +518,10 @@ class KontrakController extends Controller
             // penerima
 
             $penerima_table = [];
-
+            $total_qty_penerima = 0;
             if ($kontrak->penerima && $kontrak->penerima->count() > 0) {
                 foreach ($kontrak->penerima as $index => $penerima) {
+                    // dd($penerima->qty);
                     $penerima_table[] = [
                         'NO_PENERIMA' => $index + 1,
                         'TABLE_NAMA_SEKOLAH' => $penerima->keterangan_penerima,
@@ -522,8 +529,14 @@ class KontrakController extends Controller
                         'TABLE_QTY' => $penerima->qty,
                         'TABLE_SATUAN' => $penerima->satuan,
                     ];
+
+                    $total_qty_penerima += $penerima->qty;
                 }
             }
+
+            $templateProcessor->setValue('${SATUAN_PENERIMA}', $kontrak->penerima->first()->satuan);
+            $templateProcessor->setValue('${TOTAL_QTY_PENERIMA}', $total_qty_penerima);
+
 
             if (in_array('NO_PENERIMA', $templateVariables)) {
                 $templateProcessor->cloneRowAndSetValues('NO_PENERIMA', $penerima_table);
@@ -605,7 +618,7 @@ class KontrakController extends Controller
             } else {
                 $response = Http::timeout(60) // Set timeout 60 detik
                 ->attach('file', file_get_contents($outputDocx), 'document.docx')
-                ->post('https://tefa-pnc-abm.my.id/convert/docx-to-pdf');
+                ->post('https://tefa-pnc.abm.my.id/convert/docx-to-pdf');
 
                 if ($response->successful()) {
 

@@ -8,6 +8,7 @@
     </x-slot>
 
     <x-slot name="content">
+        @if (Auth::user()->role != 'penyedia')
         <div class="max-w-xl text-sm text-gray-600 dark:text-gray-400">
             {{ __('Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.') }}
         </div>
@@ -49,5 +50,12 @@
                 </x-danger-button>
             </x-slot>
         </x-dialog-modal>
+        @else
+
+        <div class="max-w-xl text-sm text-gray-600 dark:text-gray-400">
+            {{ __('Anda tidak dapat menghapus karena anda adalah penyedia') }}
+        </div>
+
+        @endif
     </x-slot>
 </x-action-section>
