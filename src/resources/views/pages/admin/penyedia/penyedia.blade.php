@@ -31,7 +31,7 @@
                 <form id="editForm" method="POST" class="space-y-4" enctype="multipart/form-data">
                     @csrf
                     @method('PUT')
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div class="md:col-span-1">
                             <x-label>
                                 NIK <span class="text-red-500">*</span>
@@ -44,10 +44,18 @@
                         <div class="md:col-span-1">
                             <x-label>
                                 Nama <span class="text-red-500">*</span>
-                                <small class="block text-xs text-gray-500">Nama Pemilik/Direktur Perusahaan</small>
+                                <small class="block text-xs text-gray-500">Nama Pemilik Sah Perusahaan</small>
                             </x-label>
                             <x-input type="text" name="nama_pemilik" id="edit_nama_pemilik"
-                                placeholder="Nama Pemilik/Direktur sesuai KTP" required />
+                                placeholder="Nama Pemilik Sah sesuai KTP" required />
+                        </div>
+                        <div class="md:col-span-1">
+                            <x-label>
+                                Jabatan <span class="text-red-500">*</span>
+                                <small class="block text-xs text-gray-500">Jabatan Wakil Sah Perusahaan</small>
+                            </x-label>
+                            <x-input type="text" name="jabatan" id="edit_jabatan"
+                                placeholder="Jabatan Wakil Sah Perusahaan" required />
                         </div>
                     </div>
 
@@ -299,7 +307,7 @@
         input.value = formatted || '';
     });
 
-        function editPenyedia(penyedia_id, nik, nama_pemilik,
+        function editPenyedia(penyedia_id, nik, nama_pemilik, jabatan,
             alamat_pemilik, nama_perusahaan_lengkap,
             nama_perusahaan_singkat, akta_notaris_no, akta_notaris_nama,
             akta_notaris_tanggal, alamat_perusahaan, kontak_hp,
@@ -308,6 +316,7 @@
             document.getElementById('editForm').action = `penyedia/${penyedia_id}`;
             document.getElementById('edit_nik').value = nik;
             document.getElementById('edit_nama_pemilik').value = nama_pemilik;
+            document.getElementById('edit_jabatan').value = jabatan;
             document.getElementById('edit_alamat_pemilik').textContent = alamat_pemilik;
             document.getElementById('edit_nama_perusahaan_lengkap').value = nama_perusahaan_lengkap;
             document.getElementById('edit_nama_perusahaan_singkat').value = nama_perusahaan_singkat;

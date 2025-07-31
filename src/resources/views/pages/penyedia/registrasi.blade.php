@@ -108,10 +108,10 @@
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
-                        <div class="md:col-span-2">
+                        <div class="md:col-span-1">
                             <label class="block text-sm font-medium text-gray-700">
                                 Nama <span class="text-red-500">*</span>
-                                <small class="block text-xs text-gray-500">Nama Pemilik/Direktur Perusahaan</small>
+                                <small class="block text-xs text-gray-500">Nama Wakil Sah Perusahaan</small>
                             </label>
                             <input type="text" name="nama_pemilik" value="{{ old('nama_pemilik') }}" class="mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-blue-200
                             @error('nama_pemilik') border-red-500 @else border-gray-300 @enderror"
@@ -120,7 +120,18 @@
                                 <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
                             @enderror
                         </div>
-
+                        <div class="md:col-span-1">
+                            <label class="block te.xt-sm font-medium text-gray-700">
+                                Jabatan <span class="text-red-500">*</span>
+                                <small class="block text-xs text-gray-500">Jabatan Wakil Sah</small>
+                            </label>
+                            <input type="text" name="jabatan" value="{{ old('jabatan') }}" class="mt-1 block w-full rounded-md shadow-sm focus:ring focus:ring-blue-200
+                            @error('jabatan') border-red-500 @else border-gray-300 @enderror"
+                                placeholder="Jabatan Wakil Sah Perusahaan" />
+                            @error('jabatan')
+                                <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
 
                     <div>

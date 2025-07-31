@@ -10,7 +10,7 @@
         <form id="editForm" action="{{route('penyedia.data-perusahaan.update', $penyedia->penyedia_id)}}" method="post" class="space-y-4" enctype="multipart/form-data">
             @csrf
             @method('PUT')
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <div class="md:col-span-1">
                     <x-label>
                         NIK <span class="text-red-500">*</span>
@@ -23,10 +23,18 @@
                 <div class="md:col-span-1">
                     <x-label>
                         Nama <span class="text-red-500">*</span>
-                        <small class="block text-xs text-gray-500">Nama Pemilik/Direktur Perusahaan</small>
+                        <small class="block text-xs text-gray-500">Nama Pemilik Sah Perusahaan</small>
                     </x-label>
                     <x-input type="text" name="nama_pemilik" id="edit_nama_pemilik" value="{{$penyedia->nama_pemilik}}"
-                        placeholder="Nama Pemilik/Direktur sesuai KTP" required />
+                        placeholder="Nama Pemilik Sah sesuai KTP" required />
+                </div>
+                <div class="md:col-span-1">
+                    <x-label>
+                        Jabatan <span class="text-red-500">*</span>
+                        <small class="block text-xs text-gray-500">Jabatan Wakil Sah Perusahaan</small>
+                    </x-label>
+                    <x-input type="text" name="jabatan" id="edit_jabatan" value="{{$penyedia->jabatan}}"
+                        placeholder="Jabatan Wakil Sah Perusahaan" required />
                 </div>
             </div>
 

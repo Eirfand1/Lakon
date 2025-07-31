@@ -3,6 +3,7 @@
                                        {{ $p->penyedia_id }},
                                         `{{ $p->NIK }}`,
                                         `{{ $p->nama_pemilik }}`,
+                                        `{{ $p->jabatan ?? '' }}`,
                                         `{{ $p->alamat_pemilik ?? '' }}`,
                                         `{{ $p->nama_perusahaan_lengkap ?? '' }}`,
                                         `{{ $p->nama_perusahaan_singkat ?? '' }}`,

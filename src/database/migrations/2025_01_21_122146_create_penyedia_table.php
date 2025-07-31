@@ -17,6 +17,7 @@ return new class extends Migration
             $table->enum('status', ['konsultan','penyedia'])->default(null)->nullable();
             $table->char('NIK', 16);
             $table->string('nama_pemilik', 100);
+            $table->string('jabatan', 100);
             $table->string('alamat_pemilik', 255);
             $table->string('nama_perusahaan_lengkap', 150);
             $table->string('nama_perusahaan_singkat', 100)->nullable();

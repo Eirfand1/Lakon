@@ -19,6 +19,7 @@ class PenyediaSeeder extends Seeder
             'NIK' => '1234567890123456',
             'status' => 'konsultan',
             'nama_pemilik' => 'penyedia',
+            'jabatan' => 'jabatan penyedia',
             'alamat_pemilik' => 'alamat penyedia',
             'kontak_hp' => '081111111111',
             'kontak_email' => 'penyedia@gmail.com',
