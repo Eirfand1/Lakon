@@ -49,6 +49,11 @@
                         @enderror
                     </div>
 
+                    <div class="w-full flex flex-col">
+                        <x-label for="tahun">Tahun</x-label>
+                        <x-input type="number" name="tahun" id="" value="{{old('tahun')}}" required min="0" />
+                    </div>
+
                     <div class="modal-action pt-4">
                         <button type="submit" class="btn rounded-lg text-white btn-primary bg-blue-500">
                             <i class="fas fa-save"></i>
@@ -86,6 +91,14 @@
                             class="{{ $errors->has('nilai_pagu_anggaran') ? 'border-red-500' : 'border-gray-200' }} rounded bg-white dark:bg-gray-900/20 dark:border-gray-600 block rounded-md border-gray-300 shadow-sm focus:border-blue-200"
                             required></textarea>
                         @error('dasar_hukum')
+                            <span class="text-sm text-red-500 mt-1">{{$message}}</span>
+                        @enderror
+                    </div>
+
+                    <div class="w-full flex flex-col">
+                        <x-label for="tahun">Tahun</x-label>
+                        <x-input type="number" name="tahun" id="tahunHukum" required min="0" />
+                        @error('tahun')
                             <span class="text-sm text-red-500 mt-1">{{$message}}</span>
                         @enderror
                     </div>
@@ -131,9 +144,10 @@
 
             <!-- Script for Dasar Hukum -->
             <script>
-                function editDaskum(daskum_id, dasar_hukum) {
+                function editDaskum(daskum_id, dasar_hukum, tahun) {
                     document.getElementById('editForm').action = `dasar-hukum/${daskum_id}`;
                     document.getElementById('dasarHukum').value = dasar_hukum;
+                    document.getElementById('tahunHukum').value = tahun;
                 }
                 function setDeleteId(daskum_id) {
                     document.getElementById('deleteForm').action = `dasar-hukum/${daskum_id}`;

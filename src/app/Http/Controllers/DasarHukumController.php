@@ -22,10 +22,12 @@ class DasarHukumController extends Controller
     public function store(Request $request)
     {
         $validateData = $request->validate([
+            'tahun' => 'required|numeric',
             'dasar_hukum' => 'required|string',
         ]);
 
         DasarHukum::create([
+            'tahun' => $validateData['tahun'],
             'dasar_hukum' => $validateData['dasar_hukum'],
         ]);
         return redirect()->back()->with('success', 'Dasar Hukum berhasil disimpan.');
@@ -34,6 +36,7 @@ class DasarHukumController extends Controller
     public function update(Request $request, DasarHukum $dasarHukum)
     {
         $validateData = $request->validate([
+            'tahun' => 'required|numeric',
             'dasar_hukum' => 'required|string',
         ]);
 

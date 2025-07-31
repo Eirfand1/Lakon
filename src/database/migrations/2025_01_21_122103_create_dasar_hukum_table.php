@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('dasar_hukum', function (Blueprint $table) {
             $table->id('daskum_id');
+            $table->integer('tahun');
             $table->text('dasar_hukum');
             $table->timestamps();
         });

@@ -18,6 +18,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Str;
 
 class PaketPekerjaanController extends Controller
 {
@@ -27,7 +28,7 @@ class PaketPekerjaanController extends Controller
 
         $nomor_matriks = PaketPekerjaan::select('paket_id')->orderBy('paket_id', 'DESC')->first();
         $tracker = NoKontrakTracker::select('id_kontrak_last_year')->first();
-        $next_nomor_matrik = $nomor_matriks->paket_id - $tracker->id_kontrak_last_year + 1;
+        $next_nomor_matrik = ($nomor_matriks->paket_id ?? 0) - $tracker->id_kontrak_last_year + 1;
 
         $tracker = NoKontrakTracker::first();
         $tahun_saat_ini = $tracker->this_year;
@@ -38,6 +39,15 @@ class PaketPekerjaanController extends Controller
             ]);
             $next_nomor_matrik = 1;
         }
+
+        $dasarHukum = DasarHukum::select('dasar_hukum', 'tahun', 'daskum_id')->get();
+
+        $dasarHukum = $dasarHukum->map(function ($item) {
+            $item->formated = "({$item->tahun}) " . Str::limit($item->dasar_hukum, 102, '...');
+            return $item;
+        });
+
+
         // buat jadi 3 digit dengan 0 di depan
         $next_nomor_matrik = str_pad($next_nomor_matrik, 3, '0', STR_PAD_LEFT);
         return view('pages.admin.paket-pekerjaan.paket-pekerjaan', [
@@ -45,7 +55,7 @@ class PaketPekerjaanController extends Controller
             "next_nomor_matrik" => $next_nomor_matrik,
             // "paket" => $pakets,
             "sekolah" => Sekolah::select('nama_sekolah', 'sekolah_id')->get(),
-            "dasarHukum" => DasarHukum::select('dasar_hukum', 'daskum_id')->get(),
+            "dasarHukum" => $dasarHukum,
             "subKegiatan" => SubKegiatan::select('nama_sub_kegiatan', 'sub_kegiatan_id', 'pendidikan')->get(),
             "satuanKerja" => SatuanKerja::findOrFail(1),
             "ppkom" => Ppkom::select('nama', 'ppkom_id')->get(),

@@ -20,7 +20,7 @@ class DasarHukumTable extends DataTableComponent
     }
 
     public function builder(): \Illuminate\Database\Eloquent\Builder{
-        return DasarHukum::query()->orderByDesc('updated_at');
+        return DasarHukum::query()->orderByDesc('tahun');
     }
 
     public function bulkActions(): array
@@ -41,7 +41,7 @@ class DasarHukumTable extends DataTableComponent
         return [
             Column::make("Aksi", "daskum_id")
                 ->format(fn($value, $row) => view('pages.admin.dasar-hukum.actions', ['daskum' => $row])),
-            Column::make('ID', "daskum_id")
+            Column::make("Tahun", "tahun")
                 ->sortable()
                 ->searchable(),
             Column::make("Dasar Hukum ", "dasar_hukum")

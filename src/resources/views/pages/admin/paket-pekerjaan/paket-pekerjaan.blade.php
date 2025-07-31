@@ -171,7 +171,7 @@
 
         <option selected value="">Pilih Sekolah</option>
         <template x-for="option in options" :key="option.sekolah_id">
-            <option :value="option.sekolah_id" x-text="option.nama_sekolah" x-bind:selected="option.sekolah_id == {{old('sekolah_id')}} ? 'selected' : ''"></option>
+            <option :value="option.sekolah_id" x-text="option.nama_sekolah" x-bind:selected="option.sekolah_id == {{old('sekolah_id', 'null')}} ? 'selected' : ''"></option>
         </template>
 
     </select>
@@ -283,7 +283,7 @@
 
     <option selected disabled>Pilih dasar hukum</option>
     <template x-for="option in options" :key="option.daskum_id">
-        <option :value="option.daskum_id" x-text="option.dasar_hukum" :selected="option.daskum_id == {{ json_encode(old('daskum_id')) }}"></option>
+        <option :value="option.daskum_id" x-text="option.formated" :selected="option.daskum_id == {{ json_encode(old('daskum_id')) }}"></option>
     </template>
 
 </select>
@@ -566,7 +566,7 @@ class="choices w-full {{ $errors->has('daskum_id') ? 'border-red-500' : 'border-
 x-ref="daskumSelect"
 required>
 <template x-for="option in options" :key="option.daskum_id">
-    <option :value="option.daskum_id" x-text="option.dasar_hukum"></option>
+    <option :value="option.daskum_id" x-text="option.formated"></option>
 </template>
 </select>
 
