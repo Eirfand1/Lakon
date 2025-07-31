@@ -209,7 +209,7 @@
                             <small class="block text-xs text-gray-500">Pilih status penyedia</small>
                         </label>
                         <select name="status" id="edit_status"
-                            class="mt-1 bg-white dark:bg-gray-900/20 h-10 text-sm dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+                            class="w-3/4 rounded-lg text-sm bg-white dark:bg-gray-800 dark:border-gray-700 h-10 block w-full rounded-md border-gray-200 shadow-sm"
                             required>
                             <option value="" disabled>Pilih Status</option>
                             <option value="penyedia">Penyedia</option>

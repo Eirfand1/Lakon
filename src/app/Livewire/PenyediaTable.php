@@ -38,10 +38,12 @@ class PenyediaTable extends DataTableComponent
                 ->searchable(),
             Column::make("Nama Perusahaan Singkat", "nama_perusahaan_singkat")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->deselected(),
             Column::make("Username", "user.name")
                 ->sortable()
-                ->searchable(),
+                ->searchable()
+                ->deselected(),
             Column::make('Status Akun', 'status')
                 ->sortable()
                 ->searchable(),
