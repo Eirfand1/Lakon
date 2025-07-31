@@ -114,7 +114,7 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 Pembuatan</strong>
-                            <p class="font-medium">{{ date('d F Y', strtotime($kontrak->tgl_pembuatan))  }}</p>
+                                {{ $kontrak->tgl_pembuatan ? \Carbon\Carbon::parse($kontrak->tgl_pembuatan)->translatedFormat(('d F Y')) : '-' }}
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
@@ -222,7 +222,7 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 Kontrak</strong>
-                            <p class="font-medium">{{ date('d F Y', strtotime($kontrak->tanggal_awal)) }}</p>
+                                {{ $kontrak->tanggal_awal ? \Carbon\Carbon::parse($kontrak->tanggal_awal)->translatedFormat(('d F Y')) : '-' }}
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
@@ -287,8 +287,9 @@
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Notaris</strong>
-                            <p class="font-medium">{{ $kontrak->penyedia->akta_notaris_no }},
-                                {{ $kontrak->penyedia->akta_notaris_tanggal }}
+                            <p class="font-medium">Nomor {{ $kontrak->penyedia->akta_notaris_no }},
+                                Tanggal
+                                {{ $kontrak->penyedia->akta_notaris_tanggal ? \Carbon\Carbon::parse($kontrak->penyedia->akta_notaris_tanggal)->translatedFormat(('d F Y')) : '-' }}
                             </p>
                         </div>
                         <div
@@ -310,7 +311,7 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 DPPL</strong>
-                            <p class="font-medium">{{ date('d F Y', strtotime($kontrak->tgl_dppl))  ?? '-' }}</p>
+                                {{ $kontrak->tgl_dppl ? \Carbon\Carbon::parse($kontrak->tgl_dppl)->translatedFormat(('d F Y')) : '-' }}
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
@@ -324,7 +325,7 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 BAHPL</strong>
-                            <p class="font-medium">{{ date('d F Y', strtotime($kontrak->tgl_bahpl))  ?? '-' }}</p>
+                                {{ $kontrak->tgl_bahpl ? \Carbon\Carbon::parse($kontrak->tgl_bahpl)->translatedFormat(('d F Y')) : '-' }}
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
@@ -338,7 +339,7 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 SPPBJ</strong>
-                            <p class="font-medium">{{ date('d F Y', strtotime( $kontrak->tgl_sppbj) ) ?? '-'}}</p>
+                                {{ $kontrak->tgl_sppbj ? \Carbon\Carbon::parse($kontrak->tgl_sppbj)->translatedFormat(('d F Y')) : '-' }}
                         </div>
                         <div
                             class="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg shadow-sm border border-gray-200 dark:border-gray-600 hover:shadow-md transition-all">
@@ -352,7 +353,7 @@
                             <strong
                                 class="text-gray-700 dark:text-gray-300 text-xs uppercase tracking-wider block mb-1">Tanggal
                                 Penetapan Pemenang</strong>
-                            <p class="font-medium">{{  date('d F Y', strtotime($kontrak->tgl_penetapan_pemenang))  ?? '-'}}</p>
+                                {{ $kontrak->tgl_penetapan_pemenang ? \Carbon\Carbon::parse($kontrak->tgl_penetapan_pemenang)->translatedFormat(('d F Y')) : '-' }}
                         </div>
                     </div>
                 </div>
