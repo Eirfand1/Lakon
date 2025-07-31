@@ -82,10 +82,10 @@ class PaketPekerjaanController extends Controller
     private function kode_jenis_pengadaan($jenis_pengadaan)
     {
         switch ($jenis_pengadaan) {
-            case 'Jasa Konsultasi Perencanaan':
+            case 'Jasa Konsultansi Perencanaan':
                 return '1';
                 break;
-            case 'Jasa Konsultasi Pengawasan':
+            case 'Jasa Konsultansi Pengawasan':
                 return '2';
                 break;
             case 'Pekerjaan Konstruksi':

@@ -202,8 +202,8 @@
     class="w-3/4 text-sm rounded-lg bg-white h-10 dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
     required>
     <option value="" disabled {{ old('jenis_pengadaan') ? '' : 'selected' }}>Pilih Jenis Pengadaan</option>
-    <option value="Jasa Konsultasi Pengawasan" {{ old('jenis_pengadaan') == 'Jasa Konsultasi Pengawasan' ? 'selected' : '' }}>Jasa Konsultasi Pengawasan</option>
-    <option value="Jasa Konsultasi Perencanaan" {{ old('jenis_pengadaan') == 'Jasa Konsultasi Perencanaan' ? 'selected' : '' }}>Jasa Konsultasi Perencanaan</option>
+    <option value="Jasa Konsultansi Pengawasan" {{ old('jenis_pengadaan') == 'Jasa Konsultansi Pengawasan' ? 'selected' : '' }}>Jasa Konsultansi Pengawasan</option>
+    <option value="Jasa Konsultansi Perencanaan" {{ old('jenis_pengadaan') == 'Jasa Konsultansi Perencanaan' ? 'selected' : '' }}>Jasa Konsultansi Perencanaan</option>
     <option value="Pekerjaan Konstruksi" {{ old('jenis_pengadaan') == 'Pekerjaan Konstruksi' ? 'selected' : '' }}>Pekerjaan Konstruksi</option>
     <option value="Pengadaan Barang" {{ old('jenis_pengadaan') == 'Pengadaan Barang' ? 'selected' : '' }}>Pengadaan Barang</option>
 </select>
@@ -488,8 +488,8 @@
         <select name="jenis_pengadaan" id="jenis_pengadaan"
         class="w-3/4 rounded text-sm bg-white dark:bg-gray-800 dark:border-gray-700 block w-full rounded-md border-gray-200 shadow-sm"
         required>
-        <option value="Jasa Konsultasi Pengawasan">Jasa Konsultasi Pengawasan</option>
-        <option value="Jasa Konsultasi Perencanaan">Jasa Konsultasi Perencanaan</option>
+        <option value="Jasa Konsultansi Pengawasan">Jasa Konsultansi Pengawasan</option>
+        <option value="Jasa Konsultansi Perencanaan">Jasa Konsultansi Perencanaan</option>
         <option value="Pekerjaan Konstruksi">Pekerjaan Konstruksi</option>
         <option value="Pengadaan Barang">Pengadaan Barang</option>
     </select>

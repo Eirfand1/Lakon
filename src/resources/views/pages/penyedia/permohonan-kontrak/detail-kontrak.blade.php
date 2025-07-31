@@ -308,16 +308,16 @@
         @if($jenis == 'Pengadaan Barang')
             @include($view . "rincian-barang")
         @endif
-        @if($jenis == 'Jasa Konsultasi Perencanaan' || $jenis == 'Pekerjaan Konstruksi')
+        @if($jenis == 'Jasa Konsultansi Perencanaan' || $jenis == 'Pekerjaan Konstruksi')
             @include($view . "peralatan")
         @endif
 
-        @if($metode == 'Tender' && $jenis == 'Jasa Konsultasi Perencanaan')
+        @if($metode == 'Tender' && $jenis == 'Jasa Konsultansi Perencanaan')
             @include($view . "daftar-pekerjaan-sub-kontrak")
             @include($view . "daftar-keluaran-dan-harga")
         @endif
 
-        @if($metode == 'Tender' && $jenis == 'Jasa Konsultasi Pengawasan')
+        @if($metode == 'Tender' && $jenis == 'Jasa Konsultansi Pengawasan')
             @include($view . "biaya-personel")
         @endif
     </div>

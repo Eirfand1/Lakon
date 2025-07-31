@@ -261,7 +261,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative pt-32 pb-20 bg-cover bg-center bg-no-repeat min-h-[80vh] flex items-center text-white"
+    <section class="relative pt-32 pb-32 bg-cover bg-center bg-no-repeat min-h-[80vh] flex items-center text-white"
         style="background-image: url('{{ asset('images/clp.jpg') }}')">
         <div class="absolute inset-0 bg-gradient-to-r from-black/70 to-black/40"></div>
         <div class="container mx-auto px-4 relative z-10">

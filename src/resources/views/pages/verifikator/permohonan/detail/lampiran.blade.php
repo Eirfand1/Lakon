@@ -18,13 +18,13 @@ $metode = $kontrak->paketPekerjaan->metode_pemilihan;
 </div>
 
 @endif
-@if($jenis == 'Jasa Konsultasi Perencanaan' || $jenis == 'Pekerjaan Konstruksi')
+@if($jenis == 'Jasa Konsultansi Perencanaan' || $jenis == 'Pekerjaan Konstruksi')
 <div class="mb-8">
     @include($view . "peralatan")
 </div>
 @endif
 
-@if($metode == 'Tender' && $jenis == 'Jasa Konsultasi Perencanaan')
+@if($metode == 'Tender' && $jenis == 'Jasa Konsultansi Perencanaan')
 <div class="mb-8">
     @include($view . "daftar-pekerjaan-sub-kontrak")
 </div>
@@ -34,7 +34,7 @@ $metode = $kontrak->paketPekerjaan->metode_pemilihan;
 
 @endif
 
-@if($metode == 'Tender' && $jenis == 'Jasa Konsultasi Pengawasan')
+@if($metode == 'Tender' && $jenis == 'Jasa Konsultansi Pengawasan')
 <div class="mb-8">
     @include($view . "biaya-personel")
 </div>

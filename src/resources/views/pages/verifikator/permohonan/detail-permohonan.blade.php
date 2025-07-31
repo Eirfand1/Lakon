@@ -96,7 +96,7 @@
             </button>
             @endif
 
-            {{-- @if ($jenis == 'non_tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan')) --}}
+            {{-- @if ($jenis == 'non_tender' && ($metode == 'Jasa Konsultansi Pengawasan' || $metode == 'Jasa Konsultansi Perencanaan')) --}}
             {{-- <button
                 :class="{
                     'bg-blue-500 text-white': tab === 'tab5',
@@ -157,7 +157,7 @@
         </div>
         @endif
         {{-- sskk --}}
-        {{-- @if ($jenis == 'non_tender' && ($metode == 'Jasa Konsultasi Pengawasan' || $metode == 'Jasa Konsultasi Perencanaan')) --}}
+        {{-- @if ($jenis == 'non_tender' && ($metode == 'Jasa Konsultansi Pengawasan' || $metode == 'Jasa Konsultansi Perencanaan')) --}}
         {{-- <div x-show="tab === 'tab5'" class="mt-4">
             @include('pages.verifikator.permohonan.detail.sskk')
         </div> --}}

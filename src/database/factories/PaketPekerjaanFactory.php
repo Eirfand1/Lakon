@@ -28,7 +28,7 @@ class PaketPekerjaanFactory extends Factory
             'satker_id' => SatuanKerja::factory(),
             'nama_pekerjaan' => $this->faker->sentence(),
             'waktu_paket' => $this->faker->date(),
-            'metode_pemilihan' => $this->faker->randomElement(['Jasa Konsultasi Pengawasan', 'Jasa Konsultasi Perencanaan', 'Pekerjaan Konstruksi', 'Pengadaan Barang']),
+            'metode_pemilihan' => $this->faker->randomElement(['Jasa Konsultansi Pengawasan', 'Jasa Konsultansi Perencanaan', 'Pekerjaan Konstruksi', 'Pengadaan Barang']),
             'jenis_pengadaan' => $this->faker->randomElement(['Tender', 'Non Tender', 'E-Katalog', 'Swakelola']),
             'nilai_pagu_paket' => $this->faker->randomFloat(2, 100000, 1000000),
             'nilai_pagu_anggaran' => $this->faker->randomFloat(2, 100000, 1000000),
