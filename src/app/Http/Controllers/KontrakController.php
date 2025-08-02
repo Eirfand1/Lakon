@@ -351,6 +351,7 @@ class KontrakController extends Controller
 
             // Penyedia
             $templateProcessor->setValue('${NAMA_DIREKTUR}', $kontrak->penyedia->nama_pemilik);
+            $templateProcessor->setValue('${JABATAN_PEMILIK}', $kontrak->penyedia->jabatan ?? '');
             $templateProcessor->setValue('${ALAMAT_PEMILIK}', $kontrak->penyedia->alamat_pemilik);
             $templateProcessor->setValue('${NAMA_CV}', $kontrak->penyedia->nama_perusahaan_lengkap);
             $templateProcessor->setValue('${ALAMAT_PERUSAHAAN}', $kontrak->penyedia->alamat_perusahaan);

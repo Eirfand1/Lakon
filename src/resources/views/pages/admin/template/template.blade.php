@@ -294,7 +294,11 @@
                     <div class="space-y-2">
                         <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
                             <code class="text-sm font-mono text-purple-600 dark:text-purple-400">${NAMA_DIREKTUR}</code>
-                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Nama pemilik/direktur</p>
+                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Nama pemilik sah perusahaan</p>
+                        </div>
+                        <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
+                            <code class="text-sm font-mono text-purple-600 dark:text-purple-400">${JABATAN_PEMILIK}</code>
+                            <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Jabatan pemilik sah perusahaan</p>
                         </div>
                         <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
                             <code class="text-sm font-mono text-purple-600 dark:text-purple-400">${ALAMAT_PEMILIK}</code>
@@ -635,7 +639,7 @@
                                 <div class="bg-gray-50 dark:bg-gray-700 p-3 rounded">
                                     <code class="text-sm font-mono text-green-600 dark:text-green-400">TABLE_KETERANGAN</code>
                                     <p class="text-xs text-gray-600 dark:text-gray-400 mt-1">Keterangan</p>
-                                </div>  
+                                </div>
                             </div>
                         </div>
                     </div>
