@@ -148,7 +148,7 @@
                         @if ($crud_lampiran)
                             <td class="border border-gray-400/30">
                                 <div class="flex gap-1">
-                                    <label class="btn btn-warning btn-sm text-gray-100" onclick="editTim({{ $row }})">
+                                    <label class="btn btn-warning btn-sm text-gray-100" onclick="editTim({{ json_encode($row) }})">
                                         <i class="fa fa-edit"></i>
                                     </label>
                                     <label class="btn btn-error btn-sm text-gray-100" for="delete-modal" onclick="deleteTim({{ $row->tim_id }})">

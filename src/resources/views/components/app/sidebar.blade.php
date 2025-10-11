@@ -22,11 +22,11 @@
             <!-- Logo -->
             <a class="flex gap-4 items-center" href="{{ route('admin.dashboard') }}">
 
-                <p class="text-2xl font-bold block md:hidden">LAKONP&K</p>
-                <img width="32" height="32"
-                    src="https://2.bp.blogspot.com/-aEgbm1FL1mw/WVcXNvQWIwI/AAAAAAAALIw/IXb0Fh3SR807o3iRvs9Ed16PL7xom57sQCLcBGAs/s1600/Logo-Kabupaten-Cilacap.png"
+                <p class="text-2xl font-bold block md:hidden">LAKONPDK</p>
+                <img width="150" height="150"
+                    src="https://lakon-pdk.com/images/logo-lakon1.png"
                     alt="LAKON">
-                <p class="text-2xl font-bold hidden md:block lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100">LAKONP&K</p>
+                <p class="text-2xl font-bold hidden md:block lg:opacity-0 lg:sidebar-expanded:opacity-100 2xl:opacity-100"></p>
             </a>
         </div>
 
@@ -131,7 +131,7 @@
                             </div>
                         </a>
                     </li>
-
+                    
                     {{-- Riwayat Kontrak --}}
                     <li
                         class="pl-4 pr-3 py-2 rounded-lg mb-0.5 last:mb-0 bg-[linear-gradient(135deg,var(--tw-gradient-stops))] @if(in_array(Request::segment(2), ['riwayat-kontrak'])){{ 'from-violet-500/[0.12] dark:from-violet-500/[0.24] to-violet-500/[0.04]' }}@endif">

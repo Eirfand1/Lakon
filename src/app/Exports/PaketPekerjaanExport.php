@@ -72,7 +72,7 @@ class PaketPekerjaanExport implements FromCollection, WithHeadings, WithCustomSt
                     'no' => $index === 0 ? $subKegiatan->no_rekening : '',
                     'sub_kegiatan' => $index === 0 ? $subKegiatan->nama_sub_kegiatan : '',
                     'paket_id' => $paket->nomor_matrik,
-                    'nama_paket' => $paket->nama_pekerjaan ." ". $paket->sekolah->nama_sekolah,
+                    'nama_paket' => $paket->nama_pekerjaan,
                     'kode_sirup' => $paket->kode_sirup,
                     'sumber_dana' => $paket->sumber_dana,
                     'tahun_anggaran' => $paket->tahun_anggaran,

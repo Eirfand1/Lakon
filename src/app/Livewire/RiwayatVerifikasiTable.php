@@ -81,7 +81,7 @@ class RiwayatVerifikasiTable extends DataTableComponent
             Column::make("Waktu Kontrak (HK)", "waktu_kontrak")
                 ->sortable()
                 ->searchable()
-                ->format(fn($value, $row) => $row->waktu_kontrak . ' Hari Kerja'),
+                ->format(fn($value, $row) => $row->waktu_kontrak . ' Hari Kalender'),
 
             Column::make("Jenis Pengadaan", "paketPekerjaan.metode_pemilihan")
                 ->sortable()

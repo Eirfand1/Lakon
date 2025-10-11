@@ -8,61 +8,79 @@ use App\Models\Kontrak;
 
 class RealisasiController extends Controller
 {
-    //
     public function index() {
         return view('pages.admin.realisasi.realisasi');
     }
 
+    /**
+     * Detail (admin): ambil kontrak dan relasi realisasi terurut.
+     */
     public function detail($kontrak_id) {
         $kontrak = Kontrak::where('kontrak_id', $kontrak_id)
             ->with([
                 'paketPekerjaan',
+                // urut berdasarkan sekolah -> tahun -> bulan
                 'realisasi' => function ($query) {
-                    $query->orderBy('realisasi.tahun', 'asc')
-                        ->orderBy('realisasi.bulan', 'asc');
+                    $query->orderBy('sekolah', 'asc')
+                        ->orderBy('tahun', 'asc')
+                        ->orderBy('bulan', 'asc');
                 }])
-            ->first();
+            ->firstOrFail();
 
         return view('pages.admin.realisasi.detail', ['kontrak' => $kontrak]);
     }
 
+    /**
+     * Detail untuk penyedia/konsultan (mirip dengan detail admin).
+     */
     public function realisasi($kontrak_id)
     {
         $kontrak = Kontrak::where('kontrak_id', $kontrak_id)
             ->with([
                 'paketPekerjaan',
                 'realisasi' => function ($query) {
-                    $query->orderBy('realisasi.tahun', 'asc')
-                        ->orderBy('realisasi.bulan', 'asc');
+                    $query->orderBy('sekolah', 'asc')
+                        ->orderBy('tahun', 'asc')
+                        ->orderBy('bulan', 'asc');
                 }])
-            ->first();
+            ->firstOrFail();
 
         return view('pages.penyedia.konsultan.realisasi.realisasi', ['kontrak' => $kontrak]);
     }
 
+    /**
+     * Simpan / update realisasi (sama logika seperti Anda sebelumnya).
+     */
     public function storeRealisasi(Request $request, $kontrak_id)
     {
+        $rules = [
+            'sekolah' => 'required|string',
+            'tahun' => 'required|numeric',
+            'bulan' => 'required|numeric',
+            'target' => 'required|string|max:255',
+            'realisasi' => 'required|string|max:255',
+            'gambar1' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar2' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar3' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+        ];
+
         if ($request->realisasi_id) {
-            $request->validate([
-                'tahun' => 'required|numeric',
-                'bulan' => 'required|numeric',
-                'target' => 'required|string|max:255',
-                'realisasi' => 'required|string|max:255',
-                'gambar1' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-                'gambar2' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-                'gambar3' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            ]);
+            $request->validate($rules);
 
-            $oldName = Realisasi::where('realisasi_id', $request->realisasi_id)->select('gambar1', 'gambar2', 'gambar3')->first()->toArray();
-            // dd($oldName['gambar1']);
+            $oldRecord = Realisasi::where('realisasi_id', $request->realisasi_id)
+                ->select('gambar1', 'gambar2', 'gambar3')
+                ->first();
 
-            $gambar[0] = ($request->gambar1) ? $request->file('gambar1') : null;
-            $gambar[1] = ($request->gambar2) ? $request->file('gambar2') : null;
-            $gambar[2] = ($request->gambar3) ? $request->file('gambar3') : null;
+            $oldName = $oldRecord ? $oldRecord->toArray() : null;
+
+            $gambar[0] = $request->hasFile('gambar1') ? $request->file('gambar1') : null;
+            $gambar[1] = $request->hasFile('gambar2') ? $request->file('gambar2') : null;
+            $gambar[2] = $request->hasFile('gambar3') ? $request->file('gambar3') : null;
 
             $filePath = $this->createFilePath($gambar, $oldName);
 
             Realisasi::where('realisasi_id', $request->realisasi_id)->update([
+                'sekolah' => $request->sekolah,
                 'tahun' => $request->tahun,
                 'bulan' => $request->bulan,
                 'target' => $request->target,
@@ -73,16 +91,8 @@ class RealisasiController extends Controller
             ]);
 
             return redirect()->back()->with('success', 'Realisasi berhasil diperbarui.');
-        }else {
-            $request->validate([
-                'tahun' => 'required|numeric',
-                'bulan' => 'required|numeric',
-                'target' => 'required|string|max:255',
-                'realisasi' => 'required|string|max:255',
-                'gambar1' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-                'gambar2' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-                'gambar3' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-            ]);
+        } else {
+            $request->validate($rules);
 
             $gambar[0] = $request->file('gambar1');
             $gambar[1] = $request->file('gambar2');
@@ -92,6 +102,7 @@ class RealisasiController extends Controller
 
             Realisasi::create([
                 'kontrak_id' => $kontrak_id,
+                'sekolah' => $request->sekolah,
                 'tahun' => $request->tahun,
                 'bulan' => $request->bulan,
                 'target' => $request->target,
@@ -105,27 +116,34 @@ class RealisasiController extends Controller
         }
     }
 
-    private function createFilePath($gambar, $oldName = null) {
-        $i = 0;
-        foreach ($gambar as $value) {
-            if ($value) {
-                $fileName[$i] = time() . '_' . $value->getClientOriginalName();
-
-                // Store file in the storage/app/public/uploads/realisasi directory
-                $filePath[$i] = $value->storeAs('uploads/realisasi', $fileName[$i], 'public');
-                $filePath[$i] = 'storage/' . $filePath[$i];
-            }else {
-                $filePath[$i] = $oldName['gambar'.$i+1];
-            }
-            $i++;
-        }
-
-        return $filePath;
-    }
-
+    /**
+     * Hapus realisasi
+     */
     public function destroyRealisasi($realisasi_id) {
         Realisasi::where('realisasi_id', $realisasi_id)->delete();
 
         return redirect()->back()->with('success', 'Realisasi berhasil dihapus.')->withFragment('tableRealisasi');
+    }
+
+    /**
+     * Simpan file gambar (maks 3). Jika update dan file kosong, gunakan old name.
+     */
+    private function createFilePath($gambar, $oldName = null) {
+        $filePath = [null, null, null];
+        for ($i = 0; $i < 3; $i++) {
+            $value = isset($gambar[$i]) ? $gambar[$i] : null;
+            if ($value) {
+                $fileName = time() . '_' . $value->getClientOriginalName();
+                $stored = $value->storeAs('uploads/realisasi', $fileName, 'public');
+                $filePath[$i] = 'storage/' . $stored;
+            } else {
+                if (is_array($oldName) && array_key_exists('gambar'.($i+1), $oldName)) {
+                    $filePath[$i] = $oldName['gambar'.($i+1)];
+                } else {
+                    $filePath[$i] = null;
+                }
+            }
+        }
+        return $filePath;
     }
 }

@@ -54,6 +54,7 @@ class KontrakTable extends DataTableComponent
             Column::make("Nama Paket", "paketPekerjaan.nama_pekerjaan")
                 ->sortable()
                 ->searchable(),
+                // nama cv
             Column::make("Nama Penyedia", "penyedia.nama_perusahaan_lengkap")
                 ->sortable()
                 ->searchable(),
@@ -63,15 +64,15 @@ class KontrakTable extends DataTableComponent
             Column::make("Nilai Kontrak")
                 ->sortable()
                 ->searchable()
-                ->format(fn($value, $row) => 'Rp. ' . number_format($row->nilai_kontrak,0, '', '.')),
-            Column::make("Tanggal Kontrak", "tgl_pembuatan")
+                ->format(fn($value, $row) => 'Rp. ' . number_format($row->nilai_kontrak, 0, '', '.')),
+            Column::make("Tanggal Kontrak", "tanggal_awal")
                 ->sortable()
                 ->format(fn ($value) => Carbon::parse($value)->translatedFormat('d F Y'))
                 ->searchable(),
             Column::make("Waktu Kontrak (HK)", "waktu_kontrak")
                 ->sortable()
                 ->searchable()
-                ->format(fn($value, $row) => $row->waktu_kontrak . ' Hari Kerja'),
+                ->format(fn($value, $row) => $row->waktu_kontrak . ' Hari Kalender'),
             Column::make("Jenis Pengadaan", "paketPekerjaan.jenis_pengadaan")
                 ->sortable()
                 ->searchable(),

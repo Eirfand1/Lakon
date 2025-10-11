@@ -302,18 +302,29 @@ class KontrakController extends Controller
                 'November',
                 'Desember'
             ];
+            
+            $hari = [
+                'Minggu',
+                'Senin',
+                'Selasa',
+                'Rabu',
+                'Kamis',
+                'Jumat',
+                'Sabtu'
+            ];
 
             $terbilangTanggal = Carbon::parse($kontrak->tanggal_awal);
 
             $spellout = new NumberFormatter("id", NumberFormatter::SPELLOUT);
-
+            
+            $namaHari = $hari[$terbilangTanggal->dayOfWeek];
             $hari  = ucwords($spellout->format($terbilangTanggal->day));
             $tahun = ucwords($spellout->format($terbilangTanggal->year));
             $namaBulan = $bulan[$terbilangTanggal->month - 1];
 
             $templateProcessor->setValue(
                 '${TERBILANG_TGL_PEMBUATAN}',
-                "{$hari} {$namaBulan} Tahun {$tahun}"
+                "hari {$namaHari} tanggal {$hari} {$namaBulan} Tahun {$tahun}"
             );
 
             $terbilangTanggalPenetapanPemenang = Carbon::parse($kontrak->tgl_penetapan_pemenang);
@@ -338,7 +349,7 @@ class KontrakController extends Controller
             $templateProcessor->setValue('${NOMOR_SPPBJ}', $kontrak->nomor_sppbj);
             $templateProcessor->setValue('${TGL_SPPBJ}', Carbon::parse($kontrak->tgl_sppbj)->translatedFormat('d F Y'));
             $templateProcessor->setValue('${NOMOR_PENETAPAN_PEMENANG}', $kontrak->nomor_penetapan_pemenang);
-            $templateProcessor->setValue('${TGL_PENETAPAN_PEMENANG}', $kontrak->tgl_penetapan_pemenang);
+            $templateProcessor->setValue('${TGL_PENETAPAN_PEMENANG}', Carbon::parse($kontrak->tgl_penetapan_pemenang)->translatedFormat('d F Y'));
             $templateProcessor->setValue('${TGL_SELESAI}', Carbon::parse($kontrak->tanggal_akhir)->translatedFormat('d F Y'));
             $templateProcessor->setValue('${JANGKA_WAKTU}', $kontrak->waktu_kontrak);
 
@@ -454,13 +465,18 @@ class KontrakController extends Controller
 
             if ($kontrak->tim && $kontrak->tim->count() > 0) {
                 foreach ($kontrak->tim as $index => $tim) {
+                    if ($tim->pengalaman == 0) {
+                        $pengalaman = "0 ";  
+                    }else {
+                        $pengalaman = $tim->pengalaman;
+                    };
                     $tim_table[] = [
                         'NO_TIM' => $index + 1,
                         'TABLE_NAMA' => $tim->nama,
                         'TABLE_POSISI' => $tim->posisi,
                         'TABLE_STATUS_TENAGA' => $tim->status_tenaga,
                         'TABLE_PENDIDIKAN' => $tim->pendidikan,
-                        'TABLE_PENGALAMAN' => $tim->pengalaman,
+                        'TABLE_PENGALAMAN' => $pengalaman,
                         'TABLE_SERTIFIKASI' => $tim->sertifikasi,
                         'TABLE_KETERANGAN' => $tim->keterangan
                     ];
@@ -504,7 +520,6 @@ class KontrakController extends Controller
                         'TABLE_JENIS' => $rincian->jenis,
                         'TABLE_QTY' => $rincian->qty,
                         'TABLE_SATUAN' => $rincian->satuan,
-                        // separator ribuan
                         'TABLE_HARGA_SATUAN' => number_format($rincian->harga_satuan, 0, ',', '.'),
                         'TABLE_ONGKOS_KIRIM' => number_format($rincian->ongkos_kirim, 0, ',', '.'),
                         'TABLE_TOTAL_HARGA' => number_format($rincian->total_harga, 0, ',', '.'),
@@ -520,9 +535,10 @@ class KontrakController extends Controller
 
             $penerima_table = [];
             $total_qty_penerima = 0;
+
+
             if ($kontrak->penerima && $kontrak->penerima->count() > 0) {
                 foreach ($kontrak->penerima as $index => $penerima) {
-                    // dd($penerima->qty);
                     $penerima_table[] = [
                         'NO_PENERIMA' => $index + 1,
                         'TABLE_NAMA_SEKOLAH' => $penerima->keterangan_penerima,
@@ -530,14 +546,14 @@ class KontrakController extends Controller
                         'TABLE_QTY' => $penerima->qty,
                         'TABLE_SATUAN' => $penerima->satuan,
                     ];
-
+                    
                     $total_qty_penerima += $penerima->qty;
+
                 }
             }
-
-            $templateProcessor->setValue('${SATUAN_PENERIMA}', $kontrak->penerima->first()->satuan);
+            
+            $templateProcessor->setValue('${SATUAN_PENERIMA}', $kontrak->penerima->first()->satuan ?? '');
             $templateProcessor->setValue('${TOTAL_QTY_PENERIMA}', $total_qty_penerima);
-
 
             if (in_array('NO_PENERIMA', $templateVariables)) {
                 $templateProcessor->cloneRowAndSetValues('NO_PENERIMA', $penerima_table);
