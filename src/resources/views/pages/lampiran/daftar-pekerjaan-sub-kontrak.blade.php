@@ -5,7 +5,8 @@
             DAFTAR PEKERJAAN SUB KONTRAK
         </span>
     </h1>
-
+<form action="{{ route('daftar-pekerjaan-sub-kontrak.store') }}" method="POST">
+@csrf
     <table class="table">
         <thead class="text-gray-600  dark:text-gray-300">
             <tr>
@@ -21,8 +22,6 @@
         </thead>
         <tbody>
             <tr>
-                <form action="{{ route('daftar-pekerjaan-sub-kontrak.store') }}" method="POST">
-                    @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="daftar_pekerjaan_sub_kontrak_id" id="bagianPekerjaanSubKontrakId">
                 <td class="text-center border border-gray-400/30">
@@ -46,7 +45,6 @@
                     </td>
                 @endif
 
-                </form>
             </tr>
 
                 @foreach($daftarPekerjaanSubKontrak as $row)
@@ -73,6 +71,7 @@
                 @endforeach
         </tbody>
     </table>
+</form>
 </div>
 
 <script>

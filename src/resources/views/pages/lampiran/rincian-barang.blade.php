@@ -6,7 +6,8 @@
         </span>
     </h1>
 
-
+<form action="{{ route('rincian-belanja.store') }}" method="POST">
+@csrf
     <table class="table">
         <thead class="text-gray-600  dark:text-gray-300">
             <tr>
@@ -23,8 +24,6 @@
         </thead>
         <tbody>
             <tr>
-                <form action="{{ route('rincian-belanja.store') }}" method="POST">
-                    @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="rincian_belanja_id" id="rincianBelanjaId_belanja">
                 <input type="hidden" name="uraian" value="-">
@@ -51,7 +50,6 @@
                     </td>
                 @endif
 
-                </form>
             </tr>
 
                 @foreach($rincianBelanja as $row)
@@ -86,6 +84,7 @@
                 </tr>
         </tbody>
     </table>
+</form>
 </div>
 
 <script>

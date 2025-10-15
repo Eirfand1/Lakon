@@ -6,7 +6,8 @@
         </span>
     </h1>
 
-
+<form action="{{ route('peralatan.store') }}" method="POST">
+@csrf
     <table class="table">
         <thead class="text-gray-600  dark:text-gray-300">
             <tr>
@@ -25,8 +26,6 @@
         </thead>
         <tbody>
             <tr>
-                <form action="{{ route('peralatan.store') }}" method="POST">
-                    @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="peralatan_id" id="peralatanId">
                 <td class="text-center border border-gray-400/30">
@@ -68,7 +67,6 @@
                     </td>
                 @endif
 
-                </form>
             </tr>
 
                 @foreach($peralatan as $row)
@@ -98,6 +96,7 @@
                 @endforeach
         </tbody>
     </table>
+</form>
 </div>
 
 <script>

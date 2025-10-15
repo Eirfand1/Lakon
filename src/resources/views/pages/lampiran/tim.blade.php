@@ -6,7 +6,8 @@
         </span>
     </h1>
 
-
+<form action="{{ route('tim.store') }}" method="POST">
+@csrf
     <table class="table">
         <thead class="text-gray-600  dark:text-gray-300">
             <tr>
@@ -39,8 +40,6 @@
         </thead>
         <tbody>
             <tr>
-                <form action="{{ route('tim.store') }}" method="POST">
-                    @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="tim_id" id="timId">
                 <td class="text-center border border-gray-400/30">
@@ -121,7 +120,6 @@
                         <button class="btn btn-success px-4"><i class="fa fa-save text-gray-100"></i></button>
                     </td>
                 @endif
-                </form>
             </tr>
 
                 @foreach($tim as $row)
@@ -161,6 +159,7 @@
                 @endforeach
         </tbody>
     </table>
+</form>
 </div>
 
 <script>

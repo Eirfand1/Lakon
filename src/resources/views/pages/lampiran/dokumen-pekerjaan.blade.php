@@ -6,7 +6,8 @@
         </span>
     </h1>
 
-
+<form action="dokumen" method="POST">
+@csrf
     <table class="table">
         <thead class="text-gray-600  dark:text-gray-300">
             <tr>
@@ -17,8 +18,6 @@
         </thead>
         <tbody>
             <tr>
-                <form action="dokumen" method="POST">
-                    @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="dokumen_id" id="dokumenIdPekerjaan">
                 <input type="hidden" name="jenis" value="pekerjaan">
@@ -30,7 +29,6 @@
                     <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
                 </td>
 
-                </form>
             </tr>
 
                 @foreach($dokumen_pekerjaan as $row)
@@ -52,6 +50,7 @@
                 @endforeach
         </tbody>
     </table>
+</form>
 </div>
 
 <script>

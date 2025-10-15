@@ -6,7 +6,8 @@
         </span>
     </h1>
 
-
+<form action="{{ route('rincian-belanja.store') }}" method="POST">
+@csrf
     <table class="table">
         <thead class="text-gray-600  dark:text-gray-300">
             <tr>
@@ -22,8 +23,6 @@
         </thead>
         <tbody>
             <tr>
-                <form action="{{ route('rincian-belanja.store') }}" method="POST">
-                    @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="rincian_belanja_id" id="rincianBelanjaId">
                 <td class="text-center border border-gray-400/30">
@@ -49,7 +48,6 @@
                     <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
                 </td>
 
-                </form>
             </tr>
 
                 @foreach($rincianBelanja as $row)
@@ -82,6 +80,7 @@
 
         </tbody>
     </table>
+</form>
 </div>
 
 <script>

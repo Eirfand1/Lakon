@@ -7,6 +7,8 @@
     </h1>
 
 
+<form action="penerima-barang" method="POST">
+@csrf
     <table class="table">
         <thead class="text-gray-600  dark:text-gray-300">
             <tr>
@@ -20,8 +22,6 @@
         </thead>
         <tbody>
             <tr>
-                <form action="penerima-barang" method="POST">
-                    @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="penerima_id" id="penerimaId">
                 <td class="text-center border border-gray-400/30"></td>
@@ -41,7 +41,6 @@
                     <button class="btn btn-success px-4"><i class="fa fa-save text-gray-100"></i></button>
                 </td>
 
-                </form>
             </tr>
 
                 @foreach($penerima as $row)
@@ -66,6 +65,7 @@
                 @endforeach
         </tbody>
     </table>
+</form>
 </div>
 
 <script>

@@ -13,6 +13,8 @@
                 {{ session('error') }}
             </div>
         @endif
+<form action="{{ route('biaya-personel.store') }}" method="POST">
+@csrf
     <table class="table">
         <thead class="text-gray-600  dark:text-gray-300">
             <tr>
@@ -30,8 +32,6 @@
         </thead>
         <tbody>
             <tr>
-                <form action="{{ route('biaya-personel.store') }}" method="POST">
-                    @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="biaya_personel_id" id="id_jenis_biaya_personel">
                 <td class="text-center border border-gray-400/30">
@@ -59,7 +59,6 @@
                     </td>
                 @endif
 
-                </form>
             </tr>
 
                 @foreach($biayaPersonel as $row)
@@ -95,6 +94,7 @@
                 </tr>
         </tbody>
     </table>
+</form>
 </div>
 
 <script>

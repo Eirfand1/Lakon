@@ -6,7 +6,8 @@
         </span>
     </h1>
 
-
+<form action="ruang-lingkup" method="POST">
+@csrf
     <table class="table">
         <thead class="text-gray-600  dark:text-gray-300">
             <tr>
@@ -16,8 +17,6 @@
         </thead>
         <tbody>
             <tr>
-                <form action="ruang-lingkup" method="POST">
-                    @csrf
                 <input type="hidden" name="kontrak_id" value="{{ $kontrak->kontrak_id }}">
                 <input type="hidden" name="ruang_lingkup_id" id="ruangLingkupId">
                 <td class="text-center border border-gray-400/30">
@@ -27,7 +26,6 @@
                     <button class="btn btn-success"><i class="fa fa-save text-gray-100"></i></button>
                 </td>
 
-                </form>
             </tr>
 
                 @foreach($ruangLingkup as $row)
@@ -48,6 +46,7 @@
                 @endforeach
         </tbody>
     </table>
+</form>
 </div>
 
 <script>
