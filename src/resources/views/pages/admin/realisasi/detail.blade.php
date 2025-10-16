@@ -175,7 +175,22 @@
                                                         <img src="{{ asset($r->gambar3) }}" loading="lazy" class="w-full h-24 object-cover border rounded">
                                                     </button>
                                                 @endif
-                                                @if(empty($r->gambar1) && empty($r->gambar2) && empty($r->gambar3))
+                                                @if(!empty($r->gambar4))
+                                                    <button type="button" class="open-image" data-src="{{ asset($r->gambar4) }}">
+                                                        <img src="{{ asset($r->gambar4) }}" loading="lazy" class="w-full h-24 object-cover border rounded">
+                                                    </button>
+                                                @endif
+                                                @if(!empty($r->gambar5))
+                                                    <button type="button" class="open-image" data-src="{{ asset($r->gambar5) }}">
+                                                        <img src="{{ asset($r->gambar5) }}" loading="lazy" class="w-full h-24 object-cover border rounded">
+                                                    </button>
+                                                @endif
+                                                @if(!empty($r->gambar6))
+                                                    <button type="button" class="open-image" data-src="{{ asset($r->gambar6) }}">
+                                                        <img src="{{ asset($r->gambar6) }}" loading="lazy" class="w-full h-24 object-cover border rounded">
+                                                    </button>
+                                                @endif
+                                                @if(empty($r->gambar1) && empty($r->gambar2) && empty($r->gambar3) && empty($r->gambar4) && empty($r->gambar5) && empty($r->gambar6))
                                                     <div class="col-span-3 text-center text-sm text-gray-500">-</div>
                                                 @endif
                                             </div>

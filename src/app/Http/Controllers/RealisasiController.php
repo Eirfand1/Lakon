@@ -62,13 +62,16 @@ class RealisasiController extends Controller
             'gambar1' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'gambar2' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
             'gambar3' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar4' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar5' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar6' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ];
 
         if ($request->realisasi_id) {
             $request->validate($rules);
 
             $oldRecord = Realisasi::where('realisasi_id', $request->realisasi_id)
-                ->select('gambar1', 'gambar2', 'gambar3')
+                ->select('gambar1', 'gambar2', 'gambar3', 'gambar4', 'gambar5', 'gambar6')
                 ->first();
 
             $oldName = $oldRecord ? $oldRecord->toArray() : null;
@@ -76,6 +79,9 @@ class RealisasiController extends Controller
             $gambar[0] = $request->hasFile('gambar1') ? $request->file('gambar1') : null;
             $gambar[1] = $request->hasFile('gambar2') ? $request->file('gambar2') : null;
             $gambar[2] = $request->hasFile('gambar3') ? $request->file('gambar3') : null;
+            $gambar[3] = $request->hasFile('gambar4') ? $request->file('gambar4') : null;
+            $gambar[4] = $request->hasFile('gambar5') ? $request->file('gambar5') : null;
+            $gambar[5] = $request->hasFile('gambar6') ? $request->file('gambar6') : null;
 
             $filePath = $this->createFilePath($gambar, $oldName);
 
@@ -88,6 +94,9 @@ class RealisasiController extends Controller
                 'gambar1' => $filePath[0],
                 'gambar2' => $filePath[1],
                 'gambar3' => $filePath[2],
+                'gambar4' => $filePath[3],
+                'gambar5' => $filePath[4],
+                'gambar6' => $filePath[5],
             ]);
 
             return redirect()->back()->with('success', 'Realisasi berhasil diperbarui.');
@@ -97,6 +106,9 @@ class RealisasiController extends Controller
             $gambar[0] = $request->file('gambar1');
             $gambar[1] = $request->file('gambar2');
             $gambar[2] = $request->file('gambar3');
+            $gambar[3] = $request->file('gambar4');
+            $gambar[4] = $request->file('gambar5');
+            $gambar[5] = $request->file('gambar6');
 
             $filePath = $this->createFilePath($gambar);
 
@@ -110,6 +122,9 @@ class RealisasiController extends Controller
                 'gambar1' => $filePath[0],
                 'gambar2' => $filePath[1],
                 'gambar3' => $filePath[2],
+                'gambar4' => $filePath[3],
+                'gambar5' => $filePath[4],
+                'gambar6' => $filePath[5],
             ]);
 
             return redirect()->back()->with('success', 'Realisasi berhasil ditambahkan.');
@@ -130,7 +145,7 @@ class RealisasiController extends Controller
      */
     private function createFilePath($gambar, $oldName = null) {
         $filePath = [null, null, null];
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 6; $i++) {
             $value = isset($gambar[$i]) ? $gambar[$i] : null;
             if ($value) {
                 $fileName = time() . '_' . $value->getClientOriginalName();

@@ -71,7 +71,7 @@
 
             {{-- Upload gambar (3 wajib) --}}
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                @foreach ([1,2,3] as $i)
+                @foreach ([1,2,3,4,5,6] as $i)
                     <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg relative">
                         <label class="block text-sm font-semibold">Gambar {{ $i }}</label>
                         <input type="file" id="gambar{{ $i }}" name="gambar{{ $i }}"
@@ -190,7 +190,7 @@
                             {{-- Gambar --}}
                             <td class="p-3 border border-white/30">
                                 <div class="grid grid-cols-3 gap-2">
-                                    @foreach ([1,2,3] as $i)
+                                    @foreach ([1,2,3,4,5,6] as $i)
                                         @php $g = "gambar$i"; @endphp
                                         @if($item->$g)
                                             <img src="{{ asset($item->$g) }}"
