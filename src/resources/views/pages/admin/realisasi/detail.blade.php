@@ -1,10 +1,12 @@
 <x-app-layout>
     <div class="p-4">
         <h2 class="text-2xl font-bold mb-4">
-            <i class="fa fa-calendar-o mr-2"></i> REALISASI KONTRAK
-            <span class="text-red-500"> {{ $kontrak->no_kontrak ?? '' }} </span>
+            <i class="fa fa-calendar-o mr-2 text-blue-500"></i>
+            REALISASI KONTRAK
         </h2>
-
+        <span class="font-semibold text-gray-800 dark:text-gray-200 ml-2">
+            {{ $kontrak->paketPekerjaan->nama_pekerjaan }}
+        </span>
         <div class="border-b border-gray-300 my-4"></div>
 
         <div class="overflow-x-auto">

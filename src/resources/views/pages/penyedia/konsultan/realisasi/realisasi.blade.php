@@ -1,9 +1,12 @@
 <x-app-layout>
     <div class="p-4">
         <h2 class="text-2xl font-bold mb-4">
-            <i class="fa fa-calendar-o mr-2"></i> REALISASI KONTRAK
-            <span class="text-red-500"> {{ $kontrak->no_kontrak }} </span>
+            <i class="fa fa-calendar-o mr-2 text-blue-500"></i>
+            REALISASI KONTRAK
         </h2>
+        <span class="font-semibold text-gray-800 dark:text-gray-200 ml-2">
+            {{ $kontrak->paketPekerjaan->nama_pekerjaan }}
+        </span>
         <div class="border-b border-gray-300 my-4"></div>
 
         {{-- SERVER-SIDE ERRORS --}}
@@ -72,7 +75,7 @@
                     <div class="p-3 bg-blue-50 dark:bg-gray-700/60 rounded-lg relative">
                         <label class="block text-sm font-semibold">Gambar {{ $i }}</label>
                         <input type="file" id="gambar{{ $i }}" name="gambar{{ $i }}"
-                               onchange="previewImage(event,'preview{{ $i }}','removeBtn{{ $i }}')" 
+                               onchange="previewImage(event,'preview{{ $i }}','removeBtn{{ $i }}')"
                                accept="image/*" class="block pt-2 w-full">
 
                         {{-- preview + close button wrapper --}}
