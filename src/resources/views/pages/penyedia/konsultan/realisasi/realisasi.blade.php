@@ -313,7 +313,7 @@
             if(!real){ missing.push('Realisasi'); realEl.classList.add('input-invalid'); }
 
             // REQUIRE ALL 3 IMAGES (either file selected or existing preview visible when editing)
-            for(let i=1;i<=3;i++){
+            for(let i=1;i<=6;i++){
                 const fileInput = document.getElementById('gambar' + i);
                 const hasFile = fileInput && fileInput.files && fileInput.files.length > 0;
                 const hasPreview = previewVisible(i);
@@ -417,12 +417,12 @@
             Array.from(bulan.options).forEach(o => { o.selected = (o.value == d.bulan); });
 
             // clear removed flags if any (editing new item)
-            [1,2,3].forEach(i => {
+            [1,2,3,4,5,6].forEach(i => {
                 const oldRemoved = document.getElementById('removed_gambar'+i);
                 if(oldRemoved) oldRemoved.remove();
             });
 
-            for(let i=1;i<=3;i++){
+            for(let i=1;i<=6;i++){
                 const img = document.getElementById('preview'+i);
                 const btn = document.getElementById('removeBtn'+i);
                 const fileInput = document.getElementById('gambar'+i);
