@@ -292,55 +292,83 @@
         </div>
     </div>
 
-    <!-- Modal zoom gambar -->
-    <div id="imageModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70">
-        <div class="relative max-w-5xl max-h-[90vh] p-4 w-full">
-            <button id="closeModal" class="absolute -top-10 right-0 text-white hover:text-gray-300 px-4 py-2">
-                <i class="fa fa-times mr-2"></i>Tutup
-            </button>
-            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden">
-                <img id="modalImage" src="" alt="preview" class="w-full h-auto max-h-[85vh] object-contain" />
+    <!-- Modal zoom gambar (DaisyUI modal) -->
+    <!-- menggunakan modal-toggle input agar konsisten dengan DaisyUI -->
+    <input type="checkbox" id="image-modal" class="modal-toggle" />
+    <label for="image-modal" class="modal cursor-pointer">
+        <label class="modal-box p-0 max-w-5xl max-h-[90vh] w-full relative" for="">
+            <div class="absolute top-2 right-2 z-50">
+                <!-- tombol tutup: klik akan toggle input -->
+                <label for="image-modal" class="btn btn-circle btn-sm bg-white/80 text-gray-800 hover:bg-white">
+                    <i class="fa fa-times"></i>
+                </label>
             </div>
-        </div>
-    </div>
+
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden">
+                <img id="daisyModalImage" src="" alt="preview" class="w-full h-auto max-h-[85vh] object-contain" />
+            </div>
+        </label>
+    </label>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const modal = document.getElementById('imageModal');
-            const modalImg = document.getElementById('modalImage');
-            const closeBtn = document.getElementById('closeModal');
+        // Robust modal handler:
+        // - Use event delegation so dynamically inserted .open-image buttons work
+        // - Query modal elements dynamically to survive partial DOM replacements (Livewire/Turbo)
+        // - Support Escape to close and clear image src after close
 
-            document.querySelectorAll('.open-image').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const src = this.getAttribute('data-src');
-                    if (!src) return;
-                    modalImg.src = src;
-                    modal.classList.remove('hidden');
-                    modal.classList.add('flex');
+        (function() {
+            const openImageHandler = function(e) {
+                const btn = e.target.closest && e.target.closest('.open-image');
+                if (!btn) return;
+                e.preventDefault();
+                const src = btn.getAttribute('data-src');
+                if (!src) return;
+
+                const modalToggle = document.getElementById('image-modal');
+                const modalImg = document.getElementById('daisyModalImage');
+                if (!modalToggle || !modalImg) return;
+
+                modalImg.src = src;
+                modalToggle.checked = true;
+            };
+
+            // Delegate clicks on document so elements added later still work
+            document.addEventListener('click', openImageHandler);
+
+            // Clear image src when modal is closed
+            const clearOnClose = function() {
+                const modalToggle = document.getElementById('image-modal');
+                const modalImg = document.getElementById('daisyModalImage');
+                if (!modalToggle || !modalImg) return;
+                if (!modalToggle.checked) {
+                    setTimeout(() => { modalImg.src = ''; }, 150);
+                }
+            };
+
+            // Watch for changes on the checkbox using event delegation (in case it's re-rendered)
+            document.addEventListener('change', function(e) {
+                const target = e.target;
+                if (!target) return;
+                if (target.id === 'image-modal') {
+                    clearOnClose();
+                }
+            });
+
+            // Escape to close modal
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    const modalToggle = document.getElementById('image-modal');
+                    if (modalToggle && modalToggle.checked) modalToggle.checked = false;
+                }
+            });
+
+            // Optional: re-clear img after Livewire/Turbo partial updates
+            ['livewire:update', 'livewire:load', 'turbo:load', 'turbolinks:load', 'pjax:complete'].forEach(evt => {
+                document.addEventListener(evt, () => {
+                    // ensure stale src cleared if modal input is unchecked
+                    clearOnClose();
                 });
             });
-
-            closeBtn.addEventListener('click', function() {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-                modalImg.src = '';
-            });
-
-            modal.addEventListener('click', function(e) {
-                if (e.target === modal) {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('flex');
-                    modalImg.src = '';
-                }
-            });
-
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
-                    modal.classList.add('hidden');
-                    modal.classList.remove('flex');
-                    modalImg.src = '';
-                }
-            });
-        });
+        })();
     </script>
 </x-app-layout>
