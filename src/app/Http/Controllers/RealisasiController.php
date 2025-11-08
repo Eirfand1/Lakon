@@ -19,6 +19,7 @@ class RealisasiController extends Controller
         $kontrak = Kontrak::where('kontrak_id', $kontrak_id)
             ->with([
                 'paketPekerjaan',
+                'penyedia',
                 // urut berdasarkan sekolah -> tahun -> bulan
                 'realisasi' => function ($query) {
                     $query->orderBy('sekolah', 'asc')

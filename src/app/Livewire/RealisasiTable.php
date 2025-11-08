@@ -50,6 +50,14 @@ class RealisasiTable extends DataTableComponent
         return [
 
             IncrementColumn::make('#'),
+            Column::make('Aksi', 'kontrak_id')
+                ->format(function ($value) {
+                    return '
+                            <a  href="detail-realisasi/'.$value.'"
+                            class="btn btn-sm btn-info text-gray-50" wire:navigate>
+                            Realisasi</a>
+                        ';
+            })->html(),
             Column::make("Nama Pekerjaan", "paketPekerjaan.nama_pekerjaan")
                 ->sortable()
                 ->searchable(),
@@ -61,15 +69,7 @@ class RealisasiTable extends DataTableComponent
                 ->searchable(),
             Column::make("Jenis Kontrak", "jenis_kontrak")
                 ->sortable()
-                ->searchable(),
-            Column::make('Aksi', 'kontrak_id')
-                ->format(function ($value) {
-                    return '
-                            <a  href="detail-realisasi/'.$value.'"
-                            class="btn btn-sm btn-info dark:text-gray-50">
-                            realisasi</a>
-                            ';
-                })->html(),
+                ->searchable()
         ];
     }
 }

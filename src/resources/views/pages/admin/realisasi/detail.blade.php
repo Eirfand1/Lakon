@@ -1,26 +1,83 @@
 <x-app-layout>
-    <div class="p-4">
-        <h2 class="text-2xl font-bold mb-4">
-            <i class="fa fa-calendar-o mr-2 text-blue-500"></i>
-            REALISASI KONTRAK
-        </h2>
-        <span class="font-semibold text-gray-800 dark:text-gray-200 ml-2">
-            {{ $kontrak->paketPekerjaan->nama_pekerjaan }}
-        </span>
-        <div class="border-b border-gray-300 my-4"></div>
+    <div class="p-4 sm:p-6">
+        <!-- Header Section -->
+        <div class="mb-6">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Detail Realisasi Kontrak
+            </h2>
 
-        <div class="overflow-x-auto">
-            <table class="min-w-full border-collapse" id="tableRealisasi">
-                <thead>
-                    <tr class="bg-blue-50 text-blue-900">
-                        <th class="border px-2 py-2 text-center w-[160px]">Nama Sekolah</th>
-                        <th class="border px-2 py-2 text-center w-[80px]">Tahun</th>
-                        <th class="border px-2 py-2 text-center w-[100px]">Bulan</th>
-                        <th class="border px-2 py-2 text-center w-[120px]">Target</th>
-                        <th class="border px-2 py-2 text-center w-[120px]">Realisasi</th>
-                        <th class="border px-2 py-2 text-center">Gambar</th>
-                    </tr>
-                </thead>
+            <!-- Info Kontrak Card -->
+            <div class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-lg p-4 shadow-sm space-y-3">
+                <div class="flex items-start gap-3">
+                    <div class="text-gray-600 dark:text-gray-400 mt-0.5">
+                        <i class="fa fa-file-contract text-lg"></i>
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <p class="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Nama Paket Pekerjaan</p>
+                        <p class="text-sm font-semibold text-gray-800 dark:text-gray-100 leading-relaxed">
+                            {{ $kontrak->paketPekerjaan->nama_pekerjaan }}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-2 border-t border-gray-200 dark:border-gray-700">
+                    <div class="flex items-start gap-2">
+                        <i class="fa fa-hashtag text-gray-600 dark:text-gray-400 text-sm mt-1"></i>
+                        <div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Nomor Kontrak</p>
+                            <p class="text-sm font-medium text-gray-800 dark:text-gray-200">{{ $kontrak->nomor_spk ?? '-' }}</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-2">
+                        <i class="fa fa-building text-gray-600 dark:text-gray-400 text-sm mt-1"></i>
+                        <div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Penyedia</p>
+                            <p class="text-sm font-medium text-gray-800 dark:text-gray-200">
+                                @if($kontrak->penyedia && $kontrak->penyedia->nama_pemilik)sss
+                                    {{ $kontrak->penyedia->nama_pemilik }}
+                                @else
+                                    <span class="text-gray-400">-</span>
+                                @endif
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-2">
+                        <i class="fa fa-money-bill-wave text-gray-600 dark:text-gray-400 text-sm mt-1"></i>
+                        <div>
+                            <p class="text-xs text-gray-500 dark:text-gray-400">Nilai Kontrak</p>
+                            <p class="text-sm font-medium text-gray-800 dark:text-gray-200">Rp {{ number_format($kontrak->nilai_kontrak ?? 0, 0, ',', '.') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        <!-- Table Section -->
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="min-w-full border-collapse" id="tableRealisasi">
+                    <thead>
+                        <tr class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300">
+                            <th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-left font-semibold w-[180px]">
+                                Nama Sekolah
+                            </th>
+                            <th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-center font-semibold w-[90px]">
+                                Tahun
+                            </th>
+                            <th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-center font-semibold w-[110px]">
+                                Bulan
+                            </th>
+                            <th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-center font-semibold w-[140px]">
+                                Target
+                            </th>
+                            <th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-center font-semibold w-[140px]">
+                                Realisasi
+                            </th>
+                            <th class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-center font-semibold">
+                                Dokumentasi
+                            </th>
+                        </tr>
+                    </thead>
 
                 <tbody>
                     @php
@@ -107,91 +164,113 @@
                                         $realisasi_label = __percentLabel($realisasiVal);
                                     @endphp
 
-                                    <tr class="even:bg-gray-50 align-top">
+                                    <tr class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-colors">
                                         @if (!$printedSchool)
-                                            <td rowspan="{{ $schoolRowCount }}" class="border px-2 py-2 font-semibold align-top w-[160px]">
+                                            <td rowspan="{{ $schoolRowCount }}" class="border border-gray-300 dark:border-gray-600 px-4 py-3 font-medium align-top w-[180px] text-gray-800 dark:text-gray-200">
                                                 {{ $sekolah }}
                                             </td>
                                             @php $printedSchool = true; @endphp
                                         @endif
 
                                         @if (!$printedYear)
-                                            <td rowspan="{{ $yearRowCount }}" class="border px-2 py-2 text-center align-top w-[80px]">
+                                            <td rowspan="{{ $yearRowCount }}" class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-center align-top w-[90px] text-gray-700 dark:text-gray-300">
                                                 {{ $tahun }}
                                             </td>
                                             @php $printedYear = true; @endphp
                                         @endif
 
                                         @if (!$printedMonth)
-                                            <td rowspan="{{ $monthRowCount }}" class="border px-2 py-2 text-center align-top w-[100px]">
+                                            <td rowspan="{{ $monthRowCount }}" class="border border-gray-300 dark:border-gray-600 px-4 py-3 text-center align-top w-[110px] text-gray-700 dark:text-gray-300">
                                                 {{ $bulanText }}
                                             </td>
                                             @php $printedMonth = true; @endphp
                                         @endif
 
                                         {{-- Target --}}
-                                        <td class="border px-2 py-2 text-right align-top w-[120px]">
-                                            <div class="text-center text-gray-400 text-xs mb-1">{{ $target_label }}</div>
-                                            <div style="width: {{ $pillWidth }}px; height:14px; background:#e5e7eb; border-radius:999px; overflow:hidden; margin:0 auto; box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);">
-                                                <div style="
-                                                    height:100%;
-                                                    width: {{ $target_bar }}%;
-                                                    background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%);
-                                                    box-shadow: 0 0 6px rgba(79,172,254,0.65);
-                                                    border-radius: 999px;
-                                                "></div>
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-3 align-top w-[140px]">
+                                            <div class="flex flex-col items-center gap-2">
+                                                <span class="text-sm font-semibold text-blue-600 dark:text-blue-400">{{ $target_label }}</span>
+                                                <div style="width: {{ $pillWidth }}px; height:16px; background:#e5e7eb; border-radius:8px; overflow:hidden;">
+                                                    <div style="
+                                                        height:100%;
+                                                        width: {{ $target_bar }}%;
+                                                        background: #3b82f6;
+                                                        border-radius: 8px;
+                                                    "></div>
+                                                </div>
                                             </div>
                                         </td>
 
                                         {{-- Realisasi --}}
-                                        <td class="border px-2 py-2 text-right align-top w-[120px]">
-                                            <div class="text-center text-gray-400 text-xs mb-1">{{ $realisasi_label }}</div>
-                                            <div style="width: {{ $pillWidth }}px; height:14px; background:#e5e7eb; border-radius:999px; overflow:hidden; margin:0 auto; box-shadow: inset 0 1px 2px rgba(0,0,0,0.2);">
-                                                <div style="
-                                                    height:100%;
-                                                    width: {{ $realisasi_bar }}%;
-                                                    background: linear-gradient(90deg, #43e97b 0%, #38f9d7 100%);
-                                                    box-shadow: 0 0 6px rgba(67,233,123,0.65);
-                                                    border-radius: 999px;
-                                                "></div>
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-3 align-top w-[140px]">
+                                            <div class="flex flex-col items-center gap-2">
+                                                <span class="text-sm font-semibold text-green-600 dark:text-green-400">{{ $realisasi_label }}</span>
+                                                <div style="width: {{ $pillWidth }}px; height:16px; background:#e5e7eb; border-radius:8px; overflow:hidden;">
+                                                    <div style="
+                                                        height:100%;
+                                                        width: {{ $realisasi_bar }}%;
+                                                        background: #10b981;
+                                                        border-radius: 8px;
+                                                    "></div>
+                                                </div>
                                             </div>
                                         </td>
 
                                         {{-- Gambar --}}
-                                        <td class="border px-2 py-2 align-top">
+                                        <td class="border border-gray-300 dark:border-gray-600 px-4 py-3 align-top">
                                             <div class="grid grid-cols-3 gap-2">
                                                 @if(!empty($r->gambar1))
-                                                    <button type="button" class="open-image" data-src="{{ asset($r->gambar1) }}">
-                                                        <img src="{{ asset($r->gambar1) }}" loading="lazy" class="w-full h-24 object-cover border rounded">
+                                                    <button type="button" class="open-image group relative overflow-hidden rounded shadow hover:shadow-md transition-shadow" data-src="{{ asset($r->gambar1) }}">
+                                                        <img src="{{ asset($r->gambar1) }}" loading="lazy" class="w-full h-20 object-cover">
+                                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                                            <i class="fa fa-search-plus text-white opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                                        </div>
                                                     </button>
                                                 @endif
                                                 @if(!empty($r->gambar2))
-                                                    <button type="button" class="open-image" data-src="{{ asset($r->gambar2) }}">
-                                                        <img src="{{ asset($r->gambar2) }}" loading="lazy" class="w-full h-24 object-cover border rounded">
+                                                    <button type="button" class="open-image group relative overflow-hidden rounded shadow hover:shadow-md transition-shadow" data-src="{{ asset($r->gambar2) }}">
+                                                        <img src="{{ asset($r->gambar2) }}" loading="lazy" class="w-full h-20 object-cover">
+                                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                                            <i class="fa fa-search-plus text-white opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                                        </div>
                                                     </button>
                                                 @endif
                                                 @if(!empty($r->gambar3))
-                                                    <button type="button" class="open-image" data-src="{{ asset($r->gambar3) }}">
-                                                        <img src="{{ asset($r->gambar3) }}" loading="lazy" class="w-full h-24 object-cover border rounded">
+                                                    <button type="button" class="open-image group relative overflow-hidden rounded shadow hover:shadow-md transition-shadow" data-src="{{ asset($r->gambar3) }}">
+                                                        <img src="{{ asset($r->gambar3) }}" loading="lazy" class="w-full h-20 object-cover">
+                                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                                            <i class="fa fa-search-plus text-white opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                                        </div>
                                                     </button>
                                                 @endif
                                                 @if(!empty($r->gambar4))
-                                                    <button type="button" class="open-image" data-src="{{ asset($r->gambar4) }}">
-                                                        <img src="{{ asset($r->gambar4) }}" loading="lazy" class="w-full h-24 object-cover border rounded">
+                                                    <button type="button" class="open-image group relative overflow-hidden rounded shadow hover:shadow-md transition-shadow" data-src="{{ asset($r->gambar4) }}">
+                                                        <img src="{{ asset($r->gambar4) }}" loading="lazy" class="w-full h-20 object-cover">
+                                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                                            <i class="fa fa-search-plus text-white opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                                        </div>
                                                     </button>
                                                 @endif
                                                 @if(!empty($r->gambar5))
-                                                    <button type="button" class="open-image" data-src="{{ asset($r->gambar5) }}">
-                                                        <img src="{{ asset($r->gambar5) }}" loading="lazy" class="w-full h-24 object-cover border rounded">
+                                                    <button type="button" class="open-image group relative overflow-hidden rounded shadow hover:shadow-md transition-shadow" data-src="{{ asset($r->gambar5) }}">
+                                                        <img src="{{ asset($r->gambar5) }}" loading="lazy" class="w-full h-20 object-cover">
+                                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                                            <i class="fa fa-search-plus text-white opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                                        </div>
                                                     </button>
                                                 @endif
                                                 @if(!empty($r->gambar6))
-                                                    <button type="button" class="open-image" data-src="{{ asset($r->gambar6) }}">
-                                                        <img src="{{ asset($r->gambar6) }}" loading="lazy" class="w-full h-24 object-cover border rounded">
+                                                    <button type="button" class="open-image group relative overflow-hidden rounded shadow hover:shadow-md transition-shadow" data-src="{{ asset($r->gambar6) }}">
+                                                        <img src="{{ asset($r->gambar6) }}" loading="lazy" class="w-full h-20 object-cover">
+                                                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-colors flex items-center justify-center">
+                                                            <i class="fa fa-search-plus text-white opacity-0 group-hover:opacity-100 transition-opacity"></i>
+                                                        </div>
                                                     </button>
                                                 @endif
                                                 @if(empty($r->gambar1) && empty($r->gambar2) && empty($r->gambar3) && empty($r->gambar4) && empty($r->gambar5) && empty($r->gambar6))
-                                                    <div class="col-span-3 text-center text-sm text-gray-500">-</div>
+                                                    <div class="col-span-3 text-center text-sm text-gray-400 py-2">
+                                                        Tidak ada dokumentasi
+                                                    </div>
                                                 @endif
                                             </div>
                                         </td>
@@ -202,19 +281,26 @@
                         @endforeach
                     @empty
                         <tr>
-                            <td colspan="6" class="text-center p-4 text-gray-500">Belum ada data realisasi.</td>
+                            <td colspan="6" class="text-center p-6 text-gray-500 dark:text-gray-400">
+                                Belum ada data realisasi
+                            </td>
                         </tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
+        </div>
     </div>
 
     <!-- Modal zoom gambar -->
     <div id="imageModal" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/70">
-        <div class="max-w-5xl max-h-[90vh] p-4">
-            <button id="closeModal" class="text-white mb-2 float-right">Tutup ✕</button>
-            <img id="modalImage" src="" alt="preview" class="w-full h-auto rounded shadow-lg" />
+        <div class="relative max-w-5xl max-h-[90vh] p-4 w-full">
+            <button id="closeModal" class="absolute -top-10 right-0 text-white hover:text-gray-300 px-4 py-2">
+                <i class="fa fa-times mr-2"></i>Tutup
+            </button>
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl overflow-hidden">
+                <img id="modalImage" src="" alt="preview" class="w-full h-auto max-h-[85vh] object-contain" />
+            </div>
         </div>
     </div>
 

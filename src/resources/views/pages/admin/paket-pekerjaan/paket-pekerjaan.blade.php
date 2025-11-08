@@ -297,49 +297,73 @@
     KERJA
 </h1>
 
-<input type="text" name="satker_id" id="" value="{{$satuanKerja->satker_id}}" hidden readonly>
-<div class="flex w-full flex-col py-2 ">
-    <x-label for="nama_pimpinan" class="w-full sm:w-1/4">Nama pimpinan</x-label>
-    <x-input type="text" name="nama_pimpinan" id="" value="{{$satuanKerja->nama_pimpinan}}"
-        class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-        readonly />
+<div x-data="satkerSingleManager({{ json_encode($satuanKerja) }})" x-init="init" class="w-full space-y-4">
+    <div class="flex w-full flex-col">
+        <x-label for="satker_id" class="w-full sm:w-1/4">Pilih Satuan Kerja</x-label>
+        <select x-ref="satkerSelect" name="satker_id" id="satker_id"
+            class="choices w-full {{ $errors->has('satker_id') ? 'border-red-500' : 'border-gray-200' }}"
+            @change="onSatkerChange($event)" required>
+            <option value="">Pilih Satuan Kerja</option>
+            <template x-for="option in options" :key="option.satker_id">
+                <option :value="option.satker_id"
+                    x-text="option.nama_pimpinan + ' - ' + option.jabatan"
+                    :selected="option.satker_id == {{ json_encode(old('satker_id', '')) }}"></option>
+            </template>
+        </select>
+        @error('satker_id')
+        <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
+        @enderror
     </div>
 
-    <div class="flex w-full flex-col ">
-        <x-label for="jabatan" class="w-full sm:w-1/4">Jabatan</x-label>
-        <x-input type="text" name="jabatan" id="" value="{{$satuanKerja->jabatan}}"
-            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+    <div class="flex w-full flex-col">
+        <x-label for="nama_pimpinan" class="w-full sm:w-1/4">Nama Pimpinan</x-label>
+        <x-input type="text" x-model="selectedSatker.nama_pimpinan" id="nama_pimpinan_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
             readonly />
-        </div>
+    </div>
 
-        <div class="flex w-full flex-col ">
-            <x-label for="website" class="w-full sm:w-1/4">Website</x-label>
-            <x-input type="text" name="website" id="" value="{{$satuanKerja->website}}"
-                class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                readonly />
-            </div>
+    <div class="flex w-full flex-col">
+        <x-label for="nip" class="w-full sm:w-1/4">NIP</x-label>
+        <x-input type="text" x-model="selectedSatker.nip" id="nip_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
+            readonly />
+    </div>
 
+    <div class="flex w-full flex-col">
+        <x-label for="jabatan" class="w-full sm:w-1/4">Jabatan</x-label>
+        <x-input type="text" x-model="selectedSatker.jabatan" id="jabatan_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
+            readonly />
+    </div>
 
-            <div class="flex w-full flex-col ">
-                <x-label for="email" class="w-full sm:w-1/4">Email</x-label>
-                <x-input type="text" name="email" id="" value="{{$satuanKerja->email}}"
-                    class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                    readonly />
-                </div>
+    <div class="flex w-full flex-col">
+        <x-label for="website" class="w-full sm:w-1/4">Website</x-label>
+        <x-input type="text" x-model="selectedSatker.website" id="website_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
+            readonly />
+    </div>
 
-                <div class="flex w-full flex-col ">
-                    <x-label for="telp" class="w-full sm:w-1/4">Telepon</x-label>
-                    <x-input type="text" name="telp" id="" value="{{$satuanKerja->telp}}"
-                        class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                        readonly />
-                    </div>
+    <div class="flex w-full flex-col">
+        <x-label for="email" class="w-full sm:w-1/4">Email</x-label>
+        <x-input type="text" x-model="selectedSatker.email" id="email_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
+            readonly />
+    </div>
 
-                    <div class="flex w-full flex-col ">
-                        <x-label for="klpd" class="w-full sm:w-1/4">KLPD</x-label>
-                        <x-input type="text" name="klpd" id="" value="{{$satuanKerja->klpd}}"
-                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly />
-                        </div>
+    <div class="flex w-full flex-col">
+        <x-label for="telp" class="w-full sm:w-1/4">Telepon</x-label>
+        <x-input type="text" x-model="selectedSatker.telp" id="telp_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
+            readonly />
+    </div>
+
+    <div class="flex w-full flex-col">
+        <x-label for="klpd" class="w-full sm:w-1/4">KLPD</x-label>
+        <x-input type="text" x-model="selectedSatker.klpd" id="klpd_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
+            readonly />
+    </div>
+</div>
 
 
                         <div class="modal-action pt-4">
@@ -580,49 +604,72 @@ required>
     KERJA
 </h1>
 
-<input type="text" name="satker_id" id="" value="{{$satuanKerja->satker_id}}" hidden readonly>
-<div class="flex w-full flex-col py-2 ">
-    <x-label for="nama_pimpinan" class="w-full sm:w-1/4">Nama pimpinan</x-label>
-    <x-input type="text" name="nama_pimpinan" id="" value="{{$satuanKerja->nama_pimpinan}}"
-        class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-        readonly />
+<div x-data="satkerSingleManager({{ json_encode($satuanKerja) }})" x-init="init" id="satker-edit-manager" class="w-full space-y-4">
+    <div class="flex w-full flex-col">
+        <x-label for="satker_id_edit" class="w-full sm:w-1/4">Pilih Satuan Kerja</x-label>
+        <select x-ref="satkerSelect" name="satker_id" id="satker_id_edit"
+            class="choices w-full {{ $errors->has('satker_id') ? 'border-red-500' : 'border-gray-200' }}"
+            @change="onSatkerChange($event)" required>
+            <option value="">Pilih Satuan Kerja</option>
+            <template x-for="option in options" :key="option.satker_id">
+                <option :value="option.satker_id"
+                    x-text="option.nama_pimpinan + ' - ' + option.jabatan"></option>
+            </template>
+        </select>
+        @error('satker_id')
+        <span class="text-sm text-red-500 mt-1">{{ $message }}</span>
+        @enderror
     </div>
 
-    <div class="flex w-full flex-col ">
-        <x-label for="jabatan" class="w-full sm:w-1/4">Jabatan</x-label>
-        <x-input type="text" name="jabatan" id="" value="{{$satuanKerja->jabatan}}"
-            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
+    <div class="flex w-full flex-col">
+        <x-label for="nama_pimpinan_edit_display" class="w-full sm:w-1/4">Nama Pimpinan</x-label>
+        <x-input type="text" x-model="selectedSatker.nama_pimpinan" id="nama_pimpinan_edit_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
             readonly />
-        </div>
+    </div>
 
-        <div class="flex w-full flex-col ">
-            <x-label for="website" class="w-full sm:w-1/4">Website</x-label>
-            <x-input type="text" name="website" id="" value="{{$satuanKerja->website}}"
-                class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                readonly />
-            </div>
+    <div class="flex w-full flex-col">
+        <x-label for="nip_edit_display" class="w-full sm:w-1/4">NIP</x-label>
+        <x-input type="text" x-model="selectedSatker.nip" id="nip_edit_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
+            readonly />
+    </div>
 
+    <div class="flex w-full flex-col">
+        <x-label for="jabatan_edit_display" class="w-full sm:w-1/4">Jabatan</x-label>
+        <x-input type="text" x-model="selectedSatker.jabatan" id="jabatan_edit_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
+            readonly />
+    </div>
 
-            <div class="flex w-full flex-col ">
-                <x-label for="email" class="w-full sm:w-1/4">Email</x-label>
-                <x-input type="text" name="email" id="" value="{{$satuanKerja->email}}"
-                    class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                    readonly />
-                </div>
+    <div class="flex w-full flex-col">
+        <x-label for="website_edit_display" class="w-full sm:w-1/4">Website</x-label>
+        <x-input type="text" x-model="selectedSatker.website" id="website_edit_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
+            readonly />
+    </div>
 
-                <div class="flex w-full flex-col ">
-                    <x-label for="telp" class="w-full sm:w-1/4">Telepon</x-label>
-                    <x-input type="text" name="telp" id="" value="{{$satuanKerja->telp}}"
-                        class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                        readonly />
-                    </div>
+    <div class="flex w-full flex-col">
+        <x-label for="email_edit_display" class="w-full sm:w-1/4">Email</x-label>
+        <x-input type="text" x-model="selectedSatker.email" id="email_edit_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
+            readonly />
+    </div>
 
-                    <div class="flex w-full flex-col ">
-                        <x-label for="klpd" class="w-full sm:w-1/4">KLPD</x-label>
-                        <x-input type="text" name="klpd" id="" value="{{$satuanKerja->klpd}}"
-                            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200"
-                            readonly />
-                        </div>
+    <div class="flex w-full flex-col">
+        <x-label for="telp_edit_display" class="w-full sm:w-1/4">Telepon</x-label>
+        <x-input type="text" x-model="selectedSatker.telp" id="telp_edit_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
+            readonly />
+    </div>
+
+    <div class="flex w-full flex-col">
+        <x-label for="klpd_edit_display" class="w-full sm:w-1/4">KLPD</x-label>
+        <x-input type="text" x-model="selectedSatker.klpd" id="klpd_edit_display"
+            class="rounded bg-gray-200 dark:bg-gray-600 dark:border-gray-600 block w-full rounded-md border-gray-300 shadow-sm"
+            readonly />
+    </div>
+</div>
 
                         <div class="modal-action pt-4">
                             <button type="submit" class="btn rounded-md text-white bg-blue-600 btn-primary">
@@ -683,26 +730,29 @@ required>
             document.getElementById('nilai_hps_display_edit').value = 'Rp ' + formatNumber(paket.nilai_hps);
             document.getElementById('tahun_anggaran').value = paket.tahun_anggaran;
 
-            // INPUT YANG ADA ALPINE
-            // sekolah
-            const sekolahEditManagerInstance = Alpine.$data(document.getElementById('sekolah-edit-manager'));
-
+            // INPUT YANG ADA ALPINE - Tunggu modal terbuka dan Alpine component siap
             setTimeout(() => {
-                if (paket['sekolah.sekolah_id']) {
-                    sekolahEditManagerInstance.setSelectedValue(paket['sekolah.sekolah_id']);
+                // SEKOLAH
+                const sekolahEditManagerInstance = Alpine.$data(document.getElementById('sekolah-edit-manager'));
+                const sekolahId = paket.sekolah_id || paket['sekolah.sekolah_id'];
+                if (sekolahId) {
+                    sekolahEditManagerInstance.setSelectedValue(sekolahId);
                 }
-            }, 200);
-            const sekolahManagerInstance = Alpine.$data(document.getElementById('sekolah-edit-manager'));
 
-            // dasar hukum
-            const daskumEditManagerInstance = Alpine.$data(document.getElementById('daskum-edit-manager'));
-            setTimeout(() => {
-                if(paket['dasarHukum.daskum_id']) {
-                    daskumEditManagerInstance.setSelectedValue(paket['dasarHukum.daskum_id']);
+                // DASAR HUKUM
+                const daskumEditManagerInstance = Alpine.$data(document.getElementById('daskum-edit-manager'));
+                const daskumId = paket.daskum_id || paket['dasarHukum.daskum_id'];
+                if(daskumId) {
+                    daskumEditManagerInstance.setSelectedValue(daskumId);
                 }
-            }, 200)
 
-            const daskumManagerInstance = Alpine.$data(document.getElementById('daskum-edit-manager'));
+                // SATUAN KERJA
+                const satkerEditManagerInstance = Alpine.$data(document.getElementById('satker-edit-manager'));
+                const satkerId = paket.satker_id || paket.satuan_kerja?.satker_id;
+                if(satkerId) {
+                    satkerEditManagerInstance.setSelectedValue(satkerId);
+                }
+            }, 300)
 
             // subKegiatan - menggunakan Choices.js multiple select
             const subKegiatanEditManagerInstance = Alpine.$data(document.getElementById('sub-kegiatan-edit-manager'));
@@ -1041,6 +1091,111 @@ required>
                     if (this.choicesInstance) {
                         this.choicesInstance.removeActiveItems();
                         this.selectedValue = null;
+                    }
+                },
+
+                destroy() {
+                    if (this.choicesInstance) {
+                        this.choicesInstance.destroy();
+                        this.choicesInstance = null;
+                    }
+                }
+            }
+        }
+
+        function satkerSingleManager(options) {
+            return {
+                options: options,
+                choicesInstance: null,
+                selectedValue: null,
+                selectedSatker: {
+                    satker_id: '',
+                    nama_pimpinan: '',
+                    nip: '',
+                    jabatan: '',
+                    website: '',
+                    email: '',
+                    telp: '',
+                    klpd: ''
+                },
+
+                init() {
+                    this.$nextTick(() => {
+                        this.initializeChoicesSingle();
+                    });
+                },
+
+                initializeChoicesSingle() {
+                    const selectElement = this.$refs.satkerSelect;
+                    if (selectElement && !this.choicesInstance) {
+                        this.choicesInstance = new Choices(selectElement, {
+                            searchEnabled: true,
+                            itemSelectText: 'Pilih',
+                            shouldSort: false,
+                            searchPlaceholderValue: 'Cari satuan kerja...',
+                            noResultsText: 'Tidak ada hasil ditemukan',
+                            noChoicesText: 'Tidak ada pilihan tersedia',
+                        });
+
+                        // Sync ke model Alpine
+                        selectElement.addEventListener('change', (event) => {
+                            this.selectedValue = event.target.value;
+                            this.updateSatkerInfo(event.target.value);
+                        });
+                    }
+                },
+
+                updateSatkerInfo(satkerId) {
+                    if (satkerId) {
+                        const satker = this.options.find(opt => opt.satker_id == satkerId);
+                        if (satker) {
+                            this.selectedSatker = { ...satker };
+                        }
+                    } else {
+                        // Reset jika tidak ada yang dipilih
+                        this.selectedSatker = {
+                            satker_id: '',
+                            nama_pimpinan: '',
+                            nip: '',
+                            jabatan: '',
+                            website: '',
+                            email: '',
+                            telp: '',
+                            klpd: ''
+                        };
+                    }
+                },
+
+                onSatkerChange(event) {
+                    this.updateSatkerInfo(event.target.value);
+                },
+
+                setSelectedValue(value) {
+                    if (this.choicesInstance && value) {
+                        try {
+                            const stringValue = value.toString();
+                            const validOption = this.options.find(option =>
+                                option.satker_id.toString() === stringValue
+                            );
+
+                            if (validOption) {
+                                this.choicesInstance.setChoiceByValue(stringValue);
+                                this.selectedValue = stringValue;
+                                this.updateSatkerInfo(stringValue);
+                            }
+                        } catch (error) {
+                            console.error('Error setting selected satker value:', error);
+                        }
+                    }
+                },                getSelectedValue() {
+                    return this.selectedValue;
+                },
+
+                clearSelection() {
+                    if (this.choicesInstance) {
+                        this.choicesInstance.removeActiveItems();
+                        this.selectedValue = null;
+                        this.updateSatkerInfo(null);
                     }
                 },
 

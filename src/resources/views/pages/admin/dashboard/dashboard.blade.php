@@ -22,10 +22,12 @@
         </div>
 
         <!-- Cards -->
-        <div class="flex flex-col md:flex-row gap-6 ">
-			<x-dashboard.dashboard-card-06 :profilePimpinan="$profile_pimpinan"/>
-			<div class="w-full md:flex-1 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-8 gap-4 auto-rows-max">
-				<x-dashboard.dashboard-card-05 :permohonanKontrak="$permohonan_kontrak"/>
+        <div class="flex flex-col gap-6">
+
+            <!-- Cards container -->
+            {{-- <x-dashboard.dashboard-card-06 :profilePimpinan="$profile_pimpinan"/> --}}
+            <div class="w-full md:flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 auto-rows-max">
+                <x-dashboard.dashboard-card-05 :permohonanKontrak="$permohonan_kontrak"/>
 
 				<!-- Paket Pekerjaan -->
 				<x-dashboard.dashboard-card-01 :paketPekerjaan="$paket_pekerjaan" />
@@ -41,7 +43,7 @@
 
                 <!-- Swakelola -->
                 <x-dashboard.dashboard-card-07 :swakelola="$swakelola" />
-			</div>
+            </div>
             <!-- Permohonan kontrak baru -->
 
 

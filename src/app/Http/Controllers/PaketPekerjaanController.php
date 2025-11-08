@@ -57,7 +57,7 @@ class PaketPekerjaanController extends Controller
             "sekolah" => Sekolah::select('nama_sekolah', 'sekolah_id')->get(),
             "dasarHukum" => $dasarHukum,
             "subKegiatan" => SubKegiatan::select('nama_sub_kegiatan', 'sub_kegiatan_id', 'pendidikan')->get(),
-            "satuanKerja" => SatuanKerja::findOrFail(1),
+            "satuanKerja" => SatuanKerja::select('satker_id', 'nama_pimpinan', 'jabatan', 'website', 'email', 'telp', 'nip', 'klpd')->get(),
             "ppkom" => Ppkom::select('nama', 'ppkom_id')->get(),
         ]);
     }

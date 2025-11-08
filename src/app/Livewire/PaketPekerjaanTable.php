@@ -46,6 +46,19 @@ class PaketPekerjaanTable extends DataTableComponent
     public function columns(): array
     {
         return [
+            // Hidden columns for foreign keys (needed for edit modal)
+            Column::make('Satker ID', 'satker_id')
+                ->hideIf(true),
+
+            Column::make('Daskum ID FK', 'daskum_id')
+                ->hideIf(true),
+
+            Column::make('Ppkom ID FK', 'ppkom_id')
+                ->hideIf(true),
+
+            Column::make('Sekolah ID FK', 'sekolah_id')
+                ->hideIf(true),
+
             Column::make('Nomor Matrik', 'nomor_matrik')
                 ->searchable()
                 ->sortable(),

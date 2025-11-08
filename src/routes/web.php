@@ -8,6 +8,7 @@ use App\Http\Controllers\RealisasiController;
 use App\Http\Controllers\SubKegiatanController;
 use App\Http\Controllers\PenyediaController;
 use App\Http\Controllers\PpkomController;
+use App\Http\Controllers\SatuanKerjaController;
 use App\Http\Controllers\SekolahController;
 use App\Http\Controllers\TemplateController;
 use App\Http\Controllers\VerifikatorController;
@@ -193,6 +194,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('/admin')->group(function () {
         Route::post('/', [PpkomController::class, 'store'])->name('admin.ppkom.store'); // Create new data
         Route::put('/{ppkom}', [PpkomController::class, 'update'])->name('admin.ppkom.update'); // Update data
         Route::delete('/{ppkom}', [PpkomController::class, 'destroy'])->name('admin.ppkom.destroy'); // Delete data
+    });
+
+    // Satuan Kerja Route
+    Route::prefix('/satuan-kerja')->group(function () {
+        Route::get('/', [SatuanKerjaController::class, 'index'])->name('admin.satuan-kerja.index');
+        Route::post('/', [SatuanKerjaController::class, 'store'])->name('admin.satuan-kerja.store');
+        Route::put('/{satuanKerja}', [SatuanKerjaController::class, 'update'])->name('admin.satuan-kerja.update');
+        Route::delete('/{satuanKerja}', [SatuanKerjaController::class, 'destroy'])->name('admin.satuan-kerja.destroy');
     });
 
     // Verifikator Route
