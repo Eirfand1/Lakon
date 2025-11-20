@@ -302,7 +302,7 @@ class KontrakController extends Controller
                 'November',
                 'Desember'
             ];
-            
+
             $hari = [
                 'Minggu',
                 'Senin',
@@ -316,7 +316,7 @@ class KontrakController extends Controller
             $terbilangTanggal = Carbon::parse($kontrak->tanggal_awal);
 
             $spellout = new NumberFormatter("id", NumberFormatter::SPELLOUT);
-            
+
             $namaHari = $hari[$terbilangTanggal->dayOfWeek];
             $hari  = ucwords($spellout->format($terbilangTanggal->day));
             $tahun = ucwords($spellout->format($terbilangTanggal->year));
@@ -384,12 +384,12 @@ class KontrakController extends Controller
 
 
             // kepana dinas/ satuan kerja/ pimpinan
-            $templateProcessor->setValue('${NAMA_KEPALA_DINAS}', $kontrak->satuanKerja->nama_pimpinan);
-            $templateProcessor->setValue('${NIP_KEPALA_DINAS}', $kontrak->satuanKerja->nip);
-            $templateProcessor->setValue('${EMAIL_KEPALA_DINAS}', $kontrak->satuanKerja->email);
-            $templateProcessor->setValue('${TELP_KEPALA_DINAS}', $kontrak->satuanKerja->telp);
-            $templateProcessor->setValue('${KLPD_KEPALA_DINAS}', $kontrak->satuanKerja->klpd);
-            $templateProcessor->setValue('${JABATAN_KEPALA_DINAS}', $kontrak->satuanKerja->jabatan);
+            $templateProcessor->setValue('${NAMA_KEPALA_DINAS}', $kontrak->paketPekerjaan->satuanKerja->nama_pimpinan);
+            $templateProcessor->setValue('${NIP_KEPALA_DINAS}', $kontrak->paketPekerjaan->satuanKerja->nip);
+            $templateProcessor->setValue('${EMAIL_KEPALA_DINAS}', $kontrak->paketPekerjaan->satuanKerja->email);
+            $templateProcessor->setValue('${TELP_KEPALA_DINAS}', $kontrak->paketPekerjaan->satuanKerja->telp);
+            $templateProcessor->setValue('${KLPD_KEPALA_DINAS}', $kontrak->paketPekerjaan->satuanKerja->klpd);
+            $templateProcessor->setValue('${JABATAN_KEPALA_DINAS}', $kontrak->paketPekerjaan->satuanKerja->jabatan);
 
             // sp
             $templateProcessor->setValue('${NO_SP}', $kontrak->nomor_sp);
@@ -466,7 +466,7 @@ class KontrakController extends Controller
             if ($kontrak->tim && $kontrak->tim->count() > 0) {
                 foreach ($kontrak->tim as $index => $tim) {
                     if ($tim->pengalaman == 0) {
-                        $pengalaman = "0 ";  
+                        $pengalaman = "0 ";
                     }else {
                         $pengalaman = $tim->pengalaman;
                     };
@@ -546,12 +546,12 @@ class KontrakController extends Controller
                         'TABLE_QTY' => $penerima->qty,
                         'TABLE_SATUAN' => $penerima->satuan,
                     ];
-                    
+
                     $total_qty_penerima += $penerima->qty;
 
                 }
             }
-            
+
             $templateProcessor->setValue('${SATUAN_PENERIMA}', $kontrak->penerima->first()->satuan ?? '');
             $templateProcessor->setValue('${TOTAL_QTY_PENERIMA}', $total_qty_penerima);
 
