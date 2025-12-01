@@ -138,6 +138,127 @@
 </form>
 
 <script>
+    function angkaTerbilang(angka) {
+        if (typeof angka !== 'number' || isNaN(angka)) {
+            return '';
+        }
+
+        if (angka === 0) {
+            return 'nol';
+        }
+
+        if (angka < 0) {
+            return 'minus ' + angkaTerbilang(Math.abs(angka));
+        }
+
+        // Maksimal 999 triliun
+        if (angka > 999999999999999) {
+            return 'Angka terlalu besar';
+        }
+
+        const satuan = ['', 'satu', 'dua', 'tiga', 'empat', 'lima', 'enam', 'tujuh', 'delapan', 'sembilan'];
+        const belasan = ['sepuluh', 'sebelas', 'dua belas', 'tiga belas', 'empat belas', 'lima belas', 'enam belas', 'tujuh belas', 'delapan belas', 'sembilan belas'];
+
+        function konversiRatusan(n) {
+            let hasil = '';
+
+            const ratus = Math.floor(n / 100);
+            const puluhan = Math.floor((n % 100) / 10);
+            const satuan_digit = n % 10;
+
+            // Ratusan
+            if (ratus > 0) {
+                if (ratus === 1) {
+                    hasil += 'seratus';
+                } else {
+                    hasil += satuan[ratus] + ' ratus';
+                }
+            }
+
+            // Puluhan dan satuan
+            const sisa = n % 100;
+            if (sisa >= 10 && sisa <= 19) {
+                if (hasil) hasil += ' ';
+                hasil += belasan[sisa - 10];
+            } else {
+                // Puluhan
+                if (puluhan > 0) {
+                    if (hasil) hasil += ' ';
+                    hasil += satuan[puluhan] + ' puluh';
+                }
+
+                // Satuan
+                if (satuan_digit > 0) {
+                    if (hasil) hasil += ' ';
+                    hasil += satuan[satuan_digit];
+                }
+            }
+
+            return hasil;
+        }
+
+        function konversiRibuan(n) {
+            const ribuan = Math.floor(n / 1000);
+            const sisa = n % 1000;
+
+            let hasil = '';
+
+            if (ribuan > 0) {
+                if (ribuan === 1) {
+                    hasil = 'seribu';
+                } else {
+                    hasil = konversiRatusan(ribuan) + ' ribu';
+                }
+            }
+
+            if (sisa > 0) {
+                if (hasil) hasil += ' ';
+                hasil += konversiRatusan(sisa);
+            }
+
+            return hasil;
+        }
+
+        // Memproses per grup: triliun, miliar, juta, ribuan
+        const triliun = Math.floor(angka / 1000000000000);
+        const miliar = Math.floor((angka % 1000000000000) / 1000000000);
+        const juta = Math.floor((angka % 1000000000) / 1000000);
+        const ribuan = angka % 1000000;
+
+        let hasil = '';
+
+        // Triliun
+        if (triliun > 0) {
+            hasil = konversiRatusan(triliun) + ' triliun';
+        }
+
+        // Miliar
+        if (miliar > 0) {
+            if (hasil) hasil += ' ';
+            hasil += konversiRatusan(miliar) + ' miliar';
+        }
+
+        // Juta
+        if (juta > 0) {
+            if (hasil) hasil += ' ';
+            hasil += konversiRatusan(juta) + ' juta';
+        }
+
+        // Ribuan dan ratusan
+        if (ribuan > 0) {
+            if (hasil) hasil += ' ';
+            hasil += konversiRibuan(ribuan);
+        }
+
+        return hasil;
+    }
+
+    function convertToText(angka) {
+        const hasil = angkaTerbilang(angka);
+        // Kapitalisasi setiap awal kata
+        return hasil.replace(/\b\w/g, (char) => char.toUpperCase());
+    }
+
         function numberToTextFunction(input, too_long) {
             let terbilang_input = document.getElementById("terbilangNilaiKontrakSPK");
             const nilai_hps = parseFloat({{ $nilai_hps }});
@@ -153,8 +274,8 @@
                 terbilang_input.value = "Nilai kontrak terlalu besar";
                 terbilang_input.classList.add("text-red-600", "dark:text-red-600");
                 button_submit.disabled = true;
-                button_submit.classList.remove("bg-green-500, hover:bg-green-700");
-                button_submit.classList.add("cursor-not-allowed, bg-gray-500, hover:bg-gray-700");
+                button_submit.classList.remove("bg-green-500", "hover:bg-green-700");
+                button_submit.classList.add("cursor-not-allowed", "bg-gray-500", "hover:bg-gray-700");
                 return;
             } else if (input > nilai_hps) {
                 terbilang_input.value = "Nilai kontrak melebihi nilai HPS: " + nilai_hps.toLocaleString("id-ID");
@@ -170,7 +291,7 @@
                 button_submit.classList.add("bg-green-500", "hover:bg-green-700");
             }
 
-            const convert = numberToText.convertToText(input, { language: 'id' });
+            const convert = convertToText(parseFloat(input));
             terbilang_input.value = `${convert} Rupiah`;
         }
 
